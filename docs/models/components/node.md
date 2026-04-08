@@ -25,7 +25,5 @@ switch node.Type {
 		// node.ChapterContentBlockTtsNodeResponseModel is populated
 	case components.NodeTypeOther:
 		// node.ChapterContentBlockExtendableNodeResponseModel is populated
-	default:
-		// Unknown type - use node.GetUnknownRaw() for raw JSON
 }
 ```

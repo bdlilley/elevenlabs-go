@@ -153,7 +153,5 @@ switch astNodeOutput.Type {
 		// astNodeOutput.ASTStringNodeOutput is populated
 	case components.ASTNodeOutputTypeSubOperator:
 		// astNodeOutput.ASTSubtractionOperatorNodeOutput1 is populated
-	default:
-		// Unknown type - use astNodeOutput.GetUnknownRaw() for raw JSON
 }
 ```

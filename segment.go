@@ -18,12 +18,12 @@ import (
 )
 
 type Segment struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSegment(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Segment {
+func newSegment(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Segment {
 	return &Segment{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

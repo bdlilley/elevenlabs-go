@@ -13,11 +13,10 @@ import (
 type GetKnowledgeBaseListResponseModelDocumentType string
 
 const (
-	GetKnowledgeBaseListResponseModelDocumentTypeFile    GetKnowledgeBaseListResponseModelDocumentType = "file"
-	GetKnowledgeBaseListResponseModelDocumentTypeFolder  GetKnowledgeBaseListResponseModelDocumentType = "folder"
-	GetKnowledgeBaseListResponseModelDocumentTypeText    GetKnowledgeBaseListResponseModelDocumentType = "text"
-	GetKnowledgeBaseListResponseModelDocumentTypeURLObj  GetKnowledgeBaseListResponseModelDocumentType = "url"
-	GetKnowledgeBaseListResponseModelDocumentTypeUnknown GetKnowledgeBaseListResponseModelDocumentType = "UNKNOWN"
+	GetKnowledgeBaseListResponseModelDocumentTypeFile   GetKnowledgeBaseListResponseModelDocumentType = "file"
+	GetKnowledgeBaseListResponseModelDocumentTypeFolder GetKnowledgeBaseListResponseModelDocumentType = "folder"
+	GetKnowledgeBaseListResponseModelDocumentTypeText   GetKnowledgeBaseListResponseModelDocumentType = "text"
+	GetKnowledgeBaseListResponseModelDocumentTypeURLObj GetKnowledgeBaseListResponseModelDocumentType = "url"
 )
 
 type GetKnowledgeBaseListResponseModelDocument struct {
@@ -25,7 +24,6 @@ type GetKnowledgeBaseListResponseModelDocument struct {
 	GetKnowledgeBaseSummaryFileResponseModel   *GetKnowledgeBaseSummaryFileResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseSummaryTextResponseModel   *GetKnowledgeBaseSummaryTextResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseSummaryFolderResponseModel *GetKnowledgeBaseSummaryFolderResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                                 json.RawMessage                             `json:"-" union:"unknown"`
 
 	Type GetKnowledgeBaseListResponseModelDocumentType
 }
@@ -66,21 +64,6 @@ func CreateGetKnowledgeBaseListResponseModelDocumentURLObj(urlT GetKnowledgeBase
 	}
 }
 
-func CreateGetKnowledgeBaseListResponseModelDocumentUnknown(raw json.RawMessage) GetKnowledgeBaseListResponseModelDocument {
-	return GetKnowledgeBaseListResponseModelDocument{
-		UnknownRaw: raw,
-		Type:       GetKnowledgeBaseListResponseModelDocumentTypeUnknown,
-	}
-}
-
-func (u GetKnowledgeBaseListResponseModelDocument) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetKnowledgeBaseListResponseModelDocument) IsUnknown() bool {
-	return u.Type == GetKnowledgeBaseListResponseModelDocumentTypeUnknown
-}
-
 func (u *GetKnowledgeBaseListResponseModelDocument) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -89,14 +72,7 @@ func (u *GetKnowledgeBaseListResponseModelDocument) UnmarshalJSON(data []byte) e
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetKnowledgeBaseListResponseModelDocumentTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetKnowledgeBaseListResponseModelDocumentTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -136,12 +112,9 @@ func (u *GetKnowledgeBaseListResponseModelDocument) UnmarshalJSON(data []byte) e
 		u.GetKnowledgeBaseSummaryURLResponseModel = getKnowledgeBaseSummaryURLResponseModel
 		u.Type = GetKnowledgeBaseListResponseModelDocumentTypeURLObj
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetKnowledgeBaseListResponseModelDocumentTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetKnowledgeBaseListResponseModelDocument", string(data))
 }
 
 func (u GetKnowledgeBaseListResponseModelDocument) MarshalJSON() ([]byte, error) {
@@ -161,9 +134,6 @@ func (u GetKnowledgeBaseListResponseModelDocument) MarshalJSON() ([]byte, error)
 		return utils.MarshalJSON(u.GetKnowledgeBaseSummaryFolderResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetKnowledgeBaseListResponseModelDocument: all fields are null")
 }
 

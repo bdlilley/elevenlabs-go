@@ -18,12 +18,12 @@ import (
 
 // TextToSpeech - Convert text into lifelike speech using a voice of your choice.
 type TextToSpeech struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newTextToSpeech(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *TextToSpeech {
+func newTextToSpeech(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *TextToSpeech {
 	return &TextToSpeech{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

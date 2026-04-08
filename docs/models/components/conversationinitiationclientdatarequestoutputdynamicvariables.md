@@ -41,7 +41,5 @@ switch conversationInitiationClientDataRequestOutputDynamicVariables.Type {
 		// conversationInitiationClientDataRequestOutputDynamicVariables.Integer is populated
 	case components.ConversationInitiationClientDataRequestOutputDynamicVariablesTypeBoolean:
 		// conversationInitiationClientDataRequestOutputDynamicVariables.Boolean is populated
-	default:
-		// Unknown type - use conversationInitiationClientDataRequestOutputDynamicVariables.GetUnknownRaw() for raw JSON
 }
 ```

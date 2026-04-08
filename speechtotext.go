@@ -20,12 +20,12 @@ import (
 
 // SpeechToText - Transcribe your audio files with detailed speaker annotations and precise timestamps using our cutting-edge model.
 type SpeechToText struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSpeechToText(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SpeechToText {
+func newSpeechToText(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SpeechToText {
 	return &SpeechToText{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

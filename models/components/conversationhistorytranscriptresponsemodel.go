@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -38,7 +38,6 @@ const (
 	ConversationHistoryTranscriptResponseModelToolResultTypeConversationHistoryTranscriptSystemToolResultCommonModelOutput                 ConversationHistoryTranscriptResponseModelToolResultType = "ConversationHistoryTranscriptSystemToolResultCommonModel-Output"
 	ConversationHistoryTranscriptResponseModelToolResultTypeConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput ConversationHistoryTranscriptResponseModelToolResultType = "ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel-Output"
 	ConversationHistoryTranscriptResponseModelToolResultTypeConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput              ConversationHistoryTranscriptResponseModelToolResultType = "ConversationHistoryTranscriptWorkflowToolsResultCommonModel-Output"
-	ConversationHistoryTranscriptResponseModelToolResultTypeUnknown                                                                        ConversationHistoryTranscriptResponseModelToolResultType = "Unknown"
 )
 
 type ConversationHistoryTranscriptResponseModelToolResult struct {
@@ -46,7 +45,6 @@ type ConversationHistoryTranscriptResponseModelToolResult struct {
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutput                 *ConversationHistoryTranscriptSystemToolResultCommonModelOutput                 `queryParam:"inline" union:"member"`
 	ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput *ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput `queryParam:"inline" union:"member"`
 	ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput              *ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput              `queryParam:"inline" union:"member"`
-	UnknownRaw                                                                     json.RawMessage                                                                 `json:"-" union:"unknown"`
 
 	Type ConversationHistoryTranscriptResponseModelToolResultType
 }
@@ -87,21 +85,6 @@ func CreateConversationHistoryTranscriptResponseModelToolResultConversationHisto
 	}
 }
 
-func CreateConversationHistoryTranscriptResponseModelToolResultUnknown(raw json.RawMessage) ConversationHistoryTranscriptResponseModelToolResult {
-	return ConversationHistoryTranscriptResponseModelToolResult{
-		UnknownRaw: raw,
-		Type:       ConversationHistoryTranscriptResponseModelToolResultTypeUnknown,
-	}
-}
-
-func (u ConversationHistoryTranscriptResponseModelToolResult) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConversationHistoryTranscriptResponseModelToolResult) IsUnknown() bool {
-	return u.Type == ConversationHistoryTranscriptResponseModelToolResultTypeUnknown
-}
-
 func (u *ConversationHistoryTranscriptResponseModelToolResult) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -140,17 +123,13 @@ func (u *ConversationHistoryTranscriptResponseModelToolResult) UnmarshalJSON(dat
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptResponseModelToolResultTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationHistoryTranscriptResponseModelToolResult", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptResponseModelToolResultTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationHistoryTranscriptResponseModelToolResult", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -170,9 +149,7 @@ func (u *ConversationHistoryTranscriptResponseModelToolResult) UnmarshalJSON(dat
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ConversationHistoryTranscriptResponseModelToolResultTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationHistoryTranscriptResponseModelToolResult", string(data))
 }
 
 func (u ConversationHistoryTranscriptResponseModelToolResult) MarshalJSON() ([]byte, error) {
@@ -192,9 +169,6 @@ func (u ConversationHistoryTranscriptResponseModelToolResult) MarshalJSON() ([]b
 		return utils.MarshalJSON(u.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConversationHistoryTranscriptResponseModelToolResult: all fields are null")
 }
 

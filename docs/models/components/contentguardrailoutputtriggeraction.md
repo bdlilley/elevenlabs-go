@@ -25,7 +25,5 @@ switch contentGuardrailOutputTriggerAction.Type {
 		// contentGuardrailOutputTriggerAction.EndCallTriggerAction is populated
 	case components.ContentGuardrailOutputTriggerActionTypeRetry:
 		// contentGuardrailOutputTriggerAction.RetryTriggerAction is populated
-	default:
-		// Unknown type - use contentGuardrailOutputTriggerAction.GetUnknownRaw() for raw JSON
 }
 ```

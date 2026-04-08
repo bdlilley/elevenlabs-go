@@ -41,7 +41,5 @@ switch data.Type {
 		// data.GetKnowledgeBaseSummaryTextResponseModel is populated
 	case components.DataTypeURLObj:
 		// data.GetKnowledgeBaseSummaryURLResponseModel is populated
-	default:
-		// Unknown type - use data.GetUnknownRaw() for raw JSON
 }
 ```

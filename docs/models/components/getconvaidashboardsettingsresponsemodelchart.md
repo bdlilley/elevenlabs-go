@@ -33,7 +33,5 @@ switch getConvAIDashboardSettingsResponseModelChart.Type {
 		// getConvAIDashboardSettingsResponseModelChart.DashboardCriteriaChartModel is populated
 	case components.GetConvAIDashboardSettingsResponseModelChartTypeDataCollection:
 		// getConvAIDashboardSettingsResponseModelChart.DashboardDataCollectionChartModel is populated
-	default:
-		// Unknown type - use getConvAIDashboardSettingsResponseModelChart.GetUnknownRaw() for raw JSON
 }
 ```

@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -15,15 +15,13 @@ const (
 	WidgetConfigOutputAvatarTypeOrbAvatar   WidgetConfigOutputAvatarType = "OrbAvatar"
 	WidgetConfigOutputAvatarTypeURLAvatar   WidgetConfigOutputAvatarType = "URLAvatar"
 	WidgetConfigOutputAvatarTypeImageAvatar WidgetConfigOutputAvatarType = "ImageAvatar"
-	WidgetConfigOutputAvatarTypeUnknown     WidgetConfigOutputAvatarType = "Unknown"
 )
 
 // WidgetConfigOutputAvatar - The avatar of the widget
 type WidgetConfigOutputAvatar struct {
-	OrbAvatar   *OrbAvatar      `queryParam:"inline" union:"member"`
-	URLAvatar   *URLAvatar      `queryParam:"inline" union:"member"`
-	ImageAvatar *ImageAvatar    `queryParam:"inline" union:"member"`
-	UnknownRaw  json.RawMessage `json:"-" union:"unknown"`
+	OrbAvatar   *OrbAvatar   `queryParam:"inline" union:"member"`
+	URLAvatar   *URLAvatar   `queryParam:"inline" union:"member"`
+	ImageAvatar *ImageAvatar `queryParam:"inline" union:"member"`
 
 	Type WidgetConfigOutputAvatarType
 }
@@ -53,21 +51,6 @@ func CreateWidgetConfigOutputAvatarImageAvatar(imageAvatar ImageAvatar) WidgetCo
 		ImageAvatar: &imageAvatar,
 		Type:        typ,
 	}
-}
-
-func CreateWidgetConfigOutputAvatarUnknown(raw json.RawMessage) WidgetConfigOutputAvatar {
-	return WidgetConfigOutputAvatar{
-		UnknownRaw: raw,
-		Type:       WidgetConfigOutputAvatarTypeUnknown,
-	}
-}
-
-func (u WidgetConfigOutputAvatar) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WidgetConfigOutputAvatar) IsUnknown() bool {
-	return u.Type == WidgetConfigOutputAvatarTypeUnknown
 }
 
 func (u *WidgetConfigOutputAvatar) UnmarshalJSON(data []byte) error {
@@ -100,17 +83,13 @@ func (u *WidgetConfigOutputAvatar) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WidgetConfigOutputAvatarTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WidgetConfigOutputAvatar", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WidgetConfigOutputAvatarTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WidgetConfigOutputAvatar", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -127,9 +106,7 @@ func (u *WidgetConfigOutputAvatar) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = WidgetConfigOutputAvatarTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WidgetConfigOutputAvatar", string(data))
 }
 
 func (u WidgetConfigOutputAvatar) MarshalJSON() ([]byte, error) {
@@ -145,9 +122,6 @@ func (u WidgetConfigOutputAvatar) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ImageAvatar, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WidgetConfigOutputAvatar: all fields are null")
 }
 

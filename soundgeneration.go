@@ -19,12 +19,12 @@ import (
 )
 
 type SoundGeneration struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSoundGeneration(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SoundGeneration {
+func newSoundGeneration(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SoundGeneration {
 	return &SoundGeneration{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

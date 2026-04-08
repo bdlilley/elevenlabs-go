@@ -25,7 +25,5 @@ switch phoneNumberTransferPostDialDigits.Type {
 		// phoneNumberTransferPostDialDigits.PostDialDigitsDynamicVariable is populated
 	case components.PhoneNumberTransferPostDialDigitsTypeStatic:
 		// phoneNumberTransferPostDialDigits.PostDialDigitsStatic is populated
-	default:
-		// Unknown type - use phoneNumberTransferPostDialDigits.GetUnknownRaw() for raw JSON
 }
 ```

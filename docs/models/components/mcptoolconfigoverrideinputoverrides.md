@@ -33,7 +33,5 @@ switch mcpToolConfigOverrideInputOverrides.Type {
 		// mcpToolConfigOverrideInputOverrides.DynamicVariableSchemaOverride is populated
 	case components.MCPToolConfigOverrideInputOverridesTypeLlm:
 		// mcpToolConfigOverrideInputOverrides.LLMSchemaOverride is populated
-	default:
-		// Unknown type - use mcpToolConfigOverrideInputOverrides.GetUnknownRaw() for raw JSON
 }
 ```

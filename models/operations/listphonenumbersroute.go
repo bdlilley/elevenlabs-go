@@ -28,13 +28,11 @@ type ListPhoneNumbersRouteResponseBodyType string
 const (
 	ListPhoneNumbersRouteResponseBodyTypeTwilio   ListPhoneNumbersRouteResponseBodyType = "twilio"
 	ListPhoneNumbersRouteResponseBodyTypeSipTrunk ListPhoneNumbersRouteResponseBodyType = "sip_trunk"
-	ListPhoneNumbersRouteResponseBodyTypeUnknown  ListPhoneNumbersRouteResponseBodyType = "UNKNOWN"
 )
 
 type ListPhoneNumbersRouteResponseBody struct {
 	GetPhoneNumberTwilioResponseModel   *components.GetPhoneNumberTwilioResponseModel   `queryParam:"inline" union:"member"`
 	GetPhoneNumberSIPTrunkResponseModel *components.GetPhoneNumberSIPTrunkResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                          json.RawMessage                                 `json:"-" union:"unknown"`
 
 	Type ListPhoneNumbersRouteResponseBodyType
 }
@@ -57,21 +55,6 @@ func CreateListPhoneNumbersRouteResponseBodySipTrunk(sipTrunk components.GetPhon
 	}
 }
 
-func CreateListPhoneNumbersRouteResponseBodyUnknown(raw json.RawMessage) ListPhoneNumbersRouteResponseBody {
-	return ListPhoneNumbersRouteResponseBody{
-		UnknownRaw: raw,
-		Type:       ListPhoneNumbersRouteResponseBodyTypeUnknown,
-	}
-}
-
-func (u ListPhoneNumbersRouteResponseBody) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ListPhoneNumbersRouteResponseBody) IsUnknown() bool {
-	return u.Type == ListPhoneNumbersRouteResponseBodyTypeUnknown
-}
-
 func (u *ListPhoneNumbersRouteResponseBody) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -80,14 +63,7 @@ func (u *ListPhoneNumbersRouteResponseBody) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ListPhoneNumbersRouteResponseBodyTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ListPhoneNumbersRouteResponseBodyTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Provider {
@@ -109,12 +85,9 @@ func (u *ListPhoneNumbersRouteResponseBody) UnmarshalJSON(data []byte) error {
 		u.GetPhoneNumberSIPTrunkResponseModel = getPhoneNumberSIPTrunkResponseModel
 		u.Type = ListPhoneNumbersRouteResponseBodyTypeSipTrunk
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ListPhoneNumbersRouteResponseBodyTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ListPhoneNumbersRouteResponseBody", string(data))
 }
 
 func (u ListPhoneNumbersRouteResponseBody) MarshalJSON() ([]byte, error) {
@@ -126,9 +99,6 @@ func (u ListPhoneNumbersRouteResponseBody) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.GetPhoneNumberSIPTrunkResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ListPhoneNumbersRouteResponseBody: all fields are null")
 }
 

@@ -15,13 +15,11 @@ type MCPServerResponseModelDependentAgentType string
 const (
 	MCPServerResponseModelDependentAgentTypeAvailable MCPServerResponseModelDependentAgentType = "available"
 	MCPServerResponseModelDependentAgentTypeUnknown   MCPServerResponseModelDependentAgentType = "unknown"
-	MCPServerResponseModelDependentAgentTypeUnknown   MCPServerResponseModelDependentAgentType = "UNKNOWN"
 )
 
 type MCPServerResponseModelDependentAgent struct {
 	DependentAvailableAgentIdentifier *DependentAvailableAgentIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownAgentIdentifier   *DependentUnknownAgentIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                        json.RawMessage                    `json:"-" union:"unknown"`
 
 	Type MCPServerResponseModelDependentAgentType
 }
@@ -44,21 +42,6 @@ func CreateMCPServerResponseModelDependentAgentUnknown(unknown DependentUnknownA
 	}
 }
 
-func CreateMCPServerResponseModelDependentAgentUnknown(raw json.RawMessage) MCPServerResponseModelDependentAgent {
-	return MCPServerResponseModelDependentAgent{
-		UnknownRaw: raw,
-		Type:       MCPServerResponseModelDependentAgentTypeUnknown,
-	}
-}
-
-func (u MCPServerResponseModelDependentAgent) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u MCPServerResponseModelDependentAgent) IsUnknown() bool {
-	return u.Type == MCPServerResponseModelDependentAgentTypeUnknown
-}
-
 func (u *MCPServerResponseModelDependentAgent) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -67,14 +50,7 @@ func (u *MCPServerResponseModelDependentAgent) UnmarshalJSON(data []byte) error 
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerResponseModelDependentAgentTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerResponseModelDependentAgentTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -96,12 +72,9 @@ func (u *MCPServerResponseModelDependentAgent) UnmarshalJSON(data []byte) error 
 		u.DependentUnknownAgentIdentifier = dependentUnknownAgentIdentifier
 		u.Type = MCPServerResponseModelDependentAgentTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerResponseModelDependentAgentTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerResponseModelDependentAgent", string(data))
 }
 
 func (u MCPServerResponseModelDependentAgent) MarshalJSON() ([]byte, error) {
@@ -113,9 +86,6 @@ func (u MCPServerResponseModelDependentAgent) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DependentUnknownAgentIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type MCPServerResponseModelDependentAgent: all fields are null")
 }
 

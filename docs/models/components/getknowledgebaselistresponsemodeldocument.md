@@ -41,7 +41,5 @@ switch getKnowledgeBaseListResponseModelDocument.Type {
 		// getKnowledgeBaseListResponseModelDocument.GetKnowledgeBaseSummaryTextResponseModel is populated
 	case components.GetKnowledgeBaseListResponseModelDocumentTypeURLObj:
 		// getKnowledgeBaseListResponseModelDocument.GetKnowledgeBaseSummaryURLResponseModel is populated
-	default:
-		// Unknown type - use getKnowledgeBaseListResponseModelDocument.GetUnknownRaw() for raw JSON
 }
 ```

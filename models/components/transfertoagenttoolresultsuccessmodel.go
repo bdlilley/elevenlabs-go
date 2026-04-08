@@ -16,13 +16,11 @@ type BranchInfoType string
 const (
 	BranchInfoTypeDefaultingToMain BranchInfoType = "defaulting_to_main"
 	BranchInfoTypeTrafficSplit     BranchInfoType = "traffic_split"
-	BranchInfoTypeUnknown          BranchInfoType = "UNKNOWN"
 )
 
 type BranchInfo struct {
 	TransferBranchInfoTrafficSplit     *TransferBranchInfoTrafficSplit     `queryParam:"inline" union:"member"`
 	TransferBranchInfoDefaultingToMain *TransferBranchInfoDefaultingToMain `queryParam:"inline" union:"member"`
-	UnknownRaw                         json.RawMessage                     `json:"-" union:"unknown"`
 
 	Type BranchInfoType
 }
@@ -45,21 +43,6 @@ func CreateBranchInfoTrafficSplit(trafficSplit TransferBranchInfoTrafficSplit) B
 	}
 }
 
-func CreateBranchInfoUnknown(raw json.RawMessage) BranchInfo {
-	return BranchInfo{
-		UnknownRaw: raw,
-		Type:       BranchInfoTypeUnknown,
-	}
-}
-
-func (u BranchInfo) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u BranchInfo) IsUnknown() bool {
-	return u.Type == BranchInfoTypeUnknown
-}
-
 func (u *BranchInfo) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -68,14 +51,7 @@ func (u *BranchInfo) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = BranchInfoTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = BranchInfoTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.BranchReason {
@@ -97,12 +73,9 @@ func (u *BranchInfo) UnmarshalJSON(data []byte) error {
 		u.TransferBranchInfoTrafficSplit = transferBranchInfoTrafficSplit
 		u.Type = BranchInfoTypeTrafficSplit
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = BranchInfoTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for BranchInfo", string(data))
 }
 
 func (u BranchInfo) MarshalJSON() ([]byte, error) {
@@ -114,9 +87,6 @@ func (u BranchInfo) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.TransferBranchInfoDefaultingToMain, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type BranchInfo: all fields are null")
 }
 

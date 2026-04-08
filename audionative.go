@@ -19,12 +19,12 @@ import (
 )
 
 type AudioNative struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newAudioNative(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AudioNative {
+func newAudioNative(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AudioNative {
 	return &AudioNative{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

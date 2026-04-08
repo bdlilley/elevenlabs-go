@@ -25,7 +25,5 @@ switch getPronunciationDictionaryWithRulesResponseModelRule.Type {
 		// getPronunciationDictionaryWithRulesResponseModelRule.PronunciationDictionaryAliasRuleResponseModel is populated
 	case components.GetPronunciationDictionaryWithRulesResponseModelRuleTypePhoneme:
 		// getPronunciationDictionaryWithRulesResponseModelRule.PronunciationDictionaryPhonemeRuleResponseModel is populated
-	default:
-		// Unknown type - use getPronunciationDictionaryWithRulesResponseModelRule.GetUnknownRaw() for raw JSON
 }
 ```

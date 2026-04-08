@@ -16,14 +16,12 @@ const (
 	TestInfoTypeLlm        TestInfoType = "llm"
 	TestInfoTypeSimulation TestInfoType = "simulation"
 	TestInfoTypeTool       TestInfoType = "tool"
-	TestInfoTypeUnknown    TestInfoType = "UNKNOWN"
 )
 
 type TestInfo struct {
 	ResponseUnitTestModel *ResponseUnitTestModel `queryParam:"inline" union:"member"`
 	ToolCallUnitTestModel *ToolCallUnitTestModel `queryParam:"inline" union:"member"`
 	SimulationTestModel   *SimulationTestModel   `queryParam:"inline" union:"member"`
-	UnknownRaw            json.RawMessage        `json:"-" union:"unknown"`
 
 	Type TestInfoType
 }
@@ -55,21 +53,6 @@ func CreateTestInfoTool(tool ToolCallUnitTestModel) TestInfo {
 	}
 }
 
-func CreateTestInfoUnknown(raw json.RawMessage) TestInfo {
-	return TestInfo{
-		UnknownRaw: raw,
-		Type:       TestInfoTypeUnknown,
-	}
-}
-
-func (u TestInfo) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u TestInfo) IsUnknown() bool {
-	return u.Type == TestInfoTypeUnknown
-}
-
 func (u *TestInfo) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -78,14 +61,7 @@ func (u *TestInfo) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = TestInfoTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = TestInfoTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -116,12 +92,9 @@ func (u *TestInfo) UnmarshalJSON(data []byte) error {
 		u.ToolCallUnitTestModel = toolCallUnitTestModel
 		u.Type = TestInfoTypeTool
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = TestInfoTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for TestInfo", string(data))
 }
 
 func (u TestInfo) MarshalJSON() ([]byte, error) {
@@ -137,9 +110,6 @@ func (u TestInfo) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.SimulationTestModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type TestInfo: all fields are null")
 }
 

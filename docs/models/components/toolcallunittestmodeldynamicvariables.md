@@ -41,7 +41,5 @@ switch toolCallUnitTestModelDynamicVariables.Type {
 		// toolCallUnitTestModelDynamicVariables.Integer is populated
 	case components.ToolCallUnitTestModelDynamicVariablesTypeBoolean:
 		// toolCallUnitTestModelDynamicVariables.Boolean is populated
-	default:
-		// Unknown type - use toolCallUnitTestModelDynamicVariables.GetUnknownRaw() for raw JSON
 }
 ```

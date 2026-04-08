@@ -27,7 +27,5 @@ switch responseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet.Ty
 		// responseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet.DubbingTranscriptResponseModel is populated
 	case operations.ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeStr:
 		// responseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet.Str is populated
-	default:
-		// Unknown type - use responseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet.GetUnknownRaw() for raw JSON
 }
 ```

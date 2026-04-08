@@ -27,7 +27,5 @@ switch mcpServerConfigOutputURL.Type {
 		// mcpServerConfigOutputURL.Str is populated
 	case components.MCPServerConfigOutputURLTypeConvAISecretLocator:
 		// mcpServerConfigOutputURL.ConvAISecretLocator is populated
-	default:
-		// Unknown type - use mcpServerConfigOutputURL.GetUnknownRaw() for raw JSON
 }
 ```

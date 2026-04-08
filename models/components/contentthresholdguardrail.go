@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
@@ -36,13 +36,11 @@ type ThresholdType string
 const (
 	ThresholdTypeNumber        ThresholdType = "number"
 	ThresholdTypeThresholdEnum ThresholdType = "Threshold_enum"
-	ThresholdTypeUnknown       ThresholdType = "Unknown"
 )
 
 type Threshold struct {
-	Number        *float64        `queryParam:"inline" union:"member"`
-	ThresholdEnum *ThresholdEnum  `queryParam:"inline" union:"member"`
-	UnknownRaw    json.RawMessage `json:"-" union:"unknown"`
+	Number        *float64       `queryParam:"inline" union:"member"`
+	ThresholdEnum *ThresholdEnum `queryParam:"inline" union:"member"`
 
 	Type ThresholdType
 }
@@ -63,21 +61,6 @@ func CreateThresholdThresholdEnum(thresholdEnum ThresholdEnum) Threshold {
 		ThresholdEnum: &thresholdEnum,
 		Type:          typ,
 	}
-}
-
-func CreateThresholdUnknown(raw json.RawMessage) Threshold {
-	return Threshold{
-		UnknownRaw: raw,
-		Type:       ThresholdTypeUnknown,
-	}
-}
-
-func (u Threshold) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u Threshold) IsUnknown() bool {
-	return u.Type == ThresholdTypeUnknown
 }
 
 func (u *Threshold) UnmarshalJSON(data []byte) error {
@@ -102,17 +85,13 @@ func (u *Threshold) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ThresholdTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Threshold", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ThresholdTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Threshold", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -126,9 +105,7 @@ func (u *Threshold) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ThresholdTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Threshold", string(data))
 }
 
 func (u Threshold) MarshalJSON() ([]byte, error) {
@@ -140,9 +117,6 @@ func (u Threshold) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ThresholdEnum, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type Threshold: all fields are null")
 }
 

@@ -35,11 +35,10 @@ func (r *RefreshURLDocumentRouteRequest) GetXiAPIKey() optionalnullable.Optional
 type ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType string
 
 const (
-	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeURLObj  ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "url"
-	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFile    ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "file"
-	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeText    ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "text"
-	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFolder  ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "folder"
-	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeUnknown ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "UNKNOWN"
+	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeURLObj ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "url"
+	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFile   ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "file"
+	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeText   ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "text"
+	ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFolder ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType = "folder"
 )
 
 // ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost - Successful Response
@@ -48,7 +47,6 @@ type ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefres
 	GetKnowledgeBaseFileResponseModel   *components.GetKnowledgeBaseFileResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseTextResponseModel   *components.GetKnowledgeBaseTextResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseFolderResponseModel *components.GetKnowledgeBaseFolderResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                          json.RawMessage                                 `json:"-" union:"unknown"`
 
 	Type ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostType
 }
@@ -89,21 +87,6 @@ func CreateResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationID
 	}
 }
 
-func CreateResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostUnknown(raw json.RawMessage) ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost {
-	return ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost{
-		UnknownRaw: raw,
-		Type:       ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeUnknown,
-	}
-}
-
-func (u ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost) IsUnknown() bool {
-	return u.Type == ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeUnknown
-}
-
 func (u *ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -112,14 +95,7 @@ func (u *ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRe
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -159,12 +135,9 @@ func (u *ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRe
 		u.GetKnowledgeBaseFolderResponseModel = getKnowledgeBaseFolderResponseModel
 		u.Type = ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFolder
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost", string(data))
 }
 
 func (u ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost) MarshalJSON() ([]byte, error) {
@@ -184,9 +157,6 @@ func (u ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRef
 		return utils.MarshalJSON(u.GetKnowledgeBaseFolderResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost: all fields are null")
 }
 

@@ -43,7 +43,5 @@ switch responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefr
 		// responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseTextResponseModel is populated
 	case operations.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFolder:
 		// responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseFolderResponseModel is populated
-	default:
-		// Unknown type - use responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetUnknownRaw() for raw JSON
 }
 ```

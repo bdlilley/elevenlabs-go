@@ -41,7 +41,5 @@ switch conversationHistoryTranscriptToolCallCommonModelOutputToolDetails.Type {
 		// conversationHistoryTranscriptToolCallCommonModelOutputToolDetails.ConversationHistoryTranscriptToolCallMCPDetails is populated
 	case components.ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeWebhook:
 		// conversationHistoryTranscriptToolCallCommonModelOutputToolDetails.ConversationHistoryTranscriptToolCallWebhookDetails is populated
-	default:
-		// Unknown type - use conversationHistoryTranscriptToolCallCommonModelOutputToolDetails.GetUnknownRaw() for raw JSON
 }
 ```

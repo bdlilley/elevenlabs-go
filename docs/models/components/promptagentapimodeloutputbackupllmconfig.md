@@ -35,7 +35,5 @@ switch promptAgentAPIModelOutputBackupLlmConfig.Type {
 		// promptAgentAPIModelOutputBackupLlmConfig.BackupLLMDisabled is populated
 	case components.PromptAgentAPIModelOutputBackupLlmConfigTypeOverride:
 		// promptAgentAPIModelOutputBackupLlmConfig.BackupLLMOverride is populated
-	default:
-		// Unknown type - use promptAgentAPIModelOutputBackupLlmConfig.GetUnknownRaw() for raw JSON
 }
 ```

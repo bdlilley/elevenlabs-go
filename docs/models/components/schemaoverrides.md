@@ -33,7 +33,5 @@ switch schemaOverrides.Type {
 		// schemaOverrides.DynamicVariableSchemaOverride is populated
 	case components.SchemaOverridesTypeLlm:
 		// schemaOverrides.LLMSchemaOverride is populated
-	default:
-		// Unknown type - use schemaOverrides.GetUnknownRaw() for raw JSON
 }
 ```

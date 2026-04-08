@@ -41,7 +41,5 @@ switch mcpServerConfigOutputRequestHeaders.Type {
 		// mcpServerConfigOutputRequestHeaders.ConvAIDynamicVariable is populated
 	case components.MCPServerConfigOutputRequestHeadersTypeConvAIEnvVarLocator:
 		// mcpServerConfigOutputRequestHeaders.ConvAIEnvVarLocator is populated
-	default:
-		// Unknown type - use mcpServerConfigOutputRequestHeaders.GetUnknownRaw() for raw JSON
 }
 ```

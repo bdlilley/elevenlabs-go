@@ -14,13 +14,11 @@ type ConvAIStoredSecretDependenciesToolType string
 const (
 	ConvAIStoredSecretDependenciesToolTypeAvailable ConvAIStoredSecretDependenciesToolType = "available"
 	ConvAIStoredSecretDependenciesToolTypeUnknown   ConvAIStoredSecretDependenciesToolType = "unknown"
-	ConvAIStoredSecretDependenciesToolTypeUnknown   ConvAIStoredSecretDependenciesToolType = "UNKNOWN"
 )
 
 type ConvAIStoredSecretDependenciesTool struct {
 	DependentAvailableToolIdentifier *DependentAvailableToolIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownToolIdentifier   *DependentUnknownToolIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                       json.RawMessage                   `json:"-" union:"unknown"`
 
 	Type ConvAIStoredSecretDependenciesToolType
 }
@@ -43,21 +41,6 @@ func CreateConvAIStoredSecretDependenciesToolUnknown(unknown DependentUnknownToo
 	}
 }
 
-func CreateConvAIStoredSecretDependenciesToolUnknown(raw json.RawMessage) ConvAIStoredSecretDependenciesTool {
-	return ConvAIStoredSecretDependenciesTool{
-		UnknownRaw: raw,
-		Type:       ConvAIStoredSecretDependenciesToolTypeUnknown,
-	}
-}
-
-func (u ConvAIStoredSecretDependenciesTool) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConvAIStoredSecretDependenciesTool) IsUnknown() bool {
-	return u.Type == ConvAIStoredSecretDependenciesToolTypeUnknown
-}
-
 func (u *ConvAIStoredSecretDependenciesTool) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -66,14 +49,7 @@ func (u *ConvAIStoredSecretDependenciesTool) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesToolTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesToolTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -95,12 +71,9 @@ func (u *ConvAIStoredSecretDependenciesTool) UnmarshalJSON(data []byte) error {
 		u.DependentUnknownToolIdentifier = dependentUnknownToolIdentifier
 		u.Type = ConvAIStoredSecretDependenciesToolTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesToolTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConvAIStoredSecretDependenciesTool", string(data))
 }
 
 func (u ConvAIStoredSecretDependenciesTool) MarshalJSON() ([]byte, error) {
@@ -112,9 +85,6 @@ func (u ConvAIStoredSecretDependenciesTool) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DependentUnknownToolIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConvAIStoredSecretDependenciesTool: all fields are null")
 }
 
@@ -123,13 +93,11 @@ type ConvAIStoredSecretDependenciesAgentType string
 const (
 	ConvAIStoredSecretDependenciesAgentTypeAvailable ConvAIStoredSecretDependenciesAgentType = "available"
 	ConvAIStoredSecretDependenciesAgentTypeUnknown   ConvAIStoredSecretDependenciesAgentType = "unknown"
-	ConvAIStoredSecretDependenciesAgentTypeUnknown   ConvAIStoredSecretDependenciesAgentType = "UNKNOWN"
 )
 
 type ConvAIStoredSecretDependenciesAgent struct {
 	DependentAvailableAgentIdentifier *DependentAvailableAgentIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownAgentIdentifier   *DependentUnknownAgentIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                        json.RawMessage                    `json:"-" union:"unknown"`
 
 	Type ConvAIStoredSecretDependenciesAgentType
 }
@@ -152,21 +120,6 @@ func CreateConvAIStoredSecretDependenciesAgentUnknown(unknown DependentUnknownAg
 	}
 }
 
-func CreateConvAIStoredSecretDependenciesAgentUnknown(raw json.RawMessage) ConvAIStoredSecretDependenciesAgent {
-	return ConvAIStoredSecretDependenciesAgent{
-		UnknownRaw: raw,
-		Type:       ConvAIStoredSecretDependenciesAgentTypeUnknown,
-	}
-}
-
-func (u ConvAIStoredSecretDependenciesAgent) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConvAIStoredSecretDependenciesAgent) IsUnknown() bool {
-	return u.Type == ConvAIStoredSecretDependenciesAgentTypeUnknown
-}
-
 func (u *ConvAIStoredSecretDependenciesAgent) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -175,14 +128,7 @@ func (u *ConvAIStoredSecretDependenciesAgent) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesAgentTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesAgentTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -204,12 +150,9 @@ func (u *ConvAIStoredSecretDependenciesAgent) UnmarshalJSON(data []byte) error {
 		u.DependentUnknownAgentIdentifier = dependentUnknownAgentIdentifier
 		u.Type = ConvAIStoredSecretDependenciesAgentTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesAgentTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConvAIStoredSecretDependenciesAgent", string(data))
 }
 
 func (u ConvAIStoredSecretDependenciesAgent) MarshalJSON() ([]byte, error) {
@@ -221,9 +164,6 @@ func (u ConvAIStoredSecretDependenciesAgent) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DependentUnknownAgentIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConvAIStoredSecretDependenciesAgent: all fields are null")
 }
 
@@ -232,13 +172,11 @@ type ConvAIStoredSecretDependenciesMcpServerType string
 const (
 	ConvAIStoredSecretDependenciesMcpServerTypeAvailable ConvAIStoredSecretDependenciesMcpServerType = "available"
 	ConvAIStoredSecretDependenciesMcpServerTypeUnknown   ConvAIStoredSecretDependenciesMcpServerType = "unknown"
-	ConvAIStoredSecretDependenciesMcpServerTypeUnknown   ConvAIStoredSecretDependenciesMcpServerType = "UNKNOWN"
 )
 
 type ConvAIStoredSecretDependenciesMcpServer struct {
 	DependentAvailableMCPServerIdentifier *DependentAvailableMCPServerIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownMCPServerIdentifier   *DependentUnknownMCPServerIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                            json.RawMessage                        `json:"-" union:"unknown"`
 
 	Type ConvAIStoredSecretDependenciesMcpServerType
 }
@@ -261,21 +199,6 @@ func CreateConvAIStoredSecretDependenciesMcpServerUnknown(unknown DependentUnkno
 	}
 }
 
-func CreateConvAIStoredSecretDependenciesMcpServerUnknown(raw json.RawMessage) ConvAIStoredSecretDependenciesMcpServer {
-	return ConvAIStoredSecretDependenciesMcpServer{
-		UnknownRaw: raw,
-		Type:       ConvAIStoredSecretDependenciesMcpServerTypeUnknown,
-	}
-}
-
-func (u ConvAIStoredSecretDependenciesMcpServer) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConvAIStoredSecretDependenciesMcpServer) IsUnknown() bool {
-	return u.Type == ConvAIStoredSecretDependenciesMcpServerTypeUnknown
-}
-
 func (u *ConvAIStoredSecretDependenciesMcpServer) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -284,14 +207,7 @@ func (u *ConvAIStoredSecretDependenciesMcpServer) UnmarshalJSON(data []byte) err
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesMcpServerTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesMcpServerTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -313,12 +229,9 @@ func (u *ConvAIStoredSecretDependenciesMcpServer) UnmarshalJSON(data []byte) err
 		u.DependentUnknownMCPServerIdentifier = dependentUnknownMCPServerIdentifier
 		u.Type = ConvAIStoredSecretDependenciesMcpServerTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConvAIStoredSecretDependenciesMcpServerTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConvAIStoredSecretDependenciesMcpServer", string(data))
 }
 
 func (u ConvAIStoredSecretDependenciesMcpServer) MarshalJSON() ([]byte, error) {
@@ -330,9 +243,6 @@ func (u ConvAIStoredSecretDependenciesMcpServer) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DependentUnknownMCPServerIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConvAIStoredSecretDependenciesMcpServer: all fields are null")
 }
 

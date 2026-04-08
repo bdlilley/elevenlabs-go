@@ -33,7 +33,5 @@ switch testInfo.Type {
 		// testInfo.SimulationTestModel is populated
 	case components.TestInfoTypeTool:
 		// testInfo.ToolCallUnitTestModel is populated
-	default:
-		// Unknown type - use testInfo.GetUnknownRaw() for raw JSON
 }
 ```

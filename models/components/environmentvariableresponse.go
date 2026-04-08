@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -38,14 +38,12 @@ const (
 	EnvironmentVariableResponseValuesTypeMapOfStr                                    EnvironmentVariableResponseValuesType = "mapOfStr"
 	EnvironmentVariableResponseValuesTypeMapOfEnvironmentVariableSecretValue         EnvironmentVariableResponseValuesType = "mapOfEnvironmentVariableSecretValue"
 	EnvironmentVariableResponseValuesTypeMapOfEnvironmentVariableAuthConnectionValue EnvironmentVariableResponseValuesType = "mapOfEnvironmentVariableAuthConnectionValue"
-	EnvironmentVariableResponseValuesTypeUnknown                                     EnvironmentVariableResponseValuesType = "Unknown"
 )
 
 type EnvironmentVariableResponseValues struct {
 	MapOfStr                                    map[string]string                                 `queryParam:"inline" union:"member"`
 	MapOfEnvironmentVariableSecretValue         map[string]EnvironmentVariableSecretValue         `queryParam:"inline" union:"member"`
 	MapOfEnvironmentVariableAuthConnectionValue map[string]EnvironmentVariableAuthConnectionValue `queryParam:"inline" union:"member"`
-	UnknownRaw                                  json.RawMessage                                   `json:"-" union:"unknown"`
 
 	Type EnvironmentVariableResponseValuesType
 }
@@ -75,21 +73,6 @@ func CreateEnvironmentVariableResponseValuesMapOfEnvironmentVariableAuthConnecti
 		MapOfEnvironmentVariableAuthConnectionValue: mapOfEnvironmentVariableAuthConnectionValue,
 		Type: typ,
 	}
-}
-
-func CreateEnvironmentVariableResponseValuesUnknown(raw json.RawMessage) EnvironmentVariableResponseValues {
-	return EnvironmentVariableResponseValues{
-		UnknownRaw: raw,
-		Type:       EnvironmentVariableResponseValuesTypeUnknown,
-	}
-}
-
-func (u EnvironmentVariableResponseValues) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u EnvironmentVariableResponseValues) IsUnknown() bool {
-	return u.Type == EnvironmentVariableResponseValuesTypeUnknown
 }
 
 func (u *EnvironmentVariableResponseValues) UnmarshalJSON(data []byte) error {
@@ -122,17 +105,13 @@ func (u *EnvironmentVariableResponseValues) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EnvironmentVariableResponseValuesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for EnvironmentVariableResponseValues", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EnvironmentVariableResponseValuesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for EnvironmentVariableResponseValues", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -149,9 +128,7 @@ func (u *EnvironmentVariableResponseValues) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = EnvironmentVariableResponseValuesTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for EnvironmentVariableResponseValues", string(data))
 }
 
 func (u EnvironmentVariableResponseValues) MarshalJSON() ([]byte, error) {
@@ -167,9 +144,6 @@ func (u EnvironmentVariableResponseValues) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.MapOfEnvironmentVariableAuthConnectionValue, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type EnvironmentVariableResponseValues: all fields are null")
 }
 

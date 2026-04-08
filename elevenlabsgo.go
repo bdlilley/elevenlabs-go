@@ -47,8 +47,8 @@ func Float64(f float64) *float64 { return &f }
 // Pointer provides a helper function to return a pointer to a type
 func Pointer[T any](v T) *T { return &v }
 
-// SDK - ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. You can use this API to use our service programmatically, this is done by using your API key. You can find your API key in the dashboard at https://elevenlabs.io/app/settings/api-keys.
-type SDK struct {
+// ElevenlabsGo - ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. You can use this API to use our service programmatically, this is done by using your API key. You can find your API key in the dashboard at https://elevenlabs.io/app/settings/api-keys.
+type ElevenlabsGo struct {
 	SDKVersion string
 	// Accesses your speech history. Your speech history is a list of all your created audio including its metadata using our text-to-speech and speech-to-speech models.
 	SpeechHistory   *SpeechHistory
@@ -91,18 +91,18 @@ type SDK struct {
 	hooks            *hooks.Hooks
 }
 
-type SDKOption func(*SDK)
+type SDKOption func(*ElevenlabsGo)
 
 // WithServerURL allows providing an alternative server URL
 func WithServerURL(serverURL string) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *ElevenlabsGo) {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 }
 
 // WithTemplatedServerURL allows the overriding of the default server URL with a templated URL populated with the provided parameters
 func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *ElevenlabsGo) {
 		if params != nil {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
@@ -113,30 +113,30 @@ func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOptio
 
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *ElevenlabsGo) {
 		sdk.sdkConfiguration.Client = client
 	}
 }
 
 func WithRetryConfig(retryConfig retry.Config) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *ElevenlabsGo) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
 	}
 }
 
 // WithTimeout Optional request timeout applied to each operation
 func WithTimeout(timeout time.Duration) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *ElevenlabsGo) {
 		sdk.sdkConfiguration.Timeout = &timeout
 	}
 }
 
 // New creates a new instance of the SDK with the provided serverURL and options
-func New(serverURL string, opts ...SDKOption) *SDK {
-	sdk := &SDK{
-		SDKVersion: "0.0.2",
+func New(serverURL string, opts ...SDKOption) *ElevenlabsGo {
+	sdk := &ElevenlabsGo{
+		SDKVersion: "0.0.3",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent: "speakeasy-sdk/go 0.0.2 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent: "speakeasy-sdk/go 0.0.3 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
 		},
 		hooks: hooks.New(),
 	}
@@ -186,7 +186,7 @@ func New(serverURL string, opts ...SDKOption) *SDK {
 
 // GetUserSubscriptionInfo - Get User Subscription Info
 // Gets extended information about the users subscription
-func (s *SDK) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetUserSubscriptionInfoResponse, error) {
+func (s *ElevenlabsGo) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetUserSubscriptionInfoResponse, error) {
 	request := operations.GetUserSubscriptionInfoRequest{
 		XiAPIKey: xiAPIKey,
 	}
@@ -418,7 +418,7 @@ func (s *SDK) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey optionalnull
 
 // GetUserInfo - Get User Info
 // Gets information about the user
-func (s *SDK) GetUserInfo(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetUserInfoResponse, error) {
+func (s *ElevenlabsGo) GetUserInfo(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetUserInfoResponse, error) {
 	request := operations.GetUserInfoRequest{
 		XiAPIKey: xiAPIKey,
 	}
@@ -650,7 +650,7 @@ func (s *SDK) GetUserInfo(ctx context.Context, xiAPIKey optionalnullable.Optiona
 
 // UsageCharacters - Get Characters Usage Metrics
 // Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
-func (s *SDK) UsageCharacters(ctx context.Context, request operations.UsageCharactersRequest, opts ...operations.Option) (*operations.UsageCharactersResponse, error) {
+func (s *ElevenlabsGo) UsageCharacters(ctx context.Context, request operations.UsageCharactersRequest, opts ...operations.Option) (*operations.UsageCharactersResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -882,7 +882,7 @@ func (s *SDK) UsageCharacters(ctx context.Context, request operations.UsageChara
 
 // CreateAgentResponseTestRoute - Create Agent Response Test
 // Creates a new agent response test.
-func (s *SDK) CreateAgentResponseTestRoute(ctx context.Context, body operations.CreateAgentResponseTestRouteTestRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, body operations.CreateAgentResponseTestRouteTestRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAgentResponseTestRouteResponse, error) {
 	request := operations.CreateAgentResponseTestRouteRequest{
 		XiAPIKey: xiAPIKey,
 		Body:     body,
@@ -1122,7 +1122,7 @@ func (s *SDK) CreateAgentResponseTestRoute(ctx context.Context, body operations.
 
 // GetAgentResponseTestRoute - Get Agent Response Test By Id
 // Gets an agent response test by ID.
-func (s *SDK) GetAgentResponseTestRoute(ctx context.Context, testID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentResponseTestRouteResponse, error) {
 	request := operations.GetAgentResponseTestRouteRequest{
 		TestID:   testID,
 		XiAPIKey: xiAPIKey,
@@ -1355,7 +1355,7 @@ func (s *SDK) GetAgentResponseTestRoute(ctx context.Context, testID string, xiAP
 
 // UpdateAgentResponseTestRoute - Update Agent Response Test
 // Updates an agent response test by ID.
-func (s *SDK) UpdateAgentResponseTestRoute(ctx context.Context, testID string, body operations.UpdateAgentResponseTestRouteTestRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID string, body operations.UpdateAgentResponseTestRouteTestRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateAgentResponseTestRouteResponse, error) {
 	request := operations.UpdateAgentResponseTestRouteRequest{
 		TestID:   testID,
 		XiAPIKey: xiAPIKey,
@@ -1596,7 +1596,7 @@ func (s *SDK) UpdateAgentResponseTestRoute(ctx context.Context, testID string, b
 
 // DeleteChatResponseTestRoute - Delete Agent Response Test
 // Deletes an agent response test by ID.
-func (s *SDK) DeleteChatResponseTestRoute(ctx context.Context, testID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteChatResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteChatResponseTestRouteResponse, error) {
 	request := operations.DeleteChatResponseTestRouteRequest{
 		TestID:   testID,
 		XiAPIKey: xiAPIKey,
@@ -1829,7 +1829,7 @@ func (s *SDK) DeleteChatResponseTestRoute(ctx context.Context, testID string, xi
 
 // GetAgentResponseTestsSummariesRoute - Get Agent Response Test Summaries By Ids
 // Gets multiple agent response tests by their IDs. Returns a dictionary mapping test IDs to test summaries.
-func (s *SDK) GetAgentResponseTestsSummariesRoute(ctx context.Context, body components.ListTestsByIdsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentResponseTestsSummariesRouteResponse, error) {
+func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, body components.ListTestsByIdsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentResponseTestsSummariesRouteResponse, error) {
 	request := operations.GetAgentResponseTestsSummariesRouteRequest{
 		XiAPIKey: xiAPIKey,
 		Body:     body,
@@ -2069,7 +2069,7 @@ func (s *SDK) GetAgentResponseTestsSummariesRoute(ctx context.Context, body comp
 
 // ListChatResponseTestsRoute - List Agent Response Tests
 // Lists all agent response tests with pagination support and optional search filtering.
-func (s *SDK) ListChatResponseTestsRoute(ctx context.Context, request operations.ListChatResponseTestsRouteRequest, opts ...operations.Option) (*operations.ListChatResponseTestsRouteResponse, error) {
+func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request operations.ListChatResponseTestsRouteRequest, opts ...operations.Option) (*operations.ListChatResponseTestsRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2301,7 +2301,7 @@ func (s *SDK) ListChatResponseTestsRoute(ctx context.Context, request operations
 
 // ListTestInvocationsRoute - List Test Invocations
 // Lists all test invocations with pagination support and optional search filtering.
-func (s *SDK) ListTestInvocationsRoute(ctx context.Context, agentID string, pageSize *int64, cursor optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
+func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID string, pageSize *int64, cursor optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
 	request := operations.ListTestInvocationsRouteRequest{
 		AgentID:  agentID,
 		PageSize: pageSize,
@@ -2540,7 +2540,7 @@ func (s *SDK) ListTestInvocationsRoute(ctx context.Context, agentID string, page
 
 // RunAgentTestSuiteRoute - Run Tests On The Agent
 // Run selected tests on the agent with provided configuration. If the agent configuration is provided, it will be used to override default agent configuration.
-func (s *SDK) RunAgentTestSuiteRoute(ctx context.Context, agentID string, body components.RunAgentTestsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RunAgentTestSuiteRouteResponse, error) {
+func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID string, body components.RunAgentTestsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RunAgentTestSuiteRouteResponse, error) {
 	request := operations.RunAgentTestSuiteRouteRequest{
 		AgentID:  agentID,
 		XiAPIKey: xiAPIKey,
@@ -2781,7 +2781,7 @@ func (s *SDK) RunAgentTestSuiteRoute(ctx context.Context, agentID string, body c
 
 // GetTestInvocationRoute - Get Test Invocation
 // Gets a test invocation by ID.
-func (s *SDK) GetTestInvocationRoute(ctx context.Context, testInvocationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetTestInvocationRouteResponse, error) {
+func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetTestInvocationRouteResponse, error) {
 	request := operations.GetTestInvocationRouteRequest{
 		TestInvocationID: testInvocationID,
 		XiAPIKey:         xiAPIKey,
@@ -3014,7 +3014,7 @@ func (s *SDK) GetTestInvocationRoute(ctx context.Context, testInvocationID strin
 
 // ResubmitTestsRoute - Resubmit Tests
 // Resubmits specific test runs from a test invocation.
-func (s *SDK) ResubmitTestsRoute(ctx context.Context, testInvocationID string, body components.ResubmitTestsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ResubmitTestsRouteResponse, error) {
+func (s *ElevenlabsGo) ResubmitTestsRoute(ctx context.Context, testInvocationID string, body components.ResubmitTestsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ResubmitTestsRouteResponse, error) {
 	request := operations.ResubmitTestsRouteRequest{
 		TestInvocationID: testInvocationID,
 		XiAPIKey:         xiAPIKey,
@@ -3254,7 +3254,7 @@ func (s *SDK) ResubmitTestsRoute(ctx context.Context, testInvocationID string, b
 }
 
 // RedirectToMintlify - Redirect To Mintlify
-func (s *SDK) RedirectToMintlify(ctx context.Context, opts ...operations.Option) (*operations.RedirectToMintlifyResponse, error) {
+func (s *ElevenlabsGo) RedirectToMintlify(ctx context.Context, opts ...operations.Option) (*operations.RedirectToMintlifyResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,

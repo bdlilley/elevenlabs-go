@@ -25,7 +25,5 @@ switch apiIntegrationWebhookOverridesRequestHeaders.Type {
 		// apiIntegrationWebhookOverridesRequestHeaders.Str is populated
 	case components.APIIntegrationWebhookOverridesRequestHeadersTypeConvAIDynamicVariable:
 		// apiIntegrationWebhookOverridesRequestHeaders.ConvAIDynamicVariable is populated
-	default:
-		// Unknown type - use apiIntegrationWebhookOverridesRequestHeaders.GetUnknownRaw() for raw JSON
 }
 ```

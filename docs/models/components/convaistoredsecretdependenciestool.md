@@ -25,7 +25,5 @@ switch convAIStoredSecretDependenciesTool.Type {
 		// convAIStoredSecretDependenciesTool.DependentAvailableToolIdentifier is populated
 	case components.ConvAIStoredSecretDependenciesToolTypeUnknown:
 		// convAIStoredSecretDependenciesTool.DependentUnknownToolIdentifier is populated
-	default:
-		// Unknown type - use convAIStoredSecretDependenciesTool.GetUnknownRaw() for raw JSON
 }
 ```

@@ -33,7 +33,5 @@ switch arrayJSONSchemaPropertyOutputItems.Type {
 		// arrayJSONSchemaPropertyOutputItems.ObjectJSONSchemaPropertyOutput is populated
 	case components.ArrayJSONSchemaPropertyOutputItemsTypeArrayJSONSchemaPropertyOutput:
 		// arrayJSONSchemaPropertyOutputItems.ArrayJSONSchemaPropertyOutput is populated
-	default:
-		// Unknown type - use arrayJSONSchemaPropertyOutputItems.GetUnknownRaw() for raw JSON
 }
 ```

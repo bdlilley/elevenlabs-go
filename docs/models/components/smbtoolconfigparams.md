@@ -433,7 +433,5 @@ switch smbToolConfigParams.Type {
 		// smbToolConfigParams.UpdateServiceParams is populated
 	case components.SMBToolConfigParamsTypeUpdateStaff:
 		// smbToolConfigParams.UpdateStaffParams is populated
-	default:
-		// Unknown type - use smbToolConfigParams.GetUnknownRaw() for raw JSON
 }
 ```

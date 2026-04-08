@@ -20,12 +20,12 @@ import (
 
 // Models - Access the different models of the platform.
 type Models struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newModels(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Models {
+func newModels(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Models {
 	return &Models{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

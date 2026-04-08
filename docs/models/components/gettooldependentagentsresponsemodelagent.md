@@ -25,7 +25,5 @@ switch getToolDependentAgentsResponseModelAgent.Type {
 		// getToolDependentAgentsResponseModelAgent.DependentAvailableAgentIdentifier is populated
 	case components.GetToolDependentAgentsResponseModelAgentTypeUnknown:
 		// getToolDependentAgentsResponseModelAgent.DependentUnknownAgentIdentifier is populated
-	default:
-		// Unknown type - use getToolDependentAgentsResponseModelAgent.GetUnknownRaw() for raw JSON
 }
 ```

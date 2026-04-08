@@ -1,4 +1,4 @@
-# SDK
+# ElevenlabsGo SDK
 
 ## Overview
 
@@ -56,8 +56,6 @@ func main() {
                 // res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
             case components.PendingChangeTypePendingCancellationResponseModel:
                 // res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-            default:
-                // Unknown type - use res.ExtendedSubscriptionResponseModel.PendingChange.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -289,8 +287,6 @@ func main() {
                 // res.ResponseGetAgentResponseTestByIDV1ConvaiAgentTestingTestIDGet.GetToolCallUnitTestResponseModel is populated
             case operations.ResponseGetAgentResponseTestByIDV1ConvaiAgentTestingTestIDGetTypeSimulation:
                 // res.ResponseGetAgentResponseTestByIDV1ConvaiAgentTestingTestIDGet.GetSimulationTestResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseGetAgentResponseTestByIDV1ConvaiAgentTestingTestIDGet.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -359,8 +355,6 @@ func main() {
                 // res.ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut.GetToolCallUnitTestResponseModel is populated
             case operations.ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeSimulation:
                 // res.ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut.GetSimulationTestResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut.GetUnknownRaw() for raw JSON
         }
 
     }

@@ -30,7 +30,6 @@ const (
 	ASTNodeOutputTypeOrOperator          ASTNodeOutputType = "or_operator"
 	ASTNodeOutputTypeStringLiteral       ASTNodeOutputType = "string_literal"
 	ASTNodeOutputTypeSubOperator         ASTNodeOutputType = "sub_operator"
-	ASTNodeOutputTypeUnknown             ASTNodeOutputType = "UNKNOWN"
 )
 
 type ASTNodeOutput struct {
@@ -52,7 +51,6 @@ type ASTNodeOutput struct {
 	ASTMultiplicationOperatorNodeOutput1      *ASTMultiplicationOperatorNodeOutput1      `queryParam:"inline" union:"member"`
 	ASTDivisionOperatorNodeOutput1            *ASTDivisionOperatorNodeOutput1            `queryParam:"inline" union:"member"`
 	ASTConditionalOperatorNodeOutput1         *ASTConditionalOperatorNodeOutput1         `queryParam:"inline" union:"member"`
-	UnknownRaw                                json.RawMessage                            `json:"-" union:"unknown"`
 
 	Type ASTNodeOutputType
 }
@@ -219,21 +217,6 @@ func CreateASTNodeOutputSubOperator(subOperator ASTSubtractionOperatorNodeOutput
 	}
 }
 
-func CreateASTNodeOutputUnknown(raw json.RawMessage) ASTNodeOutput {
-	return ASTNodeOutput{
-		UnknownRaw: raw,
-		Type:       ASTNodeOutputTypeUnknown,
-	}
-}
-
-func (u ASTNodeOutput) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ASTNodeOutput) IsUnknown() bool {
-	return u.Type == ASTNodeOutputTypeUnknown
-}
-
 func (u *ASTNodeOutput) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -242,14 +225,7 @@ func (u *ASTNodeOutput) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ASTNodeOutputTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ASTNodeOutputTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -415,12 +391,9 @@ func (u *ASTNodeOutput) UnmarshalJSON(data []byte) error {
 		u.ASTSubtractionOperatorNodeOutput1 = astSubtractionOperatorNodeOutput1
 		u.Type = ASTNodeOutputTypeSubOperator
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ASTNodeOutputTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ASTNodeOutput", string(data))
 }
 
 func (u ASTNodeOutput) MarshalJSON() ([]byte, error) {
@@ -496,8 +469,5 @@ func (u ASTNodeOutput) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ASTConditionalOperatorNodeOutput1, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ASTNodeOutput: all fields are null")
 }

@@ -15,13 +15,11 @@ type GetToolDependentAgentsResponseModelAgentType string
 const (
 	GetToolDependentAgentsResponseModelAgentTypeAvailable GetToolDependentAgentsResponseModelAgentType = "available"
 	GetToolDependentAgentsResponseModelAgentTypeUnknown   GetToolDependentAgentsResponseModelAgentType = "unknown"
-	GetToolDependentAgentsResponseModelAgentTypeUnknown   GetToolDependentAgentsResponseModelAgentType = "UNKNOWN"
 )
 
 type GetToolDependentAgentsResponseModelAgent struct {
 	DependentAvailableAgentIdentifier *DependentAvailableAgentIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownAgentIdentifier   *DependentUnknownAgentIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                        json.RawMessage                    `json:"-" union:"unknown"`
 
 	Type GetToolDependentAgentsResponseModelAgentType
 }
@@ -44,21 +42,6 @@ func CreateGetToolDependentAgentsResponseModelAgentUnknown(unknown DependentUnkn
 	}
 }
 
-func CreateGetToolDependentAgentsResponseModelAgentUnknown(raw json.RawMessage) GetToolDependentAgentsResponseModelAgent {
-	return GetToolDependentAgentsResponseModelAgent{
-		UnknownRaw: raw,
-		Type:       GetToolDependentAgentsResponseModelAgentTypeUnknown,
-	}
-}
-
-func (u GetToolDependentAgentsResponseModelAgent) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetToolDependentAgentsResponseModelAgent) IsUnknown() bool {
-	return u.Type == GetToolDependentAgentsResponseModelAgentTypeUnknown
-}
-
 func (u *GetToolDependentAgentsResponseModelAgent) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -67,14 +50,7 @@ func (u *GetToolDependentAgentsResponseModelAgent) UnmarshalJSON(data []byte) er
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetToolDependentAgentsResponseModelAgentTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetToolDependentAgentsResponseModelAgentTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -96,12 +72,9 @@ func (u *GetToolDependentAgentsResponseModelAgent) UnmarshalJSON(data []byte) er
 		u.DependentUnknownAgentIdentifier = dependentUnknownAgentIdentifier
 		u.Type = GetToolDependentAgentsResponseModelAgentTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetToolDependentAgentsResponseModelAgentTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetToolDependentAgentsResponseModelAgent", string(data))
 }
 
 func (u GetToolDependentAgentsResponseModelAgent) MarshalJSON() ([]byte, error) {
@@ -113,9 +86,6 @@ func (u GetToolDependentAgentsResponseModelAgent) MarshalJSON() ([]byte, error) 
 		return utils.MarshalJSON(u.DependentUnknownAgentIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetToolDependentAgentsResponseModelAgent: all fields are null")
 }
 

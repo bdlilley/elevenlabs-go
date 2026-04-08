@@ -19,12 +19,12 @@ import (
 )
 
 type PvcVoices struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newPvcVoices(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *PvcVoices {
+func newPvcVoices(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *PvcVoices {
 	return &PvcVoices{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

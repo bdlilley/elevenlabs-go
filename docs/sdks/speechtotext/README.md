@@ -56,8 +56,6 @@ func main() {
                 // res.ResponseSpeechToTextV1SpeechToTextPost.MultichannelSpeechToTextResponseModel is populated
             case operations.ResponseSpeechToTextV1SpeechToTextPostTypeSpeechToTextWebhookResponseModel:
                 // res.ResponseSpeechToTextV1SpeechToTextPost.SpeechToTextWebhookResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseSpeechToTextV1SpeechToTextPost.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -105,8 +103,6 @@ func main() {
                 // res.ResponseSpeechToTextV1SpeechToTextPost.MultichannelSpeechToTextResponseModel is populated
             case operations.ResponseSpeechToTextV1SpeechToTextPostTypeSpeechToTextWebhookResponseModel:
                 // res.ResponseSpeechToTextV1SpeechToTextPost.SpeechToTextWebhookResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseSpeechToTextV1SpeechToTextPost.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -169,8 +165,6 @@ func main() {
                 // res.ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet.SpeechToTextChunkResponseModel is populated
             case operations.ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeMultichannelSpeechToTextResponseModel:
                 // res.ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet.MultichannelSpeechToTextResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet.GetUnknownRaw() for raw JSON
         }
 
     }

@@ -59,7 +59,5 @@ switch promptAgentAPIModelWorkflowOverrideOutputTool.Type {
 		// promptAgentAPIModelWorkflowOverrideOutputTool.SystemToolConfigOutput is populated
 	case components.PromptAgentAPIModelWorkflowOverrideOutputToolTypeWebhook:
 		// promptAgentAPIModelWorkflowOverrideOutputTool.WebhookToolConfigOutput is populated
-	default:
-		// Unknown type - use promptAgentAPIModelWorkflowOverrideOutputTool.GetUnknownRaw() for raw JSON
 }
 ```

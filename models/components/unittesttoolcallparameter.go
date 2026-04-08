@@ -16,7 +16,6 @@ const (
 	EvalTypeExact    EvalType = "exact"
 	EvalTypeLlm      EvalType = "llm"
 	EvalTypeRegex    EvalType = "regex"
-	EvalTypeUnknown  EvalType = "UNKNOWN"
 )
 
 type Eval struct {
@@ -24,7 +23,6 @@ type Eval struct {
 	RegexParameterEvaluationStrategy         *RegexParameterEvaluationStrategy         `queryParam:"inline" union:"member"`
 	ExactParameterEvaluationStrategy         *ExactParameterEvaluationStrategy         `queryParam:"inline" union:"member"`
 	MatchAnythingParameterEvaluationStrategy *MatchAnythingParameterEvaluationStrategy `queryParam:"inline" union:"member"`
-	UnknownRaw                               json.RawMessage                           `json:"-" union:"unknown"`
 
 	Type EvalType
 }
@@ -65,21 +63,6 @@ func CreateEvalRegex(regex RegexParameterEvaluationStrategy) Eval {
 	}
 }
 
-func CreateEvalUnknown(raw json.RawMessage) Eval {
-	return Eval{
-		UnknownRaw: raw,
-		Type:       EvalTypeUnknown,
-	}
-}
-
-func (u Eval) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u Eval) IsUnknown() bool {
-	return u.Type == EvalTypeUnknown
-}
-
 func (u *Eval) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -88,14 +71,7 @@ func (u *Eval) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EvalTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EvalTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -135,12 +111,9 @@ func (u *Eval) UnmarshalJSON(data []byte) error {
 		u.RegexParameterEvaluationStrategy = regexParameterEvaluationStrategy
 		u.Type = EvalTypeRegex
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = EvalTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Eval", string(data))
 }
 
 func (u Eval) MarshalJSON() ([]byte, error) {
@@ -160,9 +133,6 @@ func (u Eval) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.MatchAnythingParameterEvaluationStrategy, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type Eval: all fields are null")
 }
 

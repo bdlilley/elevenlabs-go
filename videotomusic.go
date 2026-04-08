@@ -18,12 +18,12 @@ import (
 )
 
 type VideoToMusic struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newVideoToMusic(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *VideoToMusic {
+func newVideoToMusic(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *VideoToMusic {
 	return &VideoToMusic{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

@@ -15,13 +15,11 @@ type GetKnowledgeBaseSummaryTextResponseModelDependentAgentType string
 const (
 	GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeAvailable GetKnowledgeBaseSummaryTextResponseModelDependentAgentType = "available"
 	GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown   GetKnowledgeBaseSummaryTextResponseModelDependentAgentType = "unknown"
-	GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown   GetKnowledgeBaseSummaryTextResponseModelDependentAgentType = "UNKNOWN"
 )
 
 type GetKnowledgeBaseSummaryTextResponseModelDependentAgent struct {
 	DependentAvailableAgentIdentifier *DependentAvailableAgentIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownAgentIdentifier   *DependentUnknownAgentIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                        json.RawMessage                    `json:"-" union:"unknown"`
 
 	Type GetKnowledgeBaseSummaryTextResponseModelDependentAgentType
 }
@@ -44,21 +42,6 @@ func CreateGetKnowledgeBaseSummaryTextResponseModelDependentAgentUnknown(unknown
 	}
 }
 
-func CreateGetKnowledgeBaseSummaryTextResponseModelDependentAgentUnknown(raw json.RawMessage) GetKnowledgeBaseSummaryTextResponseModelDependentAgent {
-	return GetKnowledgeBaseSummaryTextResponseModelDependentAgent{
-		UnknownRaw: raw,
-		Type:       GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown,
-	}
-}
-
-func (u GetKnowledgeBaseSummaryTextResponseModelDependentAgent) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetKnowledgeBaseSummaryTextResponseModelDependentAgent) IsUnknown() bool {
-	return u.Type == GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown
-}
-
 func (u *GetKnowledgeBaseSummaryTextResponseModelDependentAgent) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -67,14 +50,7 @@ func (u *GetKnowledgeBaseSummaryTextResponseModelDependentAgent) UnmarshalJSON(d
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -96,12 +72,9 @@ func (u *GetKnowledgeBaseSummaryTextResponseModelDependentAgent) UnmarshalJSON(d
 		u.DependentUnknownAgentIdentifier = dependentUnknownAgentIdentifier
 		u.Type = GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetKnowledgeBaseSummaryTextResponseModelDependentAgentTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetKnowledgeBaseSummaryTextResponseModelDependentAgent", string(data))
 }
 
 func (u GetKnowledgeBaseSummaryTextResponseModelDependentAgent) MarshalJSON() ([]byte, error) {
@@ -113,9 +86,6 @@ func (u GetKnowledgeBaseSummaryTextResponseModelDependentAgent) MarshalJSON() ([
 		return utils.MarshalJSON(u.DependentUnknownAgentIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetKnowledgeBaseSummaryTextResponseModelDependentAgent: all fields are null")
 }
 

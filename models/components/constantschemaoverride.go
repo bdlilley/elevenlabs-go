@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
@@ -16,16 +16,14 @@ const (
 	ConstantSchemaOverrideConstantValueTypeInteger ConstantSchemaOverrideConstantValueType = "integer"
 	ConstantSchemaOverrideConstantValueTypeNumber  ConstantSchemaOverrideConstantValueType = "number"
 	ConstantSchemaOverrideConstantValueTypeBoolean ConstantSchemaOverrideConstantValueType = "boolean"
-	ConstantSchemaOverrideConstantValueTypeUnknown ConstantSchemaOverrideConstantValueType = "Unknown"
 )
 
 // ConstantSchemaOverrideConstantValue - The constant value to use
 type ConstantSchemaOverrideConstantValue struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type ConstantSchemaOverrideConstantValueType
 }
@@ -66,21 +64,6 @@ func CreateConstantSchemaOverrideConstantValueBoolean(boolean bool) ConstantSche
 	}
 }
 
-func CreateConstantSchemaOverrideConstantValueUnknown(raw json.RawMessage) ConstantSchemaOverrideConstantValue {
-	return ConstantSchemaOverrideConstantValue{
-		UnknownRaw: raw,
-		Type:       ConstantSchemaOverrideConstantValueTypeUnknown,
-	}
-}
-
-func (u ConstantSchemaOverrideConstantValue) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConstantSchemaOverrideConstantValue) IsUnknown() bool {
-	return u.Type == ConstantSchemaOverrideConstantValueTypeUnknown
-}
-
 func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -119,17 +102,13 @@ func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConstantSchemaOverrideConstantValueTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConstantSchemaOverrideConstantValueTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -149,9 +128,7 @@ func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ConstantSchemaOverrideConstantValueTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue", string(data))
 }
 
 func (u ConstantSchemaOverrideConstantValue) MarshalJSON() ([]byte, error) {
@@ -171,9 +148,6 @@ func (u ConstantSchemaOverrideConstantValue) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConstantSchemaOverrideConstantValue: all fields are null")
 }
 

@@ -33,7 +33,5 @@ switch environmentVariableResponseValues.Type {
 		// environmentVariableResponseValues.MapOfEnvironmentVariableSecretValue is populated
 	case components.EnvironmentVariableResponseValuesTypeMapOfEnvironmentVariableAuthConnectionValue:
 		// environmentVariableResponseValues.MapOfEnvironmentVariableAuthConnectionValue is populated
-	default:
-		// Unknown type - use environmentVariableResponseValues.GetUnknownRaw() for raw JSON
 }
 ```

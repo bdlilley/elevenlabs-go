@@ -43,11 +43,10 @@ func (u *UpdateDocumentRouteRequest) GetBody() components.BodyUpdateDocumentV1Co
 type ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType string
 
 const (
-	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeURLObj  ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "url"
-	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFile    ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "file"
-	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeText    ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "text"
-	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFolder  ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "folder"
-	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeUnknown ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "UNKNOWN"
+	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeURLObj ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "url"
+	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFile   ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "file"
+	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeText   ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "text"
+	ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFolder ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType = "folder"
 )
 
 // ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch - Successful Response
@@ -56,7 +55,6 @@ type ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch struct {
 	GetKnowledgeBaseFileResponseModel   *components.GetKnowledgeBaseFileResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseTextResponseModel   *components.GetKnowledgeBaseTextResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseFolderResponseModel *components.GetKnowledgeBaseFolderResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                          json.RawMessage                                 `json:"-" union:"unknown"`
 
 	Type ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchType
 }
@@ -97,21 +95,6 @@ func CreateResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchFolder
 	}
 }
 
-func CreateResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchUnknown(raw json.RawMessage) ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch {
-	return ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch{
-		UnknownRaw: raw,
-		Type:       ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeUnknown,
-	}
-}
-
-func (u ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) IsUnknown() bool {
-	return u.Type == ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeUnknown
-}
-
 func (u *ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -120,14 +103,7 @@ func (u *ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) Unmars
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -167,12 +143,9 @@ func (u *ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) Unmars
 		u.GetKnowledgeBaseFolderResponseModel = getKnowledgeBaseFolderResponseModel
 		u.Type = ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFolder
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch", string(data))
 }
 
 func (u ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) MarshalJSON() ([]byte, error) {
@@ -192,9 +165,6 @@ func (u ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) Marshal
 		return utils.MarshalJSON(u.GetKnowledgeBaseFolderResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch: all fields are null")
 }
 

@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
@@ -17,15 +17,13 @@ const (
 	ToolCallUnitTestModelDynamicVariablesTypeNumber  ToolCallUnitTestModelDynamicVariablesType = "number"
 	ToolCallUnitTestModelDynamicVariablesTypeInteger ToolCallUnitTestModelDynamicVariablesType = "integer"
 	ToolCallUnitTestModelDynamicVariablesTypeBoolean ToolCallUnitTestModelDynamicVariablesType = "boolean"
-	ToolCallUnitTestModelDynamicVariablesTypeUnknown ToolCallUnitTestModelDynamicVariablesType = "Unknown"
 )
 
 type ToolCallUnitTestModelDynamicVariables struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type ToolCallUnitTestModelDynamicVariablesType
 }
@@ -66,21 +64,6 @@ func CreateToolCallUnitTestModelDynamicVariablesBoolean(boolean bool) ToolCallUn
 	}
 }
 
-func CreateToolCallUnitTestModelDynamicVariablesUnknown(raw json.RawMessage) ToolCallUnitTestModelDynamicVariables {
-	return ToolCallUnitTestModelDynamicVariables{
-		UnknownRaw: raw,
-		Type:       ToolCallUnitTestModelDynamicVariablesTypeUnknown,
-	}
-}
-
-func (u ToolCallUnitTestModelDynamicVariables) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ToolCallUnitTestModelDynamicVariables) IsUnknown() bool {
-	return u.Type == ToolCallUnitTestModelDynamicVariablesTypeUnknown
-}
-
 func (u *ToolCallUnitTestModelDynamicVariables) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -119,17 +102,13 @@ func (u *ToolCallUnitTestModelDynamicVariables) UnmarshalJSON(data []byte) error
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ToolCallUnitTestModelDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ToolCallUnitTestModelDynamicVariables", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ToolCallUnitTestModelDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ToolCallUnitTestModelDynamicVariables", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -149,9 +128,7 @@ func (u *ToolCallUnitTestModelDynamicVariables) UnmarshalJSON(data []byte) error
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ToolCallUnitTestModelDynamicVariablesTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ToolCallUnitTestModelDynamicVariables", string(data))
 }
 
 func (u ToolCallUnitTestModelDynamicVariables) MarshalJSON() ([]byte, error) {
@@ -171,9 +148,6 @@ func (u ToolCallUnitTestModelDynamicVariables) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ToolCallUnitTestModelDynamicVariables: all fields are null")
 }
 

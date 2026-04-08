@@ -41,7 +41,5 @@ switch phoneNumberTransferTransferDestination.Type {
 		// phoneNumberTransferTransferDestination.SIPURITransferDestination is populated
 	case components.PhoneNumberTransferTransferDestinationTypeSipURIDynamicVariable:
 		// phoneNumberTransferTransferDestination.SIPURIDynamicVariableTransferDestination is populated
-	default:
-		// Unknown type - use phoneNumberTransferTransferDestination.GetUnknownRaw() for raw JSON
 }
 ```

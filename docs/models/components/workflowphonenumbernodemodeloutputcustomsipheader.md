@@ -25,7 +25,5 @@ switch workflowPhoneNumberNodeModelOutputCustomSipHeader.Type {
 		// workflowPhoneNumberNodeModelOutputCustomSipHeader.CustomSIPHeaderWithDynamicVariable is populated
 	case components.WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeStatic:
 		// workflowPhoneNumberNodeModelOutputCustomSipHeader.CustomSIPHeader is populated
-	default:
-		// Unknown type - use workflowPhoneNumberNodeModelOutputCustomSipHeader.GetUnknownRaw() for raw JSON
 }
 ```

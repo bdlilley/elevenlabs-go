@@ -35,7 +35,5 @@ switch responseSpeechToTextV1SpeechToTextPost.Type {
 		// responseSpeechToTextV1SpeechToTextPost.MultichannelSpeechToTextResponseModel is populated
 	case operations.ResponseSpeechToTextV1SpeechToTextPostTypeSpeechToTextWebhookResponseModel:
 		// responseSpeechToTextV1SpeechToTextPost.SpeechToTextWebhookResponseModel is populated
-	default:
-		// Unknown type - use responseSpeechToTextV1SpeechToTextPost.GetUnknownRaw() for raw JSON
 }
 ```

@@ -18,12 +18,12 @@ import (
 )
 
 type SingleUseToken struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSingleUseToken(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SingleUseToken {
+func newSingleUseToken(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SingleUseToken {
 	return &SingleUseToken{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

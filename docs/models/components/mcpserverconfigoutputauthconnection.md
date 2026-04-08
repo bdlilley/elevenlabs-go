@@ -27,7 +27,5 @@ switch mcpServerConfigOutputAuthConnection.Type {
 		// mcpServerConfigOutputAuthConnection.AuthConnectionLocator is populated
 	case components.MCPServerConfigOutputAuthConnectionTypeEnvironmentAuthConnectionLocator:
 		// mcpServerConfigOutputAuthConnection.EnvironmentAuthConnectionLocator is populated
-	default:
-		// Unknown type - use mcpServerConfigOutputAuthConnection.GetUnknownRaw() for raw JSON
 }
 ```

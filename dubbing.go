@@ -19,12 +19,12 @@ import (
 )
 
 type Dubbing struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newDubbing(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Dubbing {
+func newDubbing(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Dubbing {
 	return &Dubbing{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

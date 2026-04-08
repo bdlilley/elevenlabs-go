@@ -19,12 +19,12 @@ import (
 )
 
 type ConversationalAI struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newConversationalAI(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *ConversationalAI {
+func newConversationalAI(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *ConversationalAI {
 	return &ConversationalAI{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

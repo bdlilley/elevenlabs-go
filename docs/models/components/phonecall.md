@@ -25,7 +25,5 @@ switch phoneCall.Type {
 		// phoneCall.ConversationHistorySIPTrunkingPhoneCallModel is populated
 	case components.PhoneCallTypeTwilio:
 		// phoneCall.ConversationHistoryTwilioPhoneCallModel is populated
-	default:
-		// Unknown type - use phoneCall.GetUnknownRaw() for raw JSON
 }
 ```

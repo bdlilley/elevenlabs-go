@@ -96,14 +96,12 @@ type ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetType 
 const (
 	ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeDubbingTranscriptResponseModel ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetType = "DubbingTranscriptResponseModel"
 	ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeStr                            ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetType = "str"
-	ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeUnknown                        ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetType = "Unknown"
 )
 
 // ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet - Successful Response
 type ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet struct {
 	DubbingTranscriptResponseModel *components.DubbingTranscriptResponseModel `queryParam:"inline" union:"member"`
 	Str                            *string                                    `queryParam:"inline" union:"member"`
-	UnknownRaw                     json.RawMessage                            `json:"-" union:"unknown"`
 
 	Type ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetType
 }
@@ -124,21 +122,6 @@ func CreateResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGe
 		Str:  &str,
 		Type: typ,
 	}
-}
-
-func CreateResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetUnknown(raw json.RawMessage) ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet {
-	return ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet{
-		UnknownRaw: raw,
-		Type:       ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeUnknown,
-	}
-}
-
-func (u ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet) IsUnknown() bool {
-	return u.Type == ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeUnknown
 }
 
 func (u *ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet) UnmarshalJSON(data []byte) error {
@@ -163,17 +146,13 @@ func (u *ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet)
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -187,9 +166,7 @@ func (u *ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet)
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet", string(data))
 }
 
 func (u ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet) MarshalJSON() ([]byte, error) {
@@ -201,9 +178,6 @@ func (u ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet) 
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet: all fields are null")
 }
 

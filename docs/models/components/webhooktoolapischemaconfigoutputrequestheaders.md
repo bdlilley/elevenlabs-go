@@ -41,7 +41,5 @@ switch webhookToolAPISchemaConfigOutputRequestHeaders.Type {
 		// webhookToolAPISchemaConfigOutputRequestHeaders.ConvAIDynamicVariable is populated
 	case components.WebhookToolAPISchemaConfigOutputRequestHeadersTypeConvAIEnvVarLocator:
 		// webhookToolAPISchemaConfigOutputRequestHeaders.ConvAIEnvVarLocator is populated
-	default:
-		// Unknown type - use webhookToolAPISchemaConfigOutputRequestHeaders.GetUnknownRaw() for raw JSON
 }
 ```

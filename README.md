@@ -74,8 +74,6 @@ func main() {
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
 		case components.PendingChangeTypePendingCancellationResponseModel:
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		default:
-			// Unknown type - use res.ExtendedSubscriptionResponseModel.PendingChange.GetUnknownRaw() for raw JSON
 		}
 
 	}
@@ -90,22 +88,22 @@ func main() {
 <details open>
 <summary>Available methods</summary>
 
-### [SDK](docs/sdks/sdk/README.md)
+### [ElevenlabsGo SDK](docs/sdks/elevenlabsgo/README.md)
 
-* [GetUserSubscriptionInfo](docs/sdks/sdk/README.md#getusersubscriptioninfo) - Get User Subscription Info
-* [GetUserInfo](docs/sdks/sdk/README.md#getuserinfo) - Get User Info
-* [UsageCharacters](docs/sdks/sdk/README.md#usagecharacters) - Get Characters Usage Metrics
-* [CreateAgentResponseTestRoute](docs/sdks/sdk/README.md#createagentresponsetestroute) - Create Agent Response Test
-* [GetAgentResponseTestRoute](docs/sdks/sdk/README.md#getagentresponsetestroute) - Get Agent Response Test By Id
-* [UpdateAgentResponseTestRoute](docs/sdks/sdk/README.md#updateagentresponsetestroute) - Update Agent Response Test
-* [DeleteChatResponseTestRoute](docs/sdks/sdk/README.md#deletechatresponsetestroute) - Delete Agent Response Test
-* [GetAgentResponseTestsSummariesRoute](docs/sdks/sdk/README.md#getagentresponsetestssummariesroute) - Get Agent Response Test Summaries By Ids
-* [ListChatResponseTestsRoute](docs/sdks/sdk/README.md#listchatresponsetestsroute) - List Agent Response Tests
-* [ListTestInvocationsRoute](docs/sdks/sdk/README.md#listtestinvocationsroute) - List Test Invocations
-* [RunAgentTestSuiteRoute](docs/sdks/sdk/README.md#runagenttestsuiteroute) - Run Tests On The Agent
-* [GetTestInvocationRoute](docs/sdks/sdk/README.md#gettestinvocationroute) - Get Test Invocation
-* [ResubmitTestsRoute](docs/sdks/sdk/README.md#resubmittestsroute) - Resubmit Tests
-* [RedirectToMintlify](docs/sdks/sdk/README.md#redirecttomintlify) - Redirect To Mintlify
+* [GetUserSubscriptionInfo](docs/sdks/elevenlabsgo/README.md#getusersubscriptioninfo) - Get User Subscription Info
+* [GetUserInfo](docs/sdks/elevenlabsgo/README.md#getuserinfo) - Get User Info
+* [UsageCharacters](docs/sdks/elevenlabsgo/README.md#usagecharacters) - Get Characters Usage Metrics
+* [CreateAgentResponseTestRoute](docs/sdks/elevenlabsgo/README.md#createagentresponsetestroute) - Create Agent Response Test
+* [GetAgentResponseTestRoute](docs/sdks/elevenlabsgo/README.md#getagentresponsetestroute) - Get Agent Response Test By Id
+* [UpdateAgentResponseTestRoute](docs/sdks/elevenlabsgo/README.md#updateagentresponsetestroute) - Update Agent Response Test
+* [DeleteChatResponseTestRoute](docs/sdks/elevenlabsgo/README.md#deletechatresponsetestroute) - Delete Agent Response Test
+* [GetAgentResponseTestsSummariesRoute](docs/sdks/elevenlabsgo/README.md#getagentresponsetestssummariesroute) - Get Agent Response Test Summaries By Ids
+* [ListChatResponseTestsRoute](docs/sdks/elevenlabsgo/README.md#listchatresponsetestsroute) - List Agent Response Tests
+* [ListTestInvocationsRoute](docs/sdks/elevenlabsgo/README.md#listtestinvocationsroute) - List Test Invocations
+* [RunAgentTestSuiteRoute](docs/sdks/elevenlabsgo/README.md#runagenttestsuiteroute) - Run Tests On The Agent
+* [GetTestInvocationRoute](docs/sdks/elevenlabsgo/README.md#gettestinvocationroute) - Get Test Invocation
+* [ResubmitTestsRoute](docs/sdks/elevenlabsgo/README.md#resubmittestsroute) - Resubmit Tests
+* [RedirectToMintlify](docs/sdks/elevenlabsgo/README.md#redirecttomintlify) - Redirect To Mintlify
 
 ### [AgentsPlatform](docs/sdks/agentsplatform/README.md)
 
@@ -537,8 +535,6 @@ func main() {
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
 		case components.PendingChangeTypePendingCancellationResponseModel:
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		default:
-			// Unknown type - use res.ExtendedSubscriptionResponseModel.PendingChange.GetUnknownRaw() for raw JSON
 		}
 
 	}
@@ -587,8 +583,6 @@ func main() {
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
 		case components.PendingChangeTypePendingCancellationResponseModel:
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		default:
-			// Unknown type - use res.ExtendedSubscriptionResponseModel.PendingChange.GetUnknownRaw() for raw JSON
 		}
 
 	}

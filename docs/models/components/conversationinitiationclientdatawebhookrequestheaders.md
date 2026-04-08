@@ -25,7 +25,5 @@ switch conversationInitiationClientDataWebhookRequestHeaders.Type {
 		// conversationInitiationClientDataWebhookRequestHeaders.Str is populated
 	case components.ConversationInitiationClientDataWebhookRequestHeadersTypeConvAISecretLocator:
 		// conversationInitiationClientDataWebhookRequestHeaders.ConvAISecretLocator is populated
-	default:
-		// Unknown type - use conversationInitiationClientDataWebhookRequestHeaders.GetUnknownRaw() for raw JSON
 }
 ```

@@ -41,7 +41,5 @@ switch knowledgeBaseContentSearchResultDocument.Type {
 		// knowledgeBaseContentSearchResultDocument.GetKnowledgeBaseSummaryTextResponseModel is populated
 	case components.KnowledgeBaseContentSearchResultDocumentTypeURLObj:
 		// knowledgeBaseContentSearchResultDocument.GetKnowledgeBaseSummaryURLResponseModel is populated
-	default:
-		// Unknown type - use knowledgeBaseContentSearchResultDocument.GetUnknownRaw() for raw JSON
 }
 ```

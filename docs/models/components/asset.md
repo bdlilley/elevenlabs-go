@@ -33,7 +33,5 @@ switch asset.Type {
 		// asset.ProjectExternalAudioResponseModel is populated
 	case components.AssetTypeProjectImageResponseModel:
 		// asset.ProjectImageResponseModel is populated
-	default:
-		// Unknown type - use asset.GetUnknownRaw() for raw JSON
 }
 ```

@@ -25,7 +25,5 @@ switch branchInfo.Type {
 		// branchInfo.TransferBranchInfoDefaultingToMain is populated
 	case components.BranchInfoTypeTrafficSplit:
 		// branchInfo.TransferBranchInfoTrafficSplit is populated
-	default:
-		// Unknown type - use branchInfo.GetUnknownRaw() for raw JSON
 }
 ```

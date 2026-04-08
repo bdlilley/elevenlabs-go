@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
@@ -15,14 +15,12 @@ const (
 	ArrayJSONSchemaPropertyOutputItemsTypeLiteralJSONSchemaProperty      ArrayJSONSchemaPropertyOutputItemsType = "LiteralJsonSchemaProperty"
 	ArrayJSONSchemaPropertyOutputItemsTypeObjectJSONSchemaPropertyOutput ArrayJSONSchemaPropertyOutputItemsType = "ObjectJsonSchemaProperty-Output"
 	ArrayJSONSchemaPropertyOutputItemsTypeArrayJSONSchemaPropertyOutput  ArrayJSONSchemaPropertyOutputItemsType = "ArrayJsonSchemaProperty-Output"
-	ArrayJSONSchemaPropertyOutputItemsTypeUnknown                        ArrayJSONSchemaPropertyOutputItemsType = "Unknown"
 )
 
 type ArrayJSONSchemaPropertyOutputItems struct {
 	LiteralJSONSchemaProperty      *LiteralJSONSchemaProperty      `queryParam:"inline" union:"member"`
 	ObjectJSONSchemaPropertyOutput *ObjectJSONSchemaPropertyOutput `queryParam:"inline" union:"member"`
 	ArrayJSONSchemaPropertyOutput  *ArrayJSONSchemaPropertyOutput  `queryParam:"inline" union:"member"`
-	UnknownRaw                     json.RawMessage                 `json:"-" union:"unknown"`
 
 	Type ArrayJSONSchemaPropertyOutputItemsType
 }
@@ -52,21 +50,6 @@ func CreateArrayJSONSchemaPropertyOutputItemsArrayJSONSchemaPropertyOutput(array
 		ArrayJSONSchemaPropertyOutput: &arrayJSONSchemaPropertyOutput,
 		Type:                          typ,
 	}
-}
-
-func CreateArrayJSONSchemaPropertyOutputItemsUnknown(raw json.RawMessage) ArrayJSONSchemaPropertyOutputItems {
-	return ArrayJSONSchemaPropertyOutputItems{
-		UnknownRaw: raw,
-		Type:       ArrayJSONSchemaPropertyOutputItemsTypeUnknown,
-	}
-}
-
-func (u ArrayJSONSchemaPropertyOutputItems) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ArrayJSONSchemaPropertyOutputItems) IsUnknown() bool {
-	return u.Type == ArrayJSONSchemaPropertyOutputItemsTypeUnknown
 }
 
 func (u *ArrayJSONSchemaPropertyOutputItems) UnmarshalJSON(data []byte) error {
@@ -99,17 +82,13 @@ func (u *ArrayJSONSchemaPropertyOutputItems) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ArrayJSONSchemaPropertyOutputItemsTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyOutputItems", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ArrayJSONSchemaPropertyOutputItemsTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyOutputItems", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -126,9 +105,7 @@ func (u *ArrayJSONSchemaPropertyOutputItems) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ArrayJSONSchemaPropertyOutputItemsTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyOutputItems", string(data))
 }
 
 func (u ArrayJSONSchemaPropertyOutputItems) MarshalJSON() ([]byte, error) {
@@ -144,9 +121,6 @@ func (u ArrayJSONSchemaPropertyOutputItems) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ArrayJSONSchemaPropertyOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ArrayJSONSchemaPropertyOutputItems: all fields are null")
 }
 

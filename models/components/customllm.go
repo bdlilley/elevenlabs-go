@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -14,14 +14,12 @@ type APIKeyType string
 const (
 	APIKeyTypeConvAISecretLocator APIKeyType = "ConvAISecretLocator"
 	APIKeyTypeConvAIEnvVarLocator APIKeyType = "ConvAIEnvVarLocator"
-	APIKeyTypeUnknown             APIKeyType = "Unknown"
 )
 
 // APIKey - The API key for authentication. Either a workspace secret reference {'secret_id': '...'} or an environment variable reference {'env_var_label': '...'}.
 type APIKey struct {
 	ConvAISecretLocator *ConvAISecretLocator `queryParam:"inline" union:"member"`
 	ConvAIEnvVarLocator *ConvAIEnvVarLocator `queryParam:"inline" union:"member"`
-	UnknownRaw          json.RawMessage      `json:"-" union:"unknown"`
 
 	Type APIKeyType
 }
@@ -42,21 +40,6 @@ func CreateAPIKeyConvAIEnvVarLocator(convAIEnvVarLocator ConvAIEnvVarLocator) AP
 		ConvAIEnvVarLocator: &convAIEnvVarLocator,
 		Type:                typ,
 	}
-}
-
-func CreateAPIKeyUnknown(raw json.RawMessage) APIKey {
-	return APIKey{
-		UnknownRaw: raw,
-		Type:       APIKeyTypeUnknown,
-	}
-}
-
-func (u APIKey) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u APIKey) IsUnknown() bool {
-	return u.Type == APIKeyTypeUnknown
 }
 
 func (u *APIKey) UnmarshalJSON(data []byte) error {
@@ -81,17 +64,13 @@ func (u *APIKey) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = APIKeyTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for APIKey", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = APIKeyTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for APIKey", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -105,9 +84,7 @@ func (u *APIKey) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = APIKeyTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for APIKey", string(data))
 }
 
 func (u APIKey) MarshalJSON() ([]byte, error) {
@@ -119,9 +96,6 @@ func (u APIKey) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ConvAIEnvVarLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type APIKey: all fields are null")
 }
 
@@ -132,7 +106,6 @@ const (
 	CustomLLMRequestHeadersTypeConvAISecretLocator   CustomLLMRequestHeadersType = "ConvAISecretLocator"
 	CustomLLMRequestHeadersTypeConvAIDynamicVariable CustomLLMRequestHeadersType = "ConvAIDynamicVariable"
 	CustomLLMRequestHeadersTypeConvAIEnvVarLocator   CustomLLMRequestHeadersType = "ConvAIEnvVarLocator"
-	CustomLLMRequestHeadersTypeUnknown               CustomLLMRequestHeadersType = "Unknown"
 )
 
 type CustomLLMRequestHeaders struct {
@@ -140,7 +113,6 @@ type CustomLLMRequestHeaders struct {
 	ConvAISecretLocator   *ConvAISecretLocator   `queryParam:"inline" union:"member"`
 	ConvAIDynamicVariable *ConvAIDynamicVariable `queryParam:"inline" union:"member"`
 	ConvAIEnvVarLocator   *ConvAIEnvVarLocator   `queryParam:"inline" union:"member"`
-	UnknownRaw            json.RawMessage        `json:"-" union:"unknown"`
 
 	Type CustomLLMRequestHeadersType
 }
@@ -181,21 +153,6 @@ func CreateCustomLLMRequestHeadersConvAIEnvVarLocator(convAIEnvVarLocator ConvAI
 	}
 }
 
-func CreateCustomLLMRequestHeadersUnknown(raw json.RawMessage) CustomLLMRequestHeaders {
-	return CustomLLMRequestHeaders{
-		UnknownRaw: raw,
-		Type:       CustomLLMRequestHeadersTypeUnknown,
-	}
-}
-
-func (u CustomLLMRequestHeaders) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u CustomLLMRequestHeaders) IsUnknown() bool {
-	return u.Type == CustomLLMRequestHeadersTypeUnknown
-}
-
 func (u *CustomLLMRequestHeaders) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -234,17 +191,13 @@ func (u *CustomLLMRequestHeaders) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = CustomLLMRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomLLMRequestHeaders", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = CustomLLMRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomLLMRequestHeaders", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -264,9 +217,7 @@ func (u *CustomLLMRequestHeaders) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = CustomLLMRequestHeadersTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomLLMRequestHeaders", string(data))
 }
 
 func (u CustomLLMRequestHeaders) MarshalJSON() ([]byte, error) {
@@ -286,9 +237,6 @@ func (u CustomLLMRequestHeaders) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ConvAIEnvVarLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type CustomLLMRequestHeaders: all fields are null")
 }
 

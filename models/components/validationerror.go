@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
@@ -13,13 +13,11 @@ type LocType string
 const (
 	LocTypeStr     LocType = "str"
 	LocTypeInteger LocType = "integer"
-	LocTypeUnknown LocType = "Unknown"
 )
 
 type Loc struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string `queryParam:"inline" union:"member"`
+	Integer *int64  `queryParam:"inline" union:"member"`
 
 	Type LocType
 }
@@ -40,21 +38,6 @@ func CreateLocInteger(integer int64) Loc {
 		Integer: &integer,
 		Type:    typ,
 	}
-}
-
-func CreateLocUnknown(raw json.RawMessage) Loc {
-	return Loc{
-		UnknownRaw: raw,
-		Type:       LocTypeUnknown,
-	}
-}
-
-func (u Loc) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u Loc) IsUnknown() bool {
-	return u.Type == LocTypeUnknown
 }
 
 func (u *Loc) UnmarshalJSON(data []byte) error {
@@ -79,17 +62,13 @@ func (u *Loc) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = LocTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Loc", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = LocTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Loc", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -103,9 +82,7 @@ func (u *Loc) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = LocTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Loc", string(data))
 }
 
 func (u Loc) MarshalJSON() ([]byte, error) {
@@ -117,9 +94,6 @@ func (u Loc) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Integer, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type Loc: all fields are null")
 }
 

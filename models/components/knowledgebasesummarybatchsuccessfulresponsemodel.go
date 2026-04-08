@@ -13,11 +13,10 @@ import (
 type DataType string
 
 const (
-	DataTypeFile    DataType = "file"
-	DataTypeFolder  DataType = "folder"
-	DataTypeText    DataType = "text"
-	DataTypeURLObj  DataType = "url"
-	DataTypeUnknown DataType = "UNKNOWN"
+	DataTypeFile   DataType = "file"
+	DataTypeFolder DataType = "folder"
+	DataTypeText   DataType = "text"
+	DataTypeURLObj DataType = "url"
 )
 
 type Data struct {
@@ -25,7 +24,6 @@ type Data struct {
 	GetKnowledgeBaseSummaryFileResponseModel   *GetKnowledgeBaseSummaryFileResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseSummaryTextResponseModel   *GetKnowledgeBaseSummaryTextResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseSummaryFolderResponseModel *GetKnowledgeBaseSummaryFolderResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                                 json.RawMessage                             `json:"-" union:"unknown"`
 
 	Type DataType
 }
@@ -66,21 +64,6 @@ func CreateDataURLObj(urlT GetKnowledgeBaseSummaryURLResponseModel) Data {
 	}
 }
 
-func CreateDataUnknown(raw json.RawMessage) Data {
-	return Data{
-		UnknownRaw: raw,
-		Type:       DataTypeUnknown,
-	}
-}
-
-func (u Data) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u Data) IsUnknown() bool {
-	return u.Type == DataTypeUnknown
-}
-
 func (u *Data) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -89,14 +72,7 @@ func (u *Data) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = DataTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = DataTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -136,12 +112,9 @@ func (u *Data) UnmarshalJSON(data []byte) error {
 		u.GetKnowledgeBaseSummaryURLResponseModel = getKnowledgeBaseSummaryURLResponseModel
 		u.Type = DataTypeURLObj
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = DataTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Data", string(data))
 }
 
 func (u Data) MarshalJSON() ([]byte, error) {
@@ -161,9 +134,6 @@ func (u Data) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.GetKnowledgeBaseSummaryFolderResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type Data: all fields are null")
 }
 

@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
@@ -56,7 +56,6 @@ const (
 	ResponseSpeechToTextV1SpeechToTextPostTypeSpeechToTextChunkResponseModel        ResponseSpeechToTextV1SpeechToTextPostType = "SpeechToTextChunkResponseModel"
 	ResponseSpeechToTextV1SpeechToTextPostTypeMultichannelSpeechToTextResponseModel ResponseSpeechToTextV1SpeechToTextPostType = "MultichannelSpeechToTextResponseModel"
 	ResponseSpeechToTextV1SpeechToTextPostTypeSpeechToTextWebhookResponseModel      ResponseSpeechToTextV1SpeechToTextPostType = "SpeechToTextWebhookResponseModel"
-	ResponseSpeechToTextV1SpeechToTextPostTypeUnknown                               ResponseSpeechToTextV1SpeechToTextPostType = "Unknown"
 )
 
 // ResponseSpeechToTextV1SpeechToTextPost - Synchronous transcription result
@@ -64,7 +63,6 @@ type ResponseSpeechToTextV1SpeechToTextPost struct {
 	SpeechToTextChunkResponseModel        *components.SpeechToTextChunkResponseModel        `queryParam:"inline" union:"member"`
 	MultichannelSpeechToTextResponseModel *components.MultichannelSpeechToTextResponseModel `queryParam:"inline" union:"member"`
 	SpeechToTextWebhookResponseModel      *components.SpeechToTextWebhookResponseModel      `queryParam:"inline" union:"member"`
-	UnknownRaw                            json.RawMessage                                   `json:"-" union:"unknown"`
 
 	Type ResponseSpeechToTextV1SpeechToTextPostType
 }
@@ -94,21 +92,6 @@ func CreateResponseSpeechToTextV1SpeechToTextPostSpeechToTextWebhookResponseMode
 		SpeechToTextWebhookResponseModel: &speechToTextWebhookResponseModel,
 		Type:                             typ,
 	}
-}
-
-func CreateResponseSpeechToTextV1SpeechToTextPostUnknown(raw json.RawMessage) ResponseSpeechToTextV1SpeechToTextPost {
-	return ResponseSpeechToTextV1SpeechToTextPost{
-		UnknownRaw: raw,
-		Type:       ResponseSpeechToTextV1SpeechToTextPostTypeUnknown,
-	}
-}
-
-func (u ResponseSpeechToTextV1SpeechToTextPost) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseSpeechToTextV1SpeechToTextPost) IsUnknown() bool {
-	return u.Type == ResponseSpeechToTextV1SpeechToTextPostTypeUnknown
 }
 
 func (u *ResponseSpeechToTextV1SpeechToTextPost) UnmarshalJSON(data []byte) error {
@@ -141,17 +124,13 @@ func (u *ResponseSpeechToTextV1SpeechToTextPost) UnmarshalJSON(data []byte) erro
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseSpeechToTextV1SpeechToTextPostTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseSpeechToTextV1SpeechToTextPost", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseSpeechToTextV1SpeechToTextPostTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseSpeechToTextV1SpeechToTextPost", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -168,9 +147,7 @@ func (u *ResponseSpeechToTextV1SpeechToTextPost) UnmarshalJSON(data []byte) erro
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ResponseSpeechToTextV1SpeechToTextPostTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseSpeechToTextV1SpeechToTextPost", string(data))
 }
 
 func (u ResponseSpeechToTextV1SpeechToTextPost) MarshalJSON() ([]byte, error) {
@@ -186,9 +163,6 @@ func (u ResponseSpeechToTextV1SpeechToTextPost) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.SpeechToTextWebhookResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseSpeechToTextV1SpeechToTextPost: all fields are null")
 }
 

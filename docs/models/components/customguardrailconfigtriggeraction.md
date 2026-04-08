@@ -25,7 +25,5 @@ switch customGuardrailConfigTriggerAction.Type {
 		// customGuardrailConfigTriggerAction.EndCallTriggerAction is populated
 	case components.CustomGuardrailConfigTriggerActionTypeRetry:
 		// customGuardrailConfigTriggerAction.RetryTriggerAction is populated
-	default:
-		// Unknown type - use customGuardrailConfigTriggerAction.GetUnknownRaw() for raw JSON
 }
 ```

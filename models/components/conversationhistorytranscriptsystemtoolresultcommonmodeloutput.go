@@ -25,7 +25,6 @@ const (
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberSipSuccess    ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_number_sip_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberTwilioSuccess ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_number_twilio_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeVoicemailDetectionSuccess     ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "voicemail_detection_success"
-	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeUnknown                       ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "UNKNOWN"
 )
 
 type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult struct {
@@ -41,7 +40,6 @@ type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult struct
 	PlayDTMFResultErrorModel                 *PlayDTMFResultErrorModel                 `queryParam:"inline" union:"member"`
 	VoiceMailDetectionResultSuccessModel     *VoiceMailDetectionResultSuccessModel     `queryParam:"inline" union:"member"`
 	TestToolResultModel                      *TestToolResultModel                      `queryParam:"inline" union:"member"`
-	UnknownRaw                               json.RawMessage                           `json:"-" union:"unknown"`
 
 	Type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType
 }
@@ -154,21 +152,6 @@ func CreateConversationHistoryTranscriptSystemToolResultCommonModelOutputResultV
 	}
 }
 
-func CreateConversationHistoryTranscriptSystemToolResultCommonModelOutputResultUnknown(raw json.RawMessage) ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult {
-	return ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult{
-		UnknownRaw: raw,
-		Type:       ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeUnknown,
-	}
-}
-
-func (u ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) IsUnknown() bool {
-	return u.Type == ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeUnknown
-}
-
 func (u *ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -177,14 +160,7 @@ func (u *ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) U
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.ResultType {
@@ -296,12 +272,9 @@ func (u *ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) U
 		u.VoiceMailDetectionResultSuccessModel = voiceMailDetectionResultSuccessModel
 		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeVoicemailDetectionSuccess
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult", string(data))
 }
 
 func (u ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) MarshalJSON() ([]byte, error) {
@@ -353,9 +326,6 @@ func (u ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) Ma
 		return utils.MarshalJSON(u.TestToolResultModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult: all fields are null")
 }
 

@@ -37,14 +37,12 @@ type ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetType string
 const (
 	ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeTwilio   ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetType = "twilio"
 	ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeSipTrunk ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetType = "sip_trunk"
-	ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeUnknown  ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetType = "UNKNOWN"
 )
 
 // ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet - Successful Response
 type ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet struct {
 	GetPhoneNumberTwilioResponseModel   *components.GetPhoneNumberTwilioResponseModel   `queryParam:"inline" union:"member"`
 	GetPhoneNumberSIPTrunkResponseModel *components.GetPhoneNumberSIPTrunkResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                          json.RawMessage                                 `json:"-" union:"unknown"`
 
 	Type ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetType
 }
@@ -67,21 +65,6 @@ func CreateResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetSipTrunk(si
 	}
 }
 
-func CreateResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetUnknown(raw json.RawMessage) ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet {
-	return ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet{
-		UnknownRaw: raw,
-		Type:       ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeUnknown,
-	}
-}
-
-func (u ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet) IsUnknown() bool {
-	return u.Type == ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeUnknown
-}
-
 func (u *ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -90,14 +73,7 @@ func (u *ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet) UnmarshalJS
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Provider {
@@ -119,12 +95,9 @@ func (u *ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet) UnmarshalJS
 		u.GetPhoneNumberSIPTrunkResponseModel = getPhoneNumberSIPTrunkResponseModel
 		u.Type = ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeSipTrunk
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet", string(data))
 }
 
 func (u ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet) MarshalJSON() ([]byte, error) {
@@ -136,9 +109,6 @@ func (u ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet) MarshalJSON(
 		return utils.MarshalJSON(u.GetPhoneNumberSIPTrunkResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet: all fields are null")
 }
 

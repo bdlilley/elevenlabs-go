@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
@@ -36,14 +36,12 @@ type ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetType st
 const (
 	ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeSpeechToTextChunkResponseModel        ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetType = "SpeechToTextChunkResponseModel"
 	ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeMultichannelSpeechToTextResponseModel ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetType = "MultichannelSpeechToTextResponseModel"
-	ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeUnknown                               ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetType = "Unknown"
 )
 
 // ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet - The transcript data
 type ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet struct {
 	SpeechToTextChunkResponseModel        *components.SpeechToTextChunkResponseModel        `queryParam:"inline" union:"member"`
 	MultichannelSpeechToTextResponseModel *components.MultichannelSpeechToTextResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                            json.RawMessage                                   `json:"-" union:"unknown"`
 
 	Type ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetType
 }
@@ -64,21 +62,6 @@ func CreateResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetM
 		MultichannelSpeechToTextResponseModel: &multichannelSpeechToTextResponseModel,
 		Type:                                  typ,
 	}
-}
-
-func CreateResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetUnknown(raw json.RawMessage) ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet {
-	return ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet{
-		UnknownRaw: raw,
-		Type:       ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeUnknown,
-	}
-}
-
-func (u ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet) IsUnknown() bool {
-	return u.Type == ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeUnknown
 }
 
 func (u *ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet) UnmarshalJSON(data []byte) error {
@@ -103,17 +86,13 @@ func (u *ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet) U
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -127,9 +106,7 @@ func (u *ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet) U
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet", string(data))
 }
 
 func (u ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet) MarshalJSON() ([]byte, error) {
@@ -141,9 +118,6 @@ func (u ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet) Ma
 		return utils.MarshalJSON(u.MultichannelSpeechToTextResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGet: all fields are null")
 }
 

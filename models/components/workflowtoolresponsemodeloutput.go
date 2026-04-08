@@ -15,14 +15,12 @@ const (
 	WorkflowToolResponseModelOutputStepTypeEdge                  WorkflowToolResponseModelOutputStepType = "edge"
 	WorkflowToolResponseModelOutputStepTypeMaxIterationsExceeded WorkflowToolResponseModelOutputStepType = "max_iterations_exceeded"
 	WorkflowToolResponseModelOutputStepTypeNestedTools           WorkflowToolResponseModelOutputStepType = "nested_tools"
-	WorkflowToolResponseModelOutputStepTypeUnknown               WorkflowToolResponseModelOutputStepType = "UNKNOWN"
 )
 
 type WorkflowToolResponseModelOutputStep struct {
 	WorkflowToolEdgeStepModel                  *WorkflowToolEdgeStepModel                  `queryParam:"inline" union:"member"`
 	WorkflowToolNestedToolsStepModelOutput     *WorkflowToolNestedToolsStepModelOutput     `queryParam:"inline" union:"member"`
 	WorkflowToolMaxIterationsExceededStepModel *WorkflowToolMaxIterationsExceededStepModel `queryParam:"inline" union:"member"`
-	UnknownRaw                                 json.RawMessage                             `json:"-" union:"unknown"`
 
 	Type WorkflowToolResponseModelOutputStepType
 }
@@ -54,21 +52,6 @@ func CreateWorkflowToolResponseModelOutputStepNestedTools(nestedTools WorkflowTo
 	}
 }
 
-func CreateWorkflowToolResponseModelOutputStepUnknown(raw json.RawMessage) WorkflowToolResponseModelOutputStep {
-	return WorkflowToolResponseModelOutputStep{
-		UnknownRaw: raw,
-		Type:       WorkflowToolResponseModelOutputStepTypeUnknown,
-	}
-}
-
-func (u WorkflowToolResponseModelOutputStep) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WorkflowToolResponseModelOutputStep) IsUnknown() bool {
-	return u.Type == WorkflowToolResponseModelOutputStepTypeUnknown
-}
-
 func (u *WorkflowToolResponseModelOutputStep) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -77,14 +60,7 @@ func (u *WorkflowToolResponseModelOutputStep) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowToolResponseModelOutputStepTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowToolResponseModelOutputStepTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -115,12 +91,9 @@ func (u *WorkflowToolResponseModelOutputStep) UnmarshalJSON(data []byte) error {
 		u.WorkflowToolNestedToolsStepModelOutput = workflowToolNestedToolsStepModelOutput
 		u.Type = WorkflowToolResponseModelOutputStepTypeNestedTools
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowToolResponseModelOutputStepTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowToolResponseModelOutputStep", string(data))
 }
 
 func (u WorkflowToolResponseModelOutputStep) MarshalJSON() ([]byte, error) {
@@ -136,9 +109,6 @@ func (u WorkflowToolResponseModelOutputStep) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.WorkflowToolMaxIterationsExceededStepModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WorkflowToolResponseModelOutputStep: all fields are null")
 }
 

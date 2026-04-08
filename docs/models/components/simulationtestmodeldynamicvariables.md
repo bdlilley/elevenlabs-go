@@ -41,7 +41,5 @@ switch simulationTestModelDynamicVariables.Type {
 		// simulationTestModelDynamicVariables.Integer is populated
 	case components.SimulationTestModelDynamicVariablesTypeBoolean:
 		// simulationTestModelDynamicVariables.Boolean is populated
-	default:
-		// Unknown type - use simulationTestModelDynamicVariables.GetUnknownRaw() for raw JSON
 }
 ```

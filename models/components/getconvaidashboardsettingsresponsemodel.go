@@ -15,14 +15,12 @@ const (
 	GetConvAIDashboardSettingsResponseModelChartTypeCallSuccess    GetConvAIDashboardSettingsResponseModelChartType = "call_success"
 	GetConvAIDashboardSettingsResponseModelChartTypeCriteria       GetConvAIDashboardSettingsResponseModelChartType = "criteria"
 	GetConvAIDashboardSettingsResponseModelChartTypeDataCollection GetConvAIDashboardSettingsResponseModelChartType = "data_collection"
-	GetConvAIDashboardSettingsResponseModelChartTypeUnknown        GetConvAIDashboardSettingsResponseModelChartType = "UNKNOWN"
 )
 
 type GetConvAIDashboardSettingsResponseModelChart struct {
 	DashboardCallSuccessChartModel    *DashboardCallSuccessChartModel    `queryParam:"inline" union:"member"`
 	DashboardCriteriaChartModel       *DashboardCriteriaChartModel       `queryParam:"inline" union:"member"`
 	DashboardDataCollectionChartModel *DashboardDataCollectionChartModel `queryParam:"inline" union:"member"`
-	UnknownRaw                        json.RawMessage                    `json:"-" union:"unknown"`
 
 	Type GetConvAIDashboardSettingsResponseModelChartType
 }
@@ -54,21 +52,6 @@ func CreateGetConvAIDashboardSettingsResponseModelChartDataCollection(dataCollec
 	}
 }
 
-func CreateGetConvAIDashboardSettingsResponseModelChartUnknown(raw json.RawMessage) GetConvAIDashboardSettingsResponseModelChart {
-	return GetConvAIDashboardSettingsResponseModelChart{
-		UnknownRaw: raw,
-		Type:       GetConvAIDashboardSettingsResponseModelChartTypeUnknown,
-	}
-}
-
-func (u GetConvAIDashboardSettingsResponseModelChart) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetConvAIDashboardSettingsResponseModelChart) IsUnknown() bool {
-	return u.Type == GetConvAIDashboardSettingsResponseModelChartTypeUnknown
-}
-
 func (u *GetConvAIDashboardSettingsResponseModelChart) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -77,14 +60,7 @@ func (u *GetConvAIDashboardSettingsResponseModelChart) UnmarshalJSON(data []byte
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetConvAIDashboardSettingsResponseModelChartTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetConvAIDashboardSettingsResponseModelChartTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -115,12 +91,9 @@ func (u *GetConvAIDashboardSettingsResponseModelChart) UnmarshalJSON(data []byte
 		u.DashboardDataCollectionChartModel = dashboardDataCollectionChartModel
 		u.Type = GetConvAIDashboardSettingsResponseModelChartTypeDataCollection
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetConvAIDashboardSettingsResponseModelChartTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetConvAIDashboardSettingsResponseModelChart", string(data))
 }
 
 func (u GetConvAIDashboardSettingsResponseModelChart) MarshalJSON() ([]byte, error) {
@@ -136,9 +109,6 @@ func (u GetConvAIDashboardSettingsResponseModelChart) MarshalJSON() ([]byte, err
 		return utils.MarshalJSON(u.DashboardDataCollectionChartModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetConvAIDashboardSettingsResponseModelChart: all fields are null")
 }
 

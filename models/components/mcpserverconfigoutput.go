@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -14,14 +14,12 @@ type MCPServerConfigOutputURLType string
 const (
 	MCPServerConfigOutputURLTypeStr                 MCPServerConfigOutputURLType = "str"
 	MCPServerConfigOutputURLTypeConvAISecretLocator MCPServerConfigOutputURLType = "ConvAISecretLocator"
-	MCPServerConfigOutputURLTypeUnknown             MCPServerConfigOutputURLType = "Unknown"
 )
 
 // MCPServerConfigOutputURL - The URL of the MCP server, if this contains a secret please store as a workspace secret, otherwise store as a plain string. Must use https
 type MCPServerConfigOutputURL struct {
 	Str                 *string              `queryParam:"inline" union:"member"`
 	ConvAISecretLocator *ConvAISecretLocator `queryParam:"inline" union:"member"`
-	UnknownRaw          json.RawMessage      `json:"-" union:"unknown"`
 
 	Type MCPServerConfigOutputURLType
 }
@@ -42,21 +40,6 @@ func CreateMCPServerConfigOutputURLConvAISecretLocator(convAISecretLocator ConvA
 		ConvAISecretLocator: &convAISecretLocator,
 		Type:                typ,
 	}
-}
-
-func CreateMCPServerConfigOutputURLUnknown(raw json.RawMessage) MCPServerConfigOutputURL {
-	return MCPServerConfigOutputURL{
-		UnknownRaw: raw,
-		Type:       MCPServerConfigOutputURLTypeUnknown,
-	}
-}
-
-func (u MCPServerConfigOutputURL) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u MCPServerConfigOutputURL) IsUnknown() bool {
-	return u.Type == MCPServerConfigOutputURLTypeUnknown
 }
 
 func (u *MCPServerConfigOutputURL) UnmarshalJSON(data []byte) error {
@@ -81,17 +64,13 @@ func (u *MCPServerConfigOutputURL) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputURLTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputURL", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputURLTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputURL", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -105,9 +84,7 @@ func (u *MCPServerConfigOutputURL) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = MCPServerConfigOutputURLTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputURL", string(data))
 }
 
 func (u MCPServerConfigOutputURL) MarshalJSON() ([]byte, error) {
@@ -119,9 +96,6 @@ func (u MCPServerConfigOutputURL) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ConvAISecretLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type MCPServerConfigOutputURL: all fields are null")
 }
 
@@ -130,14 +104,12 @@ type MCPServerConfigOutputSecretTokenType string
 const (
 	MCPServerConfigOutputSecretTokenTypeConvAISecretLocator     MCPServerConfigOutputSecretTokenType = "ConvAISecretLocator"
 	MCPServerConfigOutputSecretTokenTypeConvAIUserSecretDBModel MCPServerConfigOutputSecretTokenType = "ConvAIUserSecretDBModel"
-	MCPServerConfigOutputSecretTokenTypeUnknown                 MCPServerConfigOutputSecretTokenType = "Unknown"
 )
 
 // MCPServerConfigOutputSecretToken - The secret token (Authorization header) stored as a workspace secret or in-place secret
 type MCPServerConfigOutputSecretToken struct {
 	ConvAISecretLocator     *ConvAISecretLocator     `queryParam:"inline" union:"member"`
 	ConvAIUserSecretDBModel *ConvAIUserSecretDBModel `queryParam:"inline" union:"member"`
-	UnknownRaw              json.RawMessage          `json:"-" union:"unknown"`
 
 	Type MCPServerConfigOutputSecretTokenType
 }
@@ -158,21 +130,6 @@ func CreateMCPServerConfigOutputSecretTokenConvAIUserSecretDBModel(convAIUserSec
 		ConvAIUserSecretDBModel: &convAIUserSecretDBModel,
 		Type:                    typ,
 	}
-}
-
-func CreateMCPServerConfigOutputSecretTokenUnknown(raw json.RawMessage) MCPServerConfigOutputSecretToken {
-	return MCPServerConfigOutputSecretToken{
-		UnknownRaw: raw,
-		Type:       MCPServerConfigOutputSecretTokenTypeUnknown,
-	}
-}
-
-func (u MCPServerConfigOutputSecretToken) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u MCPServerConfigOutputSecretToken) IsUnknown() bool {
-	return u.Type == MCPServerConfigOutputSecretTokenTypeUnknown
 }
 
 func (u *MCPServerConfigOutputSecretToken) UnmarshalJSON(data []byte) error {
@@ -197,17 +154,13 @@ func (u *MCPServerConfigOutputSecretToken) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputSecretTokenTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputSecretToken", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputSecretTokenTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputSecretToken", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -221,9 +174,7 @@ func (u *MCPServerConfigOutputSecretToken) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = MCPServerConfigOutputSecretTokenTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputSecretToken", string(data))
 }
 
 func (u MCPServerConfigOutputSecretToken) MarshalJSON() ([]byte, error) {
@@ -235,9 +186,6 @@ func (u MCPServerConfigOutputSecretToken) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ConvAIUserSecretDBModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type MCPServerConfigOutputSecretToken: all fields are null")
 }
 
@@ -248,7 +196,6 @@ const (
 	MCPServerConfigOutputRequestHeadersTypeConvAISecretLocator   MCPServerConfigOutputRequestHeadersType = "ConvAISecretLocator"
 	MCPServerConfigOutputRequestHeadersTypeConvAIDynamicVariable MCPServerConfigOutputRequestHeadersType = "ConvAIDynamicVariable"
 	MCPServerConfigOutputRequestHeadersTypeConvAIEnvVarLocator   MCPServerConfigOutputRequestHeadersType = "ConvAIEnvVarLocator"
-	MCPServerConfigOutputRequestHeadersTypeUnknown               MCPServerConfigOutputRequestHeadersType = "Unknown"
 )
 
 type MCPServerConfigOutputRequestHeaders struct {
@@ -256,7 +203,6 @@ type MCPServerConfigOutputRequestHeaders struct {
 	ConvAISecretLocator   *ConvAISecretLocator   `queryParam:"inline" union:"member"`
 	ConvAIDynamicVariable *ConvAIDynamicVariable `queryParam:"inline" union:"member"`
 	ConvAIEnvVarLocator   *ConvAIEnvVarLocator   `queryParam:"inline" union:"member"`
-	UnknownRaw            json.RawMessage        `json:"-" union:"unknown"`
 
 	Type MCPServerConfigOutputRequestHeadersType
 }
@@ -297,21 +243,6 @@ func CreateMCPServerConfigOutputRequestHeadersConvAIEnvVarLocator(convAIEnvVarLo
 	}
 }
 
-func CreateMCPServerConfigOutputRequestHeadersUnknown(raw json.RawMessage) MCPServerConfigOutputRequestHeaders {
-	return MCPServerConfigOutputRequestHeaders{
-		UnknownRaw: raw,
-		Type:       MCPServerConfigOutputRequestHeadersTypeUnknown,
-	}
-}
-
-func (u MCPServerConfigOutputRequestHeaders) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u MCPServerConfigOutputRequestHeaders) IsUnknown() bool {
-	return u.Type == MCPServerConfigOutputRequestHeadersTypeUnknown
-}
-
 func (u *MCPServerConfigOutputRequestHeaders) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -350,17 +281,13 @@ func (u *MCPServerConfigOutputRequestHeaders) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputRequestHeaders", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputRequestHeaders", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -380,9 +307,7 @@ func (u *MCPServerConfigOutputRequestHeaders) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = MCPServerConfigOutputRequestHeadersTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputRequestHeaders", string(data))
 }
 
 func (u MCPServerConfigOutputRequestHeaders) MarshalJSON() ([]byte, error) {
@@ -402,9 +327,6 @@ func (u MCPServerConfigOutputRequestHeaders) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ConvAIEnvVarLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type MCPServerConfigOutputRequestHeaders: all fields are null")
 }
 
@@ -413,14 +335,12 @@ type MCPServerConfigOutputAuthConnectionType string
 const (
 	MCPServerConfigOutputAuthConnectionTypeAuthConnectionLocator            MCPServerConfigOutputAuthConnectionType = "AuthConnectionLocator"
 	MCPServerConfigOutputAuthConnectionTypeEnvironmentAuthConnectionLocator MCPServerConfigOutputAuthConnectionType = "EnvironmentAuthConnectionLocator"
-	MCPServerConfigOutputAuthConnectionTypeUnknown                          MCPServerConfigOutputAuthConnectionType = "Unknown"
 )
 
 // MCPServerConfigOutputAuthConnection - Optional auth connection to use for authentication with this MCP server
 type MCPServerConfigOutputAuthConnection struct {
 	AuthConnectionLocator            *AuthConnectionLocator            `queryParam:"inline" union:"member"`
 	EnvironmentAuthConnectionLocator *EnvironmentAuthConnectionLocator `queryParam:"inline" union:"member"`
-	UnknownRaw                       json.RawMessage                   `json:"-" union:"unknown"`
 
 	Type MCPServerConfigOutputAuthConnectionType
 }
@@ -441,21 +361,6 @@ func CreateMCPServerConfigOutputAuthConnectionEnvironmentAuthConnectionLocator(e
 		EnvironmentAuthConnectionLocator: &environmentAuthConnectionLocator,
 		Type:                             typ,
 	}
-}
-
-func CreateMCPServerConfigOutputAuthConnectionUnknown(raw json.RawMessage) MCPServerConfigOutputAuthConnection {
-	return MCPServerConfigOutputAuthConnection{
-		UnknownRaw: raw,
-		Type:       MCPServerConfigOutputAuthConnectionTypeUnknown,
-	}
-}
-
-func (u MCPServerConfigOutputAuthConnection) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u MCPServerConfigOutputAuthConnection) IsUnknown() bool {
-	return u.Type == MCPServerConfigOutputAuthConnectionTypeUnknown
 }
 
 func (u *MCPServerConfigOutputAuthConnection) UnmarshalJSON(data []byte) error {
@@ -480,17 +385,13 @@ func (u *MCPServerConfigOutputAuthConnection) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputAuthConnectionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputAuthConnection", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPServerConfigOutputAuthConnectionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputAuthConnection", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -504,9 +405,7 @@ func (u *MCPServerConfigOutputAuthConnection) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = MCPServerConfigOutputAuthConnectionTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPServerConfigOutputAuthConnection", string(data))
 }
 
 func (u MCPServerConfigOutputAuthConnection) MarshalJSON() ([]byte, error) {
@@ -518,9 +417,6 @@ func (u MCPServerConfigOutputAuthConnection) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.EnvironmentAuthConnectionLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type MCPServerConfigOutputAuthConnection: all fields are null")
 }
 

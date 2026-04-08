@@ -41,7 +41,5 @@ switch dynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders.Type {
 		// dynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders.Integer is populated
 	case components.DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeBoolean:
 		// dynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders.Boolean is populated
-	default:
-		// Unknown type - use dynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders.GetUnknownRaw() for raw JSON
 }
 ```

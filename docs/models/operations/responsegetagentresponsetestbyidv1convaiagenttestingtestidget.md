@@ -35,7 +35,5 @@ switch responseGetAgentResponseTestByIdv1ConvaiAgentTestingTestIDGet.Type {
 		// responseGetAgentResponseTestByIdv1ConvaiAgentTestingTestIDGet.GetToolCallUnitTestResponseModel is populated
 	case operations.ResponseGetAgentResponseTestByIDV1ConvaiAgentTestingTestIDGetTypeSimulation:
 		// responseGetAgentResponseTestByIdv1ConvaiAgentTestingTestIDGet.GetSimulationTestResponseModel is populated
-	default:
-		// Unknown type - use responseGetAgentResponseTestByIdv1ConvaiAgentTestingTestIDGet.GetUnknownRaw() for raw JSON
 }
 ```

@@ -27,7 +27,5 @@ switch mcpServerConfigOutputSecretToken.Type {
 		// mcpServerConfigOutputSecretToken.ConvAISecretLocator is populated
 	case components.MCPServerConfigOutputSecretTokenTypeConvAIUserSecretDBModel:
 		// mcpServerConfigOutputSecretToken.ConvAIUserSecretDBModel is populated
-	default:
-		// Unknown type - use mcpServerConfigOutputSecretToken.GetUnknownRaw() for raw JSON
 }
 ```

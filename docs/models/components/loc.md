@@ -25,7 +25,5 @@ switch loc.Type {
 		// loc.Str is populated
 	case components.LocTypeInteger:
 		// loc.Integer is populated
-	default:
-		// Unknown type - use loc.GetUnknownRaw() for raw JSON
 }
 ```

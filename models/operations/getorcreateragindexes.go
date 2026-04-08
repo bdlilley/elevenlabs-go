@@ -36,13 +36,11 @@ type GetOrCreateRagIndexesResponseBodyType string
 const (
 	GetOrCreateRagIndexesResponseBodyTypeSuccess GetOrCreateRagIndexesResponseBodyType = "success"
 	GetOrCreateRagIndexesResponseBodyTypeFailure GetOrCreateRagIndexesResponseBodyType = "failure"
-	GetOrCreateRagIndexesResponseBodyTypeUnknown GetOrCreateRagIndexesResponseBodyType = "UNKNOWN"
 )
 
 type GetOrCreateRagIndexesResponseBody struct {
 	RAGIndexBatchSuccessfulResponseModel *components.RAGIndexBatchSuccessfulResponseModel `queryParam:"inline" union:"member"`
 	BatchFailureResponseModel            *components.BatchFailureResponseModel            `queryParam:"inline" union:"member"`
-	UnknownRaw                           json.RawMessage                                  `json:"-" union:"unknown"`
 
 	Type GetOrCreateRagIndexesResponseBodyType
 }
@@ -65,21 +63,6 @@ func CreateGetOrCreateRagIndexesResponseBodyFailure(failure components.BatchFail
 	}
 }
 
-func CreateGetOrCreateRagIndexesResponseBodyUnknown(raw json.RawMessage) GetOrCreateRagIndexesResponseBody {
-	return GetOrCreateRagIndexesResponseBody{
-		UnknownRaw: raw,
-		Type:       GetOrCreateRagIndexesResponseBodyTypeUnknown,
-	}
-}
-
-func (u GetOrCreateRagIndexesResponseBody) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetOrCreateRagIndexesResponseBody) IsUnknown() bool {
-	return u.Type == GetOrCreateRagIndexesResponseBodyTypeUnknown
-}
-
 func (u *GetOrCreateRagIndexesResponseBody) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -88,14 +71,7 @@ func (u *GetOrCreateRagIndexesResponseBody) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetOrCreateRagIndexesResponseBodyTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetOrCreateRagIndexesResponseBodyTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Status {
@@ -117,12 +93,9 @@ func (u *GetOrCreateRagIndexesResponseBody) UnmarshalJSON(data []byte) error {
 		u.BatchFailureResponseModel = batchFailureResponseModel
 		u.Type = GetOrCreateRagIndexesResponseBodyTypeFailure
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetOrCreateRagIndexesResponseBodyTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetOrCreateRagIndexesResponseBody", string(data))
 }
 
 func (u GetOrCreateRagIndexesResponseBody) MarshalJSON() ([]byte, error) {
@@ -134,9 +107,6 @@ func (u GetOrCreateRagIndexesResponseBody) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.BatchFailureResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetOrCreateRagIndexesResponseBody: all fields are null")
 }
 

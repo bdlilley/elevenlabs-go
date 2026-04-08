@@ -39,13 +39,11 @@ type GetPronunciationDictionaryWithRulesResponseModelRuleType string
 const (
 	GetPronunciationDictionaryWithRulesResponseModelRuleTypeAlias   GetPronunciationDictionaryWithRulesResponseModelRuleType = "alias"
 	GetPronunciationDictionaryWithRulesResponseModelRuleTypePhoneme GetPronunciationDictionaryWithRulesResponseModelRuleType = "phoneme"
-	GetPronunciationDictionaryWithRulesResponseModelRuleTypeUnknown GetPronunciationDictionaryWithRulesResponseModelRuleType = "UNKNOWN"
 )
 
 type GetPronunciationDictionaryWithRulesResponseModelRule struct {
 	PronunciationDictionaryAliasRuleResponseModel   *PronunciationDictionaryAliasRuleResponseModel   `queryParam:"inline" union:"member"`
 	PronunciationDictionaryPhonemeRuleResponseModel *PronunciationDictionaryPhonemeRuleResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                                      json.RawMessage                                  `json:"-" union:"unknown"`
 
 	Type GetPronunciationDictionaryWithRulesResponseModelRuleType
 }
@@ -68,21 +66,6 @@ func CreateGetPronunciationDictionaryWithRulesResponseModelRulePhoneme(phoneme P
 	}
 }
 
-func CreateGetPronunciationDictionaryWithRulesResponseModelRuleUnknown(raw json.RawMessage) GetPronunciationDictionaryWithRulesResponseModelRule {
-	return GetPronunciationDictionaryWithRulesResponseModelRule{
-		UnknownRaw: raw,
-		Type:       GetPronunciationDictionaryWithRulesResponseModelRuleTypeUnknown,
-	}
-}
-
-func (u GetPronunciationDictionaryWithRulesResponseModelRule) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetPronunciationDictionaryWithRulesResponseModelRule) IsUnknown() bool {
-	return u.Type == GetPronunciationDictionaryWithRulesResponseModelRuleTypeUnknown
-}
-
 func (u *GetPronunciationDictionaryWithRulesResponseModelRule) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -91,14 +74,7 @@ func (u *GetPronunciationDictionaryWithRulesResponseModelRule) UnmarshalJSON(dat
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetPronunciationDictionaryWithRulesResponseModelRuleTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetPronunciationDictionaryWithRulesResponseModelRuleTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -120,12 +96,9 @@ func (u *GetPronunciationDictionaryWithRulesResponseModelRule) UnmarshalJSON(dat
 		u.PronunciationDictionaryPhonemeRuleResponseModel = pronunciationDictionaryPhonemeRuleResponseModel
 		u.Type = GetPronunciationDictionaryWithRulesResponseModelRuleTypePhoneme
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetPronunciationDictionaryWithRulesResponseModelRuleTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetPronunciationDictionaryWithRulesResponseModelRule", string(data))
 }
 
 func (u GetPronunciationDictionaryWithRulesResponseModelRule) MarshalJSON() ([]byte, error) {
@@ -137,9 +110,6 @@ func (u GetPronunciationDictionaryWithRulesResponseModelRule) MarshalJSON() ([]b
 		return utils.MarshalJSON(u.PronunciationDictionaryPhonemeRuleResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetPronunciationDictionaryWithRulesResponseModelRule: all fields are null")
 }
 

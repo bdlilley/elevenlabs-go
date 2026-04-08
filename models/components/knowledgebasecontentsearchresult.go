@@ -13,11 +13,10 @@ import (
 type KnowledgeBaseContentSearchResultDocumentType string
 
 const (
-	KnowledgeBaseContentSearchResultDocumentTypeFile    KnowledgeBaseContentSearchResultDocumentType = "file"
-	KnowledgeBaseContentSearchResultDocumentTypeFolder  KnowledgeBaseContentSearchResultDocumentType = "folder"
-	KnowledgeBaseContentSearchResultDocumentTypeText    KnowledgeBaseContentSearchResultDocumentType = "text"
-	KnowledgeBaseContentSearchResultDocumentTypeURLObj  KnowledgeBaseContentSearchResultDocumentType = "url"
-	KnowledgeBaseContentSearchResultDocumentTypeUnknown KnowledgeBaseContentSearchResultDocumentType = "UNKNOWN"
+	KnowledgeBaseContentSearchResultDocumentTypeFile   KnowledgeBaseContentSearchResultDocumentType = "file"
+	KnowledgeBaseContentSearchResultDocumentTypeFolder KnowledgeBaseContentSearchResultDocumentType = "folder"
+	KnowledgeBaseContentSearchResultDocumentTypeText   KnowledgeBaseContentSearchResultDocumentType = "text"
+	KnowledgeBaseContentSearchResultDocumentTypeURLObj KnowledgeBaseContentSearchResultDocumentType = "url"
 )
 
 type KnowledgeBaseContentSearchResultDocument struct {
@@ -25,7 +24,6 @@ type KnowledgeBaseContentSearchResultDocument struct {
 	GetKnowledgeBaseSummaryFileResponseModel   *GetKnowledgeBaseSummaryFileResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseSummaryTextResponseModel   *GetKnowledgeBaseSummaryTextResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseSummaryFolderResponseModel *GetKnowledgeBaseSummaryFolderResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                                 json.RawMessage                             `json:"-" union:"unknown"`
 
 	Type KnowledgeBaseContentSearchResultDocumentType
 }
@@ -66,21 +64,6 @@ func CreateKnowledgeBaseContentSearchResultDocumentURLObj(urlT GetKnowledgeBaseS
 	}
 }
 
-func CreateKnowledgeBaseContentSearchResultDocumentUnknown(raw json.RawMessage) KnowledgeBaseContentSearchResultDocument {
-	return KnowledgeBaseContentSearchResultDocument{
-		UnknownRaw: raw,
-		Type:       KnowledgeBaseContentSearchResultDocumentTypeUnknown,
-	}
-}
-
-func (u KnowledgeBaseContentSearchResultDocument) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u KnowledgeBaseContentSearchResultDocument) IsUnknown() bool {
-	return u.Type == KnowledgeBaseContentSearchResultDocumentTypeUnknown
-}
-
 func (u *KnowledgeBaseContentSearchResultDocument) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -89,14 +72,7 @@ func (u *KnowledgeBaseContentSearchResultDocument) UnmarshalJSON(data []byte) er
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = KnowledgeBaseContentSearchResultDocumentTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = KnowledgeBaseContentSearchResultDocumentTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -136,12 +112,9 @@ func (u *KnowledgeBaseContentSearchResultDocument) UnmarshalJSON(data []byte) er
 		u.GetKnowledgeBaseSummaryURLResponseModel = getKnowledgeBaseSummaryURLResponseModel
 		u.Type = KnowledgeBaseContentSearchResultDocumentTypeURLObj
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = KnowledgeBaseContentSearchResultDocumentTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for KnowledgeBaseContentSearchResultDocument", string(data))
 }
 
 func (u KnowledgeBaseContentSearchResultDocument) MarshalJSON() ([]byte, error) {
@@ -161,9 +134,6 @@ func (u KnowledgeBaseContentSearchResultDocument) MarshalJSON() ([]byte, error) 
 		return utils.MarshalJSON(u.GetKnowledgeBaseSummaryFolderResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type KnowledgeBaseContentSearchResultDocument: all fields are null")
 }
 

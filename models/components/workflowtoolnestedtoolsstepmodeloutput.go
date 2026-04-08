@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
@@ -16,7 +16,6 @@ const (
 	WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptSystemToolResultCommonModelOutput                 WorkflowToolNestedToolsStepModelOutputResultType = "ConversationHistoryTranscriptSystemToolResultCommonModel-Output"
 	WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput WorkflowToolNestedToolsStepModelOutputResultType = "ConversationHistoryTranscriptApiIntegrationWebhookToolsResultCommonModel-Output"
 	WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput              WorkflowToolNestedToolsStepModelOutputResultType = "ConversationHistoryTranscriptWorkflowToolsResultCommonModel-Output"
-	WorkflowToolNestedToolsStepModelOutputResultTypeUnknown                                                                        WorkflowToolNestedToolsStepModelOutputResultType = "Unknown"
 )
 
 type WorkflowToolNestedToolsStepModelOutputResult struct {
@@ -24,7 +23,6 @@ type WorkflowToolNestedToolsStepModelOutputResult struct {
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutput                 *ConversationHistoryTranscriptSystemToolResultCommonModelOutput                 `queryParam:"inline" union:"member"`
 	ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput *ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput `queryParam:"inline" union:"member"`
 	ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput              *ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput              `queryParam:"inline" union:"member"`
-	UnknownRaw                                                                     json.RawMessage                                                                 `json:"-" union:"unknown"`
 
 	Type WorkflowToolNestedToolsStepModelOutputResultType
 }
@@ -65,21 +63,6 @@ func CreateWorkflowToolNestedToolsStepModelOutputResultConversationHistoryTransc
 	}
 }
 
-func CreateWorkflowToolNestedToolsStepModelOutputResultUnknown(raw json.RawMessage) WorkflowToolNestedToolsStepModelOutputResult {
-	return WorkflowToolNestedToolsStepModelOutputResult{
-		UnknownRaw: raw,
-		Type:       WorkflowToolNestedToolsStepModelOutputResultTypeUnknown,
-	}
-}
-
-func (u WorkflowToolNestedToolsStepModelOutputResult) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WorkflowToolNestedToolsStepModelOutputResult) IsUnknown() bool {
-	return u.Type == WorkflowToolNestedToolsStepModelOutputResultTypeUnknown
-}
-
 func (u *WorkflowToolNestedToolsStepModelOutputResult) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -118,17 +101,13 @@ func (u *WorkflowToolNestedToolsStepModelOutputResult) UnmarshalJSON(data []byte
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowToolNestedToolsStepModelOutputResultTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowToolNestedToolsStepModelOutputResult", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowToolNestedToolsStepModelOutputResultTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowToolNestedToolsStepModelOutputResult", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -148,9 +127,7 @@ func (u *WorkflowToolNestedToolsStepModelOutputResult) UnmarshalJSON(data []byte
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = WorkflowToolNestedToolsStepModelOutputResultTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowToolNestedToolsStepModelOutputResult", string(data))
 }
 
 func (u WorkflowToolNestedToolsStepModelOutputResult) MarshalJSON() ([]byte, error) {
@@ -170,9 +147,6 @@ func (u WorkflowToolNestedToolsStepModelOutputResult) MarshalJSON() ([]byte, err
 		return utils.MarshalJSON(u.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WorkflowToolNestedToolsStepModelOutputResult: all fields are null")
 }
 

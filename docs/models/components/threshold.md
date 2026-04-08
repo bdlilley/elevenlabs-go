@@ -25,7 +25,5 @@ switch threshold.Type {
 		// threshold.Number is populated
 	case components.ThresholdTypeThresholdEnum:
 		// threshold.ThresholdEnum is populated
-	default:
-		// Unknown type - use threshold.GetUnknownRaw() for raw JSON
 }
 ```

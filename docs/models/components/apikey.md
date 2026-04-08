@@ -27,7 +27,5 @@ switch apiKey.Type {
 		// apiKey.ConvAISecretLocator is populated
 	case components.APIKeyTypeConvAIEnvVarLocator:
 		// apiKey.ConvAIEnvVarLocator is populated
-	default:
-		// Unknown type - use apiKey.GetUnknownRaw() for raw JSON
 }
 ```

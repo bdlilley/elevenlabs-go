@@ -17,7 +17,6 @@ const (
 	ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeClient                ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsType = "client"
 	ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeMcp                   ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsType = "mcp"
 	ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeWebhook               ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsType = "webhook"
-	ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeUnknown               ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsType = "UNKNOWN"
 )
 
 type ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails struct {
@@ -25,7 +24,6 @@ type ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails struct {
 	ConversationHistoryTranscriptToolCallClientDetails                      *ConversationHistoryTranscriptToolCallClientDetails                      `queryParam:"inline" union:"member"`
 	ConversationHistoryTranscriptToolCallMCPDetails                         *ConversationHistoryTranscriptToolCallMCPDetails                         `queryParam:"inline" union:"member"`
 	ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsOutput *ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsOutput `queryParam:"inline" union:"member"`
-	UnknownRaw                                                              json.RawMessage                                                          `json:"-" union:"unknown"`
 
 	Type ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsType
 }
@@ -66,21 +64,6 @@ func CreateConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsWebh
 	}
 }
 
-func CreateConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsUnknown(raw json.RawMessage) ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails {
-	return ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails{
-		UnknownRaw: raw,
-		Type:       ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeUnknown,
-	}
-}
-
-func (u ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails) IsUnknown() bool {
-	return u.Type == ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeUnknown
-}
-
 func (u *ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -89,14 +72,7 @@ func (u *ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails) Unma
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -136,12 +112,9 @@ func (u *ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails) Unma
 		u.ConversationHistoryTranscriptToolCallWebhookDetails = conversationHistoryTranscriptToolCallWebhookDetails
 		u.Type = ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeWebhook
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationHistoryTranscriptToolCallCommonModelOutputToolDetailsTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails", string(data))
 }
 
 func (u ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails) MarshalJSON() ([]byte, error) {
@@ -161,9 +134,6 @@ func (u ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails) Marsh
 		return utils.MarshalJSON(u.ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConversationHistoryTranscriptToolCallCommonModelOutputToolDetails: all fields are null")
 }
 

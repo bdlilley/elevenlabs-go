@@ -2672,8 +2672,6 @@ func main() {
                 // res.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet.GetPhoneNumberTwilioResponseModel is populated
             case operations.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeSipTrunk:
                 // res.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet.GetPhoneNumberSIPTrunkResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -2790,8 +2788,6 @@ func main() {
                 // res.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberTwilioResponseModel is populated
             case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeSipTrunk:
                 // res.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberSIPTrunkResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -3491,8 +3487,6 @@ func main() {
                 // res.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetKnowledgeBaseTextResponseModel is populated
             case operations.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFolder:
                 // res.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetKnowledgeBaseFolderResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -3617,8 +3611,6 @@ func main() {
                 // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseTextResponseModel is populated
             case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFolder:
                 // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseFolderResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -3800,8 +3792,6 @@ func main() {
                 // res.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseTextResponseModel is populated
             case operations.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFolder:
                 // res.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseFolderResponseModel is populated
-            default:
-                // Unknown type - use res.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -4367,8 +4357,6 @@ func main() {
                 // res.ToolResponseModel.ToolConfig.SystemToolConfigOutput is populated
             case components.ToolResponseModelToolConfigTypeWebhook:
                 // res.ToolResponseModel.ToolConfig.WebhookToolConfigOutput is populated
-            default:
-                // Unknown type - use res.ToolResponseModel.ToolConfig.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -4434,8 +4422,6 @@ func main() {
                 // res.ToolResponseModel.ToolConfig.SystemToolConfigOutput is populated
             case components.ToolResponseModelToolConfigTypeWebhook:
                 // res.ToolResponseModel.ToolConfig.WebhookToolConfigOutput is populated
-            default:
-                // Unknown type - use res.ToolResponseModel.ToolConfig.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -4563,8 +4549,6 @@ func main() {
                 // res.ToolResponseModel.ToolConfig.SystemToolConfigOutput is populated
             case components.ToolResponseModelToolConfigTypeWebhook:
                 // res.ToolResponseModel.ToolConfig.WebhookToolConfigOutput is populated
-            default:
-                // Unknown type - use res.ToolResponseModel.ToolConfig.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -7300,8 +7284,6 @@ func main() {
                 // res.EnvironmentVariableResponse.Values.MapOfEnvironmentVariableSecretValue is populated
             case components.EnvironmentVariableResponseValuesTypeMapOfEnvironmentVariableAuthConnectionValue:
                 // res.EnvironmentVariableResponse.Values.MapOfEnvironmentVariableAuthConnectionValue is populated
-            default:
-                // Unknown type - use res.EnvironmentVariableResponse.Values.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -7365,8 +7347,6 @@ func main() {
                 // res.EnvironmentVariableResponse.Values.MapOfEnvironmentVariableSecretValue is populated
             case components.EnvironmentVariableResponseValuesTypeMapOfEnvironmentVariableAuthConnectionValue:
                 // res.EnvironmentVariableResponse.Values.MapOfEnvironmentVariableAuthConnectionValue is populated
-            default:
-                // Unknown type - use res.EnvironmentVariableResponse.Values.GetUnknownRaw() for raw JSON
         }
 
     }
@@ -7434,8 +7414,6 @@ func main() {
                 // res.EnvironmentVariableResponse.Values.MapOfEnvironmentVariableSecretValue is populated
             case components.EnvironmentVariableResponseValuesTypeMapOfEnvironmentVariableAuthConnectionValue:
                 // res.EnvironmentVariableResponse.Values.MapOfEnvironmentVariableAuthConnectionValue is populated
-            default:
-                // Unknown type - use res.EnvironmentVariableResponse.Values.GetUnknownRaw() for raw JSON
         }
 
     }

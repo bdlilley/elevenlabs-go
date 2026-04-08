@@ -25,7 +25,5 @@ switch phoneNumberTransferCustomSipHeader.Type {
 		// phoneNumberTransferCustomSipHeader.CustomSIPHeaderWithDynamicVariable is populated
 	case components.PhoneNumberTransferCustomSipHeaderTypeStatic:
 		// phoneNumberTransferCustomSipHeader.CustomSIPHeader is populated
-	default:
-		// Unknown type - use phoneNumberTransferCustomSipHeader.GetUnknownRaw() for raw JSON
 }
 ```

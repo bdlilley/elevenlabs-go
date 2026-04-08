@@ -41,7 +41,5 @@ switch customLLMRequestHeaders.Type {
 		// customLLMRequestHeaders.ConvAIDynamicVariable is populated
 	case components.CustomLLMRequestHeadersTypeConvAIEnvVarLocator:
 		// customLLMRequestHeaders.ConvAIEnvVarLocator is populated
-	default:
-		// Unknown type - use customLLMRequestHeaders.GetUnknownRaw() for raw JSON
 }
 ```

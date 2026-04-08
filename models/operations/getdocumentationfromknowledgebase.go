@@ -54,11 +54,10 @@ func (g *GetDocumentationFromKnowledgeBaseRequest) GetXiAPIKey() optionalnullabl
 type ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType string
 
 const (
-	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeURLObj  ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "url"
-	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFile    ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "file"
-	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeText    ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "text"
-	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFolder  ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "folder"
-	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeUnknown ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "UNKNOWN"
+	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeURLObj ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "url"
+	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFile   ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "file"
+	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeText   ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "text"
+	ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFolder ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType = "folder"
 )
 
 // ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet - Successful Response
@@ -67,7 +66,6 @@ type ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentation
 	GetKnowledgeBaseFileResponseModel   *components.GetKnowledgeBaseFileResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseTextResponseModel   *components.GetKnowledgeBaseTextResponseModel   `queryParam:"inline" union:"member"`
 	GetKnowledgeBaseFolderResponseModel *components.GetKnowledgeBaseFolderResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                          json.RawMessage                                 `json:"-" union:"unknown"`
 
 	Type ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetType
 }
@@ -108,21 +106,6 @@ func CreateResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumen
 	}
 }
 
-func CreateResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetUnknown(raw json.RawMessage) ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet {
-	return ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet{
-		UnknownRaw: raw,
-		Type:       ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeUnknown,
-	}
-}
-
-func (u ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet) IsUnknown() bool {
-	return u.Type == ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeUnknown
-}
-
 func (u *ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -131,14 +114,7 @@ func (u *ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumenta
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -178,12 +154,9 @@ func (u *ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumenta
 		u.GetKnowledgeBaseFolderResponseModel = getKnowledgeBaseFolderResponseModel
 		u.Type = ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFolder
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet", string(data))
 }
 
 func (u ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet) MarshalJSON() ([]byte, error) {
@@ -203,9 +176,6 @@ func (u ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentat
 		return utils.MarshalJSON(u.GetKnowledgeBaseFolderResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet: all fields are null")
 }
 

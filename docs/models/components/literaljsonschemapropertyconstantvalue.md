@@ -43,7 +43,5 @@ switch literalJSONSchemaPropertyConstantValue.Type {
 		// literalJSONSchemaPropertyConstantValue.Number is populated
 	case components.LiteralJSONSchemaPropertyConstantValueTypeBoolean:
 		// literalJSONSchemaPropertyConstantValue.Boolean is populated
-	default:
-		// Unknown type - use literalJSONSchemaPropertyConstantValue.GetUnknownRaw() for raw JSON
 }
 ```

@@ -25,7 +25,5 @@ switch listPhoneNumbersRouteResponseBody.Type {
 		// listPhoneNumbersRouteResponseBody.GetPhoneNumberTwilioResponseModel is populated
 	case operations.ListPhoneNumbersRouteResponseBodyTypeSipTrunk:
 		// listPhoneNumbersRouteResponseBody.GetPhoneNumberSIPTrunkResponseModel is populated
-	default:
-		// Unknown type - use listPhoneNumbersRouteResponseBody.GetUnknownRaw() for raw JSON
 }
 ```

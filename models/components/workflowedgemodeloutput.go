@@ -16,7 +16,6 @@ const (
 	WorkflowEdgeModelOutputForwardConditionTypeLlm           WorkflowEdgeModelOutputForwardConditionType = "llm"
 	WorkflowEdgeModelOutputForwardConditionTypeResult        WorkflowEdgeModelOutputForwardConditionType = "result"
 	WorkflowEdgeModelOutputForwardConditionTypeUnconditional WorkflowEdgeModelOutputForwardConditionType = "unconditional"
-	WorkflowEdgeModelOutputForwardConditionTypeUnknown       WorkflowEdgeModelOutputForwardConditionType = "UNKNOWN"
 )
 
 type WorkflowEdgeModelOutputForwardCondition struct {
@@ -24,7 +23,6 @@ type WorkflowEdgeModelOutputForwardCondition struct {
 	WorkflowLLMConditionModelOutput        *WorkflowLLMConditionModelOutput        `queryParam:"inline" union:"member"`
 	WorkflowResultConditionModelOutput     *WorkflowResultConditionModelOutput     `queryParam:"inline" union:"member"`
 	WorkflowExpressionConditionModelOutput *WorkflowExpressionConditionModelOutput `queryParam:"inline" union:"member"`
-	UnknownRaw                             json.RawMessage                         `json:"-" union:"unknown"`
 
 	Type WorkflowEdgeModelOutputForwardConditionType
 }
@@ -65,21 +63,6 @@ func CreateWorkflowEdgeModelOutputForwardConditionUnconditional(unconditional Wo
 	}
 }
 
-func CreateWorkflowEdgeModelOutputForwardConditionUnknown(raw json.RawMessage) WorkflowEdgeModelOutputForwardCondition {
-	return WorkflowEdgeModelOutputForwardCondition{
-		UnknownRaw: raw,
-		Type:       WorkflowEdgeModelOutputForwardConditionTypeUnknown,
-	}
-}
-
-func (u WorkflowEdgeModelOutputForwardCondition) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WorkflowEdgeModelOutputForwardCondition) IsUnknown() bool {
-	return u.Type == WorkflowEdgeModelOutputForwardConditionTypeUnknown
-}
-
 func (u *WorkflowEdgeModelOutputForwardCondition) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -88,14 +71,7 @@ func (u *WorkflowEdgeModelOutputForwardCondition) UnmarshalJSON(data []byte) err
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowEdgeModelOutputForwardConditionTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowEdgeModelOutputForwardConditionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -135,12 +111,9 @@ func (u *WorkflowEdgeModelOutputForwardCondition) UnmarshalJSON(data []byte) err
 		u.WorkflowUnconditionalModelOutput = workflowUnconditionalModelOutput
 		u.Type = WorkflowEdgeModelOutputForwardConditionTypeUnconditional
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowEdgeModelOutputForwardConditionTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowEdgeModelOutputForwardCondition", string(data))
 }
 
 func (u WorkflowEdgeModelOutputForwardCondition) MarshalJSON() ([]byte, error) {
@@ -160,9 +133,6 @@ func (u WorkflowEdgeModelOutputForwardCondition) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.WorkflowExpressionConditionModelOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WorkflowEdgeModelOutputForwardCondition: all fields are null")
 }
 
@@ -173,7 +143,6 @@ const (
 	WorkflowEdgeModelOutputBackwardConditionTypeLlm           WorkflowEdgeModelOutputBackwardConditionType = "llm"
 	WorkflowEdgeModelOutputBackwardConditionTypeResult        WorkflowEdgeModelOutputBackwardConditionType = "result"
 	WorkflowEdgeModelOutputBackwardConditionTypeUnconditional WorkflowEdgeModelOutputBackwardConditionType = "unconditional"
-	WorkflowEdgeModelOutputBackwardConditionTypeUnknown       WorkflowEdgeModelOutputBackwardConditionType = "UNKNOWN"
 )
 
 type WorkflowEdgeModelOutputBackwardCondition struct {
@@ -181,7 +150,6 @@ type WorkflowEdgeModelOutputBackwardCondition struct {
 	WorkflowLLMConditionModelOutput        *WorkflowLLMConditionModelOutput        `queryParam:"inline" union:"member"`
 	WorkflowResultConditionModelOutput     *WorkflowResultConditionModelOutput     `queryParam:"inline" union:"member"`
 	WorkflowExpressionConditionModelOutput *WorkflowExpressionConditionModelOutput `queryParam:"inline" union:"member"`
-	UnknownRaw                             json.RawMessage                         `json:"-" union:"unknown"`
 
 	Type WorkflowEdgeModelOutputBackwardConditionType
 }
@@ -222,21 +190,6 @@ func CreateWorkflowEdgeModelOutputBackwardConditionUnconditional(unconditional W
 	}
 }
 
-func CreateWorkflowEdgeModelOutputBackwardConditionUnknown(raw json.RawMessage) WorkflowEdgeModelOutputBackwardCondition {
-	return WorkflowEdgeModelOutputBackwardCondition{
-		UnknownRaw: raw,
-		Type:       WorkflowEdgeModelOutputBackwardConditionTypeUnknown,
-	}
-}
-
-func (u WorkflowEdgeModelOutputBackwardCondition) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WorkflowEdgeModelOutputBackwardCondition) IsUnknown() bool {
-	return u.Type == WorkflowEdgeModelOutputBackwardConditionTypeUnknown
-}
-
 func (u *WorkflowEdgeModelOutputBackwardCondition) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -245,14 +198,7 @@ func (u *WorkflowEdgeModelOutputBackwardCondition) UnmarshalJSON(data []byte) er
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowEdgeModelOutputBackwardConditionTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowEdgeModelOutputBackwardConditionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -292,12 +238,9 @@ func (u *WorkflowEdgeModelOutputBackwardCondition) UnmarshalJSON(data []byte) er
 		u.WorkflowUnconditionalModelOutput = workflowUnconditionalModelOutput
 		u.Type = WorkflowEdgeModelOutputBackwardConditionTypeUnconditional
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowEdgeModelOutputBackwardConditionTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowEdgeModelOutputBackwardCondition", string(data))
 }
 
 func (u WorkflowEdgeModelOutputBackwardCondition) MarshalJSON() ([]byte, error) {
@@ -317,9 +260,6 @@ func (u WorkflowEdgeModelOutputBackwardCondition) MarshalJSON() ([]byte, error) 
 		return utils.MarshalJSON(u.WorkflowExpressionConditionModelOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WorkflowEdgeModelOutputBackwardCondition: all fields are null")
 }
 

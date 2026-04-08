@@ -18,12 +18,12 @@ import (
 )
 
 type Enterprise struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newEnterprise(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Enterprise {
+func newEnterprise(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Enterprise {
 	return &Enterprise{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

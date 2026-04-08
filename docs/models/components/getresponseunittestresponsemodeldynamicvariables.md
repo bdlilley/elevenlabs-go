@@ -41,7 +41,5 @@ switch getResponseUnitTestResponseModelDynamicVariables.Type {
 		// getResponseUnitTestResponseModelDynamicVariables.Integer is populated
 	case components.GetResponseUnitTestResponseModelDynamicVariablesTypeBoolean:
 		// getResponseUnitTestResponseModelDynamicVariables.Boolean is populated
-	default:
-		// Unknown type - use getResponseUnitTestResponseModelDynamicVariables.GetUnknownRaw() for raw JSON
 }
 ```

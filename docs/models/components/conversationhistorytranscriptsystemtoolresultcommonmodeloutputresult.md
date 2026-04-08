@@ -105,7 +105,5 @@ switch conversationHistoryTranscriptSystemToolResultCommonModelOutputResult.Type
 		// conversationHistoryTranscriptSystemToolResultCommonModelOutputResult.TransferToNumberResultTwilioSuccessModel is populated
 	case components.ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeVoicemailDetectionSuccess:
 		// conversationHistoryTranscriptSystemToolResultCommonModelOutputResult.VoiceMailDetectionResultSuccessModel is populated
-	default:
-		// Unknown type - use conversationHistoryTranscriptSystemToolResultCommonModelOutputResult.GetUnknownRaw() for raw JSON
 }
 ```

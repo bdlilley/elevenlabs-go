@@ -237,7 +237,6 @@ const (
 	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeCustomHeaderAuth             ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "custom_header_auth"
 	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2AuthCode ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "api_integration_oauth2_auth_code"
 	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth                 ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "whatsapp_auth"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeUnknown                      ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "UNKNOWN"
 )
 
 // ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost - The type of auth connection config
@@ -251,7 +250,6 @@ type ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost struct 
 	CustomHeaderAuthResponse             *components.CustomHeaderAuthResponse             `queryParam:"inline" union:"member"`
 	APIIntegrationOAuth2AuthCodeResponse *components.APIIntegrationOAuth2AuthCodeResponse `queryParam:"inline" union:"member"`
 	WhatsAppAuthResponse                 *components.WhatsAppAuthResponse                 `queryParam:"inline" union:"member"`
-	UnknownRaw                           json.RawMessage                                  `json:"-" union:"unknown"`
 
 	Type ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType
 }
@@ -337,21 +335,6 @@ func CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostWh
 	}
 }
 
-func CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostUnknown(raw json.RawMessage) ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost {
-	return ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost{
-		UnknownRaw: raw,
-		Type:       ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeUnknown,
-	}
-}
-
-func (u ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) IsUnknown() bool {
-	return u.Type == ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeUnknown
-}
-
 func (u *ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -360,14 +343,7 @@ func (u *ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) Un
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.AuthType {
@@ -452,12 +428,9 @@ func (u *ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) Un
 		u.WhatsAppAuthResponse = whatsAppAuthResponse
 		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost", string(data))
 }
 
 func (u ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) MarshalJSON() ([]byte, error) {
@@ -497,9 +470,6 @@ func (u ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) Mar
 		return utils.MarshalJSON(u.WhatsAppAuthResponse, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost: all fields are null")
 }
 

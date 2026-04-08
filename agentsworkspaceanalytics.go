@@ -18,12 +18,12 @@ import (
 )
 
 type AgentsWorkspaceAnalytics struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newAgentsWorkspaceAnalytics(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AgentsWorkspaceAnalytics {
+func newAgentsWorkspaceAnalytics(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AgentsWorkspaceAnalytics {
 	return &AgentsWorkspaceAnalytics{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

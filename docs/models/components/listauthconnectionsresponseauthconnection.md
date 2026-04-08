@@ -83,7 +83,5 @@ switch listAuthConnectionsResponseAuthConnection.Type {
 		// listAuthConnectionsResponseAuthConnection.PrivateKeyJWTResponse is populated
 	case components.ListAuthConnectionsResponseAuthConnectionTypeWhatsappAuth:
 		// listAuthConnectionsResponseAuthConnection.WhatsAppAuthResponse is populated
-	default:
-		// Unknown type - use listAuthConnectionsResponseAuthConnection.GetUnknownRaw() for raw JSON
 }
 ```

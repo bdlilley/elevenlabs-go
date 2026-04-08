@@ -33,7 +33,5 @@ switch workflowToolResponseModelOutputStep.Type {
 		// workflowToolResponseModelOutputStep.WorkflowToolMaxIterationsExceededStepModel is populated
 	case components.WorkflowToolResponseModelOutputStepTypeNestedTools:
 		// workflowToolResponseModelOutputStep.WorkflowToolNestedToolsStepModelOutput is populated
-	default:
-		// Unknown type - use workflowToolResponseModelOutputStep.GetUnknownRaw() for raw JSON
 }
 ```

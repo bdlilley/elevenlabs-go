@@ -15,13 +15,11 @@ type PhoneNumberType string
 const (
 	PhoneNumberTypeSipTrunk PhoneNumberType = "sip_trunk"
 	PhoneNumberTypeTwilio   PhoneNumberType = "twilio"
-	PhoneNumberTypeUnknown  PhoneNumberType = "UNKNOWN"
 )
 
 type PhoneNumber struct {
 	GetPhoneNumberTwilioResponseModel   *GetPhoneNumberTwilioResponseModel   `queryParam:"inline" union:"member"`
 	GetPhoneNumberSIPTrunkResponseModel *GetPhoneNumberSIPTrunkResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                          json.RawMessage                      `json:"-" union:"unknown"`
 
 	Type PhoneNumberType
 }
@@ -44,21 +42,6 @@ func CreatePhoneNumberTwilio(twilio GetPhoneNumberTwilioResponseModel) PhoneNumb
 	}
 }
 
-func CreatePhoneNumberUnknown(raw json.RawMessage) PhoneNumber {
-	return PhoneNumber{
-		UnknownRaw: raw,
-		Type:       PhoneNumberTypeUnknown,
-	}
-}
-
-func (u PhoneNumber) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PhoneNumber) IsUnknown() bool {
-	return u.Type == PhoneNumberTypeUnknown
-}
-
 func (u *PhoneNumber) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -67,14 +50,7 @@ func (u *PhoneNumber) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Provider {
@@ -96,12 +72,9 @@ func (u *PhoneNumber) UnmarshalJSON(data []byte) error {
 		u.GetPhoneNumberTwilioResponseModel = getPhoneNumberTwilioResponseModel
 		u.Type = PhoneNumberTypeTwilio
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PhoneNumber", string(data))
 }
 
 func (u PhoneNumber) MarshalJSON() ([]byte, error) {
@@ -113,9 +86,6 @@ func (u PhoneNumber) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.GetPhoneNumberSIPTrunkResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PhoneNumber: all fields are null")
 }
 

@@ -20,12 +20,12 @@ import (
 
 // ForcedAlignment - Force align an audio file to a text transcript to get precise word-level and character level timing information. Response is a list of characters with their start and end times as milliseconds elapsed from the start of the recording.
 type ForcedAlignment struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newForcedAlignment(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *ForcedAlignment {
+func newForcedAlignment(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *ForcedAlignment {
 	return &ForcedAlignment{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

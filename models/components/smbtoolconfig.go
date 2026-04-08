@@ -67,7 +67,6 @@ const (
 	SMBToolConfigParamsTypeUpdateRentalService        SMBToolConfigParamsType = "update_rental_service"
 	SMBToolConfigParamsTypeUpdateService              SMBToolConfigParamsType = "update_service"
 	SMBToolConfigParamsTypeUpdateStaff                SMBToolConfigParamsType = "update_staff"
-	SMBToolConfigParamsTypeUnknown                    SMBToolConfigParamsType = "UNKNOWN"
 )
 
 type SMBToolConfigParams struct {
@@ -124,7 +123,6 @@ type SMBToolConfigParams struct {
 	ListClientInteractionsParams     *ListClientInteractionsParams     `queryParam:"inline" union:"member"`
 	CreateClientInteractionParams    *CreateClientInteractionParams    `queryParam:"inline" union:"member"`
 	DeleteClientInteractionParams    *DeleteClientInteractionParams    `queryParam:"inline" union:"member"`
-	UnknownRaw                       json.RawMessage                   `json:"-" union:"unknown"`
 
 	Type SMBToolConfigParamsType
 }
@@ -606,21 +604,6 @@ func CreateSMBToolConfigParamsUpdateStaff(updateStaff UpdateStaffParams) SMBTool
 	}
 }
 
-func CreateSMBToolConfigParamsUnknown(raw json.RawMessage) SMBToolConfigParams {
-	return SMBToolConfigParams{
-		UnknownRaw: raw,
-		Type:       SMBToolConfigParamsTypeUnknown,
-	}
-}
-
-func (u SMBToolConfigParams) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u SMBToolConfigParams) IsUnknown() bool {
-	return u.Type == SMBToolConfigParamsTypeUnknown
-}
-
 func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -629,14 +612,7 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SMBToolConfigParamsTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SMBToolConfigParamsTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.SmbToolType {
@@ -1117,12 +1093,9 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.UpdateStaffParams = updateStaffParams
 		u.Type = SMBToolConfigParamsTypeUpdateStaff
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SMBToolConfigParamsTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SMBToolConfigParams", string(data))
 }
 
 func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
@@ -1338,9 +1311,6 @@ func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DeleteClientInteractionParams, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type SMBToolConfigParams: all fields are null")
 }
 

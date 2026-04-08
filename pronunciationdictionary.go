@@ -19,12 +19,12 @@ import (
 )
 
 type PronunciationDictionary struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newPronunciationDictionary(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *PronunciationDictionary {
+func newPronunciationDictionary(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *PronunciationDictionary {
 	return &PronunciationDictionary{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

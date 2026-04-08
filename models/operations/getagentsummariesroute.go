@@ -37,13 +37,11 @@ type GetAgentSummariesRouteResponseBodyType string
 const (
 	GetAgentSummariesRouteResponseBodyTypeSuccess GetAgentSummariesRouteResponseBodyType = "success"
 	GetAgentSummariesRouteResponseBodyTypeFailure GetAgentSummariesRouteResponseBodyType = "failure"
-	GetAgentSummariesRouteResponseBodyTypeUnknown GetAgentSummariesRouteResponseBodyType = "UNKNOWN"
 )
 
 type GetAgentSummariesRouteResponseBody struct {
 	AgentSummaryBatchSuccessfulResponseModel *components.AgentSummaryBatchSuccessfulResponseModel `queryParam:"inline" union:"member"`
 	BatchFailureResponseModel                *components.BatchFailureResponseModel                `queryParam:"inline" union:"member"`
-	UnknownRaw                               json.RawMessage                                      `json:"-" union:"unknown"`
 
 	Type GetAgentSummariesRouteResponseBodyType
 }
@@ -66,21 +64,6 @@ func CreateGetAgentSummariesRouteResponseBodyFailure(failure components.BatchFai
 	}
 }
 
-func CreateGetAgentSummariesRouteResponseBodyUnknown(raw json.RawMessage) GetAgentSummariesRouteResponseBody {
-	return GetAgentSummariesRouteResponseBody{
-		UnknownRaw: raw,
-		Type:       GetAgentSummariesRouteResponseBodyTypeUnknown,
-	}
-}
-
-func (u GetAgentSummariesRouteResponseBody) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetAgentSummariesRouteResponseBody) IsUnknown() bool {
-	return u.Type == GetAgentSummariesRouteResponseBodyTypeUnknown
-}
-
 func (u *GetAgentSummariesRouteResponseBody) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -89,14 +72,7 @@ func (u *GetAgentSummariesRouteResponseBody) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetAgentSummariesRouteResponseBodyTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetAgentSummariesRouteResponseBodyTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Status {
@@ -118,12 +94,9 @@ func (u *GetAgentSummariesRouteResponseBody) UnmarshalJSON(data []byte) error {
 		u.BatchFailureResponseModel = batchFailureResponseModel
 		u.Type = GetAgentSummariesRouteResponseBodyTypeFailure
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetAgentSummariesRouteResponseBodyTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetAgentSummariesRouteResponseBody", string(data))
 }
 
 func (u GetAgentSummariesRouteResponseBody) MarshalJSON() ([]byte, error) {
@@ -135,9 +108,6 @@ func (u GetAgentSummariesRouteResponseBody) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.BatchFailureResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetAgentSummariesRouteResponseBody: all fields are null")
 }
 

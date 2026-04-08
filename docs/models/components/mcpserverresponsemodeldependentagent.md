@@ -25,7 +25,5 @@ switch mcpServerResponseModelDependentAgent.Type {
 		// mcpServerResponseModelDependentAgent.DependentAvailableAgentIdentifier is populated
 	case components.MCPServerResponseModelDependentAgentTypeUnknown:
 		// mcpServerResponseModelDependentAgent.DependentUnknownAgentIdentifier is populated
-	default:
-		// Unknown type - use mcpServerResponseModelDependentAgent.GetUnknownRaw() for raw JSON
 }
 ```

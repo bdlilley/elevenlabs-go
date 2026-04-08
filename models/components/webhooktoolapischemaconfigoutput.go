@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -16,7 +16,6 @@ const (
 	WebhookToolAPISchemaConfigOutputRequestHeadersTypeConvAISecretLocator   WebhookToolAPISchemaConfigOutputRequestHeadersType = "ConvAISecretLocator"
 	WebhookToolAPISchemaConfigOutputRequestHeadersTypeConvAIDynamicVariable WebhookToolAPISchemaConfigOutputRequestHeadersType = "ConvAIDynamicVariable"
 	WebhookToolAPISchemaConfigOutputRequestHeadersTypeConvAIEnvVarLocator   WebhookToolAPISchemaConfigOutputRequestHeadersType = "ConvAIEnvVarLocator"
-	WebhookToolAPISchemaConfigOutputRequestHeadersTypeUnknown               WebhookToolAPISchemaConfigOutputRequestHeadersType = "Unknown"
 )
 
 type WebhookToolAPISchemaConfigOutputRequestHeaders struct {
@@ -24,7 +23,6 @@ type WebhookToolAPISchemaConfigOutputRequestHeaders struct {
 	ConvAISecretLocator   *ConvAISecretLocator   `queryParam:"inline" union:"member"`
 	ConvAIDynamicVariable *ConvAIDynamicVariable `queryParam:"inline" union:"member"`
 	ConvAIEnvVarLocator   *ConvAIEnvVarLocator   `queryParam:"inline" union:"member"`
-	UnknownRaw            json.RawMessage        `json:"-" union:"unknown"`
 
 	Type WebhookToolAPISchemaConfigOutputRequestHeadersType
 }
@@ -65,21 +63,6 @@ func CreateWebhookToolAPISchemaConfigOutputRequestHeadersConvAIEnvVarLocator(con
 	}
 }
 
-func CreateWebhookToolAPISchemaConfigOutputRequestHeadersUnknown(raw json.RawMessage) WebhookToolAPISchemaConfigOutputRequestHeaders {
-	return WebhookToolAPISchemaConfigOutputRequestHeaders{
-		UnknownRaw: raw,
-		Type:       WebhookToolAPISchemaConfigOutputRequestHeadersTypeUnknown,
-	}
-}
-
-func (u WebhookToolAPISchemaConfigOutputRequestHeaders) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WebhookToolAPISchemaConfigOutputRequestHeaders) IsUnknown() bool {
-	return u.Type == WebhookToolAPISchemaConfigOutputRequestHeadersTypeUnknown
-}
-
 func (u *WebhookToolAPISchemaConfigOutputRequestHeaders) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -118,17 +101,13 @@ func (u *WebhookToolAPISchemaConfigOutputRequestHeaders) UnmarshalJSON(data []by
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WebhookToolAPISchemaConfigOutputRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WebhookToolAPISchemaConfigOutputRequestHeaders", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WebhookToolAPISchemaConfigOutputRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WebhookToolAPISchemaConfigOutputRequestHeaders", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -148,9 +127,7 @@ func (u *WebhookToolAPISchemaConfigOutputRequestHeaders) UnmarshalJSON(data []by
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = WebhookToolAPISchemaConfigOutputRequestHeadersTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WebhookToolAPISchemaConfigOutputRequestHeaders", string(data))
 }
 
 func (u WebhookToolAPISchemaConfigOutputRequestHeaders) MarshalJSON() ([]byte, error) {
@@ -170,9 +147,6 @@ func (u WebhookToolAPISchemaConfigOutputRequestHeaders) MarshalJSON() ([]byte, e
 		return utils.MarshalJSON(u.ConvAIEnvVarLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WebhookToolAPISchemaConfigOutputRequestHeaders: all fields are null")
 }
 
@@ -230,14 +204,12 @@ type WebhookToolAPISchemaConfigOutputAuthConnectionType string
 const (
 	WebhookToolAPISchemaConfigOutputAuthConnectionTypeAuthConnectionLocator            WebhookToolAPISchemaConfigOutputAuthConnectionType = "AuthConnectionLocator"
 	WebhookToolAPISchemaConfigOutputAuthConnectionTypeEnvironmentAuthConnectionLocator WebhookToolAPISchemaConfigOutputAuthConnectionType = "EnvironmentAuthConnectionLocator"
-	WebhookToolAPISchemaConfigOutputAuthConnectionTypeUnknown                          WebhookToolAPISchemaConfigOutputAuthConnectionType = "Unknown"
 )
 
 // WebhookToolAPISchemaConfigOutputAuthConnection - Optional auth connection to use for authentication with this webhook
 type WebhookToolAPISchemaConfigOutputAuthConnection struct {
 	AuthConnectionLocator            *AuthConnectionLocator            `queryParam:"inline" union:"member"`
 	EnvironmentAuthConnectionLocator *EnvironmentAuthConnectionLocator `queryParam:"inline" union:"member"`
-	UnknownRaw                       json.RawMessage                   `json:"-" union:"unknown"`
 
 	Type WebhookToolAPISchemaConfigOutputAuthConnectionType
 }
@@ -258,21 +230,6 @@ func CreateWebhookToolAPISchemaConfigOutputAuthConnectionEnvironmentAuthConnecti
 		EnvironmentAuthConnectionLocator: &environmentAuthConnectionLocator,
 		Type:                             typ,
 	}
-}
-
-func CreateWebhookToolAPISchemaConfigOutputAuthConnectionUnknown(raw json.RawMessage) WebhookToolAPISchemaConfigOutputAuthConnection {
-	return WebhookToolAPISchemaConfigOutputAuthConnection{
-		UnknownRaw: raw,
-		Type:       WebhookToolAPISchemaConfigOutputAuthConnectionTypeUnknown,
-	}
-}
-
-func (u WebhookToolAPISchemaConfigOutputAuthConnection) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WebhookToolAPISchemaConfigOutputAuthConnection) IsUnknown() bool {
-	return u.Type == WebhookToolAPISchemaConfigOutputAuthConnectionTypeUnknown
 }
 
 func (u *WebhookToolAPISchemaConfigOutputAuthConnection) UnmarshalJSON(data []byte) error {
@@ -297,17 +254,13 @@ func (u *WebhookToolAPISchemaConfigOutputAuthConnection) UnmarshalJSON(data []by
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WebhookToolAPISchemaConfigOutputAuthConnectionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WebhookToolAPISchemaConfigOutputAuthConnection", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WebhookToolAPISchemaConfigOutputAuthConnectionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for WebhookToolAPISchemaConfigOutputAuthConnection", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -321,9 +274,7 @@ func (u *WebhookToolAPISchemaConfigOutputAuthConnection) UnmarshalJSON(data []by
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = WebhookToolAPISchemaConfigOutputAuthConnectionTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WebhookToolAPISchemaConfigOutputAuthConnection", string(data))
 }
 
 func (u WebhookToolAPISchemaConfigOutputAuthConnection) MarshalJSON() ([]byte, error) {
@@ -335,9 +286,6 @@ func (u WebhookToolAPISchemaConfigOutputAuthConnection) MarshalJSON() ([]byte, e
 		return utils.MarshalJSON(u.EnvironmentAuthConnectionLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WebhookToolAPISchemaConfigOutputAuthConnection: all fields are null")
 }
 

@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -16,15 +16,13 @@ const (
 	ConversationInitiationClientDataInternalDynamicVariablesTypeNumber  ConversationInitiationClientDataInternalDynamicVariablesType = "number"
 	ConversationInitiationClientDataInternalDynamicVariablesTypeInteger ConversationInitiationClientDataInternalDynamicVariablesType = "integer"
 	ConversationInitiationClientDataInternalDynamicVariablesTypeBoolean ConversationInitiationClientDataInternalDynamicVariablesType = "boolean"
-	ConversationInitiationClientDataInternalDynamicVariablesTypeUnknown ConversationInitiationClientDataInternalDynamicVariablesType = "Unknown"
 )
 
 type ConversationInitiationClientDataInternalDynamicVariables struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type ConversationInitiationClientDataInternalDynamicVariablesType
 }
@@ -65,21 +63,6 @@ func CreateConversationInitiationClientDataInternalDynamicVariablesBoolean(boole
 	}
 }
 
-func CreateConversationInitiationClientDataInternalDynamicVariablesUnknown(raw json.RawMessage) ConversationInitiationClientDataInternalDynamicVariables {
-	return ConversationInitiationClientDataInternalDynamicVariables{
-		UnknownRaw: raw,
-		Type:       ConversationInitiationClientDataInternalDynamicVariablesTypeUnknown,
-	}
-}
-
-func (u ConversationInitiationClientDataInternalDynamicVariables) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConversationInitiationClientDataInternalDynamicVariables) IsUnknown() bool {
-	return u.Type == ConversationInitiationClientDataInternalDynamicVariablesTypeUnknown
-}
-
 func (u *ConversationInitiationClientDataInternalDynamicVariables) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -118,17 +101,13 @@ func (u *ConversationInitiationClientDataInternalDynamicVariables) UnmarshalJSON
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationInitiationClientDataInternalDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataInternalDynamicVariables", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationInitiationClientDataInternalDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataInternalDynamicVariables", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -148,9 +127,7 @@ func (u *ConversationInitiationClientDataInternalDynamicVariables) UnmarshalJSON
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ConversationInitiationClientDataInternalDynamicVariablesTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataInternalDynamicVariables", string(data))
 }
 
 func (u ConversationInitiationClientDataInternalDynamicVariables) MarshalJSON() ([]byte, error) {
@@ -170,9 +147,6 @@ func (u ConversationInitiationClientDataInternalDynamicVariables) MarshalJSON() 
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConversationInitiationClientDataInternalDynamicVariables: all fields are null")
 }
 

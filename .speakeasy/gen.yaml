@@ -1,7 +1,6 @@
 configVersion: 2.0.0
 generation:
-  apiName: elevenlabs-go
-  sdkClassName: elevenlabs-go 
+  sdkClassName: elevenlabs-go
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
@@ -31,8 +30,9 @@ generation:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
+  apiName: elevenlabs-go
 go:
-  version: 0.0.2
+  version: 0.0.3
   additionalDependencies: {}
   baseErrorName: SDKError
   clientServerStatusCodesAsErrors: true
@@ -41,7 +41,7 @@ go:
   enableSkipDeserialization: false
   flattenGlobalSecurity: true
   forwardCompatibleEnumsByDefault: true
-  forwardCompatibleUnionsByDefault: tagged-and-untagged
+  forwardCompatibleUnionsByDefault: "false"
   imports:
     option: openapi
     paths:
@@ -63,5 +63,5 @@ go:
   respectRequiredFields: false
   respectTitlesForPrimitiveUnionMembers: true
   responseFormat: envelope-http
-  sdkPackageName: "elevenlabsgo"
+  sdkPackageName: elevenlabsgo
   unionStrategy: populated-fields

@@ -19,12 +19,12 @@ import (
 )
 
 type TextToDialogue struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newTextToDialogue(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *TextToDialogue {
+func newTextToDialogue(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *TextToDialogue {
 	return &TextToDialogue{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

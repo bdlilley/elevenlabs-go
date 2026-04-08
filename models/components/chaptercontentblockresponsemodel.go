@@ -14,13 +14,11 @@ type NodeType string
 const (
 	NodeTypeTtsNode NodeType = "tts_node"
 	NodeTypeOther   NodeType = "_other"
-	NodeTypeUnknown NodeType = "UNKNOWN"
 )
 
 type Node struct {
 	ChapterContentBlockTtsNodeResponseModel        *ChapterContentBlockTtsNodeResponseModel        `queryParam:"inline" union:"member"`
 	ChapterContentBlockExtendableNodeResponseModel *ChapterContentBlockExtendableNodeResponseModel `queryParam:"inline" union:"member"`
-	UnknownRaw                                     json.RawMessage                                 `json:"-" union:"unknown"`
 
 	Type NodeType
 }
@@ -43,21 +41,6 @@ func CreateNodeOther(other ChapterContentBlockExtendableNodeResponseModel) Node 
 	}
 }
 
-func CreateNodeUnknown(raw json.RawMessage) Node {
-	return Node{
-		UnknownRaw: raw,
-		Type:       NodeTypeUnknown,
-	}
-}
-
-func (u Node) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u Node) IsUnknown() bool {
-	return u.Type == NodeTypeUnknown
-}
-
 func (u *Node) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -66,14 +49,7 @@ func (u *Node) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = NodeTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = NodeTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -95,12 +71,9 @@ func (u *Node) UnmarshalJSON(data []byte) error {
 		u.ChapterContentBlockExtendableNodeResponseModel = chapterContentBlockExtendableNodeResponseModel
 		u.Type = NodeTypeOther
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = NodeTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Node", string(data))
 }
 
 func (u Node) MarshalJSON() ([]byte, error) {
@@ -112,9 +85,6 @@ func (u Node) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ChapterContentBlockExtendableNodeResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type Node: all fields are null")
 }
 

@@ -33,7 +33,5 @@ switch sourceContext.Type {
 		// sourceContext.SfxSourceContext is populated
 	case components.SourceContextTypeSong:
 		// sourceContext.SongSourceContext is populated
-	default:
-		// Unknown type - use sourceContext.GetUnknownRaw() for raw JSON
 }
 ```

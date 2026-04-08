@@ -65,7 +65,5 @@ switch systemToolConfigOutputParams.Type {
 		// systemToolConfigOutputParams.TransferToNumberToolConfigOutput is populated
 	case components.SystemToolConfigOutputParamsTypeVoicemailDetection:
 		// systemToolConfigOutputParams.VoicemailDetectionToolConfig is populated
-	default:
-		// Unknown type - use systemToolConfigOutputParams.GetUnknownRaw() for raw JSON
 }
 ```

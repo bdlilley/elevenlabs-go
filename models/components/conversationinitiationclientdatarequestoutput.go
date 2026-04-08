@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -16,15 +16,13 @@ const (
 	ConversationInitiationClientDataRequestOutputDynamicVariablesTypeNumber  ConversationInitiationClientDataRequestOutputDynamicVariablesType = "number"
 	ConversationInitiationClientDataRequestOutputDynamicVariablesTypeInteger ConversationInitiationClientDataRequestOutputDynamicVariablesType = "integer"
 	ConversationInitiationClientDataRequestOutputDynamicVariablesTypeBoolean ConversationInitiationClientDataRequestOutputDynamicVariablesType = "boolean"
-	ConversationInitiationClientDataRequestOutputDynamicVariablesTypeUnknown ConversationInitiationClientDataRequestOutputDynamicVariablesType = "Unknown"
 )
 
 type ConversationInitiationClientDataRequestOutputDynamicVariables struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type ConversationInitiationClientDataRequestOutputDynamicVariablesType
 }
@@ -65,21 +63,6 @@ func CreateConversationInitiationClientDataRequestOutputDynamicVariablesBoolean(
 	}
 }
 
-func CreateConversationInitiationClientDataRequestOutputDynamicVariablesUnknown(raw json.RawMessage) ConversationInitiationClientDataRequestOutputDynamicVariables {
-	return ConversationInitiationClientDataRequestOutputDynamicVariables{
-		UnknownRaw: raw,
-		Type:       ConversationInitiationClientDataRequestOutputDynamicVariablesTypeUnknown,
-	}
-}
-
-func (u ConversationInitiationClientDataRequestOutputDynamicVariables) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConversationInitiationClientDataRequestOutputDynamicVariables) IsUnknown() bool {
-	return u.Type == ConversationInitiationClientDataRequestOutputDynamicVariablesTypeUnknown
-}
-
 func (u *ConversationInitiationClientDataRequestOutputDynamicVariables) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -118,17 +101,13 @@ func (u *ConversationInitiationClientDataRequestOutputDynamicVariables) Unmarsha
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationInitiationClientDataRequestOutputDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataRequestOutputDynamicVariables", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationInitiationClientDataRequestOutputDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataRequestOutputDynamicVariables", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -148,9 +127,7 @@ func (u *ConversationInitiationClientDataRequestOutputDynamicVariables) Unmarsha
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ConversationInitiationClientDataRequestOutputDynamicVariablesTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataRequestOutputDynamicVariables", string(data))
 }
 
 func (u ConversationInitiationClientDataRequestOutputDynamicVariables) MarshalJSON() ([]byte, error) {
@@ -170,9 +147,6 @@ func (u ConversationInitiationClientDataRequestOutputDynamicVariables) MarshalJS
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConversationInitiationClientDataRequestOutputDynamicVariables: all fields are null")
 }
 

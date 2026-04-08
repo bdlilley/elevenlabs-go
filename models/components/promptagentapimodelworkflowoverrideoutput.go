@@ -16,7 +16,6 @@ const (
 	PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeBackupLLMDefault  PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigType = "BackupLLMDefault"
 	PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeBackupLLMDisabled PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigType = "BackupLLMDisabled"
 	PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeBackupLLMOverride PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigType = "BackupLLMOverride"
-	PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeUnknown           PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigType = "Unknown"
 )
 
 // PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig - Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order.
@@ -24,7 +23,6 @@ type PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig struct {
 	BackupLLMDefault  *BackupLLMDefault  `queryParam:"inline" union:"member"`
 	BackupLLMDisabled *BackupLLMDisabled `queryParam:"inline" union:"member"`
 	BackupLLMOverride *BackupLLMOverride `queryParam:"inline" union:"member"`
-	UnknownRaw        json.RawMessage    `json:"-" union:"unknown"`
 
 	Type PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigType
 }
@@ -54,21 +52,6 @@ func CreatePromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigBackupLLMOver
 		BackupLLMOverride: &backupLLMOverride,
 		Type:              typ,
 	}
-}
-
-func CreatePromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigUnknown(raw json.RawMessage) PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig {
-	return PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig{
-		UnknownRaw: raw,
-		Type:       PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeUnknown,
-	}
-}
-
-func (u PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig) IsUnknown() bool {
-	return u.Type == PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeUnknown
 }
 
 func (u *PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig) UnmarshalJSON(data []byte) error {
@@ -101,17 +84,13 @@ func (u *PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig) UnmarshalJSON
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -128,9 +107,7 @@ func (u *PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig) UnmarshalJSON
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig", string(data))
 }
 
 func (u PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig) MarshalJSON() ([]byte, error) {
@@ -146,9 +123,6 @@ func (u PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig) MarshalJSON() 
 		return utils.MarshalJSON(u.BackupLLMOverride, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig: all fields are null")
 }
 
@@ -161,7 +135,6 @@ const (
 	PromptAgentAPIModelWorkflowOverrideOutputToolTypeSmb                   PromptAgentAPIModelWorkflowOverrideOutputToolType = "smb"
 	PromptAgentAPIModelWorkflowOverrideOutputToolTypeSystem                PromptAgentAPIModelWorkflowOverrideOutputToolType = "system"
 	PromptAgentAPIModelWorkflowOverrideOutputToolTypeWebhook               PromptAgentAPIModelWorkflowOverrideOutputToolType = "webhook"
-	PromptAgentAPIModelWorkflowOverrideOutputToolTypeUnknown               PromptAgentAPIModelWorkflowOverrideOutputToolType = "UNKNOWN"
 )
 
 // PromptAgentAPIModelWorkflowOverrideOutputTool - The type of tool
@@ -172,7 +145,6 @@ type PromptAgentAPIModelWorkflowOverrideOutputTool struct {
 	MCPToolConfigOutput                   *MCPToolConfigOutput                   `queryParam:"inline" union:"member"`
 	APIIntegrationWebhookToolConfigOutput *APIIntegrationWebhookToolConfigOutput `queryParam:"inline" union:"member"`
 	SMBToolConfig                         *SMBToolConfig                         `queryParam:"inline" union:"member"`
-	UnknownRaw                            json.RawMessage                        `json:"-" union:"unknown"`
 
 	Type PromptAgentAPIModelWorkflowOverrideOutputToolType
 }
@@ -231,21 +203,6 @@ func CreatePromptAgentAPIModelWorkflowOverrideOutputToolWebhook(webhook WebhookT
 	}
 }
 
-func CreatePromptAgentAPIModelWorkflowOverrideOutputToolUnknown(raw json.RawMessage) PromptAgentAPIModelWorkflowOverrideOutputTool {
-	return PromptAgentAPIModelWorkflowOverrideOutputTool{
-		UnknownRaw: raw,
-		Type:       PromptAgentAPIModelWorkflowOverrideOutputToolTypeUnknown,
-	}
-}
-
-func (u PromptAgentAPIModelWorkflowOverrideOutputTool) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PromptAgentAPIModelWorkflowOverrideOutputTool) IsUnknown() bool {
-	return u.Type == PromptAgentAPIModelWorkflowOverrideOutputToolTypeUnknown
-}
-
 func (u *PromptAgentAPIModelWorkflowOverrideOutputTool) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -254,14 +211,7 @@ func (u *PromptAgentAPIModelWorkflowOverrideOutputTool) UnmarshalJSON(data []byt
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelWorkflowOverrideOutputToolTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelWorkflowOverrideOutputToolTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -319,12 +269,9 @@ func (u *PromptAgentAPIModelWorkflowOverrideOutputTool) UnmarshalJSON(data []byt
 		u.WebhookToolConfigOutput = webhookToolConfigOutput
 		u.Type = PromptAgentAPIModelWorkflowOverrideOutputToolTypeWebhook
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelWorkflowOverrideOutputToolTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PromptAgentAPIModelWorkflowOverrideOutputTool", string(data))
 }
 
 func (u PromptAgentAPIModelWorkflowOverrideOutputTool) MarshalJSON() ([]byte, error) {
@@ -352,9 +299,6 @@ func (u PromptAgentAPIModelWorkflowOverrideOutputTool) MarshalJSON() ([]byte, er
 		return utils.MarshalJSON(u.SMBToolConfig, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PromptAgentAPIModelWorkflowOverrideOutputTool: all fields are null")
 }
 

@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
@@ -13,13 +13,11 @@ type ConversationInitiationClientDataWebhookRequestHeadersType string
 const (
 	ConversationInitiationClientDataWebhookRequestHeadersTypeStr                 ConversationInitiationClientDataWebhookRequestHeadersType = "str"
 	ConversationInitiationClientDataWebhookRequestHeadersTypeConvAISecretLocator ConversationInitiationClientDataWebhookRequestHeadersType = "ConvAISecretLocator"
-	ConversationInitiationClientDataWebhookRequestHeadersTypeUnknown             ConversationInitiationClientDataWebhookRequestHeadersType = "Unknown"
 )
 
 type ConversationInitiationClientDataWebhookRequestHeaders struct {
 	Str                 *string              `queryParam:"inline" union:"member"`
 	ConvAISecretLocator *ConvAISecretLocator `queryParam:"inline" union:"member"`
-	UnknownRaw          json.RawMessage      `json:"-" union:"unknown"`
 
 	Type ConversationInitiationClientDataWebhookRequestHeadersType
 }
@@ -40,21 +38,6 @@ func CreateConversationInitiationClientDataWebhookRequestHeadersConvAISecretLoca
 		ConvAISecretLocator: &convAISecretLocator,
 		Type:                typ,
 	}
-}
-
-func CreateConversationInitiationClientDataWebhookRequestHeadersUnknown(raw json.RawMessage) ConversationInitiationClientDataWebhookRequestHeaders {
-	return ConversationInitiationClientDataWebhookRequestHeaders{
-		UnknownRaw: raw,
-		Type:       ConversationInitiationClientDataWebhookRequestHeadersTypeUnknown,
-	}
-}
-
-func (u ConversationInitiationClientDataWebhookRequestHeaders) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ConversationInitiationClientDataWebhookRequestHeaders) IsUnknown() bool {
-	return u.Type == ConversationInitiationClientDataWebhookRequestHeadersTypeUnknown
 }
 
 func (u *ConversationInitiationClientDataWebhookRequestHeaders) UnmarshalJSON(data []byte) error {
@@ -79,17 +62,13 @@ func (u *ConversationInitiationClientDataWebhookRequestHeaders) UnmarshalJSON(da
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationInitiationClientDataWebhookRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataWebhookRequestHeaders", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ConversationInitiationClientDataWebhookRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataWebhookRequestHeaders", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -103,9 +82,7 @@ func (u *ConversationInitiationClientDataWebhookRequestHeaders) UnmarshalJSON(da
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = ConversationInitiationClientDataWebhookRequestHeadersTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataWebhookRequestHeaders", string(data))
 }
 
 func (u ConversationInitiationClientDataWebhookRequestHeaders) MarshalJSON() ([]byte, error) {
@@ -117,9 +94,6 @@ func (u ConversationInitiationClientDataWebhookRequestHeaders) MarshalJSON() ([]
 		return utils.MarshalJSON(u.ConvAISecretLocator, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ConversationInitiationClientDataWebhookRequestHeaders: all fields are null")
 }
 

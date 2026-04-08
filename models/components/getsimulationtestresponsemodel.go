@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
@@ -17,15 +17,13 @@ const (
 	GetSimulationTestResponseModelDynamicVariablesTypeNumber  GetSimulationTestResponseModelDynamicVariablesType = "number"
 	GetSimulationTestResponseModelDynamicVariablesTypeInteger GetSimulationTestResponseModelDynamicVariablesType = "integer"
 	GetSimulationTestResponseModelDynamicVariablesTypeBoolean GetSimulationTestResponseModelDynamicVariablesType = "boolean"
-	GetSimulationTestResponseModelDynamicVariablesTypeUnknown GetSimulationTestResponseModelDynamicVariablesType = "Unknown"
 )
 
 type GetSimulationTestResponseModelDynamicVariables struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type GetSimulationTestResponseModelDynamicVariablesType
 }
@@ -66,21 +64,6 @@ func CreateGetSimulationTestResponseModelDynamicVariablesBoolean(boolean bool) G
 	}
 }
 
-func CreateGetSimulationTestResponseModelDynamicVariablesUnknown(raw json.RawMessage) GetSimulationTestResponseModelDynamicVariables {
-	return GetSimulationTestResponseModelDynamicVariables{
-		UnknownRaw: raw,
-		Type:       GetSimulationTestResponseModelDynamicVariablesTypeUnknown,
-	}
-}
-
-func (u GetSimulationTestResponseModelDynamicVariables) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetSimulationTestResponseModelDynamicVariables) IsUnknown() bool {
-	return u.Type == GetSimulationTestResponseModelDynamicVariablesTypeUnknown
-}
-
 func (u *GetSimulationTestResponseModelDynamicVariables) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -119,17 +102,13 @@ func (u *GetSimulationTestResponseModelDynamicVariables) UnmarshalJSON(data []by
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetSimulationTestResponseModelDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetSimulationTestResponseModelDynamicVariables", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetSimulationTestResponseModelDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetSimulationTestResponseModelDynamicVariables", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -149,9 +128,7 @@ func (u *GetSimulationTestResponseModelDynamicVariables) UnmarshalJSON(data []by
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = GetSimulationTestResponseModelDynamicVariablesTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetSimulationTestResponseModelDynamicVariables", string(data))
 }
 
 func (u GetSimulationTestResponseModelDynamicVariables) MarshalJSON() ([]byte, error) {
@@ -171,9 +148,6 @@ func (u GetSimulationTestResponseModelDynamicVariables) MarshalJSON() ([]byte, e
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetSimulationTestResponseModelDynamicVariables: all fields are null")
 }
 

@@ -14,13 +14,11 @@ type AuthConnectionDependenciesToolType string
 const (
 	AuthConnectionDependenciesToolTypeAvailable AuthConnectionDependenciesToolType = "available"
 	AuthConnectionDependenciesToolTypeUnknown   AuthConnectionDependenciesToolType = "unknown"
-	AuthConnectionDependenciesToolTypeUnknown   AuthConnectionDependenciesToolType = "UNKNOWN"
 )
 
 type AuthConnectionDependenciesTool struct {
 	DependentAvailableToolIdentifier *DependentAvailableToolIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownToolIdentifier   *DependentUnknownToolIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                       json.RawMessage                   `json:"-" union:"unknown"`
 
 	Type AuthConnectionDependenciesToolType
 }
@@ -43,21 +41,6 @@ func CreateAuthConnectionDependenciesToolUnknown(unknown DependentUnknownToolIde
 	}
 }
 
-func CreateAuthConnectionDependenciesToolUnknown(raw json.RawMessage) AuthConnectionDependenciesTool {
-	return AuthConnectionDependenciesTool{
-		UnknownRaw: raw,
-		Type:       AuthConnectionDependenciesToolTypeUnknown,
-	}
-}
-
-func (u AuthConnectionDependenciesTool) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u AuthConnectionDependenciesTool) IsUnknown() bool {
-	return u.Type == AuthConnectionDependenciesToolTypeUnknown
-}
-
 func (u *AuthConnectionDependenciesTool) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -66,14 +49,7 @@ func (u *AuthConnectionDependenciesTool) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AuthConnectionDependenciesToolTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AuthConnectionDependenciesToolTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -95,12 +71,9 @@ func (u *AuthConnectionDependenciesTool) UnmarshalJSON(data []byte) error {
 		u.DependentUnknownToolIdentifier = dependentUnknownToolIdentifier
 		u.Type = AuthConnectionDependenciesToolTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AuthConnectionDependenciesToolTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AuthConnectionDependenciesTool", string(data))
 }
 
 func (u AuthConnectionDependenciesTool) MarshalJSON() ([]byte, error) {
@@ -112,9 +85,6 @@ func (u AuthConnectionDependenciesTool) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DependentUnknownToolIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type AuthConnectionDependenciesTool: all fields are null")
 }
 
@@ -123,13 +93,11 @@ type AuthConnectionDependenciesMcpServerType string
 const (
 	AuthConnectionDependenciesMcpServerTypeAvailable AuthConnectionDependenciesMcpServerType = "available"
 	AuthConnectionDependenciesMcpServerTypeUnknown   AuthConnectionDependenciesMcpServerType = "unknown"
-	AuthConnectionDependenciesMcpServerTypeUnknown   AuthConnectionDependenciesMcpServerType = "UNKNOWN"
 )
 
 type AuthConnectionDependenciesMcpServer struct {
 	DependentAvailableMCPServerIdentifier *DependentAvailableMCPServerIdentifier `queryParam:"inline" union:"member"`
 	DependentUnknownMCPServerIdentifier   *DependentUnknownMCPServerIdentifier   `queryParam:"inline" union:"member"`
-	UnknownRaw                            json.RawMessage                        `json:"-" union:"unknown"`
 
 	Type AuthConnectionDependenciesMcpServerType
 }
@@ -152,21 +120,6 @@ func CreateAuthConnectionDependenciesMcpServerUnknown(unknown DependentUnknownMC
 	}
 }
 
-func CreateAuthConnectionDependenciesMcpServerUnknown(raw json.RawMessage) AuthConnectionDependenciesMcpServer {
-	return AuthConnectionDependenciesMcpServer{
-		UnknownRaw: raw,
-		Type:       AuthConnectionDependenciesMcpServerTypeUnknown,
-	}
-}
-
-func (u AuthConnectionDependenciesMcpServer) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u AuthConnectionDependenciesMcpServer) IsUnknown() bool {
-	return u.Type == AuthConnectionDependenciesMcpServerTypeUnknown
-}
-
 func (u *AuthConnectionDependenciesMcpServer) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -175,14 +128,7 @@ func (u *AuthConnectionDependenciesMcpServer) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AuthConnectionDependenciesMcpServerTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AuthConnectionDependenciesMcpServerTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -204,12 +150,9 @@ func (u *AuthConnectionDependenciesMcpServer) UnmarshalJSON(data []byte) error {
 		u.DependentUnknownMCPServerIdentifier = dependentUnknownMCPServerIdentifier
 		u.Type = AuthConnectionDependenciesMcpServerTypeUnknown
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AuthConnectionDependenciesMcpServerTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AuthConnectionDependenciesMcpServer", string(data))
 }
 
 func (u AuthConnectionDependenciesMcpServer) MarshalJSON() ([]byte, error) {
@@ -221,9 +164,6 @@ func (u AuthConnectionDependenciesMcpServer) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DependentUnknownMCPServerIdentifier, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type AuthConnectionDependenciesMcpServer: all fields are null")
 }
 

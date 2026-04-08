@@ -20,12 +20,12 @@ import (
 
 // SpeechHistory - Accesses your speech history. Your speech history is a list of all your created audio including its metadata using our text-to-speech and speech-to-speech models.
 type SpeechHistory struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSpeechHistory(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SpeechHistory {
+func newSpeechHistory(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SpeechHistory {
 	return &SpeechHistory{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

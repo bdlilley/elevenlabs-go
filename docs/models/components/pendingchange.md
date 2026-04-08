@@ -27,7 +27,5 @@ switch pendingChange.Type {
 		// pendingChange.PendingSubscriptionSwitchResponseModel is populated
 	case components.PendingChangeTypePendingCancellationResponseModel:
 		// pendingChange.PendingCancellationResponseModel is populated
-	default:
-		// Unknown type - use pendingChange.GetUnknownRaw() for raw JSON
 }
 ```

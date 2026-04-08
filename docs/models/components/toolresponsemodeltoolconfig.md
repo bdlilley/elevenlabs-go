@@ -43,7 +43,5 @@ switch toolResponseModelToolConfig.Type {
 		// toolResponseModelToolConfig.SystemToolConfigOutput is populated
 	case components.ToolResponseModelToolConfigTypeWebhook:
 		// toolResponseModelToolConfig.WebhookToolConfigOutput is populated
-	default:
-		// Unknown type - use toolResponseModelToolConfig.GetUnknownRaw() for raw JSON
 }
 ```

@@ -43,7 +43,5 @@ switch responseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.Type {
 		// responseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseTextResponseModel is populated
 	case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFolder:
 		// responseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseFolderResponseModel is populated
-	default:
-		// Unknown type - use responseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetUnknownRaw() for raw JSON
 }
 ```

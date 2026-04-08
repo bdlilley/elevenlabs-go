@@ -25,7 +25,5 @@ switch getKnowledgeBaseDependentAgentsResponseModelAgent.Type {
 		// getKnowledgeBaseDependentAgentsResponseModelAgent.DependentAvailableAgentIdentifier is populated
 	case components.GetKnowledgeBaseDependentAgentsResponseModelAgentTypeUnknown:
 		// getKnowledgeBaseDependentAgentsResponseModelAgent.DependentUnknownAgentIdentifier is populated
-	default:
-		// Unknown type - use getKnowledgeBaseDependentAgentsResponseModelAgent.GetUnknownRaw() for raw JSON
 }
 ```

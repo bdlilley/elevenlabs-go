@@ -41,7 +41,5 @@ switch workflowToolNestedToolsStepModelOutputResult.Type {
 		// workflowToolNestedToolsStepModelOutputResult.ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput is populated
 	case components.WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput:
 		// workflowToolNestedToolsStepModelOutputResult.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput is populated
-	default:
-		// Unknown type - use workflowToolNestedToolsStepModelOutputResult.GetUnknownRaw() for raw JSON
 }
 ```

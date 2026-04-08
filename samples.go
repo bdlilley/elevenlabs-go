@@ -19,12 +19,12 @@ import (
 
 // Samples - Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
 type Samples struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSamples(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Samples {
+func newSamples(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Samples {
 	return &Samples{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

@@ -25,7 +25,5 @@ switch authConnectionDependenciesTool.Type {
 		// authConnectionDependenciesTool.DependentAvailableToolIdentifier is populated
 	case components.AuthConnectionDependenciesToolTypeUnknown:
 		// authConnectionDependenciesTool.DependentUnknownToolIdentifier is populated
-	default:
-		// Unknown type - use authConnectionDependenciesTool.GetUnknownRaw() for raw JSON
 }
 ```

@@ -17,14 +17,12 @@ const (
 	SourceContextTypeMusicExploreSong SourceContextType = "music_explore_song"
 	SourceContextTypeSfx              SourceContextType = "sfx"
 	SourceContextTypeSong             SourceContextType = "song"
-	SourceContextTypeUnknown          SourceContextType = "UNKNOWN"
 )
 
 type SourceContext struct {
 	SongSourceContext             *SongSourceContext             `queryParam:"inline" union:"member"`
 	MusicExploreSongSourceContext *MusicExploreSongSourceContext `queryParam:"inline" union:"member"`
 	SfxSourceContext              *SfxSourceContext              `queryParam:"inline" union:"member"`
-	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
 
 	Type SourceContextType
 }
@@ -56,21 +54,6 @@ func CreateSourceContextSong(song SongSourceContext) SourceContext {
 	}
 }
 
-func CreateSourceContextUnknown(raw json.RawMessage) SourceContext {
-	return SourceContext{
-		UnknownRaw: raw,
-		Type:       SourceContextTypeUnknown,
-	}
-}
-
-func (u SourceContext) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u SourceContext) IsUnknown() bool {
-	return u.Type == SourceContextTypeUnknown
-}
-
 func (u *SourceContext) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -79,14 +62,7 @@ func (u *SourceContext) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SourceContextTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SourceContextTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.SourceType {
@@ -117,12 +93,9 @@ func (u *SourceContext) UnmarshalJSON(data []byte) error {
 		u.SongSourceContext = songSourceContext
 		u.Type = SourceContextTypeSong
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SourceContextTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SourceContext", string(data))
 }
 
 func (u SourceContext) MarshalJSON() ([]byte, error) {
@@ -138,9 +111,6 @@ func (u SourceContext) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.SfxSourceContext, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type SourceContext: all fields are null")
 }
 

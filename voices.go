@@ -20,12 +20,12 @@ import (
 
 // Voices - Access to voices created either by you or ElevenLabs.
 type Voices struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newVoices(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Voices {
+func newVoices(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Voices {
 	return &Voices{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

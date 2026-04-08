@@ -27,7 +27,5 @@ switch responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.Type {
 		// responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberTwilioResponseModel is populated
 	case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeSipTrunk:
 		// responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberSIPTrunkResponseModel is populated
-	default:
-		// Unknown type - use responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetUnknownRaw() for raw JSON
 }
 ```

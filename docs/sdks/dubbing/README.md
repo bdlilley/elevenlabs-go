@@ -1093,8 +1093,6 @@ func main() {
                 // res.ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet.DubbingTranscriptResponseModel is populated
             case operations.ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGetTypeStr:
                 // res.ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet.Str is populated
-            default:
-                // Unknown type - use res.ResponseGetDubbedTranscriptV1DubbingDubbingIDTranscriptLanguageCodeGet.GetUnknownRaw() for raw JSON
         }
 
     }

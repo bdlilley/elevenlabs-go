@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -14,13 +14,11 @@ type GroupUsageLimitType string
 const (
 	GroupUsageLimitTypeInteger GroupUsageLimitType = "integer"
 	GroupUsageLimitTypeStr     GroupUsageLimitType = "str"
-	GroupUsageLimitTypeUnknown GroupUsageLimitType = "Unknown"
 )
 
 type GroupUsageLimit struct {
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Str        *string         `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Integer *int64  `queryParam:"inline" union:"member"`
+	Str     *string `queryParam:"inline" union:"member"`
 
 	Type GroupUsageLimitType
 }
@@ -41,21 +39,6 @@ func CreateGroupUsageLimitStr(str string) GroupUsageLimit {
 		Str:  &str,
 		Type: typ,
 	}
-}
-
-func CreateGroupUsageLimitUnknown(raw json.RawMessage) GroupUsageLimit {
-	return GroupUsageLimit{
-		UnknownRaw: raw,
-		Type:       GroupUsageLimitTypeUnknown,
-	}
-}
-
-func (u GroupUsageLimit) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GroupUsageLimit) IsUnknown() bool {
-	return u.Type == GroupUsageLimitTypeUnknown
 }
 
 func (u *GroupUsageLimit) UnmarshalJSON(data []byte) error {
@@ -80,17 +63,13 @@ func (u *GroupUsageLimit) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GroupUsageLimitTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GroupUsageLimit", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GroupUsageLimitTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GroupUsageLimit", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -104,9 +83,7 @@ func (u *GroupUsageLimit) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = GroupUsageLimitTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GroupUsageLimit", string(data))
 }
 
 func (u GroupUsageLimit) MarshalJSON() ([]byte, error) {
@@ -118,9 +95,6 @@ func (u GroupUsageLimit) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GroupUsageLimit: all fields are null")
 }
 

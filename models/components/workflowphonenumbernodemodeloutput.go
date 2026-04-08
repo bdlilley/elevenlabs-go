@@ -15,13 +15,11 @@ type WorkflowPhoneNumberNodeModelOutputCustomSipHeaderType string
 const (
 	WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeDynamic WorkflowPhoneNumberNodeModelOutputCustomSipHeaderType = "dynamic"
 	WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeStatic  WorkflowPhoneNumberNodeModelOutputCustomSipHeaderType = "static"
-	WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeUnknown WorkflowPhoneNumberNodeModelOutputCustomSipHeaderType = "UNKNOWN"
 )
 
 type WorkflowPhoneNumberNodeModelOutputCustomSipHeader struct {
 	CustomSIPHeader                    *CustomSIPHeader                    `queryParam:"inline" union:"member"`
 	CustomSIPHeaderWithDynamicVariable *CustomSIPHeaderWithDynamicVariable `queryParam:"inline" union:"member"`
-	UnknownRaw                         json.RawMessage                     `json:"-" union:"unknown"`
 
 	Type WorkflowPhoneNumberNodeModelOutputCustomSipHeaderType
 }
@@ -44,21 +42,6 @@ func CreateWorkflowPhoneNumberNodeModelOutputCustomSipHeaderStatic(static Custom
 	}
 }
 
-func CreateWorkflowPhoneNumberNodeModelOutputCustomSipHeaderUnknown(raw json.RawMessage) WorkflowPhoneNumberNodeModelOutputCustomSipHeader {
-	return WorkflowPhoneNumberNodeModelOutputCustomSipHeader{
-		UnknownRaw: raw,
-		Type:       WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeUnknown,
-	}
-}
-
-func (u WorkflowPhoneNumberNodeModelOutputCustomSipHeader) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WorkflowPhoneNumberNodeModelOutputCustomSipHeader) IsUnknown() bool {
-	return u.Type == WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeUnknown
-}
-
 func (u *WorkflowPhoneNumberNodeModelOutputCustomSipHeader) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -67,14 +50,7 @@ func (u *WorkflowPhoneNumberNodeModelOutputCustomSipHeader) UnmarshalJSON(data [
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -96,12 +72,9 @@ func (u *WorkflowPhoneNumberNodeModelOutputCustomSipHeader) UnmarshalJSON(data [
 		u.CustomSIPHeader = customSIPHeader
 		u.Type = WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeStatic
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputCustomSipHeaderTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowPhoneNumberNodeModelOutputCustomSipHeader", string(data))
 }
 
 func (u WorkflowPhoneNumberNodeModelOutputCustomSipHeader) MarshalJSON() ([]byte, error) {
@@ -113,9 +86,6 @@ func (u WorkflowPhoneNumberNodeModelOutputCustomSipHeader) MarshalJSON() ([]byte
 		return utils.MarshalJSON(u.CustomSIPHeaderWithDynamicVariable, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WorkflowPhoneNumberNodeModelOutputCustomSipHeader: all fields are null")
 }
 
@@ -126,7 +96,6 @@ const (
 	WorkflowPhoneNumberNodeModelOutputTransferDestinationTypePhoneDynamicVariable  WorkflowPhoneNumberNodeModelOutputTransferDestinationType = "phone_dynamic_variable"
 	WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeSipURI                WorkflowPhoneNumberNodeModelOutputTransferDestinationType = "sip_uri"
 	WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeSipURIDynamicVariable WorkflowPhoneNumberNodeModelOutputTransferDestinationType = "sip_uri_dynamic_variable"
-	WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeUnknown               WorkflowPhoneNumberNodeModelOutputTransferDestinationType = "UNKNOWN"
 )
 
 type WorkflowPhoneNumberNodeModelOutputTransferDestination struct {
@@ -134,7 +103,6 @@ type WorkflowPhoneNumberNodeModelOutputTransferDestination struct {
 	SIPURITransferDestination                     *SIPURITransferDestination                     `queryParam:"inline" union:"member"`
 	PhoneNumberDynamicVariableTransferDestination *PhoneNumberDynamicVariableTransferDestination `queryParam:"inline" union:"member"`
 	SIPURIDynamicVariableTransferDestination      *SIPURIDynamicVariableTransferDestination      `queryParam:"inline" union:"member"`
-	UnknownRaw                                    json.RawMessage                                `json:"-" union:"unknown"`
 
 	Type WorkflowPhoneNumberNodeModelOutputTransferDestinationType
 }
@@ -175,21 +143,6 @@ func CreateWorkflowPhoneNumberNodeModelOutputTransferDestinationSipURIDynamicVar
 	}
 }
 
-func CreateWorkflowPhoneNumberNodeModelOutputTransferDestinationUnknown(raw json.RawMessage) WorkflowPhoneNumberNodeModelOutputTransferDestination {
-	return WorkflowPhoneNumberNodeModelOutputTransferDestination{
-		UnknownRaw: raw,
-		Type:       WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeUnknown,
-	}
-}
-
-func (u WorkflowPhoneNumberNodeModelOutputTransferDestination) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WorkflowPhoneNumberNodeModelOutputTransferDestination) IsUnknown() bool {
-	return u.Type == WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeUnknown
-}
-
 func (u *WorkflowPhoneNumberNodeModelOutputTransferDestination) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -198,14 +151,7 @@ func (u *WorkflowPhoneNumberNodeModelOutputTransferDestination) UnmarshalJSON(da
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -245,12 +191,9 @@ func (u *WorkflowPhoneNumberNodeModelOutputTransferDestination) UnmarshalJSON(da
 		u.SIPURIDynamicVariableTransferDestination = sipURIDynamicVariableTransferDestination
 		u.Type = WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeSipURIDynamicVariable
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowPhoneNumberNodeModelOutputTransferDestination", string(data))
 }
 
 func (u WorkflowPhoneNumberNodeModelOutputTransferDestination) MarshalJSON() ([]byte, error) {
@@ -270,9 +213,6 @@ func (u WorkflowPhoneNumberNodeModelOutputTransferDestination) MarshalJSON() ([]
 		return utils.MarshalJSON(u.SIPURIDynamicVariableTransferDestination, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WorkflowPhoneNumberNodeModelOutputTransferDestination: all fields are null")
 }
 
@@ -281,13 +221,11 @@ type WorkflowPhoneNumberNodeModelOutputPostDialDigitsType string
 const (
 	WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeDynamic WorkflowPhoneNumberNodeModelOutputPostDialDigitsType = "dynamic"
 	WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeStatic  WorkflowPhoneNumberNodeModelOutputPostDialDigitsType = "static"
-	WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeUnknown WorkflowPhoneNumberNodeModelOutputPostDialDigitsType = "UNKNOWN"
 )
 
 type WorkflowPhoneNumberNodeModelOutputPostDialDigits struct {
 	PostDialDigitsStatic          *PostDialDigitsStatic          `queryParam:"inline" union:"member"`
 	PostDialDigitsDynamicVariable *PostDialDigitsDynamicVariable `queryParam:"inline" union:"member"`
-	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
 
 	Type WorkflowPhoneNumberNodeModelOutputPostDialDigitsType
 }
@@ -310,21 +248,6 @@ func CreateWorkflowPhoneNumberNodeModelOutputPostDialDigitsStatic(static PostDia
 	}
 }
 
-func CreateWorkflowPhoneNumberNodeModelOutputPostDialDigitsUnknown(raw json.RawMessage) WorkflowPhoneNumberNodeModelOutputPostDialDigits {
-	return WorkflowPhoneNumberNodeModelOutputPostDialDigits{
-		UnknownRaw: raw,
-		Type:       WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeUnknown,
-	}
-}
-
-func (u WorkflowPhoneNumberNodeModelOutputPostDialDigits) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u WorkflowPhoneNumberNodeModelOutputPostDialDigits) IsUnknown() bool {
-	return u.Type == WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeUnknown
-}
-
 func (u *WorkflowPhoneNumberNodeModelOutputPostDialDigits) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -333,14 +256,7 @@ func (u *WorkflowPhoneNumberNodeModelOutputPostDialDigits) UnmarshalJSON(data []
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -362,12 +278,9 @@ func (u *WorkflowPhoneNumberNodeModelOutputPostDialDigits) UnmarshalJSON(data []
 		u.PostDialDigitsStatic = postDialDigitsStatic
 		u.Type = WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeStatic
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowPhoneNumberNodeModelOutputPostDialDigits", string(data))
 }
 
 func (u WorkflowPhoneNumberNodeModelOutputPostDialDigits) MarshalJSON() ([]byte, error) {
@@ -379,9 +292,6 @@ func (u WorkflowPhoneNumberNodeModelOutputPostDialDigits) MarshalJSON() ([]byte,
 		return utils.MarshalJSON(u.PostDialDigitsDynamicVariable, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type WorkflowPhoneNumberNodeModelOutputPostDialDigits: all fields are null")
 }
 

@@ -25,7 +25,5 @@ switch convAIStoredSecretDependenciesMcpServer.Type {
 		// convAIStoredSecretDependenciesMcpServer.DependentAvailableMCPServerIdentifier is populated
 	case components.ConvAIStoredSecretDependenciesMcpServerTypeUnknown:
 		// convAIStoredSecretDependenciesMcpServer.DependentUnknownMCPServerIdentifier is populated
-	default:
-		// Unknown type - use convAIStoredSecretDependenciesMcpServer.GetUnknownRaw() for raw JSON
 }
 ```

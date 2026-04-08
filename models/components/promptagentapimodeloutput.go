@@ -16,7 +16,6 @@ const (
 	PromptAgentAPIModelOutputBackupLlmConfigTypeDefault  PromptAgentAPIModelOutputBackupLlmConfigType = "default"
 	PromptAgentAPIModelOutputBackupLlmConfigTypeDisabled PromptAgentAPIModelOutputBackupLlmConfigType = "disabled"
 	PromptAgentAPIModelOutputBackupLlmConfigTypeOverride PromptAgentAPIModelOutputBackupLlmConfigType = "override"
-	PromptAgentAPIModelOutputBackupLlmConfigTypeUnknown  PromptAgentAPIModelOutputBackupLlmConfigType = "UNKNOWN"
 )
 
 // PromptAgentAPIModelOutputBackupLlmConfig - Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order.
@@ -24,7 +23,6 @@ type PromptAgentAPIModelOutputBackupLlmConfig struct {
 	BackupLLMDefault  *BackupLLMDefault  `queryParam:"inline" union:"member"`
 	BackupLLMDisabled *BackupLLMDisabled `queryParam:"inline" union:"member"`
 	BackupLLMOverride *BackupLLMOverride `queryParam:"inline" union:"member"`
-	UnknownRaw        json.RawMessage    `json:"-" union:"unknown"`
 
 	Type PromptAgentAPIModelOutputBackupLlmConfigType
 }
@@ -56,21 +54,6 @@ func CreatePromptAgentAPIModelOutputBackupLlmConfigOverride(override BackupLLMOv
 	}
 }
 
-func CreatePromptAgentAPIModelOutputBackupLlmConfigUnknown(raw json.RawMessage) PromptAgentAPIModelOutputBackupLlmConfig {
-	return PromptAgentAPIModelOutputBackupLlmConfig{
-		UnknownRaw: raw,
-		Type:       PromptAgentAPIModelOutputBackupLlmConfigTypeUnknown,
-	}
-}
-
-func (u PromptAgentAPIModelOutputBackupLlmConfig) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PromptAgentAPIModelOutputBackupLlmConfig) IsUnknown() bool {
-	return u.Type == PromptAgentAPIModelOutputBackupLlmConfigTypeUnknown
-}
-
 func (u *PromptAgentAPIModelOutputBackupLlmConfig) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -79,14 +62,7 @@ func (u *PromptAgentAPIModelOutputBackupLlmConfig) UnmarshalJSON(data []byte) er
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelOutputBackupLlmConfigTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelOutputBackupLlmConfigTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Preference {
@@ -117,12 +93,9 @@ func (u *PromptAgentAPIModelOutputBackupLlmConfig) UnmarshalJSON(data []byte) er
 		u.BackupLLMOverride = backupLLMOverride
 		u.Type = PromptAgentAPIModelOutputBackupLlmConfigTypeOverride
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelOutputBackupLlmConfigTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PromptAgentAPIModelOutputBackupLlmConfig", string(data))
 }
 
 func (u PromptAgentAPIModelOutputBackupLlmConfig) MarshalJSON() ([]byte, error) {
@@ -138,9 +111,6 @@ func (u PromptAgentAPIModelOutputBackupLlmConfig) MarshalJSON() ([]byte, error) 
 		return utils.MarshalJSON(u.BackupLLMOverride, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PromptAgentAPIModelOutputBackupLlmConfig: all fields are null")
 }
 
@@ -153,7 +123,6 @@ const (
 	PromptAgentAPIModelOutputToolTypeSmb                   PromptAgentAPIModelOutputToolType = "smb"
 	PromptAgentAPIModelOutputToolTypeSystem                PromptAgentAPIModelOutputToolType = "system"
 	PromptAgentAPIModelOutputToolTypeWebhook               PromptAgentAPIModelOutputToolType = "webhook"
-	PromptAgentAPIModelOutputToolTypeUnknown               PromptAgentAPIModelOutputToolType = "UNKNOWN"
 )
 
 // PromptAgentAPIModelOutputTool - The type of tool
@@ -164,7 +133,6 @@ type PromptAgentAPIModelOutputTool struct {
 	MCPToolConfigOutput                   *MCPToolConfigOutput                   `queryParam:"inline" union:"member"`
 	APIIntegrationWebhookToolConfigOutput *APIIntegrationWebhookToolConfigOutput `queryParam:"inline" union:"member"`
 	SMBToolConfig                         *SMBToolConfig                         `queryParam:"inline" union:"member"`
-	UnknownRaw                            json.RawMessage                        `json:"-" union:"unknown"`
 
 	Type PromptAgentAPIModelOutputToolType
 }
@@ -223,21 +191,6 @@ func CreatePromptAgentAPIModelOutputToolWebhook(webhook WebhookToolConfigOutput)
 	}
 }
 
-func CreatePromptAgentAPIModelOutputToolUnknown(raw json.RawMessage) PromptAgentAPIModelOutputTool {
-	return PromptAgentAPIModelOutputTool{
-		UnknownRaw: raw,
-		Type:       PromptAgentAPIModelOutputToolTypeUnknown,
-	}
-}
-
-func (u PromptAgentAPIModelOutputTool) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PromptAgentAPIModelOutputTool) IsUnknown() bool {
-	return u.Type == PromptAgentAPIModelOutputToolTypeUnknown
-}
-
 func (u *PromptAgentAPIModelOutputTool) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -246,14 +199,7 @@ func (u *PromptAgentAPIModelOutputTool) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelOutputToolTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelOutputToolTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -311,12 +257,9 @@ func (u *PromptAgentAPIModelOutputTool) UnmarshalJSON(data []byte) error {
 		u.WebhookToolConfigOutput = webhookToolConfigOutput
 		u.Type = PromptAgentAPIModelOutputToolTypeWebhook
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PromptAgentAPIModelOutputToolTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PromptAgentAPIModelOutputTool", string(data))
 }
 
 func (u PromptAgentAPIModelOutputTool) MarshalJSON() ([]byte, error) {
@@ -344,9 +287,6 @@ func (u PromptAgentAPIModelOutputTool) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.SMBToolConfig, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PromptAgentAPIModelOutputTool: all fields are null")
 }
 

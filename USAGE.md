@@ -27,8 +27,6 @@ func main() {
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
 		case components.PendingChangeTypePendingCancellationResponseModel:
 			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		default:
-			// Unknown type - use res.ExtendedSubscriptionResponseModel.PendingChange.GetUnknownRaw() for raw JSON
 		}
 
 	}

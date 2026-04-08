@@ -15,13 +15,11 @@ type PhoneCallType string
 const (
 	PhoneCallTypeSipTrunking PhoneCallType = "sip_trunking"
 	PhoneCallTypeTwilio      PhoneCallType = "twilio"
-	PhoneCallTypeUnknown     PhoneCallType = "UNKNOWN"
 )
 
 type PhoneCall struct {
 	ConversationHistoryTwilioPhoneCallModel      *ConversationHistoryTwilioPhoneCallModel      `queryParam:"inline" union:"member"`
 	ConversationHistorySIPTrunkingPhoneCallModel *ConversationHistorySIPTrunkingPhoneCallModel `queryParam:"inline" union:"member"`
-	UnknownRaw                                   json.RawMessage                               `json:"-" union:"unknown"`
 
 	Type PhoneCallType
 }
@@ -44,21 +42,6 @@ func CreatePhoneCallTwilio(twilio ConversationHistoryTwilioPhoneCallModel) Phone
 	}
 }
 
-func CreatePhoneCallUnknown(raw json.RawMessage) PhoneCall {
-	return PhoneCall{
-		UnknownRaw: raw,
-		Type:       PhoneCallTypeUnknown,
-	}
-}
-
-func (u PhoneCall) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PhoneCall) IsUnknown() bool {
-	return u.Type == PhoneCallTypeUnknown
-}
-
 func (u *PhoneCall) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -67,14 +50,7 @@ func (u *PhoneCall) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneCallTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneCallTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -96,12 +72,9 @@ func (u *PhoneCall) UnmarshalJSON(data []byte) error {
 		u.ConversationHistoryTwilioPhoneCallModel = conversationHistoryTwilioPhoneCallModel
 		u.Type = PhoneCallTypeTwilio
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneCallTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PhoneCall", string(data))
 }
 
 func (u PhoneCall) MarshalJSON() ([]byte, error) {
@@ -113,9 +86,6 @@ func (u PhoneCall) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ConversationHistorySIPTrunkingPhoneCallModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PhoneCall: all fields are null")
 }
 

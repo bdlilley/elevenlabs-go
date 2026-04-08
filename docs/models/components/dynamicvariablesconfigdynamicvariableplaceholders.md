@@ -41,7 +41,5 @@ switch dynamicVariablesConfigDynamicVariablePlaceholders.Type {
 		// dynamicVariablesConfigDynamicVariablePlaceholders.Integer is populated
 	case components.DynamicVariablesConfigDynamicVariablePlaceholdersTypeBoolean:
 		// dynamicVariablesConfigDynamicVariablePlaceholders.Boolean is populated
-	default:
-		// Unknown type - use dynamicVariablesConfigDynamicVariablePlaceholders.GetUnknownRaw() for raw JSON
 }
 ```

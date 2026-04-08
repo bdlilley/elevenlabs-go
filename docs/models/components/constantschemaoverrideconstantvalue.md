@@ -43,7 +43,5 @@ switch constantSchemaOverrideConstantValue.Type {
 		// constantSchemaOverrideConstantValue.Number is populated
 	case components.ConstantSchemaOverrideConstantValueTypeBoolean:
 		// constantSchemaOverrideConstantValue.Boolean is populated
-	default:
-		// Unknown type - use constantSchemaOverrideConstantValue.GetUnknownRaw() for raw JSON
 }
 ```

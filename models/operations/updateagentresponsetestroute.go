@@ -162,7 +162,6 @@ const (
 	ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeLlm        ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutType = "llm"
 	ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeTool       ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutType = "tool"
 	ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeSimulation ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutType = "simulation"
-	ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeUnknown    ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutType = "UNKNOWN"
 )
 
 // ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut - Successful Response
@@ -170,7 +169,6 @@ type ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut struct {
 	GetResponseUnitTestResponseModel *components.GetResponseUnitTestResponseModel `queryParam:"inline" union:"member"`
 	GetToolCallUnitTestResponseModel *components.GetToolCallUnitTestResponseModel `queryParam:"inline" union:"member"`
 	GetSimulationTestResponseModel   *components.GetSimulationTestResponseModel   `queryParam:"inline" union:"member"`
-	UnknownRaw                       json.RawMessage                              `json:"-" union:"unknown"`
 
 	Type ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutType
 }
@@ -202,21 +200,6 @@ func CreateResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutSimulatio
 	}
 }
 
-func CreateResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutUnknown(raw json.RawMessage) ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut {
-	return ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut{
-		UnknownRaw: raw,
-		Type:       ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeUnknown,
-	}
-}
-
-func (u ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut) IsUnknown() bool {
-	return u.Type == ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeUnknown
-}
-
 func (u *ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -225,14 +208,7 @@ func (u *ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut) Unmarshal
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -263,12 +239,9 @@ func (u *ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut) Unmarshal
 		u.GetSimulationTestResponseModel = getSimulationTestResponseModel
 		u.Type = ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeSimulation
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPutTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut", string(data))
 }
 
 func (u ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut) MarshalJSON() ([]byte, error) {
@@ -284,9 +257,6 @@ func (u ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut) MarshalJSO
 		return utils.MarshalJSON(u.GetSimulationTestResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ResponseUpdateAgentResponseTestV1ConvaiAgentTestingTestIDPut: all fields are null")
 }
 

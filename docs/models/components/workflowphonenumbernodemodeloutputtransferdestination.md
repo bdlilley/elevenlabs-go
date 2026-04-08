@@ -41,7 +41,5 @@ switch workflowPhoneNumberNodeModelOutputTransferDestination.Type {
 		// workflowPhoneNumberNodeModelOutputTransferDestination.SIPURITransferDestination is populated
 	case components.WorkflowPhoneNumberNodeModelOutputTransferDestinationTypeSipURIDynamicVariable:
 		// workflowPhoneNumberNodeModelOutputTransferDestination.SIPURIDynamicVariableTransferDestination is populated
-	default:
-		// Unknown type - use workflowPhoneNumberNodeModelOutputTransferDestination.GetUnknownRaw() for raw JSON
 }
 ```

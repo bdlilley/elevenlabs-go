@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -16,15 +16,13 @@ const (
 	DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeNumber  DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersType = "number"
 	DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeInteger DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersType = "integer"
 	DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeBoolean DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersType = "boolean"
-	DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeUnknown DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersType = "Unknown"
 )
 
 type DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersType
 }
@@ -65,21 +63,6 @@ func CreateDynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersBool
 	}
 }
 
-func CreateDynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersUnknown(raw json.RawMessage) DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders {
-	return DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders{
-		UnknownRaw: raw,
-		Type:       DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeUnknown,
-	}
-}
-
-func (u DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) IsUnknown() bool {
-	return u.Type == DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeUnknown
-}
-
 func (u *DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -118,17 +101,13 @@ func (u *DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) Unma
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -148,9 +127,7 @@ func (u *DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) Unma
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders", string(data))
 }
 
 func (u DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) MarshalJSON() ([]byte, error) {
@@ -170,9 +147,6 @@ func (u DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) Marsh
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders: all fields are null")
 }
 

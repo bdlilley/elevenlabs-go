@@ -21,7 +21,6 @@ const (
 	ListAuthConnectionsResponseAuthConnectionTypeOauth2Jwt                    ListAuthConnectionsResponseAuthConnectionType = "oauth2_jwt"
 	ListAuthConnectionsResponseAuthConnectionTypePrivateKeyJwt                ListAuthConnectionsResponseAuthConnectionType = "private_key_jwt"
 	ListAuthConnectionsResponseAuthConnectionTypeWhatsappAuth                 ListAuthConnectionsResponseAuthConnectionType = "whatsapp_auth"
-	ListAuthConnectionsResponseAuthConnectionTypeUnknown                      ListAuthConnectionsResponseAuthConnectionType = "UNKNOWN"
 )
 
 // ListAuthConnectionsResponseAuthConnection - The type of auth connection config
@@ -35,7 +34,6 @@ type ListAuthConnectionsResponseAuthConnection struct {
 	CustomHeaderAuthResponse             *CustomHeaderAuthResponse             `queryParam:"inline" union:"member"`
 	APIIntegrationOAuth2AuthCodeResponse *APIIntegrationOAuth2AuthCodeResponse `queryParam:"inline" union:"member"`
 	WhatsAppAuthResponse                 *WhatsAppAuthResponse                 `queryParam:"inline" union:"member"`
-	UnknownRaw                           json.RawMessage                       `json:"-" union:"unknown"`
 
 	Type ListAuthConnectionsResponseAuthConnectionType
 }
@@ -121,21 +119,6 @@ func CreateListAuthConnectionsResponseAuthConnectionWhatsappAuth(whatsappAuth Wh
 	}
 }
 
-func CreateListAuthConnectionsResponseAuthConnectionUnknown(raw json.RawMessage) ListAuthConnectionsResponseAuthConnection {
-	return ListAuthConnectionsResponseAuthConnection{
-		UnknownRaw: raw,
-		Type:       ListAuthConnectionsResponseAuthConnectionTypeUnknown,
-	}
-}
-
-func (u ListAuthConnectionsResponseAuthConnection) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ListAuthConnectionsResponseAuthConnection) IsUnknown() bool {
-	return u.Type == ListAuthConnectionsResponseAuthConnectionTypeUnknown
-}
-
 func (u *ListAuthConnectionsResponseAuthConnection) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -144,14 +127,7 @@ func (u *ListAuthConnectionsResponseAuthConnection) UnmarshalJSON(data []byte) e
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ListAuthConnectionsResponseAuthConnectionTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ListAuthConnectionsResponseAuthConnectionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.AuthType {
@@ -236,12 +212,9 @@ func (u *ListAuthConnectionsResponseAuthConnection) UnmarshalJSON(data []byte) e
 		u.WhatsAppAuthResponse = whatsAppAuthResponse
 		u.Type = ListAuthConnectionsResponseAuthConnectionTypeWhatsappAuth
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ListAuthConnectionsResponseAuthConnectionTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ListAuthConnectionsResponseAuthConnection", string(data))
 }
 
 func (u ListAuthConnectionsResponseAuthConnection) MarshalJSON() ([]byte, error) {
@@ -281,9 +254,6 @@ func (u ListAuthConnectionsResponseAuthConnection) MarshalJSON() ([]byte, error)
 		return utils.MarshalJSON(u.WhatsAppAuthResponse, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ListAuthConnectionsResponseAuthConnection: all fields are null")
 }
 

@@ -57,7 +57,5 @@ switch agentWorkflowResponseModelNodes.Type {
 		// agentWorkflowResponseModelNodes.WorkflowStartNodeModelOutput is populated
 	case components.AgentWorkflowResponseModelNodesTypeTool:
 		// agentWorkflowResponseModelNodes.WorkflowToolNodeModelOutput is populated
-	default:
-		// Unknown type - use agentWorkflowResponseModelNodes.GetUnknownRaw() for raw JSON
 }
 ```

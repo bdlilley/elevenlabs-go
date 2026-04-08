@@ -19,12 +19,12 @@ import (
 )
 
 type TextToVoice struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newTextToVoice(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *TextToVoice {
+func newTextToVoice(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *TextToVoice {
 	return &TextToVoice{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

@@ -41,7 +41,5 @@ switch eval.Type {
 		// eval.LLMParameterEvaluationStrategy is populated
 	case components.EvalTypeRegex:
 		// eval.RegexParameterEvaluationStrategy is populated
-	default:
-		// Unknown type - use eval.GetUnknownRaw() for raw JSON
 }
 ```

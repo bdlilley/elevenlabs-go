@@ -20,12 +20,12 @@ import (
 
 // Workspace - Access to workspace related endpoints.
 type Workspace struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newWorkspace(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Workspace {
+func newWorkspace(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Workspace {
 	return &Workspace{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

@@ -17,14 +17,12 @@ const (
 	MCPToolConfigOutputInputOverridesTypeConstant        MCPToolConfigOutputInputOverridesType = "constant"
 	MCPToolConfigOutputInputOverridesTypeDynamicVariable MCPToolConfigOutputInputOverridesType = "dynamic_variable"
 	MCPToolConfigOutputInputOverridesTypeLlm             MCPToolConfigOutputInputOverridesType = "llm"
-	MCPToolConfigOutputInputOverridesTypeUnknown         MCPToolConfigOutputInputOverridesType = "UNKNOWN"
 )
 
 type MCPToolConfigOutputInputOverrides struct {
 	ConstantSchemaOverride        *ConstantSchemaOverride        `queryParam:"inline" union:"member"`
 	DynamicVariableSchemaOverride *DynamicVariableSchemaOverride `queryParam:"inline" union:"member"`
 	LLMSchemaOverride             *LLMSchemaOverride             `queryParam:"inline" union:"member"`
-	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
 
 	Type MCPToolConfigOutputInputOverridesType
 }
@@ -56,21 +54,6 @@ func CreateMCPToolConfigOutputInputOverridesLlm(llm LLMSchemaOverride) MCPToolCo
 	}
 }
 
-func CreateMCPToolConfigOutputInputOverridesUnknown(raw json.RawMessage) MCPToolConfigOutputInputOverrides {
-	return MCPToolConfigOutputInputOverrides{
-		UnknownRaw: raw,
-		Type:       MCPToolConfigOutputInputOverridesTypeUnknown,
-	}
-}
-
-func (u MCPToolConfigOutputInputOverrides) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u MCPToolConfigOutputInputOverrides) IsUnknown() bool {
-	return u.Type == MCPToolConfigOutputInputOverridesTypeUnknown
-}
-
 func (u *MCPToolConfigOutputInputOverrides) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -79,14 +62,7 @@ func (u *MCPToolConfigOutputInputOverrides) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPToolConfigOutputInputOverridesTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPToolConfigOutputInputOverridesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Source {
@@ -117,12 +93,9 @@ func (u *MCPToolConfigOutputInputOverrides) UnmarshalJSON(data []byte) error {
 		u.LLMSchemaOverride = llmSchemaOverride
 		u.Type = MCPToolConfigOutputInputOverridesTypeLlm
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = MCPToolConfigOutputInputOverridesTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPToolConfigOutputInputOverrides", string(data))
 }
 
 func (u MCPToolConfigOutputInputOverrides) MarshalJSON() ([]byte, error) {
@@ -138,9 +111,6 @@ func (u MCPToolConfigOutputInputOverrides) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.LLMSchemaOverride, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type MCPToolConfigOutputInputOverrides: all fields are null")
 }
 

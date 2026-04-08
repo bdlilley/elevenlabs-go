@@ -25,7 +25,5 @@ switch groupUsageLimit.Type {
 		// groupUsageLimit.Integer is populated
 	case components.GroupUsageLimitTypeStr:
 		// groupUsageLimit.Str is populated
-	default:
-		// Unknown type - use groupUsageLimit.GetUnknownRaw() for raw JSON
 }
 ```

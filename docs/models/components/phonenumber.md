@@ -25,7 +25,5 @@ switch phoneNumber.Type {
 		// phoneNumber.GetPhoneNumberSIPTrunkResponseModel is populated
 	case components.PhoneNumberTypeTwilio:
 		// phoneNumber.GetPhoneNumberTwilioResponseModel is populated
-	default:
-		// Unknown type - use phoneNumber.GetUnknownRaw() for raw JSON
 }
 ```

@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -40,16 +40,14 @@ const (
 	LiteralJSONSchemaPropertyConstantValueTypeInteger LiteralJSONSchemaPropertyConstantValueType = "integer"
 	LiteralJSONSchemaPropertyConstantValueTypeNumber  LiteralJSONSchemaPropertyConstantValueType = "number"
 	LiteralJSONSchemaPropertyConstantValueTypeBoolean LiteralJSONSchemaPropertyConstantValueType = "boolean"
-	LiteralJSONSchemaPropertyConstantValueTypeUnknown LiteralJSONSchemaPropertyConstantValueType = "Unknown"
 )
 
 // LiteralJSONSchemaPropertyConstantValue - A constant value to use for this property. Mutually exclusive with description, dynamic_variable, and is_system_provided.
 type LiteralJSONSchemaPropertyConstantValue struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type LiteralJSONSchemaPropertyConstantValueType
 }
@@ -90,21 +88,6 @@ func CreateLiteralJSONSchemaPropertyConstantValueBoolean(boolean bool) LiteralJS
 	}
 }
 
-func CreateLiteralJSONSchemaPropertyConstantValueUnknown(raw json.RawMessage) LiteralJSONSchemaPropertyConstantValue {
-	return LiteralJSONSchemaPropertyConstantValue{
-		UnknownRaw: raw,
-		Type:       LiteralJSONSchemaPropertyConstantValueTypeUnknown,
-	}
-}
-
-func (u LiteralJSONSchemaPropertyConstantValue) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u LiteralJSONSchemaPropertyConstantValue) IsUnknown() bool {
-	return u.Type == LiteralJSONSchemaPropertyConstantValueTypeUnknown
-}
-
 func (u *LiteralJSONSchemaPropertyConstantValue) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -143,17 +126,13 @@ func (u *LiteralJSONSchemaPropertyConstantValue) UnmarshalJSON(data []byte) erro
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = LiteralJSONSchemaPropertyConstantValueTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LiteralJSONSchemaPropertyConstantValue", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = LiteralJSONSchemaPropertyConstantValueTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LiteralJSONSchemaPropertyConstantValue", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -173,9 +152,7 @@ func (u *LiteralJSONSchemaPropertyConstantValue) UnmarshalJSON(data []byte) erro
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = LiteralJSONSchemaPropertyConstantValueTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for LiteralJSONSchemaPropertyConstantValue", string(data))
 }
 
 func (u LiteralJSONSchemaPropertyConstantValue) MarshalJSON() ([]byte, error) {
@@ -195,9 +172,6 @@ func (u LiteralJSONSchemaPropertyConstantValue) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type LiteralJSONSchemaPropertyConstantValue: all fields are null")
 }
 

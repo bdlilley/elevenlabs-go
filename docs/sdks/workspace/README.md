@@ -375,8 +375,6 @@ func main() {
                 // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.APIIntegrationOAuth2AuthCodeResponse is populated
             case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth:
                 // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.WhatsAppAuthResponse is populated
-            default:
-                // Unknown type - use res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.GetUnknownRaw() for raw JSON
         }
 
     }

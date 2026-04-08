@@ -25,7 +25,5 @@ switch getOrCreateRagIndexesResponseBody.Type {
 		// getOrCreateRagIndexesResponseBody.RAGIndexBatchSuccessfulResponseModel is populated
 	case operations.GetOrCreateRagIndexesResponseBodyTypeFailure:
 		// getOrCreateRagIndexesResponseBody.BatchFailureResponseModel is populated
-	default:
-		// Unknown type - use getOrCreateRagIndexesResponseBody.GetUnknownRaw() for raw JSON
 }
 ```

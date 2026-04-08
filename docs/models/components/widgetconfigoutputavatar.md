@@ -35,7 +35,5 @@ switch widgetConfigOutputAvatar.Type {
 		// widgetConfigOutputAvatar.URLAvatar is populated
 	case components.WidgetConfigOutputAvatarTypeImageAvatar:
 		// widgetConfigOutputAvatar.ImageAvatar is populated
-	default:
-		// Unknown type - use widgetConfigOutputAvatar.GetUnknownRaw() for raw JSON
 }
 ```

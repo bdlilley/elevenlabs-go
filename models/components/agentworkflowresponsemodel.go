@@ -18,7 +18,6 @@ const (
 	AgentWorkflowResponseModelNodesTypeStandaloneAgent AgentWorkflowResponseModelNodesType = "standalone_agent"
 	AgentWorkflowResponseModelNodesTypeStart           AgentWorkflowResponseModelNodesType = "start"
 	AgentWorkflowResponseModelNodesTypeTool            AgentWorkflowResponseModelNodesType = "tool"
-	AgentWorkflowResponseModelNodesTypeUnknown         AgentWorkflowResponseModelNodesType = "UNKNOWN"
 )
 
 type AgentWorkflowResponseModelNodes struct {
@@ -28,7 +27,6 @@ type AgentWorkflowResponseModelNodes struct {
 	WorkflowOverrideAgentNodeModelOutput   *WorkflowOverrideAgentNodeModelOutput   `queryParam:"inline" union:"member"`
 	WorkflowStandaloneAgentNodeModelOutput *WorkflowStandaloneAgentNodeModelOutput `queryParam:"inline" union:"member"`
 	WorkflowToolNodeModelOutput            *WorkflowToolNodeModelOutput            `queryParam:"inline" union:"member"`
-	UnknownRaw                             json.RawMessage                         `json:"-" union:"unknown"`
 
 	Type AgentWorkflowResponseModelNodesType
 }
@@ -87,21 +85,6 @@ func CreateAgentWorkflowResponseModelNodesTool(tool WorkflowToolNodeModelOutput)
 	}
 }
 
-func CreateAgentWorkflowResponseModelNodesUnknown(raw json.RawMessage) AgentWorkflowResponseModelNodes {
-	return AgentWorkflowResponseModelNodes{
-		UnknownRaw: raw,
-		Type:       AgentWorkflowResponseModelNodesTypeUnknown,
-	}
-}
-
-func (u AgentWorkflowResponseModelNodes) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u AgentWorkflowResponseModelNodes) IsUnknown() bool {
-	return u.Type == AgentWorkflowResponseModelNodesTypeUnknown
-}
-
 func (u *AgentWorkflowResponseModelNodes) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -110,14 +93,7 @@ func (u *AgentWorkflowResponseModelNodes) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AgentWorkflowResponseModelNodesTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AgentWorkflowResponseModelNodesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -175,12 +151,9 @@ func (u *AgentWorkflowResponseModelNodes) UnmarshalJSON(data []byte) error {
 		u.WorkflowToolNodeModelOutput = workflowToolNodeModelOutput
 		u.Type = AgentWorkflowResponseModelNodesTypeTool
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = AgentWorkflowResponseModelNodesTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentWorkflowResponseModelNodes", string(data))
 }
 
 func (u AgentWorkflowResponseModelNodes) MarshalJSON() ([]byte, error) {
@@ -208,9 +181,6 @@ func (u AgentWorkflowResponseModelNodes) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.WorkflowToolNodeModelOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type AgentWorkflowResponseModelNodes: all fields are null")
 }
 

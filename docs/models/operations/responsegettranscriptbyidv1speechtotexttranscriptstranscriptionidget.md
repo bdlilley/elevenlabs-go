@@ -27,7 +27,5 @@ switch responseGetTranscriptByIdv1SpeechToTextTranscriptsTranscriptionIDGet.Type
 		// responseGetTranscriptByIdv1SpeechToTextTranscriptsTranscriptionIDGet.SpeechToTextChunkResponseModel is populated
 	case operations.ResponseGetTranscriptByIDV1SpeechToTextTranscriptsTranscriptionIDGetTypeMultichannelSpeechToTextResponseModel:
 		// responseGetTranscriptByIdv1SpeechToTextTranscriptsTranscriptionIDGet.MultichannelSpeechToTextResponseModel is populated
-	default:
-		// Unknown type - use responseGetTranscriptByIdv1SpeechToTextTranscriptsTranscriptionIDGet.GetUnknownRaw() for raw JSON
 }
 ```

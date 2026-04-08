@@ -7,7 +7,14 @@ sources:
         tags:
             - latest
             - "1.0"
-targets: {}
+targets:
+    elevenlabs-go:
+        source: elevenlabs-go
+        sourceNamespace: elevenlabs-go
+        sourceRevisionDigest: sha256:b171a9841aaeaaf057b3282b0027f5af21495fefcd839f112ed4b742f055c067
+        sourceBlobDigest: sha256:20111f21b6ed7473aeeb6a46cf2e1b81cea488c85c6e54626ebbb38c45cf0957
+        codeSamplesNamespace: elevenlabs-go-code-samples
+        codeSamplesRevisionDigest: sha256:3d93d85d9d32d0489ba0b5b3d7c9fbda290f9038b978f1e9c3ad13f66ae5ea71
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -17,4 +24,13 @@ workflow:
                 - location: https://api.elevenlabs.io/openapi.json
             registry:
                 location: registry.speakeasyapi.dev/kudos/elevenlabs-go/elevenlabs-go
-    targets: {}
+    targets:
+        elevenlabs-go:
+            target: go
+            source: elevenlabs-go
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/kudos/elevenlabs-go/elevenlabs-go-code-samples
+                labelOverride:
+                    fixedValue: Go (SDK)
+                blocking: false

@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
@@ -17,15 +17,13 @@ const (
 	GetToolCallUnitTestResponseModelDynamicVariablesTypeNumber  GetToolCallUnitTestResponseModelDynamicVariablesType = "number"
 	GetToolCallUnitTestResponseModelDynamicVariablesTypeInteger GetToolCallUnitTestResponseModelDynamicVariablesType = "integer"
 	GetToolCallUnitTestResponseModelDynamicVariablesTypeBoolean GetToolCallUnitTestResponseModelDynamicVariablesType = "boolean"
-	GetToolCallUnitTestResponseModelDynamicVariablesTypeUnknown GetToolCallUnitTestResponseModelDynamicVariablesType = "Unknown"
 )
 
 type GetToolCallUnitTestResponseModelDynamicVariables struct {
-	Str        *string         `queryParam:"inline" union:"member"`
-	Number     *float64        `queryParam:"inline" union:"member"`
-	Integer    *int64          `queryParam:"inline" union:"member"`
-	Boolean    *bool           `queryParam:"inline" union:"member"`
-	UnknownRaw json.RawMessage `json:"-" union:"unknown"`
+	Str     *string  `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
 
 	Type GetToolCallUnitTestResponseModelDynamicVariablesType
 }
@@ -66,21 +64,6 @@ func CreateGetToolCallUnitTestResponseModelDynamicVariablesBoolean(boolean bool)
 	}
 }
 
-func CreateGetToolCallUnitTestResponseModelDynamicVariablesUnknown(raw json.RawMessage) GetToolCallUnitTestResponseModelDynamicVariables {
-	return GetToolCallUnitTestResponseModelDynamicVariables{
-		UnknownRaw: raw,
-		Type:       GetToolCallUnitTestResponseModelDynamicVariablesTypeUnknown,
-	}
-}
-
-func (u GetToolCallUnitTestResponseModelDynamicVariables) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u GetToolCallUnitTestResponseModelDynamicVariables) IsUnknown() bool {
-	return u.Type == GetToolCallUnitTestResponseModelDynamicVariablesTypeUnknown
-}
-
 func (u *GetToolCallUnitTestResponseModelDynamicVariables) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
@@ -119,17 +102,13 @@ func (u *GetToolCallUnitTestResponseModelDynamicVariables) UnmarshalJSON(data []
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetToolCallUnitTestResponseModelDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetToolCallUnitTestResponseModelDynamicVariables", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = GetToolCallUnitTestResponseModelDynamicVariablesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetToolCallUnitTestResponseModelDynamicVariables", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -149,9 +128,7 @@ func (u *GetToolCallUnitTestResponseModelDynamicVariables) UnmarshalJSON(data []
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = GetToolCallUnitTestResponseModelDynamicVariablesTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetToolCallUnitTestResponseModelDynamicVariables", string(data))
 }
 
 func (u GetToolCallUnitTestResponseModelDynamicVariables) MarshalJSON() ([]byte, error) {
@@ -171,9 +148,6 @@ func (u GetToolCallUnitTestResponseModelDynamicVariables) MarshalJSON() ([]byte,
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type GetToolCallUnitTestResponseModelDynamicVariables: all fields are null")
 }
 

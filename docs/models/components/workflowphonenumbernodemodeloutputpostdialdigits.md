@@ -25,7 +25,5 @@ switch workflowPhoneNumberNodeModelOutputPostDialDigits.Type {
 		// workflowPhoneNumberNodeModelOutputPostDialDigits.PostDialDigitsDynamicVariable is populated
 	case components.WorkflowPhoneNumberNodeModelOutputPostDialDigitsTypeStatic:
 		// workflowPhoneNumberNodeModelOutputPostDialDigits.PostDialDigitsStatic is populated
-	default:
-		// Unknown type - use workflowPhoneNumberNodeModelOutputPostDialDigits.GetUnknownRaw() for raw JSON
 }
 ```

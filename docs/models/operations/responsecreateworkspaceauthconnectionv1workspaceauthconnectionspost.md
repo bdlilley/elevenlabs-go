@@ -83,7 +83,5 @@ switch responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.Type 
 		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.APIIntegrationOAuth2AuthCodeResponse is populated
 	case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth:
 		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.WhatsAppAuthResponse is populated
-	default:
-		// Unknown type - use responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.GetUnknownRaw() for raw JSON
 }
 ```

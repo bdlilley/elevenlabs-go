@@ -15,13 +15,11 @@ type PhoneNumberTransferCustomSipHeaderType string
 const (
 	PhoneNumberTransferCustomSipHeaderTypeDynamic PhoneNumberTransferCustomSipHeaderType = "dynamic"
 	PhoneNumberTransferCustomSipHeaderTypeStatic  PhoneNumberTransferCustomSipHeaderType = "static"
-	PhoneNumberTransferCustomSipHeaderTypeUnknown PhoneNumberTransferCustomSipHeaderType = "UNKNOWN"
 )
 
 type PhoneNumberTransferCustomSipHeader struct {
 	CustomSIPHeader                    *CustomSIPHeader                    `queryParam:"inline" union:"member"`
 	CustomSIPHeaderWithDynamicVariable *CustomSIPHeaderWithDynamicVariable `queryParam:"inline" union:"member"`
-	UnknownRaw                         json.RawMessage                     `json:"-" union:"unknown"`
 
 	Type PhoneNumberTransferCustomSipHeaderType
 }
@@ -44,21 +42,6 @@ func CreatePhoneNumberTransferCustomSipHeaderStatic(static CustomSIPHeader) Phon
 	}
 }
 
-func CreatePhoneNumberTransferCustomSipHeaderUnknown(raw json.RawMessage) PhoneNumberTransferCustomSipHeader {
-	return PhoneNumberTransferCustomSipHeader{
-		UnknownRaw: raw,
-		Type:       PhoneNumberTransferCustomSipHeaderTypeUnknown,
-	}
-}
-
-func (u PhoneNumberTransferCustomSipHeader) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PhoneNumberTransferCustomSipHeader) IsUnknown() bool {
-	return u.Type == PhoneNumberTransferCustomSipHeaderTypeUnknown
-}
-
 func (u *PhoneNumberTransferCustomSipHeader) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -67,14 +50,7 @@ func (u *PhoneNumberTransferCustomSipHeader) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferCustomSipHeaderTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferCustomSipHeaderTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -96,12 +72,9 @@ func (u *PhoneNumberTransferCustomSipHeader) UnmarshalJSON(data []byte) error {
 		u.CustomSIPHeader = customSIPHeader
 		u.Type = PhoneNumberTransferCustomSipHeaderTypeStatic
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferCustomSipHeaderTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PhoneNumberTransferCustomSipHeader", string(data))
 }
 
 func (u PhoneNumberTransferCustomSipHeader) MarshalJSON() ([]byte, error) {
@@ -113,9 +86,6 @@ func (u PhoneNumberTransferCustomSipHeader) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.CustomSIPHeaderWithDynamicVariable, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PhoneNumberTransferCustomSipHeader: all fields are null")
 }
 
@@ -126,7 +96,6 @@ const (
 	PhoneNumberTransferTransferDestinationTypePhoneDynamicVariable  PhoneNumberTransferTransferDestinationType = "phone_dynamic_variable"
 	PhoneNumberTransferTransferDestinationTypeSipURI                PhoneNumberTransferTransferDestinationType = "sip_uri"
 	PhoneNumberTransferTransferDestinationTypeSipURIDynamicVariable PhoneNumberTransferTransferDestinationType = "sip_uri_dynamic_variable"
-	PhoneNumberTransferTransferDestinationTypeUnknown               PhoneNumberTransferTransferDestinationType = "UNKNOWN"
 )
 
 type PhoneNumberTransferTransferDestination struct {
@@ -134,7 +103,6 @@ type PhoneNumberTransferTransferDestination struct {
 	SIPURITransferDestination                     *SIPURITransferDestination                     `queryParam:"inline" union:"member"`
 	PhoneNumberDynamicVariableTransferDestination *PhoneNumberDynamicVariableTransferDestination `queryParam:"inline" union:"member"`
 	SIPURIDynamicVariableTransferDestination      *SIPURIDynamicVariableTransferDestination      `queryParam:"inline" union:"member"`
-	UnknownRaw                                    json.RawMessage                                `json:"-" union:"unknown"`
 
 	Type PhoneNumberTransferTransferDestinationType
 }
@@ -175,21 +143,6 @@ func CreatePhoneNumberTransferTransferDestinationSipURIDynamicVariable(sipURIDyn
 	}
 }
 
-func CreatePhoneNumberTransferTransferDestinationUnknown(raw json.RawMessage) PhoneNumberTransferTransferDestination {
-	return PhoneNumberTransferTransferDestination{
-		UnknownRaw: raw,
-		Type:       PhoneNumberTransferTransferDestinationTypeUnknown,
-	}
-}
-
-func (u PhoneNumberTransferTransferDestination) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PhoneNumberTransferTransferDestination) IsUnknown() bool {
-	return u.Type == PhoneNumberTransferTransferDestinationTypeUnknown
-}
-
 func (u *PhoneNumberTransferTransferDestination) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -198,14 +151,7 @@ func (u *PhoneNumberTransferTransferDestination) UnmarshalJSON(data []byte) erro
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferTransferDestinationTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferTransferDestinationTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -245,12 +191,9 @@ func (u *PhoneNumberTransferTransferDestination) UnmarshalJSON(data []byte) erro
 		u.SIPURIDynamicVariableTransferDestination = sipURIDynamicVariableTransferDestination
 		u.Type = PhoneNumberTransferTransferDestinationTypeSipURIDynamicVariable
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferTransferDestinationTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PhoneNumberTransferTransferDestination", string(data))
 }
 
 func (u PhoneNumberTransferTransferDestination) MarshalJSON() ([]byte, error) {
@@ -270,9 +213,6 @@ func (u PhoneNumberTransferTransferDestination) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.SIPURIDynamicVariableTransferDestination, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PhoneNumberTransferTransferDestination: all fields are null")
 }
 
@@ -281,13 +221,11 @@ type PhoneNumberTransferPostDialDigitsType string
 const (
 	PhoneNumberTransferPostDialDigitsTypeDynamic PhoneNumberTransferPostDialDigitsType = "dynamic"
 	PhoneNumberTransferPostDialDigitsTypeStatic  PhoneNumberTransferPostDialDigitsType = "static"
-	PhoneNumberTransferPostDialDigitsTypeUnknown PhoneNumberTransferPostDialDigitsType = "UNKNOWN"
 )
 
 type PhoneNumberTransferPostDialDigits struct {
 	PostDialDigitsStatic          *PostDialDigitsStatic          `queryParam:"inline" union:"member"`
 	PostDialDigitsDynamicVariable *PostDialDigitsDynamicVariable `queryParam:"inline" union:"member"`
-	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
 
 	Type PhoneNumberTransferPostDialDigitsType
 }
@@ -310,21 +248,6 @@ func CreatePhoneNumberTransferPostDialDigitsStatic(static PostDialDigitsStatic) 
 	}
 }
 
-func CreatePhoneNumberTransferPostDialDigitsUnknown(raw json.RawMessage) PhoneNumberTransferPostDialDigits {
-	return PhoneNumberTransferPostDialDigits{
-		UnknownRaw: raw,
-		Type:       PhoneNumberTransferPostDialDigitsTypeUnknown,
-	}
-}
-
-func (u PhoneNumberTransferPostDialDigits) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PhoneNumberTransferPostDialDigits) IsUnknown() bool {
-	return u.Type == PhoneNumberTransferPostDialDigitsTypeUnknown
-}
-
 func (u *PhoneNumberTransferPostDialDigits) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -333,14 +256,7 @@ func (u *PhoneNumberTransferPostDialDigits) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferPostDialDigitsTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferPostDialDigitsTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -362,12 +278,9 @@ func (u *PhoneNumberTransferPostDialDigits) UnmarshalJSON(data []byte) error {
 		u.PostDialDigitsStatic = postDialDigitsStatic
 		u.Type = PhoneNumberTransferPostDialDigitsTypeStatic
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PhoneNumberTransferPostDialDigitsTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PhoneNumberTransferPostDialDigits", string(data))
 }
 
 func (u PhoneNumberTransferPostDialDigits) MarshalJSON() ([]byte, error) {
@@ -379,9 +292,6 @@ func (u PhoneNumberTransferPostDialDigits) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.PostDialDigitsDynamicVariable, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PhoneNumberTransferPostDialDigits: all fields are null")
 }
 

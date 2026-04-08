@@ -14,13 +14,11 @@ type CustomGuardrailConfigTriggerActionType string
 const (
 	CustomGuardrailConfigTriggerActionTypeEndCall CustomGuardrailConfigTriggerActionType = "end_call"
 	CustomGuardrailConfigTriggerActionTypeRetry   CustomGuardrailConfigTriggerActionType = "retry"
-	CustomGuardrailConfigTriggerActionTypeUnknown CustomGuardrailConfigTriggerActionType = "UNKNOWN"
 )
 
 type CustomGuardrailConfigTriggerAction struct {
 	EndCallTriggerAction *EndCallTriggerAction `queryParam:"inline" union:"member"`
 	RetryTriggerAction   *RetryTriggerAction   `queryParam:"inline" union:"member"`
-	UnknownRaw           json.RawMessage       `json:"-" union:"unknown"`
 
 	Type CustomGuardrailConfigTriggerActionType
 }
@@ -43,21 +41,6 @@ func CreateCustomGuardrailConfigTriggerActionRetry(retry RetryTriggerAction) Cus
 	}
 }
 
-func CreateCustomGuardrailConfigTriggerActionUnknown(raw json.RawMessage) CustomGuardrailConfigTriggerAction {
-	return CustomGuardrailConfigTriggerAction{
-		UnknownRaw: raw,
-		Type:       CustomGuardrailConfigTriggerActionTypeUnknown,
-	}
-}
-
-func (u CustomGuardrailConfigTriggerAction) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u CustomGuardrailConfigTriggerAction) IsUnknown() bool {
-	return u.Type == CustomGuardrailConfigTriggerActionTypeUnknown
-}
-
 func (u *CustomGuardrailConfigTriggerAction) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -66,14 +49,7 @@ func (u *CustomGuardrailConfigTriggerAction) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = CustomGuardrailConfigTriggerActionTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = CustomGuardrailConfigTriggerActionTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -95,12 +71,9 @@ func (u *CustomGuardrailConfigTriggerAction) UnmarshalJSON(data []byte) error {
 		u.RetryTriggerAction = retryTriggerAction
 		u.Type = CustomGuardrailConfigTriggerActionTypeRetry
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = CustomGuardrailConfigTriggerActionTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomGuardrailConfigTriggerAction", string(data))
 }
 
 func (u CustomGuardrailConfigTriggerAction) MarshalJSON() ([]byte, error) {
@@ -112,9 +85,6 @@ func (u CustomGuardrailConfigTriggerAction) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.RetryTriggerAction, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type CustomGuardrailConfigTriggerAction: all fields are null")
 }
 

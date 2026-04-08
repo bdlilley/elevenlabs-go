@@ -25,7 +25,5 @@ switch convAIStoredSecretDependenciesAgent.Type {
 		// convAIStoredSecretDependenciesAgent.DependentAvailableAgentIdentifier is populated
 	case components.ConvAIStoredSecretDependenciesAgentTypeUnknown:
 		// convAIStoredSecretDependenciesAgent.DependentUnknownAgentIdentifier is populated
-	default:
-		// Unknown type - use convAIStoredSecretDependenciesAgent.GetUnknownRaw() for raw JSON
 }
 ```

@@ -25,7 +25,5 @@ switch getAgentSummariesRouteResponseBody.Type {
 		// getAgentSummariesRouteResponseBody.AgentSummaryBatchSuccessfulResponseModel is populated
 	case operations.GetAgentSummariesRouteResponseBodyTypeFailure:
 		// getAgentSummariesRouteResponseBody.BatchFailureResponseModel is populated
-	default:
-		// Unknown type - use getAgentSummariesRouteResponseBody.GetUnknownRaw() for raw JSON
 }
 ```

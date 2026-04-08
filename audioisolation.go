@@ -19,12 +19,12 @@ import (
 )
 
 type AudioIsolation struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newAudioIsolation(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AudioIsolation {
+func newAudioIsolation(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AudioIsolation {
 	return &AudioIsolation{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

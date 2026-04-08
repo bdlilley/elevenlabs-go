@@ -25,7 +25,5 @@ switch authConnectionDependenciesMcpServer.Type {
 		// authConnectionDependenciesMcpServer.DependentAvailableMCPServerIdentifier is populated
 	case components.AuthConnectionDependenciesMcpServerTypeUnknown:
 		// authConnectionDependenciesMcpServer.DependentUnknownMCPServerIdentifier is populated
-	default:
-		// Unknown type - use authConnectionDependenciesMcpServer.GetUnknownRaw() for raw JSON
 }
 ```

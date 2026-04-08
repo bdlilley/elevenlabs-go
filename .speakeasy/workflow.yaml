@@ -10,3 +10,9 @@ targets:
     elevenlabs-go:
         target: go
         source: elevenlabs-go
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/kudos/elevenlabs-go/elevenlabs-go-code-samples
+            labelOverride:
+                fixedValue: Go (SDK)
+            blocking: false

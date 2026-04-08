@@ -19,12 +19,12 @@ import (
 )
 
 type AgentsPlatform struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newAgentsPlatform(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AgentsPlatform {
+func newAgentsPlatform(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AgentsPlatform {
 	return &AgentsPlatform{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

@@ -18,12 +18,12 @@ import (
 
 // SpeechToSpeech - Create speech by combining the style and content of an audio file you upload with a voice of your choice.
 type SpeechToSpeech struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSpeechToSpeech(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SpeechToSpeech {
+func newSpeechToSpeech(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SpeechToSpeech {
 	return &SpeechToSpeech{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

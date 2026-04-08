@@ -21,7 +21,6 @@ const (
 	SystemToolConfigOutputParamsTypeTransferToAgent     SystemToolConfigOutputParamsType = "transfer_to_agent"
 	SystemToolConfigOutputParamsTypeTransferToNumber    SystemToolConfigOutputParamsType = "transfer_to_number"
 	SystemToolConfigOutputParamsTypeVoicemailDetection  SystemToolConfigOutputParamsType = "voicemail_detection"
-	SystemToolConfigOutputParamsTypeUnknown             SystemToolConfigOutputParamsType = "UNKNOWN"
 )
 
 type SystemToolConfigOutputParams struct {
@@ -32,7 +31,6 @@ type SystemToolConfigOutputParams struct {
 	SkipTurnToolConfig               *SkipTurnToolConfig               `queryParam:"inline" union:"member"`
 	PlayDTMFToolConfig               *PlayDTMFToolConfig               `queryParam:"inline" union:"member"`
 	VoicemailDetectionToolConfig     *VoicemailDetectionToolConfig     `queryParam:"inline" union:"member"`
-	UnknownRaw                       json.RawMessage                   `json:"-" union:"unknown"`
 
 	Type SystemToolConfigOutputParamsType
 }
@@ -100,21 +98,6 @@ func CreateSystemToolConfigOutputParamsVoicemailDetection(voicemailDetection Voi
 	}
 }
 
-func CreateSystemToolConfigOutputParamsUnknown(raw json.RawMessage) SystemToolConfigOutputParams {
-	return SystemToolConfigOutputParams{
-		UnknownRaw: raw,
-		Type:       SystemToolConfigOutputParamsTypeUnknown,
-	}
-}
-
-func (u SystemToolConfigOutputParams) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u SystemToolConfigOutputParams) IsUnknown() bool {
-	return u.Type == SystemToolConfigOutputParamsTypeUnknown
-}
-
 func (u *SystemToolConfigOutputParams) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -123,14 +106,7 @@ func (u *SystemToolConfigOutputParams) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SystemToolConfigOutputParamsTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SystemToolConfigOutputParamsTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.SystemToolType {
@@ -197,12 +173,9 @@ func (u *SystemToolConfigOutputParams) UnmarshalJSON(data []byte) error {
 		u.VoicemailDetectionToolConfig = voicemailDetectionToolConfig
 		u.Type = SystemToolConfigOutputParamsTypeVoicemailDetection
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SystemToolConfigOutputParamsTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SystemToolConfigOutputParams", string(data))
 }
 
 func (u SystemToolConfigOutputParams) MarshalJSON() ([]byte, error) {
@@ -234,9 +207,6 @@ func (u SystemToolConfigOutputParams) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.VoicemailDetectionToolConfig, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type SystemToolConfigOutputParams: all fields are null")
 }
 

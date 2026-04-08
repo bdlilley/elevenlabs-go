@@ -17,7 +17,6 @@ const (
 	ToolResponseModelToolConfigTypeMcp     ToolResponseModelToolConfigType = "mcp"
 	ToolResponseModelToolConfigTypeSystem  ToolResponseModelToolConfigType = "system"
 	ToolResponseModelToolConfigTypeWebhook ToolResponseModelToolConfigType = "webhook"
-	ToolResponseModelToolConfigTypeUnknown ToolResponseModelToolConfigType = "UNKNOWN"
 )
 
 // ToolResponseModelToolConfig - The type of tool
@@ -26,7 +25,6 @@ type ToolResponseModelToolConfig struct {
 	ClientToolConfigOutput  *ClientToolConfigOutput  `queryParam:"inline" union:"member"`
 	SystemToolConfigOutput  *SystemToolConfigOutput  `queryParam:"inline" union:"member"`
 	MCPToolConfigOutput     *MCPToolConfigOutput     `queryParam:"inline" union:"member"`
-	UnknownRaw              json.RawMessage          `json:"-" union:"unknown"`
 
 	Type ToolResponseModelToolConfigType
 }
@@ -67,21 +65,6 @@ func CreateToolResponseModelToolConfigWebhook(webhook WebhookToolConfigOutput) T
 	}
 }
 
-func CreateToolResponseModelToolConfigUnknown(raw json.RawMessage) ToolResponseModelToolConfig {
-	return ToolResponseModelToolConfig{
-		UnknownRaw: raw,
-		Type:       ToolResponseModelToolConfigTypeUnknown,
-	}
-}
-
-func (u ToolResponseModelToolConfig) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u ToolResponseModelToolConfig) IsUnknown() bool {
-	return u.Type == ToolResponseModelToolConfigTypeUnknown
-}
-
 func (u *ToolResponseModelToolConfig) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -90,14 +73,7 @@ func (u *ToolResponseModelToolConfig) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ToolResponseModelToolConfigTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ToolResponseModelToolConfigTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Type {
@@ -137,12 +113,9 @@ func (u *ToolResponseModelToolConfig) UnmarshalJSON(data []byte) error {
 		u.WebhookToolConfigOutput = webhookToolConfigOutput
 		u.Type = ToolResponseModelToolConfigTypeWebhook
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = ToolResponseModelToolConfigTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ToolResponseModelToolConfig", string(data))
 }
 
 func (u ToolResponseModelToolConfig) MarshalJSON() ([]byte, error) {
@@ -162,9 +135,6 @@ func (u ToolResponseModelToolConfig) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.MCPToolConfigOutput, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type ToolResponseModelToolConfig: all fields are null")
 }
 

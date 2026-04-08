@@ -59,7 +59,5 @@ switch promptAgentAPIModelOutputTool.Type {
 		// promptAgentAPIModelOutputTool.SystemToolConfigOutput is populated
 	case components.PromptAgentAPIModelOutputToolTypeWebhook:
 		// promptAgentAPIModelOutputTool.WebhookToolConfigOutput is populated
-	default:
-		// Unknown type - use promptAgentAPIModelOutputTool.GetUnknownRaw() for raw JSON
 }
 ```

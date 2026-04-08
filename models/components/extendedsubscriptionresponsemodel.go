@@ -3,8 +3,8 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
@@ -37,14 +37,12 @@ type PendingChangeType string
 const (
 	PendingChangeTypePendingSubscriptionSwitchResponseModel PendingChangeType = "PendingSubscriptionSwitchResponseModel"
 	PendingChangeTypePendingCancellationResponseModel       PendingChangeType = "PendingCancellationResponseModel"
-	PendingChangeTypeUnknown                                PendingChangeType = "Unknown"
 )
 
 // PendingChange - The pending change for the user.
 type PendingChange struct {
 	PendingSubscriptionSwitchResponseModel *PendingSubscriptionSwitchResponseModel `queryParam:"inline" union:"member"`
 	PendingCancellationResponseModel       *PendingCancellationResponseModel       `queryParam:"inline" union:"member"`
-	UnknownRaw                             json.RawMessage                         `json:"-" union:"unknown"`
 
 	Type PendingChangeType
 }
@@ -65,21 +63,6 @@ func CreatePendingChangePendingCancellationResponseModel(pendingCancellationResp
 		PendingCancellationResponseModel: &pendingCancellationResponseModel,
 		Type:                             typ,
 	}
-}
-
-func CreatePendingChangeUnknown(raw json.RawMessage) PendingChange {
-	return PendingChange{
-		UnknownRaw: raw,
-		Type:       PendingChangeTypeUnknown,
-	}
-}
-
-func (u PendingChange) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u PendingChange) IsUnknown() bool {
-	return u.Type == PendingChangeTypeUnknown
 }
 
 func (u *PendingChange) UnmarshalJSON(data []byte) error {
@@ -104,17 +87,13 @@ func (u *PendingChange) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PendingChangeTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for PendingChange", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = PendingChangeTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for PendingChange", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -128,9 +107,7 @@ func (u *PendingChange) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = PendingChangeTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PendingChange", string(data))
 }
 
 func (u PendingChange) MarshalJSON() ([]byte, error) {
@@ -142,9 +119,6 @@ func (u PendingChange) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.PendingCancellationResponseModel, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type PendingChange: all fields are null")
 }
 

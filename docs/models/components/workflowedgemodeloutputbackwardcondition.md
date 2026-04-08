@@ -41,7 +41,5 @@ switch workflowEdgeModelOutputBackwardCondition.Type {
 		// workflowEdgeModelOutputBackwardCondition.WorkflowResultConditionModelOutput is populated
 	case components.WorkflowEdgeModelOutputBackwardConditionTypeUnconditional:
 		// workflowEdgeModelOutputBackwardCondition.WorkflowUnconditionalModelOutput is populated
-	default:
-		// Unknown type - use workflowEdgeModelOutputBackwardCondition.GetUnknownRaw() for raw JSON
 }
 ```

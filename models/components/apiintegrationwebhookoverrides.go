@@ -16,14 +16,12 @@ const (
 	SchemaOverridesTypeConstant        SchemaOverridesType = "constant"
 	SchemaOverridesTypeDynamicVariable SchemaOverridesType = "dynamic_variable"
 	SchemaOverridesTypeLlm             SchemaOverridesType = "llm"
-	SchemaOverridesTypeUnknown         SchemaOverridesType = "UNKNOWN"
 )
 
 type SchemaOverrides struct {
 	ConstantSchemaOverride        *ConstantSchemaOverride        `queryParam:"inline" union:"member"`
 	DynamicVariableSchemaOverride *DynamicVariableSchemaOverride `queryParam:"inline" union:"member"`
 	LLMSchemaOverride             *LLMSchemaOverride             `queryParam:"inline" union:"member"`
-	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
 
 	Type SchemaOverridesType
 }
@@ -55,21 +53,6 @@ func CreateSchemaOverridesLlm(llm LLMSchemaOverride) SchemaOverrides {
 	}
 }
 
-func CreateSchemaOverridesUnknown(raw json.RawMessage) SchemaOverrides {
-	return SchemaOverrides{
-		UnknownRaw: raw,
-		Type:       SchemaOverridesTypeUnknown,
-	}
-}
-
-func (u SchemaOverrides) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u SchemaOverrides) IsUnknown() bool {
-	return u.Type == SchemaOverridesTypeUnknown
-}
-
 func (u *SchemaOverrides) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -78,14 +61,7 @@ func (u *SchemaOverrides) UnmarshalJSON(data []byte) error {
 
 	dis := new(discriminator)
 	if err := json.Unmarshal(data, &dis); err != nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SchemaOverridesTypeUnknown
-		return nil
-	}
-	if dis == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SchemaOverridesTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
 	switch dis.Source {
@@ -116,12 +92,9 @@ func (u *SchemaOverrides) UnmarshalJSON(data []byte) error {
 		u.LLMSchemaOverride = llmSchemaOverride
 		u.Type = SchemaOverridesTypeLlm
 		return nil
-	default:
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = SchemaOverridesTypeUnknown
-		return nil
 	}
 
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SchemaOverrides", string(data))
 }
 
 func (u SchemaOverrides) MarshalJSON() ([]byte, error) {
@@ -137,9 +110,6 @@ func (u SchemaOverrides) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.LLMSchemaOverride, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type SchemaOverrides: all fields are null")
 }
 
@@ -148,13 +118,11 @@ type APIIntegrationWebhookOverridesRequestHeadersType string
 const (
 	APIIntegrationWebhookOverridesRequestHeadersTypeStr                   APIIntegrationWebhookOverridesRequestHeadersType = "str"
 	APIIntegrationWebhookOverridesRequestHeadersTypeConvAIDynamicVariable APIIntegrationWebhookOverridesRequestHeadersType = "ConvAIDynamicVariable"
-	APIIntegrationWebhookOverridesRequestHeadersTypeUnknown               APIIntegrationWebhookOverridesRequestHeadersType = "Unknown"
 )
 
 type APIIntegrationWebhookOverridesRequestHeaders struct {
 	Str                   *string                `queryParam:"inline" union:"member"`
 	ConvAIDynamicVariable *ConvAIDynamicVariable `queryParam:"inline" union:"member"`
-	UnknownRaw            json.RawMessage        `json:"-" union:"unknown"`
 
 	Type APIIntegrationWebhookOverridesRequestHeadersType
 }
@@ -175,21 +143,6 @@ func CreateAPIIntegrationWebhookOverridesRequestHeadersConvAIDynamicVariable(con
 		ConvAIDynamicVariable: &convAIDynamicVariable,
 		Type:                  typ,
 	}
-}
-
-func CreateAPIIntegrationWebhookOverridesRequestHeadersUnknown(raw json.RawMessage) APIIntegrationWebhookOverridesRequestHeaders {
-	return APIIntegrationWebhookOverridesRequestHeaders{
-		UnknownRaw: raw,
-		Type:       APIIntegrationWebhookOverridesRequestHeadersTypeUnknown,
-	}
-}
-
-func (u APIIntegrationWebhookOverridesRequestHeaders) GetUnknownRaw() json.RawMessage {
-	return u.UnknownRaw
-}
-
-func (u APIIntegrationWebhookOverridesRequestHeaders) IsUnknown() bool {
-	return u.Type == APIIntegrationWebhookOverridesRequestHeadersTypeUnknown
 }
 
 func (u *APIIntegrationWebhookOverridesRequestHeaders) UnmarshalJSON(data []byte) error {
@@ -214,17 +167,13 @@ func (u *APIIntegrationWebhookOverridesRequestHeaders) UnmarshalJSON(data []byte
 	}
 
 	if len(candidates) == 0 {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = APIIntegrationWebhookOverridesRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for APIIntegrationWebhookOverridesRequestHeaders", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		u.UnknownRaw = json.RawMessage(data)
-		u.Type = APIIntegrationWebhookOverridesRequestHeadersTypeUnknown
-		return nil
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for APIIntegrationWebhookOverridesRequestHeaders", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
@@ -238,9 +187,7 @@ func (u *APIIntegrationWebhookOverridesRequestHeaders) UnmarshalJSON(data []byte
 		return nil
 	}
 
-	u.UnknownRaw = json.RawMessage(data)
-	u.Type = APIIntegrationWebhookOverridesRequestHeadersTypeUnknown
-	return nil
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for APIIntegrationWebhookOverridesRequestHeaders", string(data))
 }
 
 func (u APIIntegrationWebhookOverridesRequestHeaders) MarshalJSON() ([]byte, error) {
@@ -252,9 +199,6 @@ func (u APIIntegrationWebhookOverridesRequestHeaders) MarshalJSON() ([]byte, err
 		return utils.MarshalJSON(u.ConvAIDynamicVariable, "", true)
 	}
 
-	if u.UnknownRaw != nil {
-		return json.RawMessage(u.UnknownRaw), nil
-	}
 	return nil, errors.New("could not marshal union type APIIntegrationWebhookOverridesRequestHeaders: all fields are null")
 }
 

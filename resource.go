@@ -18,12 +18,12 @@ import (
 )
 
 type Resource struct {
-	rootSDK          *SDK
+	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newResource(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Resource {
+func newResource(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Resource {
 	return &Resource{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
