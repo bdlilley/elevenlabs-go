@@ -4,19 +4,18 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SupportedVoice struct {
-	Label                    string                                                         `json:"label"`
-	VoiceID                  string                                                         `json:"voice_id"`
-	Description              optionalnullable.OptionalNullable[string]                      `json:"description,omitzero"`
-	Language                 optionalnullable.OptionalNullable[string]                      `json:"language,omitzero"`
-	ModelFamily              optionalnullable.OptionalNullable[TTSModelFamily]              `json:"model_family,omitzero"`
-	OptimizeStreamingLatency optionalnullable.OptionalNullable[TTSOptimizeStreamingLatency] `json:"optimize_streaming_latency,omitzero"`
-	Stability                optionalnullable.OptionalNullable[float64]                     `json:"stability,omitzero"`
-	Speed                    optionalnullable.OptionalNullable[float64]                     `json:"speed,omitzero"`
-	SimilarityBoost          optionalnullable.OptionalNullable[float64]                     `json:"similarity_boost,omitzero"`
+	Label                    string                       `json:"label"`
+	VoiceID                  string                       `json:"voice_id"`
+	Description              *string                      `json:"description,omitzero"`
+	Language                 *string                      `json:"language,omitzero"`
+	ModelFamily              *TTSModelFamily              `json:"model_family,omitzero"`
+	OptimizeStreamingLatency *TTSOptimizeStreamingLatency `json:"optimize_streaming_latency,omitzero"`
+	Stability                *float64                     `json:"stability,omitzero"`
+	Speed                    *float64                     `json:"speed,omitzero"`
+	SimilarityBoost          *float64                     `json:"similarity_boost,omitzero"`
 }
 
 func (s SupportedVoice) MarshalJSON() ([]byte, error) {
@@ -44,49 +43,49 @@ func (s *SupportedVoice) GetVoiceID() string {
 	return s.VoiceID
 }
 
-func (s *SupportedVoice) GetDescription() optionalnullable.OptionalNullable[string] {
+func (s *SupportedVoice) GetDescription() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Description
 }
 
-func (s *SupportedVoice) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (s *SupportedVoice) GetLanguage() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Language
 }
 
-func (s *SupportedVoice) GetModelFamily() optionalnullable.OptionalNullable[TTSModelFamily] {
+func (s *SupportedVoice) GetModelFamily() *TTSModelFamily {
 	if s == nil {
 		return nil
 	}
 	return s.ModelFamily
 }
 
-func (s *SupportedVoice) GetOptimizeStreamingLatency() optionalnullable.OptionalNullable[TTSOptimizeStreamingLatency] {
+func (s *SupportedVoice) GetOptimizeStreamingLatency() *TTSOptimizeStreamingLatency {
 	if s == nil {
 		return nil
 	}
 	return s.OptimizeStreamingLatency
 }
 
-func (s *SupportedVoice) GetStability() optionalnullable.OptionalNullable[float64] {
+func (s *SupportedVoice) GetStability() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.Stability
 }
 
-func (s *SupportedVoice) GetSpeed() optionalnullable.OptionalNullable[float64] {
+func (s *SupportedVoice) GetSpeed() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.Speed
 }
 
-func (s *SupportedVoice) GetSimilarityBoost() optionalnullable.OptionalNullable[float64] {
+func (s *SupportedVoice) GetSimilarityBoost() *float64 {
 	if s == nil {
 		return nil
 	}

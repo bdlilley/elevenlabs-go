@@ -2,16 +2,12 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type ConversationFeedbackRequestModel struct {
 	// Either 'like' or 'dislike' to indicate the feedback for the conversation.
-	Feedback optionalnullable.OptionalNullable[UserFeedbackScore] `json:"feedback,omitzero"`
+	Feedback *UserFeedbackScore `json:"feedback,omitzero"`
 }
 
-func (c *ConversationFeedbackRequestModel) GetFeedback() optionalnullable.OptionalNullable[UserFeedbackScore] {
+func (c *ConversationFeedbackRequestModel) GetFeedback() *UserFeedbackScore {
 	if c == nil {
 		return nil
 	}

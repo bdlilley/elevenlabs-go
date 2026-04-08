@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ASRConversationalConfigWorkflowOverride struct {
 	// The quality of the transcription
-	Quality optionalnullable.OptionalNullable[ASRQuality] `default:"high" json:"quality"`
+	Quality *ASRQuality `default:"high" json:"quality"`
 	// The provider of the transcription service
-	Provider optionalnullable.OptionalNullable[ASRProvider] `default:"elevenlabs" json:"provider"`
+	Provider *ASRProvider `default:"elevenlabs" json:"provider"`
 	// The format of the audio to be transcribed
-	UserInputAudioFormat optionalnullable.OptionalNullable[ASRInputFormat] `default:"pcm_16000" json:"user_input_audio_format"`
+	UserInputAudioFormat *ASRInputFormat `default:"pcm_16000" json:"user_input_audio_format"`
 	// Keywords to boost prediction probability for
-	Keywords optionalnullable.OptionalNullable[[]string] `json:"keywords,omitzero"`
+	Keywords []string `json:"keywords,omitzero"`
 }
 
 func (a ASRConversationalConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -29,28 +28,28 @@ func (a *ASRConversationalConfigWorkflowOverride) UnmarshalJSON(data []byte) err
 	return nil
 }
 
-func (a *ASRConversationalConfigWorkflowOverride) GetQuality() optionalnullable.OptionalNullable[ASRQuality] {
+func (a *ASRConversationalConfigWorkflowOverride) GetQuality() *ASRQuality {
 	if a == nil {
 		return nil
 	}
 	return a.Quality
 }
 
-func (a *ASRConversationalConfigWorkflowOverride) GetProvider() optionalnullable.OptionalNullable[ASRProvider] {
+func (a *ASRConversationalConfigWorkflowOverride) GetProvider() *ASRProvider {
 	if a == nil {
 		return nil
 	}
 	return a.Provider
 }
 
-func (a *ASRConversationalConfigWorkflowOverride) GetUserInputAudioFormat() optionalnullable.OptionalNullable[ASRInputFormat] {
+func (a *ASRConversationalConfigWorkflowOverride) GetUserInputAudioFormat() *ASRInputFormat {
 	if a == nil {
 		return nil
 	}
 	return a.UserInputAudioFormat
 }
 
-func (a *ASRConversationalConfigWorkflowOverride) GetKeywords() optionalnullable.OptionalNullable[[]string] {
+func (a *ASRConversationalConfigWorkflowOverride) GetKeywords() []string {
 	if a == nil {
 		return nil
 	}

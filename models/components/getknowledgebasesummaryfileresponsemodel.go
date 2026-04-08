@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseSummaryFileResponseModelDependentAgentType string
@@ -96,7 +95,7 @@ type GetKnowledgeBaseSummaryFileResponseModel struct {
 	SupportedUsages []DocumentUsageModeEnum                    `json:"supported_usages"`
 	AccessInfo      ResourceAccessInfo                         `json:"access_info"`
 	// The ID of the parent folder, or null if the document is at the root level.
-	FolderParentID optionalnullable.OptionalNullable[string] `json:"folder_parent_id,omitzero"`
+	FolderParentID *string `json:"folder_parent_id,omitzero"`
 	// The folder path segments leading to this entity, from root to parent folder.
 	FolderPath []KnowledgeBaseFolderPathSegmentSummaryResponseModel `json:"folder_path,omitzero"`
 	// This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead.
@@ -153,7 +152,7 @@ func (g *GetKnowledgeBaseSummaryFileResponseModel) GetAccessInfo() ResourceAcces
 	return g.AccessInfo
 }
 
-func (g *GetKnowledgeBaseSummaryFileResponseModel) GetFolderParentID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseSummaryFileResponseModel) GetFolderParentID() *string {
 	if g == nil {
 		return nil
 	}

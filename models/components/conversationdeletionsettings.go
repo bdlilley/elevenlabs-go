@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationDeletionSettings struct {
-	DeletionTimeUnixSecs            optionalnullable.OptionalNullable[int64] `json:"deletion_time_unix_secs,omitzero"`
-	DeletedLogsAtTimeUnixSecs       optionalnullable.OptionalNullable[int64] `json:"deleted_logs_at_time_unix_secs,omitzero"`
-	DeletedAudioAtTimeUnixSecs      optionalnullable.OptionalNullable[int64] `json:"deleted_audio_at_time_unix_secs,omitzero"`
-	DeletedTranscriptAtTimeUnixSecs optionalnullable.OptionalNullable[int64] `json:"deleted_transcript_at_time_unix_secs,omitzero"`
-	DeleteTranscriptAndPii          *bool                                    `default:"false" json:"delete_transcript_and_pii"`
-	DeleteAudio                     *bool                                    `default:"false" json:"delete_audio"`
+	DeletionTimeUnixSecs            *int64 `json:"deletion_time_unix_secs,omitzero"`
+	DeletedLogsAtTimeUnixSecs       *int64 `json:"deleted_logs_at_time_unix_secs,omitzero"`
+	DeletedAudioAtTimeUnixSecs      *int64 `json:"deleted_audio_at_time_unix_secs,omitzero"`
+	DeletedTranscriptAtTimeUnixSecs *int64 `json:"deleted_transcript_at_time_unix_secs,omitzero"`
+	DeleteTranscriptAndPii          *bool  `default:"false" json:"delete_transcript_and_pii"`
+	DeleteAudio                     *bool  `default:"false" json:"delete_audio"`
 }
 
 func (c ConversationDeletionSettings) MarshalJSON() ([]byte, error) {
@@ -27,28 +26,28 @@ func (c *ConversationDeletionSettings) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *ConversationDeletionSettings) GetDeletionTimeUnixSecs() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationDeletionSettings) GetDeletionTimeUnixSecs() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.DeletionTimeUnixSecs
 }
 
-func (c *ConversationDeletionSettings) GetDeletedLogsAtTimeUnixSecs() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationDeletionSettings) GetDeletedLogsAtTimeUnixSecs() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.DeletedLogsAtTimeUnixSecs
 }
 
-func (c *ConversationDeletionSettings) GetDeletedAudioAtTimeUnixSecs() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationDeletionSettings) GetDeletedAudioAtTimeUnixSecs() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.DeletedAudioAtTimeUnixSecs
 }
 
-func (c *ConversationDeletionSettings) GetDeletedTranscriptAtTimeUnixSecs() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationDeletionSettings) GetDeletedTranscriptAtTimeUnixSecs() *int64 {
 	if c == nil {
 		return nil
 	}

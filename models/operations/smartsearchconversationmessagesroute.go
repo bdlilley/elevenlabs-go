@@ -5,18 +5,17 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SmartSearchConversationMessagesRouteRequest struct {
 	// The search query text for semantic similarity matching
 	TextQuery string `queryParam:"style=form,explode=true,name=text_query"`
 	// The id of the agent you're taking the action on.
-	AgentID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=agent_id"`
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// Number of results per page. Max 50.
 	PageSize *int64 `default:"20" queryParam:"style=form,explode=true,name=page_size"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (s SmartSearchConversationMessagesRouteRequest) MarshalJSON() ([]byte, error) {
@@ -37,7 +36,7 @@ func (s *SmartSearchConversationMessagesRouteRequest) GetTextQuery() string {
 	return s.TextQuery
 }
 
-func (s *SmartSearchConversationMessagesRouteRequest) GetAgentID() optionalnullable.OptionalNullable[string] {
+func (s *SmartSearchConversationMessagesRouteRequest) GetAgentID() *string {
 	if s == nil {
 		return nil
 	}
@@ -51,7 +50,7 @@ func (s *SmartSearchConversationMessagesRouteRequest) GetPageSize() *int64 {
 	return s.PageSize
 }
 
-func (s *SmartSearchConversationMessagesRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (s *SmartSearchConversationMessagesRouteRequest) GetCursor() *string {
 	if s == nil {
 		return nil
 	}

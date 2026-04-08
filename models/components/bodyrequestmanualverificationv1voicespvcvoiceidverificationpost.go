@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPostFile struct {
 	FileName string `multipartForm:"name=fileName"`
 	// This field accepts []byte data or io.Reader implementations, such as *os.File.
@@ -33,7 +29,7 @@ type BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost struct {
 	// Verification documents
 	Files []BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPostFile `multipartForm:"file,name=files"`
 	// Extra text to be used in the manual verification process.
-	ExtraText optionalnullable.OptionalNullable[string] `multipartForm:"name=extra_text"`
+	ExtraText *string `multipartForm:"name=extra_text"`
 }
 
 func (b *BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost) GetFiles() []BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPostFile {
@@ -43,7 +39,7 @@ func (b *BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost) GetFil
 	return b.Files
 }
 
-func (b *BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost) GetExtraText() optionalnullable.OptionalNullable[string] {
+func (b *BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost) GetExtraText() *string {
 	if b == nil {
 		return nil
 	}

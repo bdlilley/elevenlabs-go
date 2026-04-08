@@ -2,14 +2,10 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type ToolsResponseModel struct {
-	Tools      []ToolResponseModel                       `json:"tools"`
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
-	HasMore    bool                                      `json:"has_more"`
+	Tools      []ToolResponseModel `json:"tools"`
+	NextCursor *string             `json:"next_cursor,omitzero"`
+	HasMore    bool                `json:"has_more"`
 }
 
 func (t *ToolsResponseModel) GetTools() []ToolResponseModel {
@@ -19,7 +15,7 @@ func (t *ToolsResponseModel) GetTools() []ToolResponseModel {
 	return t.Tools
 }
 
-func (t *ToolsResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (t *ToolsResponseModel) GetNextCursor() *string {
 	if t == nil {
 		return nil
 	}

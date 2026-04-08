@@ -5,16 +5,15 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type CreatePodcastRequest struct {
 	// Used for moderation. Your workspace must be allowlisted to use this feature.
-	SafetyIdentifier optionalnullable.OptionalNullable[string]        `header:"style=simple,explode=false,name=safety-identifier"`
+	SafetyIdentifier *string                                          `header:"style=simple,explode=false,name=safety-identifier"`
 	Body             components.BodyCreatePodcastV1StudioPodcastsPost `request:"mediaType=application/json"`
 }
 
-func (c *CreatePodcastRequest) GetSafetyIdentifier() optionalnullable.OptionalNullable[string] {
+func (c *CreatePodcastRequest) GetSafetyIdentifier() *string {
 	if c == nil {
 		return nil
 	}

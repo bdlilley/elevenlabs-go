@@ -5,34 +5,33 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseListRouteRequest struct {
 	// How many documents to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// If specified, the endpoint returns only such knowledge base documents whose names start with this string.
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// If set to true, the endpoint will return only documents owned by you (and not shared from somebody else). Deprecated: use created_by_user_id instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	ShowOnlyOwnedDocuments *bool `default:"false" queryParam:"style=form,explode=true,name=show_only_owned_documents"`
 	// Filter documents by creator user ID. When set, only documents created by this user are returned. Takes precedence over show_only_owned_documents. Use '@me' to refer to the authenticated user.
-	CreatedByUserID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=created_by_user_id"`
+	CreatedByUserID *string `queryParam:"style=form,explode=true,name=created_by_user_id"`
 	// If present, the endpoint will return only documents of the given types.
-	Types optionalnullable.OptionalNullable[[]components.KnowledgeBaseDocumentType] `queryParam:"style=form,explode=true,name=types"`
+	Types []components.KnowledgeBaseDocumentType `queryParam:"style=form,explode=true,name=types"`
 	// If set, the endpoint will return only documents that are direct children of the given folder.
-	ParentFolderID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=parent_folder_id"`
+	ParentFolderID *string `queryParam:"style=form,explode=true,name=parent_folder_id"`
 	// If set, the endpoint will return only documents that are descendants of the given folder.
-	AncestorFolderID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=ancestor_folder_id"`
+	AncestorFolderID *string `queryParam:"style=form,explode=true,name=ancestor_folder_id"`
 	// Whether folders should be returned first in the list of documents.
 	FoldersFirst *bool `default:"false" queryParam:"style=form,explode=true,name=folders_first"`
 	// The direction to sort the results
 	SortDirection *components.SortDirection `queryParam:"style=form,explode=true,name=sort_direction"`
 	// The field to sort the results by
-	SortBy optionalnullable.OptionalNullable[components.KnowledgeBaseSortBy] `queryParam:"style=form,explode=true,name=sort_by"`
+	SortBy *components.KnowledgeBaseSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (g GetKnowledgeBaseListRouteRequest) MarshalJSON() ([]byte, error) {
@@ -53,7 +52,7 @@ func (g *GetKnowledgeBaseListRouteRequest) GetPageSize() *int64 {
 	return g.PageSize
 }
 
-func (g *GetKnowledgeBaseListRouteRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseListRouteRequest) GetSearch() *string {
 	if g == nil {
 		return nil
 	}
@@ -67,28 +66,28 @@ func (g *GetKnowledgeBaseListRouteRequest) GetShowOnlyOwnedDocuments() *bool {
 	return g.ShowOnlyOwnedDocuments
 }
 
-func (g *GetKnowledgeBaseListRouteRequest) GetCreatedByUserID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseListRouteRequest) GetCreatedByUserID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.CreatedByUserID
 }
 
-func (g *GetKnowledgeBaseListRouteRequest) GetTypes() optionalnullable.OptionalNullable[[]components.KnowledgeBaseDocumentType] {
+func (g *GetKnowledgeBaseListRouteRequest) GetTypes() []components.KnowledgeBaseDocumentType {
 	if g == nil {
 		return nil
 	}
 	return g.Types
 }
 
-func (g *GetKnowledgeBaseListRouteRequest) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseListRouteRequest) GetParentFolderID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.ParentFolderID
 }
 
-func (g *GetKnowledgeBaseListRouteRequest) GetAncestorFolderID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseListRouteRequest) GetAncestorFolderID() *string {
 	if g == nil {
 		return nil
 	}
@@ -109,14 +108,14 @@ func (g *GetKnowledgeBaseListRouteRequest) GetSortDirection() *components.SortDi
 	return g.SortDirection
 }
 
-func (g *GetKnowledgeBaseListRouteRequest) GetSortBy() optionalnullable.OptionalNullable[components.KnowledgeBaseSortBy] {
+func (g *GetKnowledgeBaseListRouteRequest) GetSortBy() *components.KnowledgeBaseSortBy {
 	if g == nil {
 		return nil
 	}
 	return g.SortBy
 }
 
-func (g *GetKnowledgeBaseListRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseListRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}

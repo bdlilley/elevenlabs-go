@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type VoiceSamplePreviewResponseModel struct {
 	// The base64 encoded audio.
 	AudioBase64 string `json:"audio_base_64"`
@@ -16,7 +12,7 @@ type VoiceSamplePreviewResponseModel struct {
 	// The media type of the audio.
 	MediaType string `json:"media_type"`
 	// The duration of the audio in seconds.
-	DurationSecs optionalnullable.OptionalNullable[float64] `json:"duration_secs,omitzero"`
+	DurationSecs *float64 `json:"duration_secs,omitzero"`
 }
 
 func (v *VoiceSamplePreviewResponseModel) GetAudioBase64() string {
@@ -47,7 +43,7 @@ func (v *VoiceSamplePreviewResponseModel) GetMediaType() string {
 	return v.MediaType
 }
 
-func (v *VoiceSamplePreviewResponseModel) GetDurationSecs() optionalnullable.OptionalNullable[float64] {
+func (v *VoiceSamplePreviewResponseModel) GetDurationSecs() *float64 {
 	if v == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // SpeechToTextChunkResponseModel - Chunk-level detail of the transcription with timing information.
@@ -18,15 +17,15 @@ type SpeechToTextChunkResponseModel struct {
 	// List of words with their timing information.
 	Words []SpeechToTextWordResponseModel `json:"words"`
 	// The channel index this transcript belongs to (for multichannel audio).
-	ChannelIndex optionalnullable.OptionalNullable[int64] `json:"channel_index,omitzero"`
+	ChannelIndex *int64 `json:"channel_index,omitzero"`
 	// Requested additional formats of the transcript.
-	AdditionalFormats optionalnullable.OptionalNullable[[]*AdditionalFormatResponseModel] `json:"additional_formats,omitzero"`
+	AdditionalFormats []*AdditionalFormatResponseModel `json:"additional_formats,omitzero"`
 	// The transcription ID of the response.
-	TranscriptionID optionalnullable.OptionalNullable[string] `json:"transcription_id,omitzero"`
+	TranscriptionID *string `json:"transcription_id,omitzero"`
 	// List of detected entities with their text, type, and character positions in the transcript.
-	Entities optionalnullable.OptionalNullable[[]DetectedEntity] `json:"entities,omitzero"`
+	Entities []DetectedEntity `json:"entities,omitzero"`
 	// The duration of the audio that was transcribed in seconds.
-	AudioDurationSecs optionalnullable.OptionalNullable[float64] `json:"audio_duration_secs,omitzero"`
+	AudioDurationSecs *float64 `json:"audio_duration_secs,omitzero"`
 }
 
 func (s SpeechToTextChunkResponseModel) MarshalJSON() ([]byte, error) {
@@ -68,35 +67,35 @@ func (s *SpeechToTextChunkResponseModel) GetWords() []SpeechToTextWordResponseMo
 	return s.Words
 }
 
-func (s *SpeechToTextChunkResponseModel) GetChannelIndex() optionalnullable.OptionalNullable[int64] {
+func (s *SpeechToTextChunkResponseModel) GetChannelIndex() *int64 {
 	if s == nil {
 		return nil
 	}
 	return s.ChannelIndex
 }
 
-func (s *SpeechToTextChunkResponseModel) GetAdditionalFormats() optionalnullable.OptionalNullable[[]*AdditionalFormatResponseModel] {
+func (s *SpeechToTextChunkResponseModel) GetAdditionalFormats() []*AdditionalFormatResponseModel {
 	if s == nil {
 		return nil
 	}
 	return s.AdditionalFormats
 }
 
-func (s *SpeechToTextChunkResponseModel) GetTranscriptionID() optionalnullable.OptionalNullable[string] {
+func (s *SpeechToTextChunkResponseModel) GetTranscriptionID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.TranscriptionID
 }
 
-func (s *SpeechToTextChunkResponseModel) GetEntities() optionalnullable.OptionalNullable[[]DetectedEntity] {
+func (s *SpeechToTextChunkResponseModel) GetEntities() []DetectedEntity {
 	if s == nil {
 		return nil
 	}
 	return s.Entities
 }
 
-func (s *SpeechToTextChunkResponseModel) GetAudioDurationSecs() optionalnullable.OptionalNullable[float64] {
+func (s *SpeechToTextChunkResponseModel) GetAudioDurationSecs() *float64 {
 	if s == nil {
 		return nil
 	}

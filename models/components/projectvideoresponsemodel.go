@@ -4,45 +4,44 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type ProjectVideoResponseModel struct {
-	VideoID                  string                                                     `json:"video_id"`
-	Filename                 string                                                     `json:"filename"`
-	SignedURL                *string                                                    `json:"signed_url"`
-	SignedPreviewURL         *string                                                    `json:"signed_preview_url"`
-	OffsetMs                 int64                                                      `json:"offset_ms"`
-	DurationMs               int64                                                      `json:"duration_ms"`
-	VolumeGainDb             float64                                                    `json:"volume_gain_db"`
-	Muted                    bool                                                       `json:"muted"`
-	FadeInMs                 *int64                                                     `default:"0" json:"fade_in_ms"`
-	FadeOutMs                *int64                                                     `default:"0" json:"fade_out_ms"`
-	Width                    int64                                                      `json:"width"`
-	Height                   int64                                                      `json:"height"`
-	Codec                    string                                                     `json:"codec"`
-	Order                    string                                                     `json:"order"`
-	CreatedAtMs              int64                                                      `json:"created_at_ms"`
-	UpdatedAtMs              int64                                                      `json:"updated_at_ms"`
-	Error                    optionalnullable.OptionalNullable[string]                  `json:"error,omitzero"`
-	ThumbnailIntervalSeconds float64                                                    `json:"thumbnail_interval_seconds"`
-	ThumbnailSize            []int64                                                    `json:"thumbnail_size"`
-	ThumbnailSheets          []ProjectVideoThumbnailSheetResponseModel                  `json:"thumbnail_sheets"`
-	StartTimeMs              int64                                                      `json:"start_time_ms"`
-	EndTimeMs                int64                                                      `json:"end_time_ms"`
-	AssetPreviewSignedURL    optionalnullable.OptionalNullable[string]                  `json:"asset_preview_signed_url,omitzero"`
-	SourceVideoID            optionalnullable.OptionalNullable[string]                  `json:"source_video_id,omitzero"`
-	SourceAssetID            optionalnullable.OptionalNullable[string]                  `json:"source_asset_id,omitzero"`
-	PendingBlockIds          []string                                                   `json:"pending_block_ids"`
-	PendingExternalAudioIds  []string                                                   `json:"pending_external_audio_ids"`
-	SpeechImported           *bool                                                      `default:"false" json:"speech_imported"`
-	PendingTask              optionalnullable.OptionalNullable[PendingClipTask]         `json:"pending_task,omitzero"`
-	AudioTrackReady          *bool                                                      `default:"true" json:"audio_track_ready"`
-	ExportFormatReady        *bool                                                      `default:"true" json:"export_format_ready"`
-	CurrentSnapshotID        optionalnullable.OptionalNullable[string]                  `json:"current_snapshot_id,omitzero"`
-	SourceContext            optionalnullable.OptionalNullable[GenerationSourceContext] `json:"source_context,omitzero"`
-	Analysis                 optionalnullable.OptionalNullable[VideoAnalysis]           `json:"analysis,omitzero"`
+	VideoID                  string                                    `json:"video_id"`
+	Filename                 string                                    `json:"filename"`
+	SignedURL                *string                                   `json:"signed_url"`
+	SignedPreviewURL         *string                                   `json:"signed_preview_url"`
+	OffsetMs                 int64                                     `json:"offset_ms"`
+	DurationMs               int64                                     `json:"duration_ms"`
+	VolumeGainDb             float64                                   `json:"volume_gain_db"`
+	Muted                    bool                                      `json:"muted"`
+	FadeInMs                 *int64                                    `default:"0" json:"fade_in_ms"`
+	FadeOutMs                *int64                                    `default:"0" json:"fade_out_ms"`
+	Width                    int64                                     `json:"width"`
+	Height                   int64                                     `json:"height"`
+	Codec                    string                                    `json:"codec"`
+	Order                    string                                    `json:"order"`
+	CreatedAtMs              int64                                     `json:"created_at_ms"`
+	UpdatedAtMs              int64                                     `json:"updated_at_ms"`
+	Error                    *string                                   `json:"error,omitzero"`
+	ThumbnailIntervalSeconds float64                                   `json:"thumbnail_interval_seconds"`
+	ThumbnailSize            []int64                                   `json:"thumbnail_size"`
+	ThumbnailSheets          []ProjectVideoThumbnailSheetResponseModel `json:"thumbnail_sheets"`
+	StartTimeMs              int64                                     `json:"start_time_ms"`
+	EndTimeMs                int64                                     `json:"end_time_ms"`
+	AssetPreviewSignedURL    *string                                   `json:"asset_preview_signed_url,omitzero"`
+	SourceVideoID            *string                                   `json:"source_video_id,omitzero"`
+	SourceAssetID            *string                                   `json:"source_asset_id,omitzero"`
+	PendingBlockIds          []string                                  `json:"pending_block_ids"`
+	PendingExternalAudioIds  []string                                  `json:"pending_external_audio_ids"`
+	SpeechImported           *bool                                     `default:"false" json:"speech_imported"`
+	PendingTask              *PendingClipTask                          `json:"pending_task,omitzero"`
+	AudioTrackReady          *bool                                     `default:"true" json:"audio_track_ready"`
+	ExportFormatReady        *bool                                     `default:"true" json:"export_format_ready"`
+	CurrentSnapshotID        *string                                   `json:"current_snapshot_id,omitzero"`
+	SourceContext            *GenerationSourceContext                  `json:"source_context,omitzero"`
+	Analysis                 *VideoAnalysis                            `json:"analysis,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"video" json:"type"`
 	// Defines asset positioning and transformation on canvas.
@@ -178,7 +177,7 @@ func (p *ProjectVideoResponseModel) GetUpdatedAtMs() int64 {
 	return p.UpdatedAtMs
 }
 
-func (p *ProjectVideoResponseModel) GetError() optionalnullable.OptionalNullable[string] {
+func (p *ProjectVideoResponseModel) GetError() *string {
 	if p == nil {
 		return nil
 	}
@@ -220,21 +219,21 @@ func (p *ProjectVideoResponseModel) GetEndTimeMs() int64 {
 	return p.EndTimeMs
 }
 
-func (p *ProjectVideoResponseModel) GetAssetPreviewSignedURL() optionalnullable.OptionalNullable[string] {
+func (p *ProjectVideoResponseModel) GetAssetPreviewSignedURL() *string {
 	if p == nil {
 		return nil
 	}
 	return p.AssetPreviewSignedURL
 }
 
-func (p *ProjectVideoResponseModel) GetSourceVideoID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectVideoResponseModel) GetSourceVideoID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.SourceVideoID
 }
 
-func (p *ProjectVideoResponseModel) GetSourceAssetID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectVideoResponseModel) GetSourceAssetID() *string {
 	if p == nil {
 		return nil
 	}
@@ -262,7 +261,7 @@ func (p *ProjectVideoResponseModel) GetSpeechImported() *bool {
 	return p.SpeechImported
 }
 
-func (p *ProjectVideoResponseModel) GetPendingTask() optionalnullable.OptionalNullable[PendingClipTask] {
+func (p *ProjectVideoResponseModel) GetPendingTask() *PendingClipTask {
 	if p == nil {
 		return nil
 	}
@@ -283,21 +282,21 @@ func (p *ProjectVideoResponseModel) GetExportFormatReady() *bool {
 	return p.ExportFormatReady
 }
 
-func (p *ProjectVideoResponseModel) GetCurrentSnapshotID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectVideoResponseModel) GetCurrentSnapshotID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.CurrentSnapshotID
 }
 
-func (p *ProjectVideoResponseModel) GetSourceContext() optionalnullable.OptionalNullable[GenerationSourceContext] {
+func (p *ProjectVideoResponseModel) GetSourceContext() *GenerationSourceContext {
 	if p == nil {
 		return nil
 	}
 	return p.SourceContext
 }
 
-func (p *ProjectVideoResponseModel) GetAnalysis() optionalnullable.OptionalNullable[VideoAnalysis] {
+func (p *ProjectVideoResponseModel) GetAnalysis() *VideoAnalysis {
 	if p == nil {
 		return nil
 	}

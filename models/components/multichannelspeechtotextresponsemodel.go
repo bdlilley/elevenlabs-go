@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // MultichannelSpeechToTextResponseModel - Response model for multichannel speech-to-text transcription.
@@ -12,9 +11,9 @@ type MultichannelSpeechToTextResponseModel struct {
 	// List of transcripts, one for each audio channel. Each transcript contains the text and word-level details for its respective channel.
 	Transcripts []SpeechToTextChunkResponseModel `json:"transcripts"`
 	// The transcription ID of the response.
-	TranscriptionID optionalnullable.OptionalNullable[string] `json:"transcription_id,omitzero"`
+	TranscriptionID *string `json:"transcription_id,omitzero"`
 	// The duration of the audio that was transcribed across all channels in seconds.
-	AudioDurationSecs optionalnullable.OptionalNullable[float64] `json:"audio_duration_secs,omitzero"`
+	AudioDurationSecs *float64 `json:"audio_duration_secs,omitzero"`
 }
 
 func (m MultichannelSpeechToTextResponseModel) MarshalJSON() ([]byte, error) {
@@ -35,14 +34,14 @@ func (m *MultichannelSpeechToTextResponseModel) GetTranscripts() []SpeechToTextC
 	return m.Transcripts
 }
 
-func (m *MultichannelSpeechToTextResponseModel) GetTranscriptionID() optionalnullable.OptionalNullable[string] {
+func (m *MultichannelSpeechToTextResponseModel) GetTranscriptionID() *string {
 	if m == nil {
 		return nil
 	}
 	return m.TranscriptionID
 }
 
-func (m *MultichannelSpeechToTextResponseModel) GetAudioDurationSecs() optionalnullable.OptionalNullable[float64] {
+func (m *MultichannelSpeechToTextResponseModel) GetAudioDurationSecs() *float64 {
 	if m == nil {
 		return nil
 	}

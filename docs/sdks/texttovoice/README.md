@@ -23,7 +23,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -37,8 +36,8 @@ func main() {
 
     res, err := s.TextToVoice.TextToVoice(ctx, components.VoicePreviewsRequestModel{
         VoiceDescription: "A sassy squeaky mouse",
-        Text: optionalnullable.From(elevenlabsgo.Pointer("Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted.")),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](11)),
+        Text: elevenlabsgo.Pointer("Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted."),
+        Seed: elevenlabsgo.Pointer[int64](11),
         ShouldEnhance: elevenlabsgo.Pointer(true),
     }, nil)
     if err != nil {
@@ -83,7 +82,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -99,9 +97,9 @@ func main() {
         VoiceName: "Sassy squeaky mouse",
         VoiceDescription: "A sassy squeaky mouse",
         GeneratedVoiceID: "37HceQefKmEi3bGovXjL",
-        Labels: optionalnullable.From(elevenlabsgo.Pointer(map[string]string{
+        Labels: map[string]string{
             "language": "en",
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -144,7 +142,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -158,14 +155,14 @@ func main() {
 
     res, err := s.TextToVoice.TextToVoiceDesign(ctx, components.VoiceDesignRequestModel{
         VoiceDescription: "A sassy squeaky mouse",
-        Text: optionalnullable.From(elevenlabsgo.Pointer("Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted.")),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](11)),
+        Text: elevenlabsgo.Pointer("Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted."),
+        Seed: elevenlabsgo.Pointer[int64](11),
         StreamPreviews: elevenlabsgo.Pointer(true),
         ShouldEnhance: elevenlabsgo.Pointer(true),
-        RemixingSessionID: optionalnullable.From(elevenlabsgo.Pointer("123")),
-        RemixingSessionIterationID: optionalnullable.From(elevenlabsgo.Pointer("123")),
-        Quality: optionalnullable.From(elevenlabsgo.Pointer[float64](0.9)),
-        PromptStrength: optionalnullable.From(elevenlabsgo.Pointer[float64](0.25)),
+        RemixingSessionID: elevenlabsgo.Pointer("123"),
+        RemixingSessionIterationID: elevenlabsgo.Pointer("123"),
+        Quality: elevenlabsgo.Pointer[float64](0.9),
+        PromptStrength: elevenlabsgo.Pointer[float64](0.25),
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -209,7 +206,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -223,13 +219,13 @@ func main() {
 
     res, err := s.TextToVoice.TextToVoiceRemix(ctx, "21m00Tcm4TlvDq8ikWAM", components.VoiceRemixRequestModel{
         VoiceDescription: "Make the voice have a higher pitch.",
-        Text: optionalnullable.From(elevenlabsgo.Pointer("Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted.")),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](11)),
+        Text: elevenlabsgo.Pointer("Every act of kindness, no matter how small, carries value and can make a difference, as no gesture of goodwill is ever wasted."),
+        Seed: elevenlabsgo.Pointer[int64](11),
         GuidanceScale: elevenlabsgo.Pointer[float64](5.0),
         StreamPreviews: elevenlabsgo.Pointer(true),
-        RemixingSessionID: optionalnullable.From(elevenlabsgo.Pointer("123")),
-        RemixingSessionIterationID: optionalnullable.From(elevenlabsgo.Pointer("123")),
-        PromptStrength: optionalnullable.From(elevenlabsgo.Pointer[float64](0.25)),
+        RemixingSessionID: elevenlabsgo.Pointer("123"),
+        RemixingSessionIterationID: elevenlabsgo.Pointer("123"),
+        PromptStrength: elevenlabsgo.Pointer[float64](0.25),
     }, nil)
     if err != nil {
         log.Fatal(err)

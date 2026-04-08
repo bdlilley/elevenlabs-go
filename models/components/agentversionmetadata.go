@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentVersionMetadata struct {
-	ID                 string                                                `json:"id"`
-	AgentID            string                                                `json:"agent_id"`
-	BranchID           string                                                `json:"branch_id"`
-	VersionDescription string                                                `json:"version_description"`
-	SeqNoInBranch      int64                                                 `json:"seq_no_in_branch"`
-	TimeCommittedSecs  int64                                                 `json:"time_committed_secs"`
-	Parents            AgentVersionParents                                   `json:"parents"`
-	AccessInfo         optionalnullable.OptionalNullable[ResourceAccessInfo] `json:"access_info,omitzero"`
+	ID                 string              `json:"id"`
+	AgentID            string              `json:"agent_id"`
+	BranchID           string              `json:"branch_id"`
+	VersionDescription string              `json:"version_description"`
+	SeqNoInBranch      int64               `json:"seq_no_in_branch"`
+	TimeCommittedSecs  int64               `json:"time_committed_secs"`
+	Parents            AgentVersionParents `json:"parents"`
+	AccessInfo         *ResourceAccessInfo `json:"access_info,omitzero"`
 }
 
 func (a AgentVersionMetadata) MarshalJSON() ([]byte, error) {
@@ -78,7 +77,7 @@ func (a *AgentVersionMetadata) GetParents() AgentVersionParents {
 	return a.Parents
 }
 
-func (a *AgentVersionMetadata) GetAccessInfo() optionalnullable.OptionalNullable[ResourceAccessInfo] {
+func (a *AgentVersionMetadata) GetAccessInfo() *ResourceAccessInfo {
 	if a == nil {
 		return nil
 	}

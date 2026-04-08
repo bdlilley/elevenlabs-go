@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetDocumentationChunkFromKnowledgeBaseRequest struct {
@@ -14,7 +13,7 @@ type GetDocumentationChunkFromKnowledgeBaseRequest struct {
 	// The id of a document RAG chunk from the knowledge base.
 	ChunkID string `pathParam:"style=simple,explode=false,name=chunk_id"`
 	// The embedding model used to retrieve the chunk.
-	EmbeddingModel optionalnullable.OptionalNullable[components.EmbeddingModelEnum] `default:"e5_mistral_7b_instruct" queryParam:"style=form,explode=true,name=embedding_model"`
+	EmbeddingModel *components.EmbeddingModelEnum `default:"e5_mistral_7b_instruct" queryParam:"style=form,explode=true,name=embedding_model"`
 }
 
 func (g GetDocumentationChunkFromKnowledgeBaseRequest) MarshalJSON() ([]byte, error) {
@@ -42,7 +41,7 @@ func (g *GetDocumentationChunkFromKnowledgeBaseRequest) GetChunkID() string {
 	return g.ChunkID
 }
 
-func (g *GetDocumentationChunkFromKnowledgeBaseRequest) GetEmbeddingModel() optionalnullable.OptionalNullable[components.EmbeddingModelEnum] {
+func (g *GetDocumentationChunkFromKnowledgeBaseRequest) GetEmbeddingModel() *components.EmbeddingModelEnum {
 	if g == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type MCPToolConfigOverrideCreateRequestModelInputOverridesType string
@@ -115,19 +114,19 @@ func (u MCPToolConfigOverrideCreateRequestModelInputOverrides) MarshalJSON() ([]
 
 type MCPToolConfigOverrideCreateRequestModel struct {
 	// If set, overrides the server's force_pre_tool_speech setting for this tool
-	ForcePreToolSpeech optionalnullable.OptionalNullable[bool] `json:"force_pre_tool_speech,omitzero"`
+	ForcePreToolSpeech *bool `json:"force_pre_tool_speech,omitzero"`
 	// If set, overrides the server's disable_interruptions setting for this tool
-	DisableInterruptions optionalnullable.OptionalNullable[bool] `json:"disable_interruptions,omitzero"`
+	DisableInterruptions *bool `json:"disable_interruptions,omitzero"`
 	// If set, overrides the server's tool_call_sound setting for this tool
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// If set, overrides the server's tool_call_sound_behavior setting for this tool
-	ToolCallSoundBehavior optionalnullable.OptionalNullable[ToolCallSoundBehavior] `default:"auto" json:"tool_call_sound_behavior"`
+	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// If set, overrides the server's execution_mode setting for this tool
-	ExecutionMode optionalnullable.OptionalNullable[ToolExecutionMode] `default:"immediate" json:"execution_mode"`
+	ExecutionMode *ToolExecutionMode `default:"immediate" json:"execution_mode"`
 	// Dynamic variable assignments for this MCP tool
-	Assignments optionalnullable.OptionalNullable[[]DynamicVariableAssignment] `json:"assignments,omitzero"`
+	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Mapping of json path to input override configuration
-	InputOverrides optionalnullable.OptionalNullable[map[string]MCPToolConfigOverrideCreateRequestModelInputOverrides] `json:"input_overrides,omitzero"`
+	InputOverrides map[string]MCPToolConfigOverrideCreateRequestModelInputOverrides `json:"input_overrides,omitzero"`
 	// The name of the MCP tool
 	ToolName string `json:"tool_name"`
 }
@@ -143,49 +142,49 @@ func (m *MCPToolConfigOverrideCreateRequestModel) UnmarshalJSON(data []byte) err
 	return nil
 }
 
-func (m *MCPToolConfigOverrideCreateRequestModel) GetForcePreToolSpeech() optionalnullable.OptionalNullable[bool] {
+func (m *MCPToolConfigOverrideCreateRequestModel) GetForcePreToolSpeech() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.ForcePreToolSpeech
 }
 
-func (m *MCPToolConfigOverrideCreateRequestModel) GetDisableInterruptions() optionalnullable.OptionalNullable[bool] {
+func (m *MCPToolConfigOverrideCreateRequestModel) GetDisableInterruptions() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.DisableInterruptions
 }
 
-func (m *MCPToolConfigOverrideCreateRequestModel) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (m *MCPToolConfigOverrideCreateRequestModel) GetToolCallSound() *ToolCallSoundType {
 	if m == nil {
 		return nil
 	}
 	return m.ToolCallSound
 }
 
-func (m *MCPToolConfigOverrideCreateRequestModel) GetToolCallSoundBehavior() optionalnullable.OptionalNullable[ToolCallSoundBehavior] {
+func (m *MCPToolConfigOverrideCreateRequestModel) GetToolCallSoundBehavior() *ToolCallSoundBehavior {
 	if m == nil {
 		return nil
 	}
 	return m.ToolCallSoundBehavior
 }
 
-func (m *MCPToolConfigOverrideCreateRequestModel) GetExecutionMode() optionalnullable.OptionalNullable[ToolExecutionMode] {
+func (m *MCPToolConfigOverrideCreateRequestModel) GetExecutionMode() *ToolExecutionMode {
 	if m == nil {
 		return nil
 	}
 	return m.ExecutionMode
 }
 
-func (m *MCPToolConfigOverrideCreateRequestModel) GetAssignments() optionalnullable.OptionalNullable[[]DynamicVariableAssignment] {
+func (m *MCPToolConfigOverrideCreateRequestModel) GetAssignments() []DynamicVariableAssignment {
 	if m == nil {
 		return nil
 	}
 	return m.Assignments
 }
 
-func (m *MCPToolConfigOverrideCreateRequestModel) GetInputOverrides() optionalnullable.OptionalNullable[map[string]MCPToolConfigOverrideCreateRequestModelInputOverrides] {
+func (m *MCPToolConfigOverrideCreateRequestModel) GetInputOverrides() map[string]MCPToolConfigOverrideCreateRequestModelInputOverrides {
 	if m == nil {
 		return nil
 	}

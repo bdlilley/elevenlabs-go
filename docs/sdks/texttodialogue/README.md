@@ -23,7 +23,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -45,16 +44,16 @@ func main() {
                 VoiceID: "6lCwbsX1yVjD49QmpkTR",
             },
         },
-        Settings: optionalnullable.From(&components.ModelSettingsResponseModel{
-            Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-        }),
-        PronunciationDictionaryLocators: optionalnullable.From(elevenlabsgo.Pointer([]components.PronunciationDictionaryVersionLocatorRequestModel{
+        Settings: &components.ModelSettingsResponseModel{
+            Stability: elevenlabsgo.Pointer[float64](0.5),
+        },
+        PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
             components.PronunciationDictionaryVersionLocatorRequestModel{
                 PronunciationDictionaryID: "test",
-                VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                VersionID: elevenlabsgo.Pointer("id2"),
             },
-        })),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
+        },
+        Seed: elevenlabsgo.Pointer[int64](12345),
         ApplyTextNormalization: components.BodyTextToDialogueMultiVoiceV1TextToDialoguePostApplyTextNormalizationOff.ToPointer(),
     }, nil)
     if err != nil {
@@ -100,7 +99,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -122,16 +120,16 @@ func main() {
                 VoiceID: "6lCwbsX1yVjD49QmpkTR",
             },
         },
-        Settings: optionalnullable.From(&components.ModelSettingsResponseModel{
-            Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-        }),
-        PronunciationDictionaryLocators: optionalnullable.From(elevenlabsgo.Pointer([]components.PronunciationDictionaryVersionLocatorRequestModel{
+        Settings: &components.ModelSettingsResponseModel{
+            Stability: elevenlabsgo.Pointer[float64](0.5),
+        },
+        PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
             components.PronunciationDictionaryVersionLocatorRequestModel{
                 PronunciationDictionaryID: "test",
-                VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                VersionID: elevenlabsgo.Pointer("id2"),
             },
-        })),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
+        },
+        Seed: elevenlabsgo.Pointer[int64](12345),
         ApplyTextNormalization: components.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalizationOff.ToPointer(),
     }, nil)
     if err != nil {
@@ -177,7 +175,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -199,16 +196,16 @@ func main() {
                 VoiceID: "6lCwbsX1yVjD49QmpkTR",
             },
         },
-        Settings: optionalnullable.From(&components.ModelSettingsResponseModel{
-            Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-        }),
-        PronunciationDictionaryLocators: optionalnullable.From(elevenlabsgo.Pointer([]components.PronunciationDictionaryVersionLocatorRequestModel{
+        Settings: &components.ModelSettingsResponseModel{
+            Stability: elevenlabsgo.Pointer[float64](0.5),
+        },
+        PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
             components.PronunciationDictionaryVersionLocatorRequestModel{
                 PronunciationDictionaryID: "test",
-                VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                VersionID: elevenlabsgo.Pointer("id2"),
             },
-        })),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
+        },
+        Seed: elevenlabsgo.Pointer[int64](12345),
         ApplyTextNormalization: components.BodyTextToDialogueStreamWithTimestampsApplyTextNormalizationOff.ToPointer(),
     }, nil)
     if err != nil {
@@ -254,7 +251,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -276,16 +272,16 @@ func main() {
                 VoiceID: "6lCwbsX1yVjD49QmpkTR",
             },
         },
-        Settings: optionalnullable.From(&components.ModelSettingsResponseModel{
-            Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-        }),
-        PronunciationDictionaryLocators: optionalnullable.From(elevenlabsgo.Pointer([]components.PronunciationDictionaryVersionLocatorRequestModel{
+        Settings: &components.ModelSettingsResponseModel{
+            Stability: elevenlabsgo.Pointer[float64](0.5),
+        },
+        PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
             components.PronunciationDictionaryVersionLocatorRequestModel{
                 PronunciationDictionaryID: "test",
-                VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                VersionID: elevenlabsgo.Pointer("id2"),
             },
-        })),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
+        },
+        Seed: elevenlabsgo.Pointer[int64](12345),
         ApplyTextNormalization: components.BodyTextToDialogueFullWithTimestampsApplyTextNormalizationOff.ToPointer(),
     }, nil)
     if err != nil {

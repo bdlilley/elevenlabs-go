@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SrtExportOptions struct {
-	MaxCharactersPerLine optionalnullable.OptionalNullable[int64] `json:"max_characters_per_line,omitzero"`
-	IncludeSpeakers      *bool                                    `default:"false" json:"include_speakers"`
-	IncludeTimestamps    *bool                                    `default:"true" json:"include_timestamps"`
+	MaxCharactersPerLine *int64 `json:"max_characters_per_line,omitzero"`
+	IncludeSpeakers      *bool  `default:"false" json:"include_speakers"`
+	IncludeTimestamps    *bool  `default:"true" json:"include_timestamps"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	format                      string                                     `const:"srt" json:"format"`
-	SegmentOnSilenceLongerThanS optionalnullable.OptionalNullable[float64] `json:"segment_on_silence_longer_than_s,omitzero"`
-	MaxSegmentDurationS         optionalnullable.OptionalNullable[float64] `json:"max_segment_duration_s,omitzero"`
-	MaxSegmentChars             optionalnullable.OptionalNullable[int64]   `json:"max_segment_chars,omitzero"`
+	format                      string   `const:"srt" json:"format"`
+	SegmentOnSilenceLongerThanS *float64 `json:"segment_on_silence_longer_than_s,omitzero"`
+	MaxSegmentDurationS         *float64 `json:"max_segment_duration_s,omitzero"`
+	MaxSegmentChars             *int64   `json:"max_segment_chars,omitzero"`
 }
 
 func (s SrtExportOptions) MarshalJSON() ([]byte, error) {
@@ -29,7 +28,7 @@ func (s *SrtExportOptions) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SrtExportOptions) GetMaxCharactersPerLine() optionalnullable.OptionalNullable[int64] {
+func (s *SrtExportOptions) GetMaxCharactersPerLine() *int64 {
 	if s == nil {
 		return nil
 	}
@@ -54,21 +53,21 @@ func (s *SrtExportOptions) GetFormat() string {
 	return "srt"
 }
 
-func (s *SrtExportOptions) GetSegmentOnSilenceLongerThanS() optionalnullable.OptionalNullable[float64] {
+func (s *SrtExportOptions) GetSegmentOnSilenceLongerThanS() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.SegmentOnSilenceLongerThanS
 }
 
-func (s *SrtExportOptions) GetMaxSegmentDurationS() optionalnullable.OptionalNullable[float64] {
+func (s *SrtExportOptions) GetMaxSegmentDurationS() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.MaxSegmentDurationS
 }
 
-func (s *SrtExportOptions) GetMaxSegmentChars() optionalnullable.OptionalNullable[int64] {
+func (s *SrtExportOptions) GetMaxSegmentChars() *int64 {
 	if s == nil {
 		return nil
 	}

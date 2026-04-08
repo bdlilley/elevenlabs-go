@@ -4,15 +4,14 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost struct {
-	AgentID                          string                                                                          `json:"agent_id"`
-	AgentPhoneNumberID               string                                                                          `json:"agent_phone_number_id"`
-	ToNumber                         string                                                                          `json:"to_number"`
-	ConversationInitiationClientData optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] `json:"conversation_initiation_client_data,omitzero"`
-	TelephonyCallConfig              *TelephonyCallConfig                                                            `json:"telephony_call_config,omitzero"`
+	AgentID                          string                                        `json:"agent_id"`
+	AgentPhoneNumberID               string                                        `json:"agent_phone_number_id"`
+	ToNumber                         string                                        `json:"to_number"`
+	ConversationInitiationClientData *ConversationInitiationClientDataRequestInput `json:"conversation_initiation_client_data,omitzero"`
+	TelephonyCallConfig              *TelephonyCallConfig                          `json:"telephony_call_config,omitzero"`
 }
 
 func (b BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost) MarshalJSON() ([]byte, error) {
@@ -47,7 +46,7 @@ func (b *BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost) Ge
 	return b.ToNumber
 }
 
-func (b *BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost) GetConversationInitiationClientData() optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] {
+func (b *BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost) GetConversationInitiationClientData() *ConversationInitiationClientDataRequestInput {
 	if b == nil {
 		return nil
 	}

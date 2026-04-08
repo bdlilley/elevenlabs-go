@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type LiteralJSONSchemaPropertyType string
@@ -181,7 +180,7 @@ type LiteralJSONSchemaProperty struct {
 	// The description of the property. When set, the LLM will provide the value based on this description. Mutually exclusive with dynamic_variable, is_system_provided, and constant_value.
 	Description *string `default:"" json:"description"`
 	// List of allowed string values for string type parameters
-	Enum optionalnullable.OptionalNullable[[]string] `json:"enum,omitzero"`
+	Enum []string `json:"enum,omitzero"`
 	// If true, the value will be populated by the system at runtime. Used by API Integration Webhook tools for templating. Mutually exclusive with description, dynamic_variable, and constant_value.
 	IsSystemProvided *bool `default:"false" json:"is_system_provided"`
 	// The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, and constant_value.
@@ -215,7 +214,7 @@ func (l *LiteralJSONSchemaProperty) GetDescription() *string {
 	return l.Description
 }
 
-func (l *LiteralJSONSchemaProperty) GetEnum() optionalnullable.OptionalNullable[[]string] {
+func (l *LiteralJSONSchemaProperty) GetEnum() []string {
 	if l == nil {
 		return nil
 	}

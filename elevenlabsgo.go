@@ -14,7 +14,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -59,7 +58,9 @@ type ElevenlabsGo struct {
 	// Accesses your speech history. Your speech history is a list of all your created audio including its metadata using our text-to-speech and speech-to-speech models.
 	SpeechHistory   *SpeechHistory
 	SoundGeneration *SoundGeneration
-	AudioIsolation  *AudioIsolation
+	// Audio Isolation
+	// Removes background noise from audio
+	AudioIsolation *AudioIsolation
 	// Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
 	Samples *Samples
 	// Convert text into lifelike speech using a voice of your choice.
@@ -67,10 +68,14 @@ type ElevenlabsGo struct {
 	TextToDialogue *TextToDialogue
 	// Create speech by combining the style and content of an audio file you upload with a voice of your choice.
 	SpeechToSpeech *SpeechToSpeech
-	TextToVoice    *TextToVoice
+	// Generate A Voice Preview From Description
+	// Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
+	TextToVoice *TextToVoice
 	// Access to voices created either by you or ElevenLabs.
-	Voices       *Voices
-	Studio       *Studio
+	Voices *Voices
+	Studio *Studio
+	// Video To Music
+	// Generate background music from one or more video files. Videos are combined in order. Optional description and style tags influence the generated music.
 	VideoToMusic *VideoToMusic
 	Dubbing      *Dubbing
 	Resource     *Resource
@@ -168,9 +173,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *ElevenlabsGo {
 	sdk := &ElevenlabsGo{
-		SDKVersion: "0.2.0",
+		SDKVersion: "0.3.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 0.2.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent:  "speakeasy-sdk/go 0.3.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -2331,7 +2336,7 @@ func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request o
 
 // ListTestInvocationsRoute - List Test Invocations
 // Lists all test invocations with pagination support and optional search filtering.
-func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID string, pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
+func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID string, pageSize *int64, cursor *string, opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
 	request := operations.ListTestInvocationsRouteRequest{
 		AgentID:  agentID,
 		PageSize: pageSize,

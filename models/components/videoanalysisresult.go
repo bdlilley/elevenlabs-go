@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type VideoAnalysisResult struct {
-	Title         string                                                `json:"title"`
-	Description   string                                                `json:"description"`
-	ContentType   optionalnullable.OptionalNullable[string]             `json:"content_type,omitzero"`
-	OverallPacing optionalnullable.OptionalNullable[string]             `json:"overall_pacing,omitzero"`
-	Subjects      []VideoSubject                                        `json:"subjects,omitzero"`
-	Segments      []VideoSegment                                        `json:"segments,omitzero"`
-	KeyMoments    []VideoKeyMoment                                      `json:"key_moments,omitzero"`
-	Transcription optionalnullable.OptionalNullable[AssetTranscription] `json:"transcription,omitzero"`
+	Title         string              `json:"title"`
+	Description   string              `json:"description"`
+	ContentType   *string             `json:"content_type,omitzero"`
+	OverallPacing *string             `json:"overall_pacing,omitzero"`
+	Subjects      []VideoSubject      `json:"subjects,omitzero"`
+	Segments      []VideoSegment      `json:"segments,omitzero"`
+	KeyMoments    []VideoKeyMoment    `json:"key_moments,omitzero"`
+	Transcription *AssetTranscription `json:"transcription,omitzero"`
 }
 
 func (v VideoAnalysisResult) MarshalJSON() ([]byte, error) {
@@ -43,14 +42,14 @@ func (v *VideoAnalysisResult) GetDescription() string {
 	return v.Description
 }
 
-func (v *VideoAnalysisResult) GetContentType() optionalnullable.OptionalNullable[string] {
+func (v *VideoAnalysisResult) GetContentType() *string {
 	if v == nil {
 		return nil
 	}
 	return v.ContentType
 }
 
-func (v *VideoAnalysisResult) GetOverallPacing() optionalnullable.OptionalNullable[string] {
+func (v *VideoAnalysisResult) GetOverallPacing() *string {
 	if v == nil {
 		return nil
 	}
@@ -78,7 +77,7 @@ func (v *VideoAnalysisResult) GetKeyMoments() []VideoKeyMoment {
 	return v.KeyMoments
 }
 
-func (v *VideoAnalysisResult) GetTranscription() optionalnullable.OptionalNullable[AssetTranscription] {
+func (v *VideoAnalysisResult) GetTranscription() *AssetTranscription {
 	if v == nil {
 		return nil
 	}

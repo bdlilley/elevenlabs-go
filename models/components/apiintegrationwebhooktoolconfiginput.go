@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -23,7 +22,7 @@ type APIIntegrationWebhookToolConfigInput struct {
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines how the tool call sound should be played.
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// Controls how tool errors are processed before being shared with the agent.
@@ -35,7 +34,7 @@ type APIIntegrationWebhookToolConfigInput struct {
 	APIIntegrationID           string  `json:"api_integration_id"`
 	APIIntegrationConnectionID string  `json:"api_integration_connection_id"`
 	// User overrides applied on top of the base api_schema
-	APISchemaOverrides optionalnullable.OptionalNullable[APIIntegrationWebhookOverrides] `json:"api_schema_overrides,omitzero"`
+	APISchemaOverrides *APIIntegrationWebhookOverrides `json:"api_schema_overrides,omitzero"`
 }
 
 func (a APIIntegrationWebhookToolConfigInput) MarshalJSON() ([]byte, error) {
@@ -95,7 +94,7 @@ func (a *APIIntegrationWebhookToolConfigInput) GetAssignments() []DynamicVariabl
 	return a.Assignments
 }
 
-func (a *APIIntegrationWebhookToolConfigInput) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (a *APIIntegrationWebhookToolConfigInput) GetToolCallSound() *ToolCallSoundType {
 	if a == nil {
 		return nil
 	}
@@ -151,7 +150,7 @@ func (a *APIIntegrationWebhookToolConfigInput) GetAPIIntegrationConnectionID() s
 	return a.APIIntegrationConnectionID
 }
 
-func (a *APIIntegrationWebhookToolConfigInput) GetAPISchemaOverrides() optionalnullable.OptionalNullable[APIIntegrationWebhookOverrides] {
+func (a *APIIntegrationWebhookToolConfigInput) GetAPISchemaOverrides() *APIIntegrationWebhookOverrides {
 	if a == nil {
 		return nil
 	}

@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreateStudioProjectV1StudioProjectsPostFromDocument struct {
@@ -201,13 +200,13 @@ type BodyCreateStudioProjectV1StudioProjectsPost struct {
 	// The name of the Studio project, used for identification only.
 	Name string `multipartForm:"name=name"`
 	// The voice_id that corresponds to the default voice used for new titles.
-	DefaultTitleVoiceID optionalnullable.OptionalNullable[string] `multipartForm:"name=default_title_voice_id"`
+	DefaultTitleVoiceID *string `multipartForm:"name=default_title_voice_id"`
 	// The voice_id that corresponds to the default voice used for new paragraphs.
-	DefaultParagraphVoiceID optionalnullable.OptionalNullable[string] `multipartForm:"name=default_paragraph_voice_id"`
+	DefaultParagraphVoiceID *string `multipartForm:"name=default_paragraph_voice_id"`
 	// The ID of the model to be used for this Studio project, you can query GET /v1/models to list all available models.
-	DefaultModelID optionalnullable.OptionalNullable[string] `multipartForm:"name=default_model_id"`
+	DefaultModelID *string `multipartForm:"name=default_model_id"`
 	// An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
-	FromURL optionalnullable.OptionalNullable[string] `multipartForm:"name=from_url"`
+	FromURL *string `multipartForm:"name=from_url"`
 	// An optional .epub, .pdf, .txt or similar file can be provided. If provided, we will initialize the Studio project with its content. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
 	FromDocument *BodyCreateStudioProjectV1StudioProjectsPostFromDocument `multipartForm:"file,name=from_document"`
 	//     An optional content to initialize the Studio project with. If this is set, 'from_url' and 'from_document' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
@@ -224,25 +223,25 @@ type BodyCreateStudioProjectV1StudioProjectsPost struct {
 	//
 	QualityPreset *BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio `default:"standard" multipartForm:"name=quality_preset"`
 	// An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download.
-	Title optionalnullable.OptionalNullable[string] `multipartForm:"name=title"`
+	Title *string `multipartForm:"name=title"`
 	// An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download.
-	Author optionalnullable.OptionalNullable[string] `multipartForm:"name=author"`
+	Author *string `multipartForm:"name=author"`
 	// An optional description of the Studio project.
-	Description optionalnullable.OptionalNullable[string] `multipartForm:"name=description"`
+	Description *string `multipartForm:"name=description"`
 	// An optional list of genres associated with the Studio project.
 	Genres []string `multipartForm:"name=genres"`
 	// An optional target audience of the Studio project.
-	TargetAudience optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostTargetAudience] `multipartForm:"name=target_audience"`
+	TargetAudience *BodyCreateStudioProjectV1StudioProjectsPostTargetAudience `multipartForm:"name=target_audience"`
 	// An optional language of the Studio project. Two-letter language code (ISO 639-1).
-	Language optionalnullable.OptionalNullable[string] `multipartForm:"name=language"`
+	Language *string `multipartForm:"name=language"`
 	// An optional content type of the Studio project.
-	ContentType optionalnullable.OptionalNullable[string] `multipartForm:"name=content_type"`
+	ContentType *string `multipartForm:"name=content_type"`
 	// An optional original publication date of the Studio project, in the format YYYY-MM-DD or YYYY.
-	OriginalPublicationDate optionalnullable.OptionalNullable[string] `multipartForm:"name=original_publication_date"`
+	OriginalPublicationDate *string `multipartForm:"name=original_publication_date"`
 	// An optional specification of whether this Studio project contains mature content.
-	MatureContent optionalnullable.OptionalNullable[bool] `multipartForm:"name=mature_content"`
+	MatureContent *bool `multipartForm:"name=mature_content"`
 	// An optional ISBN number of the Studio project you want to create, this will be added as metadata to the mp3 file on Studio project or chapter download.
-	IsbnNumber optionalnullable.OptionalNullable[string] `multipartForm:"name=isbn_number"`
+	IsbnNumber *string `multipartForm:"name=isbn_number"`
 	// [Deprecated] When the Studio project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements
 	AcxVolumeNormalization *bool `default:"false" multipartForm:"name=acx_volume_normalization"`
 	// When the Studio project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements
@@ -303,21 +302,21 @@ type BodyCreateStudioProjectV1StudioProjectsPost struct {
 	//       }
 	//     }
 	//
-	CallbackURL optionalnullable.OptionalNullable[string] `multipartForm:"name=callback_url"`
+	CallbackURL *string `multipartForm:"name=callback_url"`
 	// An optional specification of whether the content of this Studio project is fiction.
-	Fiction optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostFiction] `multipartForm:"name=fiction"`
+	Fiction *BodyCreateStudioProjectV1StudioProjectsPostFiction `multipartForm:"name=fiction"`
 	//     This parameter controls text normalization with four modes: 'auto', 'on', 'apply_english' and 'off'.
 	//     When set to 'auto', the system will automatically decide whether to apply text normalization
 	//     (e.g., spelling out numbers). With 'on', text normalization will always be applied, while
 	//     with 'off', it will be skipped. 'apply_english' is the same as 'on' but will assume that text is in English.
 	//
-	ApplyTextNormalization optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostApplyTextNormalization] `multipartForm:"name=apply_text_normalization"`
+	ApplyTextNormalization *BodyCreateStudioProjectV1StudioProjectsPostApplyTextNormalization `multipartForm:"name=apply_text_normalization"`
 	// Whether to auto convert the Studio project to audio or not.
 	AutoConvert *bool `default:"false" multipartForm:"name=auto_convert"`
 	// [Alpha Feature] Whether automatically assign voices to phrases in the create Project.
-	AutoAssignVoices optionalnullable.OptionalNullable[bool] `multipartForm:"name=auto_assign_voices"`
+	AutoAssignVoices *bool `multipartForm:"name=auto_assign_voices"`
 	// The type of Studio project to create.
-	SourceType optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostSourceType] `multipartForm:"name=source_type"`
+	SourceType *BodyCreateStudioProjectV1StudioProjectsPostSourceType `multipartForm:"name=source_type"`
 	//     Optional voice settings overrides for the project, encoded as a list of JSON strings.
 	//
 	//     Example:
@@ -325,7 +324,7 @@ type BodyCreateStudioProjectV1StudioProjectsPost struct {
 	//
 	VoiceSettings []string `multipartForm:"name=voice_settings"`
 	// If true, creates a corresponding read for direct publishing in draft state
-	CreatePublishingRead optionalnullable.OptionalNullable[bool] `multipartForm:"name=create_publishing_read"`
+	CreatePublishingRead *bool `multipartForm:"name=create_publishing_read"`
 }
 
 func (b BodyCreateStudioProjectV1StudioProjectsPost) MarshalJSON() ([]byte, error) {
@@ -346,28 +345,28 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetName() string {
 	return b.Name
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDefaultTitleVoiceID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDefaultTitleVoiceID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.DefaultTitleVoiceID
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDefaultParagraphVoiceID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDefaultParagraphVoiceID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.DefaultParagraphVoiceID
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDefaultModelID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDefaultModelID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.DefaultModelID
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetFromURL() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetFromURL() *string {
 	if b == nil {
 		return nil
 	}
@@ -395,21 +394,21 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetQualityPreset() *BodyCr
 	return b.QualityPreset
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetTitle() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetTitle() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Title
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetAuthor() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetAuthor() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Author
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDescription() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetDescription() *string {
 	if b == nil {
 		return nil
 	}
@@ -423,42 +422,42 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetGenres() []string {
 	return b.Genres
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetTargetAudience() optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostTargetAudience] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetTargetAudience() *BodyCreateStudioProjectV1StudioProjectsPostTargetAudience {
 	if b == nil {
 		return nil
 	}
 	return b.TargetAudience
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetLanguage() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Language
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetContentType() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetContentType() *string {
 	if b == nil {
 		return nil
 	}
 	return b.ContentType
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetOriginalPublicationDate() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetOriginalPublicationDate() *string {
 	if b == nil {
 		return nil
 	}
 	return b.OriginalPublicationDate
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetMatureContent() optionalnullable.OptionalNullable[bool] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetMatureContent() *bool {
 	if b == nil {
 		return nil
 	}
 	return b.MatureContent
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetIsbnNumber() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetIsbnNumber() *string {
 	if b == nil {
 		return nil
 	}
@@ -486,21 +485,21 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetPronunciationDictionary
 	return b.PronunciationDictionaryLocators
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetCallbackURL() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetCallbackURL() *string {
 	if b == nil {
 		return nil
 	}
 	return b.CallbackURL
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetFiction() optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostFiction] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetFiction() *BodyCreateStudioProjectV1StudioProjectsPostFiction {
 	if b == nil {
 		return nil
 	}
 	return b.Fiction
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetApplyTextNormalization() optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostApplyTextNormalization] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetApplyTextNormalization() *BodyCreateStudioProjectV1StudioProjectsPostApplyTextNormalization {
 	if b == nil {
 		return nil
 	}
@@ -514,14 +513,14 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetAutoConvert() *bool {
 	return b.AutoConvert
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetAutoAssignVoices() optionalnullable.OptionalNullable[bool] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetAutoAssignVoices() *bool {
 	if b == nil {
 		return nil
 	}
 	return b.AutoAssignVoices
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetSourceType() optionalnullable.OptionalNullable[BodyCreateStudioProjectV1StudioProjectsPostSourceType] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetSourceType() *BodyCreateStudioProjectV1StudioProjectsPostSourceType {
 	if b == nil {
 		return nil
 	}
@@ -535,7 +534,7 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetVoiceSettings() []strin
 	return b.VoiceSettings
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetCreatePublishingRead() optionalnullable.OptionalNullable[bool] {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetCreatePublishingRead() *bool {
 	if b == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UnitTestSummaryResponseModel struct {
@@ -13,7 +12,7 @@ type UnitTestSummaryResponseModel struct {
 	// Name of the test
 	Name string `json:"name"`
 	// The access information of the test
-	AccessInfo optionalnullable.OptionalNullable[ResourceAccessInfo] `json:"access_info,omitzero"`
+	AccessInfo *ResourceAccessInfo `json:"access_info,omitzero"`
 	// Creation time of the test in unix seconds
 	CreatedAtUnixSecs int64 `json:"created_at_unix_secs"`
 	// Last update time of the test in unix seconds
@@ -21,11 +20,11 @@ type UnitTestSummaryResponseModel struct {
 	Type                  TestType             `json:"type"`
 	EntityType            *AgentTestEntityType `default:"test" json:"entity_type"`
 	// The ID of the parent folder
-	FolderParentID optionalnullable.OptionalNullable[string] `json:"folder_parent_id,omitzero"`
+	FolderParentID *string `json:"folder_parent_id,omitzero"`
 	// The folder path segments from root to this entity
 	FolderPath []AgentTestFolderPathSegmentResponseModel `json:"folder_path,omitzero"`
 	// Number of direct children (tests and subfolders) for folders only
-	ChildrenCount optionalnullable.OptionalNullable[int64] `json:"children_count,omitzero"`
+	ChildrenCount *int64 `json:"children_count,omitzero"`
 }
 
 func (u UnitTestSummaryResponseModel) MarshalJSON() ([]byte, error) {
@@ -53,7 +52,7 @@ func (u *UnitTestSummaryResponseModel) GetName() string {
 	return u.Name
 }
 
-func (u *UnitTestSummaryResponseModel) GetAccessInfo() optionalnullable.OptionalNullable[ResourceAccessInfo] {
+func (u *UnitTestSummaryResponseModel) GetAccessInfo() *ResourceAccessInfo {
 	if u == nil {
 		return nil
 	}
@@ -88,7 +87,7 @@ func (u *UnitTestSummaryResponseModel) GetEntityType() *AgentTestEntityType {
 	return u.EntityType
 }
 
-func (u *UnitTestSummaryResponseModel) GetFolderParentID() optionalnullable.OptionalNullable[string] {
+func (u *UnitTestSummaryResponseModel) GetFolderParentID() *string {
 	if u == nil {
 		return nil
 	}
@@ -102,7 +101,7 @@ func (u *UnitTestSummaryResponseModel) GetFolderPath() []AgentTestFolderPathSegm
 	return u.FolderPath
 }
 
-func (u *UnitTestSummaryResponseModel) GetChildrenCount() optionalnullable.OptionalNullable[int64] {
+func (u *UnitTestSummaryResponseModel) GetChildrenCount() *int64 {
 	if u == nil {
 		return nil
 	}

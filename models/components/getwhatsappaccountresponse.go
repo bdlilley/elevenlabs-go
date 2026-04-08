@@ -4,20 +4,19 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetWhatsAppAccountResponse struct {
-	BusinessAccountID          string                                    `json:"business_account_id"`
-	PhoneNumberID              string                                    `json:"phone_number_id"`
-	BusinessAccountName        string                                    `json:"business_account_name"`
-	PhoneNumberName            string                                    `json:"phone_number_name"`
-	PhoneNumber                string                                    `json:"phone_number"`
-	AssignedAgentID            optionalnullable.OptionalNullable[string] `json:"assigned_agent_id,omitzero"`
-	EnableMessaging            *bool                                     `default:"true" json:"enable_messaging"`
-	EnableAudioMessageResponse *bool                                     `default:"true" json:"enable_audio_message_response"`
-	AssignedAgentName          *string                                   `json:"assigned_agent_name"`
-	IsTokenExpired             *bool                                     `default:"false" json:"is_token_expired"`
+	BusinessAccountID          string  `json:"business_account_id"`
+	PhoneNumberID              string  `json:"phone_number_id"`
+	BusinessAccountName        string  `json:"business_account_name"`
+	PhoneNumberName            string  `json:"phone_number_name"`
+	PhoneNumber                string  `json:"phone_number"`
+	AssignedAgentID            *string `json:"assigned_agent_id,omitzero"`
+	EnableMessaging            *bool   `default:"true" json:"enable_messaging"`
+	EnableAudioMessageResponse *bool   `default:"true" json:"enable_audio_message_response"`
+	AssignedAgentName          *string `json:"assigned_agent_name"`
+	IsTokenExpired             *bool   `default:"false" json:"is_token_expired"`
 }
 
 func (g GetWhatsAppAccountResponse) MarshalJSON() ([]byte, error) {
@@ -66,7 +65,7 @@ func (g *GetWhatsAppAccountResponse) GetPhoneNumber() string {
 	return g.PhoneNumber
 }
 
-func (g *GetWhatsAppAccountResponse) GetAssignedAgentID() optionalnullable.OptionalNullable[string] {
+func (g *GetWhatsAppAccountResponse) GetAssignedAgentID() *string {
 	if g == nil {
 		return nil
 	}

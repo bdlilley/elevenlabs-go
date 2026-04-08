@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationInitiationClientDataInternalDynamicVariablesType string
@@ -154,13 +153,13 @@ type ConversationInitiationClientDataInternal struct {
 	ConversationConfigOverride *ConversationConfigClientOverrideOutput `json:"conversation_config_override,omitzero"`
 	CustomLlmExtraBody         map[string]any                          `json:"custom_llm_extra_body,omitzero"`
 	// ID of the end user participating in this conversation (for agent owner's user identification)
-	UserID optionalnullable.OptionalNullable[string] `json:"user_id,omitzero"`
+	UserID *string `json:"user_id,omitzero"`
 	// Information about the source of conversation initiation
 	SourceInfo *ConversationInitiationSourceInfo `json:"source_info,omitzero"`
 	// ID of the agent branch to use for this conversation
-	BranchID optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
+	BranchID *string `json:"branch_id,omitzero"`
 	// Environment to use for resolving environment variables
-	Environment      optionalnullable.OptionalNullable[string]                            `json:"environment,omitzero"`
+	Environment      *string                                                              `json:"environment,omitzero"`
 	DynamicVariables map[string]*ConversationInitiationClientDataInternalDynamicVariables `json:"dynamic_variables,omitzero"`
 	// Orchestrator-side config: tools are identified by resolved names.
 	ToolMockConfig *OrchestratorToolMockBehaviorConfig `json:"tool_mock_config,omitzero"`
@@ -191,7 +190,7 @@ func (c *ConversationInitiationClientDataInternal) GetCustomLlmExtraBody() map[s
 	return c.CustomLlmExtraBody
 }
 
-func (c *ConversationInitiationClientDataInternal) GetUserID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationInitiationClientDataInternal) GetUserID() *string {
 	if c == nil {
 		return nil
 	}
@@ -205,14 +204,14 @@ func (c *ConversationInitiationClientDataInternal) GetSourceInfo() *Conversation
 	return c.SourceInfo
 }
 
-func (c *ConversationInitiationClientDataInternal) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationInitiationClientDataInternal) GetBranchID() *string {
 	if c == nil {
 		return nil
 	}
 	return c.BranchID
 }
 
-func (c *ConversationInitiationClientDataInternal) GetEnvironment() optionalnullable.OptionalNullable[string] {
+func (c *ConversationInitiationClientDataInternal) GetEnvironment() *string {
 	if c == nil {
 		return nil
 	}

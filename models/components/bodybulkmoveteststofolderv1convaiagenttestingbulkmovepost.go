@@ -2,15 +2,11 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost struct {
 	// The IDs of tests or folders to move.
 	EntityIds []string `json:"entity_ids"`
 	// The folder to move the entities to. If not set, the entities will be moved to the root folder.
-	MoveTo optionalnullable.OptionalNullable[string] `json:"move_to,omitzero"`
+	MoveTo *string `json:"move_to,omitzero"`
 }
 
 func (b *BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost) GetEntityIds() []string {
@@ -20,7 +16,7 @@ func (b *BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost) GetEntityIds
 	return b.EntityIds
 }
 
-func (b *BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost) GetMoveTo() optionalnullable.OptionalNullable[string] {
+func (b *BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost) GetMoveTo() *string {
 	if b == nil {
 		return nil
 	}

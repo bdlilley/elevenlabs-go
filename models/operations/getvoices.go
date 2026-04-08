@@ -5,15 +5,14 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetVoicesRequest struct {
 	// If set to true, legacy premade voices will be included in responses from /v1/voices
-	ShowLegacy optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=show_legacy"`
+	ShowLegacy *bool `queryParam:"style=form,explode=true,name=show_legacy"`
 }
 
-func (g *GetVoicesRequest) GetShowLegacy() optionalnullable.OptionalNullable[bool] {
+func (g *GetVoicesRequest) GetShowLegacy() *bool {
 	if g == nil {
 		return nil
 	}

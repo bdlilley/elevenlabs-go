@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PatchConvAISettingsRequest struct {
-	ConversationInitiationClientDataWebhook optionalnullable.OptionalNullable[ConversationInitiationClientDataWebhook] `json:"conversation_initiation_client_data_webhook,omitzero"`
-	Webhooks                                *ConvAIWebhooks                                                            `json:"webhooks,omitzero"`
+	ConversationInitiationClientDataWebhook *ConversationInitiationClientDataWebhook `json:"conversation_initiation_client_data_webhook,omitzero"`
+	Webhooks                                *ConvAIWebhooks                          `json:"webhooks,omitzero"`
 	// Whether the workspace can use MCP servers
 	CanUseMcpServers       *bool  `default:"false" json:"can_use_mcp_servers"`
 	RagRetentionPeriodDays *int64 `default:"10" json:"rag_retention_period_days"`
 	// Days to retain conversation embeddings. None means use the system default (30 days).
-	ConversationEmbeddingRetentionDays optionalnullable.OptionalNullable[int64] `json:"conversation_embedding_retention_days,omitzero"`
-	DefaultLivekitStack                *LivekitStackType                        `default:"standard" json:"default_livekit_stack"`
+	ConversationEmbeddingRetentionDays *int64            `json:"conversation_embedding_retention_days,omitzero"`
+	DefaultLivekitStack                *LivekitStackType `default:"standard" json:"default_livekit_stack"`
 }
 
 func (p PatchConvAISettingsRequest) MarshalJSON() ([]byte, error) {
@@ -29,7 +28,7 @@ func (p *PatchConvAISettingsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PatchConvAISettingsRequest) GetConversationInitiationClientDataWebhook() optionalnullable.OptionalNullable[ConversationInitiationClientDataWebhook] {
+func (p *PatchConvAISettingsRequest) GetConversationInitiationClientDataWebhook() *ConversationInitiationClientDataWebhook {
 	if p == nil {
 		return nil
 	}
@@ -57,7 +56,7 @@ func (p *PatchConvAISettingsRequest) GetRagRetentionPeriodDays() *int64 {
 	return p.RagRetentionPeriodDays
 }
 
-func (p *PatchConvAISettingsRequest) GetConversationEmbeddingRetentionDays() optionalnullable.OptionalNullable[int64] {
+func (p *PatchConvAISettingsRequest) GetConversationEmbeddingRetentionDays() *int64 {
 	if p == nil {
 		return nil
 	}

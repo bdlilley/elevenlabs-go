@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -58,7 +57,7 @@ type CreatePrivateKeyJWTRequest struct {
 	// JWT signing algorithm
 	Algorithm *CreatePrivateKeyJWTRequestAlgorithm `default:"HS256" json:"algorithm"`
 	// Key ID (kid) for JWT header - useful for key rotation
-	KeyID optionalnullable.OptionalNullable[string] `json:"key_id,omitzero"`
+	KeyID *string `json:"key_id,omitzero"`
 	// JWT issuer (iss claim)
 	Issuer string `json:"issuer"`
 	// JWT audience (aud claim)
@@ -108,7 +107,7 @@ func (c *CreatePrivateKeyJWTRequest) GetAlgorithm() *CreatePrivateKeyJWTRequestA
 	return c.Algorithm
 }
 
-func (c *CreatePrivateKeyJWTRequest) GetKeyID() optionalnullable.OptionalNullable[string] {
+func (c *CreatePrivateKeyJWTRequest) GetKeyID() *string {
 	if c == nil {
 		return nil
 	}

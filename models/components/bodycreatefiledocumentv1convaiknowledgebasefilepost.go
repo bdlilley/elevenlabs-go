@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePostFile struct {
 	FileName string `multipartForm:"name=fileName"`
 	// This field accepts []byte data or io.Reader implementations, such as *os.File.
@@ -33,9 +29,9 @@ type BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost struct {
 	// Documentation that the agent will have access to in order to interact with users.
 	File BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePostFile `multipartForm:"file,name=file"`
 	// A custom, human-readable name for the document.
-	Name optionalnullable.OptionalNullable[string] `multipartForm:"name=name"`
+	Name *string `multipartForm:"name=name"`
 	// If set, the created document or folder will be placed inside the given folder.
-	ParentFolderID optionalnullable.OptionalNullable[string] `multipartForm:"name=parent_folder_id"`
+	ParentFolderID *string `multipartForm:"name=parent_folder_id"`
 }
 
 func (b *BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost) GetFile() BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePostFile {
@@ -45,14 +41,14 @@ func (b *BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost) GetFile() BodyCrea
 	return b.File
 }
 
-func (b *BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost) GetName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost) GetParentFolderID() *string {
 	if b == nil {
 		return nil
 	}

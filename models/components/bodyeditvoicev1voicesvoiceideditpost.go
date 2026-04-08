@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyEditVoiceV1VoicesVoiceIDEditPostFile struct {
@@ -130,9 +129,9 @@ type BodyEditVoiceV1VoicesVoiceIDEditPost struct {
 	// If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse.
 	RemoveBackgroundNoise *bool `default:"false" multipartForm:"name=remove_background_noise"`
 	// A description of the voice.
-	Description optionalnullable.OptionalNullable[string] `multipartForm:"name=description"`
+	Description *string `multipartForm:"name=description"`
 	// Labels for the voice. Keys can be language, accent, gender, or age.
-	Labels optionalnullable.OptionalNullable[BodyEditVoiceV1VoicesVoiceIDEditPostLabels] `multipartForm:"name=labels,json"`
+	Labels *BodyEditVoiceV1VoicesVoiceIDEditPostLabels `multipartForm:"name=labels,json"`
 }
 
 func (b BodyEditVoiceV1VoicesVoiceIDEditPost) MarshalJSON() ([]byte, error) {
@@ -167,14 +166,14 @@ func (b *BodyEditVoiceV1VoicesVoiceIDEditPost) GetRemoveBackgroundNoise() *bool 
 	return b.RemoveBackgroundNoise
 }
 
-func (b *BodyEditVoiceV1VoicesVoiceIDEditPost) GetDescription() optionalnullable.OptionalNullable[string] {
+func (b *BodyEditVoiceV1VoicesVoiceIDEditPost) GetDescription() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Description
 }
 
-func (b *BodyEditVoiceV1VoicesVoiceIDEditPost) GetLabels() optionalnullable.OptionalNullable[BodyEditVoiceV1VoicesVoiceIDEditPostLabels] {
+func (b *BodyEditVoiceV1VoicesVoiceIDEditPost) GetLabels() *BodyEditVoiceV1VoicesVoiceIDEditPostLabels {
 	if b == nil {
 		return nil
 	}

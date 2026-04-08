@@ -4,20 +4,19 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type VideoSegment struct {
-	StartMs        int64                                     `json:"start_ms"`
-	EndMs          int64                                     `json:"end_ms"`
-	Description    string                                    `json:"description"`
-	Subjects       []string                                  `json:"subjects,omitzero"`
-	ShotType       optionalnullable.OptionalNullable[string] `json:"shot_type,omitzero"`
-	CameraMovement optionalnullable.OptionalNullable[string] `json:"camera_movement,omitzero"`
-	TransitionIn   optionalnullable.OptionalNullable[string] `json:"transition_in,omitzero"`
-	HasSpeech      *bool                                     `default:"false" json:"has_speech"`
-	HasMusic       *bool                                     `default:"false" json:"has_music"`
-	Pacing         optionalnullable.OptionalNullable[string] `json:"pacing,omitzero"`
+	StartMs        int64    `json:"start_ms"`
+	EndMs          int64    `json:"end_ms"`
+	Description    string   `json:"description"`
+	Subjects       []string `json:"subjects,omitzero"`
+	ShotType       *string  `json:"shot_type,omitzero"`
+	CameraMovement *string  `json:"camera_movement,omitzero"`
+	TransitionIn   *string  `json:"transition_in,omitzero"`
+	HasSpeech      *bool    `default:"false" json:"has_speech"`
+	HasMusic       *bool    `default:"false" json:"has_music"`
+	Pacing         *string  `json:"pacing,omitzero"`
 }
 
 func (v VideoSegment) MarshalJSON() ([]byte, error) {
@@ -59,21 +58,21 @@ func (v *VideoSegment) GetSubjects() []string {
 	return v.Subjects
 }
 
-func (v *VideoSegment) GetShotType() optionalnullable.OptionalNullable[string] {
+func (v *VideoSegment) GetShotType() *string {
 	if v == nil {
 		return nil
 	}
 	return v.ShotType
 }
 
-func (v *VideoSegment) GetCameraMovement() optionalnullable.OptionalNullable[string] {
+func (v *VideoSegment) GetCameraMovement() *string {
 	if v == nil {
 		return nil
 	}
 	return v.CameraMovement
 }
 
-func (v *VideoSegment) GetTransitionIn() optionalnullable.OptionalNullable[string] {
+func (v *VideoSegment) GetTransitionIn() *string {
 	if v == nil {
 		return nil
 	}
@@ -94,7 +93,7 @@ func (v *VideoSegment) GetHasMusic() *bool {
 	return v.HasMusic
 }
 
-func (v *VideoSegment) GetPacing() optionalnullable.OptionalNullable[string] {
+func (v *VideoSegment) GetPacing() *string {
 	if v == nil {
 		return nil
 	}

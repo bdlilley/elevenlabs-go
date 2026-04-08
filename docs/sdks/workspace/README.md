@@ -720,7 +720,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -734,10 +733,10 @@ func main() {
 
     res, err := s.Workspace.InviteUser(ctx, components.BodyInviteUserV1WorkspaceInvitesAddPost{
         Email: "john.doe@testmail.com",
-        GroupIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+        GroupIds: []string{
             "group_id_1",
             "group_id_2",
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -780,7 +779,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -796,10 +794,10 @@ func main() {
         Emails: []string{
             "john.doe@testmail.com",
         },
-        GroupIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+        GroupIds: []string{
             "group_id_1",
             "group_id_2",
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -1281,7 +1279,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -1296,7 +1293,7 @@ func main() {
     res, err := s.Workspace.EditWorkspaceWebhookRoute(ctx, "G007vmtq9uWYl7SUW9zGS8GZZa1K", components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch{
         IsDisabled: true,
         Name: "My Callback Webhook",
-        RetryEnabled: optionalnullable.From(elevenlabsgo.Pointer(true)),
+        RetryEnabled: elevenlabsgo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)

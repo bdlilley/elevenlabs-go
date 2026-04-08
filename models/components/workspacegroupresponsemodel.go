@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GroupUsageLimitType string
@@ -99,13 +98,13 @@ func (u GroupUsageLimit) MarshalJSON() ([]byte, error) {
 }
 
 type WorkspaceGroupResponseModel struct {
-	Name            string                                             `json:"name"`
-	ID              string                                             `json:"id"`
-	Members         []string                                           `json:"members"`
-	Permissions     []WorkspaceGroupPermission                         `json:"permissions"`
-	GroupUsageLimit optionalnullable.OptionalNullable[GroupUsageLimit] `json:"group_usage_limit,omitzero"`
-	CharacterCount  optionalnullable.OptionalNullable[int64]           `json:"character_count,omitzero"`
-	ScimExternalID  optionalnullable.OptionalNullable[string]          `json:"scim_external_id,omitzero"`
+	Name            string                     `json:"name"`
+	ID              string                     `json:"id"`
+	Members         []string                   `json:"members"`
+	Permissions     []WorkspaceGroupPermission `json:"permissions"`
+	GroupUsageLimit *GroupUsageLimit           `json:"group_usage_limit,omitzero"`
+	CharacterCount  *int64                     `json:"character_count,omitzero"`
+	ScimExternalID  *string                    `json:"scim_external_id,omitzero"`
 }
 
 func (w *WorkspaceGroupResponseModel) GetName() string {
@@ -136,21 +135,21 @@ func (w *WorkspaceGroupResponseModel) GetPermissions() []WorkspaceGroupPermissio
 	return w.Permissions
 }
 
-func (w *WorkspaceGroupResponseModel) GetGroupUsageLimit() optionalnullable.OptionalNullable[GroupUsageLimit] {
+func (w *WorkspaceGroupResponseModel) GetGroupUsageLimit() *GroupUsageLimit {
 	if w == nil {
 		return nil
 	}
 	return w.GroupUsageLimit
 }
 
-func (w *WorkspaceGroupResponseModel) GetCharacterCount() optionalnullable.OptionalNullable[int64] {
+func (w *WorkspaceGroupResponseModel) GetCharacterCount() *int64 {
 	if w == nil {
 		return nil
 	}
 	return w.CharacterCount
 }
 
-func (w *WorkspaceGroupResponseModel) GetScimExternalID() optionalnullable.OptionalNullable[string] {
+func (w *WorkspaceGroupResponseModel) GetScimExternalID() *string {
 	if w == nil {
 		return nil
 	}

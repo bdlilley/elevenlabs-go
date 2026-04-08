@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SIPTrunkCredentialsRequestModel struct {
 	// SIP trunk username
 	Username string `json:"username"`
 	// SIP trunk password - if not specified, then remain unchanged
-	Password optionalnullable.OptionalNullable[string] `json:"password,omitzero"`
+	Password *string `json:"password,omitzero"`
 }
 
 func (s SIPTrunkCredentialsRequestModel) MarshalJSON() ([]byte, error) {
@@ -32,7 +31,7 @@ func (s *SIPTrunkCredentialsRequestModel) GetUsername() string {
 	return s.Username
 }
 
-func (s *SIPTrunkCredentialsRequestModel) GetPassword() optionalnullable.OptionalNullable[string] {
+func (s *SIPTrunkCredentialsRequestModel) GetPassword() *string {
 	if s == nil {
 		return nil
 	}

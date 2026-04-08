@@ -5,33 +5,32 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetSecretsRouteRequest struct {
 	// How many documents to return at maximum. Can not exceed 100. If not provided, returns all secrets.
-	PageSize optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=page_size"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 	// Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100.
-	DependencyLimit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=dependency_limit"`
+	DependencyLimit *int64 `queryParam:"style=form,explode=true,name=dependency_limit"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
-func (g *GetSecretsRouteRequest) GetPageSize() optionalnullable.OptionalNullable[int64] {
+func (g *GetSecretsRouteRequest) GetPageSize() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.PageSize
 }
 
-func (g *GetSecretsRouteRequest) GetDependencyLimit() optionalnullable.OptionalNullable[int64] {
+func (g *GetSecretsRouteRequest) GetDependencyLimit() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.DependencyLimit
 }
 
-func (g *GetSecretsRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetSecretsRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}

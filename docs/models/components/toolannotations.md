@@ -12,11 +12,11 @@ received from untrusted servers.
 
 ## Fields
 
-| Field                                       | Type                                        | Required                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `Title`                                     | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |
-| `ReadOnlyHint`                              | optionalnullable.OptionalNullable[`bool`]   | :heavy_minus_sign:                          | N/A                                         |
-| `DestructiveHint`                           | optionalnullable.OptionalNullable[`bool`]   | :heavy_minus_sign:                          | N/A                                         |
-| `IdempotentHint`                            | optionalnullable.OptionalNullable[`bool`]   | :heavy_minus_sign:                          | N/A                                         |
-| `OpenWorldHint`                             | optionalnullable.OptionalNullable[`bool`]   | :heavy_minus_sign:                          | N/A                                         |
-| `AdditionalProperties`                      | map[string]`any`                            | :heavy_minus_sign:                          | N/A                                         |
+| Field                  | Type                   | Required               | Description            |
+| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `Title`                | `*string`              | :heavy_minus_sign:     | N/A                    |
+| `ReadOnlyHint`         | `*bool`                | :heavy_minus_sign:     | N/A                    |
+| `DestructiveHint`      | `*bool`                | :heavy_minus_sign:     | N/A                    |
+| `IdempotentHint`       | `*bool`                | :heavy_minus_sign:     | N/A                    |
+| `OpenWorldHint`        | `*bool`                | :heavy_minus_sign:     | N/A                    |
+| `AdditionalProperties` | map[string]`any`       | :heavy_minus_sign:     | N/A                    |

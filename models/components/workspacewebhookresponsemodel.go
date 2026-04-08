@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WorkspaceWebhookResponseModel struct {
@@ -22,11 +21,11 @@ type WorkspaceWebhookResponseModel struct {
 	CreatedAtUnix int64                 `json:"created_at_unix"`
 	AuthType      WebhookAuthMethodType `json:"auth_type"`
 	// The list of products that are currently configured to trigger this webhook.
-	Usage optionalnullable.OptionalNullable[[]WorkspaceWebhookUsageResponseModel] `json:"usage,omitzero"`
+	Usage []WorkspaceWebhookUsageResponseModel `json:"usage,omitzero"`
 	// The most recent error code returned from the callback URL.
-	MostRecentFailureErrorCode optionalnullable.OptionalNullable[int64] `json:"most_recent_failure_error_code,omitzero"`
+	MostRecentFailureErrorCode *int64 `json:"most_recent_failure_error_code,omitzero"`
 	// The most recent time the webhook failed, failures are any non-200 codes returned by the callback URL.
-	MostRecentFailureTimestamp optionalnullable.OptionalNullable[int64] `json:"most_recent_failure_timestamp,omitzero"`
+	MostRecentFailureTimestamp *int64 `json:"most_recent_failure_timestamp,omitzero"`
 }
 
 func (w WorkspaceWebhookResponseModel) MarshalJSON() ([]byte, error) {
@@ -89,21 +88,21 @@ func (w *WorkspaceWebhookResponseModel) GetAuthType() WebhookAuthMethodType {
 	return w.AuthType
 }
 
-func (w *WorkspaceWebhookResponseModel) GetUsage() optionalnullable.OptionalNullable[[]WorkspaceWebhookUsageResponseModel] {
+func (w *WorkspaceWebhookResponseModel) GetUsage() []WorkspaceWebhookUsageResponseModel {
 	if w == nil {
 		return nil
 	}
 	return w.Usage
 }
 
-func (w *WorkspaceWebhookResponseModel) GetMostRecentFailureErrorCode() optionalnullable.OptionalNullable[int64] {
+func (w *WorkspaceWebhookResponseModel) GetMostRecentFailureErrorCode() *int64 {
 	if w == nil {
 		return nil
 	}
 	return w.MostRecentFailureErrorCode
 }
 
-func (w *WorkspaceWebhookResponseModel) GetMostRecentFailureTimestamp() optionalnullable.OptionalNullable[int64] {
+func (w *WorkspaceWebhookResponseModel) GetMostRecentFailureTimestamp() *int64 {
 	if w == nil {
 		return nil
 	}

@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch struct {
 	// New name for the branch. Must be unique within the agent.
-	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	Name *string `json:"name,omitzero"`
 	// Whether the branch should be archived
-	IsArchived optionalnullable.OptionalNullable[bool] `json:"is_archived,omitzero"`
+	IsArchived *bool `json:"is_archived,omitzero"`
 	// The protection level for the branch
-	ProtectionStatus optionalnullable.OptionalNullable[BranchProtectionStatus] `default:"writer_perms_required" json:"protection_status"`
+	ProtectionStatus *BranchProtectionStatus `default:"writer_perms_required" json:"protection_status"`
 }
 
 func (b BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) MarshalJSON() ([]byte, error) {
@@ -27,21 +26,21 @@ func (b *BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) Unmars
 	return nil
 }
 
-func (b *BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) GetName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) GetIsArchived() optionalnullable.OptionalNullable[bool] {
+func (b *BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) GetIsArchived() *bool {
 	if b == nil {
 		return nil
 	}
 	return b.IsArchived
 }
 
-func (b *BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) GetProtectionStatus() optionalnullable.OptionalNullable[BranchProtectionStatus] {
+func (b *BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch) GetProtectionStatus() *BranchProtectionStatus {
 	if b == nil {
 		return nil
 	}

@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetSecretDependenciesRouteRequest struct {
@@ -14,7 +13,7 @@ type GetSecretDependenciesRouteRequest struct {
 	// How many dependency items to return per page.
 	PageSize *int64 `default:"20" queryParam:"style=form,explode=true,name=page_size"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (g GetSecretDependenciesRouteRequest) MarshalJSON() ([]byte, error) {
@@ -49,7 +48,7 @@ func (g *GetSecretDependenciesRouteRequest) GetPageSize() *int64 {
 	return g.PageSize
 }
 
-func (g *GetSecretDependenciesRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetSecretDependenciesRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}

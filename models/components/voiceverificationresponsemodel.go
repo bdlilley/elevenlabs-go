@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type VoiceVerificationResponseModel struct {
@@ -17,9 +16,9 @@ type VoiceVerificationResponseModel struct {
 	// The number of verification attempts.
 	VerificationAttemptsCount int64 `json:"verification_attempts_count"`
 	// The language of the voice.
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// Number of times a verification was attempted.
-	VerificationAttempts optionalnullable.OptionalNullable[[]VerificationAttemptResponseModel] `json:"verification_attempts,omitzero"`
+	VerificationAttempts []VerificationAttemptResponseModel `json:"verification_attempts,omitzero"`
 }
 
 func (v VoiceVerificationResponseModel) MarshalJSON() ([]byte, error) {
@@ -61,14 +60,14 @@ func (v *VoiceVerificationResponseModel) GetVerificationAttemptsCount() int64 {
 	return v.VerificationAttemptsCount
 }
 
-func (v *VoiceVerificationResponseModel) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (v *VoiceVerificationResponseModel) GetLanguage() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Language
 }
 
-func (v *VoiceVerificationResponseModel) GetVerificationAttempts() optionalnullable.OptionalNullable[[]VerificationAttemptResponseModel] {
+func (v *VoiceVerificationResponseModel) GetVerificationAttempts() []VerificationAttemptResponseModel {
 	if v == nil {
 		return nil
 	}

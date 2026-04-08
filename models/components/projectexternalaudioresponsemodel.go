@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -115,31 +114,31 @@ func (u SourceContext) MarshalJSON() ([]byte, error) {
 }
 
 type ProjectExternalAudioResponseModel struct {
-	ExternalAudioID         string                                             `json:"external_audio_id"`
-	Filename                string                                             `json:"filename"`
-	SignedURL               *string                                            `json:"signed_url"`
-	OffsetMs                int64                                              `json:"offset_ms"`
-	DurationMs              int64                                              `json:"duration_ms"`
-	StartTimeMs             int64                                              `json:"start_time_ms"`
-	EndTimeMs               int64                                              `json:"end_time_ms"`
-	Order                   string                                             `json:"order"`
-	TrackID                 string                                             `json:"track_id"`
-	CreatedAtMs             int64                                              `json:"created_at_ms"`
-	UpdatedAtMs             int64                                              `json:"updated_at_ms"`
-	VolumeGainDb            *float64                                           `default:"0" json:"volume_gain_db"`
-	Muted                   *bool                                              `default:"false" json:"muted"`
-	FadeInMs                *int64                                             `default:"0" json:"fade_in_ms"`
-	FadeOutMs               *int64                                             `default:"0" json:"fade_out_ms"`
-	SourceExternalAudioID   optionalnullable.OptionalNullable[string]          `json:"source_external_audio_id,omitzero"`
-	SourceAssetID           optionalnullable.OptionalNullable[string]          `json:"source_asset_id,omitzero"`
-	PendingBlockIds         []string                                           `json:"pending_block_ids"`
-	PendingExternalAudioIds []string                                           `json:"pending_external_audio_ids"`
-	SpeechImported          *bool                                              `default:"false" json:"speech_imported"`
-	PendingTask             optionalnullable.OptionalNullable[PendingClipTask] `json:"pending_task,omitzero"`
-	Error                   optionalnullable.OptionalNullable[string]          `json:"error,omitzero"`
-	CurrentSnapshotID       optionalnullable.OptionalNullable[string]          `json:"current_snapshot_id,omitzero"`
-	SourceContext           optionalnullable.OptionalNullable[SourceContext]   `json:"source_context,omitzero"`
-	Analysis                optionalnullable.OptionalNullable[AudioAnalysis]   `json:"analysis,omitzero"`
+	ExternalAudioID         string           `json:"external_audio_id"`
+	Filename                string           `json:"filename"`
+	SignedURL               *string          `json:"signed_url"`
+	OffsetMs                int64            `json:"offset_ms"`
+	DurationMs              int64            `json:"duration_ms"`
+	StartTimeMs             int64            `json:"start_time_ms"`
+	EndTimeMs               int64            `json:"end_time_ms"`
+	Order                   string           `json:"order"`
+	TrackID                 string           `json:"track_id"`
+	CreatedAtMs             int64            `json:"created_at_ms"`
+	UpdatedAtMs             int64            `json:"updated_at_ms"`
+	VolumeGainDb            *float64         `default:"0" json:"volume_gain_db"`
+	Muted                   *bool            `default:"false" json:"muted"`
+	FadeInMs                *int64           `default:"0" json:"fade_in_ms"`
+	FadeOutMs               *int64           `default:"0" json:"fade_out_ms"`
+	SourceExternalAudioID   *string          `json:"source_external_audio_id,omitzero"`
+	SourceAssetID           *string          `json:"source_asset_id,omitzero"`
+	PendingBlockIds         []string         `json:"pending_block_ids"`
+	PendingExternalAudioIds []string         `json:"pending_external_audio_ids"`
+	SpeechImported          *bool            `default:"false" json:"speech_imported"`
+	PendingTask             *PendingClipTask `json:"pending_task,omitzero"`
+	Error                   *string          `json:"error,omitzero"`
+	CurrentSnapshotID       *string          `json:"current_snapshot_id,omitzero"`
+	SourceContext           *SourceContext   `json:"source_context,omitzero"`
+	Analysis                *AudioAnalysis   `json:"analysis,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_                *string  `const:"audio" json:"type"`
 	ImportSpeechProgress *float64 `json:"import_speech_progress"`
@@ -261,14 +260,14 @@ func (p *ProjectExternalAudioResponseModel) GetFadeOutMs() *int64 {
 	return p.FadeOutMs
 }
 
-func (p *ProjectExternalAudioResponseModel) GetSourceExternalAudioID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExternalAudioResponseModel) GetSourceExternalAudioID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.SourceExternalAudioID
 }
 
-func (p *ProjectExternalAudioResponseModel) GetSourceAssetID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExternalAudioResponseModel) GetSourceAssetID() *string {
 	if p == nil {
 		return nil
 	}
@@ -296,28 +295,28 @@ func (p *ProjectExternalAudioResponseModel) GetSpeechImported() *bool {
 	return p.SpeechImported
 }
 
-func (p *ProjectExternalAudioResponseModel) GetPendingTask() optionalnullable.OptionalNullable[PendingClipTask] {
+func (p *ProjectExternalAudioResponseModel) GetPendingTask() *PendingClipTask {
 	if p == nil {
 		return nil
 	}
 	return p.PendingTask
 }
 
-func (p *ProjectExternalAudioResponseModel) GetError() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExternalAudioResponseModel) GetError() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Error
 }
 
-func (p *ProjectExternalAudioResponseModel) GetCurrentSnapshotID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExternalAudioResponseModel) GetCurrentSnapshotID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.CurrentSnapshotID
 }
 
-func (p *ProjectExternalAudioResponseModel) GetSourceContext() optionalnullable.OptionalNullable[SourceContext] {
+func (p *ProjectExternalAudioResponseModel) GetSourceContext() *SourceContext {
 	if p == nil {
 		return nil
 	}
@@ -326,35 +325,26 @@ func (p *ProjectExternalAudioResponseModel) GetSourceContext() optionalnullable.
 
 func (p *ProjectExternalAudioResponseModel) GetSourceContextMusicExploreSong() *MusicExploreSongSourceContext {
 	if v := p.GetSourceContext(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.MusicExploreSongSourceContext
-		}
-		return nil
+		return v.MusicExploreSongSourceContext
 	}
 	return nil
 }
 
 func (p *ProjectExternalAudioResponseModel) GetSourceContextSfx() *SfxSourceContext {
 	if v := p.GetSourceContext(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.SfxSourceContext
-		}
-		return nil
+		return v.SfxSourceContext
 	}
 	return nil
 }
 
 func (p *ProjectExternalAudioResponseModel) GetSourceContextSong() *SongSourceContext {
 	if v := p.GetSourceContext(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.SongSourceContext
-		}
-		return nil
+		return v.SongSourceContext
 	}
 	return nil
 }
 
-func (p *ProjectExternalAudioResponseModel) GetAnalysis() optionalnullable.OptionalNullable[AudioAnalysis] {
+func (p *ProjectExternalAudioResponseModel) GetAnalysis() *AudioAnalysis {
 	if p == nil {
 		return nil
 	}

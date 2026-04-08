@@ -5,15 +5,14 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetLiveCountRequest struct {
 	// The id of an agent to restrict the analytics to.
-	AgentID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=agent_id"`
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 }
 
-func (g *GetLiveCountRequest) GetAgentID() optionalnullable.OptionalNullable[string] {
+func (g *GetLiveCountRequest) GetAgentID() *string {
 	if g == nil {
 		return nil
 	}

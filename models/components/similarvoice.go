@@ -2,16 +2,12 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type SimilarVoice struct {
-	VoiceID     string                                    `json:"voice_id"`
-	Name        string                                    `json:"name"`
-	Category    VoiceCategory                             `json:"category"`
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
-	PreviewURL  optionalnullable.OptionalNullable[string] `json:"preview_url,omitzero"`
+	VoiceID     string        `json:"voice_id"`
+	Name        string        `json:"name"`
+	Category    VoiceCategory `json:"category"`
+	Description *string       `json:"description,omitzero"`
+	PreviewURL  *string       `json:"preview_url,omitzero"`
 }
 
 func (s *SimilarVoice) GetVoiceID() string {
@@ -35,14 +31,14 @@ func (s *SimilarVoice) GetCategory() VoiceCategory {
 	return s.Category
 }
 
-func (s *SimilarVoice) GetDescription() optionalnullable.OptionalNullable[string] {
+func (s *SimilarVoice) GetDescription() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Description
 }
 
-func (s *SimilarVoice) GetPreviewURL() optionalnullable.OptionalNullable[string] {
+func (s *SimilarVoice) GetPreviewURL() *string {
 	if s == nil {
 		return nil
 	}

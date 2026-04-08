@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost struct {
-	AgentID                          string                                                                          `json:"agent_id"`
-	AgentPhoneNumberID               string                                                                          `json:"agent_phone_number_id"`
-	ToNumber                         string                                                                          `json:"to_number"`
-	ConversationInitiationClientData optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] `json:"conversation_initiation_client_data,omitzero"`
+	AgentID                          string                                        `json:"agent_id"`
+	AgentPhoneNumberID               string                                        `json:"agent_phone_number_id"`
+	ToNumber                         string                                        `json:"to_number"`
+	ConversationInitiationClientData *ConversationInitiationClientDataRequestInput `json:"conversation_initiation_client_data,omitzero"`
 	// Whether let Twilio record the call.
-	CallRecordingEnabled optionalnullable.OptionalNullable[bool] `json:"call_recording_enabled,omitzero"`
-	TelephonyCallConfig  *TelephonyCallConfig                    `json:"telephony_call_config,omitzero"`
+	CallRecordingEnabled *bool                `json:"call_recording_enabled,omitzero"`
+	TelephonyCallConfig  *TelephonyCallConfig `json:"telephony_call_config,omitzero"`
 }
 
 func (b BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost) MarshalJSON() ([]byte, error) {
@@ -49,14 +48,14 @@ func (b *BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost) GetToN
 	return b.ToNumber
 }
 
-func (b *BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost) GetConversationInitiationClientData() optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] {
+func (b *BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost) GetConversationInitiationClientData() *ConversationInitiationClientDataRequestInput {
 	if b == nil {
 		return nil
 	}
 	return b.ConversationInitiationClientData
 }
 
-func (b *BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost) GetCallRecordingEnabled() optionalnullable.OptionalNullable[bool] {
+func (b *BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost) GetCallRecordingEnabled() *bool {
 	if b == nil {
 		return nil
 	}

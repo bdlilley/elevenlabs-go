@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AudioSegment struct {
-	StartMs     int64                                     `json:"start_ms"`
-	EndMs       int64                                     `json:"end_ms"`
-	Description string                                    `json:"description"`
-	SegmentType optionalnullable.OptionalNullable[string] `json:"segment_type,omitzero"`
-	HasSpeech   *bool                                     `default:"false" json:"has_speech"`
-	HasMusic    *bool                                     `default:"false" json:"has_music"`
-	Pacing      optionalnullable.OptionalNullable[string] `json:"pacing,omitzero"`
+	StartMs     int64   `json:"start_ms"`
+	EndMs       int64   `json:"end_ms"`
+	Description string  `json:"description"`
+	SegmentType *string `json:"segment_type,omitzero"`
+	HasSpeech   *bool   `default:"false" json:"has_speech"`
+	HasMusic    *bool   `default:"false" json:"has_music"`
+	Pacing      *string `json:"pacing,omitzero"`
 }
 
 func (a AudioSegment) MarshalJSON() ([]byte, error) {
@@ -49,7 +48,7 @@ func (a *AudioSegment) GetDescription() string {
 	return a.Description
 }
 
-func (a *AudioSegment) GetSegmentType() optionalnullable.OptionalNullable[string] {
+func (a *AudioSegment) GetSegmentType() *string {
 	if a == nil {
 		return nil
 	}
@@ -70,7 +69,7 @@ func (a *AudioSegment) GetHasMusic() *bool {
 	return a.HasMusic
 }
 
-func (a *AudioSegment) GetPacing() optionalnullable.OptionalNullable[string] {
+func (a *AudioSegment) GetPacing() *string {
 	if a == nil {
 		return nil
 	}

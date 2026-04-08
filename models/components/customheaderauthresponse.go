@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -15,9 +14,9 @@ type CustomHeaderAuthResponse struct {
 	authType *string `const:"custom_header_auth" json:"auth_type"`
 	Provider string  `json:"provider"`
 	// The name of the header to use for authentication (e.g., 'x-api-key')
-	HeaderName string                                                        `json:"header_name"`
-	ID         string                                                        `json:"id"`
-	UsedBy     optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	HeaderName string                      `json:"header_name"`
+	ID         string                      `json:"id"`
+	UsedBy     *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (c CustomHeaderAuthResponse) MarshalJSON() ([]byte, error) {
@@ -63,7 +62,7 @@ func (c *CustomHeaderAuthResponse) GetID() string {
 	return c.ID
 }
 
-func (c *CustomHeaderAuthResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (c *CustomHeaderAuthResponse) GetUsedBy() *AuthConnectionDependencies {
 	if c == nil {
 		return nil
 	}

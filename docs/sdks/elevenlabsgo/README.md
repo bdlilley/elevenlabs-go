@@ -548,7 +548,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -559,7 +558,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ListTestInvocationsRoute(ctx, "<id>", elevenlabsgo.Pointer[int64](30), optionalnullable.From[string](nil))
+    res, err := s.ListTestInvocationsRoute(ctx, "<id>", elevenlabsgo.Pointer[int64](30), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -576,7 +575,7 @@ func main() {
 | `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
 | `agentID`                                                                | `string`                                                                 | :heavy_check_mark:                                                       | Filter by agent ID                                                       |
 | `pageSize`                                                               | `*int64`                                                                 | :heavy_minus_sign:                                                       | How many Tests to return at maximum. Can not exceed 100, defaults to 30. |
-| `cursor`                                                                 | optionalnullable.OptionalNullable[`string`]                              | :heavy_minus_sign:                                                       | Used for fetching next page. Cursor is returned in the response.         |
+| `cursor`                                                                 | `*string`                                                                | :heavy_minus_sign:                                                       | Used for fetching next page. Cursor is returned in the response.         |
 | `opts`                                                                   | [][operations.Option](../../models/operations/option.md)                 | :heavy_minus_sign:                                                       | The options for this request.                                            |
 
 ### Response
@@ -604,7 +603,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -617,7 +615,7 @@ func main() {
 
     res, err := s.RunAgentTestSuiteRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.RunAgentTestsRequestModel{
         Tests: []components.SingleTestRunRequestModel{},
-        AgentConfigOverride: optionalnullable.From(&components.AdhocAgentConfigOverrideForTestRequestModel{
+        AgentConfigOverride: &components.AdhocAgentConfigOverrideForTestRequestModel{
             ConversationConfig: components.ConversationalConfigAPIModelInput{
                 Asr: &components.ASRConversationalConfig{
                     Keywords: []string{
@@ -642,27 +640,27 @@ func main() {
                 LanguagePresets: map[string]components.LanguagePresetInput{
                     "key": components.LanguagePresetInput{
                         Overrides: components.ConversationConfigClientOverrideInput{
-                            Turn: optionalnullable.From(&components.TurnConfigOverride{
-                                SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                                    Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                                }),
-                            }),
-                            Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                                VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                                Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                                Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                                SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                            }),
-                            Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                                FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                                Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                                Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                                    Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                                    Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                                    ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                                    KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                                }),
-                            }),
+                            Turn: &components.TurnConfigOverride{
+                                SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                                    Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                                },
+                            },
+                            Tts: &components.TTSConversationalConfigOverride{
+                                VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                                Stability: elevenlabsgo.Pointer[float64](0.5),
+                                Speed: elevenlabsgo.Pointer[float64](1.0),
+                                SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                            },
+                            Agent: &components.AgentConfigOverrideInput{
+                                FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                                Language: elevenlabsgo.Pointer("en"),
+                                Prompt: &components.PromptAgentAPIModelOverrideInput{
+                                    Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                                    Llm: components.LlmGemini20Flash001.ToPointer(),
+                                    ToolIds: []string{},
+                                    KnowledgeBase: []components.KnowledgeBaseLocator{},
+                                },
+                            },
                         },
                     },
                 },
@@ -682,7 +680,7 @@ func main() {
                     },
                 },
                 Widget: &components.WidgetConfigInput{
-                    CustomAvatarPath: optionalnullable.From(elevenlabsgo.Pointer("https://example.com/avatar.png")),
+                    CustomAvatarPath: elevenlabsgo.Pointer("https://example.com/avatar.png"),
                 },
                 DataCollection: map[string]components.LiteralJSONSchemaProperty{
                     "key": components.LiteralJSONSchemaProperty{
@@ -695,20 +693,20 @@ func main() {
                     EnableConversationInitiationClientDataFromWebhook: elevenlabsgo.Pointer(true),
                 },
                 WorkspaceOverrides: &components.AgentWorkspaceOverridesInput{
-                    ConversationInitiationClientDataWebhook: optionalnullable.From(&components.ConversationInitiationClientDataWebhook{
+                    ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{
                         URL: "https://example.com/webhook",
                         RequestHeaders: map[string]components.ConversationInitiationClientDataWebhookRequestHeaders{
                             "Content-Type": components.CreateConversationInitiationClientDataWebhookRequestHeadersStr(
                                 "application/json",
                             ),
                         },
-                    }),
+                    },
                 },
                 Testing: &components.AgentTestingSettings{
                     AttachedTests: []components.AttachedTestModel{
                         components.AttachedTestModel{
                             TestID: "test_123",
-                            WorkflowNodeID: optionalnullable.From(elevenlabsgo.Pointer("node_abc")),
+                            WorkflowNodeID: elevenlabsgo.Pointer("node_abc"),
                         },
                         components.AttachedTestModel{
                             TestID: "test_456",
@@ -723,76 +721,76 @@ func main() {
                         },
                     },
                     RequireOriginHeader: elevenlabsgo.Pointer(true),
-                    ShareableToken: optionalnullable.From(elevenlabsgo.Pointer("1234567890")),
+                    ShareableToken: elevenlabsgo.Pointer("1234567890"),
                 },
                 CallLimits: &components.AgentCallLimits{},
                 Privacy: &components.PrivacyConfigInput{},
             },
-            Workflow: optionalnullable.From(&components.AgentWorkflowRequestModel{
+            Workflow: &components.AgentWorkflowRequestModel{
                 Edges: map[string]components.WorkflowEdgeModelInput{
                     "entry_to_tool_a": components.WorkflowEdgeModelInput{
                         Source: "entry_node",
                         Target: "tool_node_a",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                             components.WorkflowUnconditionalModelInput{},
-                        ))),
+                        )),
                     },
                     "start_to_entry": components.WorkflowEdgeModelInput{
                         Source: "start_node",
                         Target: "entry_node",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                             components.WorkflowUnconditionalModelInput{},
-                        ))),
+                        )),
                     },
                     "tool_a_to_failure": components.WorkflowEdgeModelInput{
                         Source: "tool_node_a",
                         Target: "failure_node",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                             components.WorkflowLLMConditionModelInput{
                                 Condition: "User's last message contains a question about our pricing.",
                             },
-                        ))),
+                        )),
                     },
                     "tool_a_to_tool_b": components.WorkflowEdgeModelInput{
                         Source: "tool_node_a",
                         Target: "tool_node_b",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                             components.WorkflowLLMConditionModelInput{
                                 Condition: "User's last message contains a question about our pricing.",
                             },
-                        ))),
+                        )),
                     },
                     "tool_b_to_agent_transfer": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_transfer",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                             components.WorkflowUnconditionalModelInput{},
-                        ))),
+                        )),
                     },
                     "tool_b_to_conversation": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_conversation",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                             components.WorkflowResultConditionModelInput{
                                 Successful: true,
                             },
-                        ))),
+                        )),
                     },
                     "tool_b_to_end": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_end",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                             components.WorkflowResultConditionModelInput{
                                 Successful: true,
                             },
-                        ))),
+                        )),
                     },
                     "tool_b_to_phone": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_phone",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                             components.WorkflowUnconditionalModelInput{},
-                        ))),
+                        )),
                     },
                 },
                 Nodes: map[string]components.AgentWorkflowRequestModelNodes{
@@ -840,8 +838,8 @@ func main() {
                         },
                     ),
                 },
-            }),
-        }),
+            },
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -938,7 +936,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -951,7 +948,7 @@ func main() {
 
     res, err := s.ResubmitTestsRoute(ctx, "<id>", components.ResubmitTestsRequestModel{
         TestRunIds: []string{},
-        AgentConfigOverride: optionalnullable.From(&components.AdhocAgentConfigOverrideForTestRequestModel{
+        AgentConfigOverride: &components.AdhocAgentConfigOverrideForTestRequestModel{
             ConversationConfig: components.ConversationalConfigAPIModelInput{
                 Asr: &components.ASRConversationalConfig{
                     Keywords: []string{
@@ -976,27 +973,27 @@ func main() {
                 LanguagePresets: map[string]components.LanguagePresetInput{
                     "key": components.LanguagePresetInput{
                         Overrides: components.ConversationConfigClientOverrideInput{
-                            Turn: optionalnullable.From(&components.TurnConfigOverride{
-                                SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                                    Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                                }),
-                            }),
-                            Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                                VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                                Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                                Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                                SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                            }),
-                            Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                                FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                                Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                                Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                                    Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                                    Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                                    ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                                    KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                                }),
-                            }),
+                            Turn: &components.TurnConfigOverride{
+                                SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                                    Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                                },
+                            },
+                            Tts: &components.TTSConversationalConfigOverride{
+                                VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                                Stability: elevenlabsgo.Pointer[float64](0.5),
+                                Speed: elevenlabsgo.Pointer[float64](1.0),
+                                SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                            },
+                            Agent: &components.AgentConfigOverrideInput{
+                                FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                                Language: elevenlabsgo.Pointer("en"),
+                                Prompt: &components.PromptAgentAPIModelOverrideInput{
+                                    Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                                    Llm: components.LlmGemini20Flash001.ToPointer(),
+                                    ToolIds: []string{},
+                                    KnowledgeBase: []components.KnowledgeBaseLocator{},
+                                },
+                            },
                         },
                     },
                 },
@@ -1016,7 +1013,7 @@ func main() {
                     },
                 },
                 Widget: &components.WidgetConfigInput{
-                    CustomAvatarPath: optionalnullable.From(elevenlabsgo.Pointer("https://example.com/avatar.png")),
+                    CustomAvatarPath: elevenlabsgo.Pointer("https://example.com/avatar.png"),
                 },
                 DataCollection: map[string]components.LiteralJSONSchemaProperty{
                     "key": components.LiteralJSONSchemaProperty{
@@ -1029,20 +1026,20 @@ func main() {
                     EnableConversationInitiationClientDataFromWebhook: elevenlabsgo.Pointer(true),
                 },
                 WorkspaceOverrides: &components.AgentWorkspaceOverridesInput{
-                    ConversationInitiationClientDataWebhook: optionalnullable.From(&components.ConversationInitiationClientDataWebhook{
+                    ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{
                         URL: "https://example.com/webhook",
                         RequestHeaders: map[string]components.ConversationInitiationClientDataWebhookRequestHeaders{
                             "Content-Type": components.CreateConversationInitiationClientDataWebhookRequestHeadersStr(
                                 "application/json",
                             ),
                         },
-                    }),
+                    },
                 },
                 Testing: &components.AgentTestingSettings{
                     AttachedTests: []components.AttachedTestModel{
                         components.AttachedTestModel{
                             TestID: "test_123",
-                            WorkflowNodeID: optionalnullable.From(elevenlabsgo.Pointer("node_abc")),
+                            WorkflowNodeID: elevenlabsgo.Pointer("node_abc"),
                         },
                         components.AttachedTestModel{
                             TestID: "test_456",
@@ -1057,44 +1054,44 @@ func main() {
                         },
                     },
                     RequireOriginHeader: elevenlabsgo.Pointer(true),
-                    ShareableToken: optionalnullable.From(elevenlabsgo.Pointer("1234567890")),
+                    ShareableToken: elevenlabsgo.Pointer("1234567890"),
                 },
                 CallLimits: &components.AgentCallLimits{},
                 Privacy: &components.PrivacyConfigInput{},
             },
-            Workflow: optionalnullable.From(&components.AgentWorkflowRequestModel{
+            Workflow: &components.AgentWorkflowRequestModel{
                 Edges: map[string]components.WorkflowEdgeModelInput{
                     "entry_to_tool_a": components.WorkflowEdgeModelInput{
                         Source: "entry_node",
                         Target: "tool_node_a",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                             components.WorkflowResultConditionModelInput{
                                 Successful: false,
                             },
-                        ))),
+                        )),
                     },
                     "start_to_entry": components.WorkflowEdgeModelInput{
                         Source: "start_node",
                         Target: "entry_node",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                             components.WorkflowLLMConditionModelInput{
                                 Condition: "User's last message contains a question about our pricing.",
                             },
-                        ))),
+                        )),
                     },
                     "tool_a_to_failure": components.WorkflowEdgeModelInput{
                         Source: "tool_node_a",
                         Target: "failure_node",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                             components.WorkflowResultConditionModelInput{
                                 Successful: false,
                             },
-                        ))),
+                        )),
                     },
                     "tool_a_to_tool_b": components.WorkflowEdgeModelInput{
                         Source: "tool_node_a",
                         Target: "tool_node_b",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
                             components.WorkflowExpressionConditionModelInput{
                                 Expression: components.CreateASTNodeInputStringLiteral(
                                     components.ASTStringNodeInput{
@@ -1102,28 +1099,28 @@ func main() {
                                     },
                                 ),
                             },
-                        ))),
+                        )),
                     },
                     "tool_b_to_agent_transfer": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_transfer",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                             components.WorkflowUnconditionalModelInput{},
-                        ))),
+                        )),
                     },
                     "tool_b_to_conversation": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_conversation",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                             components.WorkflowLLMConditionModelInput{
                                 Condition: "User's last message contains a question about our pricing.",
                             },
-                        ))),
+                        )),
                     },
                     "tool_b_to_end": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_end",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
                             components.WorkflowExpressionConditionModelInput{
                                 Expression: components.CreateASTNodeInputDynamicVariable(
                                     components.ASTDynamicVariableNodeInput{
@@ -1131,16 +1128,16 @@ func main() {
                                     },
                                 ),
                             },
-                        ))),
+                        )),
                     },
                     "tool_b_to_phone": components.WorkflowEdgeModelInput{
                         Source: "tool_node_b",
                         Target: "success_phone",
-                        ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                        ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                             components.WorkflowResultConditionModelInput{
                                 Successful: true,
                             },
-                        ))),
+                        )),
                     },
                 },
                 Nodes: map[string]components.AgentWorkflowRequestModelNodes{
@@ -1184,8 +1181,8 @@ func main() {
                         components.WorkflowEndNodeModelInput{},
                     ),
                 },
-            }),
-        }),
+            },
+        },
         AgentID: "<id>",
     })
     if err != nil {

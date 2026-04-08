@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost struct {
 	// The name of the chapter, used for identification only.
-	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	Name *string `json:"name,omitzero"`
 	// The chapter content to use.
-	Content optionalnullable.OptionalNullable[ChapterContentInputModel] `json:"content,omitzero"`
+	Content *ChapterContentInputModel `json:"content,omitzero"`
 }
 
 func (b BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost) MarshalJSON() ([]byte, error) {
@@ -25,14 +24,14 @@ func (b *BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost) Unmars
 	return nil
 }
 
-func (b *BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost) GetName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost) GetContent() optionalnullable.OptionalNullable[ChapterContentInputModel] {
+func (b *BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost) GetContent() *ChapterContentInputModel {
 	if b == nil {
 		return nil
 	}

@@ -5,14 +5,13 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetToolDependentAgentsRouteRequest struct {
 	// ID of the requested tool.
 	ToolID string `pathParam:"style=simple,explode=false,name=tool_id"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// How many documents to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 }
@@ -35,7 +34,7 @@ func (g *GetToolDependentAgentsRouteRequest) GetToolID() string {
 	return g.ToolID
 }
 
-func (g *GetToolDependentAgentsRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetToolDependentAgentsRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}

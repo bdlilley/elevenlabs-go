@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SpeechToTextWebhookResponseModel struct {
@@ -13,7 +12,7 @@ type SpeechToTextWebhookResponseModel struct {
 	// The request ID of the webhook response.
 	RequestID string `json:"request_id"`
 	// The transcription ID of the webhook response.
-	TranscriptionID optionalnullable.OptionalNullable[string] `json:"transcription_id,omitzero"`
+	TranscriptionID *string `json:"transcription_id,omitzero"`
 }
 
 func (s SpeechToTextWebhookResponseModel) MarshalJSON() ([]byte, error) {
@@ -41,7 +40,7 @@ func (s *SpeechToTextWebhookResponseModel) GetRequestID() string {
 	return s.RequestID
 }
 
-func (s *SpeechToTextWebhookResponseModel) GetTranscriptionID() optionalnullable.OptionalNullable[string] {
+func (s *SpeechToTextWebhookResponseModel) GetTranscriptionID() *string {
 	if s == nil {
 		return nil
 	}

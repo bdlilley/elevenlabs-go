@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPostFromDocument struct {
@@ -32,7 +31,7 @@ func (b *BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPostFromD
 
 type BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost struct {
 	// An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
-	FromURL optionalnullable.OptionalNullable[string] `multipartForm:"name=from_url"`
+	FromURL *string `multipartForm:"name=from_url"`
 	// An optional .epub, .pdf, .txt or similar file can be provided. If provided, we will initialize the Studio project with its content. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
 	FromDocument *BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPostFromDocument `multipartForm:"file,name=from_document"`
 	//     An optional content to initialize the Studio project with. If this is set, 'from_url' and 'from_document' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
@@ -56,7 +55,7 @@ func (b *BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost) Unm
 	return nil
 }
 
-func (b *BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost) GetFromURL() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost) GetFromURL() *string {
 	if b == nil {
 		return nil
 	}

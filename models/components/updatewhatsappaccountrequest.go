@@ -2,31 +2,27 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type UpdateWhatsAppAccountRequest struct {
-	AssignedAgentID            optionalnullable.OptionalNullable[string] `json:"assigned_agent_id,omitzero"`
-	EnableMessaging            optionalnullable.OptionalNullable[bool]   `json:"enable_messaging,omitzero"`
-	EnableAudioMessageResponse optionalnullable.OptionalNullable[bool]   `json:"enable_audio_message_response,omitzero"`
+	AssignedAgentID            *string `json:"assigned_agent_id,omitzero"`
+	EnableMessaging            *bool   `json:"enable_messaging,omitzero"`
+	EnableAudioMessageResponse *bool   `json:"enable_audio_message_response,omitzero"`
 }
 
-func (u *UpdateWhatsAppAccountRequest) GetAssignedAgentID() optionalnullable.OptionalNullable[string] {
+func (u *UpdateWhatsAppAccountRequest) GetAssignedAgentID() *string {
 	if u == nil {
 		return nil
 	}
 	return u.AssignedAgentID
 }
 
-func (u *UpdateWhatsAppAccountRequest) GetEnableMessaging() optionalnullable.OptionalNullable[bool] {
+func (u *UpdateWhatsAppAccountRequest) GetEnableMessaging() *bool {
 	if u == nil {
 		return nil
 	}
 	return u.EnableMessaging
 }
 
-func (u *UpdateWhatsAppAccountRequest) GetEnableAudioMessageResponse() optionalnullable.OptionalNullable[bool] {
+func (u *UpdateWhatsAppAccountRequest) GetEnableAudioMessageResponse() *bool {
 	if u == nil {
 		return nil
 	}

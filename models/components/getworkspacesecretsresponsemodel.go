@@ -2,14 +2,10 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetWorkspaceSecretsResponseModel struct {
 	Secrets []ConvAIWorkspaceStoredSecretConfig `json:"secrets"`
 	// Cursor for fetching the next page of secrets
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
+	NextCursor *string `json:"next_cursor,omitzero"`
 }
 
 func (g *GetWorkspaceSecretsResponseModel) GetSecrets() []ConvAIWorkspaceStoredSecretConfig {
@@ -19,7 +15,7 @@ func (g *GetWorkspaceSecretsResponseModel) GetSecrets() []ConvAIWorkspaceStoredS
 	return g.Secrets
 }
 
-func (g *GetWorkspaceSecretsResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetWorkspaceSecretsResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

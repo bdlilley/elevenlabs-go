@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -1331,7 +1330,7 @@ type SMBToolConfig struct {
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines how the tool call sound should be played.
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// Controls how tool errors are processed before being shared with the agent.
@@ -1398,7 +1397,7 @@ func (s *SMBToolConfig) GetAssignments() []DynamicVariableAssignment {
 	return s.Assignments
 }
 
-func (s *SMBToolConfig) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (s *SMBToolConfig) GetToolCallSound() *ToolCallSoundType {
 	if s == nil {
 		return nil
 	}

@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyDubAVideoOrAnAudioFileV1DubbingPostFile struct {
@@ -129,29 +128,29 @@ type BodyDubAVideoOrAnAudioFileV1DubbingPost struct {
 	// For use only with csv input
 	BackgroundAudioFile *BackgroundAudioFile `multipartForm:"file,name=background_audio_file"`
 	// Name of the dubbing project.
-	Name optionalnullable.OptionalNullable[string] `multipartForm:"name=name"`
+	Name *string `multipartForm:"name=name"`
 	// URL of the source video/audio file.
-	SourceURL optionalnullable.OptionalNullable[string] `multipartForm:"name=source_url"`
+	SourceURL *string `multipartForm:"name=source_url"`
 	// Source language. Expects a valid iso639-1 or iso639-3 language code.
 	SourceLang *string `default:"auto" multipartForm:"name=source_lang"`
 	// The Target language to dub the content into. Expects a valid iso639-1 or iso639-3 language code.
-	TargetLang optionalnullable.OptionalNullable[string] `multipartForm:"name=target_lang"`
+	TargetLang *string `multipartForm:"name=target_lang"`
 	// [Experimental] An accent to apply when selecting voices from the library and to use to inform translation of the dialect to prefer.
-	TargetAccent optionalnullable.OptionalNullable[string] `multipartForm:"name=target_accent"`
+	TargetAccent *string `multipartForm:"name=target_accent"`
 	// Number of speakers to use for the dubbing. Set to 0 to automatically detect the number of speakers
 	NumSpeakers *int64 `default:"0" multipartForm:"name=num_speakers"`
 	// Whether to apply watermark to the output video.
 	Watermark *bool `default:"false" multipartForm:"name=watermark"`
 	// Start time of the source video/audio file.
-	StartTime optionalnullable.OptionalNullable[int64] `multipartForm:"name=start_time"`
+	StartTime *int64 `multipartForm:"name=start_time"`
 	// End time of the source video/audio file.
-	EndTime optionalnullable.OptionalNullable[int64] `multipartForm:"name=end_time"`
+	EndTime *int64 `multipartForm:"name=end_time"`
 	// Whether to use the highest resolution available.
 	HighestResolution *bool `default:"false" multipartForm:"name=highest_resolution"`
 	// An advanced setting. Whether to drop background audio from the final dub. This can improve dub quality where it's known that audio shouldn't have a background track such as for speeches or monologues.
 	DropBackgroundAudio *bool `default:"false" multipartForm:"name=drop_background_audio"`
 	// [BETA] Whether transcripts should have profanities censored with the words '[censored]'
-	UseProfanityFilter optionalnullable.OptionalNullable[bool] `multipartForm:"name=use_profanity_filter"`
+	UseProfanityFilter *bool `multipartForm:"name=use_profanity_filter"`
 	// Whether to prepare dub for edits in dubbing studio or edits as a dubbing resource.
 	DubbingStudio *bool `default:"false" multipartForm:"name=dubbing_studio"`
 	// Instead of using a voice clone in dubbing, use a similar voice from the ElevenLabs Voice Library. Voices used from the library will contribute towards a workspace's custom voices limit, and if there aren't enough available slots the dub will fail. Using this feature requires the caller to have the 'add_voice_from_voice_library' permission on their workspace to access new voices.
@@ -159,7 +158,7 @@ type BodyDubAVideoOrAnAudioFileV1DubbingPost struct {
 	// The mode in which to run this Dubbing job. Defaults to automatic, use manual if specifically providing a CSV transcript to use. Note that manual mode is experimental and production use is strongly discouraged.
 	Mode *ModeEnum `default:"automatic" multipartForm:"name=mode"`
 	// Frames per second to use when parsing a CSV file for dubbing. If not provided, FPS will be inferred from timecodes.
-	CsvFps optionalnullable.OptionalNullable[float64] `multipartForm:"name=csv_fps"`
+	CsvFps *float64 `multipartForm:"name=csv_fps"`
 }
 
 func (b BodyDubAVideoOrAnAudioFileV1DubbingPost) MarshalJSON() ([]byte, error) {
@@ -201,14 +200,14 @@ func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetBackgroundAudioFile() *Back
 	return b.BackgroundAudioFile
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetSourceURL() optionalnullable.OptionalNullable[string] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetSourceURL() *string {
 	if b == nil {
 		return nil
 	}
@@ -222,14 +221,14 @@ func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetSourceLang() *string {
 	return b.SourceLang
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetTargetLang() optionalnullable.OptionalNullable[string] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetTargetLang() *string {
 	if b == nil {
 		return nil
 	}
 	return b.TargetLang
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetTargetAccent() optionalnullable.OptionalNullable[string] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetTargetAccent() *string {
 	if b == nil {
 		return nil
 	}
@@ -250,14 +249,14 @@ func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetWatermark() *bool {
 	return b.Watermark
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetStartTime() optionalnullable.OptionalNullable[int64] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetStartTime() *int64 {
 	if b == nil {
 		return nil
 	}
 	return b.StartTime
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetEndTime() optionalnullable.OptionalNullable[int64] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetEndTime() *int64 {
 	if b == nil {
 		return nil
 	}
@@ -278,7 +277,7 @@ func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetDropBackgroundAudio() *bool
 	return b.DropBackgroundAudio
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetUseProfanityFilter() optionalnullable.OptionalNullable[bool] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetUseProfanityFilter() *bool {
 	if b == nil {
 		return nil
 	}
@@ -306,7 +305,7 @@ func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetMode() *ModeEnum {
 	return b.Mode
 }
 
-func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetCsvFps() optionalnullable.OptionalNullable[float64] {
+func (b *BodyDubAVideoOrAnAudioFileV1DubbingPost) GetCsvFps() *float64 {
 	if b == nil {
 		return nil
 	}

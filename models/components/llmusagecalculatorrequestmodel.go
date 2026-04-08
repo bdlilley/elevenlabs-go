@@ -2,34 +2,30 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type LLMUsageCalculatorRequestModel struct {
 	// Length of the prompt in characters.
-	PromptLength optionalnullable.OptionalNullable[int64] `json:"prompt_length,omitzero"`
+	PromptLength *int64 `json:"prompt_length,omitzero"`
 	// Pages of content in pdf documents OR urls in agent's Knowledge Base.
-	NumberOfPages optionalnullable.OptionalNullable[int64] `json:"number_of_pages,omitzero"`
+	NumberOfPages *int64 `json:"number_of_pages,omitzero"`
 	// Whether RAG is enabled.
-	RagEnabled optionalnullable.OptionalNullable[bool] `json:"rag_enabled,omitzero"`
+	RagEnabled *bool `json:"rag_enabled,omitzero"`
 }
 
-func (l *LLMUsageCalculatorRequestModel) GetPromptLength() optionalnullable.OptionalNullable[int64] {
+func (l *LLMUsageCalculatorRequestModel) GetPromptLength() *int64 {
 	if l == nil {
 		return nil
 	}
 	return l.PromptLength
 }
 
-func (l *LLMUsageCalculatorRequestModel) GetNumberOfPages() optionalnullable.OptionalNullable[int64] {
+func (l *LLMUsageCalculatorRequestModel) GetNumberOfPages() *int64 {
 	if l == nil {
 		return nil
 	}
 	return l.NumberOfPages
 }
 
-func (l *LLMUsageCalculatorRequestModel) GetRagEnabled() optionalnullable.OptionalNullable[bool] {
+func (l *LLMUsageCalculatorRequestModel) GetRagEnabled() *bool {
 	if l == nil {
 		return nil
 	}

@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AudioAnalysisResult struct {
-	Title         string                                                `json:"title"`
-	Description   string                                                `json:"description"`
-	ContentType   optionalnullable.OptionalNullable[string]             `json:"content_type,omitzero"`
-	OverallPacing optionalnullable.OptionalNullable[string]             `json:"overall_pacing,omitzero"`
-	Segments      []AudioSegment                                        `json:"segments,omitzero"`
-	KeyMoments    []AudioKeyMoment                                      `json:"key_moments,omitzero"`
-	Transcription optionalnullable.OptionalNullable[AssetTranscription] `json:"transcription,omitzero"`
+	Title         string              `json:"title"`
+	Description   string              `json:"description"`
+	ContentType   *string             `json:"content_type,omitzero"`
+	OverallPacing *string             `json:"overall_pacing,omitzero"`
+	Segments      []AudioSegment      `json:"segments,omitzero"`
+	KeyMoments    []AudioKeyMoment    `json:"key_moments,omitzero"`
+	Transcription *AssetTranscription `json:"transcription,omitzero"`
 }
 
 func (a AudioAnalysisResult) MarshalJSON() ([]byte, error) {
@@ -42,14 +41,14 @@ func (a *AudioAnalysisResult) GetDescription() string {
 	return a.Description
 }
 
-func (a *AudioAnalysisResult) GetContentType() optionalnullable.OptionalNullable[string] {
+func (a *AudioAnalysisResult) GetContentType() *string {
 	if a == nil {
 		return nil
 	}
 	return a.ContentType
 }
 
-func (a *AudioAnalysisResult) GetOverallPacing() optionalnullable.OptionalNullable[string] {
+func (a *AudioAnalysisResult) GetOverallPacing() *string {
 	if a == nil {
 		return nil
 	}
@@ -70,7 +69,7 @@ func (a *AudioAnalysisResult) GetKeyMoments() []AudioKeyMoment {
 	return a.KeyMoments
 }
 
-func (a *AudioAnalysisResult) GetTranscription() optionalnullable.OptionalNullable[AssetTranscription] {
+func (a *AudioAnalysisResult) GetTranscription() *AssetTranscription {
 	if a == nil {
 		return nil
 	}

@@ -2,17 +2,13 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost struct {
 	// URL of the page to extract content from.
 	URL string `json:"url"`
 	// Author used in the player and inserted at the start of the uploaded article. If not provided, the default author set in the Player settings is used.
-	Author optionalnullable.OptionalNullable[string] `json:"author,omitzero"`
+	Author *string `json:"author,omitzero"`
 	// Title used in the player and inserted at the top of the uploaded article. If not provided, the default title set in the Player settings is used.
-	Title optionalnullable.OptionalNullable[string] `json:"title,omitzero"`
+	Title *string `json:"title,omitzero"`
 }
 
 func (b *BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost) GetURL() string {
@@ -22,14 +18,14 @@ func (b *BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost) GetURL() s
 	return b.URL
 }
 
-func (b *BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost) GetAuthor() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost) GetAuthor() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Author
 }
 
-func (b *BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost) GetTitle() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost) GetTitle() *string {
 	if b == nil {
 		return nil
 	}

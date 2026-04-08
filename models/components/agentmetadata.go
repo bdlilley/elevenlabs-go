@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentMetadata struct {
-	AgentID        string                                    `json:"agent_id"`
-	BranchID       optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
-	WorkflowNodeID optionalnullable.OptionalNullable[string] `json:"workflow_node_id,omitzero"`
-	VersionID      optionalnullable.OptionalNullable[string] `json:"version_id,omitzero"`
+	AgentID        string  `json:"agent_id"`
+	BranchID       *string `json:"branch_id,omitzero"`
+	WorkflowNodeID *string `json:"workflow_node_id,omitzero"`
+	VersionID      *string `json:"version_id,omitzero"`
 }
 
 func (a AgentMetadata) MarshalJSON() ([]byte, error) {
@@ -32,21 +31,21 @@ func (a *AgentMetadata) GetAgentID() string {
 	return a.AgentID
 }
 
-func (a *AgentMetadata) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (a *AgentMetadata) GetBranchID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.BranchID
 }
 
-func (a *AgentMetadata) GetWorkflowNodeID() optionalnullable.OptionalNullable[string] {
+func (a *AgentMetadata) GetWorkflowNodeID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.WorkflowNodeID
 }
 
-func (a *AgentMetadata) GetVersionID() optionalnullable.OptionalNullable[string] {
+func (a *AgentMetadata) GetVersionID() *string {
 	if a == nil {
 		return nil
 	}

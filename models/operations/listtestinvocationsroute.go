@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ListTestInvocationsRouteRequest struct {
@@ -14,7 +13,7 @@ type ListTestInvocationsRouteRequest struct {
 	// How many Tests to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (l ListTestInvocationsRouteRequest) MarshalJSON() ([]byte, error) {
@@ -42,7 +41,7 @@ func (l *ListTestInvocationsRouteRequest) GetPageSize() *int64 {
 	return l.PageSize
 }
 
-func (l *ListTestInvocationsRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (l *ListTestInvocationsRouteRequest) GetCursor() *string {
 	if l == nil {
 		return nil
 	}

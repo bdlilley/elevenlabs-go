@@ -2,17 +2,13 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetTestSuiteInvocationResponseModel struct {
-	ID        string                                    `json:"id"`
-	AgentID   optionalnullable.OptionalNullable[string] `json:"agent_id,omitzero"`
-	BranchID  optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
-	CreatedAt *int64                                    `json:"created_at,omitzero"`
-	FolderID  optionalnullable.OptionalNullable[string] `json:"folder_id,omitzero"`
-	TestRuns  []UnitTestRunResponseModel                `json:"test_runs"`
+	ID        string                     `json:"id"`
+	AgentID   *string                    `json:"agent_id,omitzero"`
+	BranchID  *string                    `json:"branch_id,omitzero"`
+	CreatedAt *int64                     `json:"created_at,omitzero"`
+	FolderID  *string                    `json:"folder_id,omitzero"`
+	TestRuns  []UnitTestRunResponseModel `json:"test_runs"`
 }
 
 func (g *GetTestSuiteInvocationResponseModel) GetID() string {
@@ -22,14 +18,14 @@ func (g *GetTestSuiteInvocationResponseModel) GetID() string {
 	return g.ID
 }
 
-func (g *GetTestSuiteInvocationResponseModel) GetAgentID() optionalnullable.OptionalNullable[string] {
+func (g *GetTestSuiteInvocationResponseModel) GetAgentID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.AgentID
 }
 
-func (g *GetTestSuiteInvocationResponseModel) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetTestSuiteInvocationResponseModel) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}
@@ -43,7 +39,7 @@ func (g *GetTestSuiteInvocationResponseModel) GetCreatedAt() *int64 {
 	return g.CreatedAt
 }
 
-func (g *GetTestSuiteInvocationResponseModel) GetFolderID() optionalnullable.OptionalNullable[string] {
+func (g *GetTestSuiteInvocationResponseModel) GetFolderID() *string {
 	if g == nil {
 		return nil
 	}

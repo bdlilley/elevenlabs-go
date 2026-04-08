@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"io"
 )
 
@@ -111,7 +110,7 @@ type SpeechToSpeechStreamRequest struct {
 	//
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	OptimizeStreamingLatency optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=optimize_streaming_latency"`
+	OptimizeStreamingLatency *int64 `queryParam:"style=form,explode=true,name=optimize_streaming_latency"`
 	// Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
 	OutputFormat *SpeechToSpeechStreamOutputFormatOfTheGeneratedAudio                    `default:"mp3_44100_128" queryParam:"style=form,explode=true,name=output_format"`
 	Body         components.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIDStreamPost `request:"mediaType=multipart/form-data"`
@@ -142,7 +141,7 @@ func (s *SpeechToSpeechStreamRequest) GetEnableLogging() *bool {
 	return s.EnableLogging
 }
 
-func (s *SpeechToSpeechStreamRequest) GetOptimizeStreamingLatency() optionalnullable.OptionalNullable[int64] {
+func (s *SpeechToSpeechStreamRequest) GetOptimizeStreamingLatency() *int64 {
 	if s == nil {
 		return nil
 	}

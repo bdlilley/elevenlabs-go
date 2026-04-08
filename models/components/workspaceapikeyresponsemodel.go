@@ -4,20 +4,19 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WorkspaceAPIKeyResponseModel struct {
-	Name                 string                                              `json:"name"`
-	Hint                 string                                              `json:"hint"`
-	KeyID                string                                              `json:"key_id"`
-	ServiceAccountUserID string                                              `json:"service_account_user_id"`
-	CreatedAtUnix        optionalnullable.OptionalNullable[int64]            `json:"created_at_unix,omitzero"`
-	IsDisabled           *bool                                               `default:"false" json:"is_disabled"`
-	Permissions          optionalnullable.OptionalNullable[[]PermissionType] `json:"permissions,omitzero"`
-	CharacterLimit       optionalnullable.OptionalNullable[int64]            `json:"character_limit,omitzero"`
-	CharacterCount       optionalnullable.OptionalNullable[int64]            `json:"character_count,omitzero"`
-	HashedXiAPIKey       string                                              `json:"hashed_xi_api_key"`
+	Name                 string           `json:"name"`
+	Hint                 string           `json:"hint"`
+	KeyID                string           `json:"key_id"`
+	ServiceAccountUserID string           `json:"service_account_user_id"`
+	CreatedAtUnix        *int64           `json:"created_at_unix,omitzero"`
+	IsDisabled           *bool            `default:"false" json:"is_disabled"`
+	Permissions          []PermissionType `json:"permissions,omitzero"`
+	CharacterLimit       *int64           `json:"character_limit,omitzero"`
+	CharacterCount       *int64           `json:"character_count,omitzero"`
+	HashedXiAPIKey       string           `json:"hashed_xi_api_key"`
 }
 
 func (w WorkspaceAPIKeyResponseModel) MarshalJSON() ([]byte, error) {
@@ -59,7 +58,7 @@ func (w *WorkspaceAPIKeyResponseModel) GetServiceAccountUserID() string {
 	return w.ServiceAccountUserID
 }
 
-func (w *WorkspaceAPIKeyResponseModel) GetCreatedAtUnix() optionalnullable.OptionalNullable[int64] {
+func (w *WorkspaceAPIKeyResponseModel) GetCreatedAtUnix() *int64 {
 	if w == nil {
 		return nil
 	}
@@ -73,21 +72,21 @@ func (w *WorkspaceAPIKeyResponseModel) GetIsDisabled() *bool {
 	return w.IsDisabled
 }
 
-func (w *WorkspaceAPIKeyResponseModel) GetPermissions() optionalnullable.OptionalNullable[[]PermissionType] {
+func (w *WorkspaceAPIKeyResponseModel) GetPermissions() []PermissionType {
 	if w == nil {
 		return nil
 	}
 	return w.Permissions
 }
 
-func (w *WorkspaceAPIKeyResponseModel) GetCharacterLimit() optionalnullable.OptionalNullable[int64] {
+func (w *WorkspaceAPIKeyResponseModel) GetCharacterLimit() *int64 {
 	if w == nil {
 		return nil
 	}
 	return w.CharacterLimit
 }
 
-func (w *WorkspaceAPIKeyResponseModel) GetCharacterCount() optionalnullable.OptionalNullable[int64] {
+func (w *WorkspaceAPIKeyResponseModel) GetCharacterCount() *int64 {
 	if w == nil {
 		return nil
 	}

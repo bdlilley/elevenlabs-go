@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentSummaryResponseModel struct {
@@ -18,7 +17,7 @@ type AgentSummaryResponseModel struct {
 	CreatedAtUnixSecs int64              `json:"created_at_unix_secs"`
 	AccessInfo        ResourceAccessInfo `json:"access_info"`
 	// The time of the most recent call in unix seconds, null if no calls have been made
-	LastCallTimeUnixSecs optionalnullable.OptionalNullable[int64] `json:"last_call_time_unix_secs,omitzero"`
+	LastCallTimeUnixSecs *int64 `json:"last_call_time_unix_secs,omitzero"`
 	// Whether the agent is archived
 	Archived *bool `default:"false" json:"archived"`
 }
@@ -69,7 +68,7 @@ func (a *AgentSummaryResponseModel) GetAccessInfo() ResourceAccessInfo {
 	return a.AccessInfo
 }
 
-func (a *AgentSummaryResponseModel) GetLastCallTimeUnixSecs() optionalnullable.OptionalNullable[int64] {
+func (a *AgentSummaryResponseModel) GetLastCallTimeUnixSecs() *int64 {
 	if a == nil {
 		return nil
 	}

@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAgentLinkResponseModel struct {
 	// The ID of the agent
 	AgentID string `json:"agent_id"`
 	// The token data for the agent
-	Token optionalnullable.OptionalNullable[ConversationTokenDBModel] `json:"token,omitzero"`
+	Token *ConversationTokenDBModel `json:"token,omitzero"`
 }
 
 func (g GetAgentLinkResponseModel) MarshalJSON() ([]byte, error) {
@@ -32,7 +31,7 @@ func (g *GetAgentLinkResponseModel) GetAgentID() string {
 	return g.AgentID
 }
 
-func (g *GetAgentLinkResponseModel) GetToken() optionalnullable.OptionalNullable[ConversationTokenDBModel] {
+func (g *GetAgentLinkResponseModel) GetToken() *ConversationTokenDBModel {
 	if g == nil {
 		return nil
 	}

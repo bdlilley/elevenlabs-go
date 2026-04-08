@@ -2,19 +2,15 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetSpeechHistoryResponseModel struct {
 	// A list of speech history items.
 	History []SpeechHistoryItemResponseModel `json:"history"`
 	// The ID of the last history item.
-	LastHistoryItemID optionalnullable.OptionalNullable[string] `json:"last_history_item_id,omitzero"`
+	LastHistoryItemID *string `json:"last_history_item_id,omitzero"`
 	// Whether there are more history items to fetch.
 	HasMore bool `json:"has_more"`
 	// The timestamp of the last history item.
-	ScannedUntil optionalnullable.OptionalNullable[int64] `json:"scanned_until,omitzero"`
+	ScannedUntil *int64 `json:"scanned_until,omitzero"`
 }
 
 func (g *GetSpeechHistoryResponseModel) GetHistory() []SpeechHistoryItemResponseModel {
@@ -24,7 +20,7 @@ func (g *GetSpeechHistoryResponseModel) GetHistory() []SpeechHistoryItemResponse
 	return g.History
 }
 
-func (g *GetSpeechHistoryResponseModel) GetLastHistoryItemID() optionalnullable.OptionalNullable[string] {
+func (g *GetSpeechHistoryResponseModel) GetLastHistoryItemID() *string {
 	if g == nil {
 		return nil
 	}
@@ -38,7 +34,7 @@ func (g *GetSpeechHistoryResponseModel) GetHasMore() bool {
 	return g.HasMore
 }
 
-func (g *GetSpeechHistoryResponseModel) GetScannedUntil() optionalnullable.OptionalNullable[int64] {
+func (g *GetSpeechHistoryResponseModel) GetScannedUntil() *int64 {
 	if g == nil {
 		return nil
 	}

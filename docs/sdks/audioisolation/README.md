@@ -22,7 +22,6 @@ import(
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"os"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -43,7 +42,7 @@ func main() {
             FileName: "example.file",
             Content: example,
         },
-        FileFormat: optionalnullable.From(elevenlabsgo.Pointer(components.BodyAudioIsolationV1AudioIsolationPostFileFormatPcmS16le16)),
+        FileFormat: components.BodyAudioIsolationV1AudioIsolationPostFileFormatPcmS16le16.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -88,7 +87,6 @@ import(
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"os"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -109,7 +107,7 @@ func main() {
             FileName: "example.file",
             Content: example,
         },
-        FileFormat: optionalnullable.From(elevenlabsgo.Pointer(components.BodyAudioIsolationStreamV1AudioIsolationStreamPostFileFormatPcmS16le16)),
+        FileFormat: components.BodyAudioIsolationStreamV1AudioIsolationStreamPostFileFormatPcmS16le16.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)

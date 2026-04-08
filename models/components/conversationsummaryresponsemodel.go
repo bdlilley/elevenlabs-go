@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationSummaryResponseModelStatus string
@@ -33,24 +32,24 @@ func (e *ConversationSummaryResponseModelStatus) IsExact() bool {
 }
 
 type ConversationSummaryResponseModel struct {
-	AgentID                      string                                                          `json:"agent_id"`
-	BranchID                     optionalnullable.OptionalNullable[string]                       `json:"branch_id,omitzero"`
-	VersionID                    optionalnullable.OptionalNullable[string]                       `json:"version_id,omitzero"`
-	AgentName                    optionalnullable.OptionalNullable[string]                       `json:"agent_name,omitzero"`
-	ConversationID               string                                                          `json:"conversation_id"`
-	StartTimeUnixSecs            int64                                                           `json:"start_time_unix_secs"`
-	CallDurationSecs             int64                                                           `json:"call_duration_secs"`
-	MessageCount                 int64                                                           `json:"message_count"`
-	Status                       ConversationSummaryResponseModelStatus                          `json:"status"`
-	TerminationReason            *string                                                         `default:"" json:"termination_reason"`
-	CallSuccessful               EvaluationSuccessResult                                         `json:"call_successful"`
-	TranscriptSummary            optionalnullable.OptionalNullable[string]                       `json:"transcript_summary,omitzero"`
-	CallSummaryTitle             optionalnullable.OptionalNullable[string]                       `json:"call_summary_title,omitzero"`
-	MainLanguage                 optionalnullable.OptionalNullable[string]                       `json:"main_language,omitzero"`
-	ConversationInitiationSource optionalnullable.OptionalNullable[ConversationInitiationSource] `default:"unknown" json:"conversation_initiation_source"`
-	ToolNames                    optionalnullable.OptionalNullable[[]string]                     `json:"tool_names,omitzero"`
-	Direction                    optionalnullable.OptionalNullable[TelephonyDirection]           `default:"inbound" json:"direction"`
-	Rating                       optionalnullable.OptionalNullable[float64]                      `json:"rating,omitzero"`
+	AgentID                      string                                 `json:"agent_id"`
+	BranchID                     *string                                `json:"branch_id,omitzero"`
+	VersionID                    *string                                `json:"version_id,omitzero"`
+	AgentName                    *string                                `json:"agent_name,omitzero"`
+	ConversationID               string                                 `json:"conversation_id"`
+	StartTimeUnixSecs            int64                                  `json:"start_time_unix_secs"`
+	CallDurationSecs             int64                                  `json:"call_duration_secs"`
+	MessageCount                 int64                                  `json:"message_count"`
+	Status                       ConversationSummaryResponseModelStatus `json:"status"`
+	TerminationReason            *string                                `default:"" json:"termination_reason"`
+	CallSuccessful               EvaluationSuccessResult                `json:"call_successful"`
+	TranscriptSummary            *string                                `json:"transcript_summary,omitzero"`
+	CallSummaryTitle             *string                                `json:"call_summary_title,omitzero"`
+	MainLanguage                 *string                                `json:"main_language,omitzero"`
+	ConversationInitiationSource *ConversationInitiationSource          `default:"unknown" json:"conversation_initiation_source"`
+	ToolNames                    []string                               `json:"tool_names,omitzero"`
+	Direction                    *TelephonyDirection                    `default:"inbound" json:"direction"`
+	Rating                       *float64                               `json:"rating,omitzero"`
 }
 
 func (c ConversationSummaryResponseModel) MarshalJSON() ([]byte, error) {
@@ -71,21 +70,21 @@ func (c *ConversationSummaryResponseModel) GetAgentID() string {
 	return c.AgentID
 }
 
-func (c *ConversationSummaryResponseModel) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationSummaryResponseModel) GetBranchID() *string {
 	if c == nil {
 		return nil
 	}
 	return c.BranchID
 }
 
-func (c *ConversationSummaryResponseModel) GetVersionID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationSummaryResponseModel) GetVersionID() *string {
 	if c == nil {
 		return nil
 	}
 	return c.VersionID
 }
 
-func (c *ConversationSummaryResponseModel) GetAgentName() optionalnullable.OptionalNullable[string] {
+func (c *ConversationSummaryResponseModel) GetAgentName() *string {
 	if c == nil {
 		return nil
 	}
@@ -141,49 +140,49 @@ func (c *ConversationSummaryResponseModel) GetCallSuccessful() EvaluationSuccess
 	return c.CallSuccessful
 }
 
-func (c *ConversationSummaryResponseModel) GetTranscriptSummary() optionalnullable.OptionalNullable[string] {
+func (c *ConversationSummaryResponseModel) GetTranscriptSummary() *string {
 	if c == nil {
 		return nil
 	}
 	return c.TranscriptSummary
 }
 
-func (c *ConversationSummaryResponseModel) GetCallSummaryTitle() optionalnullable.OptionalNullable[string] {
+func (c *ConversationSummaryResponseModel) GetCallSummaryTitle() *string {
 	if c == nil {
 		return nil
 	}
 	return c.CallSummaryTitle
 }
 
-func (c *ConversationSummaryResponseModel) GetMainLanguage() optionalnullable.OptionalNullable[string] {
+func (c *ConversationSummaryResponseModel) GetMainLanguage() *string {
 	if c == nil {
 		return nil
 	}
 	return c.MainLanguage
 }
 
-func (c *ConversationSummaryResponseModel) GetConversationInitiationSource() optionalnullable.OptionalNullable[ConversationInitiationSource] {
+func (c *ConversationSummaryResponseModel) GetConversationInitiationSource() *ConversationInitiationSource {
 	if c == nil {
 		return nil
 	}
 	return c.ConversationInitiationSource
 }
 
-func (c *ConversationSummaryResponseModel) GetToolNames() optionalnullable.OptionalNullable[[]string] {
+func (c *ConversationSummaryResponseModel) GetToolNames() []string {
 	if c == nil {
 		return nil
 	}
 	return c.ToolNames
 }
 
-func (c *ConversationSummaryResponseModel) GetDirection() optionalnullable.OptionalNullable[TelephonyDirection] {
+func (c *ConversationSummaryResponseModel) GetDirection() *TelephonyDirection {
 	if c == nil {
 		return nil
 	}
 	return c.Direction
 }
 
-func (c *ConversationSummaryResponseModel) GetRating() optionalnullable.OptionalNullable[float64] {
+func (c *ConversationSummaryResponseModel) GetRating() *float64 {
 	if c == nil {
 		return nil
 	}

@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -153,7 +152,7 @@ func (u UpdateSimulationTestRequestDynamicVariables) MarshalJSON() ([]byte, erro
 
 type UpdateSimulationTestRequest struct {
 	// Metadata of a conversation this test was created from (if applicable).
-	FromConversationMetadata optionalnullable.OptionalNullable[TestFromConversationMetadataInput] `json:"from_conversation_metadata,omitzero"`
+	FromConversationMetadata *TestFromConversationMetadataInput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]*UpdateSimulationTestRequestDynamicVariables `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelInput         `json:"chat_history,omitzero"`
@@ -166,12 +165,12 @@ type UpdateSimulationTestRequest struct {
 	// Maximum number of conversation turns for simulation tests.
 	SimulationMaxTurns *int64 `default:"5" json:"simulation_max_turns"`
 	// The environment to use when running this simulation test. If not provided, defaults to 'production'.
-	SimulationEnvironment optionalnullable.OptionalNullable[string] `json:"simulation_environment,omitzero"`
+	SimulationEnvironment *string `json:"simulation_environment,omitzero"`
 	// Simulation/preview-side config: tools are identified by IDs, resolved to names at runtime.
 	ToolMockConfig *SimulationToolMockBehaviorConfig `json:"tool_mock_config,omitzero"`
 	Name           string                            `json:"name"`
 	// The ID of the parent folder. If not provided, the test will be moved to the root level.
-	ParentFolderID optionalnullable.OptionalNullable[string] `json:"parent_folder_id,omitzero"`
+	ParentFolderID *string `json:"parent_folder_id,omitzero"`
 }
 
 func (u UpdateSimulationTestRequest) MarshalJSON() ([]byte, error) {
@@ -185,7 +184,7 @@ func (u *UpdateSimulationTestRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (u *UpdateSimulationTestRequest) GetFromConversationMetadata() optionalnullable.OptionalNullable[TestFromConversationMetadataInput] {
+func (u *UpdateSimulationTestRequest) GetFromConversationMetadata() *TestFromConversationMetadataInput {
 	if u == nil {
 		return nil
 	}
@@ -231,7 +230,7 @@ func (u *UpdateSimulationTestRequest) GetSimulationMaxTurns() *int64 {
 	return u.SimulationMaxTurns
 }
 
-func (u *UpdateSimulationTestRequest) GetSimulationEnvironment() optionalnullable.OptionalNullable[string] {
+func (u *UpdateSimulationTestRequest) GetSimulationEnvironment() *string {
 	if u == nil {
 		return nil
 	}
@@ -252,7 +251,7 @@ func (u *UpdateSimulationTestRequest) GetName() string {
 	return u.Name
 }
 
-func (u *UpdateSimulationTestRequest) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (u *UpdateSimulationTestRequest) GetParentFolderID() *string {
 	if u == nil {
 		return nil
 	}

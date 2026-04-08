@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TestFromConversationMetadataOutput struct {
 	ConversationID     string                                           `json:"conversation_id"`
 	AgentID            string                                           `json:"agent_id"`
-	BranchID           optionalnullable.OptionalNullable[string]        `json:"branch_id,omitzero"`
-	WorkflowNodeID     optionalnullable.OptionalNullable[string]        `json:"workflow_node_id,omitzero"`
+	BranchID           *string                                          `json:"branch_id,omitzero"`
+	WorkflowNodeID     *string                                          `json:"workflow_node_id,omitzero"`
 	OriginalAgentReply []ConversationHistoryTranscriptCommonModelOutput `json:"original_agent_reply,omitzero"`
 }
 
@@ -40,14 +39,14 @@ func (t *TestFromConversationMetadataOutput) GetAgentID() string {
 	return t.AgentID
 }
 
-func (t *TestFromConversationMetadataOutput) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (t *TestFromConversationMetadataOutput) GetBranchID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.BranchID
 }
 
-func (t *TestFromConversationMetadataOutput) GetWorkflowNodeID() optionalnullable.OptionalNullable[string] {
+func (t *TestFromConversationMetadataOutput) GetWorkflowNodeID() *string {
 	if t == nil {
 		return nil
 	}

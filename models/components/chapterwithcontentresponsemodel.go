@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // ChapterWithContentResponseModelState - The state of the chapter.
@@ -36,24 +35,24 @@ type ChapterWithContentResponseModel struct {
 	// The name of the chapter.
 	Name string `json:"name"`
 	// The last conversion date of the chapter.
-	LastConversionDateUnix optionalnullable.OptionalNullable[int64] `json:"last_conversion_date_unix,omitzero"`
+	LastConversionDateUnix *int64 `json:"last_conversion_date_unix,omitzero"`
 	// The conversion progress of the chapter.
-	ConversionProgress optionalnullable.OptionalNullable[float64] `json:"conversion_progress,omitzero"`
+	ConversionProgress *float64 `json:"conversion_progress,omitzero"`
 	// Whether the chapter can be downloaded.
 	CanBeDownloaded bool `json:"can_be_downloaded"`
 	// The state of the chapter.
 	State ChapterWithContentResponseModelState `json:"state"`
 	// Whether the chapter has a video.
-	HasVideo optionalnullable.OptionalNullable[bool] `json:"has_video,omitzero"`
+	HasVideo *bool `json:"has_video,omitzero"`
 	// Whether the chapter has any visual content (video, image, or text clips).
-	HasVisualContent optionalnullable.OptionalNullable[bool] `json:"has_visual_content,omitzero"`
+	HasVisualContent *bool `json:"has_visual_content,omitzero"`
 	// List of voice ids used by the chapter
-	VoiceIds optionalnullable.OptionalNullable[[]string] `json:"voice_ids,omitzero"`
+	VoiceIds []string `json:"voice_ids,omitzero"`
 	// The statistics of the chapter.
-	Statistics optionalnullable.OptionalNullable[ChapterStatisticsResponseModel] `json:"statistics,omitzero"`
+	Statistics *ChapterStatisticsResponseModel `json:"statistics,omitzero"`
 	// The last conversion error of the chapter.
-	LastConversionError optionalnullable.OptionalNullable[string] `json:"last_conversion_error,omitzero"`
-	Content             ChapterContentResponseModel               `json:"content"`
+	LastConversionError *string                     `json:"last_conversion_error,omitzero"`
+	Content             ChapterContentResponseModel `json:"content"`
 }
 
 func (c ChapterWithContentResponseModel) MarshalJSON() ([]byte, error) {
@@ -81,14 +80,14 @@ func (c *ChapterWithContentResponseModel) GetName() string {
 	return c.Name
 }
 
-func (c *ChapterWithContentResponseModel) GetLastConversionDateUnix() optionalnullable.OptionalNullable[int64] {
+func (c *ChapterWithContentResponseModel) GetLastConversionDateUnix() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.LastConversionDateUnix
 }
 
-func (c *ChapterWithContentResponseModel) GetConversionProgress() optionalnullable.OptionalNullable[float64] {
+func (c *ChapterWithContentResponseModel) GetConversionProgress() *float64 {
 	if c == nil {
 		return nil
 	}
@@ -109,35 +108,35 @@ func (c *ChapterWithContentResponseModel) GetState() ChapterWithContentResponseM
 	return c.State
 }
 
-func (c *ChapterWithContentResponseModel) GetHasVideo() optionalnullable.OptionalNullable[bool] {
+func (c *ChapterWithContentResponseModel) GetHasVideo() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.HasVideo
 }
 
-func (c *ChapterWithContentResponseModel) GetHasVisualContent() optionalnullable.OptionalNullable[bool] {
+func (c *ChapterWithContentResponseModel) GetHasVisualContent() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.HasVisualContent
 }
 
-func (c *ChapterWithContentResponseModel) GetVoiceIds() optionalnullable.OptionalNullable[[]string] {
+func (c *ChapterWithContentResponseModel) GetVoiceIds() []string {
 	if c == nil {
 		return nil
 	}
 	return c.VoiceIds
 }
 
-func (c *ChapterWithContentResponseModel) GetStatistics() optionalnullable.OptionalNullable[ChapterStatisticsResponseModel] {
+func (c *ChapterWithContentResponseModel) GetStatistics() *ChapterStatisticsResponseModel {
 	if c == nil {
 		return nil
 	}
 	return c.Statistics
 }
 
-func (c *ChapterWithContentResponseModel) GetLastConversionError() optionalnullable.OptionalNullable[string] {
+func (c *ChapterWithContentResponseModel) GetLastConversionError() *string {
 	if c == nil {
 		return nil
 	}

@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type StreamingAudioChunkWithTimestampsResponseModel struct {
 	// Base64 encoded audio data
 	AudioBase64 string `json:"audio_base64"`
 	// Timestamp information for each character in the original text
-	Alignment optionalnullable.OptionalNullable[CharacterAlignmentResponseModel] `json:"alignment,omitzero"`
+	Alignment *CharacterAlignmentResponseModel `json:"alignment,omitzero"`
 	// Timestamp information for each character in the normalized text
-	NormalizedAlignment optionalnullable.OptionalNullable[CharacterAlignmentResponseModel] `json:"normalized_alignment,omitzero"`
+	NormalizedAlignment *CharacterAlignmentResponseModel `json:"normalized_alignment,omitzero"`
 }
 
 func (s StreamingAudioChunkWithTimestampsResponseModel) MarshalJSON() ([]byte, error) {
@@ -34,14 +33,14 @@ func (s *StreamingAudioChunkWithTimestampsResponseModel) GetAudioBase64() string
 	return s.AudioBase64
 }
 
-func (s *StreamingAudioChunkWithTimestampsResponseModel) GetAlignment() optionalnullable.OptionalNullable[CharacterAlignmentResponseModel] {
+func (s *StreamingAudioChunkWithTimestampsResponseModel) GetAlignment() *CharacterAlignmentResponseModel {
 	if s == nil {
 		return nil
 	}
 	return s.Alignment
 }
 
-func (s *StreamingAudioChunkWithTimestampsResponseModel) GetNormalizedAlignment() optionalnullable.OptionalNullable[CharacterAlignmentResponseModel] {
+func (s *StreamingAudioChunkWithTimestampsResponseModel) GetNormalizedAlignment() *CharacterAlignmentResponseModel {
 	if s == nil {
 		return nil
 	}

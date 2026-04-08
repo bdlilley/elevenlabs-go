@@ -2,16 +2,12 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost struct {
 	// A name to make the agent easier to find
-	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	Name *string `json:"name,omitzero"`
 }
 
-func (b *BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost) GetName() *string {
 	if b == nil {
 		return nil
 	}

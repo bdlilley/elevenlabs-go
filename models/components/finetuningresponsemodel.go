@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type FineTuningResponseModelState string
@@ -45,23 +44,23 @@ type FineTuningResponseModel struct {
 	// Whether a manual verification was requested for the fine-tuning process.
 	ManualVerificationRequested bool `json:"manual_verification_requested"`
 	// The language of the fine-tuning process.
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// The progress of the fine-tuning process.
-	Progress optionalnullable.OptionalNullable[map[string]float64] `json:"progress,omitzero"`
+	Progress map[string]float64 `json:"progress,omitzero"`
 	// The message of the fine-tuning process.
-	Message optionalnullable.OptionalNullable[map[string]string] `json:"message,omitzero"`
+	Message map[string]string `json:"message,omitzero"`
 	// The duration of the dataset in seconds.
-	DatasetDurationSeconds optionalnullable.OptionalNullable[float64] `json:"dataset_duration_seconds,omitzero"`
+	DatasetDurationSeconds *float64 `json:"dataset_duration_seconds,omitzero"`
 	// The number of verification attempts.
-	VerificationAttempts optionalnullable.OptionalNullable[[]VerificationAttemptResponseModel] `json:"verification_attempts,omitzero"`
+	VerificationAttempts []VerificationAttemptResponseModel `json:"verification_attempts,omitzero"`
 	// List of slice IDs.
-	SliceIds optionalnullable.OptionalNullable[[]string] `json:"slice_ids,omitzero"`
+	SliceIds []string `json:"slice_ids,omitzero"`
 	// The manual verification of the fine-tuning process.
-	ManualVerification optionalnullable.OptionalNullable[ManualVerificationResponseModel] `json:"manual_verification,omitzero"`
+	ManualVerification *ManualVerificationResponseModel `json:"manual_verification,omitzero"`
 	// The maximum number of verification attempts.
-	MaxVerificationAttempts optionalnullable.OptionalNullable[int64] `json:"max_verification_attempts,omitzero"`
+	MaxVerificationAttempts *int64 `json:"max_verification_attempts,omitzero"`
 	// The next maximum verification attempts reset time in Unix milliseconds.
-	NextMaxVerificationAttemptsResetUnixMs optionalnullable.OptionalNullable[int64] `json:"next_max_verification_attempts_reset_unix_ms,omitzero"`
+	NextMaxVerificationAttemptsResetUnixMs *int64 `json:"next_max_verification_attempts_reset_unix_ms,omitzero"`
 }
 
 func (f FineTuningResponseModel) MarshalJSON() ([]byte, error) {
@@ -110,63 +109,63 @@ func (f *FineTuningResponseModel) GetManualVerificationRequested() bool {
 	return f.ManualVerificationRequested
 }
 
-func (f *FineTuningResponseModel) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (f *FineTuningResponseModel) GetLanguage() *string {
 	if f == nil {
 		return nil
 	}
 	return f.Language
 }
 
-func (f *FineTuningResponseModel) GetProgress() optionalnullable.OptionalNullable[map[string]float64] {
+func (f *FineTuningResponseModel) GetProgress() map[string]float64 {
 	if f == nil {
 		return nil
 	}
 	return f.Progress
 }
 
-func (f *FineTuningResponseModel) GetMessage() optionalnullable.OptionalNullable[map[string]string] {
+func (f *FineTuningResponseModel) GetMessage() map[string]string {
 	if f == nil {
 		return nil
 	}
 	return f.Message
 }
 
-func (f *FineTuningResponseModel) GetDatasetDurationSeconds() optionalnullable.OptionalNullable[float64] {
+func (f *FineTuningResponseModel) GetDatasetDurationSeconds() *float64 {
 	if f == nil {
 		return nil
 	}
 	return f.DatasetDurationSeconds
 }
 
-func (f *FineTuningResponseModel) GetVerificationAttempts() optionalnullable.OptionalNullable[[]VerificationAttemptResponseModel] {
+func (f *FineTuningResponseModel) GetVerificationAttempts() []VerificationAttemptResponseModel {
 	if f == nil {
 		return nil
 	}
 	return f.VerificationAttempts
 }
 
-func (f *FineTuningResponseModel) GetSliceIds() optionalnullable.OptionalNullable[[]string] {
+func (f *FineTuningResponseModel) GetSliceIds() []string {
 	if f == nil {
 		return nil
 	}
 	return f.SliceIds
 }
 
-func (f *FineTuningResponseModel) GetManualVerification() optionalnullable.OptionalNullable[ManualVerificationResponseModel] {
+func (f *FineTuningResponseModel) GetManualVerification() *ManualVerificationResponseModel {
 	if f == nil {
 		return nil
 	}
 	return f.ManualVerification
 }
 
-func (f *FineTuningResponseModel) GetMaxVerificationAttempts() optionalnullable.OptionalNullable[int64] {
+func (f *FineTuningResponseModel) GetMaxVerificationAttempts() *int64 {
 	if f == nil {
 		return nil
 	}
 	return f.MaxVerificationAttempts
 }
 
-func (f *FineTuningResponseModel) GetNextMaxVerificationAttemptsResetUnixMs() optionalnullable.OptionalNullable[int64] {
+func (f *FineTuningResponseModel) GetNextMaxVerificationAttemptsResetUnixMs() *int64 {
 	if f == nil {
 		return nil
 	}

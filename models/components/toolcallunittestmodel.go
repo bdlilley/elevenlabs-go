@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -153,16 +152,16 @@ func (u ToolCallUnitTestModelDynamicVariables) MarshalJSON() ([]byte, error) {
 
 type ToolCallUnitTestModel struct {
 	// Metadata of a conversation this test was created from (if applicable).
-	FromConversationMetadata optionalnullable.OptionalNullable[TestFromConversationMetadataOutput] `json:"from_conversation_metadata,omitzero"`
+	FromConversationMetadata *TestFromConversationMetadataOutput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]*ToolCallUnitTestModelDynamicVariables `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelOutput  `json:"chat_history,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"tool" json:"type"`
 	// How to evaluate the agent's tool call (if any). If empty, the tool call is not evaluated.
-	ToolCallParameters optionalnullable.OptionalNullable[UnitTestToolCallEvaluationModelOutput] `json:"tool_call_parameters,omitzero"`
+	ToolCallParameters *UnitTestToolCallEvaluationModelOutput `json:"tool_call_parameters,omitzero"`
 	// If set to True this test will pass if any tool call returned by the LLM matches the criteria. Otherwise it will fail if more than one tool is returned by the agent.
-	CheckAnyToolMatches optionalnullable.OptionalNullable[bool] `json:"check_any_tool_matches,omitzero"`
+	CheckAnyToolMatches *bool `json:"check_any_tool_matches,omitzero"`
 }
 
 func (t ToolCallUnitTestModel) MarshalJSON() ([]byte, error) {
@@ -176,7 +175,7 @@ func (t *ToolCallUnitTestModel) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (t *ToolCallUnitTestModel) GetFromConversationMetadata() optionalnullable.OptionalNullable[TestFromConversationMetadataOutput] {
+func (t *ToolCallUnitTestModel) GetFromConversationMetadata() *TestFromConversationMetadataOutput {
 	if t == nil {
 		return nil
 	}
@@ -201,14 +200,14 @@ func (t *ToolCallUnitTestModel) GetType() *string {
 	return types.Pointer("tool")
 }
 
-func (t *ToolCallUnitTestModel) GetToolCallParameters() optionalnullable.OptionalNullable[UnitTestToolCallEvaluationModelOutput] {
+func (t *ToolCallUnitTestModel) GetToolCallParameters() *UnitTestToolCallEvaluationModelOutput {
 	if t == nil {
 		return nil
 	}
 	return t.ToolCallParameters
 }
 
-func (t *ToolCallUnitTestModel) GetCheckAnyToolMatches() optionalnullable.OptionalNullable[bool] {
+func (t *ToolCallUnitTestModel) GetCheckAnyToolMatches() *bool {
 	if t == nil {
 		return nil
 	}

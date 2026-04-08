@@ -4,20 +4,19 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost struct {
 	// If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse.
 	RemoveBackgroundNoise *bool `default:"false" json:"remove_background_noise"`
 	// Speaker IDs to be used for PVC training. Make sure you send all the speaker IDs you want to use for PVC training in one request because the last request will override the previous ones.
-	SelectedSpeakerIds optionalnullable.OptionalNullable[[]string] `json:"selected_speaker_ids,omitzero"`
+	SelectedSpeakerIds []string `json:"selected_speaker_ids,omitzero"`
 	// The start time of the audio to be used for PVC training. Time should be in milliseconds
-	TrimStartTime optionalnullable.OptionalNullable[int64] `json:"trim_start_time,omitzero"`
+	TrimStartTime *int64 `json:"trim_start_time,omitzero"`
 	// The end time of the audio to be used for PVC training. Time should be in milliseconds
-	TrimEndTime optionalnullable.OptionalNullable[int64] `json:"trim_end_time,omitzero"`
+	TrimEndTime *int64 `json:"trim_end_time,omitzero"`
 	// The name of the audio file to be used for PVC training.
-	FileName optionalnullable.OptionalNullable[string] `json:"file_name,omitzero"`
+	FileName *string `json:"file_name,omitzero"`
 }
 
 func (b BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) MarshalJSON() ([]byte, error) {
@@ -38,28 +37,28 @@ func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetRemov
 	return b.RemoveBackgroundNoise
 }
 
-func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetSelectedSpeakerIds() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetSelectedSpeakerIds() []string {
 	if b == nil {
 		return nil
 	}
 	return b.SelectedSpeakerIds
 }
 
-func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetTrimStartTime() optionalnullable.OptionalNullable[int64] {
+func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetTrimStartTime() *int64 {
 	if b == nil {
 		return nil
 	}
 	return b.TrimStartTime
 }
 
-func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetTrimEndTime() optionalnullable.OptionalNullable[int64] {
+func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetTrimEndTime() *int64 {
 	if b == nil {
 		return nil
 	}
 	return b.TrimEndTime
 }
 
-func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetFileName() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost) GetFileName() *string {
 	if b == nil {
 		return nil
 	}

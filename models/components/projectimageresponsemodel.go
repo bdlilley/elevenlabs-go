@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -25,13 +24,13 @@ type ProjectImageResponseModel struct {
 	DurationMs    int64   `json:"duration_ms"`
 	Order         string  `json:"order"`
 	// Defines asset positioning and transformation on canvas.
-	CanvasPlacement   CanvasPlacement                           `json:"canvas_placement"`
-	Animation         *ClipAnimation                            `json:"animation,omitzero"`
-	Opacity           *float64                                  `default:"1" json:"opacity"`
-	CreatedAtMs       int64                                     `json:"created_at_ms"`
-	UpdatedAtMs       int64                                     `json:"updated_at_ms"`
-	CurrentSnapshotID optionalnullable.OptionalNullable[string] `json:"current_snapshot_id,omitzero"`
-	SourceAssetID     optionalnullable.OptionalNullable[string] `json:"source_asset_id,omitzero"`
+	CanvasPlacement   CanvasPlacement `json:"canvas_placement"`
+	Animation         *ClipAnimation  `json:"animation,omitzero"`
+	Opacity           *float64        `default:"1" json:"opacity"`
+	CreatedAtMs       int64           `json:"created_at_ms"`
+	UpdatedAtMs       int64           `json:"updated_at_ms"`
+	CurrentSnapshotID *string         `json:"current_snapshot_id,omitzero"`
+	SourceAssetID     *string         `json:"source_asset_id,omitzero"`
 }
 
 func (p ProjectImageResponseModel) MarshalJSON() ([]byte, error) {
@@ -165,14 +164,14 @@ func (p *ProjectImageResponseModel) GetUpdatedAtMs() int64 {
 	return p.UpdatedAtMs
 }
 
-func (p *ProjectImageResponseModel) GetCurrentSnapshotID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectImageResponseModel) GetCurrentSnapshotID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.CurrentSnapshotID
 }
 
-func (p *ProjectImageResponseModel) GetSourceAssetID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectImageResponseModel) GetSourceAssetID() *string {
 	if p == nil {
 		return nil
 	}

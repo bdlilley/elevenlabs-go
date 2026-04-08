@@ -4,12 +4,11 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TurnConfigOverride struct {
 	// Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses.
-	SoftTimeoutConfig optionalnullable.OptionalNullable[SoftTimeoutConfigOverride] `json:"soft_timeout_config,omitzero"`
+	SoftTimeoutConfig *SoftTimeoutConfigOverride `json:"soft_timeout_config,omitzero"`
 }
 
 func (t TurnConfigOverride) MarshalJSON() ([]byte, error) {
@@ -23,7 +22,7 @@ func (t *TurnConfigOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (t *TurnConfigOverride) GetSoftTimeoutConfig() optionalnullable.OptionalNullable[SoftTimeoutConfigOverride] {
+func (t *TurnConfigOverride) GetSoftTimeoutConfig() *SoftTimeoutConfigOverride {
 	if t == nil {
 		return nil
 	}

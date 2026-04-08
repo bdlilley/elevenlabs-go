@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization - This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped.
@@ -45,17 +44,17 @@ type BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost struct {
 	// Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property.
 	ModelID *string `default:"eleven_v3" json:"model_id"`
 	// Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support provided language code, an error will be returned.
-	LanguageCode optionalnullable.OptionalNullable[string] `json:"language_code,omitzero"`
+	LanguageCode *string `json:"language_code,omitzero"`
 	// Settings controlling the dialogue generation.
-	Settings optionalnullable.OptionalNullable[ModelSettingsResponseModel] `json:"settings,omitzero"`
+	Settings *ModelSettingsResponseModel `json:"settings,omitzero"`
 	// A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request
-	PronunciationDictionaryLocators optionalnullable.OptionalNullable[[]PronunciationDictionaryVersionLocatorRequestModel] `json:"pronunciation_dictionary_locators,omitzero"`
+	PronunciationDictionaryLocators []PronunciationDictionaryVersionLocatorRequestModel `json:"pronunciation_dictionary_locators,omitzero"`
 	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295.
-	Seed optionalnullable.OptionalNullable[int64] `json:"seed,omitzero"`
+	Seed *int64 `json:"seed,omitzero"`
 	// This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped.
 	ApplyTextNormalization *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization `default:"auto" json:"apply_text_normalization"`
 	// Avatar context when this generation is made from the Avatars video editor.
-	AvatarContext optionalnullable.OptionalNullable[AvatarContextRequestModel] `json:"avatar_context,omitzero"`
+	AvatarContext *AvatarContextRequestModel `json:"avatar_context,omitzero"`
 }
 
 func (b BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) MarshalJSON() ([]byte, error) {
@@ -83,28 +82,28 @@ func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetMod
 	return b.ModelID
 }
 
-func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetLanguageCode() optionalnullable.OptionalNullable[string] {
+func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetLanguageCode() *string {
 	if b == nil {
 		return nil
 	}
 	return b.LanguageCode
 }
 
-func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetSettings() optionalnullable.OptionalNullable[ModelSettingsResponseModel] {
+func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetSettings() *ModelSettingsResponseModel {
 	if b == nil {
 		return nil
 	}
 	return b.Settings
 }
 
-func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetPronunciationDictionaryLocators() optionalnullable.OptionalNullable[[]PronunciationDictionaryVersionLocatorRequestModel] {
+func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetPronunciationDictionaryLocators() []PronunciationDictionaryVersionLocatorRequestModel {
 	if b == nil {
 		return nil
 	}
 	return b.PronunciationDictionaryLocators
 }
 
-func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetSeed() optionalnullable.OptionalNullable[int64] {
+func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetSeed() *int64 {
 	if b == nil {
 		return nil
 	}
@@ -118,7 +117,7 @@ func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetApp
 	return b.ApplyTextNormalization
 }
 
-func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetAvatarContext() optionalnullable.OptionalNullable[AvatarContextRequestModel] {
+func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetAvatarContext() *AvatarContextRequestModel {
 	if b == nil {
 		return nil
 	}

@@ -4,34 +4,33 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TTSConversationalConfigWorkflowOverrideOutput struct {
 	// The model to use for TTS
-	ModelID optionalnullable.OptionalNullable[TTSConversationalModel] `default:"eleven_flash_v2" json:"model_id"`
+	ModelID *TTSConversationalModel `default:"eleven_flash_v2" json:"model_id"`
 	// The voice ID to use for TTS
-	VoiceID optionalnullable.OptionalNullable[string] `json:"voice_id,omitzero"`
+	VoiceID *string `json:"voice_id,omitzero"`
 	// Additional supported voices for the agent
-	SupportedVoices optionalnullable.OptionalNullable[[]SupportedVoice] `json:"supported_voices,omitzero"`
+	SupportedVoices []SupportedVoice `json:"supported_voices,omitzero"`
 	// When enabled, applies expressive audio tags prompt. Automatically disabled for non-v3 models.
-	ExpressiveMode optionalnullable.OptionalNullable[bool] `json:"expressive_mode,omitzero"`
+	ExpressiveMode *bool `json:"expressive_mode,omitzero"`
 	// Suggested audio tags to boost expressive speech (for eleven_v3 and eleven_v3_conversational models). The agent can still use other tags not listed here.
-	SuggestedAudioTags optionalnullable.OptionalNullable[[]SuggestedAudioTag] `json:"suggested_audio_tags,omitzero"`
+	SuggestedAudioTags []SuggestedAudioTag `json:"suggested_audio_tags,omitzero"`
 	// The audio format to use for TTS
-	AgentOutputAudioFormat optionalnullable.OptionalNullable[TTSOutputFormat] `default:"pcm_16000" json:"agent_output_audio_format"`
+	AgentOutputAudioFormat *TTSOutputFormat `default:"pcm_16000" json:"agent_output_audio_format"`
 	// The optimization for streaming latency
-	OptimizeStreamingLatency optionalnullable.OptionalNullable[TTSOptimizeStreamingLatency] `json:"optimize_streaming_latency,omitzero"`
+	OptimizeStreamingLatency *TTSOptimizeStreamingLatency `json:"optimize_streaming_latency,omitzero"`
 	// The stability of generated speech
-	Stability optionalnullable.OptionalNullable[float64] `json:"stability,omitzero"`
+	Stability *float64 `json:"stability,omitzero"`
 	// The speed of generated speech
-	Speed optionalnullable.OptionalNullable[float64] `json:"speed,omitzero"`
+	Speed *float64 `json:"speed,omitzero"`
 	// The similarity boost for generated speech
-	SimilarityBoost optionalnullable.OptionalNullable[float64] `json:"similarity_boost,omitzero"`
+	SimilarityBoost *float64 `json:"similarity_boost,omitzero"`
 	// Method for converting numbers to words before converting text to speech. If set to SYSTEM_PROMPT, the system prompt will be updated to include normalization instructions. If set to ELEVENLABS, the text will be normalized after generation, incurring slight additional latency.
-	TextNormalisationType optionalnullable.OptionalNullable[TextNormalisationType] `default:"system_prompt" json:"text_normalisation_type"`
+	TextNormalisationType *TextNormalisationType `default:"system_prompt" json:"text_normalisation_type"`
 	// The pronunciation dictionary locators
-	PronunciationDictionaryLocators optionalnullable.OptionalNullable[[]PydanticPronunciationDictionaryVersionLocator] `json:"pronunciation_dictionary_locators,omitzero"`
+	PronunciationDictionaryLocators []PydanticPronunciationDictionaryVersionLocator `json:"pronunciation_dictionary_locators,omitzero"`
 }
 
 func (t TTSConversationalConfigWorkflowOverrideOutput) MarshalJSON() ([]byte, error) {
@@ -45,84 +44,84 @@ func (t *TTSConversationalConfigWorkflowOverrideOutput) UnmarshalJSON(data []byt
 	return nil
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetModelID() optionalnullable.OptionalNullable[TTSConversationalModel] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetModelID() *TTSConversationalModel {
 	if t == nil {
 		return nil
 	}
 	return t.ModelID
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetVoiceID() optionalnullable.OptionalNullable[string] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetVoiceID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.VoiceID
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSupportedVoices() optionalnullable.OptionalNullable[[]SupportedVoice] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSupportedVoices() []SupportedVoice {
 	if t == nil {
 		return nil
 	}
 	return t.SupportedVoices
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetExpressiveMode() optionalnullable.OptionalNullable[bool] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetExpressiveMode() *bool {
 	if t == nil {
 		return nil
 	}
 	return t.ExpressiveMode
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSuggestedAudioTags() optionalnullable.OptionalNullable[[]SuggestedAudioTag] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSuggestedAudioTags() []SuggestedAudioTag {
 	if t == nil {
 		return nil
 	}
 	return t.SuggestedAudioTags
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetAgentOutputAudioFormat() optionalnullable.OptionalNullable[TTSOutputFormat] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetAgentOutputAudioFormat() *TTSOutputFormat {
 	if t == nil {
 		return nil
 	}
 	return t.AgentOutputAudioFormat
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetOptimizeStreamingLatency() optionalnullable.OptionalNullable[TTSOptimizeStreamingLatency] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetOptimizeStreamingLatency() *TTSOptimizeStreamingLatency {
 	if t == nil {
 		return nil
 	}
 	return t.OptimizeStreamingLatency
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetStability() optionalnullable.OptionalNullable[float64] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetStability() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.Stability
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSpeed() optionalnullable.OptionalNullable[float64] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSpeed() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.Speed
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSimilarityBoost() optionalnullable.OptionalNullable[float64] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetSimilarityBoost() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.SimilarityBoost
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetTextNormalisationType() optionalnullable.OptionalNullable[TextNormalisationType] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetTextNormalisationType() *TextNormalisationType {
 	if t == nil {
 		return nil
 	}
 	return t.TextNormalisationType
 }
 
-func (t *TTSConversationalConfigWorkflowOverrideOutput) GetPronunciationDictionaryLocators() optionalnullable.OptionalNullable[[]PydanticPronunciationDictionaryVersionLocator] {
+func (t *TTSConversationalConfigWorkflowOverrideOutput) GetPronunciationDictionaryLocators() []PydanticPronunciationDictionaryVersionLocator {
 	if t == nil {
 		return nil
 	}

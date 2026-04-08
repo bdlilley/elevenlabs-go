@@ -4,28 +4,27 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type VoiceSharingModerationCheckResponseModel struct {
 	// The date the moderation check was made in Unix time.
-	DateCheckedUnix optionalnullable.OptionalNullable[int64] `json:"date_checked_unix,omitzero"`
+	DateCheckedUnix *int64 `json:"date_checked_unix,omitzero"`
 	// The name value of the voice.
-	NameValue optionalnullable.OptionalNullable[string] `json:"name_value,omitzero"`
+	NameValue *string `json:"name_value,omitzero"`
 	// Whether the name check was successful.
-	NameCheck optionalnullable.OptionalNullable[bool] `json:"name_check,omitzero"`
+	NameCheck *bool `json:"name_check,omitzero"`
 	// The description value of the voice.
-	DescriptionValue optionalnullable.OptionalNullable[string] `json:"description_value,omitzero"`
+	DescriptionValue *string `json:"description_value,omitzero"`
 	// Whether the description check was successful.
-	DescriptionCheck optionalnullable.OptionalNullable[bool] `json:"description_check,omitzero"`
+	DescriptionCheck *bool `json:"description_check,omitzero"`
 	// A list of sample IDs.
-	SampleIds optionalnullable.OptionalNullable[[]string] `json:"sample_ids,omitzero"`
+	SampleIds []string `json:"sample_ids,omitzero"`
 	// A list of sample checks.
-	SampleChecks optionalnullable.OptionalNullable[[]float64] `json:"sample_checks,omitzero"`
+	SampleChecks []float64 `json:"sample_checks,omitzero"`
 	// A list of captcha IDs.
-	CaptchaIds optionalnullable.OptionalNullable[[]string] `json:"captcha_ids,omitzero"`
+	CaptchaIds []string `json:"captcha_ids,omitzero"`
 	// A list of CAPTCHA check values.
-	CaptchaChecks optionalnullable.OptionalNullable[[]float64] `json:"captcha_checks,omitzero"`
+	CaptchaChecks []float64 `json:"captcha_checks,omitzero"`
 }
 
 func (v VoiceSharingModerationCheckResponseModel) MarshalJSON() ([]byte, error) {
@@ -39,63 +38,63 @@ func (v *VoiceSharingModerationCheckResponseModel) UnmarshalJSON(data []byte) er
 	return nil
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetDateCheckedUnix() optionalnullable.OptionalNullable[int64] {
+func (v *VoiceSharingModerationCheckResponseModel) GetDateCheckedUnix() *int64 {
 	if v == nil {
 		return nil
 	}
 	return v.DateCheckedUnix
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetNameValue() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingModerationCheckResponseModel) GetNameValue() *string {
 	if v == nil {
 		return nil
 	}
 	return v.NameValue
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetNameCheck() optionalnullable.OptionalNullable[bool] {
+func (v *VoiceSharingModerationCheckResponseModel) GetNameCheck() *bool {
 	if v == nil {
 		return nil
 	}
 	return v.NameCheck
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetDescriptionValue() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingModerationCheckResponseModel) GetDescriptionValue() *string {
 	if v == nil {
 		return nil
 	}
 	return v.DescriptionValue
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetDescriptionCheck() optionalnullable.OptionalNullable[bool] {
+func (v *VoiceSharingModerationCheckResponseModel) GetDescriptionCheck() *bool {
 	if v == nil {
 		return nil
 	}
 	return v.DescriptionCheck
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetSampleIds() optionalnullable.OptionalNullable[[]string] {
+func (v *VoiceSharingModerationCheckResponseModel) GetSampleIds() []string {
 	if v == nil {
 		return nil
 	}
 	return v.SampleIds
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetSampleChecks() optionalnullable.OptionalNullable[[]float64] {
+func (v *VoiceSharingModerationCheckResponseModel) GetSampleChecks() []float64 {
 	if v == nil {
 		return nil
 	}
 	return v.SampleChecks
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetCaptchaIds() optionalnullable.OptionalNullable[[]string] {
+func (v *VoiceSharingModerationCheckResponseModel) GetCaptchaIds() []string {
 	if v == nil {
 		return nil
 	}
 	return v.CaptchaIds
 }
 
-func (v *VoiceSharingModerationCheckResponseModel) GetCaptchaChecks() optionalnullable.OptionalNullable[[]float64] {
+func (v *VoiceSharingModerationCheckResponseModel) GetCaptchaChecks() []float64 {
 	if v == nil {
 		return nil
 	}

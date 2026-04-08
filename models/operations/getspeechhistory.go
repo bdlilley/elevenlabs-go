@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // SortDirection - Sort direction for the results.
@@ -68,21 +67,21 @@ type GetSpeechHistoryRequest struct {
 	// How many history items to return at maximum. Can not exceed 1000, defaults to 100.
 	PageSize *int64 `default:"100" queryParam:"style=form,explode=true,name=page_size"`
 	// After which ID to start fetching, use this parameter to paginate across a large collection of history items. In case this parameter is not provided history items will be fetched starting from the most recently created one ordered descending by their creation date.
-	StartAfterHistoryItemID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=start_after_history_item_id"`
+	StartAfterHistoryItemID *string `queryParam:"style=form,explode=true,name=start_after_history_item_id"`
 	// Voice ID to be filtered for, you can use GET https://api.elevenlabs.io/v1/voices to receive a list of voices and their IDs.
-	VoiceID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=voice_id"`
+	VoiceID *string `queryParam:"style=form,explode=true,name=voice_id"`
 	// Model ID to filter history items by.
-	ModelID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=model_id"`
+	ModelID *string `queryParam:"style=form,explode=true,name=model_id"`
 	// Unix timestamp to filter history items before this date (exclusive).
-	DateBeforeUnix optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=date_before_unix"`
+	DateBeforeUnix *int64 `queryParam:"style=form,explode=true,name=date_before_unix"`
 	// Unix timestamp to filter history items after this date (inclusive).
-	DateAfterUnix optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=date_after_unix"`
+	DateAfterUnix *int64 `queryParam:"style=form,explode=true,name=date_after_unix"`
 	// Sort direction for the results.
-	SortDirection optionalnullable.OptionalNullable[SortDirection] `queryParam:"style=form,explode=true,name=sort_direction"`
+	SortDirection *SortDirection `queryParam:"style=form,explode=true,name=sort_direction"`
 	// search term used for filtering
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Source of the generated history item
-	Source optionalnullable.OptionalNullable[Source] `queryParam:"style=form,explode=true,name=source"`
+	Source *Source `queryParam:"style=form,explode=true,name=source"`
 }
 
 func (g GetSpeechHistoryRequest) MarshalJSON() ([]byte, error) {
@@ -103,56 +102,56 @@ func (g *GetSpeechHistoryRequest) GetPageSize() *int64 {
 	return g.PageSize
 }
 
-func (g *GetSpeechHistoryRequest) GetStartAfterHistoryItemID() optionalnullable.OptionalNullable[string] {
+func (g *GetSpeechHistoryRequest) GetStartAfterHistoryItemID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.StartAfterHistoryItemID
 }
 
-func (g *GetSpeechHistoryRequest) GetVoiceID() optionalnullable.OptionalNullable[string] {
+func (g *GetSpeechHistoryRequest) GetVoiceID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.VoiceID
 }
 
-func (g *GetSpeechHistoryRequest) GetModelID() optionalnullable.OptionalNullable[string] {
+func (g *GetSpeechHistoryRequest) GetModelID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.ModelID
 }
 
-func (g *GetSpeechHistoryRequest) GetDateBeforeUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetSpeechHistoryRequest) GetDateBeforeUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.DateBeforeUnix
 }
 
-func (g *GetSpeechHistoryRequest) GetDateAfterUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetSpeechHistoryRequest) GetDateAfterUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.DateAfterUnix
 }
 
-func (g *GetSpeechHistoryRequest) GetSortDirection() optionalnullable.OptionalNullable[SortDirection] {
+func (g *GetSpeechHistoryRequest) GetSortDirection() *SortDirection {
 	if g == nil {
 		return nil
 	}
 	return g.SortDirection
 }
 
-func (g *GetSpeechHistoryRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (g *GetSpeechHistoryRequest) GetSearch() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Search
 }
 
-func (g *GetSpeechHistoryRequest) GetSource() optionalnullable.OptionalNullable[Source] {
+func (g *GetSpeechHistoryRequest) GetSource() *Source {
 	if g == nil {
 		return nil
 	}

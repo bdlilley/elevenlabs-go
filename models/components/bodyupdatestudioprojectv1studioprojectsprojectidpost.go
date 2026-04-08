@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyUpdateStudioProjectV1StudioProjectsProjectIDPost struct {
@@ -15,11 +14,11 @@ type BodyUpdateStudioProjectV1StudioProjectsProjectIDPost struct {
 	// The voice_id that corresponds to the default voice used for new paragraphs.
 	DefaultParagraphVoiceID string `json:"default_paragraph_voice_id"`
 	// An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download.
-	Title optionalnullable.OptionalNullable[string] `json:"title,omitzero"`
+	Title *string `json:"title,omitzero"`
 	// An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download.
-	Author optionalnullable.OptionalNullable[string] `json:"author,omitzero"`
+	Author *string `json:"author,omitzero"`
 	// An optional ISBN number of the Studio project you want to create, this will be added as metadata to the mp3 file on Studio project or chapter download.
-	IsbnNumber optionalnullable.OptionalNullable[string] `json:"isbn_number,omitzero"`
+	IsbnNumber *string `json:"isbn_number,omitzero"`
 	// When the Studio project is downloaded, should the returned audio have postprocessing in order to make it compliant with audiobook normalized volume requirements
 	VolumeNormalization *bool `default:"false" json:"volume_normalization"`
 }
@@ -56,21 +55,21 @@ func (b *BodyUpdateStudioProjectV1StudioProjectsProjectIDPost) GetDefaultParagra
 	return b.DefaultParagraphVoiceID
 }
 
-func (b *BodyUpdateStudioProjectV1StudioProjectsProjectIDPost) GetTitle() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateStudioProjectV1StudioProjectsProjectIDPost) GetTitle() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Title
 }
 
-func (b *BodyUpdateStudioProjectV1StudioProjectsProjectIDPost) GetAuthor() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateStudioProjectV1StudioProjectsProjectIDPost) GetAuthor() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Author
 }
 
-func (b *BodyUpdateStudioProjectV1StudioProjectsProjectIDPost) GetIsbnNumber() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateStudioProjectV1StudioProjectsProjectIDPost) GetIsbnNumber() *string {
 	if b == nil {
 		return nil
 	}

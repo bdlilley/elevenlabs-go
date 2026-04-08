@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentPlatformSettingsRequestModel struct {
@@ -24,10 +23,10 @@ type AgentPlatformSettingsRequestModel struct {
 	Archived   *bool              `default:"false" json:"archived"`
 	Guardrails *GuardrailsV1Input `json:"guardrails,omitzero"`
 	// Language for all conversation analysis outputs (summaries, titles, evaluation rationales, data collection rationales). If not set, the language will be inferred from the conversation. Must be one of the supported conversation languages.
-	SummaryLanguage optionalnullable.OptionalNullable[string] `json:"summary_language,omitzero"`
-	Auth            *AuthSettings                             `json:"auth,omitzero"`
-	CallLimits      *AgentCallLimits                          `json:"call_limits,omitzero"`
-	Privacy         *PrivacyConfigInput                       `json:"privacy,omitzero"`
+	SummaryLanguage *string             `json:"summary_language,omitzero"`
+	Auth            *AuthSettings       `json:"auth,omitzero"`
+	CallLimits      *AgentCallLimits    `json:"call_limits,omitzero"`
+	Privacy         *PrivacyConfigInput `json:"privacy,omitzero"`
 }
 
 func (a AgentPlatformSettingsRequestModel) MarshalJSON() ([]byte, error) {
@@ -104,7 +103,7 @@ func (a *AgentPlatformSettingsRequestModel) GetGuardrails() *GuardrailsV1Input {
 	return a.Guardrails
 }
 
-func (a *AgentPlatformSettingsRequestModel) GetSummaryLanguage() optionalnullable.OptionalNullable[string] {
+func (a *AgentPlatformSettingsRequestModel) GetSummaryLanguage() *string {
 	if a == nil {
 		return nil
 	}

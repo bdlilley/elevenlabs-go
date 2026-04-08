@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -44,7 +43,7 @@ type OAuth2JWTResponse struct {
 	// JWT signing algorithm
 	Algorithm *OAuth2JWTResponseAlgorithm `default:"HS256" json:"algorithm"`
 	// Key ID (kid) for JWT header - useful for key rotation
-	KeyID optionalnullable.OptionalNullable[string] `json:"key_id,omitzero"`
+	KeyID *string `json:"key_id,omitzero"`
 	// JWT issuer (iss claim)
 	Issuer string `json:"issuer"`
 	// JWT audience (aud claim)
@@ -58,9 +57,9 @@ type OAuth2JWTResponse struct {
 	// Token endpoint URL for exchanging JWT for access token
 	TokenURL string `json:"token_url"`
 	// OAuth2 scopes to request when exchanging JWT for access token
-	Scopes []string                                                      `json:"scopes,omitzero"`
-	ID     string                                                        `json:"id"`
-	UsedBy optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	Scopes []string                    `json:"scopes,omitzero"`
+	ID     string                      `json:"id"`
+	UsedBy *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (o OAuth2JWTResponse) MarshalJSON() ([]byte, error) {
@@ -99,7 +98,7 @@ func (o *OAuth2JWTResponse) GetAlgorithm() *OAuth2JWTResponseAlgorithm {
 	return o.Algorithm
 }
 
-func (o *OAuth2JWTResponse) GetKeyID() optionalnullable.OptionalNullable[string] {
+func (o *OAuth2JWTResponse) GetKeyID() *string {
 	if o == nil {
 		return nil
 	}
@@ -162,7 +161,7 @@ func (o *OAuth2JWTResponse) GetID() string {
 	return o.ID
 }
 
-func (o *OAuth2JWTResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (o *OAuth2JWTResponse) GetUsedBy() *AuthConnectionDependencies {
 	if o == nil {
 		return nil
 	}

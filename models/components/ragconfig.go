@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RagConfig struct {
@@ -17,9 +16,9 @@ type RagConfig struct {
 	// Maximum number of RAG document chunks to initially retrieve from the vector store. These are then further filtered by vector distance and total length.
 	MaxRetrievedRagChunksCount *int64 `default:"20" json:"max_retrieved_rag_chunks_count"`
 	// Number of candidates evaluated in ANN vector search. Higher number means better results, but higher latency. Minimum recommended value is 100. If disabled, the default value is used.
-	NumCandidates optionalnullable.OptionalNullable[int64] `json:"num_candidates,omitzero"`
+	NumCandidates *int64 `json:"num_candidates,omitzero"`
 	// Custom prompt for rewriting user queries before RAG retrieval. The conversation history will be automatically appended at the end. If not set, the default prompt will be used.
-	QueryRewritePromptOverride optionalnullable.OptionalNullable[string] `json:"query_rewrite_prompt_override,omitzero"`
+	QueryRewritePromptOverride *string `json:"query_rewrite_prompt_override,omitzero"`
 }
 
 func (r RagConfig) MarshalJSON() ([]byte, error) {
@@ -68,14 +67,14 @@ func (r *RagConfig) GetMaxRetrievedRagChunksCount() *int64 {
 	return r.MaxRetrievedRagChunksCount
 }
 
-func (r *RagConfig) GetNumCandidates() optionalnullable.OptionalNullable[int64] {
+func (r *RagConfig) GetNumCandidates() *int64 {
 	if r == nil {
 		return nil
 	}
 	return r.NumCandidates
 }
 
-func (r *RagConfig) GetQueryRewritePromptOverride() optionalnullable.OptionalNullable[string] {
+func (r *RagConfig) GetQueryRewritePromptOverride() *string {
 	if r == nil {
 		return nil
 	}

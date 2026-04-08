@@ -2,17 +2,13 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost struct {
 	// Text content to be added to the knowledge base.
 	Text string `json:"text"`
 	// A custom, human-readable name for the document.
-	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	Name *string `json:"name,omitzero"`
 	// If set, the created document or folder will be placed inside the given folder.
-	ParentFolderID optionalnullable.OptionalNullable[string] `json:"parent_folder_id,omitzero"`
+	ParentFolderID *string `json:"parent_folder_id,omitzero"`
 }
 
 func (b *BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost) GetText() string {
@@ -22,14 +18,14 @@ func (b *BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost) GetText() string {
 	return b.Text
 }
 
-func (b *BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost) GetName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost) GetParentFolderID() *string {
 	if b == nil {
 		return nil
 	}

@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentConfigOverrideInput struct {
 	// If non-empty, the first message the agent will say. If empty, the agent waits for the user to start the discussion.
-	FirstMessage optionalnullable.OptionalNullable[string] `json:"first_message,omitzero"`
+	FirstMessage *string `json:"first_message,omitzero"`
 	// Language of the agent - used for ASR and TTS
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// If non-empty, the message the agent will send when max conversation duration is reached.
-	MaxConversationDurationMessage optionalnullable.OptionalNullable[string] `json:"max_conversation_duration_message,omitzero"`
+	MaxConversationDurationMessage *string `json:"max_conversation_duration_message,omitzero"`
 	// The prompt for the agent
-	Prompt optionalnullable.OptionalNullable[PromptAgentAPIModelOverrideInput] `json:"prompt,omitzero"`
+	Prompt *PromptAgentAPIModelOverrideInput `json:"prompt,omitzero"`
 }
 
 func (a AgentConfigOverrideInput) MarshalJSON() ([]byte, error) {
@@ -29,28 +28,28 @@ func (a *AgentConfigOverrideInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *AgentConfigOverrideInput) GetFirstMessage() optionalnullable.OptionalNullable[string] {
+func (a *AgentConfigOverrideInput) GetFirstMessage() *string {
 	if a == nil {
 		return nil
 	}
 	return a.FirstMessage
 }
 
-func (a *AgentConfigOverrideInput) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (a *AgentConfigOverrideInput) GetLanguage() *string {
 	if a == nil {
 		return nil
 	}
 	return a.Language
 }
 
-func (a *AgentConfigOverrideInput) GetMaxConversationDurationMessage() optionalnullable.OptionalNullable[string] {
+func (a *AgentConfigOverrideInput) GetMaxConversationDurationMessage() *string {
 	if a == nil {
 		return nil
 	}
 	return a.MaxConversationDurationMessage
 }
 
-func (a *AgentConfigOverrideInput) GetPrompt() optionalnullable.OptionalNullable[PromptAgentAPIModelOverrideInput] {
+func (a *AgentConfigOverrideInput) GetPrompt() *PromptAgentAPIModelOverrideInput {
 	if a == nil {
 		return nil
 	}

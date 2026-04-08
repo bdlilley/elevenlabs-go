@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type MCPToolConfigOverrideInputOverridesType string
@@ -117,19 +116,19 @@ type MCPToolConfigOverride struct {
 	// The name of the MCP tool
 	ToolName string `json:"tool_name"`
 	// If set, overrides the server's force_pre_tool_speech setting for this tool
-	ForcePreToolSpeech optionalnullable.OptionalNullable[bool] `json:"force_pre_tool_speech,omitzero"`
+	ForcePreToolSpeech *bool `json:"force_pre_tool_speech,omitzero"`
 	// If set, overrides the server's disable_interruptions setting for this tool
-	DisableInterruptions optionalnullable.OptionalNullable[bool] `json:"disable_interruptions,omitzero"`
+	DisableInterruptions *bool `json:"disable_interruptions,omitzero"`
 	// If set, overrides the server's tool_call_sound setting for this tool
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// If set, overrides the server's tool_call_sound_behavior setting for this tool
-	ToolCallSoundBehavior optionalnullable.OptionalNullable[ToolCallSoundBehavior] `default:"auto" json:"tool_call_sound_behavior"`
+	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// If set, overrides the server's execution_mode setting for this tool
-	ExecutionMode optionalnullable.OptionalNullable[ToolExecutionMode] `default:"immediate" json:"execution_mode"`
+	ExecutionMode *ToolExecutionMode `default:"immediate" json:"execution_mode"`
 	// Dynamic variable assignments for this MCP tool
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Mapping of json path to input override configuration
-	InputOverrides optionalnullable.OptionalNullable[map[string]MCPToolConfigOverrideInputOverrides] `json:"input_overrides,omitzero"`
+	InputOverrides map[string]MCPToolConfigOverrideInputOverrides `json:"input_overrides,omitzero"`
 }
 
 func (m MCPToolConfigOverride) MarshalJSON() ([]byte, error) {
@@ -150,35 +149,35 @@ func (m *MCPToolConfigOverride) GetToolName() string {
 	return m.ToolName
 }
 
-func (m *MCPToolConfigOverride) GetForcePreToolSpeech() optionalnullable.OptionalNullable[bool] {
+func (m *MCPToolConfigOverride) GetForcePreToolSpeech() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.ForcePreToolSpeech
 }
 
-func (m *MCPToolConfigOverride) GetDisableInterruptions() optionalnullable.OptionalNullable[bool] {
+func (m *MCPToolConfigOverride) GetDisableInterruptions() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.DisableInterruptions
 }
 
-func (m *MCPToolConfigOverride) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (m *MCPToolConfigOverride) GetToolCallSound() *ToolCallSoundType {
 	if m == nil {
 		return nil
 	}
 	return m.ToolCallSound
 }
 
-func (m *MCPToolConfigOverride) GetToolCallSoundBehavior() optionalnullable.OptionalNullable[ToolCallSoundBehavior] {
+func (m *MCPToolConfigOverride) GetToolCallSoundBehavior() *ToolCallSoundBehavior {
 	if m == nil {
 		return nil
 	}
 	return m.ToolCallSoundBehavior
 }
 
-func (m *MCPToolConfigOverride) GetExecutionMode() optionalnullable.OptionalNullable[ToolExecutionMode] {
+func (m *MCPToolConfigOverride) GetExecutionMode() *ToolExecutionMode {
 	if m == nil {
 		return nil
 	}
@@ -192,7 +191,7 @@ func (m *MCPToolConfigOverride) GetAssignments() []DynamicVariableAssignment {
 	return m.Assignments
 }
 
-func (m *MCPToolConfigOverride) GetInputOverrides() optionalnullable.OptionalNullable[map[string]MCPToolConfigOverrideInputOverrides] {
+func (m *MCPToolConfigOverride) GetInputOverrides() map[string]MCPToolConfigOverrideInputOverrides {
 	if m == nil {
 		return nil
 	}

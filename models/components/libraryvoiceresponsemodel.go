@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // LibraryVoiceResponseModelCategory - The category of the voice.
@@ -56,13 +55,13 @@ type LibraryVoiceResponseModel struct {
 	// The category of the voice.
 	Category LibraryVoiceResponseModelCategory `json:"category"`
 	// The language of the voice.
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// The locale of the voice.
-	Locale optionalnullable.OptionalNullable[string] `json:"locale,omitzero"`
+	Locale *string `json:"locale,omitzero"`
 	// The description of the voice.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// The preview URL of the voice.
-	PreviewURL optionalnullable.OptionalNullable[string] `json:"preview_url,omitzero"`
+	PreviewURL *string `json:"preview_url,omitzero"`
 	// The usage character count of the voice in the last year.
 	UsageCharacterCount1y int64 `json:"usage_character_count_1y"`
 	// The usage character count of the voice in the last 7 days.
@@ -72,9 +71,9 @@ type LibraryVoiceResponseModel struct {
 	// The number of times the voice has been cloned.
 	ClonedByCount int64 `json:"cloned_by_count"`
 	// The rate multiplier of the voice.
-	Rate optionalnullable.OptionalNullable[float64] `json:"rate,omitzero"`
+	Rate *float64 `json:"rate,omitzero"`
 	// The rate of the voice in USD per 1000 credits. null if default
-	FiatRate optionalnullable.OptionalNullable[float64] `json:"fiat_rate,omitzero"`
+	FiatRate *float64 `json:"fiat_rate,omitzero"`
 	// Whether free users are allowed to use the voice.
 	FreeUsersAllowed bool `json:"free_users_allowed"`
 	// Whether live moderation is enabled for the voice.
@@ -82,23 +81,23 @@ type LibraryVoiceResponseModel struct {
 	// Whether the voice is featured.
 	Featured bool `json:"featured"`
 	// The verified languages of the voice.
-	VerifiedLanguages optionalnullable.OptionalNullable[[]VerifiedVoiceLanguageResponseModel] `json:"verified_languages,omitzero"`
+	VerifiedLanguages []VerifiedVoiceLanguageResponseModel `json:"verified_languages,omitzero"`
 	// The notice period of the voice.
-	NoticePeriod optionalnullable.OptionalNullable[int64] `json:"notice_period,omitzero"`
+	NoticePeriod *int64 `json:"notice_period,omitzero"`
 	// The Instagram username of the voice.
-	InstagramUsername optionalnullable.OptionalNullable[string] `json:"instagram_username,omitzero"`
+	InstagramUsername *string `json:"instagram_username,omitzero"`
 	// The Twitter username of the voice.
-	TwitterUsername optionalnullable.OptionalNullable[string] `json:"twitter_username,omitzero"`
+	TwitterUsername *string `json:"twitter_username,omitzero"`
 	// The YouTube username of the voice.
-	YoutubeUsername optionalnullable.OptionalNullable[string] `json:"youtube_username,omitzero"`
+	YoutubeUsername *string `json:"youtube_username,omitzero"`
 	// The TikTok username of the voice.
-	TiktokUsername optionalnullable.OptionalNullable[string] `json:"tiktok_username,omitzero"`
+	TiktokUsername *string `json:"tiktok_username,omitzero"`
 	// The image URL of the voice.
-	ImageURL optionalnullable.OptionalNullable[string] `json:"image_url,omitzero"`
+	ImageURL *string `json:"image_url,omitzero"`
 	// Whether the voice was added by the user.
-	IsAddedByUser optionalnullable.OptionalNullable[bool] `json:"is_added_by_user,omitzero"`
+	IsAddedByUser *bool `json:"is_added_by_user,omitzero"`
 	// Whether the voice is bookmarked by the current user. Only relevant when is_added_by_user is True.
-	IsBookmarked optionalnullable.OptionalNullable[bool] `json:"is_bookmarked,omitzero"`
+	IsBookmarked *bool `json:"is_bookmarked,omitzero"`
 }
 
 func (l LibraryVoiceResponseModel) MarshalJSON() ([]byte, error) {
@@ -182,28 +181,28 @@ func (l *LibraryVoiceResponseModel) GetCategory() LibraryVoiceResponseModelCateg
 	return l.Category
 }
 
-func (l *LibraryVoiceResponseModel) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetLanguage() *string {
 	if l == nil {
 		return nil
 	}
 	return l.Language
 }
 
-func (l *LibraryVoiceResponseModel) GetLocale() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetLocale() *string {
 	if l == nil {
 		return nil
 	}
 	return l.Locale
 }
 
-func (l *LibraryVoiceResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetDescription() *string {
 	if l == nil {
 		return nil
 	}
 	return l.Description
 }
 
-func (l *LibraryVoiceResponseModel) GetPreviewURL() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetPreviewURL() *string {
 	if l == nil {
 		return nil
 	}
@@ -238,14 +237,14 @@ func (l *LibraryVoiceResponseModel) GetClonedByCount() int64 {
 	return l.ClonedByCount
 }
 
-func (l *LibraryVoiceResponseModel) GetRate() optionalnullable.OptionalNullable[float64] {
+func (l *LibraryVoiceResponseModel) GetRate() *float64 {
 	if l == nil {
 		return nil
 	}
 	return l.Rate
 }
 
-func (l *LibraryVoiceResponseModel) GetFiatRate() optionalnullable.OptionalNullable[float64] {
+func (l *LibraryVoiceResponseModel) GetFiatRate() *float64 {
 	if l == nil {
 		return nil
 	}
@@ -273,63 +272,63 @@ func (l *LibraryVoiceResponseModel) GetFeatured() bool {
 	return l.Featured
 }
 
-func (l *LibraryVoiceResponseModel) GetVerifiedLanguages() optionalnullable.OptionalNullable[[]VerifiedVoiceLanguageResponseModel] {
+func (l *LibraryVoiceResponseModel) GetVerifiedLanguages() []VerifiedVoiceLanguageResponseModel {
 	if l == nil {
 		return nil
 	}
 	return l.VerifiedLanguages
 }
 
-func (l *LibraryVoiceResponseModel) GetNoticePeriod() optionalnullable.OptionalNullable[int64] {
+func (l *LibraryVoiceResponseModel) GetNoticePeriod() *int64 {
 	if l == nil {
 		return nil
 	}
 	return l.NoticePeriod
 }
 
-func (l *LibraryVoiceResponseModel) GetInstagramUsername() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetInstagramUsername() *string {
 	if l == nil {
 		return nil
 	}
 	return l.InstagramUsername
 }
 
-func (l *LibraryVoiceResponseModel) GetTwitterUsername() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetTwitterUsername() *string {
 	if l == nil {
 		return nil
 	}
 	return l.TwitterUsername
 }
 
-func (l *LibraryVoiceResponseModel) GetYoutubeUsername() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetYoutubeUsername() *string {
 	if l == nil {
 		return nil
 	}
 	return l.YoutubeUsername
 }
 
-func (l *LibraryVoiceResponseModel) GetTiktokUsername() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetTiktokUsername() *string {
 	if l == nil {
 		return nil
 	}
 	return l.TiktokUsername
 }
 
-func (l *LibraryVoiceResponseModel) GetImageURL() optionalnullable.OptionalNullable[string] {
+func (l *LibraryVoiceResponseModel) GetImageURL() *string {
 	if l == nil {
 		return nil
 	}
 	return l.ImageURL
 }
 
-func (l *LibraryVoiceResponseModel) GetIsAddedByUser() optionalnullable.OptionalNullable[bool] {
+func (l *LibraryVoiceResponseModel) GetIsAddedByUser() *bool {
 	if l == nil {
 		return nil
 	}
 	return l.IsAddedByUser
 }
 
-func (l *LibraryVoiceResponseModel) GetIsBookmarked() optionalnullable.OptionalNullable[bool] {
+func (l *LibraryVoiceResponseModel) GetIsBookmarked() *bool {
 	if l == nil {
 		return nil
 	}

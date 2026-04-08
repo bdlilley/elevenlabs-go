@@ -25,7 +25,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -38,12 +37,12 @@ func main() {
     )
 
     res, err := s.SpeechHistory.GetSpeechHistory(ctx, operations.GetSpeechHistoryRequest{
-        ModelID: optionalnullable.From(elevenlabsgo.Pointer("eleven_turbo_v2")),
-        DateBeforeUnix: optionalnullable.From(elevenlabsgo.Pointer[int64](1640995200)),
-        DateAfterUnix: optionalnullable.From(elevenlabsgo.Pointer[int64](1640995200)),
-        SortDirection: optionalnullable.From(elevenlabsgo.Pointer(operations.SortDirectionDesc)),
-        Search: optionalnullable.From(elevenlabsgo.Pointer("In the land far far away")),
-        Source: optionalnullable.From(elevenlabsgo.Pointer(operations.SourceTts)),
+        ModelID: elevenlabsgo.Pointer("eleven_turbo_v2"),
+        DateBeforeUnix: elevenlabsgo.Pointer[int64](1640995200),
+        DateAfterUnix: elevenlabsgo.Pointer[int64](1640995200),
+        SortDirection: operations.SortDirectionDesc.ToPointer(),
+        Search: elevenlabsgo.Pointer("In the land far far away"),
+        Source: operations.SourceTts.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)

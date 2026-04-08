@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type SubscriptionResponseModelCurrency string
 
 const (
@@ -43,7 +39,7 @@ type SubscriptionResponseModel struct {
 	// Whether the user is allowed to extend their character limit.
 	AllowedToExtendCharacterLimit bool `json:"allowed_to_extend_character_limit"`
 	// The Unix timestamp of the next character count reset.
-	NextCharacterCountResetUnix optionalnullable.OptionalNullable[int64] `json:"next_character_count_reset_unix,omitzero"`
+	NextCharacterCountResetUnix *int64 `json:"next_character_count_reset_unix,omitzero"`
 	// The number of voice slots used by the user.
 	VoiceSlotsUsed int64 `json:"voice_slots_used"`
 	// The number of professional voice slots used by the workspace/user if single seat.
@@ -51,7 +47,7 @@ type SubscriptionResponseModel struct {
 	// The maximum number of voice slots allowed for the user.
 	VoiceLimit int64 `json:"voice_limit"`
 	// The maximum number of voice add/edits allowed for the user.
-	MaxVoiceAddEdits optionalnullable.OptionalNullable[int64] `json:"max_voice_add_edits,omitzero"`
+	MaxVoiceAddEdits *int64 `json:"max_voice_add_edits,omitzero"`
 	// The number of voice add/edits used by the user.
 	VoiceAddEditCounter int64 `json:"voice_add_edit_counter"`
 	// The maximum number of professional voices allowed for the user.
@@ -63,12 +59,12 @@ type SubscriptionResponseModel struct {
 	// Whether the user can use professional voice cloning.
 	CanUseProfessionalVoiceCloning bool `json:"can_use_professional_voice_cloning"`
 	// The currency of the user's subscription.
-	Currency optionalnullable.OptionalNullable[SubscriptionResponseModelCurrency] `json:"currency,omitzero"`
-	Status   SubscriptionStatusType                                               `json:"status"`
+	Currency *SubscriptionResponseModelCurrency `json:"currency,omitzero"`
+	Status   SubscriptionStatusType             `json:"status"`
 	// The billing period of the user's subscription.
-	BillingPeriod optionalnullable.OptionalNullable[BillingPeriod] `json:"billing_period,omitzero"`
+	BillingPeriod *BillingPeriod `json:"billing_period,omitzero"`
 	// The character refresh period of the user's subscription.
-	CharacterRefreshPeriod optionalnullable.OptionalNullable[CharacterRefreshPeriod] `json:"character_refresh_period,omitzero"`
+	CharacterRefreshPeriod *CharacterRefreshPeriod `json:"character_refresh_period,omitzero"`
 }
 
 func (s *SubscriptionResponseModel) GetTier() string {
@@ -113,7 +109,7 @@ func (s *SubscriptionResponseModel) GetAllowedToExtendCharacterLimit() bool {
 	return s.AllowedToExtendCharacterLimit
 }
 
-func (s *SubscriptionResponseModel) GetNextCharacterCountResetUnix() optionalnullable.OptionalNullable[int64] {
+func (s *SubscriptionResponseModel) GetNextCharacterCountResetUnix() *int64 {
 	if s == nil {
 		return nil
 	}
@@ -141,7 +137,7 @@ func (s *SubscriptionResponseModel) GetVoiceLimit() int64 {
 	return s.VoiceLimit
 }
 
-func (s *SubscriptionResponseModel) GetMaxVoiceAddEdits() optionalnullable.OptionalNullable[int64] {
+func (s *SubscriptionResponseModel) GetMaxVoiceAddEdits() *int64 {
 	if s == nil {
 		return nil
 	}
@@ -183,7 +179,7 @@ func (s *SubscriptionResponseModel) GetCanUseProfessionalVoiceCloning() bool {
 	return s.CanUseProfessionalVoiceCloning
 }
 
-func (s *SubscriptionResponseModel) GetCurrency() optionalnullable.OptionalNullable[SubscriptionResponseModelCurrency] {
+func (s *SubscriptionResponseModel) GetCurrency() *SubscriptionResponseModelCurrency {
 	if s == nil {
 		return nil
 	}
@@ -197,14 +193,14 @@ func (s *SubscriptionResponseModel) GetStatus() SubscriptionStatusType {
 	return s.Status
 }
 
-func (s *SubscriptionResponseModel) GetBillingPeriod() optionalnullable.OptionalNullable[BillingPeriod] {
+func (s *SubscriptionResponseModel) GetBillingPeriod() *BillingPeriod {
 	if s == nil {
 		return nil
 	}
 	return s.BillingPeriod
 }
 
-func (s *SubscriptionResponseModel) GetCharacterRefreshPeriod() optionalnullable.OptionalNullable[CharacterRefreshPeriod] {
+func (s *SubscriptionResponseModel) GetCharacterRefreshPeriod() *CharacterRefreshPeriod {
 	if s == nil {
 		return nil
 	}

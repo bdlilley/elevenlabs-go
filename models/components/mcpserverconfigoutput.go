@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type MCPServerConfigOutputURLType string
@@ -430,19 +429,19 @@ type MCPServerConfigOutput struct {
 	// The URL of the MCP server, if this contains a secret please store as a workspace secret, otherwise store as a plain string. Must use https
 	URL MCPServerConfigOutputURL `json:"url"`
 	// The secret token (Authorization header) stored as a workspace secret or in-place secret
-	SecretToken optionalnullable.OptionalNullable[MCPServerConfigOutputSecretToken] `json:"secret_token,omitzero"`
+	SecretToken *MCPServerConfigOutputSecretToken `json:"secret_token,omitzero"`
 	// The headers included in the request
 	RequestHeaders map[string]MCPServerConfigOutputRequestHeaders `json:"request_headers,omitzero"`
 	// Optional auth connection to use for authentication with this MCP server
-	AuthConnection optionalnullable.OptionalNullable[MCPServerConfigOutputAuthConnection] `json:"auth_connection,omitzero"`
-	Name           string                                                                 `json:"name"`
-	Description    *string                                                                `default:"" json:"description"`
+	AuthConnection *MCPServerConfigOutputAuthConnection `json:"auth_connection,omitzero"`
+	Name           string                               `json:"name"`
+	Description    *string                              `default:"" json:"description"`
 	// If true, all tools from this MCP server will require pre-tool execution speech
 	ForcePreToolSpeech *bool `default:"false" json:"force_pre_tool_speech"`
 	// If true, the user will not be able to interrupt the agent while any tool from this MCP server is running.
 	DisableInterruptions *bool `default:"false" json:"disable_interruptions"`
 	// Predefined tool call sound type to play during tool execution for all tools from this MCP server
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines how the tool call sound should be played.
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	ExecutionMode         *ToolExecutionMode     `default:"immediate" json:"execution_mode"`
@@ -491,7 +490,7 @@ func (m *MCPServerConfigOutput) GetURL() MCPServerConfigOutputURL {
 	return m.URL
 }
 
-func (m *MCPServerConfigOutput) GetSecretToken() optionalnullable.OptionalNullable[MCPServerConfigOutputSecretToken] {
+func (m *MCPServerConfigOutput) GetSecretToken() *MCPServerConfigOutputSecretToken {
 	if m == nil {
 		return nil
 	}
@@ -505,7 +504,7 @@ func (m *MCPServerConfigOutput) GetRequestHeaders() map[string]MCPServerConfigOu
 	return m.RequestHeaders
 }
 
-func (m *MCPServerConfigOutput) GetAuthConnection() optionalnullable.OptionalNullable[MCPServerConfigOutputAuthConnection] {
+func (m *MCPServerConfigOutput) GetAuthConnection() *MCPServerConfigOutputAuthConnection {
 	if m == nil {
 		return nil
 	}
@@ -540,7 +539,7 @@ func (m *MCPServerConfigOutput) GetDisableInterruptions() *bool {
 	return m.DisableInterruptions
 }
 
-func (m *MCPServerConfigOutput) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (m *MCPServerConfigOutput) GetToolCallSound() *ToolCallSoundType {
 	if m == nil {
 		return nil
 	}

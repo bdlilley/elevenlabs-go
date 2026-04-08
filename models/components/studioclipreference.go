@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ClipType string
@@ -32,12 +31,12 @@ func (e *ClipType) IsExact() bool {
 }
 
 type StudioClipReference struct {
-	ProjectID  string                                    `json:"project_id"`
-	ChapterID  string                                    `json:"chapter_id"`
-	ClipType   ClipType                                  `json:"clip_type"`
-	ClipID     string                                    `json:"clip_id"`
-	BlockID    optionalnullable.OptionalNullable[string] `json:"block_id,omitzero"`
-	PreviewURL optionalnullable.OptionalNullable[string] `json:"preview_url,omitzero"`
+	ProjectID  string   `json:"project_id"`
+	ChapterID  string   `json:"chapter_id"`
+	ClipType   ClipType `json:"clip_type"`
+	ClipID     string   `json:"clip_id"`
+	BlockID    *string  `json:"block_id,omitzero"`
+	PreviewURL *string  `json:"preview_url,omitzero"`
 }
 
 func (s StudioClipReference) MarshalJSON() ([]byte, error) {
@@ -79,14 +78,14 @@ func (s *StudioClipReference) GetClipID() string {
 	return s.ClipID
 }
 
-func (s *StudioClipReference) GetBlockID() optionalnullable.OptionalNullable[string] {
+func (s *StudioClipReference) GetBlockID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.BlockID
 }
 
-func (s *StudioClipReference) GetPreviewURL() optionalnullable.OptionalNullable[string] {
+func (s *StudioClipReference) GetPreviewURL() *string {
 	if s == nil {
 		return nil
 	}

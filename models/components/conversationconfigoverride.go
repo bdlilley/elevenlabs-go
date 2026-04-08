@@ -4,12 +4,11 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationConfigOverride struct {
 	// If enabled audio will not be processed and only text will be used, use to avoid audio pricing.
-	TextOnly optionalnullable.OptionalNullable[bool] `json:"text_only,omitzero"`
+	TextOnly *bool `json:"text_only,omitzero"`
 }
 
 func (c ConversationConfigOverride) MarshalJSON() ([]byte, error) {
@@ -23,7 +22,7 @@ func (c *ConversationConfigOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *ConversationConfigOverride) GetTextOnly() optionalnullable.OptionalNullable[bool] {
+func (c *ConversationConfigOverride) GetTextOnly() *bool {
 	if c == nil {
 		return nil
 	}

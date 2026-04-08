@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TemplateParamType string
@@ -114,13 +113,13 @@ func (u TemplateParam) MarshalJSON() ([]byte, error) {
 }
 
 type BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost struct {
-	WhatsappPhoneNumberID            string                                                                          `json:"whatsapp_phone_number_id"`
-	WhatsappUserID                   string                                                                          `json:"whatsapp_user_id"`
-	TemplateName                     string                                                                          `json:"template_name"`
-	TemplateLanguageCode             string                                                                          `json:"template_language_code"`
-	TemplateParams                   []TemplateParam                                                                 `json:"template_params"`
-	AgentID                          string                                                                          `json:"agent_id"`
-	ConversationInitiationClientData optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] `json:"conversation_initiation_client_data,omitzero"`
+	WhatsappPhoneNumberID            string                                        `json:"whatsapp_phone_number_id"`
+	WhatsappUserID                   string                                        `json:"whatsapp_user_id"`
+	TemplateName                     string                                        `json:"template_name"`
+	TemplateLanguageCode             string                                        `json:"template_language_code"`
+	TemplateParams                   []TemplateParam                               `json:"template_params"`
+	AgentID                          string                                        `json:"agent_id"`
+	ConversationInitiationClientData *ConversationInitiationClientDataRequestInput `json:"conversation_initiation_client_data,omitzero"`
 }
 
 func (b BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost) MarshalJSON() ([]byte, error) {
@@ -176,7 +175,7 @@ func (b *BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost
 	return b.AgentID
 }
 
-func (b *BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost) GetConversationInitiationClientData() optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] {
+func (b *BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost) GetConversationInitiationClientData() *ConversationInitiationClientDataRequestInput {
 	if b == nil {
 		return nil
 	}

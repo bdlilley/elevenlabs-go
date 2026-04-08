@@ -2,43 +2,39 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type AvatarContextResponseModel struct {
 	// The ID of the avatar.
-	AvatarID optionalnullable.OptionalNullable[string] `json:"avatar_id,omitzero"`
+	AvatarID *string `json:"avatar_id,omitzero"`
 	// The ID of the avatar style.
-	AvatarStyleID optionalnullable.OptionalNullable[string] `json:"avatar_style_id,omitzero"`
+	AvatarStyleID *string `json:"avatar_style_id,omitzero"`
 	// The name of the avatar.
-	AvatarName optionalnullable.OptionalNullable[string] `json:"avatar_name,omitzero"`
+	AvatarName *string `json:"avatar_name,omitzero"`
 	// The name of the avatar style.
-	AvatarStyleName optionalnullable.OptionalNullable[string] `json:"avatar_style_name,omitzero"`
+	AvatarStyleName *string `json:"avatar_style_name,omitzero"`
 }
 
-func (a *AvatarContextResponseModel) GetAvatarID() optionalnullable.OptionalNullable[string] {
+func (a *AvatarContextResponseModel) GetAvatarID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.AvatarID
 }
 
-func (a *AvatarContextResponseModel) GetAvatarStyleID() optionalnullable.OptionalNullable[string] {
+func (a *AvatarContextResponseModel) GetAvatarStyleID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.AvatarStyleID
 }
 
-func (a *AvatarContextResponseModel) GetAvatarName() optionalnullable.OptionalNullable[string] {
+func (a *AvatarContextResponseModel) GetAvatarName() *string {
 	if a == nil {
 		return nil
 	}
 	return a.AvatarName
 }
 
-func (a *AvatarContextResponseModel) GetAvatarStyleName() optionalnullable.OptionalNullable[string] {
+func (a *AvatarContextResponseModel) GetAvatarStyleName() *string {
 	if a == nil {
 		return nil
 	}

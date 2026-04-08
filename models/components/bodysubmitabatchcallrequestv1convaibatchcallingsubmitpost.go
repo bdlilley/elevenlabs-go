@@ -4,22 +4,21 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost struct {
-	CallName            string                                                     `json:"call_name"`
-	AgentID             string                                                     `json:"agent_id"`
-	Recipients          []OutboundCallRecipient                                    `json:"recipients"`
-	ScheduledTimeUnix   optionalnullable.OptionalNullable[int64]                   `json:"scheduled_time_unix,omitzero"`
-	AgentPhoneNumberID  optionalnullable.OptionalNullable[string]                  `json:"agent_phone_number_id,omitzero"`
-	WhatsappParams      optionalnullable.OptionalNullable[BatchCallWhatsAppParams] `json:"whatsapp_params,omitzero"`
-	Timezone            optionalnullable.OptionalNullable[string]                  `json:"timezone,omitzero"`
-	BranchID            optionalnullable.OptionalNullable[string]                  `json:"branch_id,omitzero"`
-	Environment         optionalnullable.OptionalNullable[string]                  `json:"environment,omitzero"`
-	TelephonyCallConfig *TelephonyCallConfig                                       `json:"telephony_call_config,omitzero"`
+	CallName            string                   `json:"call_name"`
+	AgentID             string                   `json:"agent_id"`
+	Recipients          []OutboundCallRecipient  `json:"recipients"`
+	ScheduledTimeUnix   *int64                   `json:"scheduled_time_unix,omitzero"`
+	AgentPhoneNumberID  *string                  `json:"agent_phone_number_id,omitzero"`
+	WhatsappParams      *BatchCallWhatsAppParams `json:"whatsapp_params,omitzero"`
+	Timezone            *string                  `json:"timezone,omitzero"`
+	BranchID            *string                  `json:"branch_id,omitzero"`
+	Environment         *string                  `json:"environment,omitzero"`
+	TelephonyCallConfig *TelephonyCallConfig     `json:"telephony_call_config,omitzero"`
 	// Maximum number of simultaneous calls for this batch. When set, dispatch is governed by this limit rather than workspace/agent capacity percentages.
-	TargetConcurrencyLimit optionalnullable.OptionalNullable[int64] `json:"target_concurrency_limit,omitzero"`
+	TargetConcurrencyLimit *int64 `json:"target_concurrency_limit,omitzero"`
 }
 
 func (b BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) MarshalJSON() ([]byte, error) {
@@ -54,42 +53,42 @@ func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetRecipient
 	return b.Recipients
 }
 
-func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetScheduledTimeUnix() optionalnullable.OptionalNullable[int64] {
+func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetScheduledTimeUnix() *int64 {
 	if b == nil {
 		return nil
 	}
 	return b.ScheduledTimeUnix
 }
 
-func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetAgentPhoneNumberID() optionalnullable.OptionalNullable[string] {
+func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetAgentPhoneNumberID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.AgentPhoneNumberID
 }
 
-func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetWhatsappParams() optionalnullable.OptionalNullable[BatchCallWhatsAppParams] {
+func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetWhatsappParams() *BatchCallWhatsAppParams {
 	if b == nil {
 		return nil
 	}
 	return b.WhatsappParams
 }
 
-func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetTimezone() optionalnullable.OptionalNullable[string] {
+func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetTimezone() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Timezone
 }
 
-func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetBranchID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.BranchID
 }
 
-func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetEnvironment() optionalnullable.OptionalNullable[string] {
+func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetEnvironment() *string {
 	if b == nil {
 		return nil
 	}
@@ -103,7 +102,7 @@ func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetTelephony
 	return b.TelephonyCallConfig
 }
 
-func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetTargetConcurrencyLimit() optionalnullable.OptionalNullable[int64] {
+func (b *BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost) GetTargetConcurrencyLimit() *int64 {
 	if b == nil {
 		return nil
 	}

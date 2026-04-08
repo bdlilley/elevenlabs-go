@@ -9,4 +9,4 @@ Response model for testing tools available on an MCP server.
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
 | `Success`                                            | `bool`                                               | :heavy_check_mark:                                   | Indicates if the operation was successful.           |
 | `Tools`                                              | [][components.Tool](../../models/components/tool.md) | :heavy_check_mark:                                   | A list of tools available on the MCP server.         |
-| `ErrorMessage`                                       | optionalnullable.OptionalNullable[`string`]          | :heavy_minus_sign:                                   | Error message if the operation was not successful.   |
+| `ErrorMessage`                                       | `*string`                                            | :heavy_minus_sign:                                   | Error message if the operation was not successful.   |

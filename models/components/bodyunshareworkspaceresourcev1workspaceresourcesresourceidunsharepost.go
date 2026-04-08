@@ -2,19 +2,15 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost struct {
 	// Resource types that can be shared in the workspace. The name always need to match the collection names
 	ResourceType WorkspaceResourceType `json:"resource_type"`
 	// The email of the user or service account.
-	UserEmail optionalnullable.OptionalNullable[string] `json:"user_email,omitzero"`
+	UserEmail *string `json:"user_email,omitzero"`
 	// The ID of the target group. To target the permissions principals have by default on this resource, use the value 'default'.
-	GroupID optionalnullable.OptionalNullable[string] `json:"group_id,omitzero"`
+	GroupID *string `json:"group_id,omitzero"`
 	// The ID of the target workspace API key. This isn't the same as the key itself that would you pass in the header for authentication. Workspace admins can find this in the workspace settings UI.
-	WorkspaceAPIKeyID optionalnullable.OptionalNullable[string] `json:"workspace_api_key_id,omitzero"`
+	WorkspaceAPIKeyID *string `json:"workspace_api_key_id,omitzero"`
 }
 
 func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) GetResourceType() WorkspaceResourceType {
@@ -24,21 +20,21 @@ func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) 
 	return b.ResourceType
 }
 
-func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) GetUserEmail() optionalnullable.OptionalNullable[string] {
+func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) GetUserEmail() *string {
 	if b == nil {
 		return nil
 	}
 	return b.UserEmail
 }
 
-func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) GetGroupID() optionalnullable.OptionalNullable[string] {
+func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) GetGroupID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.GroupID
 }
 
-func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) GetWorkspaceAPIKeyID() optionalnullable.OptionalNullable[string] {
+func (b *BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost) GetWorkspaceAPIKeyID() *string {
 	if b == nil {
 		return nil
 	}

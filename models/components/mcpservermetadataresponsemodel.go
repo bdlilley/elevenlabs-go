@@ -2,13 +2,9 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type MCPServerMetadataResponseModel struct {
-	CreatedAt   int64                                     `json:"created_at"`
-	OwnerUserID optionalnullable.OptionalNullable[string] `json:"owner_user_id,omitzero"`
+	CreatedAt   int64   `json:"created_at"`
+	OwnerUserID *string `json:"owner_user_id,omitzero"`
 }
 
 func (m *MCPServerMetadataResponseModel) GetCreatedAt() int64 {
@@ -18,7 +14,7 @@ func (m *MCPServerMetadataResponseModel) GetCreatedAt() int64 {
 	return m.CreatedAt
 }
 
-func (m *MCPServerMetadataResponseModel) GetOwnerUserID() optionalnullable.OptionalNullable[string] {
+func (m *MCPServerMetadataResponseModel) GetOwnerUserID() *string {
 	if m == nil {
 		return nil
 	}

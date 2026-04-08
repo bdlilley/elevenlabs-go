@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePostFile struct {
@@ -32,7 +31,7 @@ func (b *BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePostFile) GetContent() any {
 
 type BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost struct {
 	// A custom, human-readable name for the document.
-	Name optionalnullable.OptionalNullable[string] `multipartForm:"name=name"`
+	Name *string `multipartForm:"name=name"`
 	// URL to a page of documentation that the agent will have access to in order to interact with users.
 	URL *string `multipartForm:"name=url"`
 	// Documentation that the agent will have access to in order to interact with users.
@@ -50,7 +49,7 @@ func (b *BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost) UnmarshalJSON(data []b
 	return nil
 }
 
-func (b *BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost) GetName() *string {
 	if b == nil {
 		return nil
 	}

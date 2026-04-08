@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetLibraryVoicesResponseModel struct {
@@ -13,8 +12,8 @@ type GetLibraryVoicesResponseModel struct {
 	// Whether there are more shared voices in subsequent pages.
 	HasMore bool `json:"has_more"`
 	// The total number of shared voices matching the query.
-	TotalCount *int64                                    `default:"0" json:"total_count"`
-	LastSortID optionalnullable.OptionalNullable[string] `json:"last_sort_id,omitzero"`
+	TotalCount *int64  `default:"0" json:"total_count"`
+	LastSortID *string `json:"last_sort_id,omitzero"`
 }
 
 func (g GetLibraryVoicesResponseModel) MarshalJSON() ([]byte, error) {
@@ -49,7 +48,7 @@ func (g *GetLibraryVoicesResponseModel) GetTotalCount() *int64 {
 	return g.TotalCount
 }
 
-func (g *GetLibraryVoicesResponseModel) GetLastSortID() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesResponseModel) GetLastSortID() *string {
 	if g == nil {
 		return nil
 	}

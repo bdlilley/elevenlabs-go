@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholdersType string
@@ -152,7 +151,7 @@ func (u DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders) Marsh
 
 type DynamicVariablesConfigWorkflowOverride struct {
 	// A dictionary of dynamic variable placeholders and their values
-	DynamicVariablePlaceholders optionalnullable.OptionalNullable[map[string]DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders] `json:"dynamic_variable_placeholders,omitzero"`
+	DynamicVariablePlaceholders map[string]DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders `json:"dynamic_variable_placeholders,omitzero"`
 }
 
 func (d DynamicVariablesConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -166,7 +165,7 @@ func (d *DynamicVariablesConfigWorkflowOverride) UnmarshalJSON(data []byte) erro
 	return nil
 }
 
-func (d *DynamicVariablesConfigWorkflowOverride) GetDynamicVariablePlaceholders() optionalnullable.OptionalNullable[map[string]DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders] {
+func (d *DynamicVariablesConfigWorkflowOverride) GetDynamicVariablePlaceholders() map[string]DynamicVariablesConfigWorkflowOverrideDynamicVariablePlaceholders {
 	if d == nil {
 		return nil
 	}

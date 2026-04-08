@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,10 +11,10 @@ import (
 type MTLSAuthResponse struct {
 	Name string `json:"name"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	authType *string                                                       `const:"mtls" json:"auth_type"`
-	Provider string                                                        `json:"provider"`
-	ID       string                                                        `json:"id"`
-	UsedBy   optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	authType *string                     `const:"mtls" json:"auth_type"`
+	Provider string                      `json:"provider"`
+	ID       string                      `json:"id"`
+	UsedBy   *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (m MTLSAuthResponse) MarshalJSON() ([]byte, error) {
@@ -54,7 +53,7 @@ func (m *MTLSAuthResponse) GetID() string {
 	return m.ID
 }
 
-func (m *MTLSAuthResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (m *MTLSAuthResponse) GetUsedBy() *AuthConnectionDependencies {
 	if m == nil {
 		return nil
 	}

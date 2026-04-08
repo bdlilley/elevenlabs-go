@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SpeechToTextCharacterResponseModel struct {
 	// The character that was transcribed.
 	Text string `json:"text"`
 	// The start time of the character in seconds.
-	Start optionalnullable.OptionalNullable[float64] `json:"start,omitzero"`
+	Start *float64 `json:"start,omitzero"`
 	// The end time of the character in seconds.
-	End optionalnullable.OptionalNullable[float64] `json:"end,omitzero"`
+	End *float64 `json:"end,omitzero"`
 }
 
 func (s SpeechToTextCharacterResponseModel) MarshalJSON() ([]byte, error) {
@@ -34,14 +33,14 @@ func (s *SpeechToTextCharacterResponseModel) GetText() string {
 	return s.Text
 }
 
-func (s *SpeechToTextCharacterResponseModel) GetStart() optionalnullable.OptionalNullable[float64] {
+func (s *SpeechToTextCharacterResponseModel) GetStart() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.Start
 }
 
-func (s *SpeechToTextCharacterResponseModel) GetEnd() optionalnullable.OptionalNullable[float64] {
+func (s *SpeechToTextCharacterResponseModel) GetEnd() *float64 {
 	if s == nil {
 		return nil
 	}

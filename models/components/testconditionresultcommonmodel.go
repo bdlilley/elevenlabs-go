@@ -4,12 +4,11 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TestConditionResultCommonModel struct {
-	Result    EvaluationSuccessResult                                              `json:"result"`
-	Rationale optionalnullable.OptionalNullable[TestConditionRationaleCommonModel] `json:"rationale,omitzero"`
+	Result    EvaluationSuccessResult            `json:"result"`
+	Rationale *TestConditionRationaleCommonModel `json:"rationale,omitzero"`
 }
 
 func (t TestConditionResultCommonModel) MarshalJSON() ([]byte, error) {
@@ -30,7 +29,7 @@ func (t *TestConditionResultCommonModel) GetResult() EvaluationSuccessResult {
 	return t.Result
 }
 
-func (t *TestConditionResultCommonModel) GetRationale() optionalnullable.OptionalNullable[TestConditionRationaleCommonModel] {
+func (t *TestConditionResultCommonModel) GetRationale() *TestConditionRationaleCommonModel {
 	if t == nil {
 		return nil
 	}

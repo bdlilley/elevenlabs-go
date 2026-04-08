@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // Category - Voice category used for filtering
@@ -44,38 +43,38 @@ type GetLibraryVoicesRequest struct {
 	// How many shared voices to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Voice category used for filtering
-	Category optionalnullable.OptionalNullable[Category] `queryParam:"style=form,explode=true,name=category"`
+	Category *Category `queryParam:"style=form,explode=true,name=category"`
 	// Gender used for filtering
-	Gender optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=gender"`
+	Gender *string `queryParam:"style=form,explode=true,name=gender"`
 	// Age used for filtering
-	Age optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=age"`
+	Age *string `queryParam:"style=form,explode=true,name=age"`
 	// Accent used for filtering
-	Accent optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=accent"`
+	Accent *string `queryParam:"style=form,explode=true,name=accent"`
 	// Language used for filtering
-	Language optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=language"`
+	Language *string `queryParam:"style=form,explode=true,name=language"`
 	// Locale used for filtering
-	Locale optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=locale"`
+	Locale *string `queryParam:"style=form,explode=true,name=locale"`
 	// Search term used for filtering
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Use-case used for filtering
-	UseCases optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=use_cases"`
+	UseCases []string `queryParam:"style=form,explode=true,name=use_cases"`
 	// Search term used for filtering
-	Descriptives optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=descriptives"`
+	Descriptives []string `queryParam:"style=form,explode=true,name=descriptives"`
 	// Filter featured voices
 	Featured *bool `default:"false" queryParam:"style=form,explode=true,name=featured"`
 	// Filter voices with a minimum notice period of the given number of days.
-	MinNoticePeriodDays optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=min_notice_period_days"`
+	MinNoticePeriodDays *int64 `queryParam:"style=form,explode=true,name=min_notice_period_days"`
 	// Include/exclude voices with custom rates
-	IncludeCustomRates optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=include_custom_rates"`
+	IncludeCustomRates *bool `queryParam:"style=form,explode=true,name=include_custom_rates"`
 	// Include/exclude voices that are live moderated
-	IncludeLiveModerated optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=include_live_moderated"`
+	IncludeLiveModerated *bool `queryParam:"style=form,explode=true,name=include_live_moderated"`
 	// Filter voices that are enabled for the reader app
 	ReaderAppEnabled *bool `default:"false" queryParam:"style=form,explode=true,name=reader_app_enabled"`
 	// Filter voices by public owner ID
-	OwnerID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=owner_id"`
+	OwnerID *string `queryParam:"style=form,explode=true,name=owner_id"`
 	// Sort criteria
-	Sort optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=sort"`
-	Page *int64                                    `default:"0" queryParam:"style=form,explode=true,name=page"`
+	Sort *string `queryParam:"style=form,explode=true,name=sort"`
+	Page *int64  `default:"0" queryParam:"style=form,explode=true,name=page"`
 }
 
 func (g GetLibraryVoicesRequest) MarshalJSON() ([]byte, error) {
@@ -96,63 +95,63 @@ func (g *GetLibraryVoicesRequest) GetPageSize() *int64 {
 	return g.PageSize
 }
 
-func (g *GetLibraryVoicesRequest) GetCategory() optionalnullable.OptionalNullable[Category] {
+func (g *GetLibraryVoicesRequest) GetCategory() *Category {
 	if g == nil {
 		return nil
 	}
 	return g.Category
 }
 
-func (g *GetLibraryVoicesRequest) GetGender() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetGender() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Gender
 }
 
-func (g *GetLibraryVoicesRequest) GetAge() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetAge() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Age
 }
 
-func (g *GetLibraryVoicesRequest) GetAccent() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetAccent() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Accent
 }
 
-func (g *GetLibraryVoicesRequest) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetLanguage() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Language
 }
 
-func (g *GetLibraryVoicesRequest) GetLocale() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetLocale() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Locale
 }
 
-func (g *GetLibraryVoicesRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetSearch() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Search
 }
 
-func (g *GetLibraryVoicesRequest) GetUseCases() optionalnullable.OptionalNullable[[]string] {
+func (g *GetLibraryVoicesRequest) GetUseCases() []string {
 	if g == nil {
 		return nil
 	}
 	return g.UseCases
 }
 
-func (g *GetLibraryVoicesRequest) GetDescriptives() optionalnullable.OptionalNullable[[]string] {
+func (g *GetLibraryVoicesRequest) GetDescriptives() []string {
 	if g == nil {
 		return nil
 	}
@@ -166,21 +165,21 @@ func (g *GetLibraryVoicesRequest) GetFeatured() *bool {
 	return g.Featured
 }
 
-func (g *GetLibraryVoicesRequest) GetMinNoticePeriodDays() optionalnullable.OptionalNullable[int64] {
+func (g *GetLibraryVoicesRequest) GetMinNoticePeriodDays() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.MinNoticePeriodDays
 }
 
-func (g *GetLibraryVoicesRequest) GetIncludeCustomRates() optionalnullable.OptionalNullable[bool] {
+func (g *GetLibraryVoicesRequest) GetIncludeCustomRates() *bool {
 	if g == nil {
 		return nil
 	}
 	return g.IncludeCustomRates
 }
 
-func (g *GetLibraryVoicesRequest) GetIncludeLiveModerated() optionalnullable.OptionalNullable[bool] {
+func (g *GetLibraryVoicesRequest) GetIncludeLiveModerated() *bool {
 	if g == nil {
 		return nil
 	}
@@ -194,14 +193,14 @@ func (g *GetLibraryVoicesRequest) GetReaderAppEnabled() *bool {
 	return g.ReaderAppEnabled
 }
 
-func (g *GetLibraryVoicesRequest) GetOwnerID() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetOwnerID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.OwnerID
 }
 
-func (g *GetLibraryVoicesRequest) GetSort() optionalnullable.OptionalNullable[string] {
+func (g *GetLibraryVoicesRequest) GetSort() *string {
 	if g == nil {
 		return nil
 	}

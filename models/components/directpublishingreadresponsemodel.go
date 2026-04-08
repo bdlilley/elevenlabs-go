@@ -4,7 +4,7 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
+	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type DisplayMode string
@@ -130,57 +130,57 @@ func (e *PayoutType) IsExact() bool {
 }
 
 type DirectPublishingReadResponseModel struct {
-	ReadID                     string                                                                             `json:"read_id"`
-	CreatedAtUnix              int64                                                                              `json:"created_at_unix"`
-	UpdatedAtUnix              int64                                                                              `json:"updated_at_unix"`
-	WordCount                  int64                                                                              `json:"word_count"`
-	CharCount                  int64                                                                              `json:"char_count"`
-	Chapters                   []ReadMetadataChapterDBModel                                                       `json:"chapters"`
-	Title                      optionalnullable.OptionalNullable[string]                                          `json:"title,omitzero"`
-	Author                     optionalnullable.OptionalNullable[string]                                          `json:"author,omitzero"`
-	Description                optionalnullable.OptionalNullable[string]                                          `json:"description,omitzero"`
-	ArticleImageURL            optionalnullable.OptionalNullable[string]                                          `json:"article_image_url,omitzero"`
-	Language                   optionalnullable.OptionalNullable[string]                                          `json:"language,omitzero"`
-	Locale                     optionalnullable.OptionalNullable[string]                                          `json:"locale,omitzero"`
-	DisplayMode                optionalnullable.OptionalNullable[DisplayMode]                                     `json:"display_mode,omitzero"`
-	Genre                      optionalnullable.OptionalNullable[[]Genre]                                         `json:"genre,omitzero"`
-	Fiction                    optionalnullable.OptionalNullable[string]                                          `json:"fiction,omitzero"`
-	ContentType                optionalnullable.OptionalNullable[string]                                          `json:"content_type,omitzero"`
-	OriginalFileType           optionalnullable.OptionalNullable[string]                                          `json:"original_file_type,omitzero"`
-	TargetAudience             optionalnullable.OptionalNullable[DirectPublishingReadResponseModelTargetAudience] `json:"target_audience,omitzero"`
-	MatureContent              optionalnullable.OptionalNullable[bool]                                            `json:"mature_content,omitzero"`
-	Origin                     optionalnullable.OptionalNullable[string]                                          `json:"origin,omitzero"`
-	PublicationDate            optionalnullable.OptionalNullable[string]                                          `json:"publication_date,omitzero"`
-	Isbn                       optionalnullable.OptionalNullable[string]                                          `json:"isbn,omitzero"`
-	Ean                        optionalnullable.OptionalNullable[string]                                          `json:"ean,omitzero"`
-	LegalTerms                 optionalnullable.OptionalNullable[ReadLegalTerms]                                  `json:"legal_terms,omitzero"`
-	ContentGuidelinesTerms     optionalnullable.OptionalNullable[ReadLegalTerms]                                  `json:"content_guidelines_terms,omitzero"`
-	LastUpdatedFromProjectUnix optionalnullable.OptionalNullable[int64]                                           `json:"last_updated_from_project_unix,omitzero"`
-	PublishingProjectID        optionalnullable.OptionalNullable[string]                                          `json:"publishing_project_id,omitzero"`
-	PublishingState            *string                                                                            `default:"published" json:"publishing_state"`
-	PublisherProfileID         optionalnullable.OptionalNullable[string]                                          `json:"publisher_profile_id,omitzero"`
-	QualityScore               optionalnullable.OptionalNullable[int64]                                           `json:"quality_score,omitzero"`
-	Publisher                  optionalnullable.OptionalNullable[string]                                          `json:"publisher,omitzero"`
-	Copyright                  optionalnullable.OptionalNullable[string]                                          `json:"copyright,omitzero"`
-	Subtitle                   optionalnullable.OptionalNullable[string]                                          `json:"subtitle,omitzero"`
-	DistributionTerritories    optionalnullable.OptionalNullable[[]string]                                        `json:"distribution_territories,omitzero"`
-	Edition                    optionalnullable.OptionalNullable[string]                                          `json:"edition,omitzero"`
-	Contributors               optionalnullable.OptionalNullable[[]Contributor]                                   `json:"contributors,omitzero"`
-	PayoutType                 optionalnullable.OptionalNullable[PayoutType]                                      `json:"payout_type,omitzero"`
-	ListPrice                  optionalnullable.OptionalNullable[float64]                                         `json:"list_price,omitzero"`
+	ReadID                     string                                           `json:"read_id"`
+	CreatedAtUnix              int64                                            `json:"created_at_unix"`
+	UpdatedAtUnix              int64                                            `json:"updated_at_unix"`
+	WordCount                  int64                                            `json:"word_count"`
+	CharCount                  int64                                            `json:"char_count"`
+	Chapters                   []ReadMetadataChapterDBModel                     `json:"chapters"`
+	Title                      *string                                          `json:"title,omitzero"`
+	Author                     *string                                          `json:"author,omitzero"`
+	Description                *string                                          `json:"description,omitzero"`
+	ArticleImageURL            *string                                          `json:"article_image_url,omitzero"`
+	Language                   *string                                          `json:"language,omitzero"`
+	Locale                     *string                                          `json:"locale,omitzero"`
+	DisplayMode                *DisplayMode                                     `json:"display_mode,omitzero"`
+	Genre                      []Genre                                          `json:"genre,omitzero"`
+	Fiction                    *string                                          `json:"fiction,omitzero"`
+	ContentType                *string                                          `json:"content_type,omitzero"`
+	OriginalFileType           *string                                          `json:"original_file_type,omitzero"`
+	TargetAudience             *DirectPublishingReadResponseModelTargetAudience `json:"target_audience,omitzero"`
+	MatureContent              *bool                                            `json:"mature_content,omitzero"`
+	Origin                     *string                                          `json:"origin,omitzero"`
+	PublicationDate            *string                                          `json:"publication_date,omitzero"`
+	Isbn                       *string                                          `json:"isbn,omitzero"`
+	Ean                        *string                                          `json:"ean,omitzero"`
+	LegalTerms                 *ReadLegalTerms                                  `json:"legal_terms,omitzero"`
+	ContentGuidelinesTerms     *ReadLegalTerms                                  `json:"content_guidelines_terms,omitzero"`
+	LastUpdatedFromProjectUnix *int64                                           `json:"last_updated_from_project_unix,omitzero"`
+	PublishingProjectID        *string                                          `json:"publishing_project_id,omitzero"`
+	PublishingState            *string                                          `default:"published" json:"publishing_state"`
+	PublisherProfileID         *string                                          `json:"publisher_profile_id,omitzero"`
+	QualityScore               *int64                                           `json:"quality_score,omitzero"`
+	Publisher                  *string                                          `json:"publisher,omitzero"`
+	Copyright                  *string                                          `json:"copyright,omitzero"`
+	Subtitle                   *string                                          `json:"subtitle,omitzero"`
+	DistributionTerritories    []string                                         `json:"distribution_territories,omitzero"`
+	Edition                    *string                                          `json:"edition,omitzero"`
+	Contributors               []Contributor                                    `json:"contributors,omitzero"`
+	PayoutType                 *PayoutType                                      `json:"payout_type,omitzero"`
+	ListPrice                  *float64                                         `json:"list_price,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	currency                     optionalnullable.OptionalNullable[string]              `const:"usd" json:"currency,omitzero"`
-	OriginalAudioProjectExportID optionalnullable.OptionalNullable[string]              `json:"original_audio_project_export_id,omitzero"`
-	OriginalAudioDocumentID      optionalnullable.OptionalNullable[string]              `json:"original_audio_document_id,omitzero"`
-	SeriesID                     optionalnullable.OptionalNullable[string]              `json:"series_id,omitzero"`
-	Volume                       optionalnullable.OptionalNullable[int64]               `json:"volume,omitzero"`
-	PublishedAtUnix              optionalnullable.OptionalNullable[int64]               `json:"published_at_unix,omitzero"`
-	ReadSlug                     optionalnullable.OptionalNullable[string]              `json:"read_slug,omitzero"`
-	PreviewAudioObject           optionalnullable.OptionalNullable[PreviewAudioDBModel] `json:"preview_audio_object,omitzero"`
-	SampleConfig                 optionalnullable.OptionalNullable[SampleConfigDBModel] `json:"sample_config,omitzero"`
-	Review                       optionalnullable.OptionalNullable[ReviewResponseModel] `json:"review,omitzero"`
-	VoiceID                      optionalnullable.OptionalNullable[string]              `json:"voice_id,omitzero"`
-	CanUseAssistant              *bool                                                  `default:"true" json:"can_use_assistant"`
+	currency                     *string              `const:"usd" json:"currency,omitzero"`
+	OriginalAudioProjectExportID *string              `json:"original_audio_project_export_id,omitzero"`
+	OriginalAudioDocumentID      *string              `json:"original_audio_document_id,omitzero"`
+	SeriesID                     *string              `json:"series_id,omitzero"`
+	Volume                       *int64               `json:"volume,omitzero"`
+	PublishedAtUnix              *int64               `json:"published_at_unix,omitzero"`
+	ReadSlug                     *string              `json:"read_slug,omitzero"`
+	PreviewAudioObject           *PreviewAudioDBModel `json:"preview_audio_object,omitzero"`
+	SampleConfig                 *SampleConfigDBModel `json:"sample_config,omitzero"`
+	Review                       *ReviewResponseModel `json:"review,omitzero"`
+	VoiceID                      *string              `json:"voice_id,omitzero"`
+	CanUseAssistant              *bool                `default:"true" json:"can_use_assistant"`
 }
 
 func (d DirectPublishingReadResponseModel) MarshalJSON() ([]byte, error) {
@@ -236,147 +236,147 @@ func (d *DirectPublishingReadResponseModel) GetChapters() []ReadMetadataChapterD
 	return d.Chapters
 }
 
-func (d *DirectPublishingReadResponseModel) GetTitle() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetTitle() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Title
 }
 
-func (d *DirectPublishingReadResponseModel) GetAuthor() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetAuthor() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Author
 }
 
-func (d *DirectPublishingReadResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetDescription() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Description
 }
 
-func (d *DirectPublishingReadResponseModel) GetArticleImageURL() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetArticleImageURL() *string {
 	if d == nil {
 		return nil
 	}
 	return d.ArticleImageURL
 }
 
-func (d *DirectPublishingReadResponseModel) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetLanguage() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Language
 }
 
-func (d *DirectPublishingReadResponseModel) GetLocale() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetLocale() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Locale
 }
 
-func (d *DirectPublishingReadResponseModel) GetDisplayMode() optionalnullable.OptionalNullable[DisplayMode] {
+func (d *DirectPublishingReadResponseModel) GetDisplayMode() *DisplayMode {
 	if d == nil {
 		return nil
 	}
 	return d.DisplayMode
 }
 
-func (d *DirectPublishingReadResponseModel) GetGenre() optionalnullable.OptionalNullable[[]Genre] {
+func (d *DirectPublishingReadResponseModel) GetGenre() []Genre {
 	if d == nil {
 		return nil
 	}
 	return d.Genre
 }
 
-func (d *DirectPublishingReadResponseModel) GetFiction() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetFiction() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Fiction
 }
 
-func (d *DirectPublishingReadResponseModel) GetContentType() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetContentType() *string {
 	if d == nil {
 		return nil
 	}
 	return d.ContentType
 }
 
-func (d *DirectPublishingReadResponseModel) GetOriginalFileType() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetOriginalFileType() *string {
 	if d == nil {
 		return nil
 	}
 	return d.OriginalFileType
 }
 
-func (d *DirectPublishingReadResponseModel) GetTargetAudience() optionalnullable.OptionalNullable[DirectPublishingReadResponseModelTargetAudience] {
+func (d *DirectPublishingReadResponseModel) GetTargetAudience() *DirectPublishingReadResponseModelTargetAudience {
 	if d == nil {
 		return nil
 	}
 	return d.TargetAudience
 }
 
-func (d *DirectPublishingReadResponseModel) GetMatureContent() optionalnullable.OptionalNullable[bool] {
+func (d *DirectPublishingReadResponseModel) GetMatureContent() *bool {
 	if d == nil {
 		return nil
 	}
 	return d.MatureContent
 }
 
-func (d *DirectPublishingReadResponseModel) GetOrigin() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetOrigin() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Origin
 }
 
-func (d *DirectPublishingReadResponseModel) GetPublicationDate() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetPublicationDate() *string {
 	if d == nil {
 		return nil
 	}
 	return d.PublicationDate
 }
 
-func (d *DirectPublishingReadResponseModel) GetIsbn() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetIsbn() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Isbn
 }
 
-func (d *DirectPublishingReadResponseModel) GetEan() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetEan() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Ean
 }
 
-func (d *DirectPublishingReadResponseModel) GetLegalTerms() optionalnullable.OptionalNullable[ReadLegalTerms] {
+func (d *DirectPublishingReadResponseModel) GetLegalTerms() *ReadLegalTerms {
 	if d == nil {
 		return nil
 	}
 	return d.LegalTerms
 }
 
-func (d *DirectPublishingReadResponseModel) GetContentGuidelinesTerms() optionalnullable.OptionalNullable[ReadLegalTerms] {
+func (d *DirectPublishingReadResponseModel) GetContentGuidelinesTerms() *ReadLegalTerms {
 	if d == nil {
 		return nil
 	}
 	return d.ContentGuidelinesTerms
 }
 
-func (d *DirectPublishingReadResponseModel) GetLastUpdatedFromProjectUnix() optionalnullable.OptionalNullable[int64] {
+func (d *DirectPublishingReadResponseModel) GetLastUpdatedFromProjectUnix() *int64 {
 	if d == nil {
 		return nil
 	}
 	return d.LastUpdatedFromProjectUnix
 }
 
-func (d *DirectPublishingReadResponseModel) GetPublishingProjectID() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetPublishingProjectID() *string {
 	if d == nil {
 		return nil
 	}
@@ -390,145 +390,144 @@ func (d *DirectPublishingReadResponseModel) GetPublishingState() *string {
 	return d.PublishingState
 }
 
-func (d *DirectPublishingReadResponseModel) GetPublisherProfileID() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetPublisherProfileID() *string {
 	if d == nil {
 		return nil
 	}
 	return d.PublisherProfileID
 }
 
-func (d *DirectPublishingReadResponseModel) GetQualityScore() optionalnullable.OptionalNullable[int64] {
+func (d *DirectPublishingReadResponseModel) GetQualityScore() *int64 {
 	if d == nil {
 		return nil
 	}
 	return d.QualityScore
 }
 
-func (d *DirectPublishingReadResponseModel) GetPublisher() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetPublisher() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Publisher
 }
 
-func (d *DirectPublishingReadResponseModel) GetCopyright() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetCopyright() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Copyright
 }
 
-func (d *DirectPublishingReadResponseModel) GetSubtitle() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetSubtitle() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Subtitle
 }
 
-func (d *DirectPublishingReadResponseModel) GetDistributionTerritories() optionalnullable.OptionalNullable[[]string] {
+func (d *DirectPublishingReadResponseModel) GetDistributionTerritories() []string {
 	if d == nil {
 		return nil
 	}
 	return d.DistributionTerritories
 }
 
-func (d *DirectPublishingReadResponseModel) GetEdition() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetEdition() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Edition
 }
 
-func (d *DirectPublishingReadResponseModel) GetContributors() optionalnullable.OptionalNullable[[]Contributor] {
+func (d *DirectPublishingReadResponseModel) GetContributors() []Contributor {
 	if d == nil {
 		return nil
 	}
 	return d.Contributors
 }
 
-func (d *DirectPublishingReadResponseModel) GetPayoutType() optionalnullable.OptionalNullable[PayoutType] {
+func (d *DirectPublishingReadResponseModel) GetPayoutType() *PayoutType {
 	if d == nil {
 		return nil
 	}
 	return d.PayoutType
 }
 
-func (d *DirectPublishingReadResponseModel) GetListPrice() optionalnullable.OptionalNullable[float64] {
+func (d *DirectPublishingReadResponseModel) GetListPrice() *float64 {
 	if d == nil {
 		return nil
 	}
 	return d.ListPrice
 }
 
-func (d *DirectPublishingReadResponseModel) GetCurrency() optionalnullable.OptionalNullable[string] {
-	var tmp string = "usd"
-	return optionalnullable.From[string](&tmp)
+func (d *DirectPublishingReadResponseModel) GetCurrency() *string {
+	return types.Pointer("usd")
 }
 
-func (d *DirectPublishingReadResponseModel) GetOriginalAudioProjectExportID() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetOriginalAudioProjectExportID() *string {
 	if d == nil {
 		return nil
 	}
 	return d.OriginalAudioProjectExportID
 }
 
-func (d *DirectPublishingReadResponseModel) GetOriginalAudioDocumentID() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetOriginalAudioDocumentID() *string {
 	if d == nil {
 		return nil
 	}
 	return d.OriginalAudioDocumentID
 }
 
-func (d *DirectPublishingReadResponseModel) GetSeriesID() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetSeriesID() *string {
 	if d == nil {
 		return nil
 	}
 	return d.SeriesID
 }
 
-func (d *DirectPublishingReadResponseModel) GetVolume() optionalnullable.OptionalNullable[int64] {
+func (d *DirectPublishingReadResponseModel) GetVolume() *int64 {
 	if d == nil {
 		return nil
 	}
 	return d.Volume
 }
 
-func (d *DirectPublishingReadResponseModel) GetPublishedAtUnix() optionalnullable.OptionalNullable[int64] {
+func (d *DirectPublishingReadResponseModel) GetPublishedAtUnix() *int64 {
 	if d == nil {
 		return nil
 	}
 	return d.PublishedAtUnix
 }
 
-func (d *DirectPublishingReadResponseModel) GetReadSlug() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetReadSlug() *string {
 	if d == nil {
 		return nil
 	}
 	return d.ReadSlug
 }
 
-func (d *DirectPublishingReadResponseModel) GetPreviewAudioObject() optionalnullable.OptionalNullable[PreviewAudioDBModel] {
+func (d *DirectPublishingReadResponseModel) GetPreviewAudioObject() *PreviewAudioDBModel {
 	if d == nil {
 		return nil
 	}
 	return d.PreviewAudioObject
 }
 
-func (d *DirectPublishingReadResponseModel) GetSampleConfig() optionalnullable.OptionalNullable[SampleConfigDBModel] {
+func (d *DirectPublishingReadResponseModel) GetSampleConfig() *SampleConfigDBModel {
 	if d == nil {
 		return nil
 	}
 	return d.SampleConfig
 }
 
-func (d *DirectPublishingReadResponseModel) GetReview() optionalnullable.OptionalNullable[ReviewResponseModel] {
+func (d *DirectPublishingReadResponseModel) GetReview() *ReviewResponseModel {
 	if d == nil {
 		return nil
 	}
 	return d.Review
 }
 
-func (d *DirectPublishingReadResponseModel) GetVoiceID() optionalnullable.OptionalNullable[string] {
+func (d *DirectPublishingReadResponseModel) GetVoiceID() *string {
 	if d == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // VoiceResponseModelCategory - The category of the voice.
@@ -112,53 +111,53 @@ type VoiceResponseModel struct {
 	// The name of the voice.
 	Name string `json:"name"`
 	// List of samples associated with the voice.
-	Samples optionalnullable.OptionalNullable[[]SampleResponseModel] `json:"samples,omitzero"`
+	Samples []SampleResponseModel `json:"samples,omitzero"`
 	// The category of the voice.
 	Category VoiceResponseModelCategory `json:"category"`
 	// Fine-tuning information for the voice.
-	FineTuning optionalnullable.OptionalNullable[FineTuningResponseModel] `json:"fine_tuning,omitzero"`
+	FineTuning *FineTuningResponseModel `json:"fine_tuning,omitzero"`
 	// Labels associated with the voice.
 	Labels map[string]string `json:"labels"`
 	// The description of the voice.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// The preview URL of the voice.
-	PreviewURL optionalnullable.OptionalNullable[string] `json:"preview_url,omitzero"`
+	PreviewURL *string `json:"preview_url,omitzero"`
 	// The tiers the voice is available for.
 	AvailableForTiers []string `json:"available_for_tiers"`
 	// The settings of the voice.
-	Settings optionalnullable.OptionalNullable[VoiceSettingsResponseModel] `json:"settings,omitzero"`
+	Settings *VoiceSettingsResponseModel `json:"settings,omitzero"`
 	// The sharing information of the voice.
-	Sharing optionalnullable.OptionalNullable[VoiceSharingResponseModel] `json:"sharing,omitzero"`
+	Sharing *VoiceSharingResponseModel `json:"sharing,omitzero"`
 	// The base model IDs for high-quality voices.
 	HighQualityBaseModelIds []string `json:"high_quality_base_model_ids"`
 	// The verified languages of the voice.
-	VerifiedLanguages optionalnullable.OptionalNullable[[]VerifiedVoiceLanguageResponseModel] `json:"verified_languages,omitzero"`
+	VerifiedLanguages []VerifiedVoiceLanguageResponseModel `json:"verified_languages,omitzero"`
 	// The IDs of collections this voice belongs to.
-	CollectionIds optionalnullable.OptionalNullable[[]string] `json:"collection_ids,omitzero"`
+	CollectionIds []string `json:"collection_ids,omitzero"`
 	// The safety controls of the voice.
-	SafetyControl optionalnullable.OptionalNullable[SafetyControl] `json:"safety_control,omitzero"`
+	SafetyControl *SafetyControl `json:"safety_control,omitzero"`
 	// The voice verification of the voice.
-	VoiceVerification optionalnullable.OptionalNullable[VoiceVerificationResponseModel] `json:"voice_verification,omitzero"`
+	VoiceVerification *VoiceVerificationResponseModel `json:"voice_verification,omitzero"`
 	// The permission on the resource of the voice.
-	PermissionOnResource optionalnullable.OptionalNullable[string] `json:"permission_on_resource,omitzero"`
+	PermissionOnResource *string `json:"permission_on_resource,omitzero"`
 	// Whether the voice is owned by the user.
-	IsOwner optionalnullable.OptionalNullable[bool] `json:"is_owner,omitzero"`
+	IsOwner *bool `json:"is_owner,omitzero"`
 	// Whether the voice is legacy.
 	IsLegacy *bool `default:"false" json:"is_legacy"`
 	// Whether the voice is mixed.
 	IsMixed *bool `default:"false" json:"is_mixed"`
 	// Timestamp when the voice was marked as favorite in Unix time.
-	FavoritedAtUnix optionalnullable.OptionalNullable[int64] `json:"favorited_at_unix,omitzero"`
+	FavoritedAtUnix *int64 `json:"favorited_at_unix,omitzero"`
 	// The creation time of the voice in Unix time.
-	CreatedAtUnix optionalnullable.OptionalNullable[int64] `json:"created_at_unix,omitzero"`
+	CreatedAtUnix *int64 `json:"created_at_unix,omitzero"`
 	// Whether the voice is bookmarked by the current user. Only relevant for community (library-copied) voices.
-	IsBookmarked optionalnullable.OptionalNullable[bool] `json:"is_bookmarked,omitzero"`
+	IsBookmarked *bool `json:"is_bookmarked,omitzero"`
 	// The recording quality of the voice as determined by the review pipeline.
-	RecordingQuality optionalnullable.OptionalNullable[RecordingQuality] `json:"recording_quality,omitzero"`
+	RecordingQuality *RecordingQuality `json:"recording_quality,omitzero"`
 	// The review pipeline status of the voice.
-	LabellingStatus optionalnullable.OptionalNullable[LabellingStatus] `json:"labelling_status,omitzero"`
+	LabellingStatus *LabellingStatus `json:"labelling_status,omitzero"`
 	// The reason for the recording quality assessment, as determined by the review pipeline.
-	RecordingQualityReason optionalnullable.OptionalNullable[string] `json:"recording_quality_reason,omitzero"`
+	RecordingQualityReason *string `json:"recording_quality_reason,omitzero"`
 }
 
 func (v VoiceResponseModel) MarshalJSON() ([]byte, error) {
@@ -186,7 +185,7 @@ func (v *VoiceResponseModel) GetName() string {
 	return v.Name
 }
 
-func (v *VoiceResponseModel) GetSamples() optionalnullable.OptionalNullable[[]SampleResponseModel] {
+func (v *VoiceResponseModel) GetSamples() []SampleResponseModel {
 	if v == nil {
 		return nil
 	}
@@ -200,7 +199,7 @@ func (v *VoiceResponseModel) GetCategory() VoiceResponseModelCategory {
 	return v.Category
 }
 
-func (v *VoiceResponseModel) GetFineTuning() optionalnullable.OptionalNullable[FineTuningResponseModel] {
+func (v *VoiceResponseModel) GetFineTuning() *FineTuningResponseModel {
 	if v == nil {
 		return nil
 	}
@@ -214,14 +213,14 @@ func (v *VoiceResponseModel) GetLabels() map[string]string {
 	return v.Labels
 }
 
-func (v *VoiceResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (v *VoiceResponseModel) GetDescription() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Description
 }
 
-func (v *VoiceResponseModel) GetPreviewURL() optionalnullable.OptionalNullable[string] {
+func (v *VoiceResponseModel) GetPreviewURL() *string {
 	if v == nil {
 		return nil
 	}
@@ -235,14 +234,14 @@ func (v *VoiceResponseModel) GetAvailableForTiers() []string {
 	return v.AvailableForTiers
 }
 
-func (v *VoiceResponseModel) GetSettings() optionalnullable.OptionalNullable[VoiceSettingsResponseModel] {
+func (v *VoiceResponseModel) GetSettings() *VoiceSettingsResponseModel {
 	if v == nil {
 		return nil
 	}
 	return v.Settings
 }
 
-func (v *VoiceResponseModel) GetSharing() optionalnullable.OptionalNullable[VoiceSharingResponseModel] {
+func (v *VoiceResponseModel) GetSharing() *VoiceSharingResponseModel {
 	if v == nil {
 		return nil
 	}
@@ -256,42 +255,42 @@ func (v *VoiceResponseModel) GetHighQualityBaseModelIds() []string {
 	return v.HighQualityBaseModelIds
 }
 
-func (v *VoiceResponseModel) GetVerifiedLanguages() optionalnullable.OptionalNullable[[]VerifiedVoiceLanguageResponseModel] {
+func (v *VoiceResponseModel) GetVerifiedLanguages() []VerifiedVoiceLanguageResponseModel {
 	if v == nil {
 		return nil
 	}
 	return v.VerifiedLanguages
 }
 
-func (v *VoiceResponseModel) GetCollectionIds() optionalnullable.OptionalNullable[[]string] {
+func (v *VoiceResponseModel) GetCollectionIds() []string {
 	if v == nil {
 		return nil
 	}
 	return v.CollectionIds
 }
 
-func (v *VoiceResponseModel) GetSafetyControl() optionalnullable.OptionalNullable[SafetyControl] {
+func (v *VoiceResponseModel) GetSafetyControl() *SafetyControl {
 	if v == nil {
 		return nil
 	}
 	return v.SafetyControl
 }
 
-func (v *VoiceResponseModel) GetVoiceVerification() optionalnullable.OptionalNullable[VoiceVerificationResponseModel] {
+func (v *VoiceResponseModel) GetVoiceVerification() *VoiceVerificationResponseModel {
 	if v == nil {
 		return nil
 	}
 	return v.VoiceVerification
 }
 
-func (v *VoiceResponseModel) GetPermissionOnResource() optionalnullable.OptionalNullable[string] {
+func (v *VoiceResponseModel) GetPermissionOnResource() *string {
 	if v == nil {
 		return nil
 	}
 	return v.PermissionOnResource
 }
 
-func (v *VoiceResponseModel) GetIsOwner() optionalnullable.OptionalNullable[bool] {
+func (v *VoiceResponseModel) GetIsOwner() *bool {
 	if v == nil {
 		return nil
 	}
@@ -312,42 +311,42 @@ func (v *VoiceResponseModel) GetIsMixed() *bool {
 	return v.IsMixed
 }
 
-func (v *VoiceResponseModel) GetFavoritedAtUnix() optionalnullable.OptionalNullable[int64] {
+func (v *VoiceResponseModel) GetFavoritedAtUnix() *int64 {
 	if v == nil {
 		return nil
 	}
 	return v.FavoritedAtUnix
 }
 
-func (v *VoiceResponseModel) GetCreatedAtUnix() optionalnullable.OptionalNullable[int64] {
+func (v *VoiceResponseModel) GetCreatedAtUnix() *int64 {
 	if v == nil {
 		return nil
 	}
 	return v.CreatedAtUnix
 }
 
-func (v *VoiceResponseModel) GetIsBookmarked() optionalnullable.OptionalNullable[bool] {
+func (v *VoiceResponseModel) GetIsBookmarked() *bool {
 	if v == nil {
 		return nil
 	}
 	return v.IsBookmarked
 }
 
-func (v *VoiceResponseModel) GetRecordingQuality() optionalnullable.OptionalNullable[RecordingQuality] {
+func (v *VoiceResponseModel) GetRecordingQuality() *RecordingQuality {
 	if v == nil {
 		return nil
 	}
 	return v.RecordingQuality
 }
 
-func (v *VoiceResponseModel) GetLabellingStatus() optionalnullable.OptionalNullable[LabellingStatus] {
+func (v *VoiceResponseModel) GetLabellingStatus() *LabellingStatus {
 	if v == nil {
 		return nil
 	}
 	return v.LabellingStatus
 }
 
-func (v *VoiceResponseModel) GetRecordingQualityReason() optionalnullable.OptionalNullable[string] {
+func (v *VoiceResponseModel) GetRecordingQualityReason() *string {
 	if v == nil {
 		return nil
 	}

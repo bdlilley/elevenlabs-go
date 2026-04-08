@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // MusicUploadResponse - Response model for music upload endpoint.
@@ -12,7 +11,7 @@ type MusicUploadResponse struct {
 	// Unique identifier for the uploaded song
 	SongID string `json:"song_id"`
 	// The composition plan extracted from the uploaded song. Only present if `extract_composition_plan` was True in the request body
-	CompositionPlan optionalnullable.OptionalNullable[MusicPrompt] `json:"composition_plan,omitzero"`
+	CompositionPlan *MusicPrompt `json:"composition_plan,omitzero"`
 }
 
 func (m MusicUploadResponse) MarshalJSON() ([]byte, error) {
@@ -33,7 +32,7 @@ func (m *MusicUploadResponse) GetSongID() string {
 	return m.SongID
 }
 
-func (m *MusicUploadResponse) GetCompositionPlan() optionalnullable.OptionalNullable[MusicPrompt] {
+func (m *MusicUploadResponse) GetCompositionPlan() *MusicPrompt {
 	if m == nil {
 		return nil
 	}

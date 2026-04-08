@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -24,7 +23,7 @@ type GetPhoneNumberTwilioResponseModel struct {
 	// The ID of the phone number
 	PhoneNumberID string `json:"phone_number_id"`
 	// The agent that is assigned to the phone number
-	AssignedAgent optionalnullable.OptionalNullable[PhoneNumberAgentInfo] `json:"assigned_agent,omitzero"`
+	AssignedAgent *PhoneNumberAgentInfo `json:"assigned_agent,omitzero"`
 	// Phone provider
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	provider *string `const:"twilio" json:"provider"`
@@ -76,7 +75,7 @@ func (g *GetPhoneNumberTwilioResponseModel) GetPhoneNumberID() string {
 	return g.PhoneNumberID
 }
 
-func (g *GetPhoneNumberTwilioResponseModel) GetAssignedAgent() optionalnullable.OptionalNullable[PhoneNumberAgentInfo] {
+func (g *GetPhoneNumberTwilioResponseModel) GetAssignedAgent() *PhoneNumberAgentInfo {
 	if g == nil {
 		return nil
 	}

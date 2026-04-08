@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,7 +33,7 @@ func newStudio(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *
 
 // CreatePodcast - Create Podcast
 // Create and auto-convert a podcast project. Currently, the LLM cost is covered by us but you will still be charged for the audio generation. In the future, you will be charged for both the LLM and audio generation costs.
-func (s *Studio) CreatePodcast(ctx context.Context, body components.BodyCreatePodcastV1StudioPodcastsPost, safetyIdentifier optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreatePodcastResponse, error) {
+func (s *Studio) CreatePodcast(ctx context.Context, body components.BodyCreatePodcastV1StudioPodcastsPost, safetyIdentifier *string, opts ...operations.Option) (*operations.CreatePodcastResponse, error) {
 	request := operations.CreatePodcastRequest{
 		SafetyIdentifier: safetyIdentifier,
 		Body:             body,
@@ -987,7 +986,7 @@ func (s *Studio) AddProject(ctx context.Context, request components.BodyCreateSt
 
 // GetProjectByID - Get Studio Project
 // Returns information about a specific Studio project. This endpoint returns more detailed information about a project than `GET /v1/studio`.
-func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetProjectByIDResponse, error) {
+func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID *string, opts ...operations.Option) (*operations.GetProjectByIDResponse, error) {
 	request := operations.GetProjectByIDRequest{
 		ProjectID: projectID,
 		ShareID:   shareID,

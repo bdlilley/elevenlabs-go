@@ -4,24 +4,23 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BuiltInToolsInput struct {
 	// The end call tool
-	EndCall optionalnullable.OptionalNullable[SystemToolConfigInput] `json:"end_call,omitzero"`
+	EndCall *SystemToolConfigInput `json:"end_call,omitzero"`
 	// The language detection tool
-	LanguageDetection optionalnullable.OptionalNullable[SystemToolConfigInput] `json:"language_detection,omitzero"`
+	LanguageDetection *SystemToolConfigInput `json:"language_detection,omitzero"`
 	// The transfer to agent tool
-	TransferToAgent optionalnullable.OptionalNullable[SystemToolConfigInput] `json:"transfer_to_agent,omitzero"`
+	TransferToAgent *SystemToolConfigInput `json:"transfer_to_agent,omitzero"`
 	// The transfer to number tool
-	TransferToNumber optionalnullable.OptionalNullable[SystemToolConfigInput] `json:"transfer_to_number,omitzero"`
+	TransferToNumber *SystemToolConfigInput `json:"transfer_to_number,omitzero"`
 	// The skip turn tool
-	SkipTurn optionalnullable.OptionalNullable[SystemToolConfigInput] `json:"skip_turn,omitzero"`
+	SkipTurn *SystemToolConfigInput `json:"skip_turn,omitzero"`
 	// The play DTMF tool
-	PlayKeypadTouchTone optionalnullable.OptionalNullable[SystemToolConfigInput] `json:"play_keypad_touch_tone,omitzero"`
+	PlayKeypadTouchTone *SystemToolConfigInput `json:"play_keypad_touch_tone,omitzero"`
 	// The voicemail detection tool
-	VoicemailDetection optionalnullable.OptionalNullable[SystemToolConfigInput] `json:"voicemail_detection,omitzero"`
+	VoicemailDetection *SystemToolConfigInput `json:"voicemail_detection,omitzero"`
 }
 
 func (b BuiltInToolsInput) MarshalJSON() ([]byte, error) {
@@ -35,49 +34,49 @@ func (b *BuiltInToolsInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (b *BuiltInToolsInput) GetEndCall() optionalnullable.OptionalNullable[SystemToolConfigInput] {
+func (b *BuiltInToolsInput) GetEndCall() *SystemToolConfigInput {
 	if b == nil {
 		return nil
 	}
 	return b.EndCall
 }
 
-func (b *BuiltInToolsInput) GetLanguageDetection() optionalnullable.OptionalNullable[SystemToolConfigInput] {
+func (b *BuiltInToolsInput) GetLanguageDetection() *SystemToolConfigInput {
 	if b == nil {
 		return nil
 	}
 	return b.LanguageDetection
 }
 
-func (b *BuiltInToolsInput) GetTransferToAgent() optionalnullable.OptionalNullable[SystemToolConfigInput] {
+func (b *BuiltInToolsInput) GetTransferToAgent() *SystemToolConfigInput {
 	if b == nil {
 		return nil
 	}
 	return b.TransferToAgent
 }
 
-func (b *BuiltInToolsInput) GetTransferToNumber() optionalnullable.OptionalNullable[SystemToolConfigInput] {
+func (b *BuiltInToolsInput) GetTransferToNumber() *SystemToolConfigInput {
 	if b == nil {
 		return nil
 	}
 	return b.TransferToNumber
 }
 
-func (b *BuiltInToolsInput) GetSkipTurn() optionalnullable.OptionalNullable[SystemToolConfigInput] {
+func (b *BuiltInToolsInput) GetSkipTurn() *SystemToolConfigInput {
 	if b == nil {
 		return nil
 	}
 	return b.SkipTurn
 }
 
-func (b *BuiltInToolsInput) GetPlayKeypadTouchTone() optionalnullable.OptionalNullable[SystemToolConfigInput] {
+func (b *BuiltInToolsInput) GetPlayKeypadTouchTone() *SystemToolConfigInput {
 	if b == nil {
 		return nil
 	}
 	return b.PlayKeypadTouchTone
 }
 
-func (b *BuiltInToolsInput) GetVoicemailDetection() optionalnullable.OptionalNullable[SystemToolConfigInput] {
+func (b *BuiltInToolsInput) GetVoicemailDetection() *SystemToolConfigInput {
 	if b == nil {
 		return nil
 	}

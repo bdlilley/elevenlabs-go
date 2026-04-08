@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PhoneNumberType string
@@ -103,15 +102,15 @@ type GetAgentResponseModel struct {
 	WhatsappAccounts []GetWhatsAppAccountResponse `json:"whatsapp_accounts,omitzero"`
 	Workflow         *AgentWorkflowResponseModel  `json:"workflow,omitzero"`
 	// The access information of the agent for the user
-	AccessInfo optionalnullable.OptionalNullable[ResourceAccessInfo] `json:"access_info,omitzero"`
+	AccessInfo *ResourceAccessInfo `json:"access_info,omitzero"`
 	// Agent tags used to categorize the agent
 	Tags []string `json:"tags,omitzero"`
 	// The ID of the version the agent is on
-	VersionID optionalnullable.OptionalNullable[string] `json:"version_id,omitzero"`
+	VersionID *string `json:"version_id,omitzero"`
 	// The ID of the branch the agent is on
-	BranchID optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
+	BranchID *string `json:"branch_id,omitzero"`
 	// The ID of the main branch for this agent
-	MainBranchID optionalnullable.OptionalNullable[string] `json:"main_branch_id,omitzero"`
+	MainBranchID *string `json:"main_branch_id,omitzero"`
 }
 
 func (g GetAgentResponseModel) MarshalJSON() ([]byte, error) {
@@ -181,7 +180,7 @@ func (g *GetAgentResponseModel) GetWorkflow() *AgentWorkflowResponseModel {
 	return g.Workflow
 }
 
-func (g *GetAgentResponseModel) GetAccessInfo() optionalnullable.OptionalNullable[ResourceAccessInfo] {
+func (g *GetAgentResponseModel) GetAccessInfo() *ResourceAccessInfo {
 	if g == nil {
 		return nil
 	}
@@ -195,21 +194,21 @@ func (g *GetAgentResponseModel) GetTags() []string {
 	return g.Tags
 }
 
-func (g *GetAgentResponseModel) GetVersionID() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentResponseModel) GetVersionID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.VersionID
 }
 
-func (g *GetAgentResponseModel) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentResponseModel) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.BranchID
 }
 
-func (g *GetAgentResponseModel) GetMainBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentResponseModel) GetMainBranchID() *string {
 	if g == nil {
 		return nil
 	}

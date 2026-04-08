@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PhoneCallType string
@@ -90,33 +89,33 @@ func (u PhoneCall) MarshalJSON() ([]byte, error) {
 }
 
 type ConversationHistoryMetadataCommonModel struct {
-	StartTimeUnixSecs    int64                                                                     `json:"start_time_unix_secs"`
-	AcceptedTimeUnixSecs optionalnullable.OptionalNullable[int64]                                  `json:"accepted_time_unix_secs,omitzero"`
-	CallDurationSecs     int64                                                                     `json:"call_duration_secs"`
-	Cost                 optionalnullable.OptionalNullable[int64]                                  `json:"cost,omitzero"`
-	DeletionSettings     *ConversationDeletionSettings                                             `json:"deletion_settings,omitzero"`
-	Feedback             *ConversationHistoryFeedbackCommonModel                                   `json:"feedback,omitzero"`
-	AuthorizationMethod  *AuthorizationMethod                                                      `default:"public" json:"authorization_method"`
-	Charging             *ConversationChargingCommonModel                                          `json:"charging,omitzero"`
-	PhoneCall            optionalnullable.OptionalNullable[PhoneCall]                              `json:"phone_call,omitzero"`
-	BatchCall            optionalnullable.OptionalNullable[ConversationHistoryBatchCallModel]      `json:"batch_call,omitzero"`
-	TerminationReason    *string                                                                   `default:"" json:"termination_reason"`
-	Error                optionalnullable.OptionalNullable[ConversationHistoryErrorCommonModel]    `json:"error,omitzero"`
-	Warnings             []string                                                                  `json:"warnings,omitzero"`
-	MainLanguage         optionalnullable.OptionalNullable[string]                                 `json:"main_language,omitzero"`
-	RagUsage             optionalnullable.OptionalNullable[ConversationHistoryRagUsageCommonModel] `json:"rag_usage,omitzero"`
-	TextOnly             *bool                                                                     `default:"false" json:"text_only"`
-	FeaturesUsage        *FeaturesUsageCommonModel                                                 `json:"features_usage,omitzero"`
-	ElevenAssistant      *ConversationHistoryElevenAssistantCommonModel                            `json:"eleven_assistant,omitzero"`
-	InitiatorID          optionalnullable.OptionalNullable[string]                                 `json:"initiator_id,omitzero"`
+	StartTimeUnixSecs    int64                                          `json:"start_time_unix_secs"`
+	AcceptedTimeUnixSecs *int64                                         `json:"accepted_time_unix_secs,omitzero"`
+	CallDurationSecs     int64                                          `json:"call_duration_secs"`
+	Cost                 *int64                                         `json:"cost,omitzero"`
+	DeletionSettings     *ConversationDeletionSettings                  `json:"deletion_settings,omitzero"`
+	Feedback             *ConversationHistoryFeedbackCommonModel        `json:"feedback,omitzero"`
+	AuthorizationMethod  *AuthorizationMethod                           `default:"public" json:"authorization_method"`
+	Charging             *ConversationChargingCommonModel               `json:"charging,omitzero"`
+	PhoneCall            *PhoneCall                                     `json:"phone_call,omitzero"`
+	BatchCall            *ConversationHistoryBatchCallModel             `json:"batch_call,omitzero"`
+	TerminationReason    *string                                        `default:"" json:"termination_reason"`
+	Error                *ConversationHistoryErrorCommonModel           `json:"error,omitzero"`
+	Warnings             []string                                       `json:"warnings,omitzero"`
+	MainLanguage         *string                                        `json:"main_language,omitzero"`
+	RagUsage             *ConversationHistoryRagUsageCommonModel        `json:"rag_usage,omitzero"`
+	TextOnly             *bool                                          `default:"false" json:"text_only"`
+	FeaturesUsage        *FeaturesUsageCommonModel                      `json:"features_usage,omitzero"`
+	ElevenAssistant      *ConversationHistoryElevenAssistantCommonModel `json:"eleven_assistant,omitzero"`
+	InitiatorID          *string                                        `json:"initiator_id,omitzero"`
 	// Enum representing the possible sources for conversation initiation.
-	ConversationInitiationSource        *ConversationInitiationSource                                `default:"unknown" json:"conversation_initiation_source"`
-	ConversationInitiationSourceVersion optionalnullable.OptionalNullable[string]                    `json:"conversation_initiation_source_version,omitzero"`
-	Timezone                            optionalnullable.OptionalNullable[string]                    `json:"timezone,omitzero"`
-	AsyncMetadata                       optionalnullable.OptionalNullable[AsyncConversationMetadata] `json:"async_metadata,omitzero"`
-	Whatsapp                            optionalnullable.OptionalNullable[WhatsAppConversationInfo]  `json:"whatsapp,omitzero"`
-	AgentCreatedFrom                    *AgentDefinitionSource                                       `default:"unknown" json:"agent_created_from"`
-	AgentLastUpdatedFrom                *AgentDefinitionSource                                       `default:"unknown" json:"agent_last_updated_from"`
+	ConversationInitiationSource        *ConversationInitiationSource `default:"unknown" json:"conversation_initiation_source"`
+	ConversationInitiationSourceVersion *string                       `json:"conversation_initiation_source_version,omitzero"`
+	Timezone                            *string                       `json:"timezone,omitzero"`
+	AsyncMetadata                       *AsyncConversationMetadata    `json:"async_metadata,omitzero"`
+	Whatsapp                            *WhatsAppConversationInfo     `json:"whatsapp,omitzero"`
+	AgentCreatedFrom                    *AgentDefinitionSource        `default:"unknown" json:"agent_created_from"`
+	AgentLastUpdatedFrom                *AgentDefinitionSource        `default:"unknown" json:"agent_last_updated_from"`
 }
 
 func (c ConversationHistoryMetadataCommonModel) MarshalJSON() ([]byte, error) {
@@ -137,7 +136,7 @@ func (c *ConversationHistoryMetadataCommonModel) GetStartTimeUnixSecs() int64 {
 	return c.StartTimeUnixSecs
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetAcceptedTimeUnixSecs() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationHistoryMetadataCommonModel) GetAcceptedTimeUnixSecs() *int64 {
 	if c == nil {
 		return nil
 	}
@@ -151,7 +150,7 @@ func (c *ConversationHistoryMetadataCommonModel) GetCallDurationSecs() int64 {
 	return c.CallDurationSecs
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetCost() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationHistoryMetadataCommonModel) GetCost() *int64 {
 	if c == nil {
 		return nil
 	}
@@ -186,7 +185,7 @@ func (c *ConversationHistoryMetadataCommonModel) GetCharging() *ConversationChar
 	return c.Charging
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetPhoneCall() optionalnullable.OptionalNullable[PhoneCall] {
+func (c *ConversationHistoryMetadataCommonModel) GetPhoneCall() *PhoneCall {
 	if c == nil {
 		return nil
 	}
@@ -195,25 +194,19 @@ func (c *ConversationHistoryMetadataCommonModel) GetPhoneCall() optionalnullable
 
 func (c *ConversationHistoryMetadataCommonModel) GetPhoneCallSipTrunking() *ConversationHistorySIPTrunkingPhoneCallModel {
 	if v := c.GetPhoneCall(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ConversationHistorySIPTrunkingPhoneCallModel
-		}
-		return nil
+		return v.ConversationHistorySIPTrunkingPhoneCallModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryMetadataCommonModel) GetPhoneCallTwilio() *ConversationHistoryTwilioPhoneCallModel {
 	if v := c.GetPhoneCall(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ConversationHistoryTwilioPhoneCallModel
-		}
-		return nil
+		return v.ConversationHistoryTwilioPhoneCallModel
 	}
 	return nil
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetBatchCall() optionalnullable.OptionalNullable[ConversationHistoryBatchCallModel] {
+func (c *ConversationHistoryMetadataCommonModel) GetBatchCall() *ConversationHistoryBatchCallModel {
 	if c == nil {
 		return nil
 	}
@@ -227,7 +220,7 @@ func (c *ConversationHistoryMetadataCommonModel) GetTerminationReason() *string 
 	return c.TerminationReason
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetError() optionalnullable.OptionalNullable[ConversationHistoryErrorCommonModel] {
+func (c *ConversationHistoryMetadataCommonModel) GetError() *ConversationHistoryErrorCommonModel {
 	if c == nil {
 		return nil
 	}
@@ -241,14 +234,14 @@ func (c *ConversationHistoryMetadataCommonModel) GetWarnings() []string {
 	return c.Warnings
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetMainLanguage() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryMetadataCommonModel) GetMainLanguage() *string {
 	if c == nil {
 		return nil
 	}
 	return c.MainLanguage
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetRagUsage() optionalnullable.OptionalNullable[ConversationHistoryRagUsageCommonModel] {
+func (c *ConversationHistoryMetadataCommonModel) GetRagUsage() *ConversationHistoryRagUsageCommonModel {
 	if c == nil {
 		return nil
 	}
@@ -276,7 +269,7 @@ func (c *ConversationHistoryMetadataCommonModel) GetElevenAssistant() *Conversat
 	return c.ElevenAssistant
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetInitiatorID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryMetadataCommonModel) GetInitiatorID() *string {
 	if c == nil {
 		return nil
 	}
@@ -290,28 +283,28 @@ func (c *ConversationHistoryMetadataCommonModel) GetConversationInitiationSource
 	return c.ConversationInitiationSource
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetConversationInitiationSourceVersion() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryMetadataCommonModel) GetConversationInitiationSourceVersion() *string {
 	if c == nil {
 		return nil
 	}
 	return c.ConversationInitiationSourceVersion
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetTimezone() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryMetadataCommonModel) GetTimezone() *string {
 	if c == nil {
 		return nil
 	}
 	return c.Timezone
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetAsyncMetadata() optionalnullable.OptionalNullable[AsyncConversationMetadata] {
+func (c *ConversationHistoryMetadataCommonModel) GetAsyncMetadata() *AsyncConversationMetadata {
 	if c == nil {
 		return nil
 	}
 	return c.AsyncMetadata
 }
 
-func (c *ConversationHistoryMetadataCommonModel) GetWhatsapp() optionalnullable.OptionalNullable[WhatsAppConversationInfo] {
+func (c *ConversationHistoryMetadataCommonModel) GetWhatsapp() *WhatsAppConversationInfo {
 	if c == nil {
 		return nil
 	}

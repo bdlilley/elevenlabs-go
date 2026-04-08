@@ -24,7 +24,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 )
@@ -39,11 +38,11 @@ func main() {
     res, err := s.SpeechToText.SpeechToText(ctx, components.BodySpeechToTextV1SpeechToTextPost{
         ModelID: components.BodySpeechToTextV1SpeechToTextPostModelIDScribeV2,
         FileFormat: components.BodySpeechToTextV1SpeechToTextPostFileFormatPcmS16le16.ToPointer(),
-        SourceURL: optionalnullable.From(elevenlabsgo.Pointer("https://storage.googleapis.com/my-bucket/folder/audio.mp3")),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
-        WebhookMetadata: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWebhookMetadataStr(
+        SourceURL: elevenlabsgo.Pointer("https://storage.googleapis.com/my-bucket/folder/audio.mp3"),
+        Seed: elevenlabsgo.Pointer[int64](12345),
+        WebhookMetadata: elevenlabsgo.Pointer(components.CreateWebhookMetadataStr(
             "{\"user_id\": \"123\", \"session_id\": \"abc-def-ghi\"}",
-        ))),
+        )),
     }, elevenlabsgo.Pointer(true))
     if err != nil {
         log.Fatal(err)
@@ -71,7 +70,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 )
@@ -86,11 +84,11 @@ func main() {
     res, err := s.SpeechToText.SpeechToText(ctx, components.BodySpeechToTextV1SpeechToTextPost{
         ModelID: components.BodySpeechToTextV1SpeechToTextPostModelIDScribeV2,
         FileFormat: components.BodySpeechToTextV1SpeechToTextPostFileFormatPcmS16le16.ToPointer(),
-        SourceURL: optionalnullable.From(elevenlabsgo.Pointer("https://storage.googleapis.com/my-bucket/folder/audio.mp3")),
-        Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
-        WebhookMetadata: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWebhookMetadataStr(
+        SourceURL: elevenlabsgo.Pointer("https://storage.googleapis.com/my-bucket/folder/audio.mp3"),
+        Seed: elevenlabsgo.Pointer[int64](12345),
+        WebhookMetadata: elevenlabsgo.Pointer(components.CreateWebhookMetadataStr(
             "{\"user_id\": \"123\", \"session_id\": \"abc-def-ghi\"}",
-        ))),
+        )),
     }, elevenlabsgo.Pointer(true))
     if err != nil {
         log.Fatal(err)

@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -100,7 +99,7 @@ func (e *OrderDirection) UnmarshalJSON(data []byte) error {
 
 type ListDubsRequest struct {
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// How many dubs to return at maximum. Can not exceed 200, defaults to 100.
 	PageSize *int64 `default:"100" queryParam:"style=form,explode=true,name=page_size"`
 	// What state the dub is currently in.
@@ -125,7 +124,7 @@ func (l *ListDubsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (l *ListDubsRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (l *ListDubsRequest) GetCursor() *string {
 	if l == nil {
 		return nil
 	}

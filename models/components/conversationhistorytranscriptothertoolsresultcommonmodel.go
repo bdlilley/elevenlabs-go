@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryTranscriptOtherToolsResultCommonModelType string
@@ -31,16 +30,16 @@ func (e *ConversationHistoryTranscriptOtherToolsResultCommonModelType) IsExact()
 }
 
 type ConversationHistoryTranscriptOtherToolsResultCommonModel struct {
-	RequestID              string                                                                                          `json:"request_id"`
-	ToolName               string                                                                                          `json:"tool_name"`
-	ResultValue            string                                                                                          `json:"result_value"`
-	IsError                bool                                                                                            `json:"is_error"`
-	ToolHasBeenCalled      bool                                                                                            `json:"tool_has_been_called"`
-	ToolLatencySecs        *float64                                                                                        `default:"0" json:"tool_latency_secs"`
-	ErrorType              *string                                                                                         `default:"" json:"error_type"`
-	RawErrorMessage        *string                                                                                         `default:"" json:"raw_error_message"`
-	DynamicVariableUpdates []DynamicVariableUpdateCommonModel                                                              `json:"dynamic_variable_updates,omitzero"`
-	Type                   optionalnullable.OptionalNullable[ConversationHistoryTranscriptOtherToolsResultCommonModelType] `json:"type,omitzero"`
+	RequestID              string                                                        `json:"request_id"`
+	ToolName               string                                                        `json:"tool_name"`
+	ResultValue            string                                                        `json:"result_value"`
+	IsError                bool                                                          `json:"is_error"`
+	ToolHasBeenCalled      bool                                                          `json:"tool_has_been_called"`
+	ToolLatencySecs        *float64                                                      `default:"0" json:"tool_latency_secs"`
+	ErrorType              *string                                                       `default:"" json:"error_type"`
+	RawErrorMessage        *string                                                       `default:"" json:"raw_error_message"`
+	DynamicVariableUpdates []DynamicVariableUpdateCommonModel                            `json:"dynamic_variable_updates,omitzero"`
+	Type                   *ConversationHistoryTranscriptOtherToolsResultCommonModelType `json:"type,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptOtherToolsResultCommonModel) MarshalJSON() ([]byte, error) {
@@ -117,7 +116,7 @@ func (c *ConversationHistoryTranscriptOtherToolsResultCommonModel) GetDynamicVar
 	return c.DynamicVariableUpdates
 }
 
-func (c *ConversationHistoryTranscriptOtherToolsResultCommonModel) GetType() optionalnullable.OptionalNullable[ConversationHistoryTranscriptOtherToolsResultCommonModelType] {
+func (c *ConversationHistoryTranscriptOtherToolsResultCommonModel) GetType() *ConversationHistoryTranscriptOtherToolsResultCommonModelType {
 	if c == nil {
 		return nil
 	}

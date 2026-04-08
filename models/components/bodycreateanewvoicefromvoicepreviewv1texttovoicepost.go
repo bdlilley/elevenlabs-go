@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost struct {
@@ -15,9 +14,9 @@ type BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost struct {
 	// The generated_voice_id to create, call POST /v1/text-to-voice/create-previews and fetch the generated_voice_id from the response header if don't have one yet.
 	GeneratedVoiceID string `json:"generated_voice_id"`
 	// Optional, metadata to add to the created voice. Defaults to None.
-	Labels optionalnullable.OptionalNullable[map[string]string] `json:"labels,omitzero"`
+	Labels map[string]string `json:"labels,omitzero"`
 	// List of voice ids that the user has played but not selected. Used for RLHF.
-	PlayedNotSelectedVoiceIds optionalnullable.OptionalNullable[[]string] `json:"played_not_selected_voice_ids,omitzero"`
+	PlayedNotSelectedVoiceIds []string `json:"played_not_selected_voice_ids,omitzero"`
 }
 
 func (b BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost) MarshalJSON() ([]byte, error) {
@@ -52,14 +51,14 @@ func (b *BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost) GetGeneratedVoice
 	return b.GeneratedVoiceID
 }
 
-func (b *BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost) GetLabels() optionalnullable.OptionalNullable[map[string]string] {
+func (b *BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost) GetLabels() map[string]string {
 	if b == nil {
 		return nil
 	}
 	return b.Labels
 }
 
-func (b *BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost) GetPlayedNotSelectedVoiceIds() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost) GetPlayedNotSelectedVoiceIds() []string {
 	if b == nil {
 		return nil
 	}

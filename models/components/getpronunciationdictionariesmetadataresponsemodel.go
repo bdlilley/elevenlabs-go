@@ -2,15 +2,11 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetPronunciationDictionariesMetadataResponseModel struct {
 	// A list of pronunciation dictionaries and their metadata.
 	PronunciationDictionaries []GetPronunciationDictionaryMetadataResponseModel `json:"pronunciation_dictionaries"`
 	// The next cursor to use for pagination.
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
+	NextCursor *string `json:"next_cursor,omitzero"`
 	// Whether there are more pronunciation dictionaries to fetch.
 	HasMore bool `json:"has_more"`
 }
@@ -22,7 +18,7 @@ func (g *GetPronunciationDictionariesMetadataResponseModel) GetPronunciationDict
 	return g.PronunciationDictionaries
 }
 
-func (g *GetPronunciationDictionariesMetadataResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetPronunciationDictionariesMetadataResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

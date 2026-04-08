@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetPronunciationDictionaryWithRulesResponseModelPermissionOnResource string
@@ -129,9 +128,9 @@ type GetPronunciationDictionaryWithRulesResponseModel struct {
 	// The creation time of the pronunciation dictionary in Unix timestamp.
 	CreationTimeUnix int64 `json:"creation_time_unix"`
 	// The archive time of the pronunciation dictionary in Unix timestamp.
-	ArchivedTimeUnix optionalnullable.OptionalNullable[int64] `json:"archived_time_unix,omitzero"`
+	ArchivedTimeUnix *int64 `json:"archived_time_unix,omitzero"`
 	// The description of the pronunciation dictionary.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// The rules in the latest version of the pronunciation dictionary.
 	Rules []GetPronunciationDictionaryWithRulesResponseModelRule `json:"rules"`
 }
@@ -185,14 +184,14 @@ func (g *GetPronunciationDictionaryWithRulesResponseModel) GetCreationTimeUnix()
 	return g.CreationTimeUnix
 }
 
-func (g *GetPronunciationDictionaryWithRulesResponseModel) GetArchivedTimeUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetPronunciationDictionaryWithRulesResponseModel) GetArchivedTimeUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.ArchivedTimeUnix
 }
 
-func (g *GetPronunciationDictionaryWithRulesResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (g *GetPronunciationDictionaryWithRulesResponseModel) GetDescription() *string {
 	if g == nil {
 		return nil
 	}

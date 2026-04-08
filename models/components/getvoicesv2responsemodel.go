@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetVoicesV2ResponseModel struct {
 	// The list of voices matching the query.
 	Voices []VoiceResponseModel `json:"voices"`
@@ -14,7 +10,7 @@ type GetVoicesV2ResponseModel struct {
 	// The total count of voices matching the query. This value is a live snapshot that reflects the current state of the database and may change between requests as users create, modify, or delete voices. For reliable pagination, use the has_more flag instead of relying on this value. Only request this field when you actually need the total count (e.g., for display purposes), as calculating it incurs a performance cost.
 	TotalCount int64 `json:"total_count"`
 	// Token to retrieve the next page of results. Pass this value to the next request to continue pagination. Null if there are no more results.
-	NextPageToken optionalnullable.OptionalNullable[string] `json:"next_page_token,omitzero"`
+	NextPageToken *string `json:"next_page_token,omitzero"`
 }
 
 func (g *GetVoicesV2ResponseModel) GetVoices() []VoiceResponseModel {
@@ -38,7 +34,7 @@ func (g *GetVoicesV2ResponseModel) GetTotalCount() int64 {
 	return g.TotalCount
 }
 
-func (g *GetVoicesV2ResponseModel) GetNextPageToken() optionalnullable.OptionalNullable[string] {
+func (g *GetVoicesV2ResponseModel) GetNextPageToken() *string {
 	if g == nil {
 		return nil
 	}

@@ -4,19 +4,18 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // Tool - Definition for a tool the client can call.
 type Tool struct {
-	Name                 string                                             `json:"name"`
-	Title                optionalnullable.OptionalNullable[string]          `json:"title,omitzero"`
-	Description          optionalnullable.OptionalNullable[string]          `json:"description,omitzero"`
-	InputSchema          map[string]any                                     `json:"inputSchema"`
-	OutputSchema         optionalnullable.OptionalNullable[map[string]any]  `json:"outputSchema,omitzero"`
-	Annotations          optionalnullable.OptionalNullable[ToolAnnotations] `json:"annotations,omitzero"`
-	Meta                 optionalnullable.OptionalNullable[map[string]any]  `json:"_meta,omitzero"`
-	AdditionalProperties map[string]any                                     `additionalProperties:"true" json:"-"`
+	Name                 string           `json:"name"`
+	Title                *string          `json:"title,omitzero"`
+	Description          *string          `json:"description,omitzero"`
+	InputSchema          map[string]any   `json:"inputSchema"`
+	OutputSchema         map[string]any   `json:"outputSchema,omitzero"`
+	Annotations          *ToolAnnotations `json:"annotations,omitzero"`
+	Meta                 map[string]any   `json:"_meta,omitzero"`
+	AdditionalProperties map[string]any   `additionalProperties:"true" json:"-"`
 }
 
 func (t Tool) MarshalJSON() ([]byte, error) {
@@ -37,14 +36,14 @@ func (t *Tool) GetName() string {
 	return t.Name
 }
 
-func (t *Tool) GetTitle() optionalnullable.OptionalNullable[string] {
+func (t *Tool) GetTitle() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Title
 }
 
-func (t *Tool) GetDescription() optionalnullable.OptionalNullable[string] {
+func (t *Tool) GetDescription() *string {
 	if t == nil {
 		return nil
 	}
@@ -58,21 +57,21 @@ func (t *Tool) GetInputSchema() map[string]any {
 	return t.InputSchema
 }
 
-func (t *Tool) GetOutputSchema() optionalnullable.OptionalNullable[map[string]any] {
+func (t *Tool) GetOutputSchema() map[string]any {
 	if t == nil {
 		return nil
 	}
 	return t.OutputSchema
 }
 
-func (t *Tool) GetAnnotations() optionalnullable.OptionalNullable[ToolAnnotations] {
+func (t *Tool) GetAnnotations() *ToolAnnotations {
 	if t == nil {
 		return nil
 	}
 	return t.Annotations
 }
 
-func (t *Tool) GetMeta() optionalnullable.OptionalNullable[map[string]any] {
+func (t *Tool) GetMeta() map[string]any {
 	if t == nil {
 		return nil
 	}

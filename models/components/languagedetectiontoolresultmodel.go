@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,9 +11,9 @@ type LanguageDetectionToolResultModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"language_detection_success" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status   *string                                   `const:"success" json:"status"`
-	Reason   optionalnullable.OptionalNullable[string] `json:"reason,omitzero"`
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	status   *string `const:"success" json:"status"`
+	Reason   *string `json:"reason,omitzero"`
+	Language *string `json:"language,omitzero"`
 }
 
 func (l LanguageDetectionToolResultModel) MarshalJSON() ([]byte, error) {
@@ -36,14 +35,14 @@ func (l *LanguageDetectionToolResultModel) GetStatus() *string {
 	return types.Pointer("success")
 }
 
-func (l *LanguageDetectionToolResultModel) GetReason() optionalnullable.OptionalNullable[string] {
+func (l *LanguageDetectionToolResultModel) GetReason() *string {
 	if l == nil {
 		return nil
 	}
 	return l.Reason
 }
 
-func (l *LanguageDetectionToolResultModel) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (l *LanguageDetectionToolResultModel) GetLanguage() *string {
 	if l == nil {
 		return nil
 	}

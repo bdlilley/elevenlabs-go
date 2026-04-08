@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SoftTimeoutConfigWorkflowOverride struct {
 	// Time in seconds before showing the predefined message while waiting for LLM response. Set to -1 to disable.
-	TimeoutSeconds optionalnullable.OptionalNullable[float64] `json:"timeout_seconds,omitzero"`
+	TimeoutSeconds *float64 `json:"timeout_seconds,omitzero"`
 	// Message to show when soft timeout is reached while waiting for LLM response
-	Message optionalnullable.OptionalNullable[string] `json:"message,omitzero"`
+	Message *string `json:"message,omitzero"`
 	// If enabled, the soft timeout message will be generated dynamically instead of using the static message.
-	UseLlmGeneratedMessage optionalnullable.OptionalNullable[bool] `json:"use_llm_generated_message,omitzero"`
+	UseLlmGeneratedMessage *bool `json:"use_llm_generated_message,omitzero"`
 }
 
 func (s SoftTimeoutConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -27,21 +26,21 @@ func (s *SoftTimeoutConfigWorkflowOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SoftTimeoutConfigWorkflowOverride) GetTimeoutSeconds() optionalnullable.OptionalNullable[float64] {
+func (s *SoftTimeoutConfigWorkflowOverride) GetTimeoutSeconds() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TimeoutSeconds
 }
 
-func (s *SoftTimeoutConfigWorkflowOverride) GetMessage() optionalnullable.OptionalNullable[string] {
+func (s *SoftTimeoutConfigWorkflowOverride) GetMessage() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Message
 }
 
-func (s *SoftTimeoutConfigWorkflowOverride) GetUseLlmGeneratedMessage() optionalnullable.OptionalNullable[bool] {
+func (s *SoftTimeoutConfigWorkflowOverride) GetUseLlmGeneratedMessage() *bool {
 	if s == nil {
 		return nil
 	}

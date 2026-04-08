@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationConfigClientOverrideInput struct {
 	// Configuration for turn detection
-	Turn optionalnullable.OptionalNullable[TurnConfigOverride] `json:"turn,omitzero"`
+	Turn *TurnConfigOverride `json:"turn,omitzero"`
 	// Configuration for conversational text to speech
-	Tts optionalnullable.OptionalNullable[TTSConversationalConfigOverride] `json:"tts,omitzero"`
+	Tts *TTSConversationalConfigOverride `json:"tts,omitzero"`
 	// Configuration for conversational events
-	Conversation optionalnullable.OptionalNullable[ConversationConfigOverride] `json:"conversation,omitzero"`
+	Conversation *ConversationConfigOverride `json:"conversation,omitzero"`
 	// Agent specific configuration
-	Agent optionalnullable.OptionalNullable[AgentConfigOverrideInput] `json:"agent,omitzero"`
+	Agent *AgentConfigOverrideInput `json:"agent,omitzero"`
 }
 
 func (c ConversationConfigClientOverrideInput) MarshalJSON() ([]byte, error) {
@@ -29,28 +28,28 @@ func (c *ConversationConfigClientOverrideInput) UnmarshalJSON(data []byte) error
 	return nil
 }
 
-func (c *ConversationConfigClientOverrideInput) GetTurn() optionalnullable.OptionalNullable[TurnConfigOverride] {
+func (c *ConversationConfigClientOverrideInput) GetTurn() *TurnConfigOverride {
 	if c == nil {
 		return nil
 	}
 	return c.Turn
 }
 
-func (c *ConversationConfigClientOverrideInput) GetTts() optionalnullable.OptionalNullable[TTSConversationalConfigOverride] {
+func (c *ConversationConfigClientOverrideInput) GetTts() *TTSConversationalConfigOverride {
 	if c == nil {
 		return nil
 	}
 	return c.Tts
 }
 
-func (c *ConversationConfigClientOverrideInput) GetConversation() optionalnullable.OptionalNullable[ConversationConfigOverride] {
+func (c *ConversationConfigClientOverrideInput) GetConversation() *ConversationConfigOverride {
 	if c == nil {
 		return nil
 	}
 	return c.Conversation
 }
 
-func (c *ConversationConfigClientOverrideInput) GetAgent() optionalnullable.OptionalNullable[AgentConfigOverrideInput] {
+func (c *ConversationConfigClientOverrideInput) GetAgent() *AgentConfigOverrideInput {
 	if c == nil {
 		return nil
 	}

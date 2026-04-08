@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodySpeechToSpeechV1SpeechToSpeechVoiceIDPostAudio struct {
@@ -64,13 +63,13 @@ type BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost struct {
 	// Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for speech to speech, you can check this using the can_do_voice_conversion property.
 	ModelID *string `default:"eleven_english_sts_v2" multipartForm:"name=model_id"`
 	// Voice settings overriding stored settings for the given voice. They are applied only on the given request. Needs to be send as a JSON encoded string.
-	VoiceSettings optionalnullable.OptionalNullable[string] `multipartForm:"name=voice_settings"`
+	VoiceSettings *string `multipartForm:"name=voice_settings"`
 	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295.
-	Seed optionalnullable.OptionalNullable[int64] `multipartForm:"name=seed"`
+	Seed *int64 `multipartForm:"name=seed"`
 	// If set, will remove the background noise from your audio input using our audio isolation model. Only applies to Voice Changer.
 	RemoveBackgroundNoise *bool `default:"false" multipartForm:"name=remove_background_noise"`
 	// The format of input audio. Options are 'pcm_s16le_16' or 'other' For `pcm_s16le_16`, the input audio must be 16-bit PCM at a 16kHz sample rate, single channel (mono), and little-endian byte order. Latency will be lower than with passing an encoded waveform.
-	FileFormat optionalnullable.OptionalNullable[BodySpeechToSpeechV1SpeechToSpeechVoiceIDPostFileFormat] `multipartForm:"name=file_format"`
+	FileFormat *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPostFileFormat `multipartForm:"name=file_format"`
 }
 
 func (b BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) MarshalJSON() ([]byte, error) {
@@ -98,14 +97,14 @@ func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetModelID() *string {
 	return b.ModelID
 }
 
-func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetVoiceSettings() optionalnullable.OptionalNullable[string] {
+func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetVoiceSettings() *string {
 	if b == nil {
 		return nil
 	}
 	return b.VoiceSettings
 }
 
-func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetSeed() optionalnullable.OptionalNullable[int64] {
+func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetSeed() *int64 {
 	if b == nil {
 		return nil
 	}
@@ -119,7 +118,7 @@ func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetRemoveBackgroundNoise
 	return b.RemoveBackgroundNoise
 }
 
-func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetFileFormat() optionalnullable.OptionalNullable[BodySpeechToSpeechV1SpeechToSpeechVoiceIDPostFileFormat] {
+func (b *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost) GetFileFormat() *BodySpeechToSpeechV1SpeechToSpeechVoiceIDPostFileFormat {
 	if b == nil {
 		return nil
 	}

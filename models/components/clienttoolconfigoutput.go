@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -25,13 +24,13 @@ type ClientToolConfigOutput struct {
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines how the tool call sound should be played.
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// Controls how tool errors are processed before being shared with the agent.
 	ToolErrorHandlingMode *ToolErrorHandlingMode `default:"auto" json:"tool_error_handling_mode"`
 	// Schema for any parameters to pass to the client
-	Parameters optionalnullable.OptionalNullable[ObjectJSONSchemaPropertyOutput] `json:"parameters,omitzero"`
+	Parameters *ObjectJSONSchemaPropertyOutput `json:"parameters,omitzero"`
 	// If true, calling this tool should block the conversation until the client responds with some response which is passed to the llm. If false then we will continue the conversation without waiting for the client to respond, this is useful to show content to a user but not block the conversation
 	ExpectsResponse  *bool                   `default:"false" json:"expects_response"`
 	DynamicVariables *DynamicVariablesConfig `json:"dynamic_variables,omitzero"`
@@ -95,7 +94,7 @@ func (c *ClientToolConfigOutput) GetAssignments() []DynamicVariableAssignment {
 	return c.Assignments
 }
 
-func (c *ClientToolConfigOutput) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (c *ClientToolConfigOutput) GetToolCallSound() *ToolCallSoundType {
 	if c == nil {
 		return nil
 	}
@@ -116,7 +115,7 @@ func (c *ClientToolConfigOutput) GetToolErrorHandlingMode() *ToolErrorHandlingMo
 	return c.ToolErrorHandlingMode
 }
 
-func (c *ClientToolConfigOutput) GetParameters() optionalnullable.OptionalNullable[ObjectJSONSchemaPropertyOutput] {
+func (c *ClientToolConfigOutput) GetParameters() *ObjectJSONSchemaPropertyOutput {
 	if c == nil {
 		return nil
 	}

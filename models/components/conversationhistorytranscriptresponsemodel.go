@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryTranscriptResponseModelRole string
@@ -173,23 +172,23 @@ func (u ConversationHistoryTranscriptResponseModelToolResult) MarshalJSON() ([]b
 }
 
 type ConversationHistoryTranscriptResponseModel struct {
-	Role                    ConversationHistoryTranscriptResponseModelRole                                         `json:"role"`
-	AgentMetadata           optionalnullable.OptionalNullable[AgentMetadata]                                       `json:"agent_metadata,omitzero"`
-	Message                 optionalnullable.OptionalNullable[string]                                              `json:"message,omitzero"`
-	MultivoiceMessage       optionalnullable.OptionalNullable[ConversationHistoryMultivoiceMessageModel]           `json:"multivoice_message,omitzero"`
-	ToolCalls               []ConversationHistoryTranscriptToolCallCommonModelOutput                               `json:"tool_calls,omitzero"`
-	ToolResults             []ConversationHistoryTranscriptResponseModelToolResult                                 `json:"tool_results,omitzero"`
-	Feedback                optionalnullable.OptionalNullable[UserFeedback]                                        `json:"feedback,omitzero"`
-	LlmOverride             optionalnullable.OptionalNullable[string]                                              `json:"llm_override,omitzero"`
-	TimeInCallSecs          int64                                                                                  `json:"time_in_call_secs"`
-	ConversationTurnMetrics optionalnullable.OptionalNullable[ConversationTurnMetrics]                             `json:"conversation_turn_metrics,omitzero"`
-	RagRetrievalInfo        optionalnullable.OptionalNullable[RagRetrievalInfo]                                    `json:"rag_retrieval_info,omitzero"`
-	LlmUsage                optionalnullable.OptionalNullable[LLMUsageOutput]                                      `json:"llm_usage,omitzero"`
-	Interrupted             *bool                                                                                  `default:"false" json:"interrupted"`
-	OriginalMessage         optionalnullable.OptionalNullable[string]                                              `json:"original_message,omitzero"`
-	SourceMedium            optionalnullable.OptionalNullable[ChatSourceMedium]                                    `json:"source_medium,omitzero"`
-	SourceEventID           optionalnullable.OptionalNullable[int64]                                               `json:"source_event_id,omitzero"`
-	FileInput               optionalnullable.OptionalNullable[ConversationHistoryTranscriptFileInputResponseModel] `json:"file_input,omitzero"`
+	Role                    ConversationHistoryTranscriptResponseModelRole           `json:"role"`
+	AgentMetadata           *AgentMetadata                                           `json:"agent_metadata,omitzero"`
+	Message                 *string                                                  `json:"message,omitzero"`
+	MultivoiceMessage       *ConversationHistoryMultivoiceMessageModel               `json:"multivoice_message,omitzero"`
+	ToolCalls               []ConversationHistoryTranscriptToolCallCommonModelOutput `json:"tool_calls,omitzero"`
+	ToolResults             []ConversationHistoryTranscriptResponseModelToolResult   `json:"tool_results,omitzero"`
+	Feedback                *UserFeedback                                            `json:"feedback,omitzero"`
+	LlmOverride             *string                                                  `json:"llm_override,omitzero"`
+	TimeInCallSecs          int64                                                    `json:"time_in_call_secs"`
+	ConversationTurnMetrics *ConversationTurnMetrics                                 `json:"conversation_turn_metrics,omitzero"`
+	RagRetrievalInfo        *RagRetrievalInfo                                        `json:"rag_retrieval_info,omitzero"`
+	LlmUsage                *LLMUsageOutput                                          `json:"llm_usage,omitzero"`
+	Interrupted             *bool                                                    `default:"false" json:"interrupted"`
+	OriginalMessage         *string                                                  `json:"original_message,omitzero"`
+	SourceMedium            *ChatSourceMedium                                        `json:"source_medium,omitzero"`
+	SourceEventID           *int64                                                   `json:"source_event_id,omitzero"`
+	FileInput               *ConversationHistoryTranscriptFileInputResponseModel     `json:"file_input,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptResponseModel) MarshalJSON() ([]byte, error) {
@@ -210,21 +209,21 @@ func (c *ConversationHistoryTranscriptResponseModel) GetRole() ConversationHisto
 	return c.Role
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetAgentMetadata() optionalnullable.OptionalNullable[AgentMetadata] {
+func (c *ConversationHistoryTranscriptResponseModel) GetAgentMetadata() *AgentMetadata {
 	if c == nil {
 		return nil
 	}
 	return c.AgentMetadata
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetMessage() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryTranscriptResponseModel) GetMessage() *string {
 	if c == nil {
 		return nil
 	}
 	return c.Message
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetMultivoiceMessage() optionalnullable.OptionalNullable[ConversationHistoryMultivoiceMessageModel] {
+func (c *ConversationHistoryTranscriptResponseModel) GetMultivoiceMessage() *ConversationHistoryMultivoiceMessageModel {
 	if c == nil {
 		return nil
 	}
@@ -245,14 +244,14 @@ func (c *ConversationHistoryTranscriptResponseModel) GetToolResults() []Conversa
 	return c.ToolResults
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetFeedback() optionalnullable.OptionalNullable[UserFeedback] {
+func (c *ConversationHistoryTranscriptResponseModel) GetFeedback() *UserFeedback {
 	if c == nil {
 		return nil
 	}
 	return c.Feedback
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetLlmOverride() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryTranscriptResponseModel) GetLlmOverride() *string {
 	if c == nil {
 		return nil
 	}
@@ -266,21 +265,21 @@ func (c *ConversationHistoryTranscriptResponseModel) GetTimeInCallSecs() int64 {
 	return c.TimeInCallSecs
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetConversationTurnMetrics() optionalnullable.OptionalNullable[ConversationTurnMetrics] {
+func (c *ConversationHistoryTranscriptResponseModel) GetConversationTurnMetrics() *ConversationTurnMetrics {
 	if c == nil {
 		return nil
 	}
 	return c.ConversationTurnMetrics
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetRagRetrievalInfo() optionalnullable.OptionalNullable[RagRetrievalInfo] {
+func (c *ConversationHistoryTranscriptResponseModel) GetRagRetrievalInfo() *RagRetrievalInfo {
 	if c == nil {
 		return nil
 	}
 	return c.RagRetrievalInfo
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetLlmUsage() optionalnullable.OptionalNullable[LLMUsageOutput] {
+func (c *ConversationHistoryTranscriptResponseModel) GetLlmUsage() *LLMUsageOutput {
 	if c == nil {
 		return nil
 	}
@@ -294,28 +293,28 @@ func (c *ConversationHistoryTranscriptResponseModel) GetInterrupted() *bool {
 	return c.Interrupted
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetOriginalMessage() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryTranscriptResponseModel) GetOriginalMessage() *string {
 	if c == nil {
 		return nil
 	}
 	return c.OriginalMessage
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetSourceMedium() optionalnullable.OptionalNullable[ChatSourceMedium] {
+func (c *ConversationHistoryTranscriptResponseModel) GetSourceMedium() *ChatSourceMedium {
 	if c == nil {
 		return nil
 	}
 	return c.SourceMedium
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetSourceEventID() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationHistoryTranscriptResponseModel) GetSourceEventID() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.SourceEventID
 }
 
-func (c *ConversationHistoryTranscriptResponseModel) GetFileInput() optionalnullable.OptionalNullable[ConversationHistoryTranscriptFileInputResponseModel] {
+func (c *ConversationHistoryTranscriptResponseModel) GetFileInput() *ConversationHistoryTranscriptFileInputResponseModel {
 	if c == nil {
 		return nil
 	}

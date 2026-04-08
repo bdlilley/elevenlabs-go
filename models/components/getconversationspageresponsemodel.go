@@ -2,14 +2,10 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetConversationsPageResponseModel struct {
-	Conversations []ConversationSummaryResponseModel        `json:"conversations"`
-	NextCursor    optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
-	HasMore       bool                                      `json:"has_more"`
+	Conversations []ConversationSummaryResponseModel `json:"conversations"`
+	NextCursor    *string                            `json:"next_cursor,omitzero"`
+	HasMore       bool                               `json:"has_more"`
 }
 
 func (g *GetConversationsPageResponseModel) GetConversations() []ConversationSummaryResponseModel {
@@ -19,7 +15,7 @@ func (g *GetConversationsPageResponseModel) GetConversations() []ConversationSum
 	return g.Conversations
 }
 
-func (g *GetConversationsPageResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationsPageResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

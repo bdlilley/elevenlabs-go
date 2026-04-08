@@ -4,15 +4,14 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost struct {
-	AgentID                          string                                                                          `json:"agent_id"`
-	FromNumber                       string                                                                          `json:"from_number"`
-	ToNumber                         string                                                                          `json:"to_number"`
-	Direction                        *TelephonyDirection                                                             `default:"inbound" json:"direction"`
-	ConversationInitiationClientData optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] `json:"conversation_initiation_client_data,omitzero"`
+	AgentID                          string                                        `json:"agent_id"`
+	FromNumber                       string                                        `json:"from_number"`
+	ToNumber                         string                                        `json:"to_number"`
+	Direction                        *TelephonyDirection                           `default:"inbound" json:"direction"`
+	ConversationInitiationClientData *ConversationInitiationClientDataRequestInput `json:"conversation_initiation_client_data,omitzero"`
 }
 
 func (b BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost) MarshalJSON() ([]byte, error) {
@@ -54,7 +53,7 @@ func (b *BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost) Ge
 	return b.Direction
 }
 
-func (b *BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost) GetConversationInitiationClientData() optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] {
+func (b *BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost) GetConversationInitiationClientData() *ConversationInitiationClientDataRequestInput {
 	if b == nil {
 		return nil
 	}

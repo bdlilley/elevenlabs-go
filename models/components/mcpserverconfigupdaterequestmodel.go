@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type MCPServerConfigUpdateRequestModelRequestHeadersType string
@@ -243,25 +242,25 @@ func (u MCPServerConfigUpdateRequestModelAuthConnection) MarshalJSON() ([]byte, 
 // MCPServerConfigUpdateRequestModel - Unified request model for updating MCP Server configuration.
 type MCPServerConfigUpdateRequestModel struct {
 	// The approval mode to set for the MCP server
-	ApprovalPolicy optionalnullable.OptionalNullable[MCPApprovalPolicy] `default:"require_approval_all" json:"approval_policy"`
+	ApprovalPolicy *MCPApprovalPolicy `default:"require_approval_all" json:"approval_policy"`
 	// If set, overrides the server's force_pre_tool_speech setting for this tool
-	ForcePreToolSpeech optionalnullable.OptionalNullable[bool] `json:"force_pre_tool_speech,omitzero"`
+	ForcePreToolSpeech *bool `json:"force_pre_tool_speech,omitzero"`
 	// If set, overrides the server's disable_interruptions setting for this tool
-	DisableInterruptions optionalnullable.OptionalNullable[bool] `json:"disable_interruptions,omitzero"`
+	DisableInterruptions *bool `json:"disable_interruptions,omitzero"`
 	// Predefined tool call sound type to play during tool execution for all tools from this MCP server
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines when the tool call sound should play for all tools from this MCP server
-	ToolCallSoundBehavior optionalnullable.OptionalNullable[ToolCallSoundBehavior] `default:"auto" json:"tool_call_sound_behavior"`
+	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// If set, overrides the server's execution_mode setting for this tool
-	ExecutionMode optionalnullable.OptionalNullable[ToolExecutionMode] `default:"immediate" json:"execution_mode"`
+	ExecutionMode *ToolExecutionMode `default:"immediate" json:"execution_mode"`
 	// The headers to include in requests to the MCP server
-	RequestHeaders optionalnullable.OptionalNullable[map[string]MCPServerConfigUpdateRequestModelRequestHeaders] `json:"request_headers,omitzero"`
+	RequestHeaders map[string]MCPServerConfigUpdateRequestModelRequestHeaders `json:"request_headers,omitzero"`
 	// Whether to disable HTTP compression for this MCP server
-	DisableCompression optionalnullable.OptionalNullable[bool] `json:"disable_compression,omitzero"`
+	DisableCompression *bool `json:"disable_compression,omitzero"`
 	// Optional secret token for authentication with this MCP server
-	SecretToken optionalnullable.OptionalNullable[ConvAISecretLocator] `json:"secret_token,omitzero"`
+	SecretToken *ConvAISecretLocator `json:"secret_token,omitzero"`
 	// Optional auth connection to use for authentication with this MCP server
-	AuthConnection optionalnullable.OptionalNullable[MCPServerConfigUpdateRequestModelAuthConnection] `json:"auth_connection,omitzero"`
+	AuthConnection *MCPServerConfigUpdateRequestModelAuthConnection `json:"auth_connection,omitzero"`
 }
 
 func (m MCPServerConfigUpdateRequestModel) MarshalJSON() ([]byte, error) {
@@ -275,70 +274,70 @@ func (m *MCPServerConfigUpdateRequestModel) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetApprovalPolicy() optionalnullable.OptionalNullable[MCPApprovalPolicy] {
+func (m *MCPServerConfigUpdateRequestModel) GetApprovalPolicy() *MCPApprovalPolicy {
 	if m == nil {
 		return nil
 	}
 	return m.ApprovalPolicy
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetForcePreToolSpeech() optionalnullable.OptionalNullable[bool] {
+func (m *MCPServerConfigUpdateRequestModel) GetForcePreToolSpeech() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.ForcePreToolSpeech
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetDisableInterruptions() optionalnullable.OptionalNullable[bool] {
+func (m *MCPServerConfigUpdateRequestModel) GetDisableInterruptions() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.DisableInterruptions
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (m *MCPServerConfigUpdateRequestModel) GetToolCallSound() *ToolCallSoundType {
 	if m == nil {
 		return nil
 	}
 	return m.ToolCallSound
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetToolCallSoundBehavior() optionalnullable.OptionalNullable[ToolCallSoundBehavior] {
+func (m *MCPServerConfigUpdateRequestModel) GetToolCallSoundBehavior() *ToolCallSoundBehavior {
 	if m == nil {
 		return nil
 	}
 	return m.ToolCallSoundBehavior
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetExecutionMode() optionalnullable.OptionalNullable[ToolExecutionMode] {
+func (m *MCPServerConfigUpdateRequestModel) GetExecutionMode() *ToolExecutionMode {
 	if m == nil {
 		return nil
 	}
 	return m.ExecutionMode
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetRequestHeaders() optionalnullable.OptionalNullable[map[string]MCPServerConfigUpdateRequestModelRequestHeaders] {
+func (m *MCPServerConfigUpdateRequestModel) GetRequestHeaders() map[string]MCPServerConfigUpdateRequestModelRequestHeaders {
 	if m == nil {
 		return nil
 	}
 	return m.RequestHeaders
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetDisableCompression() optionalnullable.OptionalNullable[bool] {
+func (m *MCPServerConfigUpdateRequestModel) GetDisableCompression() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.DisableCompression
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetSecretToken() optionalnullable.OptionalNullable[ConvAISecretLocator] {
+func (m *MCPServerConfigUpdateRequestModel) GetSecretToken() *ConvAISecretLocator {
 	if m == nil {
 		return nil
 	}
 	return m.SecretToken
 }
 
-func (m *MCPServerConfigUpdateRequestModel) GetAuthConnection() optionalnullable.OptionalNullable[MCPServerConfigUpdateRequestModelAuthConnection] {
+func (m *MCPServerConfigUpdateRequestModel) GetAuthConnection() *MCPServerConfigUpdateRequestModelAuthConnection {
 	if m == nil {
 		return nil
 	}

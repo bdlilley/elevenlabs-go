@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type MessagesSearchResponse struct {
 	Meta    *ListResponseMeta      `json:"meta,omitzero"`
 	Results []MessagesSearchResult `json:"results"`
 	// Cursor for the next page of results
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
+	NextCursor *string `json:"next_cursor,omitzero"`
 	// Whether there are more results available
 	HasMore bool `json:"has_more"`
 }
@@ -41,7 +40,7 @@ func (m *MessagesSearchResponse) GetResults() []MessagesSearchResult {
 	return m.Results
 }
 
-func (m *MessagesSearchResponse) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (m *MessagesSearchResponse) GetNextCursor() *string {
 	if m == nil {
 		return nil
 	}

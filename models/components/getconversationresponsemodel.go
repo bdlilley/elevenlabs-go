@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetConversationResponseModelStatus string
@@ -33,23 +32,23 @@ func (e *GetConversationResponseModelStatus) IsExact() bool {
 }
 
 type GetConversationResponseModel struct {
-	AgentID   string                                    `json:"agent_id"`
-	AgentName optionalnullable.OptionalNullable[string] `json:"agent_name,omitzero"`
-	Status    GetConversationResponseModelStatus        `json:"status"`
-	UserID    optionalnullable.OptionalNullable[string] `json:"user_id,omitzero"`
-	BranchID  optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
+	AgentID   string                             `json:"agent_id"`
+	AgentName *string                            `json:"agent_name,omitzero"`
+	Status    GetConversationResponseModelStatus `json:"status"`
+	UserID    *string                            `json:"user_id,omitzero"`
+	BranchID  *string                            `json:"branch_id,omitzero"`
 	// The ID of the agent version used for this conversation
-	VersionID                        optionalnullable.OptionalNullable[string]                                 `json:"version_id,omitzero"`
-	Metadata                         ConversationHistoryMetadataCommonModel                                    `json:"metadata"`
-	Analysis                         optionalnullable.OptionalNullable[ConversationHistoryAnalysisCommonModel] `json:"analysis,omitzero"`
-	VisitedAgents                    []VisitedAgentRef                                                         `json:"visited_agents,omitzero"`
-	ConversationInitiationClientData *ConversationInitiationClientDataRequestOutput                            `json:"conversation_initiation_client_data,omitzero"`
-	Environment                      *string                                                                   `default:"production" json:"environment"`
-	ConversationID                   string                                                                    `json:"conversation_id"`
-	HasAudio                         bool                                                                      `json:"has_audio"`
-	HasUserAudio                     bool                                                                      `json:"has_user_audio"`
-	HasResponseAudio                 bool                                                                      `json:"has_response_audio"`
-	Transcript                       []ConversationHistoryTranscriptResponseModel                              `json:"transcript"`
+	VersionID                        *string                                        `json:"version_id,omitzero"`
+	Metadata                         ConversationHistoryMetadataCommonModel         `json:"metadata"`
+	Analysis                         *ConversationHistoryAnalysisCommonModel        `json:"analysis,omitzero"`
+	VisitedAgents                    []VisitedAgentRef                              `json:"visited_agents,omitzero"`
+	ConversationInitiationClientData *ConversationInitiationClientDataRequestOutput `json:"conversation_initiation_client_data,omitzero"`
+	Environment                      *string                                        `default:"production" json:"environment"`
+	ConversationID                   string                                         `json:"conversation_id"`
+	HasAudio                         bool                                           `json:"has_audio"`
+	HasUserAudio                     bool                                           `json:"has_user_audio"`
+	HasResponseAudio                 bool                                           `json:"has_response_audio"`
+	Transcript                       []ConversationHistoryTranscriptResponseModel   `json:"transcript"`
 }
 
 func (g GetConversationResponseModel) MarshalJSON() ([]byte, error) {
@@ -70,7 +69,7 @@ func (g *GetConversationResponseModel) GetAgentID() string {
 	return g.AgentID
 }
 
-func (g *GetConversationResponseModel) GetAgentName() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationResponseModel) GetAgentName() *string {
 	if g == nil {
 		return nil
 	}
@@ -84,21 +83,21 @@ func (g *GetConversationResponseModel) GetStatus() GetConversationResponseModelS
 	return g.Status
 }
 
-func (g *GetConversationResponseModel) GetUserID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationResponseModel) GetUserID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.UserID
 }
 
-func (g *GetConversationResponseModel) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationResponseModel) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.BranchID
 }
 
-func (g *GetConversationResponseModel) GetVersionID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationResponseModel) GetVersionID() *string {
 	if g == nil {
 		return nil
 	}
@@ -112,7 +111,7 @@ func (g *GetConversationResponseModel) GetMetadata() ConversationHistoryMetadata
 	return g.Metadata
 }
 
-func (g *GetConversationResponseModel) GetAnalysis() optionalnullable.OptionalNullable[ConversationHistoryAnalysisCommonModel] {
+func (g *GetConversationResponseModel) GetAnalysis() *ConversationHistoryAnalysisCommonModel {
 	if g == nil {
 		return nil
 	}

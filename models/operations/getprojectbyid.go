@@ -5,14 +5,13 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetProjectByIDRequest struct {
 	// The ID of the Studio project.
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
 	// The share ID of the project
-	ShareID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=share_id"`
+	ShareID *string `queryParam:"style=form,explode=true,name=share_id"`
 }
 
 func (g *GetProjectByIDRequest) GetProjectID() string {
@@ -22,7 +21,7 @@ func (g *GetProjectByIDRequest) GetProjectID() string {
 	return g.ProjectID
 }
 
-func (g *GetProjectByIDRequest) GetShareID() optionalnullable.OptionalNullable[string] {
+func (g *GetProjectByIDRequest) GetShareID() *string {
 	if g == nil {
 		return nil
 	}

@@ -2,13 +2,9 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type KnowledgeBaseContentSearchResponseModel struct {
-	Results    []KnowledgeBaseContentSearchResult        `json:"results"`
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
+	Results    []KnowledgeBaseContentSearchResult `json:"results"`
+	NextCursor *string                            `json:"next_cursor,omitzero"`
 }
 
 func (k *KnowledgeBaseContentSearchResponseModel) GetResults() []KnowledgeBaseContentSearchResult {
@@ -18,7 +14,7 @@ func (k *KnowledgeBaseContentSearchResponseModel) GetResults() []KnowledgeBaseCo
 	return k.Results
 }
 
-func (k *KnowledgeBaseContentSearchResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (k *KnowledgeBaseContentSearchResponseModel) GetNextCursor() *string {
 	if k == nil {
 		return nil
 	}

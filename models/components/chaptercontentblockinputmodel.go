@@ -5,7 +5,6 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SubType string
@@ -41,12 +40,12 @@ func (e *SubType) UnmarshalJSON(data []byte) error {
 }
 
 type ChapterContentBlockInputModel struct {
-	SubType optionalnullable.OptionalNullable[SubType] `json:"sub_type,omitzero"`
+	SubType *SubType                                   `json:"sub_type,omitzero"`
 	Nodes   []ChapterContentParagraphTtsNodeInputModel `json:"nodes"`
-	BlockID optionalnullable.OptionalNullable[string]  `json:"block_id,omitzero"`
+	BlockID *string                                    `json:"block_id,omitzero"`
 }
 
-func (c *ChapterContentBlockInputModel) GetSubType() optionalnullable.OptionalNullable[SubType] {
+func (c *ChapterContentBlockInputModel) GetSubType() *SubType {
 	if c == nil {
 		return nil
 	}
@@ -60,7 +59,7 @@ func (c *ChapterContentBlockInputModel) GetNodes() []ChapterContentParagraphTtsN
 	return c.Nodes
 }
 
-func (c *ChapterContentBlockInputModel) GetBlockID() optionalnullable.OptionalNullable[string] {
+func (c *ChapterContentBlockInputModel) GetBlockID() *string {
 	if c == nil {
 		return nil
 	}

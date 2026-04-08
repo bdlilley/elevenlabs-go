@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -19,7 +18,7 @@ type WorkflowStandaloneAgentNodeModelInput struct {
 	// Artificial delay in milliseconds applied before transferring the conversation.
 	DelayMs *int64 `default:"0" json:"delay_ms"`
 	// Optional message sent to the user before the transfer is initiated.
-	TransferMessage optionalnullable.OptionalNullable[string] `json:"transfer_message,omitzero"`
+	TransferMessage *string `json:"transfer_message,omitzero"`
 	// Whether to enable the transferred agent to send its configured first message after the transfer.
 	EnableTransferredAgentFirstMessage *bool `default:"false" json:"enable_transferred_agent_first_message"`
 }
@@ -67,7 +66,7 @@ func (w *WorkflowStandaloneAgentNodeModelInput) GetDelayMs() *int64 {
 	return w.DelayMs
 }
 
-func (w *WorkflowStandaloneAgentNodeModelInput) GetTransferMessage() optionalnullable.OptionalNullable[string] {
+func (w *WorkflowStandaloneAgentNodeModelInput) GetTransferMessage() *string {
 	if w == nil {
 		return nil
 	}

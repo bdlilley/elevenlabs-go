@@ -2,31 +2,27 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type ReadLegalTerms struct {
-	Terms     optionalnullable.OptionalNullable[string] `json:"terms,omitzero"`
-	StartDate optionalnullable.OptionalNullable[string] `json:"start_date,omitzero"`
-	EndDate   optionalnullable.OptionalNullable[string] `json:"end_date,omitzero"`
+	Terms     *string `json:"terms,omitzero"`
+	StartDate *string `json:"start_date,omitzero"`
+	EndDate   *string `json:"end_date,omitzero"`
 }
 
-func (r *ReadLegalTerms) GetTerms() optionalnullable.OptionalNullable[string] {
+func (r *ReadLegalTerms) GetTerms() *string {
 	if r == nil {
 		return nil
 	}
 	return r.Terms
 }
 
-func (r *ReadLegalTerms) GetStartDate() optionalnullable.OptionalNullable[string] {
+func (r *ReadLegalTerms) GetStartDate() *string {
 	if r == nil {
 		return nil
 	}
 	return r.StartDate
 }
 
-func (r *ReadLegalTerms) GetEndDate() optionalnullable.OptionalNullable[string] {
+func (r *ReadLegalTerms) GetEndDate() *string {
 	if r == nil {
 		return nil
 	}

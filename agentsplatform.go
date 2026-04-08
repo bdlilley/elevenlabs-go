@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,7 +33,7 @@ func newAgentsPlatform(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration,
 
 // GetConversationSignedLink - Get Signed Url
 // Get a signed url to start a conversation with an agent with an agent that requires authorization
-func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, agentID string, includeConversationID *bool, branchID optionalnullable.OptionalNullable[string], environment optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetConversationSignedLinkResponse, error) {
+func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, agentID string, includeConversationID *bool, branchID *string, environment *string, opts ...operations.Option) (*operations.GetConversationSignedLinkResponse, error) {
 	request := operations.GetConversationSignedLinkRequest{
 		AgentID:               agentID,
 		IncludeConversationID: includeConversationID,
@@ -277,7 +276,7 @@ func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, agentID 
 // Get a signed url to start a conversation with an agent with an agent that requires authorization
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, agentID string, includeConversationID *bool, branchID optionalnullable.OptionalNullable[string], environment optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSignedURLDeprecatedResponse, error) {
+func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, agentID string, includeConversationID *bool, branchID *string, environment *string, opts ...operations.Option) (*operations.GetSignedURLDeprecatedResponse, error) {
 	request := operations.GetSignedURLDeprecatedRequest{
 		AgentID:               agentID,
 		IncludeConversationID: includeConversationID,
@@ -518,7 +517,7 @@ func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, agentID str
 
 // GetLivekitToken - Get Webrtc Token
 // Get a WebRTC session token for real-time communication.
-func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, agentID string, participantName optionalnullable.OptionalNullable[string], branchID optionalnullable.OptionalNullable[string], environment optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetLivekitTokenResponse, error) {
+func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, agentID string, participantName *string, branchID *string, environment *string, opts ...operations.Option) (*operations.GetLivekitTokenResponse, error) {
 	request := operations.GetLivekitTokenRequest{
 		AgentID:         agentID,
 		ParticipantName: participantName,
@@ -2187,7 +2186,7 @@ func (s *AgentsPlatform) GetAgentSummariesRoute(ctx context.Context, agentIds []
 
 // GetAgentRoute - Get Agent
 // Retrieve config for an agent
-func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, versionID optionalnullable.OptionalNullable[string], branchID optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, versionID *string, branchID *string, opts ...operations.Option) (*operations.GetAgentRouteResponse, error) {
 	request := operations.GetAgentRouteRequest{
 		AgentID:   agentID,
 		VersionID: versionID,
@@ -2644,7 +2643,7 @@ func (s *AgentsPlatform) DeleteAgentRoute(ctx context.Context, agentID string, o
 
 // PatchAgentSettingsRoute - Patches An Agent Settings
 // Patches an Agent settings
-func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, agentID string, enableVersioningIfNotEnabled *bool, branchID optionalnullable.OptionalNullable[string], body *components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch, opts ...operations.Option) (*operations.PatchAgentSettingsRouteResponse, error) {
+func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, agentID string, enableVersioningIfNotEnabled *bool, branchID *string, body *components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch, opts ...operations.Option) (*operations.PatchAgentSettingsRouteResponse, error) {
 	request := operations.PatchAgentSettingsRouteRequest{
 		AgentID:                      agentID,
 		EnableVersioningIfNotEnabled: enableVersioningIfNotEnabled,
@@ -2892,7 +2891,7 @@ func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, agentID st
 
 // GetAgentWidgetRoute - Get Agent Widget Config
 // Retrieve the widget configuration for an agent
-func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string, conversationSignature optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentWidgetRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string, conversationSignature *string, opts ...operations.Option) (*operations.GetAgentWidgetRouteResponse, error) {
 	request := operations.GetAgentWidgetRouteRequest{
 		AgentID:               agentID,
 		ConversationSignature: conversationSignature,
@@ -7821,7 +7820,7 @@ func (s *AgentsPlatform) TextSearchConversationMessagesRoute(ctx context.Context
 
 // SmartSearchConversationMessagesRoute - Smart Search Conversation Messages
 // Search conversation transcripts by semantic similarity to surface relevant messages based on meaning and intent, rather than exact keyword matches
-func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Context, textQuery string, agentID optionalnullable.OptionalNullable[string], pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SmartSearchConversationMessagesRouteResponse, error) {
+func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Context, textQuery string, agentID *string, pageSize *int64, cursor *string, opts ...operations.Option) (*operations.SmartSearchConversationMessagesRouteResponse, error) {
 	request := operations.SmartSearchConversationMessagesRouteRequest{
 		TextQuery: textQuery,
 		AgentID:   agentID,
@@ -10183,7 +10182,7 @@ func (s *AgentsPlatform) CancelFileUploadRoute(ctx context.Context, fileID strin
 
 // GetLiveCount - Get Live Count
 // Get the live count of the ongoing conversations.
-func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetLiveCountResponse, error) {
+func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID *string, opts ...operations.Option) (*operations.GetLiveCountResponse, error) {
 	request := operations.GetLiveCountRequest{
 		AgentID: agentID,
 	}
@@ -13984,7 +13983,7 @@ func (s *AgentsPlatform) DeleteRagIndex(ctx context.Context, documentationID str
 
 // SearchKnowledgeBaseContentRoute - Search Knowledge Base Content
 // Fuzzy text search over knowledge base document content
-func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, query string, pageSize *int64, types optionalnullable.OptionalNullable[[]components.KnowledgeBaseDocumentType], cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SearchKnowledgeBaseContentRouteResponse, error) {
+func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, query string, pageSize *int64, types []components.KnowledgeBaseDocumentType, cursor *string, opts ...operations.Option) (*operations.SearchKnowledgeBaseContentRouteResponse, error) {
 	request := operations.SearchKnowledgeBaseContentRouteRequest{
 		Query:    query,
 		PageSize: pageSize,
@@ -14225,7 +14224,7 @@ func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, qu
 
 // GetKnowledgeBaseDependentAgents - Get Dependent Agents List
 // Get a list of agents depending on this knowledge base document
-func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, documentationID string, dependentType *components.KnowledgeBaseDependentType, pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetKnowledgeBaseDependentAgentsResponse, error) {
+func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, documentationID string, dependentType *components.KnowledgeBaseDependentType, pageSize *int64, cursor *string, opts ...operations.Option) (*operations.GetKnowledgeBaseDependentAgentsResponse, error) {
 	request := operations.GetKnowledgeBaseDependentAgentsRequest{
 		DocumentationID: documentationID,
 		DependentType:   dependentType,
@@ -14930,7 +14929,7 @@ func (s *AgentsPlatform) GetKnowledgeBaseSourceFileURL(ctx context.Context, docu
 
 // GetDocumentationChunkFromKnowledgeBase - Get Documentation Chunk From Knowledge Base
 // Get details about a specific documentation part used by RAG.
-func (s *AgentsPlatform) GetDocumentationChunkFromKnowledgeBase(ctx context.Context, documentationID string, chunkID string, embeddingModel optionalnullable.OptionalNullable[components.EmbeddingModelEnum], opts ...operations.Option) (*operations.GetDocumentationChunkFromKnowledgeBaseResponse, error) {
+func (s *AgentsPlatform) GetDocumentationChunkFromKnowledgeBase(ctx context.Context, documentationID string, chunkID string, embeddingModel *components.EmbeddingModelEnum, opts ...operations.Option) (*operations.GetDocumentationChunkFromKnowledgeBaseResponse, error) {
 	request := operations.GetDocumentationChunkFromKnowledgeBaseRequest{
 		DocumentationID: documentationID,
 		ChunkID:         chunkID,
@@ -16356,7 +16355,7 @@ func (s *AgentsPlatform) UpdateToolRoute(ctx context.Context, toolID string, bod
 
 // GetToolDependentAgentsRoute - Get Dependent Agents List
 // Get a list of agents depending on this tool
-func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID string, cursor optionalnullable.OptionalNullable[string], pageSize *int64, opts ...operations.Option) (*operations.GetToolDependentAgentsRouteResponse, error) {
+func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID string, cursor *string, pageSize *int64, opts ...operations.Option) (*operations.GetToolDependentAgentsRouteResponse, error) {
 	request := operations.GetToolDependentAgentsRouteRequest{
 		ToolID:   toolID,
 		Cursor:   cursor,
@@ -17530,7 +17529,7 @@ func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, reque
 
 // GetSecretsRoute - Get Convai Workspace Secrets
 // Get all workspace secrets for the user
-func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize optionalnullable.OptionalNullable[int64], dependencyLimit optionalnullable.OptionalNullable[int64], cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSecretsRouteResponse, error) {
+func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize *int64, dependencyLimit *int64, cursor *string, opts ...operations.Option) (*operations.GetSecretsRouteResponse, error) {
 	request := operations.GetSecretsRouteRequest{
 		PageSize:        pageSize,
 		DependencyLimit: dependencyLimit,
@@ -18464,7 +18463,7 @@ func (s *AgentsPlatform) UpdateSecretRoute(ctx context.Context, secretID string,
 
 // GetSecretDependenciesRoute - Get Secret Dependencies By Type
 // Get paginated list of resources that depend on a specific secret, filtered by resource type.
-func (s *AgentsPlatform) GetSecretDependenciesRoute(ctx context.Context, secretID string, resourceType components.SecretDependencyResourceType, pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSecretDependenciesRouteResponse, error) {
+func (s *AgentsPlatform) GetSecretDependenciesRoute(ctx context.Context, secretID string, resourceType components.SecretDependencyResourceType, pageSize *int64, cursor *string, opts ...operations.Option) (*operations.GetSecretDependenciesRouteResponse, error) {
 	request := operations.GetSecretDependenciesRouteRequest{
 		SecretID:     secretID,
 		ResourceType: resourceType,
@@ -18942,7 +18941,7 @@ func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, request components
 
 // GetWorkspaceBatchCalls - Get All Batch Calls For A Workspace.
 // Get all batch calls for the current workspace.
-func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int64, lastDoc optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetWorkspaceBatchCallsResponse, error) {
+func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int64, lastDoc *string, opts ...operations.Option) (*operations.GetWorkspaceBatchCallsResponse, error) {
 	request := operations.GetWorkspaceBatchCallsRequest{
 		Limit:   limit,
 		LastDoc: lastDoc,

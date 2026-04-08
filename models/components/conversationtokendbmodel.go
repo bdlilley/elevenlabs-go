@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationTokenDBModel struct {
@@ -13,12 +12,12 @@ type ConversationTokenDBModel struct {
 	// The token for the agent
 	ConversationToken string `json:"conversation_token"`
 	// The expiration time of the token in unix seconds
-	ExpirationTimeUnixSecs optionalnullable.OptionalNullable[int64] `json:"expiration_time_unix_secs,omitzero"`
+	ExpirationTimeUnixSecs *int64 `json:"expiration_time_unix_secs,omitzero"`
 	// The ID of the conversation
-	ConversationID optionalnullable.OptionalNullable[string] `json:"conversation_id,omitzero"`
-	Purpose        *ConversationTokenPurpose                 `default:"signed_url" json:"purpose"`
+	ConversationID *string                   `json:"conversation_id,omitzero"`
+	Purpose        *ConversationTokenPurpose `default:"signed_url" json:"purpose"`
 	// The user ID of the entity who requested the token
-	TokenRequesterUserID optionalnullable.OptionalNullable[string] `json:"token_requester_user_id,omitzero"`
+	TokenRequesterUserID *string `json:"token_requester_user_id,omitzero"`
 }
 
 func (c ConversationTokenDBModel) MarshalJSON() ([]byte, error) {
@@ -46,14 +45,14 @@ func (c *ConversationTokenDBModel) GetConversationToken() string {
 	return c.ConversationToken
 }
 
-func (c *ConversationTokenDBModel) GetExpirationTimeUnixSecs() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationTokenDBModel) GetExpirationTimeUnixSecs() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.ExpirationTimeUnixSecs
 }
 
-func (c *ConversationTokenDBModel) GetConversationID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationTokenDBModel) GetConversationID() *string {
 	if c == nil {
 		return nil
 	}
@@ -67,7 +66,7 @@ func (c *ConversationTokenDBModel) GetPurpose() *ConversationTokenPurpose {
 	return c.Purpose
 }
 
-func (c *ConversationTokenDBModel) GetTokenRequesterUserID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationTokenDBModel) GetTokenRequesterUserID() *string {
 	if c == nil {
 		return nil
 	}

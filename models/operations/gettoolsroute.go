@@ -5,28 +5,27 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetToolsRouteRequest struct {
 	// If specified, the endpoint returns only tools whose names start with this string.
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// How many documents to return at maximum. Can not exceed 100, defaults to 30.
-	PageSize optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=page_size"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 	// If set to true, the endpoint will return only tools owned by you (and not shared from somebody else). Deprecated: use created_by_user_id instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	ShowOnlyOwnedDocuments *bool `default:"false" queryParam:"style=form,explode=true,name=show_only_owned_documents"`
 	// Filter tools by creator user ID. When set, only tools created by this user are returned. Takes precedence over show_only_owned_documents. Use '@me' to refer to the authenticated user.
-	CreatedByUserID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=created_by_user_id"`
+	CreatedByUserID *string `queryParam:"style=form,explode=true,name=created_by_user_id"`
 	// If present, the endpoint will return only tools of the given types.
-	Types optionalnullable.OptionalNullable[[]components.ToolTypeFilter] `queryParam:"style=form,explode=true,name=types"`
+	Types []components.ToolTypeFilter `queryParam:"style=form,explode=true,name=types"`
 	// The direction to sort the results
 	SortDirection *components.SortDirection `queryParam:"style=form,explode=true,name=sort_direction"`
 	// The field to sort the results by
-	SortBy optionalnullable.OptionalNullable[components.ToolSortBy] `queryParam:"style=form,explode=true,name=sort_by"`
+	SortBy *components.ToolSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (g GetToolsRouteRequest) MarshalJSON() ([]byte, error) {
@@ -40,14 +39,14 @@ func (g *GetToolsRouteRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (g *GetToolsRouteRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (g *GetToolsRouteRequest) GetSearch() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Search
 }
 
-func (g *GetToolsRouteRequest) GetPageSize() optionalnullable.OptionalNullable[int64] {
+func (g *GetToolsRouteRequest) GetPageSize() *int64 {
 	if g == nil {
 		return nil
 	}
@@ -61,14 +60,14 @@ func (g *GetToolsRouteRequest) GetShowOnlyOwnedDocuments() *bool {
 	return g.ShowOnlyOwnedDocuments
 }
 
-func (g *GetToolsRouteRequest) GetCreatedByUserID() optionalnullable.OptionalNullable[string] {
+func (g *GetToolsRouteRequest) GetCreatedByUserID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.CreatedByUserID
 }
 
-func (g *GetToolsRouteRequest) GetTypes() optionalnullable.OptionalNullable[[]components.ToolTypeFilter] {
+func (g *GetToolsRouteRequest) GetTypes() []components.ToolTypeFilter {
 	if g == nil {
 		return nil
 	}
@@ -82,14 +81,14 @@ func (g *GetToolsRouteRequest) GetSortDirection() *components.SortDirection {
 	return g.SortDirection
 }
 
-func (g *GetToolsRouteRequest) GetSortBy() optionalnullable.OptionalNullable[components.ToolSortBy] {
+func (g *GetToolsRouteRequest) GetSortBy() *components.ToolSortBy {
 	if g == nil {
 		return nil
 	}
 	return g.SortBy
 }
 
-func (g *GetToolsRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetToolsRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}

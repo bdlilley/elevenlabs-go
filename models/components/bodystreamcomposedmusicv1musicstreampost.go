@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // BodyStreamComposedMusicV1MusicStreamPostModelID - The model to use for the generation.
@@ -35,23 +34,23 @@ func (e *BodyStreamComposedMusicV1MusicStreamPostModelID) UnmarshalJSON(data []b
 
 type BodyStreamComposedMusicV1MusicStreamPost struct {
 	// A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`.
-	Prompt optionalnullable.OptionalNullable[string] `json:"prompt,omitzero"`
+	Prompt *string `json:"prompt,omitzero"`
 	// A music prompt. Deprecated. Use `composition_plan` instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	MusicPrompt optionalnullable.OptionalNullable[MusicPrompt] `json:"music_prompt,omitzero"`
+	MusicPrompt *MusicPrompt `json:"music_prompt,omitzero"`
 	// A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`.
-	CompositionPlan optionalnullable.OptionalNullable[MusicPrompt] `json:"composition_plan,omitzero"`
+	CompositionPlan *MusicPrompt `json:"composition_plan,omitzero"`
 	// The length of the song to generate in milliseconds. Used only in conjunction with `prompt`. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt.
-	MusicLengthMs optionalnullable.OptionalNullable[int64] `json:"music_length_ms,omitzero"`
+	MusicLengthMs *int64 `json:"music_length_ms,omitzero"`
 	// The model to use for the generation.
 	ModelID *BodyStreamComposedMusicV1MusicStreamPostModelID `default:"music_v1" json:"model_id"`
 	// Random seed to initialize the music generation process. Providing the same seed with the same parameters can help achieve more consistent results, but exact reproducibility is not guaranteed and outputs may change across system updates. Cannot be used in conjunction with prompt.
-	Seed optionalnullable.OptionalNullable[int64] `json:"seed,omitzero"`
+	Seed *int64 `json:"seed,omitzero"`
 	// If true, guarantees that the generated song will be instrumental. If false, the song may or may not be instrumental depending on the `prompt`. Can only be used with `prompt`.
 	ForceInstrumental *bool `default:"false" json:"force_instrumental"`
 	// The ID of the finetune to use for the generation
-	FinetuneID optionalnullable.OptionalNullable[string] `json:"finetune_id,omitzero"`
+	FinetuneID *string `json:"finetune_id,omitzero"`
 	// If true, proper names in the prompt will be phonetically spelled in the lyrics for better pronunciation by the music model. The original names will be restored in word timestamps.
 	UsePhoneticNames *bool `default:"false" json:"use_phonetic_names"`
 	// Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature.
@@ -69,28 +68,28 @@ func (b *BodyStreamComposedMusicV1MusicStreamPost) UnmarshalJSON(data []byte) er
 	return nil
 }
 
-func (b *BodyStreamComposedMusicV1MusicStreamPost) GetPrompt() optionalnullable.OptionalNullable[string] {
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetPrompt() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Prompt
 }
 
-func (b *BodyStreamComposedMusicV1MusicStreamPost) GetMusicPrompt() optionalnullable.OptionalNullable[MusicPrompt] {
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetMusicPrompt() *MusicPrompt {
 	if b == nil {
 		return nil
 	}
 	return b.MusicPrompt
 }
 
-func (b *BodyStreamComposedMusicV1MusicStreamPost) GetCompositionPlan() optionalnullable.OptionalNullable[MusicPrompt] {
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetCompositionPlan() *MusicPrompt {
 	if b == nil {
 		return nil
 	}
 	return b.CompositionPlan
 }
 
-func (b *BodyStreamComposedMusicV1MusicStreamPost) GetMusicLengthMs() optionalnullable.OptionalNullable[int64] {
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetMusicLengthMs() *int64 {
 	if b == nil {
 		return nil
 	}
@@ -104,7 +103,7 @@ func (b *BodyStreamComposedMusicV1MusicStreamPost) GetModelID() *BodyStreamCompo
 	return b.ModelID
 }
 
-func (b *BodyStreamComposedMusicV1MusicStreamPost) GetSeed() optionalnullable.OptionalNullable[int64] {
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetSeed() *int64 {
 	if b == nil {
 		return nil
 	}
@@ -118,7 +117,7 @@ func (b *BodyStreamComposedMusicV1MusicStreamPost) GetForceInstrumental() *bool 
 	return b.ForceInstrumental
 }
 
-func (b *BodyStreamComposedMusicV1MusicStreamPost) GetFinetuneID() optionalnullable.OptionalNullable[string] {
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetFinetuneID() *string {
 	if b == nil {
 		return nil
 	}

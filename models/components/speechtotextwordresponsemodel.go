@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // SpeechToTextWordResponseModelType - The type of the word or sound. 'audio_event' is used for non-word sounds like laughter or footsteps.
@@ -36,17 +35,17 @@ type SpeechToTextWordResponseModel struct {
 	// The word or sound that was transcribed.
 	Text string `json:"text"`
 	// The start time of the word or sound in seconds.
-	Start optionalnullable.OptionalNullable[float64] `json:"start,omitzero"`
+	Start *float64 `json:"start,omitzero"`
 	// The end time of the word or sound in seconds.
-	End optionalnullable.OptionalNullable[float64] `json:"end,omitzero"`
+	End *float64 `json:"end,omitzero"`
 	// The type of the word or sound. 'audio_event' is used for non-word sounds like laughter or footsteps.
 	Type SpeechToTextWordResponseModelType `json:"type"`
 	// Unique identifier for the speaker of this word.
-	SpeakerID optionalnullable.OptionalNullable[string] `json:"speaker_id,omitzero"`
+	SpeakerID *string `json:"speaker_id,omitzero"`
 	// The log of the probability with which this word was predicted. Logprobs are in range [-infinity, 0], higher logprobs indicate a higher confidence the model has in its predictions.
 	Logprob float64 `json:"logprob"`
 	// The characters that make up the word and their timing information.
-	Characters optionalnullable.OptionalNullable[[]SpeechToTextCharacterResponseModel] `json:"characters,omitzero"`
+	Characters []SpeechToTextCharacterResponseModel `json:"characters,omitzero"`
 }
 
 func (s SpeechToTextWordResponseModel) MarshalJSON() ([]byte, error) {
@@ -67,14 +66,14 @@ func (s *SpeechToTextWordResponseModel) GetText() string {
 	return s.Text
 }
 
-func (s *SpeechToTextWordResponseModel) GetStart() optionalnullable.OptionalNullable[float64] {
+func (s *SpeechToTextWordResponseModel) GetStart() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.Start
 }
 
-func (s *SpeechToTextWordResponseModel) GetEnd() optionalnullable.OptionalNullable[float64] {
+func (s *SpeechToTextWordResponseModel) GetEnd() *float64 {
 	if s == nil {
 		return nil
 	}
@@ -88,7 +87,7 @@ func (s *SpeechToTextWordResponseModel) GetType() SpeechToTextWordResponseModelT
 	return s.Type
 }
 
-func (s *SpeechToTextWordResponseModel) GetSpeakerID() optionalnullable.OptionalNullable[string] {
+func (s *SpeechToTextWordResponseModel) GetSpeakerID() *string {
 	if s == nil {
 		return nil
 	}
@@ -102,7 +101,7 @@ func (s *SpeechToTextWordResponseModel) GetLogprob() float64 {
 	return s.Logprob
 }
 
-func (s *SpeechToTextWordResponseModel) GetCharacters() optionalnullable.OptionalNullable[[]SpeechToTextCharacterResponseModel] {
+func (s *SpeechToTextWordResponseModel) GetCharacters() []SpeechToTextCharacterResponseModel {
 	if s == nil {
 		return nil
 	}

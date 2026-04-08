@@ -2,31 +2,27 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type SegmentUpdatePayload struct {
-	StartTime optionalnullable.OptionalNullable[float64] `json:"start_time,omitzero"`
-	EndTime   optionalnullable.OptionalNullable[float64] `json:"end_time,omitzero"`
-	Text      optionalnullable.OptionalNullable[string]  `json:"text,omitzero"`
+	StartTime *float64 `json:"start_time,omitzero"`
+	EndTime   *float64 `json:"end_time,omitzero"`
+	Text      *string  `json:"text,omitzero"`
 }
 
-func (s *SegmentUpdatePayload) GetStartTime() optionalnullable.OptionalNullable[float64] {
+func (s *SegmentUpdatePayload) GetStartTime() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.StartTime
 }
 
-func (s *SegmentUpdatePayload) GetEndTime() optionalnullable.OptionalNullable[float64] {
+func (s *SegmentUpdatePayload) GetEndTime() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.EndTime
 }
 
-func (s *SegmentUpdatePayload) GetText() optionalnullable.OptionalNullable[string] {
+func (s *SegmentUpdatePayload) GetText() *string {
 	if s == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseURLResponseModel struct {
@@ -14,14 +13,14 @@ type GetKnowledgeBaseURLResponseModel struct {
 	SupportedUsages []DocumentUsageModeEnum                    `json:"supported_usages"`
 	AccessInfo      ResourceAccessInfo                         `json:"access_info"`
 	// The ID of the parent folder, or null if the document is at the root level.
-	FolderParentID optionalnullable.OptionalNullable[string] `json:"folder_parent_id,omitzero"`
+	FolderParentID *string `json:"folder_parent_id,omitzero"`
 	// The folder path segments leading to this entity, from root to parent folder.
 	FolderPath []KnowledgeBaseFolderPathSegmentResponseModel `json:"folder_path,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_              string                                          `const:"url" json:"type"`
-	URL                string                                          `json:"url"`
-	ExtractedInnerHTML string                                          `json:"extracted_inner_html"`
-	AutoSyncInfo       optionalnullable.OptionalNullable[AutoSyncInfo] `json:"auto_sync_info,omitzero"`
+	type_              string        `const:"url" json:"type"`
+	URL                string        `json:"url"`
+	ExtractedInnerHTML string        `json:"extracted_inner_html"`
+	AutoSyncInfo       *AutoSyncInfo `json:"auto_sync_info,omitzero"`
 }
 
 func (g GetKnowledgeBaseURLResponseModel) MarshalJSON() ([]byte, error) {
@@ -70,7 +69,7 @@ func (g *GetKnowledgeBaseURLResponseModel) GetAccessInfo() ResourceAccessInfo {
 	return g.AccessInfo
 }
 
-func (g *GetKnowledgeBaseURLResponseModel) GetFolderParentID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseURLResponseModel) GetFolderParentID() *string {
 	if g == nil {
 		return nil
 	}
@@ -102,7 +101,7 @@ func (g *GetKnowledgeBaseURLResponseModel) GetExtractedInnerHTML() string {
 	return g.ExtractedInnerHTML
 }
 
-func (g *GetKnowledgeBaseURLResponseModel) GetAutoSyncInfo() optionalnullable.OptionalNullable[AutoSyncInfo] {
+func (g *GetKnowledgeBaseURLResponseModel) GetAutoSyncInfo() *AutoSyncInfo {
 	if g == nil {
 		return nil
 	}

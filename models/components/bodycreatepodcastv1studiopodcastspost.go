@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ModeType string
@@ -411,15 +410,15 @@ type BodyCreatePodcastV1StudioPodcastsPost struct {
 	//
 	DurationScale *TheDurationOfTheGeneratedPodcastThisVariesDependingOnTheFormatVoiceAndLanguage `default:"default" json:"duration_scale"`
 	// An optional language of the Studio project. Two-letter language code (ISO 639-1).
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// The intro text that will always be added to the beginning of the podcast.
-	Intro optionalnullable.OptionalNullable[string] `json:"intro,omitzero"`
+	Intro *string `json:"intro,omitzero"`
 	// The outro text that will always be added to the end of the podcast.
-	Outro optionalnullable.OptionalNullable[string] `json:"outro,omitzero"`
+	Outro *string `json:"outro,omitzero"`
 	// Additional instructions prompt for the podcast generation used to adjust the podcast's style and tone.
-	InstructionsPrompt optionalnullable.OptionalNullable[string] `json:"instructions_prompt,omitzero"`
+	InstructionsPrompt *string `json:"instructions_prompt,omitzero"`
 	// A brief summary or highlights of the Studio project's content, providing key points or themes. This should be between 10 and 70 characters.
-	Highlights optionalnullable.OptionalNullable[[]string] `json:"highlights,omitzero"`
+	Highlights []string `json:"highlights,omitzero"`
 	//     A url that will be called by our service when the Studio project is converted. Request will contain a json blob containing the status of the conversion
 	//     Messages:
 	//     1. When project was converted successfully:
@@ -474,13 +473,13 @@ type BodyCreatePodcastV1StudioPodcastsPost struct {
 	//       }
 	//     }
 	//
-	CallbackURL optionalnullable.OptionalNullable[string] `json:"callback_url,omitzero"`
+	CallbackURL *string `json:"callback_url,omitzero"`
 	//     This parameter controls text normalization with four modes: 'auto', 'on', 'apply_english' and 'off'.
 	//     When set to 'auto', the system will automatically decide whether to apply text normalization
 	//     (e.g., spelling out numbers). With 'on', text normalization will always be applied, while
 	//     with 'off', it will be skipped. 'apply_english' is the same as 'on' but will assume that text is in English.
 	//
-	ApplyTextNormalization optionalnullable.OptionalNullable[BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization] `json:"apply_text_normalization,omitzero"`
+	ApplyTextNormalization *BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization `json:"apply_text_normalization,omitzero"`
 }
 
 func (b BodyCreatePodcastV1StudioPodcastsPost) MarshalJSON() ([]byte, error) {
@@ -537,49 +536,49 @@ func (b *BodyCreatePodcastV1StudioPodcastsPost) GetDurationScale() *TheDurationO
 	return b.DurationScale
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetLanguage() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Language
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetIntro() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetIntro() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Intro
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetOutro() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetOutro() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Outro
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetInstructionsPrompt() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetInstructionsPrompt() *string {
 	if b == nil {
 		return nil
 	}
 	return b.InstructionsPrompt
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetHighlights() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetHighlights() []string {
 	if b == nil {
 		return nil
 	}
 	return b.Highlights
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetCallbackURL() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetCallbackURL() *string {
 	if b == nil {
 		return nil
 	}
 	return b.CallbackURL
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetApplyTextNormalization() optionalnullable.OptionalNullable[BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization] {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetApplyTextNormalization() *BodyCreatePodcastV1StudioPodcastsPostApplyTextNormalization {
 	if b == nil {
 		return nil
 	}

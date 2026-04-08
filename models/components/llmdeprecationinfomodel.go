@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"time"
 )
 
@@ -19,11 +18,11 @@ type LLMDeprecationInfoModel struct {
 	// Current percentage of traffic being routed to the replacement model (0-100).
 	FallbackPercentage *int64 `default:"0" json:"fallback_percentage"`
 	// The date when the model provider will deprecate this model. Null for immediately deprecated models.
-	ProviderDeprecationDate optionalnullable.OptionalNullable[time.Time] `json:"provider_deprecation_date,omitzero"`
+	ProviderDeprecationDate *time.Time `json:"provider_deprecation_date,omitzero"`
 	// The model that replaces this deprecated model. Traffic will be automatically routed to this model.
-	ReplacementModel optionalnullable.OptionalNullable[Llm] `default:"gemini-2.5-flash" json:"replacement_model"`
+	ReplacementModel *Llm `default:"gemini-2.5-flash" json:"replacement_model"`
 	// Custom deprecation timing configuration for this model. Null if using the default configuration.
-	DeprecationConfig optionalnullable.OptionalNullable[LLMDeprecationConfigModel] `json:"deprecation_config,omitzero"`
+	DeprecationConfig *LLMDeprecationConfigModel `json:"deprecation_config,omitzero"`
 }
 
 func (l LLMDeprecationInfoModel) MarshalJSON() ([]byte, error) {
@@ -72,21 +71,21 @@ func (l *LLMDeprecationInfoModel) GetFallbackPercentage() *int64 {
 	return l.FallbackPercentage
 }
 
-func (l *LLMDeprecationInfoModel) GetProviderDeprecationDate() optionalnullable.OptionalNullable[time.Time] {
+func (l *LLMDeprecationInfoModel) GetProviderDeprecationDate() *time.Time {
 	if l == nil {
 		return nil
 	}
 	return l.ProviderDeprecationDate
 }
 
-func (l *LLMDeprecationInfoModel) GetReplacementModel() optionalnullable.OptionalNullable[Llm] {
+func (l *LLMDeprecationInfoModel) GetReplacementModel() *Llm {
 	if l == nil {
 		return nil
 	}
 	return l.ReplacementModel
 }
 
-func (l *LLMDeprecationInfoModel) GetDeprecationConfig() optionalnullable.OptionalNullable[LLMDeprecationConfigModel] {
+func (l *LLMDeprecationInfoModel) GetDeprecationConfig() *LLMDeprecationConfigModel {
 	if l == nil {
 		return nil
 	}

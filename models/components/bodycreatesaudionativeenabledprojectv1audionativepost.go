@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreatesAudioNativeEnabledProjectV1AudioNativePostFile struct {
@@ -70,27 +69,27 @@ type BodyCreatesAudioNativeEnabledProjectV1AudioNativePost struct {
 	// (Deprecated) Image URL used in the player. If not provided, default image set in the Player settings is used.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	Image optionalnullable.OptionalNullable[string] `multipartForm:"name=image"`
+	Image *string `multipartForm:"name=image"`
 	// Author used in the player and inserted at the start of the uploaded article. If not provided, the default author set in the Player settings is used.
-	Author optionalnullable.OptionalNullable[string] `multipartForm:"name=author"`
+	Author *string `multipartForm:"name=author"`
 	// Title used in the player and inserted at the top of the uploaded article. If not provided, the default title set in the Player settings is used.
-	Title optionalnullable.OptionalNullable[string] `multipartForm:"name=title"`
+	Title *string `multipartForm:"name=title"`
 	// (Deprecated) Whether to use small player or not. If not provided, default value set in the Player settings is used.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Small *bool `default:"false" multipartForm:"name=small"`
 	// Text color used in the player. If not provided, default text color set in the Player settings is used.
-	TextColor optionalnullable.OptionalNullable[string] `multipartForm:"name=text_color"`
+	TextColor *string `multipartForm:"name=text_color"`
 	// Background color used in the player. If not provided, default background color set in the Player settings is used.
-	BackgroundColor optionalnullable.OptionalNullable[string] `multipartForm:"name=background_color"`
+	BackgroundColor *string `multipartForm:"name=background_color"`
 	// (Deprecated) Specifies for how many minutes to persist the session across page reloads. If not provided, default sessionization set in the Player settings is used.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Sessionization *int64 `default:"0" multipartForm:"name=sessionization"`
 	// Voice ID used to voice the content. If not provided, default voice ID set in the Player settings is used.
-	VoiceID optionalnullable.OptionalNullable[string] `multipartForm:"name=voice_id"`
+	VoiceID *string `multipartForm:"name=voice_id"`
 	// TTS Model ID used in the player. If not provided, default model ID set in the Player settings is used.
-	ModelID optionalnullable.OptionalNullable[string] `multipartForm:"name=model_id"`
+	ModelID *string `multipartForm:"name=model_id"`
 	// Either txt or HTML input file containing the article content. HTML should be formatted as follows '&lt;html&gt;&lt;body&gt;&lt;div&gt;&lt;p&gt;Your content&lt;/p&gt;&lt;h3&gt;More of your content&lt;/h3&gt;&lt;p&gt;Some more of your content&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;'
 	File *BodyCreatesAudioNativeEnabledProjectV1AudioNativePostFile `multipartForm:"file,name=file"`
 	// Whether to auto convert the project to audio or not.
@@ -100,7 +99,7 @@ type BodyCreatesAudioNativeEnabledProjectV1AudioNativePost struct {
 	//     (e.g., spelling out numbers). With 'on', text normalization will always be applied, while
 	//     with 'off', it will be skipped. 'apply_english' is the same as 'on' but will assume that text is in English.
 	//
-	ApplyTextNormalization optionalnullable.OptionalNullable[BodyCreatesAudioNativeEnabledProjectV1AudioNativePostApplyTextNormalization] `multipartForm:"name=apply_text_normalization"`
+	ApplyTextNormalization *BodyCreatesAudioNativeEnabledProjectV1AudioNativePostApplyTextNormalization `multipartForm:"name=apply_text_normalization"`
 	// A list of pronunciation dictionary locators (pronunciation_dictionary_id, version_id) encoded as a list of JSON strings for pronunciation dictionaries to be applied to the text. A list of json encoded strings is required as adding projects may occur through formData as opposed to jsonBody. To specify multiple dictionaries use multiple --form lines in your curl, such as --form 'pronunciation_dictionary_locators="{\"pronunciation_dictionary_id\":\"Vmd4Zor6fplcA7WrINey\",\"version_id\":\"hRPaxjlTdR7wFMhV4w0b\"}"' --form 'pronunciation_dictionary_locators="{\"pronunciation_dictionary_id\":\"JzWtcGQMJ6bnlWwyMo7e\",\"version_id\":\"lbmwxiLu4q6txYxgdZqn\"}"'.
 	PronunciationDictionaryLocators []string `multipartForm:"name=pronunciation_dictionary_locators"`
 }
@@ -123,21 +122,21 @@ func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetName() string
 	return b.Name
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetImage() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetImage() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Image
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetAuthor() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetAuthor() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Author
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetTitle() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetTitle() *string {
 	if b == nil {
 		return nil
 	}
@@ -151,14 +150,14 @@ func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetSmall() *bool
 	return b.Small
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetTextColor() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetTextColor() *string {
 	if b == nil {
 		return nil
 	}
 	return b.TextColor
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetBackgroundColor() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetBackgroundColor() *string {
 	if b == nil {
 		return nil
 	}
@@ -172,14 +171,14 @@ func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetSessionizatio
 	return b.Sessionization
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetVoiceID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetVoiceID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.VoiceID
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetModelID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetModelID() *string {
 	if b == nil {
 		return nil
 	}
@@ -200,7 +199,7 @@ func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetAutoConvert()
 	return b.AutoConvert
 }
 
-func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetApplyTextNormalization() optionalnullable.OptionalNullable[BodyCreatesAudioNativeEnabledProjectV1AudioNativePostApplyTextNormalization] {
+func (b *BodyCreatesAudioNativeEnabledProjectV1AudioNativePost) GetApplyTextNormalization() *BodyCreatesAudioNativeEnabledProjectV1AudioNativePostApplyTextNormalization {
 	if b == nil {
 		return nil
 	}

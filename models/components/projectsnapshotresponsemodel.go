@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ProjectSnapshotResponseModel struct {
@@ -17,9 +16,9 @@ type ProjectSnapshotResponseModel struct {
 	// The name of the project snapshot.
 	Name string `json:"name"`
 	// (Deprecated)
-	AudioUpload optionalnullable.OptionalNullable[map[string]any] `json:"audio_upload,omitzero"`
+	AudioUpload map[string]any `json:"audio_upload,omitzero"`
 	// (Deprecated)
-	ZipUpload optionalnullable.OptionalNullable[map[string]any] `json:"zip_upload,omitzero"`
+	ZipUpload map[string]any `json:"zip_upload,omitzero"`
 }
 
 func (p ProjectSnapshotResponseModel) MarshalJSON() ([]byte, error) {
@@ -61,14 +60,14 @@ func (p *ProjectSnapshotResponseModel) GetName() string {
 	return p.Name
 }
 
-func (p *ProjectSnapshotResponseModel) GetAudioUpload() optionalnullable.OptionalNullable[map[string]any] {
+func (p *ProjectSnapshotResponseModel) GetAudioUpload() map[string]any {
 	if p == nil {
 		return nil
 	}
 	return p.AudioUpload
 }
 
-func (p *ProjectSnapshotResponseModel) GetZipUpload() optionalnullable.OptionalNullable[map[string]any] {
+func (p *ProjectSnapshotResponseModel) GetZipUpload() map[string]any {
 	if p == nil {
 		return nil
 	}

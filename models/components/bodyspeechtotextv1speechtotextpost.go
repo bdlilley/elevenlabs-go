@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // BodySpeechToTextV1SpeechToTextPostModelID - The ID of the model to use for transcription.
@@ -393,44 +392,44 @@ type BodySpeechToTextV1SpeechToTextPost struct {
 	// The file to transcribe (100ms minimum audio length). All major audio and video formats are supported. Exactly one of the file or cloud_storage_url parameters must be provided. The file size must be less than 3.0GB.
 	File *BodySpeechToTextV1SpeechToTextPostFile `multipartForm:"file,name=file"`
 	// An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically.
-	LanguageCode optionalnullable.OptionalNullable[string] `multipartForm:"name=language_code"`
+	LanguageCode *string `multipartForm:"name=language_code"`
 	// Whether to tag audio events like (laughter), (footsteps), etc. in the transcription.
 	TagAudioEvents *bool `default:"true" multipartForm:"name=tag_audio_events"`
 	// The maximum amount of speakers talking in the uploaded file. Can help with predicting who speaks when. The maximum amount of speakers that can be predicted is 32. Defaults to null, in this case the amount of speakers is set to the maximum value the model supports.
-	NumSpeakers optionalnullable.OptionalNullable[int64] `multipartForm:"name=num_speakers"`
+	NumSpeakers *int64 `multipartForm:"name=num_speakers"`
 	// The granularity of the timestamps in the transcription. 'word' provides word-level timestamps and 'character' provides character-level timestamps per word.
 	TimestampsGranularity *TimestampsGranularity `default:"word" multipartForm:"name=timestamps_granularity"`
 	// Whether to annotate which speaker is currently talking in the uploaded file.
 	Diarize *bool `default:"false" multipartForm:"name=diarize"`
 	// Diarization threshold to apply during speaker diarization. A higher value means there will be a lower chance of one speaker being diarized as two different speakers but also a higher chance of two different speakers being diarized as one speaker (less total speakers predicted). A low value means there will be a higher chance of one speaker being diarized as two different speakers but also a lower chance of two different speakers being diarized as one speaker (more total speakers predicted). Can only be set when diarize=True and num_speakers=None. Defaults to None, in which case we will choose a threshold based on the model_id (0.22 usually).
-	DiarizationThreshold optionalnullable.OptionalNullable[float64] `multipartForm:"name=diarization_threshold"`
-	AdditionalFormats    []ExportOptions                            `multipartForm:"name=additional_formats,json"`
+	DiarizationThreshold *float64        `multipartForm:"name=diarization_threshold"`
+	AdditionalFormats    []ExportOptions `multipartForm:"name=additional_formats,json"`
 	// The format of input audio. Options are 'pcm_s16le_16' or 'other' For `pcm_s16le_16`, the input audio must be 16-bit PCM at a 16kHz sample rate, single channel (mono), and little-endian byte order. Latency will be lower than with passing an encoded waveform.
 	FileFormat *BodySpeechToTextV1SpeechToTextPostFileFormat `default:"other" multipartForm:"name=file_format"`
 	// The HTTPS URL of the file to transcribe. Exactly one of the file or cloud_storage_url parameters must be provided. The file must be accessible via HTTPS and the file size must be less than 2GB. Any valid HTTPS URL is accepted, including URLs from cloud storage providers (AWS S3, Google Cloud Storage, Cloudflare R2, etc.), CDNs, or any other HTTPS source. URLs can be pre-signed or include authentication tokens in query parameters.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	CloudStorageURL optionalnullable.OptionalNullable[string] `multipartForm:"name=cloud_storage_url"`
+	CloudStorageURL *string `multipartForm:"name=cloud_storage_url"`
 	// The URL of an audio or video file to transcribe. Supports hosted video or audio files, YouTube video URLs, TikTok video URLs, and other video hosting services.
-	SourceURL optionalnullable.OptionalNullable[string] `multipartForm:"name=source_url"`
+	SourceURL *string `multipartForm:"name=source_url"`
 	// Whether to send the transcription result to configured speech-to-text webhooks.  If set the request will return early without the transcription, which will be delivered later via webhook.
 	Webhook *bool `default:"false" multipartForm:"name=webhook"`
 	// Optional specific webhook ID to send the transcription result to. Only valid when webhook is set to true. If not provided, transcription will be sent to all configured speech-to-text webhooks.
-	WebhookID optionalnullable.OptionalNullable[string] `multipartForm:"name=webhook_id"`
+	WebhookID *string `multipartForm:"name=webhook_id"`
 	// Controls the randomness of the transcription output. Accepts values between 0.0 and 2.0, where higher values result in more diverse and less deterministic results. If omitted, we will use a temperature based on the model you selected which is usually 0.
-	Temperature optionalnullable.OptionalNullable[float64] `multipartForm:"name=temperature"`
+	Temperature *float64 `multipartForm:"name=temperature"`
 	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be an integer between 0 and 2147483647.
-	Seed optionalnullable.OptionalNullable[int64] `multipartForm:"name=seed"`
+	Seed *int64 `multipartForm:"name=seed"`
 	// Whether the audio file contains multiple channels where each channel contains a single speaker. When enabled, each channel will be transcribed independently and the results will be combined. Each word in the response will include a 'channel_index' field indicating which channel it was spoken on. A maximum of 5 channels is supported.
 	UseMultiChannel *bool `default:"false" multipartForm:"name=use_multi_channel"`
 	// Optional metadata to be included in the webhook response. This should be a JSON string representing an object with a maximum depth of 2 levels and maximum size of 16KB. Useful for tracking internal IDs, job references, or other contextual information.
-	WebhookMetadata optionalnullable.OptionalNullable[WebhookMetadata] `multipartForm:"name=webhook_metadata,json"`
+	WebhookMetadata *WebhookMetadata `multipartForm:"name=webhook_metadata,json"`
 	// Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur additional costs.
-	EntityDetection optionalnullable.OptionalNullable[EntityDetection] `multipartForm:"name=entity_detection"`
+	EntityDetection *EntityDetection `multipartForm:"name=entity_detection"`
 	// If true, the transcription will not have any filler words, false starts and non-speech sounds. Only supported with scribe_v2 model.
 	NoVerbatim *bool `default:"false" multipartForm:"name=no_verbatim"`
 	// Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned.
-	EntityRedaction optionalnullable.OptionalNullable[EntityRedaction] `multipartForm:"name=entity_redaction"`
+	EntityRedaction *EntityRedaction `multipartForm:"name=entity_redaction"`
 	// How to format redacted entities. 'redacted' replaces with {REDACTED}, 'entity_type' replaces with {ENTITY_TYPE}, 'enumerated_entity_type' replaces with {ENTITY_TYPE_N} where N enumerates each occurrence. Only used when entity_redaction is set.
 	EntityRedactionMode *string `default:"enumerated_entity_type" multipartForm:"name=entity_redaction_mode"`
 	// A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 1000.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur additional costs.           When more than 100 keyterms are provided, a minimum billable duration of 20 seconds applies per request.
@@ -462,7 +461,7 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetFile() *BodySpeechToTextV1Speech
 	return b.File
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetLanguageCode() optionalnullable.OptionalNullable[string] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetLanguageCode() *string {
 	if b == nil {
 		return nil
 	}
@@ -476,7 +475,7 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetTagAudioEvents() *bool {
 	return b.TagAudioEvents
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetNumSpeakers() optionalnullable.OptionalNullable[int64] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetNumSpeakers() *int64 {
 	if b == nil {
 		return nil
 	}
@@ -497,7 +496,7 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetDiarize() *bool {
 	return b.Diarize
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetDiarizationThreshold() optionalnullable.OptionalNullable[float64] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetDiarizationThreshold() *float64 {
 	if b == nil {
 		return nil
 	}
@@ -518,14 +517,14 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetFileFormat() *BodySpeechToTextV1
 	return b.FileFormat
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetCloudStorageURL() optionalnullable.OptionalNullable[string] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetCloudStorageURL() *string {
 	if b == nil {
 		return nil
 	}
 	return b.CloudStorageURL
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetSourceURL() optionalnullable.OptionalNullable[string] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetSourceURL() *string {
 	if b == nil {
 		return nil
 	}
@@ -539,21 +538,21 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetWebhook() *bool {
 	return b.Webhook
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetWebhookID() optionalnullable.OptionalNullable[string] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetWebhookID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.WebhookID
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetTemperature() optionalnullable.OptionalNullable[float64] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetTemperature() *float64 {
 	if b == nil {
 		return nil
 	}
 	return b.Temperature
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetSeed() optionalnullable.OptionalNullable[int64] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetSeed() *int64 {
 	if b == nil {
 		return nil
 	}
@@ -567,14 +566,14 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetUseMultiChannel() *bool {
 	return b.UseMultiChannel
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetWebhookMetadata() optionalnullable.OptionalNullable[WebhookMetadata] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetWebhookMetadata() *WebhookMetadata {
 	if b == nil {
 		return nil
 	}
 	return b.WebhookMetadata
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetEntityDetection() optionalnullable.OptionalNullable[EntityDetection] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetEntityDetection() *EntityDetection {
 	if b == nil {
 		return nil
 	}
@@ -588,7 +587,7 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetNoVerbatim() *bool {
 	return b.NoVerbatim
 }
 
-func (b *BodySpeechToTextV1SpeechToTextPost) GetEntityRedaction() optionalnullable.OptionalNullable[EntityRedaction] {
+func (b *BodySpeechToTextV1SpeechToTextPost) GetEntityRedaction() *EntityRedaction {
 	if b == nil {
 		return nil
 	}

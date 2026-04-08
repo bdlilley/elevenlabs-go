@@ -4,15 +4,14 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdatePhoneNumberRequest struct {
-	AgentID             optionalnullable.OptionalNullable[string]                             `json:"agent_id,omitzero"`
-	Label               optionalnullable.OptionalNullable[string]                             `json:"label,omitzero"`
-	InboundTrunkConfig  optionalnullable.OptionalNullable[InboundSIPTrunkConfigRequestModel]  `json:"inbound_trunk_config,omitzero"`
-	OutboundTrunkConfig optionalnullable.OptionalNullable[OutboundSIPTrunkConfigRequestModel] `json:"outbound_trunk_config,omitzero"`
-	LivekitStack        optionalnullable.OptionalNullable[LivekitStackType]                   `default:"standard" json:"livekit_stack"`
+	AgentID             *string                             `json:"agent_id,omitzero"`
+	Label               *string                             `json:"label,omitzero"`
+	InboundTrunkConfig  *InboundSIPTrunkConfigRequestModel  `json:"inbound_trunk_config,omitzero"`
+	OutboundTrunkConfig *OutboundSIPTrunkConfigRequestModel `json:"outbound_trunk_config,omitzero"`
+	LivekitStack        *LivekitStackType                   `default:"standard" json:"livekit_stack"`
 }
 
 func (u UpdatePhoneNumberRequest) MarshalJSON() ([]byte, error) {
@@ -26,35 +25,35 @@ func (u *UpdatePhoneNumberRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (u *UpdatePhoneNumberRequest) GetAgentID() optionalnullable.OptionalNullable[string] {
+func (u *UpdatePhoneNumberRequest) GetAgentID() *string {
 	if u == nil {
 		return nil
 	}
 	return u.AgentID
 }
 
-func (u *UpdatePhoneNumberRequest) GetLabel() optionalnullable.OptionalNullable[string] {
+func (u *UpdatePhoneNumberRequest) GetLabel() *string {
 	if u == nil {
 		return nil
 	}
 	return u.Label
 }
 
-func (u *UpdatePhoneNumberRequest) GetInboundTrunkConfig() optionalnullable.OptionalNullable[InboundSIPTrunkConfigRequestModel] {
+func (u *UpdatePhoneNumberRequest) GetInboundTrunkConfig() *InboundSIPTrunkConfigRequestModel {
 	if u == nil {
 		return nil
 	}
 	return u.InboundTrunkConfig
 }
 
-func (u *UpdatePhoneNumberRequest) GetOutboundTrunkConfig() optionalnullable.OptionalNullable[OutboundSIPTrunkConfigRequestModel] {
+func (u *UpdatePhoneNumberRequest) GetOutboundTrunkConfig() *OutboundSIPTrunkConfigRequestModel {
 	if u == nil {
 		return nil
 	}
 	return u.OutboundTrunkConfig
 }
 
-func (u *UpdatePhoneNumberRequest) GetLivekitStack() optionalnullable.OptionalNullable[LivekitStackType] {
+func (u *UpdatePhoneNumberRequest) GetLivekitStack() *LivekitStackType {
 	if u == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -22,9 +21,9 @@ type CreateSIPTrunkPhoneNumberRequestV2 struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	SupportsOutbound *bool `default:"true" json:"supports_outbound"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	provider            *string                                                               `const:"sip_trunk" json:"provider"`
-	InboundTrunkConfig  optionalnullable.OptionalNullable[InboundSIPTrunkConfigRequestModel]  `json:"inbound_trunk_config,omitzero"`
-	OutboundTrunkConfig optionalnullable.OptionalNullable[OutboundSIPTrunkConfigRequestModel] `json:"outbound_trunk_config,omitzero"`
+	provider            *string                             `const:"sip_trunk" json:"provider"`
+	InboundTrunkConfig  *InboundSIPTrunkConfigRequestModel  `json:"inbound_trunk_config,omitzero"`
+	OutboundTrunkConfig *OutboundSIPTrunkConfigRequestModel `json:"outbound_trunk_config,omitzero"`
 }
 
 func (c CreateSIPTrunkPhoneNumberRequestV2) MarshalJSON() ([]byte, error) {
@@ -70,14 +69,14 @@ func (c *CreateSIPTrunkPhoneNumberRequestV2) GetProvider() *string {
 	return types.Pointer("sip_trunk")
 }
 
-func (c *CreateSIPTrunkPhoneNumberRequestV2) GetInboundTrunkConfig() optionalnullable.OptionalNullable[InboundSIPTrunkConfigRequestModel] {
+func (c *CreateSIPTrunkPhoneNumberRequestV2) GetInboundTrunkConfig() *InboundSIPTrunkConfigRequestModel {
 	if c == nil {
 		return nil
 	}
 	return c.InboundTrunkConfig
 }
 
-func (c *CreateSIPTrunkPhoneNumberRequestV2) GetOutboundTrunkConfig() optionalnullable.OptionalNullable[OutboundSIPTrunkConfigRequestModel] {
+func (c *CreateSIPTrunkPhoneNumberRequestV2) GetOutboundTrunkConfig() *OutboundSIPTrunkConfigRequestModel {
 	if c == nil {
 		return nil
 	}

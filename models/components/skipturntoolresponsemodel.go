@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,8 +11,8 @@ type SkipTurnToolResponseModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"skip_turn_success" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status *string                                   `const:"success" json:"status"`
-	Reason optionalnullable.OptionalNullable[string] `json:"reason,omitzero"`
+	status *string `const:"success" json:"status"`
+	Reason *string `json:"reason,omitzero"`
 }
 
 func (s SkipTurnToolResponseModel) MarshalJSON() ([]byte, error) {
@@ -35,7 +34,7 @@ func (s *SkipTurnToolResponseModel) GetStatus() *string {
 	return types.Pointer("success")
 }
 
-func (s *SkipTurnToolResponseModel) GetReason() optionalnullable.OptionalNullable[string] {
+func (s *SkipTurnToolResponseModel) GetReason() *string {
 	if s == nil {
 		return nil
 	}

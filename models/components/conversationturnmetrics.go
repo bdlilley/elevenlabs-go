@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationTurnMetrics struct {
-	Metrics           map[string]MetricRecord                   `json:"metrics,omitzero"`
-	ConvaiAsrProvider optionalnullable.OptionalNullable[string] `json:"convai_asr_provider,omitzero"`
-	ConvaiTtsModel    optionalnullable.OptionalNullable[string] `json:"convai_tts_model,omitzero"`
-	ConvaiTtsCascade  optionalnullable.OptionalNullable[string] `json:"convai_tts_cascade,omitzero"`
+	Metrics           map[string]MetricRecord `json:"metrics,omitzero"`
+	ConvaiAsrProvider *string                 `json:"convai_asr_provider,omitzero"`
+	ConvaiTtsModel    *string                 `json:"convai_tts_model,omitzero"`
+	ConvaiTtsCascade  *string                 `json:"convai_tts_cascade,omitzero"`
 }
 
 func (c ConversationTurnMetrics) MarshalJSON() ([]byte, error) {
@@ -32,21 +31,21 @@ func (c *ConversationTurnMetrics) GetMetrics() map[string]MetricRecord {
 	return c.Metrics
 }
 
-func (c *ConversationTurnMetrics) GetConvaiAsrProvider() optionalnullable.OptionalNullable[string] {
+func (c *ConversationTurnMetrics) GetConvaiAsrProvider() *string {
 	if c == nil {
 		return nil
 	}
 	return c.ConvaiAsrProvider
 }
 
-func (c *ConversationTurnMetrics) GetConvaiTtsModel() optionalnullable.OptionalNullable[string] {
+func (c *ConversationTurnMetrics) GetConvaiTtsModel() *string {
 	if c == nil {
 		return nil
 	}
 	return c.ConvaiTtsModel
 }
 
-func (c *ConversationTurnMetrics) GetConvaiTtsCascade() optionalnullable.OptionalNullable[string] {
+func (c *ConversationTurnMetrics) GetConvaiTtsCascade() *string {
 	if c == nil {
 		return nil
 	}

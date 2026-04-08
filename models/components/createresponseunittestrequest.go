@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -153,7 +152,7 @@ func (u CreateResponseUnitTestRequestDynamicVariables) MarshalJSON() ([]byte, er
 
 type CreateResponseUnitTestRequest struct {
 	// Metadata of a conversation this test was created from (if applicable).
-	FromConversationMetadata optionalnullable.OptionalNullable[TestFromConversationMetadataInput] `json:"from_conversation_metadata,omitzero"`
+	FromConversationMetadata *TestFromConversationMetadataInput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]*CreateResponseUnitTestRequestDynamicVariables `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelInput           `json:"chat_history,omitzero"`
@@ -167,7 +166,7 @@ type CreateResponseUnitTestRequest struct {
 	FailureExamples []AgentFailureResponseExample `json:"failure_examples,omitzero"`
 	Name            string                        `json:"name"`
 	// The ID of the parent folder. If not provided, the test will be created at the root level.
-	ParentFolderID optionalnullable.OptionalNullable[string] `json:"parent_folder_id,omitzero"`
+	ParentFolderID *string `json:"parent_folder_id,omitzero"`
 }
 
 func (c CreateResponseUnitTestRequest) MarshalJSON() ([]byte, error) {
@@ -181,7 +180,7 @@ func (c *CreateResponseUnitTestRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *CreateResponseUnitTestRequest) GetFromConversationMetadata() optionalnullable.OptionalNullable[TestFromConversationMetadataInput] {
+func (c *CreateResponseUnitTestRequest) GetFromConversationMetadata() *TestFromConversationMetadataInput {
 	if c == nil {
 		return nil
 	}
@@ -234,7 +233,7 @@ func (c *CreateResponseUnitTestRequest) GetName() string {
 	return c.Name
 }
 
-func (c *CreateResponseUnitTestRequest) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (c *CreateResponseUnitTestRequest) GetParentFolderID() *string {
 	if c == nil {
 		return nil
 	}

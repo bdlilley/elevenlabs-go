@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ReferenceVideo struct {
-	GenerationID   optionalnullable.OptionalNullable[string]              `json:"generation_id,omitzero"`
-	ContentAssetID optionalnullable.OptionalNullable[string]              `json:"content_asset_id,omitzero"`
-	TemplateNodeID optionalnullable.OptionalNullable[string]              `json:"template_node_id,omitzero"`
-	StudioClip     optionalnullable.OptionalNullable[StudioClipReference] `json:"studio_clip,omitzero"`
+	GenerationID   *string              `json:"generation_id,omitzero"`
+	ContentAssetID *string              `json:"content_asset_id,omitzero"`
+	TemplateNodeID *string              `json:"template_node_id,omitzero"`
+	StudioClip     *StudioClipReference `json:"studio_clip,omitzero"`
 }
 
 func (r ReferenceVideo) MarshalJSON() ([]byte, error) {
@@ -25,28 +24,28 @@ func (r *ReferenceVideo) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (r *ReferenceVideo) GetGenerationID() optionalnullable.OptionalNullable[string] {
+func (r *ReferenceVideo) GetGenerationID() *string {
 	if r == nil {
 		return nil
 	}
 	return r.GenerationID
 }
 
-func (r *ReferenceVideo) GetContentAssetID() optionalnullable.OptionalNullable[string] {
+func (r *ReferenceVideo) GetContentAssetID() *string {
 	if r == nil {
 		return nil
 	}
 	return r.ContentAssetID
 }
 
-func (r *ReferenceVideo) GetTemplateNodeID() optionalnullable.OptionalNullable[string] {
+func (r *ReferenceVideo) GetTemplateNodeID() *string {
 	if r == nil {
 		return nil
 	}
 	return r.TemplateNodeID
 }
 
-func (r *ReferenceVideo) GetStudioClip() optionalnullable.OptionalNullable[StudioClipReference] {
+func (r *ReferenceVideo) GetStudioClip() *StudioClipReference {
 	if r == nil {
 		return nil
 	}

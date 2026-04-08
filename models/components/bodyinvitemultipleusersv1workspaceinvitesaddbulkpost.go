@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost struct {
 	// The email of the customer
 	Emails []string `json:"emails"`
 	// The seat type of the user
-	SeatType optionalnullable.OptionalNullable[SeatType] `json:"seat_type,omitzero"`
+	SeatType *SeatType `json:"seat_type,omitzero"`
 	// The group ids of the user
-	GroupIds optionalnullable.OptionalNullable[[]string] `json:"group_ids,omitzero"`
+	GroupIds []string `json:"group_ids,omitzero"`
 }
 
 func (b BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost) MarshalJSON() ([]byte, error) {
@@ -34,14 +33,14 @@ func (b *BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost) GetEmails() []str
 	return b.Emails
 }
 
-func (b *BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost) GetSeatType() optionalnullable.OptionalNullable[SeatType] {
+func (b *BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost) GetSeatType() *SeatType {
 	if b == nil {
 		return nil
 	}
 	return b.SeatType
 }
 
-func (b *BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost) GetGroupIds() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost) GetGroupIds() []string {
 	if b == nil {
 		return nil
 	}

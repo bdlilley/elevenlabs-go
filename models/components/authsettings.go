@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AuthSettings struct {
@@ -15,7 +14,7 @@ type AuthSettings struct {
 	// When enabled, connections with no origin header will be rejected. If the allowlist is empty, this option has no effect.
 	RequireOriginHeader *bool `default:"false" json:"require_origin_header"`
 	// A shareable token that can be used to start a conversation with the agent
-	ShareableToken optionalnullable.OptionalNullable[string] `json:"shareable_token,omitzero"`
+	ShareableToken *string `json:"shareable_token,omitzero"`
 }
 
 func (a AuthSettings) MarshalJSON() ([]byte, error) {
@@ -50,7 +49,7 @@ func (a *AuthSettings) GetRequireOriginHeader() *bool {
 	return a.RequireOriginHeader
 }
 
-func (a *AuthSettings) GetShareableToken() optionalnullable.OptionalNullable[string] {
+func (a *AuthSettings) GetShareableToken() *string {
 	if a == nil {
 		return nil
 	}

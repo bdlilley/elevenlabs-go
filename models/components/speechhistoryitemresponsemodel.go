@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SpeechHistoryItemResponseModelVoiceCategory string
@@ -88,17 +87,17 @@ type SpeechHistoryItemResponseModel struct {
 	// The ID of the history item.
 	HistoryItemID string `json:"history_item_id"`
 	// The ID of the request.
-	RequestID optionalnullable.OptionalNullable[string] `json:"request_id,omitzero"`
+	RequestID *string `json:"request_id,omitzero"`
 	// The ID of the voice used.
-	VoiceID optionalnullable.OptionalNullable[string] `json:"voice_id,omitzero"`
+	VoiceID *string `json:"voice_id,omitzero"`
 	// The ID of the model.
-	ModelID optionalnullable.OptionalNullable[string] `json:"model_id,omitzero"`
+	ModelID *string `json:"model_id,omitzero"`
 	// The name of the voice.
-	VoiceName optionalnullable.OptionalNullable[string] `json:"voice_name,omitzero"`
+	VoiceName *string `json:"voice_name,omitzero"`
 	// The category of the voice. Either 'premade', 'cloned', 'generated' or 'professional'.
-	VoiceCategory optionalnullable.OptionalNullable[SpeechHistoryItemResponseModelVoiceCategory] `json:"voice_category,omitzero"`
+	VoiceCategory *SpeechHistoryItemResponseModelVoiceCategory `json:"voice_category,omitzero"`
 	// The text used to generate the audio item.
-	Text optionalnullable.OptionalNullable[string] `json:"text,omitzero"`
+	Text *string `json:"text,omitzero"`
 	// Unix timestamp of when the item was created.
 	DateUnix int64 `json:"date_unix"`
 	// The character count change from.
@@ -110,21 +109,21 @@ type SpeechHistoryItemResponseModel struct {
 	// The state of the history item.
 	State SpeechHistoryItemResponseModelState `json:"state"`
 	// The settings of the history item.
-	Settings optionalnullable.OptionalNullable[map[string]any] `json:"settings,omitzero"`
+	Settings map[string]any `json:"settings,omitzero"`
 	// Feedback associated with the generated item. Returns null if no feedback has been provided.
-	Feedback optionalnullable.OptionalNullable[FeedbackResponseModel] `json:"feedback,omitzero"`
+	Feedback *FeedbackResponseModel `json:"feedback,omitzero"`
 	// The ID of the share link.
-	ShareLinkID optionalnullable.OptionalNullable[string] `json:"share_link_id,omitzero"`
+	ShareLinkID *string `json:"share_link_id,omitzero"`
 	// The source of the history item. Either TTS (text to speech), STS (speech to text), AN (audio native), Projects, Dubbing, PlayAPI, PD (pronunciation dictionary) or ConvAI (Agents Platform).
-	Source optionalnullable.OptionalNullable[SourceEnum] `json:"source,omitzero"`
+	Source *SourceEnum `json:"source,omitzero"`
 	// The alignments of the history item.
-	Alignments optionalnullable.OptionalNullable[HistoryAlignmentsResponseModel] `json:"alignments,omitzero"`
+	Alignments *HistoryAlignmentsResponseModel `json:"alignments,omitzero"`
 	// The dialogue (voice and text pairs) used to generate the audio item. If this is set then the top level `text` and `voice_id` fields will be empty.
-	Dialogue optionalnullable.OptionalNullable[[]DialogueInputResponseModel] `json:"dialogue,omitzero"`
+	Dialogue []DialogueInputResponseModel `json:"dialogue,omitzero"`
 	// The output format the audio was originally generated in.
-	OutputFormat optionalnullable.OptionalNullable[string] `json:"output_format,omitzero"`
+	OutputFormat *string `json:"output_format,omitzero"`
 	// Avatar context if this generation was created from the Avatars video editor.
-	AvatarContext optionalnullable.OptionalNullable[AvatarContextResponseModel] `json:"avatar_context,omitzero"`
+	AvatarContext *AvatarContextResponseModel `json:"avatar_context,omitzero"`
 }
 
 func (s SpeechHistoryItemResponseModel) MarshalJSON() ([]byte, error) {
@@ -145,42 +144,42 @@ func (s *SpeechHistoryItemResponseModel) GetHistoryItemID() string {
 	return s.HistoryItemID
 }
 
-func (s *SpeechHistoryItemResponseModel) GetRequestID() optionalnullable.OptionalNullable[string] {
+func (s *SpeechHistoryItemResponseModel) GetRequestID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.RequestID
 }
 
-func (s *SpeechHistoryItemResponseModel) GetVoiceID() optionalnullable.OptionalNullable[string] {
+func (s *SpeechHistoryItemResponseModel) GetVoiceID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.VoiceID
 }
 
-func (s *SpeechHistoryItemResponseModel) GetModelID() optionalnullable.OptionalNullable[string] {
+func (s *SpeechHistoryItemResponseModel) GetModelID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.ModelID
 }
 
-func (s *SpeechHistoryItemResponseModel) GetVoiceName() optionalnullable.OptionalNullable[string] {
+func (s *SpeechHistoryItemResponseModel) GetVoiceName() *string {
 	if s == nil {
 		return nil
 	}
 	return s.VoiceName
 }
 
-func (s *SpeechHistoryItemResponseModel) GetVoiceCategory() optionalnullable.OptionalNullable[SpeechHistoryItemResponseModelVoiceCategory] {
+func (s *SpeechHistoryItemResponseModel) GetVoiceCategory() *SpeechHistoryItemResponseModelVoiceCategory {
 	if s == nil {
 		return nil
 	}
 	return s.VoiceCategory
 }
 
-func (s *SpeechHistoryItemResponseModel) GetText() optionalnullable.OptionalNullable[string] {
+func (s *SpeechHistoryItemResponseModel) GetText() *string {
 	if s == nil {
 		return nil
 	}
@@ -222,56 +221,56 @@ func (s *SpeechHistoryItemResponseModel) GetState() SpeechHistoryItemResponseMod
 	return s.State
 }
 
-func (s *SpeechHistoryItemResponseModel) GetSettings() optionalnullable.OptionalNullable[map[string]any] {
+func (s *SpeechHistoryItemResponseModel) GetSettings() map[string]any {
 	if s == nil {
 		return nil
 	}
 	return s.Settings
 }
 
-func (s *SpeechHistoryItemResponseModel) GetFeedback() optionalnullable.OptionalNullable[FeedbackResponseModel] {
+func (s *SpeechHistoryItemResponseModel) GetFeedback() *FeedbackResponseModel {
 	if s == nil {
 		return nil
 	}
 	return s.Feedback
 }
 
-func (s *SpeechHistoryItemResponseModel) GetShareLinkID() optionalnullable.OptionalNullable[string] {
+func (s *SpeechHistoryItemResponseModel) GetShareLinkID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.ShareLinkID
 }
 
-func (s *SpeechHistoryItemResponseModel) GetSource() optionalnullable.OptionalNullable[SourceEnum] {
+func (s *SpeechHistoryItemResponseModel) GetSource() *SourceEnum {
 	if s == nil {
 		return nil
 	}
 	return s.Source
 }
 
-func (s *SpeechHistoryItemResponseModel) GetAlignments() optionalnullable.OptionalNullable[HistoryAlignmentsResponseModel] {
+func (s *SpeechHistoryItemResponseModel) GetAlignments() *HistoryAlignmentsResponseModel {
 	if s == nil {
 		return nil
 	}
 	return s.Alignments
 }
 
-func (s *SpeechHistoryItemResponseModel) GetDialogue() optionalnullable.OptionalNullable[[]DialogueInputResponseModel] {
+func (s *SpeechHistoryItemResponseModel) GetDialogue() []DialogueInputResponseModel {
 	if s == nil {
 		return nil
 	}
 	return s.Dialogue
 }
 
-func (s *SpeechHistoryItemResponseModel) GetOutputFormat() optionalnullable.OptionalNullable[string] {
+func (s *SpeechHistoryItemResponseModel) GetOutputFormat() *string {
 	if s == nil {
 		return nil
 	}
 	return s.OutputFormat
 }
 
-func (s *SpeechHistoryItemResponseModel) GetAvatarContext() optionalnullable.OptionalNullable[AvatarContextResponseModel] {
+func (s *SpeechHistoryItemResponseModel) GetAvatarContext() *AvatarContextResponseModel {
 	if s == nil {
 		return nil
 	}

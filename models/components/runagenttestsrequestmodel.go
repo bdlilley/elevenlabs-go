@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RunAgentTestsRequestModel struct {
 	// List of tests to run on the agent
 	Tests []SingleTestRunRequestModel `json:"tests"`
 	// Configuration overrides to use for testing. If not provided, the agent's default configuration will be used.
-	AgentConfigOverride optionalnullable.OptionalNullable[AdhocAgentConfigOverrideForTestRequestModel] `json:"agent_config_override,omitzero"`
+	AgentConfigOverride *AdhocAgentConfigOverrideForTestRequestModel `json:"agent_config_override,omitzero"`
 	// ID of the branch to run the tests on. If not provided, the tests will be run on the agent default configuration.
-	BranchID optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
+	BranchID *string `json:"branch_id,omitzero"`
 }
 
 func (r RunAgentTestsRequestModel) MarshalJSON() ([]byte, error) {
@@ -34,14 +33,14 @@ func (r *RunAgentTestsRequestModel) GetTests() []SingleTestRunRequestModel {
 	return r.Tests
 }
 
-func (r *RunAgentTestsRequestModel) GetAgentConfigOverride() optionalnullable.OptionalNullable[AdhocAgentConfigOverrideForTestRequestModel] {
+func (r *RunAgentTestsRequestModel) GetAgentConfigOverride() *AdhocAgentConfigOverrideForTestRequestModel {
 	if r == nil {
 		return nil
 	}
 	return r.AgentConfigOverride
 }
 
-func (r *RunAgentTestsRequestModel) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (r *RunAgentTestsRequestModel) GetBranchID() *string {
 	if r == nil {
 		return nil
 	}

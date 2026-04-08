@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ProjectSnapshotExtendedResponseModel struct {
@@ -17,10 +16,10 @@ type ProjectSnapshotExtendedResponseModel struct {
 	// The name of the project snapshot.
 	Name string `json:"name"`
 	// (Deprecated)
-	AudioUpload optionalnullable.OptionalNullable[map[string]any] `json:"audio_upload,omitzero"`
+	AudioUpload map[string]any `json:"audio_upload,omitzero"`
 	// (Deprecated)
-	ZipUpload           optionalnullable.OptionalNullable[map[string]any] `json:"zip_upload,omitzero"`
-	CharacterAlignments []CharacterAlignmentModel                         `json:"character_alignments"`
+	ZipUpload           map[string]any            `json:"zip_upload,omitzero"`
+	CharacterAlignments []CharacterAlignmentModel `json:"character_alignments"`
 	// The total duration of the audio in seconds.
 	AudioDurationSecs float64 `json:"audio_duration_secs"`
 }
@@ -64,14 +63,14 @@ func (p *ProjectSnapshotExtendedResponseModel) GetName() string {
 	return p.Name
 }
 
-func (p *ProjectSnapshotExtendedResponseModel) GetAudioUpload() optionalnullable.OptionalNullable[map[string]any] {
+func (p *ProjectSnapshotExtendedResponseModel) GetAudioUpload() map[string]any {
 	if p == nil {
 		return nil
 	}
 	return p.AudioUpload
 }
 
-func (p *ProjectSnapshotExtendedResponseModel) GetZipUpload() optionalnullable.OptionalNullable[map[string]any] {
+func (p *ProjectSnapshotExtendedResponseModel) GetZipUpload() map[string]any {
 	if p == nil {
 		return nil
 	}

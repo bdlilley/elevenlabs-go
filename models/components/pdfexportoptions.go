@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PdfExportOptions struct {
 	IncludeSpeakers   *bool `default:"true" json:"include_speakers"`
 	IncludeTimestamps *bool `default:"true" json:"include_timestamps"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	format                      string                                     `const:"pdf" json:"format"`
-	SegmentOnSilenceLongerThanS optionalnullable.OptionalNullable[float64] `json:"segment_on_silence_longer_than_s,omitzero"`
-	MaxSegmentDurationS         optionalnullable.OptionalNullable[float64] `json:"max_segment_duration_s,omitzero"`
-	MaxSegmentChars             optionalnullable.OptionalNullable[int64]   `json:"max_segment_chars,omitzero"`
+	format                      string   `const:"pdf" json:"format"`
+	SegmentOnSilenceLongerThanS *float64 `json:"segment_on_silence_longer_than_s,omitzero"`
+	MaxSegmentDurationS         *float64 `json:"max_segment_duration_s,omitzero"`
+	MaxSegmentChars             *int64   `json:"max_segment_chars,omitzero"`
 }
 
 func (p PdfExportOptions) MarshalJSON() ([]byte, error) {
@@ -46,21 +45,21 @@ func (p *PdfExportOptions) GetFormat() string {
 	return "pdf"
 }
 
-func (p *PdfExportOptions) GetSegmentOnSilenceLongerThanS() optionalnullable.OptionalNullable[float64] {
+func (p *PdfExportOptions) GetSegmentOnSilenceLongerThanS() *float64 {
 	if p == nil {
 		return nil
 	}
 	return p.SegmentOnSilenceLongerThanS
 }
 
-func (p *PdfExportOptions) GetMaxSegmentDurationS() optionalnullable.OptionalNullable[float64] {
+func (p *PdfExportOptions) GetMaxSegmentDurationS() *float64 {
 	if p == nil {
 		return nil
 	}
 	return p.MaxSegmentDurationS
 }
 
-func (p *PdfExportOptions) GetMaxSegmentChars() optionalnullable.OptionalNullable[int64] {
+func (p *PdfExportOptions) GetMaxSegmentChars() *int64 {
 	if p == nil {
 		return nil
 	}

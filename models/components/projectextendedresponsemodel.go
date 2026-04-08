@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ProjectExtendedResponseModelTargetAudience string
@@ -337,31 +336,31 @@ type ProjectExtendedResponseModel struct {
 	// The default model ID.
 	DefaultModelID string `json:"default_model_id"`
 	// The last conversion date of the project.
-	LastConversionDateUnix optionalnullable.OptionalNullable[int64] `json:"last_conversion_date_unix,omitzero"`
+	LastConversionDateUnix *int64 `json:"last_conversion_date_unix,omitzero"`
 	// Whether the project can be downloaded.
 	CanBeDownloaded bool `json:"can_be_downloaded"`
 	// The title of the project.
-	Title optionalnullable.OptionalNullable[string] `json:"title,omitzero"`
+	Title *string `json:"title,omitzero"`
 	// The author of the project.
-	Author optionalnullable.OptionalNullable[string] `json:"author,omitzero"`
+	Author *string `json:"author,omitzero"`
 	// The description of the project.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// List of genres of the project.
-	Genres optionalnullable.OptionalNullable[[]string] `json:"genres,omitzero"`
+	Genres []string `json:"genres,omitzero"`
 	// The cover image URL of the project.
-	CoverImageURL optionalnullable.OptionalNullable[string] `json:"cover_image_url,omitzero"`
+	CoverImageURL *string `json:"cover_image_url,omitzero"`
 	// The target audience of the project.
-	TargetAudience optionalnullable.OptionalNullable[ProjectExtendedResponseModelTargetAudience] `json:"target_audience,omitzero"`
+	TargetAudience *ProjectExtendedResponseModelTargetAudience `json:"target_audience,omitzero"`
 	// Two-letter language code (ISO 639-1) of the language of the project.
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// The content type of the project, e.g. 'Novel' or 'Short Story'
-	ContentType optionalnullable.OptionalNullable[string] `json:"content_type,omitzero"`
+	ContentType *string `json:"content_type,omitzero"`
 	// The original publication date of the project.
-	OriginalPublicationDate optionalnullable.OptionalNullable[string] `json:"original_publication_date,omitzero"`
+	OriginalPublicationDate *string `json:"original_publication_date,omitzero"`
 	// Whether the project contains mature content.
-	MatureContent optionalnullable.OptionalNullable[bool] `json:"mature_content,omitzero"`
+	MatureContent *bool `json:"mature_content,omitzero"`
 	// The ISBN number of the project.
-	IsbnNumber optionalnullable.OptionalNullable[string] `json:"isbn_number,omitzero"`
+	IsbnNumber *string `json:"isbn_number,omitzero"`
 	// Whether the project uses volume normalization.
 	VolumeNormalization bool `json:"volume_normalization"`
 	// The state of the project.
@@ -369,7 +368,7 @@ type ProjectExtendedResponseModel struct {
 	// The access level of the project.
 	AccessLevel ProjectExtendedResponseModelAccessLevel `json:"access_level"`
 	// Whether the project is fiction.
-	Fiction optionalnullable.OptionalNullable[ProjectExtendedResponseModelFiction] `json:"fiction,omitzero"`
+	Fiction *ProjectExtendedResponseModelFiction `json:"fiction,omitzero"`
 	// Whether quality check is enabled for this project.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -379,23 +378,23 @@ type ProjectExtendedResponseModel struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	QualityCheckOnWhenBulkConvert bool `json:"quality_check_on_when_bulk_convert"`
 	// The creation meta of the project.
-	CreationMeta optionalnullable.OptionalNullable[ProjectCreationMetaResponseModel] `json:"creation_meta,omitzero"`
+	CreationMeta *ProjectCreationMetaResponseModel `json:"creation_meta,omitzero"`
 	// The source type of the project.
-	SourceType optionalnullable.OptionalNullable[ProjectExtendedResponseModelSourceType] `json:"source_type,omitzero"`
+	SourceType *ProjectExtendedResponseModelSourceType `json:"source_type,omitzero"`
 	// Whether chapters are enabled for the project.
-	ChaptersEnabled optionalnullable.OptionalNullable[bool] `json:"chapters_enabled,omitzero"`
+	ChaptersEnabled *bool `json:"chapters_enabled,omitzero"`
 	// Whether captions are enabled for the project.
-	CaptionsEnabled optionalnullable.OptionalNullable[bool] `json:"captions_enabled,omitzero"`
+	CaptionsEnabled *bool `json:"captions_enabled,omitzero"`
 	// Global styling to be applied to all captions
-	CaptionStyle optionalnullable.OptionalNullable[CaptionStyleModel] `json:"caption_style,omitzero"`
+	CaptionStyle *CaptionStyleModel `json:"caption_style,omitzero"`
 	// Styling changes that have been made to the provided templates
-	CaptionStyleTemplateOverrides optionalnullable.OptionalNullable[map[string]CaptionStyleModel] `json:"caption_style_template_overrides,omitzero"`
+	CaptionStyleTemplateOverrides map[string]CaptionStyleModel `json:"caption_style_template_overrides,omitzero"`
 	// The public share ID of the project.
-	PublicShareID optionalnullable.OptionalNullable[string] `json:"public_share_id,omitzero"`
+	PublicShareID *string `json:"public_share_id,omitzero"`
 	// The aspect ratio of the project.
-	AspectRatio optionalnullable.OptionalNullable[ProjectExtendedResponseModelAspectRatio] `json:"aspect_ratio,omitzero"`
+	AspectRatio *ProjectExtendedResponseModelAspectRatio `json:"aspect_ratio,omitzero"`
 	// Agent-related settings for the project
-	AgentSettings optionalnullable.OptionalNullable[StudioAgentSettingsModel] `json:"agent_settings,omitzero"`
+	AgentSettings *StudioAgentSettingsModel `json:"agent_settings,omitzero"`
 	// The quality preset level of the project.
 	QualityPreset QualityPreset `json:"quality_preset"`
 	// List of chapters of the project and their metadata.
@@ -413,9 +412,9 @@ type ProjectExtendedResponseModel struct {
 	// List of configured project voices.
 	Voices []ProjectVoiceResponseModel `json:"voices"`
 	// List of voices used by the project.
-	BaseVoices optionalnullable.OptionalNullable[[]VoiceResponseModel] `json:"base_voices,omitzero"`
+	BaseVoices []VoiceResponseModel `json:"base_voices,omitzero"`
 	// The ElevenReader data if the book was published.
-	PublishingRead optionalnullable.OptionalNullable[DirectPublishingReadResponseModel] `json:"publishing_read,omitzero"`
+	PublishingRead *DirectPublishingReadResponseModel `json:"publishing_read,omitzero"`
 }
 
 func (p ProjectExtendedResponseModel) MarshalJSON() ([]byte, error) {
@@ -478,7 +477,7 @@ func (p *ProjectExtendedResponseModel) GetDefaultModelID() string {
 	return p.DefaultModelID
 }
 
-func (p *ProjectExtendedResponseModel) GetLastConversionDateUnix() optionalnullable.OptionalNullable[int64] {
+func (p *ProjectExtendedResponseModel) GetLastConversionDateUnix() *int64 {
 	if p == nil {
 		return nil
 	}
@@ -492,77 +491,77 @@ func (p *ProjectExtendedResponseModel) GetCanBeDownloaded() bool {
 	return p.CanBeDownloaded
 }
 
-func (p *ProjectExtendedResponseModel) GetTitle() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetTitle() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Title
 }
 
-func (p *ProjectExtendedResponseModel) GetAuthor() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetAuthor() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Author
 }
 
-func (p *ProjectExtendedResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetDescription() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Description
 }
 
-func (p *ProjectExtendedResponseModel) GetGenres() optionalnullable.OptionalNullable[[]string] {
+func (p *ProjectExtendedResponseModel) GetGenres() []string {
 	if p == nil {
 		return nil
 	}
 	return p.Genres
 }
 
-func (p *ProjectExtendedResponseModel) GetCoverImageURL() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetCoverImageURL() *string {
 	if p == nil {
 		return nil
 	}
 	return p.CoverImageURL
 }
 
-func (p *ProjectExtendedResponseModel) GetTargetAudience() optionalnullable.OptionalNullable[ProjectExtendedResponseModelTargetAudience] {
+func (p *ProjectExtendedResponseModel) GetTargetAudience() *ProjectExtendedResponseModelTargetAudience {
 	if p == nil {
 		return nil
 	}
 	return p.TargetAudience
 }
 
-func (p *ProjectExtendedResponseModel) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetLanguage() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Language
 }
 
-func (p *ProjectExtendedResponseModel) GetContentType() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetContentType() *string {
 	if p == nil {
 		return nil
 	}
 	return p.ContentType
 }
 
-func (p *ProjectExtendedResponseModel) GetOriginalPublicationDate() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetOriginalPublicationDate() *string {
 	if p == nil {
 		return nil
 	}
 	return p.OriginalPublicationDate
 }
 
-func (p *ProjectExtendedResponseModel) GetMatureContent() optionalnullable.OptionalNullable[bool] {
+func (p *ProjectExtendedResponseModel) GetMatureContent() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.MatureContent
 }
 
-func (p *ProjectExtendedResponseModel) GetIsbnNumber() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetIsbnNumber() *string {
 	if p == nil {
 		return nil
 	}
@@ -590,7 +589,7 @@ func (p *ProjectExtendedResponseModel) GetAccessLevel() ProjectExtendedResponseM
 	return p.AccessLevel
 }
 
-func (p *ProjectExtendedResponseModel) GetFiction() optionalnullable.OptionalNullable[ProjectExtendedResponseModelFiction] {
+func (p *ProjectExtendedResponseModel) GetFiction() *ProjectExtendedResponseModelFiction {
 	if p == nil {
 		return nil
 	}
@@ -611,63 +610,63 @@ func (p *ProjectExtendedResponseModel) GetQualityCheckOnWhenBulkConvert() bool {
 	return p.QualityCheckOnWhenBulkConvert
 }
 
-func (p *ProjectExtendedResponseModel) GetCreationMeta() optionalnullable.OptionalNullable[ProjectCreationMetaResponseModel] {
+func (p *ProjectExtendedResponseModel) GetCreationMeta() *ProjectCreationMetaResponseModel {
 	if p == nil {
 		return nil
 	}
 	return p.CreationMeta
 }
 
-func (p *ProjectExtendedResponseModel) GetSourceType() optionalnullable.OptionalNullable[ProjectExtendedResponseModelSourceType] {
+func (p *ProjectExtendedResponseModel) GetSourceType() *ProjectExtendedResponseModelSourceType {
 	if p == nil {
 		return nil
 	}
 	return p.SourceType
 }
 
-func (p *ProjectExtendedResponseModel) GetChaptersEnabled() optionalnullable.OptionalNullable[bool] {
+func (p *ProjectExtendedResponseModel) GetChaptersEnabled() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.ChaptersEnabled
 }
 
-func (p *ProjectExtendedResponseModel) GetCaptionsEnabled() optionalnullable.OptionalNullable[bool] {
+func (p *ProjectExtendedResponseModel) GetCaptionsEnabled() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.CaptionsEnabled
 }
 
-func (p *ProjectExtendedResponseModel) GetCaptionStyle() optionalnullable.OptionalNullable[CaptionStyleModel] {
+func (p *ProjectExtendedResponseModel) GetCaptionStyle() *CaptionStyleModel {
 	if p == nil {
 		return nil
 	}
 	return p.CaptionStyle
 }
 
-func (p *ProjectExtendedResponseModel) GetCaptionStyleTemplateOverrides() optionalnullable.OptionalNullable[map[string]CaptionStyleModel] {
+func (p *ProjectExtendedResponseModel) GetCaptionStyleTemplateOverrides() map[string]CaptionStyleModel {
 	if p == nil {
 		return nil
 	}
 	return p.CaptionStyleTemplateOverrides
 }
 
-func (p *ProjectExtendedResponseModel) GetPublicShareID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectExtendedResponseModel) GetPublicShareID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.PublicShareID
 }
 
-func (p *ProjectExtendedResponseModel) GetAspectRatio() optionalnullable.OptionalNullable[ProjectExtendedResponseModelAspectRatio] {
+func (p *ProjectExtendedResponseModel) GetAspectRatio() *ProjectExtendedResponseModelAspectRatio {
 	if p == nil {
 		return nil
 	}
 	return p.AspectRatio
 }
 
-func (p *ProjectExtendedResponseModel) GetAgentSettings() optionalnullable.OptionalNullable[StudioAgentSettingsModel] {
+func (p *ProjectExtendedResponseModel) GetAgentSettings() *StudioAgentSettingsModel {
 	if p == nil {
 		return nil
 	}
@@ -730,14 +729,14 @@ func (p *ProjectExtendedResponseModel) GetVoices() []ProjectVoiceResponseModel {
 	return p.Voices
 }
 
-func (p *ProjectExtendedResponseModel) GetBaseVoices() optionalnullable.OptionalNullable[[]VoiceResponseModel] {
+func (p *ProjectExtendedResponseModel) GetBaseVoices() []VoiceResponseModel {
 	if p == nil {
 		return nil
 	}
 	return p.BaseVoices
 }
 
-func (p *ProjectExtendedResponseModel) GetPublishingRead() optionalnullable.OptionalNullable[DirectPublishingReadResponseModel] {
+func (p *ProjectExtendedResponseModel) GetPublishingRead() *DirectPublishingReadResponseModel {
 	if p == nil {
 		return nil
 	}

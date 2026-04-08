@@ -4,13 +4,12 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type WorkflowLLMConditionModelInput struct {
 	// Optional human-readable label for the condition used throughout the UI.
-	Label optionalnullable.OptionalNullable[string] `json:"label,omitzero"`
+	Label *string `json:"label,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"llm" json:"type"`
 	// Condition to evaluate
@@ -28,7 +27,7 @@ func (w *WorkflowLLMConditionModelInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WorkflowLLMConditionModelInput) GetLabel() optionalnullable.OptionalNullable[string] {
+func (w *WorkflowLLMConditionModelInput) GetLabel() *string {
 	if w == nil {
 		return nil
 	}

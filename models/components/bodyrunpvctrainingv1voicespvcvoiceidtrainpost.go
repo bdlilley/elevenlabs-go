@@ -2,16 +2,12 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyRunPVCTrainingV1VoicesPVCVoiceIDTrainPost struct {
 	// The model ID to use for the conversion.
-	ModelID optionalnullable.OptionalNullable[string] `json:"model_id,omitzero"`
+	ModelID *string `json:"model_id,omitzero"`
 }
 
-func (b *BodyRunPVCTrainingV1VoicesPVCVoiceIDTrainPost) GetModelID() optionalnullable.OptionalNullable[string] {
+func (b *BodyRunPVCTrainingV1VoicesPVCVoiceIDTrainPost) GetModelID() *string {
 	if b == nil {
 		return nil
 	}

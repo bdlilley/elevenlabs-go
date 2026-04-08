@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConvAIWebhooks struct {
-	PostCallWebhookID optionalnullable.OptionalNullable[string] `json:"post_call_webhook_id,omitzero"`
+	PostCallWebhookID *string `json:"post_call_webhook_id,omitzero"`
 	// List of event types to send via webhook. Options: transcript, audio, call_initiation_failure.
 	Events []WebhookEventType `json:"events,omitzero"`
 	// DEPRECATED: Use 'events' field instead. Whether to send audio data with post-call webhooks for ConvAI conversations
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	SendAudio optionalnullable.OptionalNullable[bool] `json:"send_audio,omitzero"`
+	SendAudio *bool `json:"send_audio,omitzero"`
 }
 
 func (c ConvAIWebhooks) MarshalJSON() ([]byte, error) {
@@ -28,7 +27,7 @@ func (c *ConvAIWebhooks) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *ConvAIWebhooks) GetPostCallWebhookID() optionalnullable.OptionalNullable[string] {
+func (c *ConvAIWebhooks) GetPostCallWebhookID() *string {
 	if c == nil {
 		return nil
 	}
@@ -42,7 +41,7 @@ func (c *ConvAIWebhooks) GetEvents() []WebhookEventType {
 	return c.Events
 }
 
-func (c *ConvAIWebhooks) GetSendAudio() optionalnullable.OptionalNullable[bool] {
+func (c *ConvAIWebhooks) GetSendAudio() *bool {
 	if c == nil {
 		return nil
 	}

@@ -2,19 +2,15 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type SingleTestRunRequestModel struct {
 	// ID of the test to run
 	TestID string `json:"test_id"`
 	// ID of the workflow node to run the test on. If not provided, the test will be run on the agent's default workflow node.
-	WorkflowNodeID optionalnullable.OptionalNullable[string] `json:"workflow_node_id,omitzero"`
+	WorkflowNodeID *string `json:"workflow_node_id,omitzero"`
 	// ID of the root folder to run the test on. If not provided, the test will be run on the agent's default folder.
-	RootFolderID optionalnullable.OptionalNullable[string] `json:"root_folder_id,omitzero"`
+	RootFolderID *string `json:"root_folder_id,omitzero"`
 	// Name of the root folder to run the test on. If not provided, the test will be run on the agent's default folder.
-	RootFolderName optionalnullable.OptionalNullable[string] `json:"root_folder_name,omitzero"`
+	RootFolderName *string `json:"root_folder_name,omitzero"`
 }
 
 func (s *SingleTestRunRequestModel) GetTestID() string {
@@ -24,21 +20,21 @@ func (s *SingleTestRunRequestModel) GetTestID() string {
 	return s.TestID
 }
 
-func (s *SingleTestRunRequestModel) GetWorkflowNodeID() optionalnullable.OptionalNullable[string] {
+func (s *SingleTestRunRequestModel) GetWorkflowNodeID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.WorkflowNodeID
 }
 
-func (s *SingleTestRunRequestModel) GetRootFolderID() optionalnullable.OptionalNullable[string] {
+func (s *SingleTestRunRequestModel) GetRootFolderID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.RootFolderID
 }
 
-func (s *SingleTestRunRequestModel) GetRootFolderName() optionalnullable.OptionalNullable[string] {
+func (s *SingleTestRunRequestModel) GetRootFolderName() *string {
 	if s == nil {
 		return nil
 	}

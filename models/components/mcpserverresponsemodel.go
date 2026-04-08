@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type MCPServerResponseModelDependentAgentType string
@@ -94,7 +93,7 @@ type MCPServerResponseModel struct {
 	ID     string                `json:"id"`
 	Config MCPServerConfigOutput `json:"config"`
 	// The access information of the MCP Server
-	AccessInfo optionalnullable.OptionalNullable[ResourceAccessInfo] `json:"access_info,omitzero"`
+	AccessInfo *ResourceAccessInfo `json:"access_info,omitzero"`
 	// List of agents that depend on this MCP Server.
 	DependentAgents []MCPServerResponseModelDependentAgent `json:"dependent_agents,omitzero"`
 	Metadata        MCPServerMetadataResponseModel         `json:"metadata"`
@@ -125,7 +124,7 @@ func (m *MCPServerResponseModel) GetConfig() MCPServerConfigOutput {
 	return m.Config
 }
 
-func (m *MCPServerResponseModel) GetAccessInfo() optionalnullable.OptionalNullable[ResourceAccessInfo] {
+func (m *MCPServerResponseModel) GetAccessInfo() *ResourceAccessInfo {
 	if m == nil {
 		return nil
 	}

@@ -25,7 +25,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -38,7 +37,7 @@ func main() {
 
     res, err := s.MusicGeneration.ComposePlan(ctx, components.BodyGenerateCompositionPlanV1MusicPlanPost{
         Prompt: "<value>",
-        SourceCompositionPlan: optionalnullable.From(&components.MusicPrompt{
+        SourceCompositionPlan: &components.MusicPrompt{
             PositiveGlobalStyles: []string{
                 "pop",
                 "rock",
@@ -68,7 +67,7 @@ func main() {
                     },
                 },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -112,7 +111,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -124,7 +122,7 @@ func main() {
     )
 
     res, err := s.MusicGeneration.Generate(ctx, nil, &components.BodyComposeMusicV1MusicPost{
-        CompositionPlan: optionalnullable.From(&components.MusicPrompt{
+        CompositionPlan: &components.MusicPrompt{
             PositiveGlobalStyles: []string{
                 "pop",
                 "rock",
@@ -154,7 +152,7 @@ func main() {
                     },
                 },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -199,7 +197,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -211,7 +208,7 @@ func main() {
     )
 
     res, err := s.MusicGeneration.ComposeDetailed(ctx, nil, &components.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost{
-        CompositionPlan: optionalnullable.From(&components.MusicPrompt{
+        CompositionPlan: &components.MusicPrompt{
             PositiveGlobalStyles: []string{
                 "pop",
                 "rock",
@@ -241,7 +238,7 @@ func main() {
                     },
                 },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -286,7 +283,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -298,7 +294,7 @@ func main() {
     )
 
     res, err := s.MusicGeneration.StreamCompose(ctx, nil, &components.BodyStreamComposedMusicV1MusicStreamPost{
-        CompositionPlan: optionalnullable.From(&components.MusicPrompt{
+        CompositionPlan: &components.MusicPrompt{
             PositiveGlobalStyles: []string{
                 "pop",
                 "rock",
@@ -328,7 +324,7 @@ func main() {
                     },
                 },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)

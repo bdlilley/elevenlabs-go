@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -28,7 +27,7 @@ type CreateTwilioPhoneNumberRequest struct {
 	// Twilio Auth Token
 	Token string `json:"token"`
 	// Twilio Additional Region Configuration
-	RegionConfig optionalnullable.OptionalNullable[RegionConfigRequest] `json:"region_config,omitzero"`
+	RegionConfig *RegionConfigRequest `json:"region_config,omitzero"`
 }
 
 func (c CreateTwilioPhoneNumberRequest) MarshalJSON() ([]byte, error) {
@@ -88,7 +87,7 @@ func (c *CreateTwilioPhoneNumberRequest) GetToken() string {
 	return c.Token
 }
 
-func (c *CreateTwilioPhoneNumberRequest) GetRegionConfig() optionalnullable.OptionalNullable[RegionConfigRequest] {
+func (c *CreateTwilioPhoneNumberRequest) GetRegionConfig() *RegionConfigRequest {
 	if c == nil {
 		return nil
 	}

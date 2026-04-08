@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type EnvironmentVariableResponseType string
@@ -148,14 +147,14 @@ func (u EnvironmentVariableResponseValues) MarshalJSON() ([]byte, error) {
 }
 
 type EnvironmentVariableResponse struct {
-	Label             string                                    `json:"label"`
-	CreatedAtUnixSecs int64                                     `json:"created_at_unix_secs"`
-	UpdatedAtUnixSecs int64                                     `json:"updated_at_unix_secs"`
-	CreatedByUserID   optionalnullable.OptionalNullable[string] `json:"created_by_user_id,omitzero"`
-	Type              EnvironmentVariableResponseType           `json:"type"`
-	ID                string                                    `json:"id"`
-	WorkspaceID       string                                    `json:"workspace_id"`
-	Values            EnvironmentVariableResponseValues         `json:"values"`
+	Label             string                            `json:"label"`
+	CreatedAtUnixSecs int64                             `json:"created_at_unix_secs"`
+	UpdatedAtUnixSecs int64                             `json:"updated_at_unix_secs"`
+	CreatedByUserID   *string                           `json:"created_by_user_id,omitzero"`
+	Type              EnvironmentVariableResponseType   `json:"type"`
+	ID                string                            `json:"id"`
+	WorkspaceID       string                            `json:"workspace_id"`
+	Values            EnvironmentVariableResponseValues `json:"values"`
 }
 
 func (e *EnvironmentVariableResponse) GetLabel() string {
@@ -179,7 +178,7 @@ func (e *EnvironmentVariableResponse) GetUpdatedAtUnixSecs() int64 {
 	return e.UpdatedAtUnixSecs
 }
 
-func (e *EnvironmentVariableResponse) GetCreatedByUserID() optionalnullable.OptionalNullable[string] {
+func (e *EnvironmentVariableResponse) GetCreatedByUserID() *string {
 	if e == nil {
 		return nil
 	}

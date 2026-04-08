@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,9 +11,9 @@ type EndCallToolResultModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"end_call_success" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status  *string                                   `const:"success" json:"status"`
-	Reason  optionalnullable.OptionalNullable[string] `json:"reason,omitzero"`
-	Message optionalnullable.OptionalNullable[string] `json:"message,omitzero"`
+	status  *string `const:"success" json:"status"`
+	Reason  *string `json:"reason,omitzero"`
+	Message *string `json:"message,omitzero"`
 }
 
 func (e EndCallToolResultModel) MarshalJSON() ([]byte, error) {
@@ -36,14 +35,14 @@ func (e *EndCallToolResultModel) GetStatus() *string {
 	return types.Pointer("success")
 }
 
-func (e *EndCallToolResultModel) GetReason() optionalnullable.OptionalNullable[string] {
+func (e *EndCallToolResultModel) GetReason() *string {
 	if e == nil {
 		return nil
 	}
 	return e.Reason
 }
 
-func (e *EndCallToolResultModel) GetMessage() optionalnullable.OptionalNullable[string] {
+func (e *EndCallToolResultModel) GetMessage() *string {
 	if e == nil {
 		return nil
 	}

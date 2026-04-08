@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,12 +11,12 @@ import (
 type CreateMTLSAuthRequest struct {
 	Name string `json:"name"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	authType          *string                                   `const:"mtls" json:"auth_type"`
-	Provider          string                                    `json:"provider"`
-	ClientCertificate string                                    `json:"client_certificate"`
-	ClientKey         string                                    `json:"client_key"`
-	CaCertificate     optionalnullable.OptionalNullable[string] `json:"ca_certificate,omitzero"`
-	KeyPassphrase     optionalnullable.OptionalNullable[string] `json:"key_passphrase,omitzero"`
+	authType          *string `const:"mtls" json:"auth_type"`
+	Provider          string  `json:"provider"`
+	ClientCertificate string  `json:"client_certificate"`
+	ClientKey         string  `json:"client_key"`
+	CaCertificate     *string `json:"ca_certificate,omitzero"`
+	KeyPassphrase     *string `json:"key_passphrase,omitzero"`
 }
 
 func (c CreateMTLSAuthRequest) MarshalJSON() ([]byte, error) {
@@ -63,14 +62,14 @@ func (c *CreateMTLSAuthRequest) GetClientKey() string {
 	return c.ClientKey
 }
 
-func (c *CreateMTLSAuthRequest) GetCaCertificate() optionalnullable.OptionalNullable[string] {
+func (c *CreateMTLSAuthRequest) GetCaCertificate() *string {
 	if c == nil {
 		return nil
 	}
 	return c.CaCertificate
 }
 
-func (c *CreateMTLSAuthRequest) GetKeyPassphrase() optionalnullable.OptionalNullable[string] {
+func (c *CreateMTLSAuthRequest) GetKeyPassphrase() *string {
 	if c == nil {
 		return nil
 	}

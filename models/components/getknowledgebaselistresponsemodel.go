@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseListResponseModelDocumentType string
@@ -139,7 +138,7 @@ func (u GetKnowledgeBaseListResponseModelDocument) MarshalJSON() ([]byte, error)
 
 type GetKnowledgeBaseListResponseModel struct {
 	Documents  []GetKnowledgeBaseListResponseModelDocument `json:"documents"`
-	NextCursor optionalnullable.OptionalNullable[string]   `json:"next_cursor,omitzero"`
+	NextCursor *string                                     `json:"next_cursor,omitzero"`
 	HasMore    bool                                        `json:"has_more"`
 }
 
@@ -150,7 +149,7 @@ func (g *GetKnowledgeBaseListResponseModel) GetDocuments() []GetKnowledgeBaseLis
 	return g.Documents
 }
 
-func (g *GetKnowledgeBaseListResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseListResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

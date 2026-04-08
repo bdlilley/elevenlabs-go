@@ -4,12 +4,11 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type VADConfigWorkflowOverride struct {
 	// Whether to use background voice filtering
-	BackgroundVoiceDetection optionalnullable.OptionalNullable[bool] `json:"background_voice_detection,omitzero"`
+	BackgroundVoiceDetection *bool `json:"background_voice_detection,omitzero"`
 }
 
 func (v VADConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -23,7 +22,7 @@ func (v *VADConfigWorkflowOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (v *VADConfigWorkflowOverride) GetBackgroundVoiceDetection() optionalnullable.OptionalNullable[bool] {
+func (v *VADConfigWorkflowOverride) GetBackgroundVoiceDetection() *bool {
 	if v == nil {
 		return nil
 	}

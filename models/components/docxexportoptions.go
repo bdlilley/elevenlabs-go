@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DocxExportOptions struct {
 	IncludeSpeakers   *bool `default:"true" json:"include_speakers"`
 	IncludeTimestamps *bool `default:"true" json:"include_timestamps"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	format                      string                                     `const:"docx" json:"format"`
-	SegmentOnSilenceLongerThanS optionalnullable.OptionalNullable[float64] `json:"segment_on_silence_longer_than_s,omitzero"`
-	MaxSegmentDurationS         optionalnullable.OptionalNullable[float64] `json:"max_segment_duration_s,omitzero"`
-	MaxSegmentChars             optionalnullable.OptionalNullable[int64]   `json:"max_segment_chars,omitzero"`
+	format                      string   `const:"docx" json:"format"`
+	SegmentOnSilenceLongerThanS *float64 `json:"segment_on_silence_longer_than_s,omitzero"`
+	MaxSegmentDurationS         *float64 `json:"max_segment_duration_s,omitzero"`
+	MaxSegmentChars             *int64   `json:"max_segment_chars,omitzero"`
 }
 
 func (d DocxExportOptions) MarshalJSON() ([]byte, error) {
@@ -46,21 +45,21 @@ func (d *DocxExportOptions) GetFormat() string {
 	return "docx"
 }
 
-func (d *DocxExportOptions) GetSegmentOnSilenceLongerThanS() optionalnullable.OptionalNullable[float64] {
+func (d *DocxExportOptions) GetSegmentOnSilenceLongerThanS() *float64 {
 	if d == nil {
 		return nil
 	}
 	return d.SegmentOnSilenceLongerThanS
 }
 
-func (d *DocxExportOptions) GetMaxSegmentDurationS() optionalnullable.OptionalNullable[float64] {
+func (d *DocxExportOptions) GetMaxSegmentDurationS() *float64 {
 	if d == nil {
 		return nil
 	}
 	return d.MaxSegmentDurationS
 }
 
-func (d *DocxExportOptions) GetMaxSegmentChars() optionalnullable.OptionalNullable[int64] {
+func (d *DocxExportOptions) GetMaxSegmentChars() *int64 {
 	if d == nil {
 		return nil
 	}

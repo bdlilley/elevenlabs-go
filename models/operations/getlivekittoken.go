@@ -5,18 +5,17 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetLivekitTokenRequest struct {
 	// The id of the agent you're taking the action on.
 	AgentID string `queryParam:"style=form,explode=true,name=agent_id"`
 	// Optional custom participant name. If not provided, user ID will be used
-	ParticipantName optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=participant_name"`
+	ParticipantName *string `queryParam:"style=form,explode=true,name=participant_name"`
 	// The ID of the branch to use
-	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
+	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
 	// The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.
-	Environment optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=environment"`
+	Environment *string `queryParam:"style=form,explode=true,name=environment"`
 }
 
 func (g *GetLivekitTokenRequest) GetAgentID() string {
@@ -26,21 +25,21 @@ func (g *GetLivekitTokenRequest) GetAgentID() string {
 	return g.AgentID
 }
 
-func (g *GetLivekitTokenRequest) GetParticipantName() optionalnullable.OptionalNullable[string] {
+func (g *GetLivekitTokenRequest) GetParticipantName() *string {
 	if g == nil {
 		return nil
 	}
 	return g.ParticipantName
 }
 
-func (g *GetLivekitTokenRequest) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetLivekitTokenRequest) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.BranchID
 }
 
-func (g *GetLivekitTokenRequest) GetEnvironment() optionalnullable.OptionalNullable[string] {
+func (g *GetLivekitTokenRequest) GetEnvironment() *string {
 	if g == nil {
 		return nil
 	}

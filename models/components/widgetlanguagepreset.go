@@ -4,20 +4,19 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WidgetLanguagePreset struct {
 	// The text contents for the selected language
-	TextContents optionalnullable.OptionalNullable[WidgetTextContents] `json:"text_contents,omitzero"`
+	TextContents *WidgetTextContents `json:"text_contents,omitzero"`
 	// The text to display for terms and conditions in this language
-	TermsText optionalnullable.OptionalNullable[string] `json:"terms_text,omitzero"`
+	TermsText *string `json:"terms_text,omitzero"`
 	// The HTML to display for terms and conditions in this language
-	TermsHTML optionalnullable.OptionalNullable[string] `json:"terms_html,omitzero"`
+	TermsHTML *string `json:"terms_html,omitzero"`
 	// The key to display for terms and conditions in this language
-	TermsKey optionalnullable.OptionalNullable[string] `json:"terms_key,omitzero"`
+	TermsKey *string `json:"terms_key,omitzero"`
 	// The translation cache for the terms
-	TermsTranslation optionalnullable.OptionalNullable[WidgetTermsTranslation] `json:"terms_translation,omitzero"`
+	TermsTranslation *WidgetTermsTranslation `json:"terms_translation,omitzero"`
 }
 
 func (w WidgetLanguagePreset) MarshalJSON() ([]byte, error) {
@@ -31,35 +30,35 @@ func (w *WidgetLanguagePreset) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WidgetLanguagePreset) GetTextContents() optionalnullable.OptionalNullable[WidgetTextContents] {
+func (w *WidgetLanguagePreset) GetTextContents() *WidgetTextContents {
 	if w == nil {
 		return nil
 	}
 	return w.TextContents
 }
 
-func (w *WidgetLanguagePreset) GetTermsText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetLanguagePreset) GetTermsText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.TermsText
 }
 
-func (w *WidgetLanguagePreset) GetTermsHTML() optionalnullable.OptionalNullable[string] {
+func (w *WidgetLanguagePreset) GetTermsHTML() *string {
 	if w == nil {
 		return nil
 	}
 	return w.TermsHTML
 }
 
-func (w *WidgetLanguagePreset) GetTermsKey() optionalnullable.OptionalNullable[string] {
+func (w *WidgetLanguagePreset) GetTermsKey() *string {
 	if w == nil {
 		return nil
 	}
 	return w.TermsKey
 }
 
-func (w *WidgetLanguagePreset) GetTermsTranslation() optionalnullable.OptionalNullable[WidgetTermsTranslation] {
+func (w *WidgetLanguagePreset) GetTermsTranslation() *WidgetTermsTranslation {
 	if w == nil {
 		return nil
 	}

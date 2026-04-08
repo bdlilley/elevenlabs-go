@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"time"
 )
 
@@ -24,9 +23,9 @@ type DubbingMetadataResponse struct {
 	// Timestamp this dub was created.
 	CreatedAt time.Time `json:"created_at"`
 	// Metadata, such as the length in seconds and content type, of the dubbed content.
-	MediaMetadata optionalnullable.OptionalNullable[DubbingMediaMetadata] `json:"media_metadata,omitzero"`
+	MediaMetadata *DubbingMediaMetadata `json:"media_metadata,omitzero"`
 	// Error message indicate, if this dub has failed, what happened.
-	Error optionalnullable.OptionalNullable[string] `json:"error,omitzero"`
+	Error *string `json:"error,omitzero"`
 }
 
 func (d DubbingMetadataResponse) MarshalJSON() ([]byte, error) {
@@ -89,14 +88,14 @@ func (d *DubbingMetadataResponse) GetCreatedAt() time.Time {
 	return d.CreatedAt
 }
 
-func (d *DubbingMetadataResponse) GetMediaMetadata() optionalnullable.OptionalNullable[DubbingMediaMetadata] {
+func (d *DubbingMetadataResponse) GetMediaMetadata() *DubbingMediaMetadata {
 	if d == nil {
 		return nil
 	}
 	return d.MediaMetadata
 }
 
-func (d *DubbingMetadataResponse) GetError() optionalnullable.OptionalNullable[string] {
+func (d *DubbingMetadataResponse) GetError() *string {
 	if d == nil {
 		return nil
 	}

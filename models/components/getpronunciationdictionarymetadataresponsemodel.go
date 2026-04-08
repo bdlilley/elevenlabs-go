@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetPronunciationDictionaryMetadataResponseModelPermissionOnResource string
 
 const (
@@ -46,9 +42,9 @@ type GetPronunciationDictionaryMetadataResponseModel struct {
 	// The creation time of the pronunciation dictionary in Unix timestamp.
 	CreationTimeUnix int64 `json:"creation_time_unix"`
 	// The archive time of the pronunciation dictionary in Unix timestamp.
-	ArchivedTimeUnix optionalnullable.OptionalNullable[int64] `json:"archived_time_unix,omitzero"`
+	ArchivedTimeUnix *int64 `json:"archived_time_unix,omitzero"`
 	// The description of the pronunciation dictionary.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 }
 
 func (g *GetPronunciationDictionaryMetadataResponseModel) GetID() string {
@@ -100,14 +96,14 @@ func (g *GetPronunciationDictionaryMetadataResponseModel) GetCreationTimeUnix() 
 	return g.CreationTimeUnix
 }
 
-func (g *GetPronunciationDictionaryMetadataResponseModel) GetArchivedTimeUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetPronunciationDictionaryMetadataResponseModel) GetArchivedTimeUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.ArchivedTimeUnix
 }
 
-func (g *GetPronunciationDictionaryMetadataResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (g *GetPronunciationDictionaryMetadataResponseModel) GetDescription() *string {
 	if g == nil {
 		return nil
 	}

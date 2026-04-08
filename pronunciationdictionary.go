@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -1939,7 +1938,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx conte
 
 // GetPronunciationDictionariesMetadata - Get Pronunciation Dictionaries
 // Get a list of the pronunciation dictionaries you have access to and their metadata
-func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx context.Context, cursor optionalnullable.OptionalNullable[string], pageSize *int64, sort optionalnullable.OptionalNullable[operations.Sort], sortDirection optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPronunciationDictionariesMetadataResponse, error) {
+func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx context.Context, cursor *string, pageSize *int64, sort *operations.Sort, sortDirection *string, opts ...operations.Option) (*operations.GetPronunciationDictionariesMetadataResponse, error) {
 	request := operations.GetPronunciationDictionariesMetadataRequest{
 		Cursor:        cursor,
 		PageSize:      pageSize,

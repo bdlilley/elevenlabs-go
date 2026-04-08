@@ -4,22 +4,21 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationConfigWorkflowOverride struct {
 	// If enabled audio will not be processed and only text will be used, use to avoid audio pricing.
-	TextOnly optionalnullable.OptionalNullable[bool] `json:"text_only,omitzero"`
+	TextOnly *bool `json:"text_only,omitzero"`
 	// The maximum duration of a conversation in seconds
-	MaxDurationSeconds optionalnullable.OptionalNullable[int64] `json:"max_duration_seconds,omitzero"`
+	MaxDurationSeconds *int64 `json:"max_duration_seconds,omitzero"`
 	// The events that will be sent to the client
-	ClientEvents optionalnullable.OptionalNullable[[]ClientEvent] `json:"client_events,omitzero"`
+	ClientEvents []ClientEvent `json:"client_events,omitzero"`
 	// Configuration for file input (image/PDF uploads) during conversations.
-	FileInput optionalnullable.OptionalNullable[FileInputConfigWorkflowOverride] `json:"file_input,omitzero"`
+	FileInput *FileInputConfigWorkflowOverride `json:"file_input,omitzero"`
 	// Enable real-time monitoring of conversations via WebSocket
-	MonitoringEnabled optionalnullable.OptionalNullable[bool] `json:"monitoring_enabled,omitzero"`
+	MonitoringEnabled *bool `json:"monitoring_enabled,omitzero"`
 	// The events that will be sent to monitoring connections.
-	MonitoringEvents optionalnullable.OptionalNullable[[]ClientEvent] `json:"monitoring_events,omitzero"`
+	MonitoringEvents []ClientEvent `json:"monitoring_events,omitzero"`
 }
 
 func (c ConversationConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -33,42 +32,42 @@ func (c *ConversationConfigWorkflowOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *ConversationConfigWorkflowOverride) GetTextOnly() optionalnullable.OptionalNullable[bool] {
+func (c *ConversationConfigWorkflowOverride) GetTextOnly() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.TextOnly
 }
 
-func (c *ConversationConfigWorkflowOverride) GetMaxDurationSeconds() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationConfigWorkflowOverride) GetMaxDurationSeconds() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.MaxDurationSeconds
 }
 
-func (c *ConversationConfigWorkflowOverride) GetClientEvents() optionalnullable.OptionalNullable[[]ClientEvent] {
+func (c *ConversationConfigWorkflowOverride) GetClientEvents() []ClientEvent {
 	if c == nil {
 		return nil
 	}
 	return c.ClientEvents
 }
 
-func (c *ConversationConfigWorkflowOverride) GetFileInput() optionalnullable.OptionalNullable[FileInputConfigWorkflowOverride] {
+func (c *ConversationConfigWorkflowOverride) GetFileInput() *FileInputConfigWorkflowOverride {
 	if c == nil {
 		return nil
 	}
 	return c.FileInput
 }
 
-func (c *ConversationConfigWorkflowOverride) GetMonitoringEnabled() optionalnullable.OptionalNullable[bool] {
+func (c *ConversationConfigWorkflowOverride) GetMonitoringEnabled() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.MonitoringEnabled
 }
 
-func (c *ConversationConfigWorkflowOverride) GetMonitoringEvents() optionalnullable.OptionalNullable[[]ClientEvent] {
+func (c *ConversationConfigWorkflowOverride) GetMonitoringEvents() []ClientEvent {
 	if c == nil {
 		return nil
 	}

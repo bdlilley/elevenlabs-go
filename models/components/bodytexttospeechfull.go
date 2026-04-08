@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // BodyTextToSpeechFullApplyTextNormalization - This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped.
@@ -45,21 +44,21 @@ type BodyTextToSpeechFull struct {
 	// Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property.
 	ModelID *string `default:"eleven_multilingual_v2" json:"model_id"`
 	// Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support provided language code, an error will be returned.
-	LanguageCode optionalnullable.OptionalNullable[string] `json:"language_code,omitzero"`
+	LanguageCode *string `json:"language_code,omitzero"`
 	// Voice settings overriding stored settings for the given voice. They are applied only on the given request.
-	VoiceSettings optionalnullable.OptionalNullable[VoiceSettingsResponseModel] `json:"voice_settings,omitzero"`
+	VoiceSettings *VoiceSettingsResponseModel `json:"voice_settings,omitzero"`
 	// A list of pronunciation dictionary locators (id, version_id) to be applied to the text. They will be applied in order. You may have up to 3 locators per request
-	PronunciationDictionaryLocators optionalnullable.OptionalNullable[[]PronunciationDictionaryVersionLocatorRequestModel] `json:"pronunciation_dictionary_locators,omitzero"`
+	PronunciationDictionaryLocators []PronunciationDictionaryVersionLocatorRequestModel `json:"pronunciation_dictionary_locators,omitzero"`
 	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be integer between 0 and 4294967295.
-	Seed optionalnullable.OptionalNullable[int64] `json:"seed,omitzero"`
+	Seed *int64 `json:"seed,omitzero"`
 	// The text that came before the text of the current request. Can be used to improve the speech's continuity when concatenating together multiple generations or to influence the speech's continuity in the current generation.
-	PreviousText optionalnullable.OptionalNullable[string] `json:"previous_text,omitzero"`
+	PreviousText *string `json:"previous_text,omitzero"`
 	// The text that comes after the text of the current request. Can be used to improve the speech's continuity when concatenating together multiple generations or to influence the speech's continuity in the current generation.
-	NextText optionalnullable.OptionalNullable[string] `json:"next_text,omitzero"`
+	NextText *string `json:"next_text,omitzero"`
 	// A list of request_id of the samples that were generated before this generation. Can be used to improve the speech's continuity when splitting up a large task into multiple requests. The results will be best when the same model is used across the generations. In case both previous_text and previous_request_ids is send, previous_text will be ignored. A maximum of 3 request_ids can be send.
-	PreviousRequestIds optionalnullable.OptionalNullable[[]string] `json:"previous_request_ids,omitzero"`
+	PreviousRequestIds []string `json:"previous_request_ids,omitzero"`
 	// A list of request_id of the samples that come after this generation. next_request_ids is especially useful for maintaining the speech's continuity when regenerating a sample that has had some audio quality issues. For example, if you have generated 3 speech clips, and you want to improve clip 2, passing the request id of clip 3 as a next_request_id (and that of clip 1 as a previous_request_id) will help maintain natural flow in the combined speech. The results will be best when the same model is used across the generations. In case both next_text and next_request_ids is send, next_text will be ignored. A maximum of 3 request_ids can be send.
-	NextRequestIds optionalnullable.OptionalNullable[[]string] `json:"next_request_ids,omitzero"`
+	NextRequestIds []string `json:"next_request_ids,omitzero"`
 	// If true, we won't use PVC version of the voice for the generation but the IVC version. This is a temporary workaround for higher latency in PVC versions.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -69,7 +68,7 @@ type BodyTextToSpeechFull struct {
 	// This parameter controls language text normalization. This helps with proper pronunciation of text in some supported languages. WARNING: This parameter can heavily increase the latency of the request. Currently only supported for Japanese.
 	ApplyLanguageTextNormalization *bool `default:"false" json:"apply_language_text_normalization"`
 	// Avatar context when this generation is made from the Avatars video editor.
-	AvatarContext optionalnullable.OptionalNullable[AvatarContextRequestModel] `json:"avatar_context,omitzero"`
+	AvatarContext *AvatarContextRequestModel `json:"avatar_context,omitzero"`
 }
 
 func (b BodyTextToSpeechFull) MarshalJSON() ([]byte, error) {
@@ -97,56 +96,56 @@ func (b *BodyTextToSpeechFull) GetModelID() *string {
 	return b.ModelID
 }
 
-func (b *BodyTextToSpeechFull) GetLanguageCode() optionalnullable.OptionalNullable[string] {
+func (b *BodyTextToSpeechFull) GetLanguageCode() *string {
 	if b == nil {
 		return nil
 	}
 	return b.LanguageCode
 }
 
-func (b *BodyTextToSpeechFull) GetVoiceSettings() optionalnullable.OptionalNullable[VoiceSettingsResponseModel] {
+func (b *BodyTextToSpeechFull) GetVoiceSettings() *VoiceSettingsResponseModel {
 	if b == nil {
 		return nil
 	}
 	return b.VoiceSettings
 }
 
-func (b *BodyTextToSpeechFull) GetPronunciationDictionaryLocators() optionalnullable.OptionalNullable[[]PronunciationDictionaryVersionLocatorRequestModel] {
+func (b *BodyTextToSpeechFull) GetPronunciationDictionaryLocators() []PronunciationDictionaryVersionLocatorRequestModel {
 	if b == nil {
 		return nil
 	}
 	return b.PronunciationDictionaryLocators
 }
 
-func (b *BodyTextToSpeechFull) GetSeed() optionalnullable.OptionalNullable[int64] {
+func (b *BodyTextToSpeechFull) GetSeed() *int64 {
 	if b == nil {
 		return nil
 	}
 	return b.Seed
 }
 
-func (b *BodyTextToSpeechFull) GetPreviousText() optionalnullable.OptionalNullable[string] {
+func (b *BodyTextToSpeechFull) GetPreviousText() *string {
 	if b == nil {
 		return nil
 	}
 	return b.PreviousText
 }
 
-func (b *BodyTextToSpeechFull) GetNextText() optionalnullable.OptionalNullable[string] {
+func (b *BodyTextToSpeechFull) GetNextText() *string {
 	if b == nil {
 		return nil
 	}
 	return b.NextText
 }
 
-func (b *BodyTextToSpeechFull) GetPreviousRequestIds() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyTextToSpeechFull) GetPreviousRequestIds() []string {
 	if b == nil {
 		return nil
 	}
 	return b.PreviousRequestIds
 }
 
-func (b *BodyTextToSpeechFull) GetNextRequestIds() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyTextToSpeechFull) GetNextRequestIds() []string {
 	if b == nil {
 		return nil
 	}
@@ -174,7 +173,7 @@ func (b *BodyTextToSpeechFull) GetApplyLanguageTextNormalization() *bool {
 	return b.ApplyLanguageTextNormalization
 }
 
-func (b *BodyTextToSpeechFull) GetAvatarContext() optionalnullable.OptionalNullable[AvatarContextRequestModel] {
+func (b *BodyTextToSpeechFull) GetAvatarContext() *AvatarContextRequestModel {
 	if b == nil {
 		return nil
 	}

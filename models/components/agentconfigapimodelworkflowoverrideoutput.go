@@ -4,24 +4,23 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentConfigAPIModelWorkflowOverrideOutput struct {
 	// If non-empty, the first message the agent will say. If empty, the agent waits for the user to start the discussion.
-	FirstMessage optionalnullable.OptionalNullable[string] `json:"first_message,omitzero"`
+	FirstMessage *string `json:"first_message,omitzero"`
 	// Language of the agent - used for ASR and TTS
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// When enabled and language is Hindi, the agent will respond in Hinglish
-	HinglishMode optionalnullable.OptionalNullable[bool] `json:"hinglish_mode,omitzero"`
+	HinglishMode *bool `json:"hinglish_mode,omitzero"`
 	// Configuration for dynamic variables
-	DynamicVariables optionalnullable.OptionalNullable[DynamicVariablesConfigWorkflowOverride] `json:"dynamic_variables,omitzero"`
+	DynamicVariables *DynamicVariablesConfigWorkflowOverride `json:"dynamic_variables,omitzero"`
 	// If true, the user will not be able to interrupt the agent while the first message is being delivered.
-	DisableFirstMessageInterruptions optionalnullable.OptionalNullable[bool] `json:"disable_first_message_interruptions,omitzero"`
+	DisableFirstMessageInterruptions *bool `json:"disable_first_message_interruptions,omitzero"`
 	// If non-empty, the message the agent will send when max conversation duration is reached.
-	MaxConversationDurationMessage optionalnullable.OptionalNullable[string] `json:"max_conversation_duration_message,omitzero"`
+	MaxConversationDurationMessage *string `json:"max_conversation_duration_message,omitzero"`
 	// The prompt for the agent
-	Prompt optionalnullable.OptionalNullable[PromptAgentAPIModelWorkflowOverrideOutput] `json:"prompt,omitzero"`
+	Prompt *PromptAgentAPIModelWorkflowOverrideOutput `json:"prompt,omitzero"`
 }
 
 func (a AgentConfigAPIModelWorkflowOverrideOutput) MarshalJSON() ([]byte, error) {
@@ -35,49 +34,49 @@ func (a *AgentConfigAPIModelWorkflowOverrideOutput) UnmarshalJSON(data []byte) e
 	return nil
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetFirstMessage() optionalnullable.OptionalNullable[string] {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetFirstMessage() *string {
 	if a == nil {
 		return nil
 	}
 	return a.FirstMessage
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetLanguage() *string {
 	if a == nil {
 		return nil
 	}
 	return a.Language
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetHinglishMode() optionalnullable.OptionalNullable[bool] {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetHinglishMode() *bool {
 	if a == nil {
 		return nil
 	}
 	return a.HinglishMode
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetDynamicVariables() optionalnullable.OptionalNullable[DynamicVariablesConfigWorkflowOverride] {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetDynamicVariables() *DynamicVariablesConfigWorkflowOverride {
 	if a == nil {
 		return nil
 	}
 	return a.DynamicVariables
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetDisableFirstMessageInterruptions() optionalnullable.OptionalNullable[bool] {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetDisableFirstMessageInterruptions() *bool {
 	if a == nil {
 		return nil
 	}
 	return a.DisableFirstMessageInterruptions
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetMaxConversationDurationMessage() optionalnullable.OptionalNullable[string] {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetMaxConversationDurationMessage() *string {
 	if a == nil {
 		return nil
 	}
 	return a.MaxConversationDurationMessage
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetPrompt() optionalnullable.OptionalNullable[PromptAgentAPIModelWorkflowOverrideOutput] {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetPrompt() *PromptAgentAPIModelWorkflowOverrideOutput {
 	if a == nil {
 		return nil
 	}

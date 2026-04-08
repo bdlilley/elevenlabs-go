@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,14 +11,14 @@ type TransferToNumberResultTwilioSuccessModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"transfer_to_number_twilio_success" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status         *string                                   `const:"success" json:"status"`
-	TransferNumber string                                    `json:"transfer_number"`
-	Reason         optionalnullable.OptionalNullable[string] `json:"reason,omitzero"`
-	ClientMessage  optionalnullable.OptionalNullable[string] `json:"client_message,omitzero"`
-	AgentMessage   string                                    `json:"agent_message"`
-	ConferenceName string                                    `json:"conference_name"`
-	PostDialDigits optionalnullable.OptionalNullable[string] `json:"post_dial_digits,omitzero"`
-	Note           optionalnullable.OptionalNullable[string] `json:"note,omitzero"`
+	status         *string `const:"success" json:"status"`
+	TransferNumber string  `json:"transfer_number"`
+	Reason         *string `json:"reason,omitzero"`
+	ClientMessage  *string `json:"client_message,omitzero"`
+	AgentMessage   string  `json:"agent_message"`
+	ConferenceName string  `json:"conference_name"`
+	PostDialDigits *string `json:"post_dial_digits,omitzero"`
+	Note           *string `json:"note,omitzero"`
 }
 
 func (t TransferToNumberResultTwilioSuccessModel) MarshalJSON() ([]byte, error) {
@@ -48,14 +47,14 @@ func (t *TransferToNumberResultTwilioSuccessModel) GetTransferNumber() string {
 	return t.TransferNumber
 }
 
-func (t *TransferToNumberResultTwilioSuccessModel) GetReason() optionalnullable.OptionalNullable[string] {
+func (t *TransferToNumberResultTwilioSuccessModel) GetReason() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Reason
 }
 
-func (t *TransferToNumberResultTwilioSuccessModel) GetClientMessage() optionalnullable.OptionalNullable[string] {
+func (t *TransferToNumberResultTwilioSuccessModel) GetClientMessage() *string {
 	if t == nil {
 		return nil
 	}
@@ -76,14 +75,14 @@ func (t *TransferToNumberResultTwilioSuccessModel) GetConferenceName() string {
 	return t.ConferenceName
 }
 
-func (t *TransferToNumberResultTwilioSuccessModel) GetPostDialDigits() optionalnullable.OptionalNullable[string] {
+func (t *TransferToNumberResultTwilioSuccessModel) GetPostDialDigits() *string {
 	if t == nil {
 		return nil
 	}
 	return t.PostDialDigits
 }
 
-func (t *TransferToNumberResultTwilioSuccessModel) GetNote() optionalnullable.OptionalNullable[string] {
+func (t *TransferToNumberResultTwilioSuccessModel) GetNote() *string {
 	if t == nil {
 		return nil
 	}

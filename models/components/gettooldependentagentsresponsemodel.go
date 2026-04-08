@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetToolDependentAgentsResponseModelAgentType string
@@ -92,7 +91,7 @@ func (u GetToolDependentAgentsResponseModelAgent) MarshalJSON() ([]byte, error) 
 type GetToolDependentAgentsResponseModel struct {
 	Agents     []GetToolDependentAgentsResponseModelAgent `json:"agents"`
 	Branches   []DependentBranchInfo                      `json:"branches,omitzero"`
-	NextCursor optionalnullable.OptionalNullable[string]  `json:"next_cursor,omitzero"`
+	NextCursor *string                                    `json:"next_cursor,omitzero"`
 	HasMore    bool                                       `json:"has_more"`
 }
 
@@ -121,7 +120,7 @@ func (g *GetToolDependentAgentsResponseModel) GetBranches() []DependentBranchInf
 	return g.Branches
 }
 
-func (g *GetToolDependentAgentsResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetToolDependentAgentsResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

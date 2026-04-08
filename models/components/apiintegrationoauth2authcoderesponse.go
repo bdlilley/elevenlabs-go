@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -47,11 +46,11 @@ type APIIntegrationOAuth2AuthCodeResponse struct {
 	CredentialID  string                 `json:"credential_id"`
 	Status        *OAuthConnectionStatus `default:"active" json:"status"`
 	// Human-readable detail about the current status, e.g. the error message on refresh failure
-	StatusDetail optionalnullable.OptionalNullable[string] `json:"status_detail,omitzero"`
+	StatusDetail *string `json:"status_detail,omitzero"`
 	// ISO 8601 timestamp of the last status change
-	StatusUpdatedAt *string                                                       `json:"status_updated_at,omitzero"`
-	ID              string                                                        `json:"id"`
-	UsedBy          optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	StatusUpdatedAt *string                     `json:"status_updated_at,omitzero"`
+	ID              string                      `json:"id"`
+	UsedBy          *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (a APIIntegrationOAuth2AuthCodeResponse) MarshalJSON() ([]byte, error) {
@@ -132,7 +131,7 @@ func (a *APIIntegrationOAuth2AuthCodeResponse) GetStatus() *OAuthConnectionStatu
 	return a.Status
 }
 
-func (a *APIIntegrationOAuth2AuthCodeResponse) GetStatusDetail() optionalnullable.OptionalNullable[string] {
+func (a *APIIntegrationOAuth2AuthCodeResponse) GetStatusDetail() *string {
 	if a == nil {
 		return nil
 	}
@@ -153,7 +152,7 @@ func (a *APIIntegrationOAuth2AuthCodeResponse) GetID() string {
 	return a.ID
 }
 
-func (a *APIIntegrationOAuth2AuthCodeResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (a *APIIntegrationOAuth2AuthCodeResponse) GetUsedBy() *AuthConnectionDependencies {
 	if a == nil {
 		return nil
 	}

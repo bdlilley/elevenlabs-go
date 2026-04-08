@@ -5,12 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetWorkspaceBatchCallsRequest struct {
-	Limit   *int64                                    `default:"100" queryParam:"style=form,explode=true,name=limit"`
-	LastDoc optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=last_doc"`
+	Limit   *int64  `default:"100" queryParam:"style=form,explode=true,name=limit"`
+	LastDoc *string `queryParam:"style=form,explode=true,name=last_doc"`
 }
 
 func (g GetWorkspaceBatchCallsRequest) MarshalJSON() ([]byte, error) {
@@ -31,7 +30,7 @@ func (g *GetWorkspaceBatchCallsRequest) GetLimit() *int64 {
 	return g.Limit
 }
 
-func (g *GetWorkspaceBatchCallsRequest) GetLastDoc() optionalnullable.OptionalNullable[string] {
+func (g *GetWorkspaceBatchCallsRequest) GetLastDoc() *string {
 	if g == nil {
 		return nil
 	}

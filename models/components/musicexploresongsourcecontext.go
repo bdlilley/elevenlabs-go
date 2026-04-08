@@ -4,19 +4,18 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type MusicExploreSongSourceContext struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	sourceType         *string                                   `const:"music_explore_song" json:"source_type"`
-	MusicExploreSongID string                                    `json:"music_explore_song_id"`
-	Title              optionalnullable.OptionalNullable[string] `json:"title,omitzero"`
-	Description        optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
-	Bpm                optionalnullable.OptionalNullable[int64]  `json:"bpm,omitzero"`
-	Vocals             optionalnullable.OptionalNullable[string] `json:"vocals,omitzero"`
-	Lyrics             optionalnullable.OptionalNullable[string] `json:"lyrics,omitzero"`
+	sourceType         *string `const:"music_explore_song" json:"source_type"`
+	MusicExploreSongID string  `json:"music_explore_song_id"`
+	Title              *string `json:"title,omitzero"`
+	Description        *string `json:"description,omitzero"`
+	Bpm                *int64  `json:"bpm,omitzero"`
+	Vocals             *string `json:"vocals,omitzero"`
+	Lyrics             *string `json:"lyrics,omitzero"`
 }
 
 func (m MusicExploreSongSourceContext) MarshalJSON() ([]byte, error) {
@@ -41,35 +40,35 @@ func (m *MusicExploreSongSourceContext) GetMusicExploreSongID() string {
 	return m.MusicExploreSongID
 }
 
-func (m *MusicExploreSongSourceContext) GetTitle() optionalnullable.OptionalNullable[string] {
+func (m *MusicExploreSongSourceContext) GetTitle() *string {
 	if m == nil {
 		return nil
 	}
 	return m.Title
 }
 
-func (m *MusicExploreSongSourceContext) GetDescription() optionalnullable.OptionalNullable[string] {
+func (m *MusicExploreSongSourceContext) GetDescription() *string {
 	if m == nil {
 		return nil
 	}
 	return m.Description
 }
 
-func (m *MusicExploreSongSourceContext) GetBpm() optionalnullable.OptionalNullable[int64] {
+func (m *MusicExploreSongSourceContext) GetBpm() *int64 {
 	if m == nil {
 		return nil
 	}
 	return m.Bpm
 }
 
-func (m *MusicExploreSongSourceContext) GetVocals() optionalnullable.OptionalNullable[string] {
+func (m *MusicExploreSongSourceContext) GetVocals() *string {
 	if m == nil {
 		return nil
 	}
 	return m.Vocals
 }
 
-func (m *MusicExploreSongSourceContext) GetLyrics() optionalnullable.OptionalNullable[string] {
+func (m *MusicExploreSongSourceContext) GetLyrics() *string {
 	if m == nil {
 		return nil
 	}

@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost struct {
 	// URL to a page of documentation that the agent will have access to in order to interact with users.
 	URL string `json:"url"`
 	// A custom, human-readable name for the document.
-	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	Name *string `json:"name,omitzero"`
 	// If set, the created document or folder will be placed inside the given folder.
-	ParentFolderID optionalnullable.OptionalNullable[string] `json:"parent_folder_id,omitzero"`
+	ParentFolderID *string `json:"parent_folder_id,omitzero"`
 	// Whether to enable auto-sync for this URL document.
 	EnableAutoSync *bool `default:"false" json:"enable_auto_sync"`
 	// Whether to automatically remove the document if the URL becomes unavailable. Only applicable when auto-sync is enabled.
@@ -38,14 +37,14 @@ func (b *BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost) GetURL() string {
 	return b.URL
 }
 
-func (b *BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost) GetName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost) GetParentFolderID() *string {
 	if b == nil {
 		return nil
 	}

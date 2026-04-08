@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ScopedAnalysisResult struct {
 	Scope         *AnalysisScope `default:"conversation" json:"scope"`
 	SourceAgentID string         `json:"source_agent_id"`
 	// Branch of the agent for this scoped block; disambiguates repeated agent_id.
-	SourceBranchID            optionalnullable.OptionalNullable[string]                         `json:"source_branch_id,omitzero"`
+	SourceBranchID            *string                                                           `json:"source_branch_id,omitzero"`
 	EvaluationCriteriaResults map[string]ConversationHistoryEvaluationCriteriaResultCommonModel `json:"evaluation_criteria_results,omitzero"`
 	DataCollectionResults     map[string]DataCollectionResultCommonModel                        `json:"data_collection_results,omitzero"`
 	Successful                EvaluationSuccessResult                                           `json:"successful"`
@@ -42,7 +41,7 @@ func (s *ScopedAnalysisResult) GetSourceAgentID() string {
 	return s.SourceAgentID
 }
 
-func (s *ScopedAnalysisResult) GetSourceBranchID() optionalnullable.OptionalNullable[string] {
+func (s *ScopedAnalysisResult) GetSourceBranchID() *string {
 	if s == nil {
 		return nil
 	}

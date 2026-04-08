@@ -2,21 +2,17 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 // MessagesSearchResult - transcript_index: index of the message in the conversation transcript
 // chunk_text: text of the transcript; transcript messages if very long could have several chunks.
 // score: similarity score of the message to the search query
 type MessagesSearchResult struct {
-	ConversationID                string                                    `json:"conversation_id"`
-	AgentID                       string                                    `json:"agent_id"`
-	AgentName                     optionalnullable.OptionalNullable[string] `json:"agent_name,omitzero"`
-	TranscriptIndex               int64                                     `json:"transcript_index"`
-	ChunkText                     string                                    `json:"chunk_text"`
-	Score                         float64                                   `json:"score"`
-	ConversationStartTimeUnixSecs int64                                     `json:"conversation_start_time_unix_secs"`
+	ConversationID                string  `json:"conversation_id"`
+	AgentID                       string  `json:"agent_id"`
+	AgentName                     *string `json:"agent_name,omitzero"`
+	TranscriptIndex               int64   `json:"transcript_index"`
+	ChunkText                     string  `json:"chunk_text"`
+	Score                         float64 `json:"score"`
+	ConversationStartTimeUnixSecs int64   `json:"conversation_start_time_unix_secs"`
 }
 
 func (m *MessagesSearchResult) GetConversationID() string {
@@ -33,7 +29,7 @@ func (m *MessagesSearchResult) GetAgentID() string {
 	return m.AgentID
 }
 
-func (m *MessagesSearchResult) GetAgentName() optionalnullable.OptionalNullable[string] {
+func (m *MessagesSearchResult) GetAgentName() *string {
 	if m == nil {
 		return nil
 	}

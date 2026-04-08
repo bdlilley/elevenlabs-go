@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type OutboundCallRecipientResponseModel struct {
-	ID                               string                                                                      `json:"id"`
-	PhoneNumber                      optionalnullable.OptionalNullable[string]                                   `json:"phone_number,omitzero"`
-	WhatsappUserID                   optionalnullable.OptionalNullable[string]                                   `json:"whatsapp_user_id,omitzero"`
-	Status                           BatchCallRecipientStatus                                                    `json:"status"`
-	CreatedAtUnix                    int64                                                                       `json:"created_at_unix"`
-	UpdatedAtUnix                    int64                                                                       `json:"updated_at_unix"`
-	ConversationID                   *string                                                                     `json:"conversation_id"`
-	ConversationInitiationClientData optionalnullable.OptionalNullable[ConversationInitiationClientDataInternal] `json:"conversation_initiation_client_data,omitzero"`
+	ID                               string                                    `json:"id"`
+	PhoneNumber                      *string                                   `json:"phone_number,omitzero"`
+	WhatsappUserID                   *string                                   `json:"whatsapp_user_id,omitzero"`
+	Status                           BatchCallRecipientStatus                  `json:"status"`
+	CreatedAtUnix                    int64                                     `json:"created_at_unix"`
+	UpdatedAtUnix                    int64                                     `json:"updated_at_unix"`
+	ConversationID                   *string                                   `json:"conversation_id"`
+	ConversationInitiationClientData *ConversationInitiationClientDataInternal `json:"conversation_initiation_client_data,omitzero"`
 }
 
 func (o OutboundCallRecipientResponseModel) MarshalJSON() ([]byte, error) {
@@ -36,14 +35,14 @@ func (o *OutboundCallRecipientResponseModel) GetID() string {
 	return o.ID
 }
 
-func (o *OutboundCallRecipientResponseModel) GetPhoneNumber() optionalnullable.OptionalNullable[string] {
+func (o *OutboundCallRecipientResponseModel) GetPhoneNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PhoneNumber
 }
 
-func (o *OutboundCallRecipientResponseModel) GetWhatsappUserID() optionalnullable.OptionalNullable[string] {
+func (o *OutboundCallRecipientResponseModel) GetWhatsappUserID() *string {
 	if o == nil {
 		return nil
 	}
@@ -78,7 +77,7 @@ func (o *OutboundCallRecipientResponseModel) GetConversationID() *string {
 	return o.ConversationID
 }
 
-func (o *OutboundCallRecipientResponseModel) GetConversationInitiationClientData() optionalnullable.OptionalNullable[ConversationInitiationClientDataInternal] {
+func (o *OutboundCallRecipientResponseModel) GetConversationInitiationClientData() *ConversationInitiationClientDataInternal {
 	if o == nil {
 		return nil
 	}

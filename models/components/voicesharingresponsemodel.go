@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // VoiceSharingResponseModelStatus - The status of the voice sharing.
@@ -89,7 +88,7 @@ type VoiceSharingResponseModel struct {
 	// The status of the voice sharing.
 	Status VoiceSharingResponseModelStatus `json:"status"`
 	// The sample ID of the history item.
-	HistoryItemSampleID optionalnullable.OptionalNullable[string] `json:"history_item_sample_id,omitzero"`
+	HistoryItemSampleID *string `json:"history_item_sample_id,omitzero"`
 	// The date of the voice sharing in Unix time.
 	DateUnix int64 `json:"date_unix"`
 	// A list of whitelisted emails.
@@ -105,13 +104,13 @@ type VoiceSharingResponseModel struct {
 	// Whether live moderation is enabled.
 	LiveModerationEnabled bool `json:"live_moderation_enabled"`
 	// The rate of the voice sharing.
-	Rate optionalnullable.OptionalNullable[float64] `json:"rate,omitzero"`
+	Rate *float64 `json:"rate,omitzero"`
 	// The rate of the voice sharing in USD per 1000 credits.
-	FiatRate optionalnullable.OptionalNullable[float64] `json:"fiat_rate,omitzero"`
+	FiatRate *float64 `json:"fiat_rate,omitzero"`
 	// The notice period of the voice sharing.
 	NoticePeriod int64 `json:"notice_period"`
 	// The date of the voice sharing in Unix time.
-	DisableAtUnix optionalnullable.OptionalNullable[int64] `json:"disable_at_unix,omitzero"`
+	DisableAtUnix *int64 `json:"disable_at_unix,omitzero"`
 	// Whether voice mixing is allowed.
 	VoiceMixingAllowed bool `json:"voice_mixing_allowed"`
 	// Whether the voice is featured.
@@ -119,11 +118,11 @@ type VoiceSharingResponseModel struct {
 	// The category of the voice.
 	Category VoiceSharingResponseModelCategory `json:"category"`
 	// Whether the reader app is enabled.
-	ReaderAppEnabled optionalnullable.OptionalNullable[bool] `json:"reader_app_enabled,omitzero"`
+	ReaderAppEnabled *bool `json:"reader_app_enabled,omitzero"`
 	// The image URL of the voice.
-	ImageURL optionalnullable.OptionalNullable[string] `json:"image_url,omitzero"`
+	ImageURL *string `json:"image_url,omitzero"`
 	// The ban reason of the voice.
-	BanReason optionalnullable.OptionalNullable[string] `json:"ban_reason,omitzero"`
+	BanReason *string `json:"ban_reason,omitzero"`
 	// The number of likes on the voice.
 	LikedByCount int64 `json:"liked_by_count"`
 	// The number of clones on the voice.
@@ -131,27 +130,27 @@ type VoiceSharingResponseModel struct {
 	// The name of the voice.
 	Name string `json:"name"`
 	// The description of the voice.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// The labels of the voice.
 	Labels map[string]string `json:"labels"`
 	// The review status of the voice.
 	ReviewStatus VoiceSharingResponseModelReviewStatus `json:"review_status"`
 	// The review message of the voice.
-	ReviewMessage optionalnullable.OptionalNullable[string] `json:"review_message,omitzero"`
+	ReviewMessage *string `json:"review_message,omitzero"`
 	// Whether the voice is enabled in the library.
 	EnabledInLibrary bool `json:"enabled_in_library"`
 	// The Instagram username of the voice.
-	InstagramUsername optionalnullable.OptionalNullable[string] `json:"instagram_username,omitzero"`
+	InstagramUsername *string `json:"instagram_username,omitzero"`
 	// The Twitter/X username of the voice.
-	TwitterUsername optionalnullable.OptionalNullable[string] `json:"twitter_username,omitzero"`
+	TwitterUsername *string `json:"twitter_username,omitzero"`
 	// The YouTube username of the voice.
-	YoutubeUsername optionalnullable.OptionalNullable[string] `json:"youtube_username,omitzero"`
+	YoutubeUsername *string `json:"youtube_username,omitzero"`
 	// The TikTok username of the voice.
-	TiktokUsername optionalnullable.OptionalNullable[string] `json:"tiktok_username,omitzero"`
+	TiktokUsername *string `json:"tiktok_username,omitzero"`
 	// The moderation check of the voice.
-	ModerationCheck optionalnullable.OptionalNullable[VoiceSharingModerationCheckResponseModel] `json:"moderation_check,omitzero"`
+	ModerationCheck *VoiceSharingModerationCheckResponseModel `json:"moderation_check,omitzero"`
 	// The reader restricted on of the voice.
-	ReaderRestrictedOn optionalnullable.OptionalNullable[[]ReaderResourceResponseModel] `json:"reader_restricted_on,omitzero"`
+	ReaderRestrictedOn []ReaderResourceResponseModel `json:"reader_restricted_on,omitzero"`
 }
 
 func (v VoiceSharingResponseModel) MarshalJSON() ([]byte, error) {
@@ -172,7 +171,7 @@ func (v *VoiceSharingResponseModel) GetStatus() VoiceSharingResponseModelStatus 
 	return v.Status
 }
 
-func (v *VoiceSharingResponseModel) GetHistoryItemSampleID() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetHistoryItemSampleID() *string {
 	if v == nil {
 		return nil
 	}
@@ -228,14 +227,14 @@ func (v *VoiceSharingResponseModel) GetLiveModerationEnabled() bool {
 	return v.LiveModerationEnabled
 }
 
-func (v *VoiceSharingResponseModel) GetRate() optionalnullable.OptionalNullable[float64] {
+func (v *VoiceSharingResponseModel) GetRate() *float64 {
 	if v == nil {
 		return nil
 	}
 	return v.Rate
 }
 
-func (v *VoiceSharingResponseModel) GetFiatRate() optionalnullable.OptionalNullable[float64] {
+func (v *VoiceSharingResponseModel) GetFiatRate() *float64 {
 	if v == nil {
 		return nil
 	}
@@ -249,7 +248,7 @@ func (v *VoiceSharingResponseModel) GetNoticePeriod() int64 {
 	return v.NoticePeriod
 }
 
-func (v *VoiceSharingResponseModel) GetDisableAtUnix() optionalnullable.OptionalNullable[int64] {
+func (v *VoiceSharingResponseModel) GetDisableAtUnix() *int64 {
 	if v == nil {
 		return nil
 	}
@@ -277,21 +276,21 @@ func (v *VoiceSharingResponseModel) GetCategory() VoiceSharingResponseModelCateg
 	return v.Category
 }
 
-func (v *VoiceSharingResponseModel) GetReaderAppEnabled() optionalnullable.OptionalNullable[bool] {
+func (v *VoiceSharingResponseModel) GetReaderAppEnabled() *bool {
 	if v == nil {
 		return nil
 	}
 	return v.ReaderAppEnabled
 }
 
-func (v *VoiceSharingResponseModel) GetImageURL() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetImageURL() *string {
 	if v == nil {
 		return nil
 	}
 	return v.ImageURL
 }
 
-func (v *VoiceSharingResponseModel) GetBanReason() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetBanReason() *string {
 	if v == nil {
 		return nil
 	}
@@ -319,7 +318,7 @@ func (v *VoiceSharingResponseModel) GetName() string {
 	return v.Name
 }
 
-func (v *VoiceSharingResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetDescription() *string {
 	if v == nil {
 		return nil
 	}
@@ -340,7 +339,7 @@ func (v *VoiceSharingResponseModel) GetReviewStatus() VoiceSharingResponseModelR
 	return v.ReviewStatus
 }
 
-func (v *VoiceSharingResponseModel) GetReviewMessage() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetReviewMessage() *string {
 	if v == nil {
 		return nil
 	}
@@ -354,42 +353,42 @@ func (v *VoiceSharingResponseModel) GetEnabledInLibrary() bool {
 	return v.EnabledInLibrary
 }
 
-func (v *VoiceSharingResponseModel) GetInstagramUsername() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetInstagramUsername() *string {
 	if v == nil {
 		return nil
 	}
 	return v.InstagramUsername
 }
 
-func (v *VoiceSharingResponseModel) GetTwitterUsername() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetTwitterUsername() *string {
 	if v == nil {
 		return nil
 	}
 	return v.TwitterUsername
 }
 
-func (v *VoiceSharingResponseModel) GetYoutubeUsername() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetYoutubeUsername() *string {
 	if v == nil {
 		return nil
 	}
 	return v.YoutubeUsername
 }
 
-func (v *VoiceSharingResponseModel) GetTiktokUsername() optionalnullable.OptionalNullable[string] {
+func (v *VoiceSharingResponseModel) GetTiktokUsername() *string {
 	if v == nil {
 		return nil
 	}
 	return v.TiktokUsername
 }
 
-func (v *VoiceSharingResponseModel) GetModerationCheck() optionalnullable.OptionalNullable[VoiceSharingModerationCheckResponseModel] {
+func (v *VoiceSharingResponseModel) GetModerationCheck() *VoiceSharingModerationCheckResponseModel {
 	if v == nil {
 		return nil
 	}
 	return v.ModerationCheck
 }
 
-func (v *VoiceSharingResponseModel) GetReaderRestrictedOn() optionalnullable.OptionalNullable[[]ReaderResourceResponseModel] {
+func (v *VoiceSharingResponseModel) GetReaderRestrictedOn() []ReaderResourceResponseModel {
 	if v == nil {
 		return nil
 	}

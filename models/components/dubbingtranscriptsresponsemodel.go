@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TranscriptFormat string
@@ -31,10 +30,10 @@ func (e *TranscriptFormat) IsExact() bool {
 }
 
 type DubbingTranscriptsResponseModel struct {
-	TranscriptFormat TranscriptFormat                                     `json:"transcript_format"`
-	Srt              optionalnullable.OptionalNullable[string]            `json:"srt,omitzero"`
-	Webvtt           optionalnullable.OptionalNullable[string]            `json:"webvtt,omitzero"`
-	JSON             optionalnullable.OptionalNullable[DubbingTranscript] `json:"json,omitzero"`
+	TranscriptFormat TranscriptFormat   `json:"transcript_format"`
+	Srt              *string            `json:"srt,omitzero"`
+	Webvtt           *string            `json:"webvtt,omitzero"`
+	JSON             *DubbingTranscript `json:"json,omitzero"`
 }
 
 func (d DubbingTranscriptsResponseModel) MarshalJSON() ([]byte, error) {
@@ -55,21 +54,21 @@ func (d *DubbingTranscriptsResponseModel) GetTranscriptFormat() TranscriptFormat
 	return d.TranscriptFormat
 }
 
-func (d *DubbingTranscriptsResponseModel) GetSrt() optionalnullable.OptionalNullable[string] {
+func (d *DubbingTranscriptsResponseModel) GetSrt() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Srt
 }
 
-func (d *DubbingTranscriptsResponseModel) GetWebvtt() optionalnullable.OptionalNullable[string] {
+func (d *DubbingTranscriptsResponseModel) GetWebvtt() *string {
 	if d == nil {
 		return nil
 	}
 	return d.Webvtt
 }
 
-func (d *DubbingTranscriptsResponseModel) GetJSON() optionalnullable.OptionalNullable[DubbingTranscript] {
+func (d *DubbingTranscriptsResponseModel) GetJSON() *DubbingTranscript {
 	if d == nil {
 		return nil
 	}

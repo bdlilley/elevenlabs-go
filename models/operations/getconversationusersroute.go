@@ -5,26 +5,25 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetConversationUsersRouteRequest struct {
 	// The id of the agent you're taking the action on.
-	AgentID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=agent_id"`
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// Filter conversations by branch ID.
-	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
+	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
 	// Unix timestamp (in seconds) to filter conversations up to this start date.
-	CallStartBeforeUnix optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=call_start_before_unix"`
+	CallStartBeforeUnix *int64 `queryParam:"style=form,explode=true,name=call_start_before_unix"`
 	// Unix timestamp (in seconds) to filter conversations after to this start date.
-	CallStartAfterUnix optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=call_start_after_unix"`
+	CallStartAfterUnix *int64 `queryParam:"style=form,explode=true,name=call_start_after_unix"`
 	// Search/filter by user ID (exact match).
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// How many users to return at maximum. Defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// The field to sort the results by. Defaults to last_contact_unix_secs.
 	SortBy *components.UsersSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (g GetConversationUsersRouteRequest) MarshalJSON() ([]byte, error) {
@@ -38,35 +37,35 @@ func (g *GetConversationUsersRouteRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (g *GetConversationUsersRouteRequest) GetAgentID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationUsersRouteRequest) GetAgentID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.AgentID
 }
 
-func (g *GetConversationUsersRouteRequest) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationUsersRouteRequest) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.BranchID
 }
 
-func (g *GetConversationUsersRouteRequest) GetCallStartBeforeUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationUsersRouteRequest) GetCallStartBeforeUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.CallStartBeforeUnix
 }
 
-func (g *GetConversationUsersRouteRequest) GetCallStartAfterUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationUsersRouteRequest) GetCallStartAfterUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.CallStartAfterUnix
 }
 
-func (g *GetConversationUsersRouteRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationUsersRouteRequest) GetSearch() *string {
 	if g == nil {
 		return nil
 	}
@@ -87,7 +86,7 @@ func (g *GetConversationUsersRouteRequest) GetSortBy() *components.UsersSortBy {
 	return g.SortBy
 }
 
-func (g *GetConversationUsersRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationUsersRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}

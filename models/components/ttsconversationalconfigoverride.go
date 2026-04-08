@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TTSConversationalConfigOverride struct {
 	// The voice ID to use for TTS
-	VoiceID optionalnullable.OptionalNullable[string] `json:"voice_id,omitzero"`
+	VoiceID *string `json:"voice_id,omitzero"`
 	// The stability of generated speech
-	Stability optionalnullable.OptionalNullable[float64] `json:"stability,omitzero"`
+	Stability *float64 `json:"stability,omitzero"`
 	// The speed of generated speech
-	Speed optionalnullable.OptionalNullable[float64] `json:"speed,omitzero"`
+	Speed *float64 `json:"speed,omitzero"`
 	// The similarity boost for generated speech
-	SimilarityBoost optionalnullable.OptionalNullable[float64] `json:"similarity_boost,omitzero"`
+	SimilarityBoost *float64 `json:"similarity_boost,omitzero"`
 }
 
 func (t TTSConversationalConfigOverride) MarshalJSON() ([]byte, error) {
@@ -29,28 +28,28 @@ func (t *TTSConversationalConfigOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (t *TTSConversationalConfigOverride) GetVoiceID() optionalnullable.OptionalNullable[string] {
+func (t *TTSConversationalConfigOverride) GetVoiceID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.VoiceID
 }
 
-func (t *TTSConversationalConfigOverride) GetStability() optionalnullable.OptionalNullable[float64] {
+func (t *TTSConversationalConfigOverride) GetStability() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.Stability
 }
 
-func (t *TTSConversationalConfigOverride) GetSpeed() optionalnullable.OptionalNullable[float64] {
+func (t *TTSConversationalConfigOverride) GetSpeed() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.Speed
 }
 
-func (t *TTSConversationalConfigOverride) GetSimilarityBoost() optionalnullable.OptionalNullable[float64] {
+func (t *TTSConversationalConfigOverride) GetSimilarityBoost() *float64 {
 	if t == nil {
 		return nil
 	}

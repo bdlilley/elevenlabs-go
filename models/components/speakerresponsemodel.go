@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SpeakerResponseModel struct {
@@ -13,7 +12,7 @@ type SpeakerResponseModel struct {
 	// The duration of the speaker segment in seconds.
 	DurationSecs float64 `json:"duration_secs"`
 	// The utterances of the speaker.
-	Utterances optionalnullable.OptionalNullable[[]UtteranceResponseModel] `json:"utterances,omitzero"`
+	Utterances []UtteranceResponseModel `json:"utterances,omitzero"`
 }
 
 func (s SpeakerResponseModel) MarshalJSON() ([]byte, error) {
@@ -41,7 +40,7 @@ func (s *SpeakerResponseModel) GetDurationSecs() float64 {
 	return s.DurationSecs
 }
 
-func (s *SpeakerResponseModel) GetUtterances() optionalnullable.OptionalNullable[[]UtteranceResponseModel] {
+func (s *SpeakerResponseModel) GetUtterances() []UtteranceResponseModel {
 	if s == nil {
 		return nil
 	}

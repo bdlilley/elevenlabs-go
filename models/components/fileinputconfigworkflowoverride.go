@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type FileInputConfigWorkflowOverride struct {
 	// When enabled, users may attach images or PDFs in chat when the LLM supports multimodal input.
-	Enabled optionalnullable.OptionalNullable[bool] `json:"enabled,omitzero"`
+	Enabled *bool `json:"enabled,omitzero"`
 	// Maximum number of files that can be uploaded per conversation.
-	MaxFilesPerConversation optionalnullable.OptionalNullable[int64] `json:"max_files_per_conversation,omitzero"`
+	MaxFilesPerConversation *int64 `json:"max_files_per_conversation,omitzero"`
 }
 
 func (f FileInputConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -25,14 +24,14 @@ func (f *FileInputConfigWorkflowOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (f *FileInputConfigWorkflowOverride) GetEnabled() optionalnullable.OptionalNullable[bool] {
+func (f *FileInputConfigWorkflowOverride) GetEnabled() *bool {
 	if f == nil {
 		return nil
 	}
 	return f.Enabled
 }
 
-func (f *FileInputConfigWorkflowOverride) GetMaxFilesPerConversation() optionalnullable.OptionalNullable[int64] {
+func (f *FileInputConfigWorkflowOverride) GetMaxFilesPerConversation() *int64 {
 	if f == nil {
 		return nil
 	}

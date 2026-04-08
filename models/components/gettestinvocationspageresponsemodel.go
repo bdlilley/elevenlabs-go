@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetTestInvocationsPageResponseModel struct {
 	Meta    *ListResponseMeta                    `json:"meta,omitzero"`
 	Results []TestInvocationSummaryResponseModel `json:"results"`
 	// Cursor for the next page of results
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
+	NextCursor *string `json:"next_cursor,omitzero"`
 	// Whether there are more results available
 	HasMore bool `json:"has_more"`
 }
@@ -41,7 +40,7 @@ func (g *GetTestInvocationsPageResponseModel) GetResults() []TestInvocationSumma
 	return g.Results
 }
 
-func (g *GetTestInvocationsPageResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetTestInvocationsPageResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

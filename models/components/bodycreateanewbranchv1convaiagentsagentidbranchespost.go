@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost struct {
@@ -15,11 +14,11 @@ type BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost struct {
 	// Description for the branch
 	Description string `json:"description"`
 	// Changes to apply to conversation config
-	ConversationConfig optionalnullable.OptionalNullable[map[string]any] `json:"conversation_config,omitzero"`
+	ConversationConfig map[string]any `json:"conversation_config,omitzero"`
 	// Changes to apply to platform settings
-	PlatformSettings optionalnullable.OptionalNullable[map[string]any] `json:"platform_settings,omitzero"`
+	PlatformSettings map[string]any `json:"platform_settings,omitzero"`
 	// Updated workflow definition
-	Workflow optionalnullable.OptionalNullable[AgentWorkflowRequestModel] `json:"workflow,omitzero"`
+	Workflow *AgentWorkflowRequestModel `json:"workflow,omitzero"`
 }
 
 func (b BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) MarshalJSON() ([]byte, error) {
@@ -54,21 +53,21 @@ func (b *BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) GetDescription()
 	return b.Description
 }
 
-func (b *BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) GetConversationConfig() optionalnullable.OptionalNullable[map[string]any] {
+func (b *BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) GetConversationConfig() map[string]any {
 	if b == nil {
 		return nil
 	}
 	return b.ConversationConfig
 }
 
-func (b *BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) GetPlatformSettings() optionalnullable.OptionalNullable[map[string]any] {
+func (b *BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) GetPlatformSettings() map[string]any {
 	if b == nil {
 		return nil
 	}
 	return b.PlatformSettings
 }
 
-func (b *BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) GetWorkflow() optionalnullable.OptionalNullable[AgentWorkflowRequestModel] {
+func (b *BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost) GetWorkflow() *AgentWorkflowRequestModel {
 	if b == nil {
 		return nil
 	}

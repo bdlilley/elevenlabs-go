@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryTranscriptCommonModelInputRole string
@@ -178,22 +177,22 @@ func (u ConversationHistoryTranscriptCommonModelInputToolResult) MarshalJSON() (
 }
 
 type ConversationHistoryTranscriptCommonModelInput struct {
-	Role                    ConversationHistoryTranscriptCommonModelInputRole                            `json:"role"`
-	AgentMetadata           optionalnullable.OptionalNullable[AgentMetadata]                             `json:"agent_metadata,omitzero"`
-	Message                 optionalnullable.OptionalNullable[string]                                    `json:"message,omitzero"`
-	MultivoiceMessage       optionalnullable.OptionalNullable[ConversationHistoryMultivoiceMessageModel] `json:"multivoice_message,omitzero"`
-	ToolCalls               []ConversationHistoryTranscriptToolCallCommonModelInput                      `json:"tool_calls,omitzero"`
-	ToolResults             []ConversationHistoryTranscriptCommonModelInputToolResult                    `json:"tool_results,omitzero"`
-	Feedback                optionalnullable.OptionalNullable[UserFeedback]                              `json:"feedback,omitzero"`
-	LlmOverride             optionalnullable.OptionalNullable[string]                                    `json:"llm_override,omitzero"`
-	TimeInCallSecs          int64                                                                        `json:"time_in_call_secs"`
-	ConversationTurnMetrics optionalnullable.OptionalNullable[ConversationTurnMetrics]                   `json:"conversation_turn_metrics,omitzero"`
-	RagRetrievalInfo        optionalnullable.OptionalNullable[RagRetrievalInfo]                          `json:"rag_retrieval_info,omitzero"`
-	LlmUsage                optionalnullable.OptionalNullable[LLMUsageInput]                             `json:"llm_usage,omitzero"`
-	Interrupted             *bool                                                                        `default:"false" json:"interrupted"`
-	OriginalMessage         optionalnullable.OptionalNullable[string]                                    `json:"original_message,omitzero"`
-	SourceMedium            optionalnullable.OptionalNullable[ChatSourceMedium]                          `json:"source_medium,omitzero"`
-	SourceEventID           optionalnullable.OptionalNullable[int64]                                     `json:"source_event_id,omitzero"`
+	Role                    ConversationHistoryTranscriptCommonModelInputRole         `json:"role"`
+	AgentMetadata           *AgentMetadata                                            `json:"agent_metadata,omitzero"`
+	Message                 *string                                                   `json:"message,omitzero"`
+	MultivoiceMessage       *ConversationHistoryMultivoiceMessageModel                `json:"multivoice_message,omitzero"`
+	ToolCalls               []ConversationHistoryTranscriptToolCallCommonModelInput   `json:"tool_calls,omitzero"`
+	ToolResults             []ConversationHistoryTranscriptCommonModelInputToolResult `json:"tool_results,omitzero"`
+	Feedback                *UserFeedback                                             `json:"feedback,omitzero"`
+	LlmOverride             *string                                                   `json:"llm_override,omitzero"`
+	TimeInCallSecs          int64                                                     `json:"time_in_call_secs"`
+	ConversationTurnMetrics *ConversationTurnMetrics                                  `json:"conversation_turn_metrics,omitzero"`
+	RagRetrievalInfo        *RagRetrievalInfo                                         `json:"rag_retrieval_info,omitzero"`
+	LlmUsage                *LLMUsageInput                                            `json:"llm_usage,omitzero"`
+	Interrupted             *bool                                                     `default:"false" json:"interrupted"`
+	OriginalMessage         *string                                                   `json:"original_message,omitzero"`
+	SourceMedium            *ChatSourceMedium                                         `json:"source_medium,omitzero"`
+	SourceEventID           *int64                                                    `json:"source_event_id,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptCommonModelInput) MarshalJSON() ([]byte, error) {
@@ -214,21 +213,21 @@ func (c *ConversationHistoryTranscriptCommonModelInput) GetRole() ConversationHi
 	return c.Role
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetAgentMetadata() optionalnullable.OptionalNullable[AgentMetadata] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetAgentMetadata() *AgentMetadata {
 	if c == nil {
 		return nil
 	}
 	return c.AgentMetadata
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetMessage() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetMessage() *string {
 	if c == nil {
 		return nil
 	}
 	return c.Message
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetMultivoiceMessage() optionalnullable.OptionalNullable[ConversationHistoryMultivoiceMessageModel] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetMultivoiceMessage() *ConversationHistoryMultivoiceMessageModel {
 	if c == nil {
 		return nil
 	}
@@ -249,14 +248,14 @@ func (c *ConversationHistoryTranscriptCommonModelInput) GetToolResults() []Conve
 	return c.ToolResults
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetFeedback() optionalnullable.OptionalNullable[UserFeedback] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetFeedback() *UserFeedback {
 	if c == nil {
 		return nil
 	}
 	return c.Feedback
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetLlmOverride() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetLlmOverride() *string {
 	if c == nil {
 		return nil
 	}
@@ -270,21 +269,21 @@ func (c *ConversationHistoryTranscriptCommonModelInput) GetTimeInCallSecs() int6
 	return c.TimeInCallSecs
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetConversationTurnMetrics() optionalnullable.OptionalNullable[ConversationTurnMetrics] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetConversationTurnMetrics() *ConversationTurnMetrics {
 	if c == nil {
 		return nil
 	}
 	return c.ConversationTurnMetrics
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetRagRetrievalInfo() optionalnullable.OptionalNullable[RagRetrievalInfo] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetRagRetrievalInfo() *RagRetrievalInfo {
 	if c == nil {
 		return nil
 	}
 	return c.RagRetrievalInfo
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetLlmUsage() optionalnullable.OptionalNullable[LLMUsageInput] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetLlmUsage() *LLMUsageInput {
 	if c == nil {
 		return nil
 	}
@@ -298,21 +297,21 @@ func (c *ConversationHistoryTranscriptCommonModelInput) GetInterrupted() *bool {
 	return c.Interrupted
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetOriginalMessage() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetOriginalMessage() *string {
 	if c == nil {
 		return nil
 	}
 	return c.OriginalMessage
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetSourceMedium() optionalnullable.OptionalNullable[ChatSourceMedium] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetSourceMedium() *ChatSourceMedium {
 	if c == nil {
 		return nil
 	}
 	return c.SourceMedium
 }
 
-func (c *ConversationHistoryTranscriptCommonModelInput) GetSourceEventID() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationHistoryTranscriptCommonModelInput) GetSourceEventID() *int64 {
 	if c == nil {
 		return nil
 	}

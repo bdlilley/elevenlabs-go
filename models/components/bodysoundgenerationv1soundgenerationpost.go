@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodySoundGenerationV1SoundGenerationPost struct {
@@ -13,9 +12,9 @@ type BodySoundGenerationV1SoundGenerationPost struct {
 	// Whether to create a sound effect that loops smoothly. Only available for the 'eleven_text_to_sound_v2 model'.
 	Loop *bool `default:"false" json:"loop"`
 	// The duration of the sound which will be generated in seconds. Must be at least 0.5 and at most 30. If set to None we will guess the optimal duration using the prompt. Defaults to None.
-	DurationSeconds optionalnullable.OptionalNullable[float64] `json:"duration_seconds,omitzero"`
+	DurationSeconds *float64 `json:"duration_seconds,omitzero"`
 	// A higher prompt influence makes your generation follow the prompt more closely while also making generations less variable. Must be a value between 0 and 1. Defaults to 0.3.
-	PromptInfluence optionalnullable.OptionalNullable[float64] `json:"prompt_influence,omitzero"`
+	PromptInfluence *float64 `json:"prompt_influence,omitzero"`
 	// The model ID to use for the sound generation.
 	ModelID *string `default:"eleven_text_to_sound_v2" json:"model_id"`
 }
@@ -45,14 +44,14 @@ func (b *BodySoundGenerationV1SoundGenerationPost) GetLoop() *bool {
 	return b.Loop
 }
 
-func (b *BodySoundGenerationV1SoundGenerationPost) GetDurationSeconds() optionalnullable.OptionalNullable[float64] {
+func (b *BodySoundGenerationV1SoundGenerationPost) GetDurationSeconds() *float64 {
 	if b == nil {
 		return nil
 	}
 	return b.DurationSeconds
 }
 
-func (b *BodySoundGenerationV1SoundGenerationPost) GetPromptInfluence() optionalnullable.OptionalNullable[float64] {
+func (b *BodySoundGenerationV1SoundGenerationPost) GetPromptInfluence() *float64 {
 	if b == nil {
 		return nil
 	}

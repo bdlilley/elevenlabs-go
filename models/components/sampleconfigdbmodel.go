@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ParentType string
@@ -30,10 +29,10 @@ func (e *ParentType) IsExact() bool {
 }
 
 type SampleConfigDBModel struct {
-	IsSample   *bool                                         `default:"false" json:"is_sample"`
-	ParentID   optionalnullable.OptionalNullable[string]     `json:"parent_id,omitzero"`
-	ParentType optionalnullable.OptionalNullable[ParentType] `json:"parent_type,omitzero"`
-	ChapterIds optionalnullable.OptionalNullable[[]string]   `json:"chapter_ids,omitzero"`
+	IsSample   *bool       `default:"false" json:"is_sample"`
+	ParentID   *string     `json:"parent_id,omitzero"`
+	ParentType *ParentType `json:"parent_type,omitzero"`
+	ChapterIds []string    `json:"chapter_ids,omitzero"`
 }
 
 func (s SampleConfigDBModel) MarshalJSON() ([]byte, error) {
@@ -54,21 +53,21 @@ func (s *SampleConfigDBModel) GetIsSample() *bool {
 	return s.IsSample
 }
 
-func (s *SampleConfigDBModel) GetParentID() optionalnullable.OptionalNullable[string] {
+func (s *SampleConfigDBModel) GetParentID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.ParentID
 }
 
-func (s *SampleConfigDBModel) GetParentType() optionalnullable.OptionalNullable[ParentType] {
+func (s *SampleConfigDBModel) GetParentType() *ParentType {
 	if s == nil {
 		return nil
 	}
 	return s.ParentType
 }
 
-func (s *SampleConfigDBModel) GetChapterIds() optionalnullable.OptionalNullable[[]string] {
+func (s *SampleConfigDBModel) GetChapterIds() []string {
 	if s == nil {
 		return nil
 	}

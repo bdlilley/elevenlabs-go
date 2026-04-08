@@ -24,7 +24,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
@@ -41,32 +40,32 @@ func main() {
         VoiceID: "21m00Tcm4TlvDq8ikWAM",
         Body: components.BodyTextToSpeechFull{
             Text: "This is a test for the API of ElevenLabs.",
-            VoiceSettings: optionalnullable.From(&components.VoiceSettingsResponseModel{
-                Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                UseSpeakerBoost: optionalnullable.From(elevenlabsgo.Pointer(true)),
-                SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                Style: optionalnullable.From(elevenlabsgo.Pointer[float64](0.0)),
-                Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-            }),
-            PronunciationDictionaryLocators: optionalnullable.From(elevenlabsgo.Pointer([]components.PronunciationDictionaryVersionLocatorRequestModel{
+            VoiceSettings: &components.VoiceSettingsResponseModel{
+                Stability: elevenlabsgo.Pointer[float64](1.0),
+                UseSpeakerBoost: elevenlabsgo.Pointer(true),
+                SimilarityBoost: elevenlabsgo.Pointer[float64](1.0),
+                Style: elevenlabsgo.Pointer[float64](0.0),
+                Speed: elevenlabsgo.Pointer[float64](1.0),
+            },
+            PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
                 components.PronunciationDictionaryVersionLocatorRequestModel{
                     PronunciationDictionaryID: "test",
-                    VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                    VersionID: elevenlabsgo.Pointer("id2"),
                 },
-            })),
-            Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
-            PreviousText: optionalnullable.From(elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook.")),
-            NextText: optionalnullable.From(elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves.")),
-            PreviousRequestIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+            },
+            Seed: elevenlabsgo.Pointer[int64](12345),
+            PreviousText: elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook."),
+            NextText: elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves."),
+            PreviousRequestIds: []string{
                 "09bOJkdYVjKy2oOiiVtR",
                 "0p2uKqOnZyce22SPZ9d5",
                 "1KYvY8WZAKmcjCJ1mvVB",
-            })),
-            NextRequestIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+            },
+            NextRequestIds: []string{
                 "3tPgBrD1UdW3snUkGw1K",
                 "4D1jAxiRFkolBNUGzXkU",
                 "4c8Z4aWliVR2oipYRXhj",
-            })),
+            },
             UsePvcAsIvc: elevenlabsgo.Pointer(true),
             ApplyLanguageTextNormalization: elevenlabsgo.Pointer(true),
         },
@@ -112,7 +111,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
@@ -129,22 +127,22 @@ func main() {
         VoiceID: "21m00Tcm4TlvDq8ikWAM",
         Body: components.BodyTextToSpeechFullWithTimestamps{
             Text: "This is a test for the API of ElevenLabs.",
-            VoiceSettings: optionalnullable.From(&components.VoiceSettingsResponseModel{
-                Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                UseSpeakerBoost: optionalnullable.From(elevenlabsgo.Pointer(true)),
-                SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                Style: optionalnullable.From(elevenlabsgo.Pointer[float64](0.0)),
-                Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-            }),
+            VoiceSettings: &components.VoiceSettingsResponseModel{
+                Stability: elevenlabsgo.Pointer[float64](1.0),
+                UseSpeakerBoost: elevenlabsgo.Pointer(true),
+                SimilarityBoost: elevenlabsgo.Pointer[float64](1.0),
+                Style: elevenlabsgo.Pointer[float64](0.0),
+                Speed: elevenlabsgo.Pointer[float64](1.0),
+            },
             PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
                 components.PronunciationDictionaryVersionLocatorRequestModel{
                     PronunciationDictionaryID: "test",
-                    VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                    VersionID: elevenlabsgo.Pointer("id2"),
                 },
             },
-            Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
-            PreviousText: optionalnullable.From(elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook.")),
-            NextText: optionalnullable.From(elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves.")),
+            Seed: elevenlabsgo.Pointer[int64](12345),
+            PreviousText: elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook."),
+            NextText: elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves."),
             PreviousRequestIds: []string{
                 "09bOJkdYVjKy2oOiiVtR",
                 "0p2uKqOnZyce22SPZ9d5",
@@ -201,7 +199,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
@@ -218,32 +215,32 @@ func main() {
         VoiceID: "21m00Tcm4TlvDq8ikWAM",
         Body: components.BodyTextToSpeechStream{
             Text: "This is a test for the API of ElevenLabs.",
-            VoiceSettings: optionalnullable.From(&components.VoiceSettingsResponseModel{
-                Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                UseSpeakerBoost: optionalnullable.From(elevenlabsgo.Pointer(true)),
-                SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                Style: optionalnullable.From(elevenlabsgo.Pointer[float64](0.0)),
-                Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-            }),
-            PronunciationDictionaryLocators: optionalnullable.From(elevenlabsgo.Pointer([]components.PronunciationDictionaryVersionLocatorRequestModel{
+            VoiceSettings: &components.VoiceSettingsResponseModel{
+                Stability: elevenlabsgo.Pointer[float64](1.0),
+                UseSpeakerBoost: elevenlabsgo.Pointer(true),
+                SimilarityBoost: elevenlabsgo.Pointer[float64](1.0),
+                Style: elevenlabsgo.Pointer[float64](0.0),
+                Speed: elevenlabsgo.Pointer[float64](1.0),
+            },
+            PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
                 components.PronunciationDictionaryVersionLocatorRequestModel{
                     PronunciationDictionaryID: "test",
-                    VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                    VersionID: elevenlabsgo.Pointer("id2"),
                 },
-            })),
-            Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
-            PreviousText: optionalnullable.From(elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook.")),
-            NextText: optionalnullable.From(elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves.")),
-            PreviousRequestIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+            },
+            Seed: elevenlabsgo.Pointer[int64](12345),
+            PreviousText: elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook."),
+            NextText: elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves."),
+            PreviousRequestIds: []string{
                 "09bOJkdYVjKy2oOiiVtR",
                 "0p2uKqOnZyce22SPZ9d5",
                 "1KYvY8WZAKmcjCJ1mvVB",
-            })),
-            NextRequestIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+            },
+            NextRequestIds: []string{
                 "3tPgBrD1UdW3snUkGw1K",
                 "4D1jAxiRFkolBNUGzXkU",
                 "4c8Z4aWliVR2oipYRXhj",
-            })),
+            },
             UsePvcAsIvc: elevenlabsgo.Pointer(true),
             ApplyTextNormalization: components.BodyTextToSpeechStreamApplyTextNormalizationOff.ToPointer(),
             ApplyLanguageTextNormalization: elevenlabsgo.Pointer(true),
@@ -290,7 +287,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
@@ -307,32 +303,32 @@ func main() {
         VoiceID: "21m00Tcm4TlvDq8ikWAM",
         Body: components.BodyTextToSpeechStreamWithTimestamps{
             Text: "This is a test for the API of ElevenLabs.",
-            VoiceSettings: optionalnullable.From(&components.VoiceSettingsResponseModel{
-                Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                UseSpeakerBoost: optionalnullable.From(elevenlabsgo.Pointer(true)),
-                SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                Style: optionalnullable.From(elevenlabsgo.Pointer[float64](0.0)),
-                Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-            }),
-            PronunciationDictionaryLocators: optionalnullable.From(elevenlabsgo.Pointer([]components.PronunciationDictionaryVersionLocatorRequestModel{
+            VoiceSettings: &components.VoiceSettingsResponseModel{
+                Stability: elevenlabsgo.Pointer[float64](1.0),
+                UseSpeakerBoost: elevenlabsgo.Pointer(true),
+                SimilarityBoost: elevenlabsgo.Pointer[float64](1.0),
+                Style: elevenlabsgo.Pointer[float64](0.0),
+                Speed: elevenlabsgo.Pointer[float64](1.0),
+            },
+            PronunciationDictionaryLocators: []components.PronunciationDictionaryVersionLocatorRequestModel{
                 components.PronunciationDictionaryVersionLocatorRequestModel{
                     PronunciationDictionaryID: "test",
-                    VersionID: optionalnullable.From(elevenlabsgo.Pointer("id2")),
+                    VersionID: elevenlabsgo.Pointer("id2"),
                 },
-            })),
-            Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
-            PreviousText: optionalnullable.From(elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook.")),
-            NextText: optionalnullable.From(elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves.")),
-            PreviousRequestIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+            },
+            Seed: elevenlabsgo.Pointer[int64](12345),
+            PreviousText: elevenlabsgo.Pointer("In the heart of a lush valley surrounded by towering mountains lies the quaint village of Willowbrook."),
+            NextText: elevenlabsgo.Pointer("The Willowbrook Festival, held every spring, celebrates the blossoming of the wild bluebells that carpet the nearby forest floors, creating a breathtaking sea of blue under the canopy of fresh green leaves."),
+            PreviousRequestIds: []string{
                 "09bOJkdYVjKy2oOiiVtR",
                 "0p2uKqOnZyce22SPZ9d5",
                 "1KYvY8WZAKmcjCJ1mvVB",
-            })),
-            NextRequestIds: optionalnullable.From(elevenlabsgo.Pointer([]string{
+            },
+            NextRequestIds: []string{
                 "3tPgBrD1UdW3snUkGw1K",
                 "4D1jAxiRFkolBNUGzXkU",
                 "4c8Z4aWliVR2oipYRXhj",
-            })),
+            },
             UsePvcAsIvc: elevenlabsgo.Pointer(true),
             ApplyTextNormalization: components.BodyTextToSpeechStreamWithTimestampsApplyTextNormalizationOn.ToPointer(),
             ApplyLanguageTextNormalization: elevenlabsgo.Pointer(true),

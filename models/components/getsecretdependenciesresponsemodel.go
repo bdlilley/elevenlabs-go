@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type Dependencies2Type string
@@ -286,7 +285,7 @@ func (u Dependencies3) MarshalJSON() ([]byte, error) {
 type GetSecretDependenciesResponseModel struct {
 	Dependencies Dependencies3 `json:"dependencies"`
 	// Cursor for fetching the next page of dependencies
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
+	NextCursor *string `json:"next_cursor,omitzero"`
 }
 
 func (g *GetSecretDependenciesResponseModel) GetDependencies() Dependencies3 {
@@ -296,7 +295,7 @@ func (g *GetSecretDependenciesResponseModel) GetDependencies() Dependencies3 {
 	return g.Dependencies
 }
 
-func (g *GetSecretDependenciesResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetSecretDependenciesResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

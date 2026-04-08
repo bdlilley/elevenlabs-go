@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SegmentCreatePayload struct {
-	StartTime    float64                                              `json:"start_time"`
-	EndTime      float64                                              `json:"end_time"`
-	Text         optionalnullable.OptionalNullable[string]            `json:"text,omitzero"`
-	Translations optionalnullable.OptionalNullable[map[string]string] `json:"translations,omitzero"`
+	StartTime    float64           `json:"start_time"`
+	EndTime      float64           `json:"end_time"`
+	Text         *string           `json:"text,omitzero"`
+	Translations map[string]string `json:"translations,omitzero"`
 }
 
 func (s SegmentCreatePayload) MarshalJSON() ([]byte, error) {
@@ -39,14 +38,14 @@ func (s *SegmentCreatePayload) GetEndTime() float64 {
 	return s.EndTime
 }
 
-func (s *SegmentCreatePayload) GetText() optionalnullable.OptionalNullable[string] {
+func (s *SegmentCreatePayload) GetText() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Text
 }
 
-func (s *SegmentCreatePayload) GetTranslations() optionalnullable.OptionalNullable[map[string]string] {
+func (s *SegmentCreatePayload) GetTranslations() map[string]string {
 	if s == nil {
 		return nil
 	}

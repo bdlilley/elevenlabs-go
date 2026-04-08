@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // ChapterResponseModelState - The state of the chapter.
@@ -36,23 +35,23 @@ type ChapterResponseModel struct {
 	// The name of the chapter.
 	Name string `json:"name"`
 	// The last conversion date of the chapter.
-	LastConversionDateUnix optionalnullable.OptionalNullable[int64] `json:"last_conversion_date_unix,omitzero"`
+	LastConversionDateUnix *int64 `json:"last_conversion_date_unix,omitzero"`
 	// The conversion progress of the chapter.
-	ConversionProgress optionalnullable.OptionalNullable[float64] `json:"conversion_progress,omitzero"`
+	ConversionProgress *float64 `json:"conversion_progress,omitzero"`
 	// Whether the chapter can be downloaded.
 	CanBeDownloaded bool `json:"can_be_downloaded"`
 	// The state of the chapter.
 	State ChapterResponseModelState `json:"state"`
 	// Whether the chapter has a video.
-	HasVideo optionalnullable.OptionalNullable[bool] `json:"has_video,omitzero"`
+	HasVideo *bool `json:"has_video,omitzero"`
 	// Whether the chapter has any visual content (video, image, or text clips).
-	HasVisualContent optionalnullable.OptionalNullable[bool] `json:"has_visual_content,omitzero"`
+	HasVisualContent *bool `json:"has_visual_content,omitzero"`
 	// List of voice ids used by the chapter
-	VoiceIds optionalnullable.OptionalNullable[[]string] `json:"voice_ids,omitzero"`
+	VoiceIds []string `json:"voice_ids,omitzero"`
 	// The statistics of the chapter.
-	Statistics optionalnullable.OptionalNullable[ChapterStatisticsResponseModel] `json:"statistics,omitzero"`
+	Statistics *ChapterStatisticsResponseModel `json:"statistics,omitzero"`
 	// The last conversion error of the chapter.
-	LastConversionError optionalnullable.OptionalNullable[string] `json:"last_conversion_error,omitzero"`
+	LastConversionError *string `json:"last_conversion_error,omitzero"`
 }
 
 func (c ChapterResponseModel) MarshalJSON() ([]byte, error) {
@@ -80,14 +79,14 @@ func (c *ChapterResponseModel) GetName() string {
 	return c.Name
 }
 
-func (c *ChapterResponseModel) GetLastConversionDateUnix() optionalnullable.OptionalNullable[int64] {
+func (c *ChapterResponseModel) GetLastConversionDateUnix() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.LastConversionDateUnix
 }
 
-func (c *ChapterResponseModel) GetConversionProgress() optionalnullable.OptionalNullable[float64] {
+func (c *ChapterResponseModel) GetConversionProgress() *float64 {
 	if c == nil {
 		return nil
 	}
@@ -108,35 +107,35 @@ func (c *ChapterResponseModel) GetState() ChapterResponseModelState {
 	return c.State
 }
 
-func (c *ChapterResponseModel) GetHasVideo() optionalnullable.OptionalNullable[bool] {
+func (c *ChapterResponseModel) GetHasVideo() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.HasVideo
 }
 
-func (c *ChapterResponseModel) GetHasVisualContent() optionalnullable.OptionalNullable[bool] {
+func (c *ChapterResponseModel) GetHasVisualContent() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.HasVisualContent
 }
 
-func (c *ChapterResponseModel) GetVoiceIds() optionalnullable.OptionalNullable[[]string] {
+func (c *ChapterResponseModel) GetVoiceIds() []string {
 	if c == nil {
 		return nil
 	}
 	return c.VoiceIds
 }
 
-func (c *ChapterResponseModel) GetStatistics() optionalnullable.OptionalNullable[ChapterStatisticsResponseModel] {
+func (c *ChapterResponseModel) GetStatistics() *ChapterStatisticsResponseModel {
 	if c == nil {
 		return nil
 	}
 	return c.Statistics
 }
 
-func (c *ChapterResponseModel) GetLastConversionError() optionalnullable.OptionalNullable[string] {
+func (c *ChapterResponseModel) GetLastConversionError() *string {
 	if c == nil {
 		return nil
 	}

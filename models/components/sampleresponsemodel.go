@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SampleResponseModel struct {
@@ -17,14 +16,14 @@ type SampleResponseModel struct {
 	// The size of the sample file in bytes.
 	SizeBytes int64 `json:"size_bytes"`
 	// The hash of the sample file.
-	Hash                    string                                                            `json:"hash"`
-	DurationSecs            optionalnullable.OptionalNullable[float64]                        `json:"duration_secs,omitzero"`
-	RemoveBackgroundNoise   optionalnullable.OptionalNullable[bool]                           `json:"remove_background_noise,omitzero"`
-	HasIsolatedAudio        optionalnullable.OptionalNullable[bool]                           `json:"has_isolated_audio,omitzero"`
-	HasIsolatedAudioPreview optionalnullable.OptionalNullable[bool]                           `json:"has_isolated_audio_preview,omitzero"`
-	SpeakerSeparation       optionalnullable.OptionalNullable[SpeakerSeparationResponseModel] `json:"speaker_separation,omitzero"`
-	TrimStart               optionalnullable.OptionalNullable[int64]                          `json:"trim_start,omitzero"`
-	TrimEnd                 optionalnullable.OptionalNullable[int64]                          `json:"trim_end,omitzero"`
+	Hash                    string                          `json:"hash"`
+	DurationSecs            *float64                        `json:"duration_secs,omitzero"`
+	RemoveBackgroundNoise   *bool                           `json:"remove_background_noise,omitzero"`
+	HasIsolatedAudio        *bool                           `json:"has_isolated_audio,omitzero"`
+	HasIsolatedAudioPreview *bool                           `json:"has_isolated_audio_preview,omitzero"`
+	SpeakerSeparation       *SpeakerSeparationResponseModel `json:"speaker_separation,omitzero"`
+	TrimStart               *int64                          `json:"trim_start,omitzero"`
+	TrimEnd                 *int64                          `json:"trim_end,omitzero"`
 }
 
 func (s SampleResponseModel) MarshalJSON() ([]byte, error) {
@@ -73,49 +72,49 @@ func (s *SampleResponseModel) GetHash() string {
 	return s.Hash
 }
 
-func (s *SampleResponseModel) GetDurationSecs() optionalnullable.OptionalNullable[float64] {
+func (s *SampleResponseModel) GetDurationSecs() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.DurationSecs
 }
 
-func (s *SampleResponseModel) GetRemoveBackgroundNoise() optionalnullable.OptionalNullable[bool] {
+func (s *SampleResponseModel) GetRemoveBackgroundNoise() *bool {
 	if s == nil {
 		return nil
 	}
 	return s.RemoveBackgroundNoise
 }
 
-func (s *SampleResponseModel) GetHasIsolatedAudio() optionalnullable.OptionalNullable[bool] {
+func (s *SampleResponseModel) GetHasIsolatedAudio() *bool {
 	if s == nil {
 		return nil
 	}
 	return s.HasIsolatedAudio
 }
 
-func (s *SampleResponseModel) GetHasIsolatedAudioPreview() optionalnullable.OptionalNullable[bool] {
+func (s *SampleResponseModel) GetHasIsolatedAudioPreview() *bool {
 	if s == nil {
 		return nil
 	}
 	return s.HasIsolatedAudioPreview
 }
 
-func (s *SampleResponseModel) GetSpeakerSeparation() optionalnullable.OptionalNullable[SpeakerSeparationResponseModel] {
+func (s *SampleResponseModel) GetSpeakerSeparation() *SpeakerSeparationResponseModel {
 	if s == nil {
 		return nil
 	}
 	return s.SpeakerSeparation
 }
 
-func (s *SampleResponseModel) GetTrimStart() optionalnullable.OptionalNullable[int64] {
+func (s *SampleResponseModel) GetTrimStart() *int64 {
 	if s == nil {
 		return nil
 	}
 	return s.TrimStart
 }
 
-func (s *SampleResponseModel) GetTrimEnd() optionalnullable.OptionalNullable[int64] {
+func (s *SampleResponseModel) GetTrimEnd() *int64 {
 	if s == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type KnowledgeBaseContentSearchResultDocumentType string
@@ -138,9 +137,9 @@ func (u KnowledgeBaseContentSearchResultDocument) MarshalJSON() ([]byte, error) 
 }
 
 type KnowledgeBaseContentSearchResult struct {
-	Document      KnowledgeBaseContentSearchResultDocument                    `json:"document"`
-	SearchSnippet optionalnullable.OptionalNullable[[]SearchHighlightSegment] `json:"search_snippet,omitzero"`
-	Score         float64                                                     `json:"score"`
+	Document      KnowledgeBaseContentSearchResultDocument `json:"document"`
+	SearchSnippet []SearchHighlightSegment                 `json:"search_snippet,omitzero"`
+	Score         float64                                  `json:"score"`
 }
 
 func (k KnowledgeBaseContentSearchResult) MarshalJSON() ([]byte, error) {
@@ -177,7 +176,7 @@ func (k *KnowledgeBaseContentSearchResult) GetDocumentURLObj() *GetKnowledgeBase
 	return k.GetDocument().GetKnowledgeBaseSummaryURLResponseModel
 }
 
-func (k *KnowledgeBaseContentSearchResult) GetSearchSnippet() optionalnullable.OptionalNullable[[]SearchHighlightSegment] {
+func (k *KnowledgeBaseContentSearchResult) GetSearchSnippet() []SearchHighlightSegment {
 	if k == nil {
 		return nil
 	}

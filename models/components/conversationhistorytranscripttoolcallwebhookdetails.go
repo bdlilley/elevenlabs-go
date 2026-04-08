@@ -4,19 +4,18 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type ConversationHistoryTranscriptToolCallWebhookDetails struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_       *string                                   `const:"webhook" json:"type"`
-	Method      string                                    `json:"method"`
-	URL         string                                    `json:"url"`
-	Headers     map[string]string                         `json:"headers,omitzero"`
-	PathParams  map[string]string                         `json:"path_params,omitzero"`
-	QueryParams map[string]string                         `json:"query_params,omitzero"`
-	Body        optionalnullable.OptionalNullable[string] `json:"body,omitzero"`
+	type_       *string           `const:"webhook" json:"type"`
+	Method      string            `json:"method"`
+	URL         string            `json:"url"`
+	Headers     map[string]string `json:"headers,omitzero"`
+	PathParams  map[string]string `json:"path_params,omitzero"`
+	QueryParams map[string]string `json:"query_params,omitzero"`
+	Body        *string           `json:"body,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptToolCallWebhookDetails) MarshalJSON() ([]byte, error) {
@@ -69,7 +68,7 @@ func (c *ConversationHistoryTranscriptToolCallWebhookDetails) GetQueryParams() m
 	return c.QueryParams
 }
 
-func (c *ConversationHistoryTranscriptToolCallWebhookDetails) GetBody() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryTranscriptToolCallWebhookDetails) GetBody() *string {
 	if c == nil {
 		return nil
 	}

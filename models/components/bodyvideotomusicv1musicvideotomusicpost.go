@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type Video struct {
@@ -34,7 +33,7 @@ type BodyVideoToMusicV1MusicVideoToMusicPost struct {
 	//
 	Videos []Video `multipartForm:"file,name=videos"`
 	// Optional text description of the music you want. A maximum of 1000 characters is allowed.
-	Description optionalnullable.OptionalNullable[string] `multipartForm:"name=description"`
+	Description *string `multipartForm:"name=description"`
 	// Optional list of style tags (e.g. ['upbeat', 'cinematic']). A maximum of 10 tags is allowed.
 	Tags []string `multipartForm:"name=tags"`
 	// Whether to sign the generated song with C2PA. Applicable only for mp3 files.
@@ -59,7 +58,7 @@ func (b *BodyVideoToMusicV1MusicVideoToMusicPost) GetVideos() []Video {
 	return b.Videos
 }
 
-func (b *BodyVideoToMusicV1MusicVideoToMusicPost) GetDescription() optionalnullable.OptionalNullable[string] {
+func (b *BodyVideoToMusicV1MusicVideoToMusicPost) GetDescription() *string {
 	if b == nil {
 		return nil
 	}

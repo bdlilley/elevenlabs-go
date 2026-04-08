@@ -5,7 +5,7 @@ An agent (and optional branch) that participated in the call, in first-seen tran
 
 ## Fields
 
-| Field                                       | Type                                        | Required                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `AgentID`                                   | `string`                                    | :heavy_check_mark:                          | N/A                                         |
-| `BranchID`                                  | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `AgentID`          | `string`           | :heavy_check_mark: | N/A                |
+| `BranchID`         | `*string`          | :heavy_minus_sign: | N/A                |

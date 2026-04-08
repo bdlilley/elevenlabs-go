@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -17,7 +16,7 @@ type VoicemailDetectionToolConfig struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	systemToolType *string `const:"voicemail_detection" json:"system_tool_type"`
 	// Optional message to leave on voicemail when detected. If not provided, the call will end immediately when voicemail is detected. Supports dynamic variables (e.g., {{system__time}}, {{system__call_duration_secs}}, {{custom_variable}}).
-	VoicemailMessage optionalnullable.OptionalNullable[string] `json:"voicemail_message,omitzero"`
+	VoicemailMessage *string `json:"voicemail_message,omitzero"`
 }
 
 func (v VoicemailDetectionToolConfig) MarshalJSON() ([]byte, error) {
@@ -35,7 +34,7 @@ func (v *VoicemailDetectionToolConfig) GetSystemToolType() *string {
 	return types.Pointer("voicemail_detection")
 }
 
-func (v *VoicemailDetectionToolConfig) GetVoicemailMessage() optionalnullable.OptionalNullable[string] {
+func (v *VoicemailDetectionToolConfig) GetVoicemailMessage() *string {
 	if v == nil {
 		return nil
 	}

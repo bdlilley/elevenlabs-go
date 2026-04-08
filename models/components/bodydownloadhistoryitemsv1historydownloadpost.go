@@ -2,15 +2,11 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyDownloadHistoryItemsV1HistoryDownloadPost struct {
 	// A list of history items to download, you can get IDs of history items and other metadata using the GET https://api.elevenlabs.io/v1/history endpoint.
 	HistoryItemIds []string `json:"history_item_ids"`
 	// Output format to transcode the audio file, can be wav or default.
-	OutputFormat optionalnullable.OptionalNullable[string] `json:"output_format,omitzero"`
+	OutputFormat *string `json:"output_format,omitzero"`
 }
 
 func (b *BodyDownloadHistoryItemsV1HistoryDownloadPost) GetHistoryItemIds() []string {
@@ -20,7 +16,7 @@ func (b *BodyDownloadHistoryItemsV1HistoryDownloadPost) GetHistoryItemIds() []st
 	return b.HistoryItemIds
 }
 
-func (b *BodyDownloadHistoryItemsV1HistoryDownloadPost) GetOutputFormat() optionalnullable.OptionalNullable[string] {
+func (b *BodyDownloadHistoryItemsV1HistoryDownloadPost) GetOutputFormat() *string {
 	if b == nil {
 		return nil
 	}

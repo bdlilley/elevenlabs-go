@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type VoicePreviewsRequestModel struct {
 	// Description to use for the created voice.
 	VoiceDescription string `json:"voice_description"`
 	// Text to generate, text length has to be between 100 and 1000.
-	Text optionalnullable.OptionalNullable[string] `json:"text,omitzero"`
+	Text *string `json:"text,omitzero"`
 	// Whether to automatically generate a text suitable for the voice description.
 	AutoGenerateText *bool `default:"false" json:"auto_generate_text"`
 	// Controls the volume level of the generated voice. -1 is quietest, 1 is loudest, 0 corresponds to roughly -24 LUFS.
@@ -19,7 +18,7 @@ type VoicePreviewsRequestModel struct {
 	// Higher quality results in better voice output but less variety.
 	Quality *float64 `default:"0.9" json:"quality"`
 	// Random number that controls the voice generation. Same seed with same inputs produces same voice.
-	Seed optionalnullable.OptionalNullable[int64] `json:"seed,omitzero"`
+	Seed *int64 `json:"seed,omitzero"`
 	// Controls how closely the AI follows the prompt. Lower numbers give the AI more freedom to be creative, while higher numbers force it to stick more to the prompt. High numbers can cause voice to sound artificial or robotic. We recommend to use longer, more detailed prompts at lower Guidance Scale.
 	GuidanceScale *float64 `default:"5" json:"guidance_scale"`
 	// Whether to enhance the voice description using AI to add more detail and improve voice generation quality. When enabled, the system will automatically expand simple prompts into more detailed voice descriptions. Defaults to False
@@ -44,7 +43,7 @@ func (v *VoicePreviewsRequestModel) GetVoiceDescription() string {
 	return v.VoiceDescription
 }
 
-func (v *VoicePreviewsRequestModel) GetText() optionalnullable.OptionalNullable[string] {
+func (v *VoicePreviewsRequestModel) GetText() *string {
 	if v == nil {
 		return nil
 	}
@@ -72,7 +71,7 @@ func (v *VoicePreviewsRequestModel) GetQuality() *float64 {
 	return v.Quality
 }
 
-func (v *VoicePreviewsRequestModel) GetSeed() optionalnullable.OptionalNullable[int64] {
+func (v *VoicePreviewsRequestModel) GetSeed() *int64 {
 	if v == nil {
 		return nil
 	}

@@ -2,25 +2,21 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type DiscountResponseModel struct {
 	// The discount applied to the invoice. E.g. [20.0f] for 20% off.
-	DiscountPercentOff optionalnullable.OptionalNullable[float64] `json:"discount_percent_off,omitzero"`
+	DiscountPercentOff *float64 `json:"discount_percent_off,omitzero"`
 	// The discount applied to the invoice. E.g. [20.0f] for 20 cents off.
-	DiscountAmountOff optionalnullable.OptionalNullable[float64] `json:"discount_amount_off,omitzero"`
+	DiscountAmountOff *float64 `json:"discount_amount_off,omitzero"`
 }
 
-func (d *DiscountResponseModel) GetDiscountPercentOff() optionalnullable.OptionalNullable[float64] {
+func (d *DiscountResponseModel) GetDiscountPercentOff() *float64 {
 	if d == nil {
 		return nil
 	}
 	return d.DiscountPercentOff
 }
 
-func (d *DiscountResponseModel) GetDiscountAmountOff() optionalnullable.OptionalNullable[float64] {
+func (d *DiscountResponseModel) GetDiscountAmountOff() *float64 {
 	if d == nil {
 		return nil
 	}

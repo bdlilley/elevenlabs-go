@@ -2,394 +2,390 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type WidgetTextContents struct {
 	// Call to action displayed inside the compact and full variants.
-	MainLabel optionalnullable.OptionalNullable[string] `json:"main_label,omitzero"`
+	MainLabel *string `json:"main_label,omitzero"`
 	// Text and ARIA label for the start call button.
-	StartCall optionalnullable.OptionalNullable[string] `json:"start_call,omitzero"`
+	StartCall *string `json:"start_call,omitzero"`
 	// Text and ARIA label for the start chat button (text only)
-	StartChat optionalnullable.OptionalNullable[string] `json:"start_chat,omitzero"`
+	StartChat *string `json:"start_chat,omitzero"`
 	// Text and ARIA label for the new call button. Displayed when the caller already finished at least one call in order ot start the next one.
-	NewCall optionalnullable.OptionalNullable[string] `json:"new_call,omitzero"`
+	NewCall *string `json:"new_call,omitzero"`
 	// Text and ARIA label for the end call button.
-	EndCall optionalnullable.OptionalNullable[string] `json:"end_call,omitzero"`
+	EndCall *string `json:"end_call,omitzero"`
 	// ARIA label for the mute microphone button.
-	MuteMicrophone optionalnullable.OptionalNullable[string] `json:"mute_microphone,omitzero"`
+	MuteMicrophone *string `json:"mute_microphone,omitzero"`
 	// ARIA label for the change language dropdown.
-	ChangeLanguage optionalnullable.OptionalNullable[string] `json:"change_language,omitzero"`
+	ChangeLanguage *string `json:"change_language,omitzero"`
 	// ARIA label for the collapse button.
-	Collapse optionalnullable.OptionalNullable[string] `json:"collapse,omitzero"`
+	Collapse *string `json:"collapse,omitzero"`
 	// ARIA label for the expand button.
-	Expand optionalnullable.OptionalNullable[string] `json:"expand,omitzero"`
+	Expand *string `json:"expand,omitzero"`
 	// Text displayed when the user copies a value using the copy button.
-	Copied optionalnullable.OptionalNullable[string] `json:"copied,omitzero"`
+	Copied *string `json:"copied,omitzero"`
 	// Text and ARIA label for the accept terms button.
-	AcceptTerms optionalnullable.OptionalNullable[string] `json:"accept_terms,omitzero"`
+	AcceptTerms *string `json:"accept_terms,omitzero"`
 	// Text and ARIA label for the cancel terms button.
-	DismissTerms optionalnullable.OptionalNullable[string] `json:"dismiss_terms,omitzero"`
+	DismissTerms *string `json:"dismiss_terms,omitzero"`
 	// Status displayed when the agent is listening.
-	ListeningStatus optionalnullable.OptionalNullable[string] `json:"listening_status,omitzero"`
+	ListeningStatus *string `json:"listening_status,omitzero"`
 	// Status displayed when the agent is speaking.
-	SpeakingStatus optionalnullable.OptionalNullable[string] `json:"speaking_status,omitzero"`
+	SpeakingStatus *string `json:"speaking_status,omitzero"`
 	// Status displayed when the agent is connecting.
-	ConnectingStatus optionalnullable.OptionalNullable[string] `json:"connecting_status,omitzero"`
+	ConnectingStatus *string `json:"connecting_status,omitzero"`
 	// Status displayed when the agent is chatting (text only)
-	ChattingStatus optionalnullable.OptionalNullable[string] `json:"chatting_status,omitzero"`
+	ChattingStatus *string `json:"chatting_status,omitzero"`
 	// ARIA label for the text message input.
-	InputLabel optionalnullable.OptionalNullable[string] `json:"input_label,omitzero"`
+	InputLabel *string `json:"input_label,omitzero"`
 	// Placeholder text for the text message input.
-	InputPlaceholder optionalnullable.OptionalNullable[string] `json:"input_placeholder,omitzero"`
+	InputPlaceholder *string `json:"input_placeholder,omitzero"`
 	// Placeholder text for the text message input (text only)
-	InputPlaceholderTextOnly optionalnullable.OptionalNullable[string] `json:"input_placeholder_text_only,omitzero"`
+	InputPlaceholderTextOnly *string `json:"input_placeholder_text_only,omitzero"`
 	// Placeholder text for the text message input when starting a new conversation (text only)
-	InputPlaceholderNewConversation optionalnullable.OptionalNullable[string] `json:"input_placeholder_new_conversation,omitzero"`
+	InputPlaceholderNewConversation *string `json:"input_placeholder_new_conversation,omitzero"`
 	// Information message displayed when the user ends the conversation.
-	UserEndedConversation optionalnullable.OptionalNullable[string] `json:"user_ended_conversation,omitzero"`
+	UserEndedConversation *string `json:"user_ended_conversation,omitzero"`
 	// Information message displayed when the agent ends the conversation.
-	AgentEndedConversation optionalnullable.OptionalNullable[string] `json:"agent_ended_conversation,omitzero"`
+	AgentEndedConversation *string `json:"agent_ended_conversation,omitzero"`
 	// Text label used next to the conversation ID.
-	ConversationID optionalnullable.OptionalNullable[string] `json:"conversation_id,omitzero"`
+	ConversationID *string `json:"conversation_id,omitzero"`
 	// Text label used when an error occurs.
-	ErrorOccurred optionalnullable.OptionalNullable[string] `json:"error_occurred,omitzero"`
+	ErrorOccurred *string `json:"error_occurred,omitzero"`
 	// Text and ARIA label used for the copy ID button.
-	CopyID optionalnullable.OptionalNullable[string] `json:"copy_id,omitzero"`
+	CopyID *string `json:"copy_id,omitzero"`
 	// Text displayed to prompt the user for feedback.
-	InitiateFeedback optionalnullable.OptionalNullable[string] `json:"initiate_feedback,omitzero"`
+	InitiateFeedback *string `json:"initiate_feedback,omitzero"`
 	// Text displayed to request additional feedback details.
-	RequestFollowUpFeedback optionalnullable.OptionalNullable[string] `json:"request_follow_up_feedback,omitzero"`
+	RequestFollowUpFeedback *string `json:"request_follow_up_feedback,omitzero"`
 	// Text displayed to thank the user for providing feedback.
-	ThanksForFeedback optionalnullable.OptionalNullable[string] `json:"thanks_for_feedback,omitzero"`
+	ThanksForFeedback *string `json:"thanks_for_feedback,omitzero"`
 	// Additional text displayed explaining the value of user feedback.
-	ThanksForFeedbackDetails optionalnullable.OptionalNullable[string] `json:"thanks_for_feedback_details,omitzero"`
+	ThanksForFeedbackDetails *string `json:"thanks_for_feedback_details,omitzero"`
 	// Placeholder text for the follow-up feedback input field.
-	FollowUpFeedbackPlaceholder optionalnullable.OptionalNullable[string] `json:"follow_up_feedback_placeholder,omitzero"`
+	FollowUpFeedbackPlaceholder *string `json:"follow_up_feedback_placeholder,omitzero"`
 	// Text and ARIA label for the submit button.
-	Submit optionalnullable.OptionalNullable[string] `json:"submit,omitzero"`
+	Submit *string `json:"submit,omitzero"`
 	// Text and ARIA label for the go back button.
-	GoBack optionalnullable.OptionalNullable[string] `json:"go_back,omitzero"`
+	GoBack *string `json:"go_back,omitzero"`
 	// Text and ARIA label for the send message button.
-	SendMessage optionalnullable.OptionalNullable[string] `json:"send_message,omitzero"`
+	SendMessage *string `json:"send_message,omitzero"`
 	// Text and ARIA label for the switch to text mode button.
-	TextMode optionalnullable.OptionalNullable[string] `json:"text_mode,omitzero"`
+	TextMode *string `json:"text_mode,omitzero"`
 	// Text and ARIA label for the switch to voice mode button.
-	VoiceMode optionalnullable.OptionalNullable[string] `json:"voice_mode,omitzero"`
+	VoiceMode *string `json:"voice_mode,omitzero"`
 	// Toast notification displayed when switching to text mode.
-	SwitchedToTextMode optionalnullable.OptionalNullable[string] `json:"switched_to_text_mode,omitzero"`
+	SwitchedToTextMode *string `json:"switched_to_text_mode,omitzero"`
 	// Toast notification displayed when switching to voice mode.
-	SwitchedToVoiceMode optionalnullable.OptionalNullable[string] `json:"switched_to_voice_mode,omitzero"`
+	SwitchedToVoiceMode *string `json:"switched_to_voice_mode,omitzero"`
 	// Text and ARIA label for the copy button.
-	Copy optionalnullable.OptionalNullable[string] `json:"copy,omitzero"`
+	Copy *string `json:"copy,omitzero"`
 	// Text and ARIA label for the download button.
-	Download optionalnullable.OptionalNullable[string] `json:"download,omitzero"`
+	Download *string `json:"download,omitzero"`
 	// Text and ARIA label for the wrap toggle button.
-	Wrap optionalnullable.OptionalNullable[string] `json:"wrap,omitzero"`
+	Wrap *string `json:"wrap,omitzero"`
 	// Status text displayed when the agent is processing a tool call.
-	AgentWorking optionalnullable.OptionalNullable[string] `json:"agent_working,omitzero"`
+	AgentWorking *string `json:"agent_working,omitzero"`
 	// Status text displayed when the agent finishes processing a tool call.
-	AgentDone optionalnullable.OptionalNullable[string] `json:"agent_done,omitzero"`
+	AgentDone *string `json:"agent_done,omitzero"`
 	// Status text displayed when the agent encounters an error during a tool call.
-	AgentError optionalnullable.OptionalNullable[string] `json:"agent_error,omitzero"`
+	AgentError *string `json:"agent_error,omitzero"`
 }
 
-func (w *WidgetTextContents) GetMainLabel() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetMainLabel() *string {
 	if w == nil {
 		return nil
 	}
 	return w.MainLabel
 }
 
-func (w *WidgetTextContents) GetStartCall() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetStartCall() *string {
 	if w == nil {
 		return nil
 	}
 	return w.StartCall
 }
 
-func (w *WidgetTextContents) GetStartChat() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetStartChat() *string {
 	if w == nil {
 		return nil
 	}
 	return w.StartChat
 }
 
-func (w *WidgetTextContents) GetNewCall() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetNewCall() *string {
 	if w == nil {
 		return nil
 	}
 	return w.NewCall
 }
 
-func (w *WidgetTextContents) GetEndCall() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetEndCall() *string {
 	if w == nil {
 		return nil
 	}
 	return w.EndCall
 }
 
-func (w *WidgetTextContents) GetMuteMicrophone() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetMuteMicrophone() *string {
 	if w == nil {
 		return nil
 	}
 	return w.MuteMicrophone
 }
 
-func (w *WidgetTextContents) GetChangeLanguage() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetChangeLanguage() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ChangeLanguage
 }
 
-func (w *WidgetTextContents) GetCollapse() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetCollapse() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Collapse
 }
 
-func (w *WidgetTextContents) GetExpand() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetExpand() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Expand
 }
 
-func (w *WidgetTextContents) GetCopied() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetCopied() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Copied
 }
 
-func (w *WidgetTextContents) GetAcceptTerms() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetAcceptTerms() *string {
 	if w == nil {
 		return nil
 	}
 	return w.AcceptTerms
 }
 
-func (w *WidgetTextContents) GetDismissTerms() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetDismissTerms() *string {
 	if w == nil {
 		return nil
 	}
 	return w.DismissTerms
 }
 
-func (w *WidgetTextContents) GetListeningStatus() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetListeningStatus() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ListeningStatus
 }
 
-func (w *WidgetTextContents) GetSpeakingStatus() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetSpeakingStatus() *string {
 	if w == nil {
 		return nil
 	}
 	return w.SpeakingStatus
 }
 
-func (w *WidgetTextContents) GetConnectingStatus() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetConnectingStatus() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ConnectingStatus
 }
 
-func (w *WidgetTextContents) GetChattingStatus() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetChattingStatus() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ChattingStatus
 }
 
-func (w *WidgetTextContents) GetInputLabel() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetInputLabel() *string {
 	if w == nil {
 		return nil
 	}
 	return w.InputLabel
 }
 
-func (w *WidgetTextContents) GetInputPlaceholder() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetInputPlaceholder() *string {
 	if w == nil {
 		return nil
 	}
 	return w.InputPlaceholder
 }
 
-func (w *WidgetTextContents) GetInputPlaceholderTextOnly() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetInputPlaceholderTextOnly() *string {
 	if w == nil {
 		return nil
 	}
 	return w.InputPlaceholderTextOnly
 }
 
-func (w *WidgetTextContents) GetInputPlaceholderNewConversation() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetInputPlaceholderNewConversation() *string {
 	if w == nil {
 		return nil
 	}
 	return w.InputPlaceholderNewConversation
 }
 
-func (w *WidgetTextContents) GetUserEndedConversation() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetUserEndedConversation() *string {
 	if w == nil {
 		return nil
 	}
 	return w.UserEndedConversation
 }
 
-func (w *WidgetTextContents) GetAgentEndedConversation() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetAgentEndedConversation() *string {
 	if w == nil {
 		return nil
 	}
 	return w.AgentEndedConversation
 }
 
-func (w *WidgetTextContents) GetConversationID() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetConversationID() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ConversationID
 }
 
-func (w *WidgetTextContents) GetErrorOccurred() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetErrorOccurred() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ErrorOccurred
 }
 
-func (w *WidgetTextContents) GetCopyID() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetCopyID() *string {
 	if w == nil {
 		return nil
 	}
 	return w.CopyID
 }
 
-func (w *WidgetTextContents) GetInitiateFeedback() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetInitiateFeedback() *string {
 	if w == nil {
 		return nil
 	}
 	return w.InitiateFeedback
 }
 
-func (w *WidgetTextContents) GetRequestFollowUpFeedback() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetRequestFollowUpFeedback() *string {
 	if w == nil {
 		return nil
 	}
 	return w.RequestFollowUpFeedback
 }
 
-func (w *WidgetTextContents) GetThanksForFeedback() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetThanksForFeedback() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ThanksForFeedback
 }
 
-func (w *WidgetTextContents) GetThanksForFeedbackDetails() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetThanksForFeedbackDetails() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ThanksForFeedbackDetails
 }
 
-func (w *WidgetTextContents) GetFollowUpFeedbackPlaceholder() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetFollowUpFeedbackPlaceholder() *string {
 	if w == nil {
 		return nil
 	}
 	return w.FollowUpFeedbackPlaceholder
 }
 
-func (w *WidgetTextContents) GetSubmit() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetSubmit() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Submit
 }
 
-func (w *WidgetTextContents) GetGoBack() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetGoBack() *string {
 	if w == nil {
 		return nil
 	}
 	return w.GoBack
 }
 
-func (w *WidgetTextContents) GetSendMessage() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetSendMessage() *string {
 	if w == nil {
 		return nil
 	}
 	return w.SendMessage
 }
 
-func (w *WidgetTextContents) GetTextMode() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetTextMode() *string {
 	if w == nil {
 		return nil
 	}
 	return w.TextMode
 }
 
-func (w *WidgetTextContents) GetVoiceMode() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetVoiceMode() *string {
 	if w == nil {
 		return nil
 	}
 	return w.VoiceMode
 }
 
-func (w *WidgetTextContents) GetSwitchedToTextMode() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetSwitchedToTextMode() *string {
 	if w == nil {
 		return nil
 	}
 	return w.SwitchedToTextMode
 }
 
-func (w *WidgetTextContents) GetSwitchedToVoiceMode() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetSwitchedToVoiceMode() *string {
 	if w == nil {
 		return nil
 	}
 	return w.SwitchedToVoiceMode
 }
 
-func (w *WidgetTextContents) GetCopy() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetCopy() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Copy
 }
 
-func (w *WidgetTextContents) GetDownload() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetDownload() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Download
 }
 
-func (w *WidgetTextContents) GetWrap() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetWrap() *string {
 	if w == nil {
 		return nil
 	}
 	return w.Wrap
 }
 
-func (w *WidgetTextContents) GetAgentWorking() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetAgentWorking() *string {
 	if w == nil {
 		return nil
 	}
 	return w.AgentWorking
 }
 
-func (w *WidgetTextContents) GetAgentDone() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetAgentDone() *string {
 	if w == nil {
 		return nil
 	}
 	return w.AgentDone
 }
 
-func (w *WidgetTextContents) GetAgentError() optionalnullable.OptionalNullable[string] {
+func (w *WidgetTextContents) GetAgentError() *string {
 	if w == nil {
 		return nil
 	}

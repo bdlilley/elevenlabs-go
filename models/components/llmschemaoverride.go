@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,7 +11,7 @@ type LLMSchemaOverride struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	source *string `const:"llm" json:"source"`
 	// Prompt override for the LLM. If not provided, the original schema description is used.
-	Prompt optionalnullable.OptionalNullable[string] `json:"prompt,omitzero"`
+	Prompt *string `json:"prompt,omitzero"`
 }
 
 func (l LLMSchemaOverride) MarshalJSON() ([]byte, error) {
@@ -30,7 +29,7 @@ func (l *LLMSchemaOverride) GetSource() *string {
 	return types.Pointer("llm")
 }
 
-func (l *LLMSchemaOverride) GetPrompt() optionalnullable.OptionalNullable[string] {
+func (l *LLMSchemaOverride) GetPrompt() *string {
 	if l == nil {
 		return nil
 	}

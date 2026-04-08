@@ -4,15 +4,14 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type LanguagePresetInput struct {
 	Overrides ConversationConfigClientOverrideInput `json:"overrides"`
 	// The translation of the first message
-	FirstMessageTranslation optionalnullable.OptionalNullable[LanguagePresetTranslation] `json:"first_message_translation,omitzero"`
+	FirstMessageTranslation *LanguagePresetTranslation `json:"first_message_translation,omitzero"`
 	// The translation of the soft timeout message
-	SoftTimeoutTranslation optionalnullable.OptionalNullable[LanguagePresetTranslation] `json:"soft_timeout_translation,omitzero"`
+	SoftTimeoutTranslation *LanguagePresetTranslation `json:"soft_timeout_translation,omitzero"`
 }
 
 func (l LanguagePresetInput) MarshalJSON() ([]byte, error) {
@@ -33,14 +32,14 @@ func (l *LanguagePresetInput) GetOverrides() ConversationConfigClientOverrideInp
 	return l.Overrides
 }
 
-func (l *LanguagePresetInput) GetFirstMessageTranslation() optionalnullable.OptionalNullable[LanguagePresetTranslation] {
+func (l *LanguagePresetInput) GetFirstMessageTranslation() *LanguagePresetTranslation {
 	if l == nil {
 		return nil
 	}
 	return l.FirstMessageTranslation
 }
 
-func (l *LanguagePresetInput) GetSoftTimeoutTranslation() optionalnullable.OptionalNullable[LanguagePresetTranslation] {
+func (l *LanguagePresetInput) GetSoftTimeoutTranslation() *LanguagePresetTranslation {
 	if l == nil {
 		return nil
 	}

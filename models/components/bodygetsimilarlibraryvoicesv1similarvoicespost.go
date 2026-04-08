@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AudioFile struct {
@@ -30,9 +29,9 @@ func (a *AudioFile) GetContent() any {
 type BodyGetSimilarLibraryVoicesV1SimilarVoicesPost struct {
 	AudioFile *AudioFile `multipartForm:"file,name=audio_file"`
 	// Threshold for voice similarity between provided sample and library voices. Values range from 0 to 2. The smaller the value the more similar voices will be returned.
-	SimilarityThreshold optionalnullable.OptionalNullable[float64] `multipartForm:"name=similarity_threshold"`
+	SimilarityThreshold *float64 `multipartForm:"name=similarity_threshold"`
 	// Number of most similar voices to return. If similarity_threshold is provided, less than this number of voices may be returned. Values range from 1 to 100.
-	TopK optionalnullable.OptionalNullable[int64] `multipartForm:"name=top_k"`
+	TopK *int64 `multipartForm:"name=top_k"`
 }
 
 func (b BodyGetSimilarLibraryVoicesV1SimilarVoicesPost) MarshalJSON() ([]byte, error) {
@@ -53,14 +52,14 @@ func (b *BodyGetSimilarLibraryVoicesV1SimilarVoicesPost) GetAudioFile() *AudioFi
 	return b.AudioFile
 }
 
-func (b *BodyGetSimilarLibraryVoicesV1SimilarVoicesPost) GetSimilarityThreshold() optionalnullable.OptionalNullable[float64] {
+func (b *BodyGetSimilarLibraryVoicesV1SimilarVoicesPost) GetSimilarityThreshold() *float64 {
 	if b == nil {
 		return nil
 	}
 	return b.SimilarityThreshold
 }
 
-func (b *BodyGetSimilarLibraryVoicesV1SimilarVoicesPost) GetTopK() optionalnullable.OptionalNullable[int64] {
+func (b *BodyGetSimilarLibraryVoicesV1SimilarVoicesPost) GetTopK() *int64 {
 	if b == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput struct {
@@ -18,8 +17,8 @@ type ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput struct {
 	RawErrorMessage        *string                            `default:"" json:"raw_error_message"`
 	DynamicVariableUpdates []DynamicVariableUpdateCommonModel `json:"dynamic_variable_updates,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_  string                                                             `const:"workflow" json:"type"`
-	Result optionalnullable.OptionalNullable[WorkflowToolResponseModelOutput] `json:"result,omitzero"`
+	type_  string                           `const:"workflow" json:"type"`
+	Result *WorkflowToolResponseModelOutput `json:"result,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput) MarshalJSON() ([]byte, error) {
@@ -100,7 +99,7 @@ func (c *ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput) GetT
 	return "workflow"
 }
 
-func (c *ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput) GetResult() optionalnullable.OptionalNullable[WorkflowToolResponseModelOutput] {
+func (c *ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput) GetResult() *WorkflowToolResponseModelOutput {
 	if c == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type Direction string
@@ -31,10 +30,10 @@ func (e *Direction) IsExact() bool {
 }
 
 type WhatsAppConversationInfo struct {
-	Direction                *Direction                                `default:"unknown" json:"direction"`
-	WhatsappPhoneNumberID    optionalnullable.OptionalNullable[string] `json:"whatsapp_phone_number_id,omitzero"`
-	WhatsappUserID           string                                    `json:"whatsapp_user_id"`
-	AwaitingFirstUserMessage optionalnullable.OptionalNullable[bool]   `json:"awaiting_first_user_message,omitzero"`
+	Direction                *Direction `default:"unknown" json:"direction"`
+	WhatsappPhoneNumberID    *string    `json:"whatsapp_phone_number_id,omitzero"`
+	WhatsappUserID           string     `json:"whatsapp_user_id"`
+	AwaitingFirstUserMessage *bool      `json:"awaiting_first_user_message,omitzero"`
 }
 
 func (w WhatsAppConversationInfo) MarshalJSON() ([]byte, error) {
@@ -55,7 +54,7 @@ func (w *WhatsAppConversationInfo) GetDirection() *Direction {
 	return w.Direction
 }
 
-func (w *WhatsAppConversationInfo) GetWhatsappPhoneNumberID() optionalnullable.OptionalNullable[string] {
+func (w *WhatsAppConversationInfo) GetWhatsappPhoneNumberID() *string {
 	if w == nil {
 		return nil
 	}
@@ -69,7 +68,7 @@ func (w *WhatsAppConversationInfo) GetWhatsappUserID() string {
 	return w.WhatsappUserID
 }
 
-func (w *WhatsAppConversationInfo) GetAwaitingFirstUserMessage() optionalnullable.OptionalNullable[bool] {
+func (w *WhatsAppConversationInfo) GetAwaitingFirstUserMessage() *bool {
 	if w == nil {
 		return nil
 	}

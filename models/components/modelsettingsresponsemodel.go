@@ -2,16 +2,12 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type ModelSettingsResponseModel struct {
 	// Determines how stable the voice is and the randomness between each generation. Lower values introduce broader emotional range for the voice. Higher values can result in a monotonous voice with limited emotion.
-	Stability optionalnullable.OptionalNullable[float64] `json:"stability,omitzero"`
+	Stability *float64 `json:"stability,omitzero"`
 }
 
-func (m *ModelSettingsResponseModel) GetStability() optionalnullable.OptionalNullable[float64] {
+func (m *ModelSettingsResponseModel) GetStability() *float64 {
 	if m == nil {
 		return nil
 	}

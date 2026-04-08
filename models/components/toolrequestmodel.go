@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ToolRequestModelToolConfigType string
@@ -142,7 +141,7 @@ type ToolRequestModel struct {
 	// Configuration for the tool
 	ToolConfig ToolRequestModelToolConfig `json:"tool_config"`
 	// Mock responses with optional parameter conditions. Evaluated top-to-bottom; first match wins.
-	ResponseMocks optionalnullable.OptionalNullable[[]ToolResponseMockConfigInput] `json:"response_mocks,omitzero"`
+	ResponseMocks []ToolResponseMockConfigInput `json:"response_mocks,omitzero"`
 }
 
 func (t ToolRequestModel) MarshalJSON() ([]byte, error) {
@@ -179,7 +178,7 @@ func (t *ToolRequestModel) GetToolConfigWebhook() *WebhookToolConfigInput {
 	return t.GetToolConfig().WebhookToolConfigInput
 }
 
-func (t *ToolRequestModel) GetResponseMocks() optionalnullable.OptionalNullable[[]ToolResponseMockConfigInput] {
+func (t *ToolRequestModel) GetResponseMocks() []ToolResponseMockConfigInput {
 	if t == nil {
 		return nil
 	}

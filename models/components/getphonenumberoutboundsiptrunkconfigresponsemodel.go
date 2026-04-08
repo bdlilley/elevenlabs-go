@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // GetPhoneNumberOutboundSIPTrunkConfigResponseModel - SIP Trunk configuration details for a phone number
@@ -18,7 +17,7 @@ type GetPhoneNumberOutboundSIPTrunkConfigResponseModel struct {
 	// Whether authentication credentials are configured
 	HasAuthCredentials bool `json:"has_auth_credentials"`
 	// SIP trunk username (if available)
-	Username optionalnullable.OptionalNullable[string] `json:"username,omitzero"`
+	Username *string `json:"username,omitzero"`
 	// Whether a LiveKit SIP outbound trunk is configured
 	HasOutboundTrunk *bool `default:"false" json:"has_outbound_trunk"`
 }
@@ -69,7 +68,7 @@ func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetHasAuthCredential
 	return g.HasAuthCredentials
 }
 
-func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetUsername() optionalnullable.OptionalNullable[string] {
+func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetUsername() *string {
 	if g == nil {
 		return nil
 	}

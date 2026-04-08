@@ -4,22 +4,21 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RagConfigWorkflowOverride struct {
-	Enabled        optionalnullable.OptionalNullable[bool]               `json:"enabled,omitzero"`
-	EmbeddingModel optionalnullable.OptionalNullable[EmbeddingModelEnum] `default:"e5_mistral_7b_instruct" json:"embedding_model"`
+	Enabled        *bool               `json:"enabled,omitzero"`
+	EmbeddingModel *EmbeddingModelEnum `default:"e5_mistral_7b_instruct" json:"embedding_model"`
 	// Maximum vector distance of retrieved chunks.
-	MaxVectorDistance optionalnullable.OptionalNullable[float64] `json:"max_vector_distance,omitzero"`
+	MaxVectorDistance *float64 `json:"max_vector_distance,omitzero"`
 	// Maximum total length of document chunks retrieved from RAG.
-	MaxDocumentsLength optionalnullable.OptionalNullable[int64] `json:"max_documents_length,omitzero"`
+	MaxDocumentsLength *int64 `json:"max_documents_length,omitzero"`
 	// Maximum number of RAG document chunks to initially retrieve from the vector store. These are then further filtered by vector distance and total length.
-	MaxRetrievedRagChunksCount optionalnullable.OptionalNullable[int64] `json:"max_retrieved_rag_chunks_count,omitzero"`
+	MaxRetrievedRagChunksCount *int64 `json:"max_retrieved_rag_chunks_count,omitzero"`
 	// Number of candidates evaluated in ANN vector search. Higher number means better results, but higher latency. Minimum recommended value is 100. If disabled, the default value is used.
-	NumCandidates optionalnullable.OptionalNullable[int64] `json:"num_candidates,omitzero"`
+	NumCandidates *int64 `json:"num_candidates,omitzero"`
 	// Custom prompt for rewriting user queries before RAG retrieval. The conversation history will be automatically appended at the end. If not set, the default prompt will be used.
-	QueryRewritePromptOverride optionalnullable.OptionalNullable[string] `json:"query_rewrite_prompt_override,omitzero"`
+	QueryRewritePromptOverride *string `json:"query_rewrite_prompt_override,omitzero"`
 }
 
 func (r RagConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -33,49 +32,49 @@ func (r *RagConfigWorkflowOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (r *RagConfigWorkflowOverride) GetEnabled() optionalnullable.OptionalNullable[bool] {
+func (r *RagConfigWorkflowOverride) GetEnabled() *bool {
 	if r == nil {
 		return nil
 	}
 	return r.Enabled
 }
 
-func (r *RagConfigWorkflowOverride) GetEmbeddingModel() optionalnullable.OptionalNullable[EmbeddingModelEnum] {
+func (r *RagConfigWorkflowOverride) GetEmbeddingModel() *EmbeddingModelEnum {
 	if r == nil {
 		return nil
 	}
 	return r.EmbeddingModel
 }
 
-func (r *RagConfigWorkflowOverride) GetMaxVectorDistance() optionalnullable.OptionalNullable[float64] {
+func (r *RagConfigWorkflowOverride) GetMaxVectorDistance() *float64 {
 	if r == nil {
 		return nil
 	}
 	return r.MaxVectorDistance
 }
 
-func (r *RagConfigWorkflowOverride) GetMaxDocumentsLength() optionalnullable.OptionalNullable[int64] {
+func (r *RagConfigWorkflowOverride) GetMaxDocumentsLength() *int64 {
 	if r == nil {
 		return nil
 	}
 	return r.MaxDocumentsLength
 }
 
-func (r *RagConfigWorkflowOverride) GetMaxRetrievedRagChunksCount() optionalnullable.OptionalNullable[int64] {
+func (r *RagConfigWorkflowOverride) GetMaxRetrievedRagChunksCount() *int64 {
 	if r == nil {
 		return nil
 	}
 	return r.MaxRetrievedRagChunksCount
 }
 
-func (r *RagConfigWorkflowOverride) GetNumCandidates() optionalnullable.OptionalNullable[int64] {
+func (r *RagConfigWorkflowOverride) GetNumCandidates() *int64 {
 	if r == nil {
 		return nil
 	}
 	return r.NumCandidates
 }
 
-func (r *RagConfigWorkflowOverride) GetQueryRewritePromptOverride() optionalnullable.OptionalNullable[string] {
+func (r *RagConfigWorkflowOverride) GetQueryRewritePromptOverride() *string {
 	if r == nil {
 		return nil
 	}

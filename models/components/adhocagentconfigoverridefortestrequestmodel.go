@@ -4,13 +4,12 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AdhocAgentConfigOverrideForTestRequestModel struct {
-	ConversationConfig ConversationalConfigAPIModelInput                            `json:"conversation_config"`
-	PlatformSettings   AgentPlatformSettingsRequestModel                            `json:"platform_settings"`
-	Workflow           optionalnullable.OptionalNullable[AgentWorkflowRequestModel] `json:"workflow,omitzero"`
+	ConversationConfig ConversationalConfigAPIModelInput `json:"conversation_config"`
+	PlatformSettings   AgentPlatformSettingsRequestModel `json:"platform_settings"`
+	Workflow           *AgentWorkflowRequestModel        `json:"workflow,omitzero"`
 }
 
 func (a AdhocAgentConfigOverrideForTestRequestModel) MarshalJSON() ([]byte, error) {
@@ -38,7 +37,7 @@ func (a *AdhocAgentConfigOverrideForTestRequestModel) GetPlatformSettings() Agen
 	return a.PlatformSettings
 }
 
-func (a *AdhocAgentConfigOverrideForTestRequestModel) GetWorkflow() optionalnullable.OptionalNullable[AgentWorkflowRequestModel] {
+func (a *AdhocAgentConfigOverrideForTestRequestModel) GetWorkflow() *AgentWorkflowRequestModel {
 	if a == nil {
 		return nil
 	}

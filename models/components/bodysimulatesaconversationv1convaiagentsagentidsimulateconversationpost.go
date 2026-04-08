@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost struct {
 	// A specification that will be used to simulate a conversation between an agent and an AI user.
 	SimulationSpecification ConversationSimulationSpecification `json:"simulation_specification"`
 	// A list of evaluation criteria to test
-	ExtraEvaluationCriteria optionalnullable.OptionalNullable[[]PromptEvaluationCriteria] `json:"extra_evaluation_criteria,omitzero"`
+	ExtraEvaluationCriteria []PromptEvaluationCriteria `json:"extra_evaluation_criteria,omitzero"`
 	// Maximum number of new turns to generate in the conversation simulation
 	NewTurnsLimit *int64 `default:"10000" json:"new_turns_limit"`
 }
@@ -34,7 +33,7 @@ func (b *BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost
 	return b.SimulationSpecification
 }
 
-func (b *BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost) GetExtraEvaluationCriteria() optionalnullable.OptionalNullable[[]PromptEvaluationCriteria] {
+func (b *BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost) GetExtraEvaluationCriteria() []PromptEvaluationCriteria {
 	if b == nil {
 		return nil
 	}

@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WidgetConfigOutputAvatarType string
@@ -155,7 +154,7 @@ type WidgetConfigOutput struct {
 	Avatar       *WidgetConfigOutputAvatar `json:"avatar,omitzero"`
 	FeedbackMode *WidgetFeedbackMode       `default:"none" json:"feedback_mode"`
 	// Configuration for feedback collected at the end of the conversation
-	EndFeedback optionalnullable.OptionalNullable[WidgetEndFeedbackConfig] `json:"end_feedback,omitzero"`
+	EndFeedback *WidgetEndFeedbackConfig `json:"end_feedback,omitzero"`
 	// The background color of the widget
 	BgColor *string `default:"#ffffff" json:"bg_color"`
 	// The text color of the widget
@@ -169,37 +168,37 @@ type WidgetConfigOutput struct {
 	// The focus color of the widget
 	FocusColor *string `default:"#000000" json:"focus_color"`
 	// The border radius of the widget
-	BorderRadius optionalnullable.OptionalNullable[int64] `json:"border_radius,omitzero"`
+	BorderRadius *int64 `json:"border_radius,omitzero"`
 	// The button radius of the widget
-	BtnRadius optionalnullable.OptionalNullable[int64] `json:"btn_radius,omitzero"`
+	BtnRadius *int64 `json:"btn_radius,omitzero"`
 	// The action text of the widget
-	ActionText optionalnullable.OptionalNullable[string] `json:"action_text,omitzero"`
+	ActionText *string `json:"action_text,omitzero"`
 	// The start call text of the widget
-	StartCallText optionalnullable.OptionalNullable[string] `json:"start_call_text,omitzero"`
+	StartCallText *string `json:"start_call_text,omitzero"`
 	// The end call text of the widget
-	EndCallText optionalnullable.OptionalNullable[string] `json:"end_call_text,omitzero"`
+	EndCallText *string `json:"end_call_text,omitzero"`
 	// The expand text of the widget
-	ExpandText optionalnullable.OptionalNullable[string] `json:"expand_text,omitzero"`
+	ExpandText *string `json:"expand_text,omitzero"`
 	// The text to display when the agent is listening
-	ListeningText optionalnullable.OptionalNullable[string] `json:"listening_text,omitzero"`
+	ListeningText *string `json:"listening_text,omitzero"`
 	// The text to display when the agent is speaking
-	SpeakingText optionalnullable.OptionalNullable[string] `json:"speaking_text,omitzero"`
+	SpeakingText *string `json:"speaking_text,omitzero"`
 	// The text to display when sharing
-	ShareablePageText optionalnullable.OptionalNullable[string] `json:"shareable_page_text,omitzero"`
+	ShareablePageText *string `json:"shareable_page_text,omitzero"`
 	// Whether to show terms and conditions on the shareable page
 	ShareablePageShowTerms *bool `default:"true" json:"shareable_page_show_terms"`
 	// The text to display for terms and conditions
-	TermsText optionalnullable.OptionalNullable[string] `json:"terms_text,omitzero"`
+	TermsText *string `json:"terms_text,omitzero"`
 	// The HTML to display for terms and conditions
-	TermsHTML optionalnullable.OptionalNullable[string] `json:"terms_html,omitzero"`
+	TermsHTML *string `json:"terms_html,omitzero"`
 	// The key to display for terms and conditions
-	TermsKey optionalnullable.OptionalNullable[string] `json:"terms_key,omitzero"`
+	TermsKey *string `json:"terms_key,omitzero"`
 	// Whether to show the avatar when the widget is collapsed
-	ShowAvatarWhenCollapsed optionalnullable.OptionalNullable[bool] `json:"show_avatar_when_collapsed,omitzero"`
+	ShowAvatarWhenCollapsed *bool `json:"show_avatar_when_collapsed,omitzero"`
 	// Whether to disable the banner
 	DisableBanner *bool `default:"false" json:"disable_banner"`
 	// The override link for the widget
-	OverrideLink optionalnullable.OptionalNullable[string] `json:"override_link,omitzero"`
+	OverrideLink *string `json:"override_link,omitzero"`
 	// List of allowed hostnames for clickable markdown links. Use { hostname: '*' } to allow any domain. Empty means no links are allowed.
 	MarkdownLinkAllowedHosts []AllowlistItem `json:"markdown_link_allowed_hosts,omitzero"`
 	// Whether to automatically include www. variants of allowed hosts
@@ -227,15 +226,15 @@ type WidgetConfigOutput struct {
 	// Whether to strip audio markup from messages.
 	StripAudioTags *bool `default:"true" json:"strip_audio_tags"`
 	// Theme for code block syntax highlighting. Defaults to auto-detection by the widget when not set.
-	SyntaxHighlightTheme optionalnullable.OptionalNullable[WidgetConfigOutputSyntaxHighlightTheme] `json:"syntax_highlight_theme,omitzero"`
-	TextContents         *WidgetTextContents                                                       `json:"text_contents,omitzero"`
-	Styles               *WidgetStyles                                                             `json:"styles,omitzero"`
+	SyntaxHighlightTheme *WidgetConfigOutputSyntaxHighlightTheme `json:"syntax_highlight_theme,omitzero"`
+	TextContents         *WidgetTextContents                     `json:"text_contents,omitzero"`
+	Styles               *WidgetStyles                           `json:"styles,omitzero"`
 	// Whether to show the language selector
 	LanguageSelector *bool `default:"false" json:"language_selector"`
 	// Whether the widget can switch to text only mode
 	SupportsTextOnly *bool `default:"true" json:"supports_text_only"`
 	// The custom avatar path
-	CustomAvatarPath optionalnullable.OptionalNullable[string] `json:"custom_avatar_path,omitzero"`
+	CustomAvatarPath *string `json:"custom_avatar_path,omitzero"`
 	// Language presets for the widget
 	LanguagePresets map[string]WidgetLanguagePreset `json:"language_presets,omitzero"`
 }
@@ -286,7 +285,7 @@ func (w *WidgetConfigOutput) GetFeedbackMode() *WidgetFeedbackMode {
 	return w.FeedbackMode
 }
 
-func (w *WidgetConfigOutput) GetEndFeedback() optionalnullable.OptionalNullable[WidgetEndFeedbackConfig] {
+func (w *WidgetConfigOutput) GetEndFeedback() *WidgetEndFeedbackConfig {
 	if w == nil {
 		return nil
 	}
@@ -335,63 +334,63 @@ func (w *WidgetConfigOutput) GetFocusColor() *string {
 	return w.FocusColor
 }
 
-func (w *WidgetConfigOutput) GetBorderRadius() optionalnullable.OptionalNullable[int64] {
+func (w *WidgetConfigOutput) GetBorderRadius() *int64 {
 	if w == nil {
 		return nil
 	}
 	return w.BorderRadius
 }
 
-func (w *WidgetConfigOutput) GetBtnRadius() optionalnullable.OptionalNullable[int64] {
+func (w *WidgetConfigOutput) GetBtnRadius() *int64 {
 	if w == nil {
 		return nil
 	}
 	return w.BtnRadius
 }
 
-func (w *WidgetConfigOutput) GetActionText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetActionText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ActionText
 }
 
-func (w *WidgetConfigOutput) GetStartCallText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetStartCallText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.StartCallText
 }
 
-func (w *WidgetConfigOutput) GetEndCallText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetEndCallText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.EndCallText
 }
 
-func (w *WidgetConfigOutput) GetExpandText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetExpandText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ExpandText
 }
 
-func (w *WidgetConfigOutput) GetListeningText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetListeningText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.ListeningText
 }
 
-func (w *WidgetConfigOutput) GetSpeakingText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetSpeakingText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.SpeakingText
 }
 
-func (w *WidgetConfigOutput) GetShareablePageText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetShareablePageText() *string {
 	if w == nil {
 		return nil
 	}
@@ -405,28 +404,28 @@ func (w *WidgetConfigOutput) GetShareablePageShowTerms() *bool {
 	return w.ShareablePageShowTerms
 }
 
-func (w *WidgetConfigOutput) GetTermsText() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetTermsText() *string {
 	if w == nil {
 		return nil
 	}
 	return w.TermsText
 }
 
-func (w *WidgetConfigOutput) GetTermsHTML() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetTermsHTML() *string {
 	if w == nil {
 		return nil
 	}
 	return w.TermsHTML
 }
 
-func (w *WidgetConfigOutput) GetTermsKey() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetTermsKey() *string {
 	if w == nil {
 		return nil
 	}
 	return w.TermsKey
 }
 
-func (w *WidgetConfigOutput) GetShowAvatarWhenCollapsed() optionalnullable.OptionalNullable[bool] {
+func (w *WidgetConfigOutput) GetShowAvatarWhenCollapsed() *bool {
 	if w == nil {
 		return nil
 	}
@@ -440,7 +439,7 @@ func (w *WidgetConfigOutput) GetDisableBanner() *bool {
 	return w.DisableBanner
 }
 
-func (w *WidgetConfigOutput) GetOverrideLink() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetOverrideLink() *string {
 	if w == nil {
 		return nil
 	}
@@ -538,7 +537,7 @@ func (w *WidgetConfigOutput) GetStripAudioTags() *bool {
 	return w.StripAudioTags
 }
 
-func (w *WidgetConfigOutput) GetSyntaxHighlightTheme() optionalnullable.OptionalNullable[WidgetConfigOutputSyntaxHighlightTheme] {
+func (w *WidgetConfigOutput) GetSyntaxHighlightTheme() *WidgetConfigOutputSyntaxHighlightTheme {
 	if w == nil {
 		return nil
 	}
@@ -573,7 +572,7 @@ func (w *WidgetConfigOutput) GetSupportsTextOnly() *bool {
 	return w.SupportsTextOnly
 }
 
-func (w *WidgetConfigOutput) GetCustomAvatarPath() optionalnullable.OptionalNullable[string] {
+func (w *WidgetConfigOutput) GetCustomAvatarPath() *string {
 	if w == nil {
 		return nil
 	}

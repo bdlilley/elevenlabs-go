@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SchemaOverridesType string
@@ -205,10 +204,10 @@ func (u APIIntegrationWebhookOverridesRequestHeaders) MarshalJSON() ([]byte, err
 // APIIntegrationWebhookOverrides - A whitelist of fields that can be overridden by users when
 // configuring an API Integration Webhook Tool.
 type APIIntegrationWebhookOverrides struct {
-	SchemaOverrides    optionalnullable.OptionalNullable[map[string]SchemaOverrides]                              `json:"schema_overrides,omitzero"`
-	RequestHeaders     optionalnullable.OptionalNullable[map[string]APIIntegrationWebhookOverridesRequestHeaders] `json:"request_headers,omitzero"`
-	ResponseFilterMode optionalnullable.OptionalNullable[ResponseFilterMode]                                      `default:"all" json:"response_filter_mode"`
-	ResponseFilters    optionalnullable.OptionalNullable[[]string]                                                `json:"response_filters,omitzero"`
+	SchemaOverrides    map[string]SchemaOverrides                              `json:"schema_overrides,omitzero"`
+	RequestHeaders     map[string]APIIntegrationWebhookOverridesRequestHeaders `json:"request_headers,omitzero"`
+	ResponseFilterMode *ResponseFilterMode                                     `default:"all" json:"response_filter_mode"`
+	ResponseFilters    []string                                                `json:"response_filters,omitzero"`
 }
 
 func (a APIIntegrationWebhookOverrides) MarshalJSON() ([]byte, error) {
@@ -222,28 +221,28 @@ func (a *APIIntegrationWebhookOverrides) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *APIIntegrationWebhookOverrides) GetSchemaOverrides() optionalnullable.OptionalNullable[map[string]SchemaOverrides] {
+func (a *APIIntegrationWebhookOverrides) GetSchemaOverrides() map[string]SchemaOverrides {
 	if a == nil {
 		return nil
 	}
 	return a.SchemaOverrides
 }
 
-func (a *APIIntegrationWebhookOverrides) GetRequestHeaders() optionalnullable.OptionalNullable[map[string]APIIntegrationWebhookOverridesRequestHeaders] {
+func (a *APIIntegrationWebhookOverrides) GetRequestHeaders() map[string]APIIntegrationWebhookOverridesRequestHeaders {
 	if a == nil {
 		return nil
 	}
 	return a.RequestHeaders
 }
 
-func (a *APIIntegrationWebhookOverrides) GetResponseFilterMode() optionalnullable.OptionalNullable[ResponseFilterMode] {
+func (a *APIIntegrationWebhookOverrides) GetResponseFilterMode() *ResponseFilterMode {
 	if a == nil {
 		return nil
 	}
 	return a.ResponseFilterMode
 }
 
-func (a *APIIntegrationWebhookOverrides) GetResponseFilters() optionalnullable.OptionalNullable[[]string] {
+func (a *APIIntegrationWebhookOverrides) GetResponseFilters() []string {
 	if a == nil {
 		return nil
 	}

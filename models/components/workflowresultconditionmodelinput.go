@@ -4,13 +4,12 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type WorkflowResultConditionModelInput struct {
 	// Optional human-readable label for the condition used throughout the UI.
-	Label optionalnullable.OptionalNullable[string] `json:"label,omitzero"`
+	Label *string `json:"label,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"result" json:"type"`
 	// Whether all tools in the previously executed tool node were executed successfully.
@@ -28,7 +27,7 @@ func (w *WorkflowResultConditionModelInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WorkflowResultConditionModelInput) GetLabel() optionalnullable.OptionalNullable[string] {
+func (w *WorkflowResultConditionModelInput) GetLabel() *string {
 	if w == nil {
 		return nil
 	}

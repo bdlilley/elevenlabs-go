@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -130,14 +129,14 @@ type MCPToolConfigInput struct {
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines how the tool call sound should be played.
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// Controls how tool errors are processed before being shared with the agent.
 	ToolErrorHandlingMode *ToolErrorHandlingMode `default:"auto" json:"tool_error_handling_mode"`
 	IntegrationType       IntegrationType        `json:"integration_type"`
 	// Schema for any parameters the LLM needs to provide to the MCP tool.
-	Parameters optionalnullable.OptionalNullable[ObjectJSONSchemaPropertyInput] `json:"parameters,omitzero"`
+	Parameters *ObjectJSONSchemaPropertyInput `json:"parameters,omitzero"`
 	// Defines the MCP server-level approval policy for tool execution.
 	ApprovalPolicy *MCPApprovalPolicy `default:"require_approval_all" json:"approval_policy"`
 	// The name of the MCP tool to call
@@ -149,10 +148,10 @@ type MCPToolConfigInput struct {
 	// The name of the MCP server to call
 	McpServerName string `json:"mcp_server_name"`
 	// Original inputSchema dict for consistent hashing
-	McpInputSchema optionalnullable.OptionalNullable[map[string]any] `json:"mcp_input_schema,omitzero"`
-	ExecutionMode  *ToolExecutionMode                                `default:"immediate" json:"execution_mode"`
+	McpInputSchema map[string]any     `json:"mcp_input_schema,omitzero"`
+	ExecutionMode  *ToolExecutionMode `default:"immediate" json:"execution_mode"`
 	// Input parameter overrides for this tool
-	InputOverrides optionalnullable.OptionalNullable[map[string]MCPToolConfigInputInputOverrides] `json:"input_overrides,omitzero"`
+	InputOverrides map[string]MCPToolConfigInputInputOverrides `json:"input_overrides,omitzero"`
 }
 
 func (m MCPToolConfigInput) MarshalJSON() ([]byte, error) {
@@ -212,7 +211,7 @@ func (m *MCPToolConfigInput) GetAssignments() []DynamicVariableAssignment {
 	return m.Assignments
 }
 
-func (m *MCPToolConfigInput) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (m *MCPToolConfigInput) GetToolCallSound() *ToolCallSoundType {
 	if m == nil {
 		return nil
 	}
@@ -240,7 +239,7 @@ func (m *MCPToolConfigInput) GetIntegrationType() IntegrationType {
 	return m.IntegrationType
 }
 
-func (m *MCPToolConfigInput) GetParameters() optionalnullable.OptionalNullable[ObjectJSONSchemaPropertyInput] {
+func (m *MCPToolConfigInput) GetParameters() *ObjectJSONSchemaPropertyInput {
 	if m == nil {
 		return nil
 	}
@@ -282,7 +281,7 @@ func (m *MCPToolConfigInput) GetMcpServerName() string {
 	return m.McpServerName
 }
 
-func (m *MCPToolConfigInput) GetMcpInputSchema() optionalnullable.OptionalNullable[map[string]any] {
+func (m *MCPToolConfigInput) GetMcpInputSchema() map[string]any {
 	if m == nil {
 		return nil
 	}
@@ -296,7 +295,7 @@ func (m *MCPToolConfigInput) GetExecutionMode() *ToolExecutionMode {
 	return m.ExecutionMode
 }
 
-func (m *MCPToolConfigInput) GetInputOverrides() optionalnullable.OptionalNullable[map[string]MCPToolConfigInputInputOverrides] {
+func (m *MCPToolConfigInput) GetInputOverrides() map[string]MCPToolConfigInputInputOverrides {
 	if m == nil {
 		return nil
 	}

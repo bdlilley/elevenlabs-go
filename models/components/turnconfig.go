@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TurnConfig struct {
 	// Maximum wait time for the user's reply before re-engaging the user
 	TurnTimeout *float64 `default:"7" json:"turn_timeout"`
 	// How long the agent will wait for the user to start the conversation if the first message is empty. If not set, uses the regular turn_timeout.
-	InitialWaitTime optionalnullable.OptionalNullable[float64] `json:"initial_wait_time,omitzero"`
+	InitialWaitTime *float64 `json:"initial_wait_time,omitzero"`
 	// Maximum wait time since the user last spoke before terminating the call
 	SilenceEndCallTimeout *float64 `default:"-1" json:"silence_end_call_timeout"`
 	// Configuration for soft timeout functionality during LLM response generation.
@@ -43,7 +42,7 @@ func (t *TurnConfig) GetTurnTimeout() *float64 {
 	return t.TurnTimeout
 }
 
-func (t *TurnConfig) GetInitialWaitTime() optionalnullable.OptionalNullable[float64] {
+func (t *TurnConfig) GetInitialWaitTime() *float64 {
 	if t == nil {
 		return nil
 	}

@@ -4,13 +4,12 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentWorkspaceOverridesOutput struct {
 	// The webhook to send conversation initiation client data to
-	ConversationInitiationClientDataWebhook optionalnullable.OptionalNullable[ConversationInitiationClientDataWebhook] `json:"conversation_initiation_client_data_webhook,omitzero"`
-	Webhooks                                *ConvAIWebhooks                                                            `json:"webhooks,omitzero"`
+	ConversationInitiationClientDataWebhook *ConversationInitiationClientDataWebhook `json:"conversation_initiation_client_data_webhook,omitzero"`
+	Webhooks                                *ConvAIWebhooks                          `json:"webhooks,omitzero"`
 }
 
 func (a AgentWorkspaceOverridesOutput) MarshalJSON() ([]byte, error) {
@@ -24,7 +23,7 @@ func (a *AgentWorkspaceOverridesOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *AgentWorkspaceOverridesOutput) GetConversationInitiationClientDataWebhook() optionalnullable.OptionalNullable[ConversationInitiationClientDataWebhook] {
+func (a *AgentWorkspaceOverridesOutput) GetConversationInitiationClientDataWebhook() *ConversationInitiationClientDataWebhook {
 	if a == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -94,14 +93,14 @@ type TransferToAgentToolResultSuccessModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"transfer_to_agent_success" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status                             *string                                       `const:"success" json:"status"`
-	FromAgent                          string                                        `json:"from_agent"`
-	ToAgent                            string                                        `json:"to_agent"`
-	Condition                          string                                        `json:"condition"`
-	DelayMs                            *int64                                        `default:"0" json:"delay_ms"`
-	TransferMessage                    optionalnullable.OptionalNullable[string]     `json:"transfer_message,omitzero"`
-	EnableTransferredAgentFirstMessage *bool                                         `default:"false" json:"enable_transferred_agent_first_message"`
-	BranchInfo                         optionalnullable.OptionalNullable[BranchInfo] `json:"branch_info,omitzero"`
+	status                             *string     `const:"success" json:"status"`
+	FromAgent                          string      `json:"from_agent"`
+	ToAgent                            string      `json:"to_agent"`
+	Condition                          string      `json:"condition"`
+	DelayMs                            *int64      `default:"0" json:"delay_ms"`
+	TransferMessage                    *string     `json:"transfer_message,omitzero"`
+	EnableTransferredAgentFirstMessage *bool       `default:"false" json:"enable_transferred_agent_first_message"`
+	BranchInfo                         *BranchInfo `json:"branch_info,omitzero"`
 }
 
 func (t TransferToAgentToolResultSuccessModel) MarshalJSON() ([]byte, error) {
@@ -151,7 +150,7 @@ func (t *TransferToAgentToolResultSuccessModel) GetDelayMs() *int64 {
 	return t.DelayMs
 }
 
-func (t *TransferToAgentToolResultSuccessModel) GetTransferMessage() optionalnullable.OptionalNullable[string] {
+func (t *TransferToAgentToolResultSuccessModel) GetTransferMessage() *string {
 	if t == nil {
 		return nil
 	}
@@ -165,7 +164,7 @@ func (t *TransferToAgentToolResultSuccessModel) GetEnableTransferredAgentFirstMe
 	return t.EnableTransferredAgentFirstMessage
 }
 
-func (t *TransferToAgentToolResultSuccessModel) GetBranchInfo() optionalnullable.OptionalNullable[BranchInfo] {
+func (t *TransferToAgentToolResultSuccessModel) GetBranchInfo() *BranchInfo {
 	if t == nil {
 		return nil
 	}
@@ -174,20 +173,14 @@ func (t *TransferToAgentToolResultSuccessModel) GetBranchInfo() optionalnullable
 
 func (t *TransferToAgentToolResultSuccessModel) GetBranchInfoDefaultingToMain() *TransferBranchInfoDefaultingToMain {
 	if v := t.GetBranchInfo(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TransferBranchInfoDefaultingToMain
-		}
-		return nil
+		return v.TransferBranchInfoDefaultingToMain
 	}
 	return nil
 }
 
 func (t *TransferToAgentToolResultSuccessModel) GetBranchInfoTrafficSplit() *TransferBranchInfoTrafficSplit {
 	if v := t.GetBranchInfo(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TransferBranchInfoTrafficSplit
-		}
-		return nil
+		return v.TransferBranchInfoTrafficSplit
 	}
 	return nil
 }

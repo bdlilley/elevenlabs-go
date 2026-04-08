@@ -27,7 +27,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -41,8 +40,8 @@ func main() {
 
     res, err := s.PronunciationDictionary.AddFromFile(ctx, components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost{
         Name: "My Dictionary",
-        Description: optionalnullable.From(elevenlabsgo.Pointer("Contains pronunciation's of our character names")),
-        WorkspaceAccess: optionalnullable.From(elevenlabsgo.Pointer(components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWorkspaceAccessViewer)),
+        Description: elevenlabsgo.Pointer("Contains pronunciation's of our character names"),
+        WorkspaceAccess: components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWorkspaceAccessViewer.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -86,7 +85,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -108,8 +106,8 @@ func main() {
             ),
         },
         Name: "My Dictionary",
-        Description: optionalnullable.From(elevenlabsgo.Pointer("Contains pronunciation's of our character names")),
-        WorkspaceAccess: optionalnullable.From(elevenlabsgo.Pointer(components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccessViewer)),
+        Description: elevenlabsgo.Pointer("Contains pronunciation's of our character names"),
+        WorkspaceAccess: components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccessViewer.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -499,7 +497,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -511,7 +508,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.PronunciationDictionary.GetPronunciationDictionariesMetadata(ctx, optionalnullable.From[string](nil), elevenlabsgo.Pointer[int64](30), optionalnullable.From(elevenlabsgo.Pointer(operations.SortCreationTimeUnix)), optionalnullable.From(elevenlabsgo.Pointer("descending")))
+    res, err := s.PronunciationDictionary.GetPronunciationDictionariesMetadata(ctx, nil, elevenlabsgo.Pointer[int64](30), operations.SortCreationTimeUnix.ToPointer(), elevenlabsgo.Pointer("descending"))
     if err != nil {
         log.Fatal(err)
     }
@@ -526,10 +523,10 @@ func main() {
 | Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
-| `cursor`                                                                                      | optionalnullable.OptionalNullable[`string`]                                                   | :heavy_minus_sign:                                                                            | Used for fetching next page. Cursor is returned in the response.                              |                                                                                               |
+| `cursor`                                                                                      | `*string`                                                                                     | :heavy_minus_sign:                                                                            | Used for fetching next page. Cursor is returned in the response.                              |                                                                                               |
 | `pageSize`                                                                                    | `*int64`                                                                                      | :heavy_minus_sign:                                                                            | How many pronunciation dictionaries to return at maximum. Can not exceed 100, defaults to 30. |                                                                                               |
-| `sort`                                                                                        | optionalnullable.OptionalNullable[[operations.Sort](../../models/operations/sort.md)]         | :heavy_minus_sign:                                                                            | Which field to sort by, one of 'created_at_unix' or 'name'.                                   | creation_time_unix                                                                            |
-| `sortDirection`                                                                               | optionalnullable.OptionalNullable[`string`]                                                   | :heavy_minus_sign:                                                                            | Which direction to sort the voices in. 'ascending' or 'descending'.                           | descending                                                                                    |
+| `sort`                                                                                        | [*operations.Sort](../../models/operations/sort.md)                                           | :heavy_minus_sign:                                                                            | Which field to sort by, one of 'created_at_unix' or 'name'.                                   | creation_time_unix                                                                            |
+| `sortDirection`                                                                               | `*string`                                                                                     | :heavy_minus_sign:                                                                            | Which direction to sort the voices in. 'ascending' or 'descending'.                           | descending                                                                                    |
 | `opts`                                                                                        | [][operations.Option](../../models/operations/option.md)                                      | :heavy_minus_sign:                                                                            | The options for this request.                                                                 |                                                                                               |
 
 ### Response

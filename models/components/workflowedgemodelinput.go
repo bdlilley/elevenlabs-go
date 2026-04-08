@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WorkflowEdgeModelInputForwardConditionType string
@@ -270,9 +269,9 @@ type WorkflowEdgeModelInput struct {
 	// ID of the target node.
 	Target string `json:"target"`
 	// Condition that must be met for the edge to be traversed in the forward direction (source to target).
-	ForwardCondition optionalnullable.OptionalNullable[WorkflowEdgeModelInputForwardCondition] `json:"forward_condition,omitzero"`
+	ForwardCondition *WorkflowEdgeModelInputForwardCondition `json:"forward_condition,omitzero"`
 	// Condition that must be met for the edge to be traversed in the backward direction (target to source).
-	BackwardCondition optionalnullable.OptionalNullable[WorkflowEdgeModelInputBackwardCondition] `json:"backward_condition,omitzero"`
+	BackwardCondition *WorkflowEdgeModelInputBackwardCondition `json:"backward_condition,omitzero"`
 }
 
 func (w *WorkflowEdgeModelInput) GetSource() string {
@@ -289,7 +288,7 @@ func (w *WorkflowEdgeModelInput) GetTarget() string {
 	return w.Target
 }
 
-func (w *WorkflowEdgeModelInput) GetForwardCondition() optionalnullable.OptionalNullable[WorkflowEdgeModelInputForwardCondition] {
+func (w *WorkflowEdgeModelInput) GetForwardCondition() *WorkflowEdgeModelInputForwardCondition {
 	if w == nil {
 		return nil
 	}
@@ -298,45 +297,33 @@ func (w *WorkflowEdgeModelInput) GetForwardCondition() optionalnullable.Optional
 
 func (w *WorkflowEdgeModelInput) GetForwardConditionExpression() *WorkflowExpressionConditionModelInput {
 	if v := w.GetForwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowExpressionConditionModelInput
-		}
-		return nil
+		return v.WorkflowExpressionConditionModelInput
 	}
 	return nil
 }
 
 func (w *WorkflowEdgeModelInput) GetForwardConditionLlm() *WorkflowLLMConditionModelInput {
 	if v := w.GetForwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowLLMConditionModelInput
-		}
-		return nil
+		return v.WorkflowLLMConditionModelInput
 	}
 	return nil
 }
 
 func (w *WorkflowEdgeModelInput) GetForwardConditionResult() *WorkflowResultConditionModelInput {
 	if v := w.GetForwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowResultConditionModelInput
-		}
-		return nil
+		return v.WorkflowResultConditionModelInput
 	}
 	return nil
 }
 
 func (w *WorkflowEdgeModelInput) GetForwardConditionUnconditional() *WorkflowUnconditionalModelInput {
 	if v := w.GetForwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowUnconditionalModelInput
-		}
-		return nil
+		return v.WorkflowUnconditionalModelInput
 	}
 	return nil
 }
 
-func (w *WorkflowEdgeModelInput) GetBackwardCondition() optionalnullable.OptionalNullable[WorkflowEdgeModelInputBackwardCondition] {
+func (w *WorkflowEdgeModelInput) GetBackwardCondition() *WorkflowEdgeModelInputBackwardCondition {
 	if w == nil {
 		return nil
 	}
@@ -345,40 +332,28 @@ func (w *WorkflowEdgeModelInput) GetBackwardCondition() optionalnullable.Optiona
 
 func (w *WorkflowEdgeModelInput) GetBackwardConditionExpression() *WorkflowExpressionConditionModelInput {
 	if v := w.GetBackwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowExpressionConditionModelInput
-		}
-		return nil
+		return v.WorkflowExpressionConditionModelInput
 	}
 	return nil
 }
 
 func (w *WorkflowEdgeModelInput) GetBackwardConditionLlm() *WorkflowLLMConditionModelInput {
 	if v := w.GetBackwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowLLMConditionModelInput
-		}
-		return nil
+		return v.WorkflowLLMConditionModelInput
 	}
 	return nil
 }
 
 func (w *WorkflowEdgeModelInput) GetBackwardConditionResult() *WorkflowResultConditionModelInput {
 	if v := w.GetBackwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowResultConditionModelInput
-		}
-		return nil
+		return v.WorkflowResultConditionModelInput
 	}
 	return nil
 }
 
 func (w *WorkflowEdgeModelInput) GetBackwardConditionUnconditional() *WorkflowUnconditionalModelInput {
 	if v := w.GetBackwardCondition(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.WorkflowUnconditionalModelInput
-		}
-		return nil
+		return v.WorkflowUnconditionalModelInput
 	}
 	return nil
 }

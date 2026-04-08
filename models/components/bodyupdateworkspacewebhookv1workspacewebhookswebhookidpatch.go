@@ -2,17 +2,13 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch struct {
 	// Whether to disable or enable the webhook
 	IsDisabled bool `json:"is_disabled"`
 	// The display name of the webhook (used for display purposes only).
 	Name string `json:"name"`
 	// Whether to enable automatic retries for transient failures (5xx, 429, timeout)
-	RetryEnabled optionalnullable.OptionalNullable[bool] `json:"retry_enabled,omitzero"`
+	RetryEnabled *bool `json:"retry_enabled,omitzero"`
 }
 
 func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) GetIsDisabled() bool {
@@ -29,7 +25,7 @@ func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) GetName() 
 	return b.Name
 }
 
-func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) GetRetryEnabled() optionalnullable.OptionalNullable[bool] {
+func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) GetRetryEnabled() *bool {
 	if b == nil {
 		return nil
 	}

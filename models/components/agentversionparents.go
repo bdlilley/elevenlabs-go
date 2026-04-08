@@ -2,47 +2,43 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type AgentVersionParents struct {
-	InBranchParentID    optionalnullable.OptionalNullable[string] `json:"in_branch_parent_id,omitzero"`
-	OutOfBranchParentID optionalnullable.OptionalNullable[string] `json:"out_of_branch_parent_id,omitzero"`
-	MergedIntoBranchID  optionalnullable.OptionalNullable[string] `json:"merged_into_branch_id,omitzero"`
-	MergedFromBranchID  optionalnullable.OptionalNullable[string] `json:"merged_from_branch_id,omitzero"`
-	MergedFromVersionID optionalnullable.OptionalNullable[string] `json:"merged_from_version_id,omitzero"`
+	InBranchParentID    *string `json:"in_branch_parent_id,omitzero"`
+	OutOfBranchParentID *string `json:"out_of_branch_parent_id,omitzero"`
+	MergedIntoBranchID  *string `json:"merged_into_branch_id,omitzero"`
+	MergedFromBranchID  *string `json:"merged_from_branch_id,omitzero"`
+	MergedFromVersionID *string `json:"merged_from_version_id,omitzero"`
 }
 
-func (a *AgentVersionParents) GetInBranchParentID() optionalnullable.OptionalNullable[string] {
+func (a *AgentVersionParents) GetInBranchParentID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.InBranchParentID
 }
 
-func (a *AgentVersionParents) GetOutOfBranchParentID() optionalnullable.OptionalNullable[string] {
+func (a *AgentVersionParents) GetOutOfBranchParentID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.OutOfBranchParentID
 }
 
-func (a *AgentVersionParents) GetMergedIntoBranchID() optionalnullable.OptionalNullable[string] {
+func (a *AgentVersionParents) GetMergedIntoBranchID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.MergedIntoBranchID
 }
 
-func (a *AgentVersionParents) GetMergedFromBranchID() optionalnullable.OptionalNullable[string] {
+func (a *AgentVersionParents) GetMergedFromBranchID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.MergedFromBranchID
 }
 
-func (a *AgentVersionParents) GetMergedFromVersionID() optionalnullable.OptionalNullable[string] {
+func (a *AgentVersionParents) GetMergedFromVersionID() *string {
 	if a == nil {
 		return nil
 	}

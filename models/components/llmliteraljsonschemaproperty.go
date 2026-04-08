@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type LLMLiteralJSONSchemaPropertyType string
@@ -35,7 +34,7 @@ type LLMLiteralJSONSchemaProperty struct {
 	Type        LLMLiteralJSONSchemaPropertyType `json:"type"`
 	Description string                           `json:"description"`
 	// List of allowed string values for string type parameters
-	Enum optionalnullable.OptionalNullable[[]string] `json:"enum,omitzero"`
+	Enum []string `json:"enum,omitzero"`
 }
 
 func (l LLMLiteralJSONSchemaProperty) MarshalJSON() ([]byte, error) {
@@ -63,7 +62,7 @@ func (l *LLMLiteralJSONSchemaProperty) GetDescription() string {
 	return l.Description
 }
 
-func (l *LLMLiteralJSONSchemaProperty) GetEnum() optionalnullable.OptionalNullable[[]string] {
+func (l *LLMLiteralJSONSchemaProperty) GetEnum() []string {
 	if l == nil {
 		return nil
 	}

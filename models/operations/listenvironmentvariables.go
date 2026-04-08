@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // Type - Filter by variable type
@@ -42,15 +41,15 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 
 type ListEnvironmentVariablesRequest struct {
 	// Pagination cursor from previous response
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// Number of items to return (1-100)
 	PageSize *int64 `default:"100" queryParam:"style=form,explode=true,name=page_size"`
 	// Filter by exact label match
-	Label optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=label"`
+	Label *string `queryParam:"style=form,explode=true,name=label"`
 	// Filter to only return variables that have this environment. When specified, the values dict in the response will only contain this environment.
-	Environment optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=environment"`
+	Environment *string `queryParam:"style=form,explode=true,name=environment"`
 	// Filter by variable type
-	Type optionalnullable.OptionalNullable[Type] `queryParam:"style=form,explode=true,name=type"`
+	Type *Type `queryParam:"style=form,explode=true,name=type"`
 }
 
 func (l ListEnvironmentVariablesRequest) MarshalJSON() ([]byte, error) {
@@ -64,7 +63,7 @@ func (l *ListEnvironmentVariablesRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (l *ListEnvironmentVariablesRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (l *ListEnvironmentVariablesRequest) GetCursor() *string {
 	if l == nil {
 		return nil
 	}
@@ -78,21 +77,21 @@ func (l *ListEnvironmentVariablesRequest) GetPageSize() *int64 {
 	return l.PageSize
 }
 
-func (l *ListEnvironmentVariablesRequest) GetLabel() optionalnullable.OptionalNullable[string] {
+func (l *ListEnvironmentVariablesRequest) GetLabel() *string {
 	if l == nil {
 		return nil
 	}
 	return l.Label
 }
 
-func (l *ListEnvironmentVariablesRequest) GetEnvironment() optionalnullable.OptionalNullable[string] {
+func (l *ListEnvironmentVariablesRequest) GetEnvironment() *string {
 	if l == nil {
 		return nil
 	}
 	return l.Environment
 }
 
-func (l *ListEnvironmentVariablesRequest) GetType() optionalnullable.OptionalNullable[Type] {
+func (l *ListEnvironmentVariablesRequest) GetType() *Type {
 	if l == nil {
 		return nil
 	}

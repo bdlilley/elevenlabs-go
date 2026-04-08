@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TestInfoType string
@@ -114,22 +113,22 @@ func (u TestInfo) MarshalJSON() ([]byte, error) {
 }
 
 type UnitTestRunResponseModel struct {
-	TestRunID         string                                                                              `json:"test_run_id"`
-	TestInfo          optionalnullable.OptionalNullable[TestInfo]                                         `json:"test_info,omitzero"`
-	TestInvocationID  string                                                                              `json:"test_invocation_id"`
-	AgentID           string                                                                              `json:"agent_id"`
-	BranchID          optionalnullable.OptionalNullable[string]                                           `json:"branch_id,omitzero"`
-	WorkflowNodeID    optionalnullable.OptionalNullable[string]                                           `json:"workflow_node_id,omitzero"`
-	Status            TestRunStatus                                                                       `json:"status"`
-	AgentResponses    optionalnullable.OptionalNullable[[]ConversationHistoryTranscriptCommonModelOutput] `json:"agent_responses,omitzero"`
-	TestID            string                                                                              `json:"test_id"`
-	TestName          *string                                                                             `default:"Unknown Test" json:"test_name"`
-	ConditionResult   optionalnullable.OptionalNullable[TestConditionResultCommonModel]                   `json:"condition_result,omitzero"`
-	LastUpdatedAtUnix *int64                                                                              `json:"last_updated_at_unix,omitzero"`
-	Metadata          optionalnullable.OptionalNullable[TestRunMetadata]                                  `json:"metadata,omitzero"`
-	RootFolderID      optionalnullable.OptionalNullable[string]                                           `json:"root_folder_id,omitzero"`
-	RootFolderName    optionalnullable.OptionalNullable[string]                                           `json:"root_folder_name,omitzero"`
-	Environment       optionalnullable.OptionalNullable[string]                                           `json:"environment,omitzero"`
+	TestRunID         string                                           `json:"test_run_id"`
+	TestInfo          *TestInfo                                        `json:"test_info,omitzero"`
+	TestInvocationID  string                                           `json:"test_invocation_id"`
+	AgentID           string                                           `json:"agent_id"`
+	BranchID          *string                                          `json:"branch_id,omitzero"`
+	WorkflowNodeID    *string                                          `json:"workflow_node_id,omitzero"`
+	Status            TestRunStatus                                    `json:"status"`
+	AgentResponses    []ConversationHistoryTranscriptCommonModelOutput `json:"agent_responses,omitzero"`
+	TestID            string                                           `json:"test_id"`
+	TestName          *string                                          `default:"Unknown Test" json:"test_name"`
+	ConditionResult   *TestConditionResultCommonModel                  `json:"condition_result,omitzero"`
+	LastUpdatedAtUnix *int64                                           `json:"last_updated_at_unix,omitzero"`
+	Metadata          *TestRunMetadata                                 `json:"metadata,omitzero"`
+	RootFolderID      *string                                          `json:"root_folder_id,omitzero"`
+	RootFolderName    *string                                          `json:"root_folder_name,omitzero"`
+	Environment       *string                                          `json:"environment,omitzero"`
 }
 
 func (u UnitTestRunResponseModel) MarshalJSON() ([]byte, error) {
@@ -150,7 +149,7 @@ func (u *UnitTestRunResponseModel) GetTestRunID() string {
 	return u.TestRunID
 }
 
-func (u *UnitTestRunResponseModel) GetTestInfo() optionalnullable.OptionalNullable[TestInfo] {
+func (u *UnitTestRunResponseModel) GetTestInfo() *TestInfo {
 	if u == nil {
 		return nil
 	}
@@ -159,30 +158,21 @@ func (u *UnitTestRunResponseModel) GetTestInfo() optionalnullable.OptionalNullab
 
 func (u *UnitTestRunResponseModel) GetTestInfoLlm() *ResponseUnitTestModel {
 	if v := u.GetTestInfo(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ResponseUnitTestModel
-		}
-		return nil
+		return v.ResponseUnitTestModel
 	}
 	return nil
 }
 
 func (u *UnitTestRunResponseModel) GetTestInfoSimulation() *SimulationTestModel {
 	if v := u.GetTestInfo(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.SimulationTestModel
-		}
-		return nil
+		return v.SimulationTestModel
 	}
 	return nil
 }
 
 func (u *UnitTestRunResponseModel) GetTestInfoTool() *ToolCallUnitTestModel {
 	if v := u.GetTestInfo(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ToolCallUnitTestModel
-		}
-		return nil
+		return v.ToolCallUnitTestModel
 	}
 	return nil
 }
@@ -201,14 +191,14 @@ func (u *UnitTestRunResponseModel) GetAgentID() string {
 	return u.AgentID
 }
 
-func (u *UnitTestRunResponseModel) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (u *UnitTestRunResponseModel) GetBranchID() *string {
 	if u == nil {
 		return nil
 	}
 	return u.BranchID
 }
 
-func (u *UnitTestRunResponseModel) GetWorkflowNodeID() optionalnullable.OptionalNullable[string] {
+func (u *UnitTestRunResponseModel) GetWorkflowNodeID() *string {
 	if u == nil {
 		return nil
 	}
@@ -222,7 +212,7 @@ func (u *UnitTestRunResponseModel) GetStatus() TestRunStatus {
 	return u.Status
 }
 
-func (u *UnitTestRunResponseModel) GetAgentResponses() optionalnullable.OptionalNullable[[]ConversationHistoryTranscriptCommonModelOutput] {
+func (u *UnitTestRunResponseModel) GetAgentResponses() []ConversationHistoryTranscriptCommonModelOutput {
 	if u == nil {
 		return nil
 	}
@@ -243,7 +233,7 @@ func (u *UnitTestRunResponseModel) GetTestName() *string {
 	return u.TestName
 }
 
-func (u *UnitTestRunResponseModel) GetConditionResult() optionalnullable.OptionalNullable[TestConditionResultCommonModel] {
+func (u *UnitTestRunResponseModel) GetConditionResult() *TestConditionResultCommonModel {
 	if u == nil {
 		return nil
 	}
@@ -257,28 +247,28 @@ func (u *UnitTestRunResponseModel) GetLastUpdatedAtUnix() *int64 {
 	return u.LastUpdatedAtUnix
 }
 
-func (u *UnitTestRunResponseModel) GetMetadata() optionalnullable.OptionalNullable[TestRunMetadata] {
+func (u *UnitTestRunResponseModel) GetMetadata() *TestRunMetadata {
 	if u == nil {
 		return nil
 	}
 	return u.Metadata
 }
 
-func (u *UnitTestRunResponseModel) GetRootFolderID() optionalnullable.OptionalNullable[string] {
+func (u *UnitTestRunResponseModel) GetRootFolderID() *string {
 	if u == nil {
 		return nil
 	}
 	return u.RootFolderID
 }
 
-func (u *UnitTestRunResponseModel) GetRootFolderName() optionalnullable.OptionalNullable[string] {
+func (u *UnitTestRunResponseModel) GetRootFolderName() *string {
 	if u == nil {
 		return nil
 	}
 	return u.RootFolderName
 }
 
-func (u *UnitTestRunResponseModel) GetEnvironment() optionalnullable.OptionalNullable[string] {
+func (u *UnitTestRunResponseModel) GetEnvironment() *string {
 	if u == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ChapterStatisticsResponseModel struct {
@@ -17,7 +16,7 @@ type ChapterStatisticsResponseModel struct {
 	// The number of unconverted paragraphs.
 	ParagraphsUnconverted int64 `json:"paragraphs_unconverted"`
 	// Per-voice breakdown of character counts.
-	VoiceStatistics optionalnullable.OptionalNullable[[]VoiceStatisticsResponseModel] `json:"voice_statistics,omitzero"`
+	VoiceStatistics []VoiceStatisticsResponseModel `json:"voice_statistics,omitzero"`
 }
 
 func (c ChapterStatisticsResponseModel) MarshalJSON() ([]byte, error) {
@@ -59,7 +58,7 @@ func (c *ChapterStatisticsResponseModel) GetParagraphsUnconverted() int64 {
 	return c.ParagraphsUnconverted
 }
 
-func (c *ChapterStatisticsResponseModel) GetVoiceStatistics() optionalnullable.OptionalNullable[[]VoiceStatisticsResponseModel] {
+func (c *ChapterStatisticsResponseModel) GetVoiceStatistics() []VoiceStatisticsResponseModel {
 	if c == nil {
 		return nil
 	}

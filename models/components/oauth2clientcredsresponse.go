@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -19,9 +18,9 @@ type OAuth2ClientCredsResponse struct {
 	Scopes      []string          `json:"scopes,omitzero"`
 	ExtraParams map[string]string `json:"extra_params,omitzero"`
 	// If True, send client credentials in Authorization header as Basic Auth instead of request body
-	BasicAuthInHeader *bool                                                         `default:"false" json:"basic_auth_in_header"`
-	ID                string                                                        `json:"id"`
-	UsedBy            optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	BasicAuthInHeader *bool                       `default:"false" json:"basic_auth_in_header"`
+	ID                string                      `json:"id"`
+	UsedBy            *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (o OAuth2ClientCredsResponse) MarshalJSON() ([]byte, error) {
@@ -95,7 +94,7 @@ func (o *OAuth2ClientCredsResponse) GetID() string {
 	return o.ID
 }
 
-func (o *OAuth2ClientCredsResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (o *OAuth2ClientCredsResponse) GetUsedBy() *AuthConnectionDependencies {
 	if o == nil {
 		return nil
 	}

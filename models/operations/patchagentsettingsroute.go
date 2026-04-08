@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PatchAgentSettingsRouteRequest struct {
@@ -14,7 +13,7 @@ type PatchAgentSettingsRouteRequest struct {
 	// Enable versioning for the agent, if not already enabled
 	EnableVersioningIfNotEnabled *bool `default:"false" queryParam:"style=form,explode=true,name=enable_versioning_if_not_enabled"`
 	// The ID of the branch to use
-	BranchID optionalnullable.OptionalNullable[string]                        `queryParam:"style=form,explode=true,name=branch_id"`
+	BranchID *string                                                          `queryParam:"style=form,explode=true,name=branch_id"`
 	Body     *components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch `request:"mediaType=application/json"`
 }
 
@@ -43,7 +42,7 @@ func (p *PatchAgentSettingsRouteRequest) GetEnableVersioningIfNotEnabled() *bool
 	return p.EnableVersioningIfNotEnabled
 }
 
-func (p *PatchAgentSettingsRouteRequest) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (p *PatchAgentSettingsRouteRequest) GetBranchID() *string {
 	if p == nil {
 		return nil
 	}

@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost struct {
-	WhatsappPhoneNumberID                             string                                                                          `json:"whatsapp_phone_number_id"`
-	WhatsappUserID                                    string                                                                          `json:"whatsapp_user_id"`
-	WhatsappCallPermissionRequestTemplateName         string                                                                          `json:"whatsapp_call_permission_request_template_name"`
-	WhatsappCallPermissionRequestTemplateLanguageCode string                                                                          `json:"whatsapp_call_permission_request_template_language_code"`
-	AgentID                                           string                                                                          `json:"agent_id"`
-	ConversationInitiationClientData                  optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] `json:"conversation_initiation_client_data,omitzero"`
+	WhatsappPhoneNumberID                             string                                        `json:"whatsapp_phone_number_id"`
+	WhatsappUserID                                    string                                        `json:"whatsapp_user_id"`
+	WhatsappCallPermissionRequestTemplateName         string                                        `json:"whatsapp_call_permission_request_template_name"`
+	WhatsappCallPermissionRequestTemplateLanguageCode string                                        `json:"whatsapp_call_permission_request_template_language_code"`
+	AgentID                                           string                                        `json:"agent_id"`
+	ConversationInitiationClientData                  *ConversationInitiationClientDataRequestInput `json:"conversation_initiation_client_data,omitzero"`
 }
 
 func (b BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost) MarshalJSON() ([]byte, error) {
@@ -62,7 +61,7 @@ func (b *BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost) GetA
 	return b.AgentID
 }
 
-func (b *BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost) GetConversationInitiationClientData() optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] {
+func (b *BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost) GetConversationInitiationClientData() *ConversationInitiationClientDataRequestInput {
 	if b == nil {
 		return nil
 	}

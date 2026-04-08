@@ -4,23 +4,22 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type GenerationSourceContext struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	sourceType          *string                                   `const:"generation" json:"source_type"`
-	GenerationID        string                                    `json:"generation_id"`
-	Prompt              optionalnullable.OptionalNullable[string] `json:"prompt,omitzero"`
-	ModelID             string                                    `json:"model_id"`
-	ModelProvider       optionalnullable.OptionalNullable[string] `json:"model_provider,omitzero"`
-	GenerationSessionID optionalnullable.OptionalNullable[string] `json:"generation_session_id,omitzero"`
-	SessionIterationID  optionalnullable.OptionalNullable[string] `json:"session_iteration_id,omitzero"`
+	sourceType          *string `const:"generation" json:"source_type"`
+	GenerationID        string  `json:"generation_id"`
+	Prompt              *string `json:"prompt,omitzero"`
+	ModelID             string  `json:"model_id"`
+	ModelProvider       *string `json:"model_provider,omitzero"`
+	GenerationSessionID *string `json:"generation_session_id,omitzero"`
+	SessionIterationID  *string `json:"session_iteration_id,omitzero"`
 	// Modified/enhanced prompt if different from original
-	AlteredPrompt   optionalnullable.OptionalNullable[string]         `json:"altered_prompt,omitzero"`
-	ModelParameters optionalnullable.OptionalNullable[map[string]any] `json:"model_parameters,omitzero"`
-	ExtendVideo     optionalnullable.OptionalNullable[ReferenceVideo] `json:"extend_video,omitzero"`
+	AlteredPrompt   *string         `json:"altered_prompt,omitzero"`
+	ModelParameters map[string]any  `json:"model_parameters,omitzero"`
+	ExtendVideo     *ReferenceVideo `json:"extend_video,omitzero"`
 }
 
 func (g GenerationSourceContext) MarshalJSON() ([]byte, error) {
@@ -45,7 +44,7 @@ func (g *GenerationSourceContext) GetGenerationID() string {
 	return g.GenerationID
 }
 
-func (g *GenerationSourceContext) GetPrompt() optionalnullable.OptionalNullable[string] {
+func (g *GenerationSourceContext) GetPrompt() *string {
 	if g == nil {
 		return nil
 	}
@@ -59,42 +58,42 @@ func (g *GenerationSourceContext) GetModelID() string {
 	return g.ModelID
 }
 
-func (g *GenerationSourceContext) GetModelProvider() optionalnullable.OptionalNullable[string] {
+func (g *GenerationSourceContext) GetModelProvider() *string {
 	if g == nil {
 		return nil
 	}
 	return g.ModelProvider
 }
 
-func (g *GenerationSourceContext) GetGenerationSessionID() optionalnullable.OptionalNullable[string] {
+func (g *GenerationSourceContext) GetGenerationSessionID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.GenerationSessionID
 }
 
-func (g *GenerationSourceContext) GetSessionIterationID() optionalnullable.OptionalNullable[string] {
+func (g *GenerationSourceContext) GetSessionIterationID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.SessionIterationID
 }
 
-func (g *GenerationSourceContext) GetAlteredPrompt() optionalnullable.OptionalNullable[string] {
+func (g *GenerationSourceContext) GetAlteredPrompt() *string {
 	if g == nil {
 		return nil
 	}
 	return g.AlteredPrompt
 }
 
-func (g *GenerationSourceContext) GetModelParameters() optionalnullable.OptionalNullable[map[string]any] {
+func (g *GenerationSourceContext) GetModelParameters() map[string]any {
 	if g == nil {
 		return nil
 	}
 	return g.ModelParameters
 }
 
-func (g *GenerationSourceContext) GetExtendVideo() optionalnullable.OptionalNullable[ReferenceVideo] {
+func (g *GenerationSourceContext) GetExtendVideo() *ReferenceVideo {
 	if g == nil {
 		return nil
 	}

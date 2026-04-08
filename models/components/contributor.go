@@ -2,15 +2,11 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type Contributor struct {
-	Name      string                                    `json:"name"`
-	Role      string                                    `json:"role"`
-	Bio       optionalnullable.OptionalNullable[string] `json:"bio,omitzero"`
-	ProfileID optionalnullable.OptionalNullable[string] `json:"profile_id,omitzero"`
+	Name      string  `json:"name"`
+	Role      string  `json:"role"`
+	Bio       *string `json:"bio,omitzero"`
+	ProfileID *string `json:"profile_id,omitzero"`
 }
 
 func (c *Contributor) GetName() string {
@@ -27,14 +23,14 @@ func (c *Contributor) GetRole() string {
 	return c.Role
 }
 
-func (c *Contributor) GetBio() optionalnullable.OptionalNullable[string] {
+func (c *Contributor) GetBio() *string {
 	if c == nil {
 		return nil
 	}
 	return c.Bio
 }
 
-func (c *Contributor) GetProfileID() optionalnullable.OptionalNullable[string] {
+func (c *Contributor) GetProfileID() *string {
 	if c == nil {
 		return nil
 	}

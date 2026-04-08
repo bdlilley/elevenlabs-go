@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UserResponseModel struct {
@@ -16,7 +15,7 @@ type UserResponseModel struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	IsNewUser bool `json:"is_new_user"`
 	// The API key of the user.
-	XiAPIKey optionalnullable.OptionalNullable[string] `json:"xi_api_key,omitzero"`
+	XiAPIKey *string `json:"xi_api_key,omitzero"`
 	// This field is deprecated and will be removed in a future major version. Instead use subscription.trust_on_invoice_creation.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -28,15 +27,15 @@ type UserResponseModel struct {
 	// Whether to show compliance terms (ToS, Privacy Policy, biometric consent) during onboarding. Set for users signing up from the marketing site.
 	ShowComplianceTerms *bool `default:"false" json:"show_compliance_terms"`
 	// First name of the user.
-	FirstName optionalnullable.OptionalNullable[string] `json:"first_name,omitzero"`
+	FirstName *string `json:"first_name,omitzero"`
 	// Whether the user's API key is hashed.
 	IsAPIKeyHashed *bool `default:"false" json:"is_api_key_hashed"`
 	// The preview of the user's API key.
-	XiAPIKeyPreview optionalnullable.OptionalNullable[string] `json:"xi_api_key_preview,omitzero"`
+	XiAPIKeyPreview *string `json:"xi_api_key_preview,omitzero"`
 	// The referral link code of the user.
-	ReferralLinkCode optionalnullable.OptionalNullable[string] `json:"referral_link_code,omitzero"`
+	ReferralLinkCode *string `json:"referral_link_code,omitzero"`
 	// The Partnerstack partner default link of the user.
-	PartnerstackPartnerDefaultLink optionalnullable.OptionalNullable[string] `json:"partnerstack_partner_default_link,omitzero"`
+	PartnerstackPartnerDefaultLink *string `json:"partnerstack_partner_default_link,omitzero"`
 	// The unix timestamp of the user's creation. 0 if the user was created before the unix timestamp was added.
 	CreatedAt int64 `json:"created_at"`
 	// Seat types for workspace members.
@@ -77,7 +76,7 @@ func (u *UserResponseModel) GetIsNewUser() bool {
 	return u.IsNewUser
 }
 
-func (u *UserResponseModel) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
+func (u *UserResponseModel) GetXiAPIKey() *string {
 	if u == nil {
 		return nil
 	}
@@ -112,7 +111,7 @@ func (u *UserResponseModel) GetShowComplianceTerms() *bool {
 	return u.ShowComplianceTerms
 }
 
-func (u *UserResponseModel) GetFirstName() optionalnullable.OptionalNullable[string] {
+func (u *UserResponseModel) GetFirstName() *string {
 	if u == nil {
 		return nil
 	}
@@ -126,21 +125,21 @@ func (u *UserResponseModel) GetIsAPIKeyHashed() *bool {
 	return u.IsAPIKeyHashed
 }
 
-func (u *UserResponseModel) GetXiAPIKeyPreview() optionalnullable.OptionalNullable[string] {
+func (u *UserResponseModel) GetXiAPIKeyPreview() *string {
 	if u == nil {
 		return nil
 	}
 	return u.XiAPIKeyPreview
 }
 
-func (u *UserResponseModel) GetReferralLinkCode() optionalnullable.OptionalNullable[string] {
+func (u *UserResponseModel) GetReferralLinkCode() *string {
 	if u == nil {
 		return nil
 	}
 	return u.ReferralLinkCode
 }
 
-func (u *UserResponseModel) GetPartnerstackPartnerDefaultLink() optionalnullable.OptionalNullable[string] {
+func (u *UserResponseModel) GetPartnerstackPartnerDefaultLink() *string {
 	if u == nil {
 		return nil
 	}

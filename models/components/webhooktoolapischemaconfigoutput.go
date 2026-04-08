@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WebhookToolAPISchemaConfigOutputRequestHeadersType string
@@ -299,13 +298,13 @@ type WebhookToolAPISchemaConfigOutput struct {
 	// Schema for path parameters, if any. The keys should match the placeholders in the URL.
 	PathParamsSchema map[string]LiteralJSONSchemaProperty `json:"path_params_schema,omitzero"`
 	// Schema for any query params, if any. These will be added to end of the URL as query params. Note: properties in a query param must all be literal types
-	QueryParamsSchema optionalnullable.OptionalNullable[QueryParamsJSONSchema] `json:"query_params_schema,omitzero"`
+	QueryParamsSchema *QueryParamsJSONSchema `json:"query_params_schema,omitzero"`
 	// Schema for the body parameters, if any. Used for POST/PATCH/PUT requests. The schema should be an object which will be sent as the json body
-	RequestBodySchema optionalnullable.OptionalNullable[ObjectJSONSchemaPropertyOutput] `json:"request_body_schema,omitzero"`
+	RequestBodySchema *ObjectJSONSchemaPropertyOutput `json:"request_body_schema,omitzero"`
 	// Content type for the request body. Only applies to POST/PUT/PATCH requests.
 	ContentType *WebhookToolAPISchemaConfigOutputContentType `default:"application/json" json:"content_type"`
 	// Optional auth connection to use for authentication with this webhook
-	AuthConnection optionalnullable.OptionalNullable[WebhookToolAPISchemaConfigOutputAuthConnection] `json:"auth_connection,omitzero"`
+	AuthConnection *WebhookToolAPISchemaConfigOutputAuthConnection `json:"auth_connection,omitzero"`
 }
 
 func (w WebhookToolAPISchemaConfigOutput) MarshalJSON() ([]byte, error) {
@@ -347,14 +346,14 @@ func (w *WebhookToolAPISchemaConfigOutput) GetPathParamsSchema() map[string]Lite
 	return w.PathParamsSchema
 }
 
-func (w *WebhookToolAPISchemaConfigOutput) GetQueryParamsSchema() optionalnullable.OptionalNullable[QueryParamsJSONSchema] {
+func (w *WebhookToolAPISchemaConfigOutput) GetQueryParamsSchema() *QueryParamsJSONSchema {
 	if w == nil {
 		return nil
 	}
 	return w.QueryParamsSchema
 }
 
-func (w *WebhookToolAPISchemaConfigOutput) GetRequestBodySchema() optionalnullable.OptionalNullable[ObjectJSONSchemaPropertyOutput] {
+func (w *WebhookToolAPISchemaConfigOutput) GetRequestBodySchema() *ObjectJSONSchemaPropertyOutput {
 	if w == nil {
 		return nil
 	}
@@ -368,7 +367,7 @@ func (w *WebhookToolAPISchemaConfigOutput) GetContentType() *WebhookToolAPISchem
 	return w.ContentType
 }
 
-func (w *WebhookToolAPISchemaConfigOutput) GetAuthConnection() optionalnullable.OptionalNullable[WebhookToolAPISchemaConfigOutputAuthConnection] {
+func (w *WebhookToolAPISchemaConfigOutput) GetAuthConnection() *WebhookToolAPISchemaConfigOutputAuthConnection {
 	if w == nil {
 		return nil
 	}

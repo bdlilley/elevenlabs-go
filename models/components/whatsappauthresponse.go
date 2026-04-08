@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -13,10 +12,10 @@ type WhatsAppAuthResponse struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	authType *string `const:"whatsapp_auth" json:"auth_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	provider      *string                                                       `const:"whatsapp" json:"provider"`
-	PhoneNumberID string                                                        `json:"phone_number_id"`
-	ID            string                                                        `json:"id"`
-	UsedBy        optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	provider      *string                     `const:"whatsapp" json:"provider"`
+	PhoneNumberID string                      `json:"phone_number_id"`
+	ID            string                      `json:"id"`
+	UsedBy        *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (w WhatsAppAuthResponse) MarshalJSON() ([]byte, error) {
@@ -59,7 +58,7 @@ func (w *WhatsAppAuthResponse) GetID() string {
 	return w.ID
 }
 
-func (w *WhatsAppAuthResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (w *WhatsAppAuthResponse) GetUsedBy() *AuthConnectionDependencies {
 	if w == nil {
 		return nil
 	}

@@ -2,17 +2,13 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BatchCallWhatsAppParams struct {
-	WhatsappPhoneNumberID                             optionalnullable.OptionalNullable[string] `json:"whatsapp_phone_number_id,omitzero"`
-	WhatsappCallPermissionRequestTemplateName         string                                    `json:"whatsapp_call_permission_request_template_name"`
-	WhatsappCallPermissionRequestTemplateLanguageCode string                                    `json:"whatsapp_call_permission_request_template_language_code"`
+	WhatsappPhoneNumberID                             *string `json:"whatsapp_phone_number_id,omitzero"`
+	WhatsappCallPermissionRequestTemplateName         string  `json:"whatsapp_call_permission_request_template_name"`
+	WhatsappCallPermissionRequestTemplateLanguageCode string  `json:"whatsapp_call_permission_request_template_language_code"`
 }
 
-func (b *BatchCallWhatsAppParams) GetWhatsappPhoneNumberID() optionalnullable.OptionalNullable[string] {
+func (b *BatchCallWhatsAppParams) GetWhatsappPhoneNumberID() *string {
 	if b == nil {
 		return nil
 	}

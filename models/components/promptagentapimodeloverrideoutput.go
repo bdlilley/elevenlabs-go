@@ -4,20 +4,19 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PromptAgentAPIModelOverrideOutput struct {
 	// The prompt for the agent
-	Prompt optionalnullable.OptionalNullable[string] `json:"prompt,omitzero"`
+	Prompt *string `json:"prompt,omitzero"`
 	// The LLM to query with the prompt and the chat history. If using data residency, the LLM must be supported in the data residency environment
-	Llm optionalnullable.OptionalNullable[Llm] `default:"gemini-2.5-flash" json:"llm"`
+	Llm *Llm `default:"gemini-2.5-flash" json:"llm"`
 	// A list of IDs of tools used by the agent
-	ToolIds optionalnullable.OptionalNullable[[]string] `json:"tool_ids,omitzero"`
+	ToolIds []string `json:"tool_ids,omitzero"`
 	// A list of Native MCP server ids to be used by the agent
-	NativeMcpServerIds optionalnullable.OptionalNullable[[]string] `json:"native_mcp_server_ids,omitzero"`
+	NativeMcpServerIds []string `json:"native_mcp_server_ids,omitzero"`
 	// A list of knowledge bases to be used by the agent
-	KnowledgeBase optionalnullable.OptionalNullable[[]KnowledgeBaseLocator] `json:"knowledge_base,omitzero"`
+	KnowledgeBase []KnowledgeBaseLocator `json:"knowledge_base,omitzero"`
 }
 
 func (p PromptAgentAPIModelOverrideOutput) MarshalJSON() ([]byte, error) {
@@ -31,35 +30,35 @@ func (p *PromptAgentAPIModelOverrideOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PromptAgentAPIModelOverrideOutput) GetPrompt() optionalnullable.OptionalNullable[string] {
+func (p *PromptAgentAPIModelOverrideOutput) GetPrompt() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Prompt
 }
 
-func (p *PromptAgentAPIModelOverrideOutput) GetLlm() optionalnullable.OptionalNullable[Llm] {
+func (p *PromptAgentAPIModelOverrideOutput) GetLlm() *Llm {
 	if p == nil {
 		return nil
 	}
 	return p.Llm
 }
 
-func (p *PromptAgentAPIModelOverrideOutput) GetToolIds() optionalnullable.OptionalNullable[[]string] {
+func (p *PromptAgentAPIModelOverrideOutput) GetToolIds() []string {
 	if p == nil {
 		return nil
 	}
 	return p.ToolIds
 }
 
-func (p *PromptAgentAPIModelOverrideOutput) GetNativeMcpServerIds() optionalnullable.OptionalNullable[[]string] {
+func (p *PromptAgentAPIModelOverrideOutput) GetNativeMcpServerIds() []string {
 	if p == nil {
 		return nil
 	}
 	return p.NativeMcpServerIds
 }
 
-func (p *PromptAgentAPIModelOverrideOutput) GetKnowledgeBase() optionalnullable.OptionalNullable[[]KnowledgeBaseLocator] {
+func (p *PromptAgentAPIModelOverrideOutput) GetKnowledgeBase() []KnowledgeBaseLocator {
 	if p == nil {
 		return nil
 	}

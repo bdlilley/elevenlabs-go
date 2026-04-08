@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ExtendedSubscriptionResponseModelCurrency string
@@ -136,7 +135,7 @@ type ExtendedSubscriptionResponseModel struct {
 	// Whether the user is allowed to extend their character limit.
 	AllowedToExtendCharacterLimit bool `json:"allowed_to_extend_character_limit"`
 	// The Unix timestamp of the next character count reset.
-	NextCharacterCountResetUnix optionalnullable.OptionalNullable[int64] `json:"next_character_count_reset_unix,omitzero"`
+	NextCharacterCountResetUnix *int64 `json:"next_character_count_reset_unix,omitzero"`
 	// The number of voice slots used by the user.
 	VoiceSlotsUsed int64 `json:"voice_slots_used"`
 	// The number of professional voice slots used by the workspace/user if single seat.
@@ -144,7 +143,7 @@ type ExtendedSubscriptionResponseModel struct {
 	// The maximum number of voice slots allowed for the user.
 	VoiceLimit int64 `json:"voice_limit"`
 	// The maximum number of voice add/edits allowed for the user.
-	MaxVoiceAddEdits optionalnullable.OptionalNullable[int64] `json:"max_voice_add_edits,omitzero"`
+	MaxVoiceAddEdits *int64 `json:"max_voice_add_edits,omitzero"`
 	// The number of voice add/edits used by the user.
 	VoiceAddEditCounter int64 `json:"voice_add_edit_counter"`
 	// The maximum number of professional voices allowed for the user.
@@ -156,20 +155,20 @@ type ExtendedSubscriptionResponseModel struct {
 	// Whether the user can use professional voice cloning.
 	CanUseProfessionalVoiceCloning bool `json:"can_use_professional_voice_cloning"`
 	// The currency of the user's subscription.
-	Currency optionalnullable.OptionalNullable[ExtendedSubscriptionResponseModelCurrency] `json:"currency,omitzero"`
-	Status   SubscriptionStatusType                                                       `json:"status"`
+	Currency *ExtendedSubscriptionResponseModelCurrency `json:"currency,omitzero"`
+	Status   SubscriptionStatusType                     `json:"status"`
 	// The billing period of the user's subscription.
-	BillingPeriod optionalnullable.OptionalNullable[BillingPeriod] `json:"billing_period,omitzero"`
+	BillingPeriod *BillingPeriod `json:"billing_period,omitzero"`
 	// The character refresh period of the user's subscription.
-	CharacterRefreshPeriod optionalnullable.OptionalNullable[CharacterRefreshPeriod] `json:"character_refresh_period,omitzero"`
+	CharacterRefreshPeriod *CharacterRefreshPeriod `json:"character_refresh_period,omitzero"`
 	// The next invoice for the user.
-	NextInvoice optionalnullable.OptionalNullable[InvoiceResponseModel] `json:"next_invoice,omitzero"`
+	NextInvoice *InvoiceResponseModel `json:"next_invoice,omitzero"`
 	// The open invoices for the user.
 	OpenInvoices []InvoiceResponseModel `json:"open_invoices"`
 	// Whether the user has open invoices.
 	HasOpenInvoices bool `json:"has_open_invoices"`
 	// The pending change for the user.
-	PendingChange optionalnullable.OptionalNullable[PendingChange] `json:"pending_change,omitzero"`
+	PendingChange *PendingChange `json:"pending_change,omitzero"`
 	// True if any workspace owned by this user's auth account has redeemed the starter first-month discount coupon.
 	HasUsedStarterCouponOnAccount *bool `default:"false" json:"has_used_starter_coupon_on_account"`
 	// True if any workspace owned by this user's auth account has redeemed the creator first-month discount coupon.
@@ -229,7 +228,7 @@ func (e *ExtendedSubscriptionResponseModel) GetAllowedToExtendCharacterLimit() b
 	return e.AllowedToExtendCharacterLimit
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetNextCharacterCountResetUnix() optionalnullable.OptionalNullable[int64] {
+func (e *ExtendedSubscriptionResponseModel) GetNextCharacterCountResetUnix() *int64 {
 	if e == nil {
 		return nil
 	}
@@ -257,7 +256,7 @@ func (e *ExtendedSubscriptionResponseModel) GetVoiceLimit() int64 {
 	return e.VoiceLimit
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetMaxVoiceAddEdits() optionalnullable.OptionalNullable[int64] {
+func (e *ExtendedSubscriptionResponseModel) GetMaxVoiceAddEdits() *int64 {
 	if e == nil {
 		return nil
 	}
@@ -299,7 +298,7 @@ func (e *ExtendedSubscriptionResponseModel) GetCanUseProfessionalVoiceCloning() 
 	return e.CanUseProfessionalVoiceCloning
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetCurrency() optionalnullable.OptionalNullable[ExtendedSubscriptionResponseModelCurrency] {
+func (e *ExtendedSubscriptionResponseModel) GetCurrency() *ExtendedSubscriptionResponseModelCurrency {
 	if e == nil {
 		return nil
 	}
@@ -313,21 +312,21 @@ func (e *ExtendedSubscriptionResponseModel) GetStatus() SubscriptionStatusType {
 	return e.Status
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetBillingPeriod() optionalnullable.OptionalNullable[BillingPeriod] {
+func (e *ExtendedSubscriptionResponseModel) GetBillingPeriod() *BillingPeriod {
 	if e == nil {
 		return nil
 	}
 	return e.BillingPeriod
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetCharacterRefreshPeriod() optionalnullable.OptionalNullable[CharacterRefreshPeriod] {
+func (e *ExtendedSubscriptionResponseModel) GetCharacterRefreshPeriod() *CharacterRefreshPeriod {
 	if e == nil {
 		return nil
 	}
 	return e.CharacterRefreshPeriod
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetNextInvoice() optionalnullable.OptionalNullable[InvoiceResponseModel] {
+func (e *ExtendedSubscriptionResponseModel) GetNextInvoice() *InvoiceResponseModel {
 	if e == nil {
 		return nil
 	}
@@ -348,7 +347,7 @@ func (e *ExtendedSubscriptionResponseModel) GetHasOpenInvoices() bool {
 	return e.HasOpenInvoices
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetPendingChange() optionalnullable.OptionalNullable[PendingChange] {
+func (e *ExtendedSubscriptionResponseModel) GetPendingChange() *PendingChange {
 	if e == nil {
 		return nil
 	}

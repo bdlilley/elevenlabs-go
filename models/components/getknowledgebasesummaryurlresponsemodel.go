@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseSummaryURLResponseModelDependentAgentType string
@@ -96,7 +95,7 @@ type GetKnowledgeBaseSummaryURLResponseModel struct {
 	SupportedUsages []DocumentUsageModeEnum                    `json:"supported_usages"`
 	AccessInfo      ResourceAccessInfo                         `json:"access_info"`
 	// The ID of the parent folder, or null if the document is at the root level.
-	FolderParentID optionalnullable.OptionalNullable[string] `json:"folder_parent_id,omitzero"`
+	FolderParentID *string `json:"folder_parent_id,omitzero"`
 	// The folder path segments leading to this entity, from root to parent folder.
 	FolderPath []KnowledgeBaseFolderPathSegmentSummaryResponseModel `json:"folder_path,omitzero"`
 	// This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead.
@@ -104,9 +103,9 @@ type GetKnowledgeBaseSummaryURLResponseModel struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DependentAgents []GetKnowledgeBaseSummaryURLResponseModelDependentAgent `json:"dependent_agents"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_        string                                          `const:"url" json:"type"`
-	URL          string                                          `json:"url"`
-	AutoSyncInfo optionalnullable.OptionalNullable[AutoSyncInfo] `json:"auto_sync_info,omitzero"`
+	type_        string        `const:"url" json:"type"`
+	URL          string        `json:"url"`
+	AutoSyncInfo *AutoSyncInfo `json:"auto_sync_info,omitzero"`
 }
 
 func (g GetKnowledgeBaseSummaryURLResponseModel) MarshalJSON() ([]byte, error) {
@@ -155,7 +154,7 @@ func (g *GetKnowledgeBaseSummaryURLResponseModel) GetAccessInfo() ResourceAccess
 	return g.AccessInfo
 }
 
-func (g *GetKnowledgeBaseSummaryURLResponseModel) GetFolderParentID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseSummaryURLResponseModel) GetFolderParentID() *string {
 	if g == nil {
 		return nil
 	}
@@ -187,7 +186,7 @@ func (g *GetKnowledgeBaseSummaryURLResponseModel) GetURL() string {
 	return g.URL
 }
 
-func (g *GetKnowledgeBaseSummaryURLResponseModel) GetAutoSyncInfo() optionalnullable.OptionalNullable[AutoSyncInfo] {
+func (g *GetKnowledgeBaseSummaryURLResponseModel) GetAutoSyncInfo() *AutoSyncInfo {
 	if g == nil {
 		return nil
 	}

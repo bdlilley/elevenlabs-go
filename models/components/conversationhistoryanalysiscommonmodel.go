@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryAnalysisCommonModel struct {
@@ -14,7 +13,7 @@ type ConversationHistoryAnalysisCommonModel struct {
 	DataCollectionResultsList     []DataCollectionResultCommonModel                                 `json:"data_collection_results_list,omitzero"`
 	CallSuccessful                EvaluationSuccessResult                                           `json:"call_successful"`
 	TranscriptSummary             string                                                            `json:"transcript_summary"`
-	CallSummaryTitle              optionalnullable.OptionalNullable[string]                         `json:"call_summary_title,omitzero"`
+	CallSummaryTitle              *string                                                           `json:"call_summary_title,omitzero"`
 	Scoped                        []ScopedAnalysisResult                                            `json:"scoped,omitzero"`
 }
 
@@ -71,7 +70,7 @@ func (c *ConversationHistoryAnalysisCommonModel) GetTranscriptSummary() string {
 	return c.TranscriptSummary
 }
 
-func (c *ConversationHistoryAnalysisCommonModel) GetCallSummaryTitle() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryAnalysisCommonModel) GetCallSummaryTitle() *string {
 	if c == nil {
 		return nil
 	}

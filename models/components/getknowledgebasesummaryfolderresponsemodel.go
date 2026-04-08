@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseSummaryFolderResponseModelDependentAgentType string
@@ -96,7 +95,7 @@ type GetKnowledgeBaseSummaryFolderResponseModel struct {
 	SupportedUsages []DocumentUsageModeEnum                    `json:"supported_usages"`
 	AccessInfo      ResourceAccessInfo                         `json:"access_info"`
 	// The ID of the parent folder, or null if the document is at the root level.
-	FolderParentID optionalnullable.OptionalNullable[string] `json:"folder_parent_id,omitzero"`
+	FolderParentID *string `json:"folder_parent_id,omitzero"`
 	// The folder path segments leading to this entity, from root to parent folder.
 	FolderPath []KnowledgeBaseFolderPathSegmentSummaryResponseModel `json:"folder_path,omitzero"`
 	// This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead.
@@ -104,9 +103,9 @@ type GetKnowledgeBaseSummaryFolderResponseModel struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DependentAgents []GetKnowledgeBaseSummaryFolderResponseModelDependentAgent `json:"dependent_agents"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_         string                                          `const:"folder" json:"type"`
-	ChildrenCount int64                                           `json:"children_count"`
-	AutoSyncInfo  optionalnullable.OptionalNullable[AutoSyncInfo] `json:"auto_sync_info,omitzero"`
+	type_         string        `const:"folder" json:"type"`
+	ChildrenCount int64         `json:"children_count"`
+	AutoSyncInfo  *AutoSyncInfo `json:"auto_sync_info,omitzero"`
 }
 
 func (g GetKnowledgeBaseSummaryFolderResponseModel) MarshalJSON() ([]byte, error) {
@@ -155,7 +154,7 @@ func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetAccessInfo() ResourceAcc
 	return g.AccessInfo
 }
 
-func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetFolderParentID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetFolderParentID() *string {
 	if g == nil {
 		return nil
 	}
@@ -187,7 +186,7 @@ func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetChildrenCount() int64 {
 	return g.ChildrenCount
 }
 
-func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetAutoSyncInfo() optionalnullable.OptionalNullable[AutoSyncInfo] {
+func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetAutoSyncInfo() *AutoSyncInfo {
 	if g == nil {
 		return nil
 	}

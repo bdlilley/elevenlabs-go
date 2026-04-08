@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type AddPronunciationDictionaryResponseModelPermissionOnResource string
 
 const (
@@ -44,7 +40,7 @@ type AddPronunciationDictionaryResponseModel struct {
 	// The number of rules in the version of the pronunciation dictionary.
 	VersionRulesNum int64 `json:"version_rules_num"`
 	// The description of the pronunciation dictionary.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// The permission on the resource of the pronunciation dictionary.
 	PermissionOnResource *AddPronunciationDictionaryResponseModelPermissionOnResource `json:"permission_on_resource"`
 }
@@ -91,7 +87,7 @@ func (a *AddPronunciationDictionaryResponseModel) GetVersionRulesNum() int64 {
 	return a.VersionRulesNum
 }
 
-func (a *AddPronunciationDictionaryResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (a *AddPronunciationDictionaryResponseModel) GetDescription() *string {
 	if a == nil {
 		return nil
 	}

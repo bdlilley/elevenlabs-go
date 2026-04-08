@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TextAlign string
@@ -121,33 +120,33 @@ func (e *TextBlendMode) IsExact() bool {
 }
 
 type CaptionStyleModel struct {
-	Template                      optionalnullable.OptionalNullable[CaptionStyleTemplateModel]            `json:"template,omitzero"`
-	TextFont                      optionalnullable.OptionalNullable[string]                               `json:"text_font,omitzero"`
-	TextScale                     optionalnullable.OptionalNullable[float64]                              `json:"text_scale,omitzero"`
-	TextColor                     optionalnullable.OptionalNullable[string]                               `json:"text_color,omitzero"`
-	TextAlign                     optionalnullable.OptionalNullable[TextAlign]                            `json:"text_align,omitzero"`
-	TextStyle                     optionalnullable.OptionalNullable[TextStyle]                            `json:"text_style,omitzero"`
-	TextWeight                    optionalnullable.OptionalNullable[TextWeight]                           `json:"text_weight,omitzero"`
-	TextTransform                 optionalnullable.OptionalNullable[TextTransform]                        `json:"text_transform,omitzero"`
-	TextBlendMode                 optionalnullable.OptionalNullable[TextBlendMode]                        `json:"text_blend_mode,omitzero"`
-	TextShadow                    optionalnullable.OptionalNullable[StudioTextStyleShadowModel]           `json:"text_shadow,omitzero"`
-	TextOutline                   optionalnullable.OptionalNullable[StudioTextStyleOutlineModel]          `json:"text_outline,omitzero"`
-	BackgroundEnabled             optionalnullable.OptionalNullable[bool]                                 `json:"background_enabled,omitzero"`
-	BackgroundColor               optionalnullable.OptionalNullable[string]                               `json:"background_color,omitzero"`
-	BackgroundOpacity             optionalnullable.OptionalNullable[float64]                              `json:"background_opacity,omitzero"`
-	WordHighlightsEnabled         optionalnullable.OptionalNullable[bool]                                 `json:"word_highlights_enabled,omitzero"`
-	WordHighlightsColor           optionalnullable.OptionalNullable[string]                               `json:"word_highlights_color,omitzero"`
-	WordHighlightsBackgroundColor optionalnullable.OptionalNullable[string]                               `json:"word_highlights_background_color,omitzero"`
-	WordHighlightsOpacity         optionalnullable.OptionalNullable[float64]                              `json:"word_highlights_opacity,omitzero"`
-	SectionAnimation              optionalnullable.OptionalNullable[CaptionStyleSectionAnimationModel]    `json:"section_animation,omitzero"`
-	WordAnimation                 optionalnullable.OptionalNullable[CaptionStyleWordAnimationModel]       `json:"word_animation,omitzero"`
-	CharacterAnimation            optionalnullable.OptionalNullable[CaptionStyleCharacterAnimationModel]  `json:"character_animation,omitzero"`
-	WidthPct                      optionalnullable.OptionalNullable[float64]                              `json:"width_pct,omitzero"`
-	HorizontalPlacement           optionalnullable.OptionalNullable[CaptionStyleHorizontalPlacementModel] `json:"horizontal_placement,omitzero"`
-	VerticalPlacement             optionalnullable.OptionalNullable[CaptionStyleVerticalPlacementModel]   `json:"vertical_placement,omitzero"`
-	AutoBreakEnabled              optionalnullable.OptionalNullable[bool]                                 `json:"auto_break_enabled,omitzero"`
-	MaxLinesPerSection            optionalnullable.OptionalNullable[int64]                                `json:"max_lines_per_section,omitzero"`
-	MaxWordsPerLine               optionalnullable.OptionalNullable[int64]                                `json:"max_words_per_line,omitzero"`
+	Template                      *CaptionStyleTemplateModel            `json:"template,omitzero"`
+	TextFont                      *string                               `json:"text_font,omitzero"`
+	TextScale                     *float64                              `json:"text_scale,omitzero"`
+	TextColor                     *string                               `json:"text_color,omitzero"`
+	TextAlign                     *TextAlign                            `json:"text_align,omitzero"`
+	TextStyle                     *TextStyle                            `json:"text_style,omitzero"`
+	TextWeight                    *TextWeight                           `json:"text_weight,omitzero"`
+	TextTransform                 *TextTransform                        `json:"text_transform,omitzero"`
+	TextBlendMode                 *TextBlendMode                        `json:"text_blend_mode,omitzero"`
+	TextShadow                    *StudioTextStyleShadowModel           `json:"text_shadow,omitzero"`
+	TextOutline                   *StudioTextStyleOutlineModel          `json:"text_outline,omitzero"`
+	BackgroundEnabled             *bool                                 `json:"background_enabled,omitzero"`
+	BackgroundColor               *string                               `json:"background_color,omitzero"`
+	BackgroundOpacity             *float64                              `json:"background_opacity,omitzero"`
+	WordHighlightsEnabled         *bool                                 `json:"word_highlights_enabled,omitzero"`
+	WordHighlightsColor           *string                               `json:"word_highlights_color,omitzero"`
+	WordHighlightsBackgroundColor *string                               `json:"word_highlights_background_color,omitzero"`
+	WordHighlightsOpacity         *float64                              `json:"word_highlights_opacity,omitzero"`
+	SectionAnimation              *CaptionStyleSectionAnimationModel    `json:"section_animation,omitzero"`
+	WordAnimation                 *CaptionStyleWordAnimationModel       `json:"word_animation,omitzero"`
+	CharacterAnimation            *CaptionStyleCharacterAnimationModel  `json:"character_animation,omitzero"`
+	WidthPct                      *float64                              `json:"width_pct,omitzero"`
+	HorizontalPlacement           *CaptionStyleHorizontalPlacementModel `json:"horizontal_placement,omitzero"`
+	VerticalPlacement             *CaptionStyleVerticalPlacementModel   `json:"vertical_placement,omitzero"`
+	AutoBreakEnabled              *bool                                 `json:"auto_break_enabled,omitzero"`
+	MaxLinesPerSection            *int64                                `json:"max_lines_per_section,omitzero"`
+	MaxWordsPerLine               *int64                                `json:"max_words_per_line,omitzero"`
 }
 
 func (c CaptionStyleModel) MarshalJSON() ([]byte, error) {
@@ -161,189 +160,189 @@ func (c *CaptionStyleModel) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *CaptionStyleModel) GetTemplate() optionalnullable.OptionalNullable[CaptionStyleTemplateModel] {
+func (c *CaptionStyleModel) GetTemplate() *CaptionStyleTemplateModel {
 	if c == nil {
 		return nil
 	}
 	return c.Template
 }
 
-func (c *CaptionStyleModel) GetTextFont() optionalnullable.OptionalNullable[string] {
+func (c *CaptionStyleModel) GetTextFont() *string {
 	if c == nil {
 		return nil
 	}
 	return c.TextFont
 }
 
-func (c *CaptionStyleModel) GetTextScale() optionalnullable.OptionalNullable[float64] {
+func (c *CaptionStyleModel) GetTextScale() *float64 {
 	if c == nil {
 		return nil
 	}
 	return c.TextScale
 }
 
-func (c *CaptionStyleModel) GetTextColor() optionalnullable.OptionalNullable[string] {
+func (c *CaptionStyleModel) GetTextColor() *string {
 	if c == nil {
 		return nil
 	}
 	return c.TextColor
 }
 
-func (c *CaptionStyleModel) GetTextAlign() optionalnullable.OptionalNullable[TextAlign] {
+func (c *CaptionStyleModel) GetTextAlign() *TextAlign {
 	if c == nil {
 		return nil
 	}
 	return c.TextAlign
 }
 
-func (c *CaptionStyleModel) GetTextStyle() optionalnullable.OptionalNullable[TextStyle] {
+func (c *CaptionStyleModel) GetTextStyle() *TextStyle {
 	if c == nil {
 		return nil
 	}
 	return c.TextStyle
 }
 
-func (c *CaptionStyleModel) GetTextWeight() optionalnullable.OptionalNullable[TextWeight] {
+func (c *CaptionStyleModel) GetTextWeight() *TextWeight {
 	if c == nil {
 		return nil
 	}
 	return c.TextWeight
 }
 
-func (c *CaptionStyleModel) GetTextTransform() optionalnullable.OptionalNullable[TextTransform] {
+func (c *CaptionStyleModel) GetTextTransform() *TextTransform {
 	if c == nil {
 		return nil
 	}
 	return c.TextTransform
 }
 
-func (c *CaptionStyleModel) GetTextBlendMode() optionalnullable.OptionalNullable[TextBlendMode] {
+func (c *CaptionStyleModel) GetTextBlendMode() *TextBlendMode {
 	if c == nil {
 		return nil
 	}
 	return c.TextBlendMode
 }
 
-func (c *CaptionStyleModel) GetTextShadow() optionalnullable.OptionalNullable[StudioTextStyleShadowModel] {
+func (c *CaptionStyleModel) GetTextShadow() *StudioTextStyleShadowModel {
 	if c == nil {
 		return nil
 	}
 	return c.TextShadow
 }
 
-func (c *CaptionStyleModel) GetTextOutline() optionalnullable.OptionalNullable[StudioTextStyleOutlineModel] {
+func (c *CaptionStyleModel) GetTextOutline() *StudioTextStyleOutlineModel {
 	if c == nil {
 		return nil
 	}
 	return c.TextOutline
 }
 
-func (c *CaptionStyleModel) GetBackgroundEnabled() optionalnullable.OptionalNullable[bool] {
+func (c *CaptionStyleModel) GetBackgroundEnabled() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.BackgroundEnabled
 }
 
-func (c *CaptionStyleModel) GetBackgroundColor() optionalnullable.OptionalNullable[string] {
+func (c *CaptionStyleModel) GetBackgroundColor() *string {
 	if c == nil {
 		return nil
 	}
 	return c.BackgroundColor
 }
 
-func (c *CaptionStyleModel) GetBackgroundOpacity() optionalnullable.OptionalNullable[float64] {
+func (c *CaptionStyleModel) GetBackgroundOpacity() *float64 {
 	if c == nil {
 		return nil
 	}
 	return c.BackgroundOpacity
 }
 
-func (c *CaptionStyleModel) GetWordHighlightsEnabled() optionalnullable.OptionalNullable[bool] {
+func (c *CaptionStyleModel) GetWordHighlightsEnabled() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.WordHighlightsEnabled
 }
 
-func (c *CaptionStyleModel) GetWordHighlightsColor() optionalnullable.OptionalNullable[string] {
+func (c *CaptionStyleModel) GetWordHighlightsColor() *string {
 	if c == nil {
 		return nil
 	}
 	return c.WordHighlightsColor
 }
 
-func (c *CaptionStyleModel) GetWordHighlightsBackgroundColor() optionalnullable.OptionalNullable[string] {
+func (c *CaptionStyleModel) GetWordHighlightsBackgroundColor() *string {
 	if c == nil {
 		return nil
 	}
 	return c.WordHighlightsBackgroundColor
 }
 
-func (c *CaptionStyleModel) GetWordHighlightsOpacity() optionalnullable.OptionalNullable[float64] {
+func (c *CaptionStyleModel) GetWordHighlightsOpacity() *float64 {
 	if c == nil {
 		return nil
 	}
 	return c.WordHighlightsOpacity
 }
 
-func (c *CaptionStyleModel) GetSectionAnimation() optionalnullable.OptionalNullable[CaptionStyleSectionAnimationModel] {
+func (c *CaptionStyleModel) GetSectionAnimation() *CaptionStyleSectionAnimationModel {
 	if c == nil {
 		return nil
 	}
 	return c.SectionAnimation
 }
 
-func (c *CaptionStyleModel) GetWordAnimation() optionalnullable.OptionalNullable[CaptionStyleWordAnimationModel] {
+func (c *CaptionStyleModel) GetWordAnimation() *CaptionStyleWordAnimationModel {
 	if c == nil {
 		return nil
 	}
 	return c.WordAnimation
 }
 
-func (c *CaptionStyleModel) GetCharacterAnimation() optionalnullable.OptionalNullable[CaptionStyleCharacterAnimationModel] {
+func (c *CaptionStyleModel) GetCharacterAnimation() *CaptionStyleCharacterAnimationModel {
 	if c == nil {
 		return nil
 	}
 	return c.CharacterAnimation
 }
 
-func (c *CaptionStyleModel) GetWidthPct() optionalnullable.OptionalNullable[float64] {
+func (c *CaptionStyleModel) GetWidthPct() *float64 {
 	if c == nil {
 		return nil
 	}
 	return c.WidthPct
 }
 
-func (c *CaptionStyleModel) GetHorizontalPlacement() optionalnullable.OptionalNullable[CaptionStyleHorizontalPlacementModel] {
+func (c *CaptionStyleModel) GetHorizontalPlacement() *CaptionStyleHorizontalPlacementModel {
 	if c == nil {
 		return nil
 	}
 	return c.HorizontalPlacement
 }
 
-func (c *CaptionStyleModel) GetVerticalPlacement() optionalnullable.OptionalNullable[CaptionStyleVerticalPlacementModel] {
+func (c *CaptionStyleModel) GetVerticalPlacement() *CaptionStyleVerticalPlacementModel {
 	if c == nil {
 		return nil
 	}
 	return c.VerticalPlacement
 }
 
-func (c *CaptionStyleModel) GetAutoBreakEnabled() optionalnullable.OptionalNullable[bool] {
+func (c *CaptionStyleModel) GetAutoBreakEnabled() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.AutoBreakEnabled
 }
 
-func (c *CaptionStyleModel) GetMaxLinesPerSection() optionalnullable.OptionalNullable[int64] {
+func (c *CaptionStyleModel) GetMaxLinesPerSection() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.MaxLinesPerSection
 }
 
-func (c *CaptionStyleModel) GetMaxWordsPerLine() optionalnullable.OptionalNullable[int64] {
+func (c *CaptionStyleModel) GetMaxWordsPerLine() *int64 {
 	if c == nil {
 		return nil
 	}

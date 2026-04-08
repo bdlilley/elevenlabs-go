@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -153,7 +152,7 @@ func (u GetResponseUnitTestResponseModelDynamicVariables) MarshalJSON() ([]byte,
 
 type GetResponseUnitTestResponseModel struct {
 	// Metadata of a conversation this test was created from (if applicable).
-	FromConversationMetadata optionalnullable.OptionalNullable[TestFromConversationMetadataOutput] `json:"from_conversation_metadata,omitzero"`
+	FromConversationMetadata *TestFromConversationMetadataOutput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]*GetResponseUnitTestResponseModelDynamicVariables `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelOutput             `json:"chat_history,omitzero"`
@@ -180,7 +179,7 @@ func (g *GetResponseUnitTestResponseModel) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (g *GetResponseUnitTestResponseModel) GetFromConversationMetadata() optionalnullable.OptionalNullable[TestFromConversationMetadataOutput] {
+func (g *GetResponseUnitTestResponseModel) GetFromConversationMetadata() *TestFromConversationMetadataOutput {
 	if g == nil {
 		return nil
 	}

@@ -2,18 +2,14 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type ConversationUserResponseModel struct {
-	UserID                    string                                    `json:"user_id"`
-	LastContactUnixSecs       int64                                     `json:"last_contact_unix_secs"`
-	FirstContactUnixSecs      int64                                     `json:"first_contact_unix_secs"`
-	ConversationCount         int64                                     `json:"conversation_count"`
-	LastContactAgentID        optionalnullable.OptionalNullable[string] `json:"last_contact_agent_id,omitzero"`
-	LastContactConversationID string                                    `json:"last_contact_conversation_id"`
-	LastContactAgentName      optionalnullable.OptionalNullable[string] `json:"last_contact_agent_name,omitzero"`
+	UserID                    string  `json:"user_id"`
+	LastContactUnixSecs       int64   `json:"last_contact_unix_secs"`
+	FirstContactUnixSecs      int64   `json:"first_contact_unix_secs"`
+	ConversationCount         int64   `json:"conversation_count"`
+	LastContactAgentID        *string `json:"last_contact_agent_id,omitzero"`
+	LastContactConversationID string  `json:"last_contact_conversation_id"`
+	LastContactAgentName      *string `json:"last_contact_agent_name,omitzero"`
 }
 
 func (c *ConversationUserResponseModel) GetUserID() string {
@@ -44,7 +40,7 @@ func (c *ConversationUserResponseModel) GetConversationCount() int64 {
 	return c.ConversationCount
 }
 
-func (c *ConversationUserResponseModel) GetLastContactAgentID() optionalnullable.OptionalNullable[string] {
+func (c *ConversationUserResponseModel) GetLastContactAgentID() *string {
 	if c == nil {
 		return nil
 	}
@@ -58,7 +54,7 @@ func (c *ConversationUserResponseModel) GetLastContactConversationID() string {
 	return c.LastContactConversationID
 }
 
-func (c *ConversationUserResponseModel) GetLastContactAgentName() optionalnullable.OptionalNullable[string] {
+func (c *ConversationUserResponseModel) GetLastContactAgentName() *string {
 	if c == nil {
 		return nil
 	}

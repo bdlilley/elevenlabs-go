@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPostPermissionsType string
@@ -104,7 +103,7 @@ type BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysP
 	// The permissions of the XI API.
 	Permissions BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPostPermissions `json:"permissions"`
 	// The character limit of the XI API key. If provided this will limit the usage of this api key to n characters per month where n is the chosen value. Requests that incur charges will fail after reaching this monthly limit.
-	CharacterLimit optionalnullable.OptionalNullable[int64] `json:"character_limit,omitzero"`
+	CharacterLimit *int64 `json:"character_limit,omitzero"`
 }
 
 func (b *BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost) GetName() string {
@@ -121,7 +120,7 @@ func (b *BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIK
 	return b.Permissions
 }
 
-func (b *BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost) GetCharacterLimit() optionalnullable.OptionalNullable[int64] {
+func (b *BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost) GetCharacterLimit() *int64 {
 	if b == nil {
 		return nil
 	}

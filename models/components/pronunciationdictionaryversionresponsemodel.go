@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type PronunciationDictionaryVersionResponseModelPermissionOnResource string
 
 const (
@@ -39,7 +35,7 @@ type PronunciationDictionaryVersionResponseModel struct {
 	PermissionOnResource      *PronunciationDictionaryVersionResponseModelPermissionOnResource `json:"permission_on_resource"`
 	CreatedBy                 string                                                           `json:"created_by"`
 	CreationTimeUnix          int64                                                            `json:"creation_time_unix"`
-	ArchivedTimeUnix          optionalnullable.OptionalNullable[int64]                         `json:"archived_time_unix,omitzero"`
+	ArchivedTimeUnix          *int64                                                           `json:"archived_time_unix,omitzero"`
 }
 
 func (p *PronunciationDictionaryVersionResponseModel) GetVersionID() string {
@@ -98,7 +94,7 @@ func (p *PronunciationDictionaryVersionResponseModel) GetCreationTimeUnix() int6
 	return p.CreationTimeUnix
 }
 
-func (p *PronunciationDictionaryVersionResponseModel) GetArchivedTimeUnix() optionalnullable.OptionalNullable[int64] {
+func (p *PronunciationDictionaryVersionResponseModel) GetArchivedTimeUnix() *int64 {
 	if p == nil {
 		return nil
 	}

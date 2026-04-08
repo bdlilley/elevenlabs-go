@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRuleType string
@@ -129,9 +128,9 @@ type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost 
 	// The name of the pronunciation dictionary, used for identification only.
 	Name string `json:"name"`
 	// A description of the pronunciation dictionary, used for identification only.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// Should be one of 'admin', 'editor' or 'viewer'. If not provided, defaults to no access.
-	WorkspaceAccess optionalnullable.OptionalNullable[BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccess] `json:"workspace_access,omitzero"`
+	WorkspaceAccess *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccess `json:"workspace_access,omitzero"`
 }
 
 func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost) GetRules() []BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRule {
@@ -148,14 +147,14 @@ func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesP
 	return b.Name
 }
 
-func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost) GetDescription() optionalnullable.OptionalNullable[string] {
+func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost) GetDescription() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Description
 }
 
-func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost) GetWorkspaceAccess() optionalnullable.OptionalNullable[BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccess] {
+func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost) GetWorkspaceAccess() *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostWorkspaceAccess {
 	if b == nil {
 		return nil
 	}

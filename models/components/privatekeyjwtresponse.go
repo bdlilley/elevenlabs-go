@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -44,7 +43,7 @@ type PrivateKeyJWTResponse struct {
 	// JWT signing algorithm
 	Algorithm *PrivateKeyJWTResponseAlgorithm `default:"HS256" json:"algorithm"`
 	// Key ID (kid) for JWT header - useful for key rotation
-	KeyID optionalnullable.OptionalNullable[string] `json:"key_id,omitzero"`
+	KeyID *string `json:"key_id,omitzero"`
 	// JWT issuer (iss claim)
 	Issuer string `json:"issuer"`
 	// JWT audience (aud claim)
@@ -54,9 +53,9 @@ type PrivateKeyJWTResponse struct {
 	// Token expiration time in seconds
 	ExpirationSeconds *int64 `default:"3600" json:"expiration_seconds"`
 	// Additional custom claims to include in the JWT
-	ExtraParams map[string]string                                             `json:"extra_params,omitzero"`
-	ID          string                                                        `json:"id"`
-	UsedBy      optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	ExtraParams map[string]string           `json:"extra_params,omitzero"`
+	ID          string                      `json:"id"`
+	UsedBy      *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (p PrivateKeyJWTResponse) MarshalJSON() ([]byte, error) {
@@ -95,7 +94,7 @@ func (p *PrivateKeyJWTResponse) GetAlgorithm() *PrivateKeyJWTResponseAlgorithm {
 	return p.Algorithm
 }
 
-func (p *PrivateKeyJWTResponse) GetKeyID() optionalnullable.OptionalNullable[string] {
+func (p *PrivateKeyJWTResponse) GetKeyID() *string {
 	if p == nil {
 		return nil
 	}
@@ -144,7 +143,7 @@ func (p *PrivateKeyJWTResponse) GetID() string {
 	return p.ID
 }
 
-func (p *PrivateKeyJWTResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (p *PrivateKeyJWTResponse) GetUsedBy() *AuthConnectionDependencies {
 	if p == nil {
 		return nil
 	}

@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type GuardrailsV1Input struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	version         *string                                                     `const:"1" json:"version"`
-	Focus           *FocusGuardrail                                             `json:"focus,omitzero"`
-	PromptInjection *PromptInjectionGuardrail                                   `json:"prompt_injection,omitzero"`
-	Content         *ContentGuardrailInput                                      `json:"content,omitzero"`
-	Moderation      optionalnullable.OptionalNullable[ModerationGuardrailInput] `json:"moderation,omitzero"`
+	version         *string                   `const:"1" json:"version"`
+	Focus           *FocusGuardrail           `json:"focus,omitzero"`
+	PromptInjection *PromptInjectionGuardrail `json:"prompt_injection,omitzero"`
+	Content         *ContentGuardrailInput    `json:"content,omitzero"`
+	Moderation      *ModerationGuardrailInput `json:"moderation,omitzero"`
 	// Container for custom guardrails, matching ModerationGuardrail pattern
 	Custom *CustomGuardrailInput `json:"custom,omitzero"`
 }
@@ -55,7 +54,7 @@ func (g *GuardrailsV1Input) GetContent() *ContentGuardrailInput {
 	return g.Content
 }
 
-func (g *GuardrailsV1Input) GetModeration() optionalnullable.OptionalNullable[ModerationGuardrailInput] {
+func (g *GuardrailsV1Input) GetModeration() *ModerationGuardrailInput {
 	if g == nil {
 		return nil
 	}

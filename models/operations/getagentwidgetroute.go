@@ -5,14 +5,13 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAgentWidgetRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
 	// An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint
-	ConversationSignature optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=conversation_signature"`
+	ConversationSignature *string `queryParam:"style=form,explode=true,name=conversation_signature"`
 }
 
 func (g *GetAgentWidgetRouteRequest) GetAgentID() string {
@@ -22,7 +21,7 @@ func (g *GetAgentWidgetRouteRequest) GetAgentID() string {
 	return g.AgentID
 }
 
-func (g *GetAgentWidgetRouteRequest) GetConversationSignature() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentWidgetRouteRequest) GetConversationSignature() *string {
 	if g == nil {
 		return nil
 	}

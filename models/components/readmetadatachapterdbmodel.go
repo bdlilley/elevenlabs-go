@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ReadMetadataChapterDBModel struct {
-	ChapterName        string                                     `json:"chapter_name"`
-	WordCount          int64                                      `json:"word_count"`
-	CharCount          int64                                      `json:"char_count"`
-	StartingCharOffset int64                                      `json:"starting_char_offset"`
-	HasParsedHTML      *bool                                      `default:"false" json:"has_parsed_html"`
-	HasSummary         *bool                                      `default:"false" json:"has_summary"`
-	DurationSeconds    optionalnullable.OptionalNullable[float64] `json:"duration_seconds,omitzero"`
-	FileNumber         optionalnullable.OptionalNullable[string]  `json:"file_number,omitzero"`
+	ChapterName        string   `json:"chapter_name"`
+	WordCount          int64    `json:"word_count"`
+	CharCount          int64    `json:"char_count"`
+	StartingCharOffset int64    `json:"starting_char_offset"`
+	HasParsedHTML      *bool    `default:"false" json:"has_parsed_html"`
+	HasSummary         *bool    `default:"false" json:"has_summary"`
+	DurationSeconds    *float64 `json:"duration_seconds,omitzero"`
+	FileNumber         *string  `json:"file_number,omitzero"`
 }
 
 func (r ReadMetadataChapterDBModel) MarshalJSON() ([]byte, error) {
@@ -71,14 +70,14 @@ func (r *ReadMetadataChapterDBModel) GetHasSummary() *bool {
 	return r.HasSummary
 }
 
-func (r *ReadMetadataChapterDBModel) GetDurationSeconds() optionalnullable.OptionalNullable[float64] {
+func (r *ReadMetadataChapterDBModel) GetDurationSeconds() *float64 {
 	if r == nil {
 		return nil
 	}
 	return r.DurationSeconds
 }
 
-func (r *ReadMetadataChapterDBModel) GetFileNumber() optionalnullable.OptionalNullable[string] {
+func (r *ReadMetadataChapterDBModel) GetFileNumber() *string {
 	if r == nil {
 		return nil
 	}

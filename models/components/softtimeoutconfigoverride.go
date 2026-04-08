@@ -4,12 +4,11 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SoftTimeoutConfigOverride struct {
 	// Message to show when soft timeout is reached while waiting for LLM response
-	Message optionalnullable.OptionalNullable[string] `json:"message,omitzero"`
+	Message *string `json:"message,omitzero"`
 }
 
 func (s SoftTimeoutConfigOverride) MarshalJSON() ([]byte, error) {
@@ -23,7 +22,7 @@ func (s *SoftTimeoutConfigOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SoftTimeoutConfigOverride) GetMessage() optionalnullable.OptionalNullable[string] {
+func (s *SoftTimeoutConfigOverride) GetMessage() *string {
 	if s == nil {
 		return nil
 	}

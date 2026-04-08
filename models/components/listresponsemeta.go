@@ -2,31 +2,27 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type ListResponseMeta struct {
-	Total    optionalnullable.OptionalNullable[int64] `json:"total,omitzero"`
-	Page     optionalnullable.OptionalNullable[int64] `json:"page,omitzero"`
-	PageSize optionalnullable.OptionalNullable[int64] `json:"page_size,omitzero"`
+	Total    *int64 `json:"total,omitzero"`
+	Page     *int64 `json:"page,omitzero"`
+	PageSize *int64 `json:"page_size,omitzero"`
 }
 
-func (l *ListResponseMeta) GetTotal() optionalnullable.OptionalNullable[int64] {
+func (l *ListResponseMeta) GetTotal() *int64 {
 	if l == nil {
 		return nil
 	}
 	return l.Total
 }
 
-func (l *ListResponseMeta) GetPage() optionalnullable.OptionalNullable[int64] {
+func (l *ListResponseMeta) GetPage() *int64 {
 	if l == nil {
 		return nil
 	}
 	return l.Page
 }
 
-func (l *ListResponseMeta) GetPageSize() optionalnullable.OptionalNullable[int64] {
+func (l *ListResponseMeta) GetPageSize() *int64 {
 	if l == nil {
 		return nil
 	}

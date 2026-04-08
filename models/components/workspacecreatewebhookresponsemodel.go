@@ -2,13 +2,9 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type WorkspaceCreateWebhookResponseModel struct {
-	WebhookID     string                                    `json:"webhook_id"`
-	WebhookSecret optionalnullable.OptionalNullable[string] `json:"webhook_secret,omitzero"`
+	WebhookID     string  `json:"webhook_id"`
+	WebhookSecret *string `json:"webhook_secret,omitzero"`
 }
 
 func (w *WorkspaceCreateWebhookResponseModel) GetWebhookID() string {
@@ -18,7 +14,7 @@ func (w *WorkspaceCreateWebhookResponseModel) GetWebhookID() string {
 	return w.WebhookID
 }
 
-func (w *WorkspaceCreateWebhookResponseModel) GetWebhookSecret() optionalnullable.OptionalNullable[string] {
+func (w *WorkspaceCreateWebhookResponseModel) GetWebhookSecret() *string {
 	if w == nil {
 		return nil
 	}

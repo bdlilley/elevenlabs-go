@@ -4,12 +4,11 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WhatsAppTemplateDocumentParamDetails struct {
-	Link     string                                    `json:"link"`
-	Filename optionalnullable.OptionalNullable[string] `json:"filename,omitzero"`
+	Link     string  `json:"link"`
+	Filename *string `json:"filename,omitzero"`
 }
 
 func (w WhatsAppTemplateDocumentParamDetails) MarshalJSON() ([]byte, error) {
@@ -30,7 +29,7 @@ func (w *WhatsAppTemplateDocumentParamDetails) GetLink() string {
 	return w.Link
 }
 
-func (w *WhatsAppTemplateDocumentParamDetails) GetFilename() optionalnullable.OptionalNullable[string] {
+func (w *WhatsAppTemplateDocumentParamDetails) GetFilename() *string {
 	if w == nil {
 		return nil
 	}

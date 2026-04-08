@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -25,7 +24,7 @@ type WebhookToolConfigInput struct {
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
-	ToolCallSound optionalnullable.OptionalNullable[ToolCallSoundType] `json:"tool_call_sound,omitzero"`
+	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines how the tool call sound should be played.
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// Controls how tool errors are processed before being shared with the agent.
@@ -92,7 +91,7 @@ func (w *WebhookToolConfigInput) GetAssignments() []DynamicVariableAssignment {
 	return w.Assignments
 }
 
-func (w *WebhookToolConfigInput) GetToolCallSound() optionalnullable.OptionalNullable[ToolCallSoundType] {
+func (w *WebhookToolConfigInput) GetToolCallSound() *ToolCallSoundType {
 	if w == nil {
 		return nil
 	}

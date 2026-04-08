@@ -2,15 +2,11 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type PronunciationDictionaryVersionLocatorRequestModel struct {
 	// The ID of the pronunciation dictionary.
 	PronunciationDictionaryID string `json:"pronunciation_dictionary_id"`
 	// The ID of the version of the pronunciation dictionary. If not provided, the latest version will be used.
-	VersionID optionalnullable.OptionalNullable[string] `json:"version_id,omitzero"`
+	VersionID *string `json:"version_id,omitzero"`
 }
 
 func (p *PronunciationDictionaryVersionLocatorRequestModel) GetPronunciationDictionaryID() string {
@@ -20,7 +16,7 @@ func (p *PronunciationDictionaryVersionLocatorRequestModel) GetPronunciationDict
 	return p.PronunciationDictionaryID
 }
 
-func (p *PronunciationDictionaryVersionLocatorRequestModel) GetVersionID() optionalnullable.OptionalNullable[string] {
+func (p *PronunciationDictionaryVersionLocatorRequestModel) GetVersionID() *string {
 	if p == nil {
 		return nil
 	}

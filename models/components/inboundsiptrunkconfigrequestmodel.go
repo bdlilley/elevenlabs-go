@@ -4,19 +4,18 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type InboundSIPTrunkConfigRequestModel struct {
 	// List of IP addresses that are allowed to use the trunk. Each item in the list can be an individual IP address or a Classless Inter-Domain Routing notation representing a CIDR block.
-	AllowedAddresses optionalnullable.OptionalNullable[[]string] `json:"allowed_addresses,omitzero"`
+	AllowedAddresses []string `json:"allowed_addresses,omitzero"`
 	// List of phone numbers that are allowed to use the trunk.
-	AllowedNumbers  optionalnullable.OptionalNullable[[]string] `json:"allowed_numbers,omitzero"`
-	MediaEncryption *SIPMediaEncryptionEnum                     `default:"allowed" json:"media_encryption"`
+	AllowedNumbers  []string                `json:"allowed_numbers,omitzero"`
+	MediaEncryption *SIPMediaEncryptionEnum `default:"allowed" json:"media_encryption"`
 	// Optional digest authentication credentials (username/password).
-	Credentials optionalnullable.OptionalNullable[SIPTrunkCredentialsRequestModel] `json:"credentials,omitzero"`
+	Credentials *SIPTrunkCredentialsRequestModel `json:"credentials,omitzero"`
 	// Domains of remote SIP servers used to validate TLS certificates.
-	RemoteDomains optionalnullable.OptionalNullable[[]string] `json:"remote_domains,omitzero"`
+	RemoteDomains []string `json:"remote_domains,omitzero"`
 }
 
 func (i InboundSIPTrunkConfigRequestModel) MarshalJSON() ([]byte, error) {
@@ -30,14 +29,14 @@ func (i *InboundSIPTrunkConfigRequestModel) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (i *InboundSIPTrunkConfigRequestModel) GetAllowedAddresses() optionalnullable.OptionalNullable[[]string] {
+func (i *InboundSIPTrunkConfigRequestModel) GetAllowedAddresses() []string {
 	if i == nil {
 		return nil
 	}
 	return i.AllowedAddresses
 }
 
-func (i *InboundSIPTrunkConfigRequestModel) GetAllowedNumbers() optionalnullable.OptionalNullable[[]string] {
+func (i *InboundSIPTrunkConfigRequestModel) GetAllowedNumbers() []string {
 	if i == nil {
 		return nil
 	}
@@ -51,14 +50,14 @@ func (i *InboundSIPTrunkConfigRequestModel) GetMediaEncryption() *SIPMediaEncryp
 	return i.MediaEncryption
 }
 
-func (i *InboundSIPTrunkConfigRequestModel) GetCredentials() optionalnullable.OptionalNullable[SIPTrunkCredentialsRequestModel] {
+func (i *InboundSIPTrunkConfigRequestModel) GetCredentials() *SIPTrunkCredentialsRequestModel {
 	if i == nil {
 		return nil
 	}
 	return i.Credentials
 }
 
-func (i *InboundSIPTrunkConfigRequestModel) GetRemoteDomains() optionalnullable.OptionalNullable[[]string] {
+func (i *InboundSIPTrunkConfigRequestModel) GetRemoteDomains() []string {
 	if i == nil {
 		return nil
 	}

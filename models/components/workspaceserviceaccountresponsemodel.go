@@ -4,15 +4,14 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WorkspaceServiceAccountResponseModel struct {
-	ServiceAccountUserID string                                   `json:"service_account_user_id"`
-	Name                 string                                   `json:"name"`
-	CreatedAtUnix        optionalnullable.OptionalNullable[int64] `json:"created_at_unix,omitzero"`
-	APIKeys              []WorkspaceAPIKeyResponseModel           `json:"api-keys"`
-	DefaultSharingGroups []DefaultSharingGroupResponseModel       `json:"default_sharing_groups,omitzero"`
+	ServiceAccountUserID string                             `json:"service_account_user_id"`
+	Name                 string                             `json:"name"`
+	CreatedAtUnix        *int64                             `json:"created_at_unix,omitzero"`
+	APIKeys              []WorkspaceAPIKeyResponseModel     `json:"api-keys"`
+	DefaultSharingGroups []DefaultSharingGroupResponseModel `json:"default_sharing_groups,omitzero"`
 }
 
 func (w WorkspaceServiceAccountResponseModel) MarshalJSON() ([]byte, error) {
@@ -40,7 +39,7 @@ func (w *WorkspaceServiceAccountResponseModel) GetName() string {
 	return w.Name
 }
 
-func (w *WorkspaceServiceAccountResponseModel) GetCreatedAtUnix() optionalnullable.OptionalNullable[int64] {
+func (w *WorkspaceServiceAccountResponseModel) GetCreatedAtUnix() *int64 {
 	if w == nil {
 		return nil
 	}

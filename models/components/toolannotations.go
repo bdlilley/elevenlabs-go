@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // ToolAnnotations - Additional properties describing a Tool to clients.
@@ -16,12 +15,12 @@ import (
 // Clients should never make tool use decisions based on ToolAnnotations
 // received from untrusted servers.
 type ToolAnnotations struct {
-	Title                optionalnullable.OptionalNullable[string] `json:"title,omitzero"`
-	ReadOnlyHint         optionalnullable.OptionalNullable[bool]   `json:"readOnlyHint,omitzero"`
-	DestructiveHint      optionalnullable.OptionalNullable[bool]   `json:"destructiveHint,omitzero"`
-	IdempotentHint       optionalnullable.OptionalNullable[bool]   `json:"idempotentHint,omitzero"`
-	OpenWorldHint        optionalnullable.OptionalNullable[bool]   `json:"openWorldHint,omitzero"`
-	AdditionalProperties map[string]any                            `additionalProperties:"true" json:"-"`
+	Title                *string        `json:"title,omitzero"`
+	ReadOnlyHint         *bool          `json:"readOnlyHint,omitzero"`
+	DestructiveHint      *bool          `json:"destructiveHint,omitzero"`
+	IdempotentHint       *bool          `json:"idempotentHint,omitzero"`
+	OpenWorldHint        *bool          `json:"openWorldHint,omitzero"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
 }
 
 func (t ToolAnnotations) MarshalJSON() ([]byte, error) {
@@ -35,35 +34,35 @@ func (t *ToolAnnotations) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (t *ToolAnnotations) GetTitle() optionalnullable.OptionalNullable[string] {
+func (t *ToolAnnotations) GetTitle() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Title
 }
 
-func (t *ToolAnnotations) GetReadOnlyHint() optionalnullable.OptionalNullable[bool] {
+func (t *ToolAnnotations) GetReadOnlyHint() *bool {
 	if t == nil {
 		return nil
 	}
 	return t.ReadOnlyHint
 }
 
-func (t *ToolAnnotations) GetDestructiveHint() optionalnullable.OptionalNullable[bool] {
+func (t *ToolAnnotations) GetDestructiveHint() *bool {
 	if t == nil {
 		return nil
 	}
 	return t.DestructiveHint
 }
 
-func (t *ToolAnnotations) GetIdempotentHint() optionalnullable.OptionalNullable[bool] {
+func (t *ToolAnnotations) GetIdempotentHint() *bool {
 	if t == nil {
 		return nil
 	}
 	return t.IdempotentHint
 }
 
-func (t *ToolAnnotations) GetOpenWorldHint() optionalnullable.OptionalNullable[bool] {
+func (t *ToolAnnotations) GetOpenWorldHint() *bool {
 	if t == nil {
 		return nil
 	}

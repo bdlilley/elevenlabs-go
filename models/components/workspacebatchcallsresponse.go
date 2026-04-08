@@ -4,13 +4,12 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type WorkspaceBatchCallsResponse struct {
 	BatchCalls []BatchCallResponse `json:"batch_calls"`
 	// The next document, used to paginate through the batch calls
-	NextDoc optionalnullable.OptionalNullable[string] `json:"next_doc,omitzero"`
+	NextDoc *string `json:"next_doc,omitzero"`
 	// Whether there are more batch calls to paginate through
 	HasMore *bool `default:"false" json:"has_more"`
 }
@@ -33,7 +32,7 @@ func (w *WorkspaceBatchCallsResponse) GetBatchCalls() []BatchCallResponse {
 	return w.BatchCalls
 }
 
-func (w *WorkspaceBatchCallsResponse) GetNextDoc() optionalnullable.OptionalNullable[string] {
+func (w *WorkspaceBatchCallsResponse) GetNextDoc() *string {
 	if w == nil {
 		return nil
 	}

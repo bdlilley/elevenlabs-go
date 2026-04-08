@@ -5,16 +5,15 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAgentRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
 	// The ID of the agent version to use
-	VersionID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=version_id"`
+	VersionID *string `queryParam:"style=form,explode=true,name=version_id"`
 	// The ID of the branch to use
-	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
+	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
 }
 
 func (g *GetAgentRouteRequest) GetAgentID() string {
@@ -24,14 +23,14 @@ func (g *GetAgentRouteRequest) GetAgentID() string {
 	return g.AgentID
 }
 
-func (g *GetAgentRouteRequest) GetVersionID() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentRouteRequest) GetVersionID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.VersionID
 }
 
-func (g *GetAgentRouteRequest) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentRouteRequest) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}

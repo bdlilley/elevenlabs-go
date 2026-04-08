@@ -2,15 +2,11 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyCreateChapterV1StudioProjectsProjectIDChaptersPost struct {
 	// The name of the chapter, used for identification only.
 	Name string `json:"name"`
 	// An optional URL from which we will extract content to initialize the Studio project. If this is set, 'from_url' and 'from_content' must be null. If neither 'from_url', 'from_document', 'from_content' are provided we will initialize the Studio project as blank.
-	FromURL optionalnullable.OptionalNullable[string] `json:"from_url,omitzero"`
+	FromURL *string `json:"from_url,omitzero"`
 }
 
 func (b *BodyCreateChapterV1StudioProjectsProjectIDChaptersPost) GetName() string {
@@ -20,7 +16,7 @@ func (b *BodyCreateChapterV1StudioProjectsProjectIDChaptersPost) GetName() strin
 	return b.Name
 }
 
-func (b *BodyCreateChapterV1StudioProjectsProjectIDChaptersPost) GetFromURL() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreateChapterV1StudioProjectsProjectIDChaptersPost) GetFromURL() *string {
 	if b == nil {
 		return nil
 	}

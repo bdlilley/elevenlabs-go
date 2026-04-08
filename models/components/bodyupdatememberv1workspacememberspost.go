@@ -2,21 +2,17 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyUpdateMemberV1WorkspaceMembersPost struct {
 	// Email of the target user.
 	Email string `json:"email"`
 	// Whether to lock or unlock the user account.
-	IsLocked optionalnullable.OptionalNullable[bool] `json:"is_locked,omitzero"`
+	IsLocked *bool `json:"is_locked,omitzero"`
 	// The workspace role of the user. This is deprecated, use `workspace_seat_type` instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	WorkspaceRole optionalnullable.OptionalNullable[SeatType] `json:"workspace_role,omitzero"`
+	WorkspaceRole *SeatType `json:"workspace_role,omitzero"`
 	// The workspace seat type
-	WorkspaceSeatType optionalnullable.OptionalNullable[SeatType] `json:"workspace_seat_type,omitzero"`
+	WorkspaceSeatType *SeatType `json:"workspace_seat_type,omitzero"`
 }
 
 func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetEmail() string {
@@ -26,21 +22,21 @@ func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetEmail() string {
 	return b.Email
 }
 
-func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetIsLocked() optionalnullable.OptionalNullable[bool] {
+func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetIsLocked() *bool {
 	if b == nil {
 		return nil
 	}
 	return b.IsLocked
 }
 
-func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetWorkspaceRole() optionalnullable.OptionalNullable[SeatType] {
+func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetWorkspaceRole() *SeatType {
 	if b == nil {
 		return nil
 	}
 	return b.WorkspaceRole
 }
 
-func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetWorkspaceSeatType() optionalnullable.OptionalNullable[SeatType] {
+func (b *BodyUpdateMemberV1WorkspaceMembersPost) GetWorkspaceSeatType() *SeatType {
 	if b == nil {
 		return nil
 	}

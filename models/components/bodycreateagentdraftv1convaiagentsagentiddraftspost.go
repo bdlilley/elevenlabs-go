@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost struct {
@@ -16,7 +15,7 @@ type BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost struct {
 	// Name for the draft
 	Name string `json:"name"`
 	// Tags to help classify and filter the agent
-	Tags optionalnullable.OptionalNullable[[]string] `json:"tags,omitzero"`
+	Tags []string `json:"tags,omitzero"`
 }
 
 func (b BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost) MarshalJSON() ([]byte, error) {
@@ -58,7 +57,7 @@ func (b *BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost) GetName() string {
 	return b.Name
 }
 
-func (b *BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost) GetTags() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost) GetTags() []string {
 	if b == nil {
 		return nil
 	}

@@ -24,7 +24,6 @@ import(
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"os"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -48,9 +47,9 @@ func main() {
                 FileName: "example.file",
                 Content: example,
             },
-            Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
+            Seed: elevenlabsgo.Pointer[int64](12345),
             RemoveBackgroundNoise: elevenlabsgo.Pointer(true),
-            FileFormat: optionalnullable.From(elevenlabsgo.Pointer(components.BodySpeechToSpeechV1SpeechToSpeechVoiceIDPostFileFormatPcmS16le16)),
+            FileFormat: components.BodySpeechToSpeechV1SpeechToSpeechVoiceIDPostFileFormatPcmS16le16.ToPointer(),
         },
     })
     if err != nil {
@@ -96,7 +95,6 @@ import(
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"os"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -120,9 +118,9 @@ func main() {
                 FileName: "example.file",
                 Content: example,
             },
-            Seed: optionalnullable.From(elevenlabsgo.Pointer[int64](12345)),
+            Seed: elevenlabsgo.Pointer[int64](12345),
             RemoveBackgroundNoise: elevenlabsgo.Pointer(true),
-            FileFormat: optionalnullable.From(elevenlabsgo.Pointer(components.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIDStreamPostFileFormatPcmS16le16)),
+            FileFormat: components.BodySpeechToSpeechStreamingV1SpeechToSpeechVoiceIDStreamPostFileFormatPcmS16le16.ToPointer(),
         },
     })
     if err != nil {

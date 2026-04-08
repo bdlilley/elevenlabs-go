@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyCreatePVCVoiceV1VoicesPVCPost struct {
@@ -13,9 +12,9 @@ type BodyCreatePVCVoiceV1VoicesPVCPost struct {
 	// Language used in the samples.
 	Language string `json:"language"`
 	// Description to use for the created voice.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// Labels for the voice. Keys can be language, accent, gender, or age.
-	Labels optionalnullable.OptionalNullable[map[string]string] `json:"labels,omitzero"`
+	Labels map[string]string `json:"labels,omitzero"`
 }
 
 func (b BodyCreatePVCVoiceV1VoicesPVCPost) MarshalJSON() ([]byte, error) {
@@ -43,14 +42,14 @@ func (b *BodyCreatePVCVoiceV1VoicesPVCPost) GetLanguage() string {
 	return b.Language
 }
 
-func (b *BodyCreatePVCVoiceV1VoicesPVCPost) GetDescription() optionalnullable.OptionalNullable[string] {
+func (b *BodyCreatePVCVoiceV1VoicesPVCPost) GetDescription() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Description
 }
 
-func (b *BodyCreatePVCVoiceV1VoicesPVCPost) GetLabels() optionalnullable.OptionalNullable[map[string]string] {
+func (b *BodyCreatePVCVoiceV1VoicesPVCPost) GetLabels() map[string]string {
 	if b == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseFolderResponseModel struct {
@@ -14,13 +13,13 @@ type GetKnowledgeBaseFolderResponseModel struct {
 	SupportedUsages []DocumentUsageModeEnum                    `json:"supported_usages"`
 	AccessInfo      ResourceAccessInfo                         `json:"access_info"`
 	// The ID of the parent folder, or null if the document is at the root level.
-	FolderParentID optionalnullable.OptionalNullable[string] `json:"folder_parent_id,omitzero"`
+	FolderParentID *string `json:"folder_parent_id,omitzero"`
 	// The folder path segments leading to this entity, from root to parent folder.
 	FolderPath []KnowledgeBaseFolderPathSegmentResponseModel `json:"folder_path,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_         string                                          `const:"folder" json:"type"`
-	ChildrenCount int64                                           `json:"children_count"`
-	AutoSyncInfo  optionalnullable.OptionalNullable[AutoSyncInfo] `json:"auto_sync_info,omitzero"`
+	type_         string        `const:"folder" json:"type"`
+	ChildrenCount int64         `json:"children_count"`
+	AutoSyncInfo  *AutoSyncInfo `json:"auto_sync_info,omitzero"`
 }
 
 func (g GetKnowledgeBaseFolderResponseModel) MarshalJSON() ([]byte, error) {
@@ -69,7 +68,7 @@ func (g *GetKnowledgeBaseFolderResponseModel) GetAccessInfo() ResourceAccessInfo
 	return g.AccessInfo
 }
 
-func (g *GetKnowledgeBaseFolderResponseModel) GetFolderParentID() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseFolderResponseModel) GetFolderParentID() *string {
 	if g == nil {
 		return nil
 	}
@@ -94,7 +93,7 @@ func (g *GetKnowledgeBaseFolderResponseModel) GetChildrenCount() int64 {
 	return g.ChildrenCount
 }
 
-func (g *GetKnowledgeBaseFolderResponseModel) GetAutoSyncInfo() optionalnullable.OptionalNullable[AutoSyncInfo] {
+func (g *GetKnowledgeBaseFolderResponseModel) GetAutoSyncInfo() *AutoSyncInfo {
 	if g == nil {
 		return nil
 	}

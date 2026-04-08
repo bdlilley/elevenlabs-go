@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DataCollectionResultCommonModel struct {
-	DataCollectionID string                                                       `json:"data_collection_id"`
-	Value            any                                                          `json:"value,omitzero"`
-	JSONSchema       optionalnullable.OptionalNullable[LiteralJSONSchemaProperty] `json:"json_schema,omitzero"`
-	Rationale        string                                                       `json:"rationale"`
+	DataCollectionID string                     `json:"data_collection_id"`
+	Value            any                        `json:"value,omitzero"`
+	JSONSchema       *LiteralJSONSchemaProperty `json:"json_schema,omitzero"`
+	Rationale        string                     `json:"rationale"`
 }
 
 func (d DataCollectionResultCommonModel) MarshalJSON() ([]byte, error) {
@@ -39,7 +38,7 @@ func (d *DataCollectionResultCommonModel) GetValue() any {
 	return d.Value
 }
 
-func (d *DataCollectionResultCommonModel) GetJSONSchema() optionalnullable.OptionalNullable[LiteralJSONSchemaProperty] {
+func (d *DataCollectionResultCommonModel) GetJSONSchema() *LiteralJSONSchemaProperty {
 	if d == nil {
 		return nil
 	}

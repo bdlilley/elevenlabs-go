@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SongSection struct {
@@ -19,7 +18,7 @@ type SongSection struct {
 	// The lyrics of the section. Max 200 characters per line.
 	Lines []string `json:"lines"`
 	// Optional source to extract the section from. Used for inpainting. Only available to enterprise clients with access to the inpainting feature.
-	SourceFrom optionalnullable.OptionalNullable[SectionSource] `json:"source_from,omitzero"`
+	SourceFrom *SectionSource `json:"source_from,omitzero"`
 }
 
 func (s SongSection) MarshalJSON() ([]byte, error) {
@@ -68,7 +67,7 @@ func (s *SongSection) GetLines() []string {
 	return s.Lines
 }
 
-func (s *SongSection) GetSourceFrom() optionalnullable.OptionalNullable[SectionSource] {
+func (s *SongSection) GetSourceFrom() *SectionSource {
 	if s == nil {
 		return nil
 	}

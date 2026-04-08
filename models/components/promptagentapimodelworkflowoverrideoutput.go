@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfigType string
@@ -304,41 +303,41 @@ func (u PromptAgentAPIModelWorkflowOverrideOutputTool) MarshalJSON() ([]byte, er
 
 type PromptAgentAPIModelWorkflowOverrideOutput struct {
 	// The prompt for the agent
-	Prompt optionalnullable.OptionalNullable[string] `json:"prompt,omitzero"`
+	Prompt *string `json:"prompt,omitzero"`
 	// The LLM to query with the prompt and the chat history. If using data residency, the LLM must be supported in the data residency environment
-	Llm optionalnullable.OptionalNullable[Llm] `default:"gemini-2.5-flash" json:"llm"`
+	Llm *Llm `default:"gemini-2.5-flash" json:"llm"`
 	// Reasoning effort of the model. Only available for some models.
-	ReasoningEffort optionalnullable.OptionalNullable[LLMReasoningEffort] `json:"reasoning_effort,omitzero"`
+	ReasoningEffort *LLMReasoningEffort `json:"reasoning_effort,omitzero"`
 	// Max number of tokens used for thinking. Use 0 to turn off if supported by the model.
-	ThinkingBudget optionalnullable.OptionalNullable[int64] `json:"thinking_budget,omitzero"`
+	ThinkingBudget *int64 `json:"thinking_budget,omitzero"`
 	// The temperature for the LLM
-	Temperature optionalnullable.OptionalNullable[float64] `json:"temperature,omitzero"`
+	Temperature *float64 `json:"temperature,omitzero"`
 	// If greater than 0, maximum number of tokens the LLM can predict
-	MaxTokens optionalnullable.OptionalNullable[int64] `json:"max_tokens,omitzero"`
+	MaxTokens *int64 `json:"max_tokens,omitzero"`
 	// A list of IDs of tools used by the agent
-	ToolIds optionalnullable.OptionalNullable[[]string] `json:"tool_ids,omitzero"`
+	ToolIds []string `json:"tool_ids,omitzero"`
 	// Built-in system tools to be used by the agent
-	BuiltInTools optionalnullable.OptionalNullable[BuiltInToolsWorkflowOverrideOutput] `json:"built_in_tools,omitzero"`
+	BuiltInTools *BuiltInToolsWorkflowOverrideOutput `json:"built_in_tools,omitzero"`
 	// A list of MCP server ids to be used by the agent
-	McpServerIds optionalnullable.OptionalNullable[[]string] `json:"mcp_server_ids,omitzero"`
+	McpServerIds []string `json:"mcp_server_ids,omitzero"`
 	// A list of Native MCP server ids to be used by the agent
-	NativeMcpServerIds optionalnullable.OptionalNullable[[]string] `json:"native_mcp_server_ids,omitzero"`
+	NativeMcpServerIds []string `json:"native_mcp_server_ids,omitzero"`
 	// A list of knowledge bases to be used by the agent
-	KnowledgeBase optionalnullable.OptionalNullable[[]KnowledgeBaseLocator] `json:"knowledge_base,omitzero"`
+	KnowledgeBase []KnowledgeBaseLocator `json:"knowledge_base,omitzero"`
 	// Definition for a custom LLM if LLM field is set to 'CUSTOM_LLM'
-	CustomLlm optionalnullable.OptionalNullable[CustomLLM] `json:"custom_llm,omitzero"`
+	CustomLlm *CustomLLM `json:"custom_llm,omitzero"`
 	// Whether to remove the default personality lines from the system prompt
-	IgnoreDefaultPersonality optionalnullable.OptionalNullable[bool] `json:"ignore_default_personality,omitzero"`
+	IgnoreDefaultPersonality *bool `json:"ignore_default_personality,omitzero"`
 	// Configuration for RAG
-	Rag optionalnullable.OptionalNullable[RagConfigWorkflowOverride] `json:"rag,omitzero"`
+	Rag *RagConfigWorkflowOverride `json:"rag,omitzero"`
 	// Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC').
-	Timezone optionalnullable.OptionalNullable[string] `json:"timezone,omitzero"`
+	Timezone *string `json:"timezone,omitzero"`
 	// Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order.
-	BackupLlmConfig optionalnullable.OptionalNullable[PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig] `json:"backup_llm_config,omitzero"`
+	BackupLlmConfig *PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig `json:"backup_llm_config,omitzero"`
 	// Time in seconds before cascading to backup LLM. Must be between 2 and 15 seconds.
-	CascadeTimeoutSeconds optionalnullable.OptionalNullable[float64] `json:"cascade_timeout_seconds,omitzero"`
+	CascadeTimeoutSeconds *float64 `json:"cascade_timeout_seconds,omitzero"`
 	// A list of tools that the agent can use over the course of the conversation, use tool_ids instead
-	Tools optionalnullable.OptionalNullable[[]PromptAgentAPIModelWorkflowOverrideOutputTool] `json:"tools,omitzero"`
+	Tools []PromptAgentAPIModelWorkflowOverrideOutputTool `json:"tools,omitzero"`
 }
 
 func (p PromptAgentAPIModelWorkflowOverrideOutput) MarshalJSON() ([]byte, error) {
@@ -352,126 +351,126 @@ func (p *PromptAgentAPIModelWorkflowOverrideOutput) UnmarshalJSON(data []byte) e
 	return nil
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetPrompt() optionalnullable.OptionalNullable[string] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetPrompt() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Prompt
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetLlm() optionalnullable.OptionalNullable[Llm] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetLlm() *Llm {
 	if p == nil {
 		return nil
 	}
 	return p.Llm
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetReasoningEffort() optionalnullable.OptionalNullable[LLMReasoningEffort] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetReasoningEffort() *LLMReasoningEffort {
 	if p == nil {
 		return nil
 	}
 	return p.ReasoningEffort
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetThinkingBudget() optionalnullable.OptionalNullable[int64] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetThinkingBudget() *int64 {
 	if p == nil {
 		return nil
 	}
 	return p.ThinkingBudget
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetTemperature() optionalnullable.OptionalNullable[float64] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetTemperature() *float64 {
 	if p == nil {
 		return nil
 	}
 	return p.Temperature
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetMaxTokens() optionalnullable.OptionalNullable[int64] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetMaxTokens() *int64 {
 	if p == nil {
 		return nil
 	}
 	return p.MaxTokens
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetToolIds() optionalnullable.OptionalNullable[[]string] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetToolIds() []string {
 	if p == nil {
 		return nil
 	}
 	return p.ToolIds
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetBuiltInTools() optionalnullable.OptionalNullable[BuiltInToolsWorkflowOverrideOutput] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetBuiltInTools() *BuiltInToolsWorkflowOverrideOutput {
 	if p == nil {
 		return nil
 	}
 	return p.BuiltInTools
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetMcpServerIds() optionalnullable.OptionalNullable[[]string] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetMcpServerIds() []string {
 	if p == nil {
 		return nil
 	}
 	return p.McpServerIds
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetNativeMcpServerIds() optionalnullable.OptionalNullable[[]string] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetNativeMcpServerIds() []string {
 	if p == nil {
 		return nil
 	}
 	return p.NativeMcpServerIds
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetKnowledgeBase() optionalnullable.OptionalNullable[[]KnowledgeBaseLocator] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetKnowledgeBase() []KnowledgeBaseLocator {
 	if p == nil {
 		return nil
 	}
 	return p.KnowledgeBase
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetCustomLlm() optionalnullable.OptionalNullable[CustomLLM] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetCustomLlm() *CustomLLM {
 	if p == nil {
 		return nil
 	}
 	return p.CustomLlm
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetIgnoreDefaultPersonality() optionalnullable.OptionalNullable[bool] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetIgnoreDefaultPersonality() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.IgnoreDefaultPersonality
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetRag() optionalnullable.OptionalNullable[RagConfigWorkflowOverride] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetRag() *RagConfigWorkflowOverride {
 	if p == nil {
 		return nil
 	}
 	return p.Rag
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetTimezone() optionalnullable.OptionalNullable[string] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetTimezone() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Timezone
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetBackupLlmConfig() optionalnullable.OptionalNullable[PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetBackupLlmConfig() *PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig {
 	if p == nil {
 		return nil
 	}
 	return p.BackupLlmConfig
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetCascadeTimeoutSeconds() optionalnullable.OptionalNullable[float64] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetCascadeTimeoutSeconds() *float64 {
 	if p == nil {
 		return nil
 	}
 	return p.CascadeTimeoutSeconds
 }
 
-func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetTools() optionalnullable.OptionalNullable[[]PromptAgentAPIModelWorkflowOverrideOutputTool] {
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetTools() []PromptAgentAPIModelWorkflowOverrideOutputTool {
 	if p == nil {
 		return nil
 	}

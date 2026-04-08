@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type APIKeyType string
@@ -244,14 +243,14 @@ type CustomLLM struct {
 	// The URL of the Chat Completions compatible endpoint
 	URL string `json:"url"`
 	// The model ID to be used if URL serves multiple models
-	ModelID optionalnullable.OptionalNullable[string] `json:"model_id,omitzero"`
+	ModelID *string `json:"model_id,omitzero"`
 	// The API key for authentication. Either a workspace secret reference {'secret_id': '...'} or an environment variable reference {'env_var_label': '...'}.
-	APIKey optionalnullable.OptionalNullable[APIKey] `json:"api_key,omitzero"`
+	APIKey *APIKey `json:"api_key,omitzero"`
 	// Headers that should be included in the request
 	RequestHeaders map[string]CustomLLMRequestHeaders `json:"request_headers,omitzero"`
 	// The API version to use for the request
-	APIVersion optionalnullable.OptionalNullable[string] `json:"api_version,omitzero"`
-	APIType    *CustomLLMAPIType                         `default:"chat_completions" json:"api_type"`
+	APIVersion *string           `json:"api_version,omitzero"`
+	APIType    *CustomLLMAPIType `default:"chat_completions" json:"api_type"`
 }
 
 func (c CustomLLM) MarshalJSON() ([]byte, error) {
@@ -272,14 +271,14 @@ func (c *CustomLLM) GetURL() string {
 	return c.URL
 }
 
-func (c *CustomLLM) GetModelID() optionalnullable.OptionalNullable[string] {
+func (c *CustomLLM) GetModelID() *string {
 	if c == nil {
 		return nil
 	}
 	return c.ModelID
 }
 
-func (c *CustomLLM) GetAPIKey() optionalnullable.OptionalNullable[APIKey] {
+func (c *CustomLLM) GetAPIKey() *APIKey {
 	if c == nil {
 		return nil
 	}
@@ -293,7 +292,7 @@ func (c *CustomLLM) GetRequestHeaders() map[string]CustomLLMRequestHeaders {
 	return c.RequestHeaders
 }
 
-func (c *CustomLLM) GetAPIVersion() optionalnullable.OptionalNullable[string] {
+func (c *CustomLLM) GetAPIVersion() *string {
 	if c == nil {
 		return nil
 	}

@@ -5,28 +5,27 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAgentsRouteRequest struct {
 	// How many Agents to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Search by agents name.
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Filter agents by archived status
-	Archived optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=archived"`
+	Archived *bool `queryParam:"style=form,explode=true,name=archived"`
 	// If set to true, the endpoint will omit any agents that were shared with you by someone else and include only the ones you own. Deprecated: use created_by_user_id instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	ShowOnlyOwnedAgents *bool `default:"false" queryParam:"style=form,explode=true,name=show_only_owned_agents"`
 	// Filter agents by creator user ID. When set, only agents created by this user are returned. Takes precedence over show_only_owned_agents. Use '@me' to refer to the authenticated user.
-	CreatedByUserID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=created_by_user_id"`
+	CreatedByUserID *string `queryParam:"style=form,explode=true,name=created_by_user_id"`
 	// The direction to sort the results
 	SortDirection *components.SortDirection `queryParam:"style=form,explode=true,name=sort_direction"`
 	// The field to sort the results by
-	SortBy optionalnullable.OptionalNullable[components.AgentSortBy] `queryParam:"style=form,explode=true,name=sort_by"`
+	SortBy *components.AgentSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (g GetAgentsRouteRequest) MarshalJSON() ([]byte, error) {
@@ -47,14 +46,14 @@ func (g *GetAgentsRouteRequest) GetPageSize() *int64 {
 	return g.PageSize
 }
 
-func (g *GetAgentsRouteRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentsRouteRequest) GetSearch() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Search
 }
 
-func (g *GetAgentsRouteRequest) GetArchived() optionalnullable.OptionalNullable[bool] {
+func (g *GetAgentsRouteRequest) GetArchived() *bool {
 	if g == nil {
 		return nil
 	}
@@ -68,7 +67,7 @@ func (g *GetAgentsRouteRequest) GetShowOnlyOwnedAgents() *bool {
 	return g.ShowOnlyOwnedAgents
 }
 
-func (g *GetAgentsRouteRequest) GetCreatedByUserID() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentsRouteRequest) GetCreatedByUserID() *string {
 	if g == nil {
 		return nil
 	}
@@ -82,14 +81,14 @@ func (g *GetAgentsRouteRequest) GetSortDirection() *components.SortDirection {
 	return g.SortDirection
 }
 
-func (g *GetAgentsRouteRequest) GetSortBy() optionalnullable.OptionalNullable[components.AgentSortBy] {
+func (g *GetAgentsRouteRequest) GetSortBy() *components.AgentSortBy {
 	if g == nil {
 		return nil
 	}
 	return g.SortBy
 }
 
-func (g *GetAgentsRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentsRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}

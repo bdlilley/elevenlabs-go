@@ -2,13 +2,9 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type AttachedTestModel struct {
-	TestID         string                                    `json:"test_id"`
-	WorkflowNodeID optionalnullable.OptionalNullable[string] `json:"workflow_node_id,omitzero"`
+	TestID         string  `json:"test_id"`
+	WorkflowNodeID *string `json:"workflow_node_id,omitzero"`
 }
 
 func (a *AttachedTestModel) GetTestID() string {
@@ -18,7 +14,7 @@ func (a *AttachedTestModel) GetTestID() string {
 	return a.TestID
 }
 
-func (a *AttachedTestModel) GetWorkflowNodeID() optionalnullable.OptionalNullable[string] {
+func (a *AttachedTestModel) GetWorkflowNodeID() *string {
 	if a == nil {
 		return nil
 	}

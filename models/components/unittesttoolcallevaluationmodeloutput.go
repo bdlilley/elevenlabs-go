@@ -4,18 +4,17 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UnitTestToolCallEvaluationModelOutput struct {
 	// Parameters to evaluate for the agent's tool call. If empty, the tool call parameters are not evaluated.
 	Parameters []UnitTestToolCallParameter `json:"parameters,omitzero"`
 	// The tool to evaluate a call against.
-	ReferencedTool optionalnullable.OptionalNullable[ReferencedToolCommonModel] `json:"referenced_tool,omitzero"`
+	ReferencedTool *ReferencedToolCommonModel `json:"referenced_tool,omitzero"`
 	// Whether to verify that the tool was NOT called.
 	VerifyAbsence *bool `default:"false" json:"verify_absence"`
 	// Configuration for testing workflow node transitions. When set, the test will verify the agent transitions to the specified workflow node.
-	WorkflowNodeTransition optionalnullable.OptionalNullable[UnitTestWorkflowNodeTransitionEvaluationNodeID] `json:"workflow_node_transition,omitzero"`
+	WorkflowNodeTransition *UnitTestWorkflowNodeTransitionEvaluationNodeID `json:"workflow_node_transition,omitzero"`
 }
 
 func (u UnitTestToolCallEvaluationModelOutput) MarshalJSON() ([]byte, error) {
@@ -36,7 +35,7 @@ func (u *UnitTestToolCallEvaluationModelOutput) GetParameters() []UnitTestToolCa
 	return u.Parameters
 }
 
-func (u *UnitTestToolCallEvaluationModelOutput) GetReferencedTool() optionalnullable.OptionalNullable[ReferencedToolCommonModel] {
+func (u *UnitTestToolCallEvaluationModelOutput) GetReferencedTool() *ReferencedToolCommonModel {
 	if u == nil {
 		return nil
 	}
@@ -50,7 +49,7 @@ func (u *UnitTestToolCallEvaluationModelOutput) GetVerifyAbsence() *bool {
 	return u.VerifyAbsence
 }
 
-func (u *UnitTestToolCallEvaluationModelOutput) GetWorkflowNodeTransition() optionalnullable.OptionalNullable[UnitTestWorkflowNodeTransitionEvaluationNodeID] {
+func (u *UnitTestToolCallEvaluationModelOutput) GetWorkflowNodeTransition() *UnitTestWorkflowNodeTransitionEvaluationNodeID {
 	if u == nil {
 		return nil
 	}

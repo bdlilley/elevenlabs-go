@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentTransfer struct {
-	AgentID                            string                                    `json:"agent_id"`
-	Condition                          string                                    `json:"condition"`
-	DelayMs                            *int64                                    `default:"0" json:"delay_ms"`
-	TransferMessage                    optionalnullable.OptionalNullable[string] `json:"transfer_message,omitzero"`
-	EnableTransferredAgentFirstMessage *bool                                     `default:"false" json:"enable_transferred_agent_first_message"`
-	IsWorkflowNodeTransfer             *bool                                     `default:"false" json:"is_workflow_node_transfer"`
+	AgentID                            string  `json:"agent_id"`
+	Condition                          string  `json:"condition"`
+	DelayMs                            *int64  `default:"0" json:"delay_ms"`
+	TransferMessage                    *string `json:"transfer_message,omitzero"`
+	EnableTransferredAgentFirstMessage *bool   `default:"false" json:"enable_transferred_agent_first_message"`
+	IsWorkflowNodeTransfer             *bool   `default:"false" json:"is_workflow_node_transfer"`
 }
 
 func (a AgentTransfer) MarshalJSON() ([]byte, error) {
@@ -48,7 +47,7 @@ func (a *AgentTransfer) GetDelayMs() *int64 {
 	return a.DelayMs
 }
 
-func (a *AgentTransfer) GetTransferMessage() optionalnullable.OptionalNullable[string] {
+func (a *AgentTransfer) GetTransferMessage() *string {
 	if a == nil {
 		return nil
 	}

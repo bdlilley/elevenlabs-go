@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:d419e6c02865b2a0cdd2e706d6513d5a4478b41063cb7bcb36fe54535c63f216
         sourceBlobDigest: sha256:11a8adc53122f360899226ea2e1ae5846ab25ffd343f872c1501d84c7bcfa309
         codeSamplesNamespace: elevenlabs-go-code-samples
-        codeSamplesRevisionDigest: sha256:e5ecec36cb67c08fba4730fb8d4bf3c54d2911b832800f1560ff1dd7a31fea14
+        codeSamplesRevisionDigest: sha256:5165b86bbb15ee322e8590157f60f62d860d605a39bc544263a14c9e7d5e5543
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

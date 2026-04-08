@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PromptAgentAPIModelInputBackupLlmConfigType string
@@ -295,9 +294,9 @@ type PromptAgentAPIModelInput struct {
 	Prompt *string `default:"" json:"prompt"`
 	Llm    *Llm    `default:"gemini-2.5-flash" json:"llm"`
 	// Reasoning effort of the model. Only available for some models.
-	ReasoningEffort optionalnullable.OptionalNullable[LLMReasoningEffort] `json:"reasoning_effort,omitzero"`
+	ReasoningEffort *LLMReasoningEffort `json:"reasoning_effort,omitzero"`
 	// Max number of tokens used for thinking. Use 0 to turn off if supported by the model.
-	ThinkingBudget optionalnullable.OptionalNullable[int64] `json:"thinking_budget,omitzero"`
+	ThinkingBudget *int64 `json:"thinking_budget,omitzero"`
 	// The temperature for the LLM
 	Temperature *float64 `default:"0" json:"temperature"`
 	// If greater than 0, maximum number of tokens the LLM can predict
@@ -312,12 +311,12 @@ type PromptAgentAPIModelInput struct {
 	// A list of knowledge bases to be used by the agent
 	KnowledgeBase []KnowledgeBaseLocator `json:"knowledge_base,omitzero"`
 	// Definition for a custom LLM if LLM field is set to 'CUSTOM_LLM'
-	CustomLlm optionalnullable.OptionalNullable[CustomLLM] `json:"custom_llm,omitzero"`
+	CustomLlm *CustomLLM `json:"custom_llm,omitzero"`
 	// Whether to remove the default personality lines from the system prompt
-	IgnoreDefaultPersonality optionalnullable.OptionalNullable[bool] `json:"ignore_default_personality,omitzero"`
-	Rag                      *RagConfig                              `json:"rag,omitzero"`
+	IgnoreDefaultPersonality *bool      `json:"ignore_default_personality,omitzero"`
+	Rag                      *RagConfig `json:"rag,omitzero"`
 	// Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC').
-	Timezone optionalnullable.OptionalNullable[string] `json:"timezone,omitzero"`
+	Timezone *string `json:"timezone,omitzero"`
 	// Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order.
 	BackupLlmConfig *PromptAgentAPIModelInputBackupLlmConfig `json:"backup_llm_config,omitzero"`
 	// Time in seconds before cascading to backup LLM. Must be between 2 and 15 seconds.
@@ -353,14 +352,14 @@ func (p *PromptAgentAPIModelInput) GetLlm() *Llm {
 	return p.Llm
 }
 
-func (p *PromptAgentAPIModelInput) GetReasoningEffort() optionalnullable.OptionalNullable[LLMReasoningEffort] {
+func (p *PromptAgentAPIModelInput) GetReasoningEffort() *LLMReasoningEffort {
 	if p == nil {
 		return nil
 	}
 	return p.ReasoningEffort
 }
 
-func (p *PromptAgentAPIModelInput) GetThinkingBudget() optionalnullable.OptionalNullable[int64] {
+func (p *PromptAgentAPIModelInput) GetThinkingBudget() *int64 {
 	if p == nil {
 		return nil
 	}
@@ -416,14 +415,14 @@ func (p *PromptAgentAPIModelInput) GetKnowledgeBase() []KnowledgeBaseLocator {
 	return p.KnowledgeBase
 }
 
-func (p *PromptAgentAPIModelInput) GetCustomLlm() optionalnullable.OptionalNullable[CustomLLM] {
+func (p *PromptAgentAPIModelInput) GetCustomLlm() *CustomLLM {
 	if p == nil {
 		return nil
 	}
 	return p.CustomLlm
 }
 
-func (p *PromptAgentAPIModelInput) GetIgnoreDefaultPersonality() optionalnullable.OptionalNullable[bool] {
+func (p *PromptAgentAPIModelInput) GetIgnoreDefaultPersonality() *bool {
 	if p == nil {
 		return nil
 	}
@@ -437,7 +436,7 @@ func (p *PromptAgentAPIModelInput) GetRag() *RagConfig {
 	return p.Rag
 }
 
-func (p *PromptAgentAPIModelInput) GetTimezone() optionalnullable.OptionalNullable[string] {
+func (p *PromptAgentAPIModelInput) GetTimezone() *string {
 	if p == nil {
 		return nil
 	}

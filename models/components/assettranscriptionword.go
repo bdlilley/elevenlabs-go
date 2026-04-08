@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AssetTranscriptionWord struct {
-	SpeakerID optionalnullable.OptionalNullable[string] `json:"speaker_id,omitzero"`
-	Text      string                                    `json:"text"`
-	StartMs   int64                                     `json:"start_ms"`
-	EndMs     int64                                     `json:"end_ms"`
+	SpeakerID *string `json:"speaker_id,omitzero"`
+	Text      string  `json:"text"`
+	StartMs   int64   `json:"start_ms"`
+	EndMs     int64   `json:"end_ms"`
 }
 
 func (a AssetTranscriptionWord) MarshalJSON() ([]byte, error) {
@@ -25,7 +24,7 @@ func (a *AssetTranscriptionWord) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *AssetTranscriptionWord) GetSpeakerID() optionalnullable.OptionalNullable[string] {
+func (a *AssetTranscriptionWord) GetSpeakerID() *string {
 	if a == nil {
 		return nil
 	}

@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetConversationSignedLinkRequest struct {
@@ -14,9 +13,9 @@ type GetConversationSignedLinkRequest struct {
 	// Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again.
 	IncludeConversationID *bool `default:"false" queryParam:"style=form,explode=true,name=include_conversation_id"`
 	// The ID of the branch to use
-	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
+	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
 	// The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.
-	Environment optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=environment"`
+	Environment *string `queryParam:"style=form,explode=true,name=environment"`
 }
 
 func (g GetConversationSignedLinkRequest) MarshalJSON() ([]byte, error) {
@@ -44,14 +43,14 @@ func (g *GetConversationSignedLinkRequest) GetIncludeConversationID() *bool {
 	return g.IncludeConversationID
 }
 
-func (g *GetConversationSignedLinkRequest) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationSignedLinkRequest) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.BranchID
 }
 
-func (g *GetConversationSignedLinkRequest) GetEnvironment() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationSignedLinkRequest) GetEnvironment() *string {
 	if g == nil {
 		return nil
 	}

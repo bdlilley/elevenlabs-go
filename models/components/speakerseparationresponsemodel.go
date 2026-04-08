@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // SpeakerSeparationResponseModelStatus - The status of the speaker separation.
@@ -40,9 +39,9 @@ type SpeakerSeparationResponseModel struct {
 	// The status of the speaker separation.
 	Status SpeakerSeparationResponseModelStatus `json:"status"`
 	// The speakers of the sample.
-	Speakers optionalnullable.OptionalNullable[map[string]SpeakerResponseModel] `json:"speakers,omitzero"`
+	Speakers map[string]SpeakerResponseModel `json:"speakers,omitzero"`
 	// The IDs of the selected speakers.
-	SelectedSpeakerIds optionalnullable.OptionalNullable[[]string] `json:"selected_speaker_ids,omitzero"`
+	SelectedSpeakerIds []string `json:"selected_speaker_ids,omitzero"`
 }
 
 func (s SpeakerSeparationResponseModel) MarshalJSON() ([]byte, error) {
@@ -77,14 +76,14 @@ func (s *SpeakerSeparationResponseModel) GetStatus() SpeakerSeparationResponseMo
 	return s.Status
 }
 
-func (s *SpeakerSeparationResponseModel) GetSpeakers() optionalnullable.OptionalNullable[map[string]SpeakerResponseModel] {
+func (s *SpeakerSeparationResponseModel) GetSpeakers() map[string]SpeakerResponseModel {
 	if s == nil {
 		return nil
 	}
 	return s.Speakers
 }
 
-func (s *SpeakerSeparationResponseModel) GetSelectedSpeakerIds() optionalnullable.OptionalNullable[[]string] {
+func (s *SpeakerSeparationResponseModel) GetSelectedSpeakerIds() []string {
 	if s == nil {
 		return nil
 	}

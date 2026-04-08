@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -153,19 +152,19 @@ func (u CreateToolCallUnitTestRequestDynamicVariables) MarshalJSON() ([]byte, er
 
 type CreateToolCallUnitTestRequest struct {
 	// Metadata of a conversation this test was created from (if applicable).
-	FromConversationMetadata optionalnullable.OptionalNullable[TestFromConversationMetadataInput] `json:"from_conversation_metadata,omitzero"`
+	FromConversationMetadata *TestFromConversationMetadataInput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]*CreateToolCallUnitTestRequestDynamicVariables `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelInput           `json:"chat_history,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"tool" json:"type"`
 	// How to evaluate the agent's tool call (if any). If empty, the tool call is not evaluated.
-	ToolCallParameters optionalnullable.OptionalNullable[UnitTestToolCallEvaluationModelInput] `json:"tool_call_parameters,omitzero"`
+	ToolCallParameters *UnitTestToolCallEvaluationModelInput `json:"tool_call_parameters,omitzero"`
 	// If set to True this test will pass if any tool call returned by the LLM matches the criteria. Otherwise it will fail if more than one tool is returned by the agent.
-	CheckAnyToolMatches optionalnullable.OptionalNullable[bool] `json:"check_any_tool_matches,omitzero"`
-	Name                string                                  `json:"name"`
+	CheckAnyToolMatches *bool  `json:"check_any_tool_matches,omitzero"`
+	Name                string `json:"name"`
 	// The ID of the parent folder. If not provided, the test will be created at the root level.
-	ParentFolderID optionalnullable.OptionalNullable[string] `json:"parent_folder_id,omitzero"`
+	ParentFolderID *string `json:"parent_folder_id,omitzero"`
 }
 
 func (c CreateToolCallUnitTestRequest) MarshalJSON() ([]byte, error) {
@@ -179,7 +178,7 @@ func (c *CreateToolCallUnitTestRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *CreateToolCallUnitTestRequest) GetFromConversationMetadata() optionalnullable.OptionalNullable[TestFromConversationMetadataInput] {
+func (c *CreateToolCallUnitTestRequest) GetFromConversationMetadata() *TestFromConversationMetadataInput {
 	if c == nil {
 		return nil
 	}
@@ -204,14 +203,14 @@ func (c *CreateToolCallUnitTestRequest) GetType() *string {
 	return types.Pointer("tool")
 }
 
-func (c *CreateToolCallUnitTestRequest) GetToolCallParameters() optionalnullable.OptionalNullable[UnitTestToolCallEvaluationModelInput] {
+func (c *CreateToolCallUnitTestRequest) GetToolCallParameters() *UnitTestToolCallEvaluationModelInput {
 	if c == nil {
 		return nil
 	}
 	return c.ToolCallParameters
 }
 
-func (c *CreateToolCallUnitTestRequest) GetCheckAnyToolMatches() optionalnullable.OptionalNullable[bool] {
+func (c *CreateToolCallUnitTestRequest) GetCheckAnyToolMatches() *bool {
 	if c == nil {
 		return nil
 	}
@@ -225,7 +224,7 @@ func (c *CreateToolCallUnitTestRequest) GetName() string {
 	return c.Name
 }
 
-func (c *CreateToolCallUnitTestRequest) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (c *CreateToolCallUnitTestRequest) GetParentFolderID() *string {
 	if c == nil {
 		return nil
 	}

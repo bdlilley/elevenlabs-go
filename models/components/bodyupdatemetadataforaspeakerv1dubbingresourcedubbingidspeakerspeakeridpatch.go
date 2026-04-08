@@ -4,22 +4,21 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch struct {
 	// Name to attribute to this speaker.
-	SpeakerName optionalnullable.OptionalNullable[string] `json:"speaker_name,omitzero"`
+	SpeakerName *string `json:"speaker_name,omitzero"`
 	// Either the identifier of a voice from the ElevenLabs voice library, or one of ['track-clone', 'clip-clone'].
-	VoiceID optionalnullable.OptionalNullable[string] `json:"voice_id,omitzero"`
+	VoiceID *string `json:"voice_id,omitzero"`
 	// For models that support it, the voice similarity value to use. This will default to 0.65, with a valid range of [0.0, 1.0].
-	VoiceStability optionalnullable.OptionalNullable[float64] `json:"voice_stability,omitzero"`
+	VoiceStability *float64 `json:"voice_stability,omitzero"`
 	// For models that support it, the voice similarity value to use. This will default to 1.0, with a valid range of [0.0, 1.0].
-	VoiceSimilarity optionalnullable.OptionalNullable[float64] `json:"voice_similarity,omitzero"`
+	VoiceSimilarity *float64 `json:"voice_similarity,omitzero"`
 	// For models that support it, the voice style value to use. This will default to 1.0, with a valid range of [0.0, 1.0].
-	VoiceStyle optionalnullable.OptionalNullable[float64] `json:"voice_style,omitzero"`
+	VoiceStyle *float64 `json:"voice_style,omitzero"`
 	// Languages to apply these changes to. If empty, will apply to all languages.
-	Languages optionalnullable.OptionalNullable[[]string] `json:"languages,omitzero"`
+	Languages []string `json:"languages,omitzero"`
 }
 
 func (b BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) MarshalJSON() ([]byte, error) {
@@ -33,42 +32,42 @@ func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerID
 	return nil
 }
 
-func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetSpeakerName() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetSpeakerName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.SpeakerName
 }
 
-func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceID() optionalnullable.OptionalNullable[string] {
+func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceID() *string {
 	if b == nil {
 		return nil
 	}
 	return b.VoiceID
 }
 
-func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceStability() optionalnullable.OptionalNullable[float64] {
+func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceStability() *float64 {
 	if b == nil {
 		return nil
 	}
 	return b.VoiceStability
 }
 
-func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceSimilarity() optionalnullable.OptionalNullable[float64] {
+func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceSimilarity() *float64 {
 	if b == nil {
 		return nil
 	}
 	return b.VoiceSimilarity
 }
 
-func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceStyle() optionalnullable.OptionalNullable[float64] {
+func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetVoiceStyle() *float64 {
 	if b == nil {
 		return nil
 	}
 	return b.VoiceStyle
 }
 
-func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetLanguages() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch) GetLanguages() []string {
 	if b == nil {
 		return nil
 	}

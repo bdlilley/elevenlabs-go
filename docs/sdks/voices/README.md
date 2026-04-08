@@ -32,7 +32,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -43,7 +42,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Voices.GetVoices(ctx, optionalnullable.From(elevenlabsgo.Pointer(true)))
+    res, err := s.Voices.GetVoices(ctx, elevenlabsgo.Pointer(true))
     if err != nil {
         log.Fatal(err)
     }
@@ -58,7 +57,7 @@ func main() {
 | Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
 | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | `ctx`                                                                               | [context.Context](https://pkg.go.dev/context#Context)                               | :heavy_check_mark:                                                                  | The context to use for the request.                                                 |                                                                                     |
-| `showLegacy`                                                                        | optionalnullable.OptionalNullable[`bool`]                                           | :heavy_minus_sign:                                                                  | If set to true, legacy premade voices will be included in responses from /v1/voices | true                                                                                |
+| `showLegacy`                                                                        | `*bool`                                                                             | :heavy_minus_sign:                                                                  | If set to true, legacy premade voices will be included in responses from /v1/voices | true                                                                                |
 | `opts`                                                                              | [][operations.Option](../../models/operations/option.md)                            | :heavy_minus_sign:                                                                  | The options for this request.                                                       |                                                                                     |
 
 ### Response
@@ -85,7 +84,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -98,9 +96,9 @@ func main() {
     )
 
     res, err := s.Voices.GetUserVoicesV2(ctx, operations.GetUserVoicesV2Request{
-        NextPageToken: optionalnullable.From(elevenlabsgo.Pointer("0")),
-        Sort: optionalnullable.From(elevenlabsgo.Pointer("created_at_unix")),
-        SortDirection: optionalnullable.From(elevenlabsgo.Pointer("desc")),
+        NextPageToken: elevenlabsgo.Pointer("0"),
+        Sort: elevenlabsgo.Pointer("created_at_unix"),
+        SortDirection: elevenlabsgo.Pointer("desc"),
     })
     if err != nil {
         log.Fatal(err)
@@ -350,7 +348,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -363,11 +360,11 @@ func main() {
     )
 
     res, err := s.Voices.EditVoiceSettings(ctx, "21m00Tcm4TlvDq8ikWAM", components.VoiceSettingsResponseModel{
-        Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-        UseSpeakerBoost: optionalnullable.From(elevenlabsgo.Pointer(true)),
-        SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-        Style: optionalnullable.From(elevenlabsgo.Pointer[float64](0.0)),
-        Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
+        Stability: elevenlabsgo.Pointer[float64](1.0),
+        UseSpeakerBoost: elevenlabsgo.Pointer(true),
+        SimilarityBoost: elevenlabsgo.Pointer[float64](1.0),
+        Style: elevenlabsgo.Pointer[float64](0.0),
+        Speed: elevenlabsgo.Pointer[float64](1.0),
     })
     if err != nil {
         log.Fatal(err)
@@ -412,7 +409,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -427,10 +423,10 @@ func main() {
         Name: "John Smith",
         Files: []components.BodyAddVoiceV1VoicesAddPostFile{},
         RemoveBackgroundNoise: elevenlabsgo.Pointer(true),
-        Description: optionalnullable.From(elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news.")),
-        Labels: optionalnullable.From(elevenlabsgo.Pointer(components.CreateBodyAddVoiceV1VoicesAddPostLabelsStr(
+        Description: elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news."),
+        Labels: elevenlabsgo.Pointer(components.CreateBodyAddVoiceV1VoicesAddPostLabelsStr(
             "{\"language\": \"en\", \"accent\": \"en-US\", \"gender\": \"male\", \"age\": \"middle-aged\"}",
-        ))),
+        )),
     })
     if err != nil {
         log.Fatal(err)
@@ -473,7 +469,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -488,10 +483,10 @@ func main() {
     res, err := s.Voices.EditVoice(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyEditVoiceV1VoicesVoiceIDEditPost{
         Name: "John Smith",
         RemoveBackgroundNoise: elevenlabsgo.Pointer(true),
-        Description: optionalnullable.From(elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news.")),
-        Labels: optionalnullable.From(elevenlabsgo.Pointer(components.CreateBodyEditVoiceV1VoicesVoiceIDEditPostLabelsStr(
+        Description: elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news."),
+        Labels: elevenlabsgo.Pointer(components.CreateBodyEditVoiceV1VoicesVoiceIDEditPostLabelsStr(
             "{\"language\": \"en\", \"accent\": \"en-US\", \"gender\": \"male\", \"age\": \"middle-aged\"}",
-        ))),
+        )),
     })
     if err != nil {
         log.Fatal(err)
@@ -593,7 +588,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -605,20 +599,20 @@ func main() {
     )
 
     res, err := s.Voices.GetLibraryVoices(ctx, operations.GetLibraryVoicesRequest{
-        Category: optionalnullable.From(elevenlabsgo.Pointer(operations.CategoryProfessional)),
-        Gender: optionalnullable.From(elevenlabsgo.Pointer("male")),
-        Age: optionalnullable.From(elevenlabsgo.Pointer("young")),
-        Accent: optionalnullable.From(elevenlabsgo.Pointer("american")),
-        Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-        Locale: optionalnullable.From(elevenlabsgo.Pointer("en-US")),
-        Search: optionalnullable.From(elevenlabsgo.Pointer("tiktok")),
+        Category: operations.CategoryProfessional.ToPointer(),
+        Gender: elevenlabsgo.Pointer("male"),
+        Age: elevenlabsgo.Pointer("young"),
+        Accent: elevenlabsgo.Pointer("american"),
+        Language: elevenlabsgo.Pointer("en"),
+        Locale: elevenlabsgo.Pointer("en-US"),
+        Search: elevenlabsgo.Pointer("tiktok"),
         Featured: elevenlabsgo.Pointer(true),
-        MinNoticePeriodDays: optionalnullable.From(elevenlabsgo.Pointer[int64](30)),
-        IncludeCustomRates: optionalnullable.From(elevenlabsgo.Pointer(true)),
-        IncludeLiveModerated: optionalnullable.From(elevenlabsgo.Pointer(true)),
+        MinNoticePeriodDays: elevenlabsgo.Pointer[int64](30),
+        IncludeCustomRates: elevenlabsgo.Pointer(true),
+        IncludeLiveModerated: elevenlabsgo.Pointer(true),
         ReaderAppEnabled: elevenlabsgo.Pointer(true),
-        OwnerID: optionalnullable.From(elevenlabsgo.Pointer("7c9fab611d9a0e1fb2e7448a0c294a8804efc2bcc324b0a366a5d5232b7d1532")),
-        Sort: optionalnullable.From(elevenlabsgo.Pointer("created_date")),
+        OwnerID: elevenlabsgo.Pointer("7c9fab611d9a0e1fb2e7448a0c294a8804efc2bcc324b0a366a5d5232b7d1532"),
+        Sort: elevenlabsgo.Pointer("created_date"),
     })
     if err != nil {
         log.Fatal(err)
@@ -661,7 +655,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -674,8 +667,8 @@ func main() {
     )
 
     res, err := s.Voices.GetSimilarLibraryVoices(ctx, &components.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost{
-        SimilarityThreshold: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-        TopK: optionalnullable.From(elevenlabsgo.Pointer[int64](10)),
+        SimilarityThreshold: elevenlabsgo.Pointer[float64](0.5),
+        TopK: elevenlabsgo.Pointer[int64](10),
     })
     if err != nil {
         log.Fatal(err)

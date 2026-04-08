@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -153,7 +152,7 @@ func (u SimulationTestModelDynamicVariables) MarshalJSON() ([]byte, error) {
 
 type SimulationTestModel struct {
 	// Metadata of a conversation this test was created from (if applicable).
-	FromConversationMetadata optionalnullable.OptionalNullable[TestFromConversationMetadataOutput] `json:"from_conversation_metadata,omitzero"`
+	FromConversationMetadata *TestFromConversationMetadataOutput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]*SimulationTestModelDynamicVariables  `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelOutput `json:"chat_history,omitzero"`
@@ -166,7 +165,7 @@ type SimulationTestModel struct {
 	// Maximum number of conversation turns for simulation tests.
 	SimulationMaxTurns *int64 `default:"5" json:"simulation_max_turns"`
 	// The environment to use when running this simulation test. If not provided, defaults to 'production'.
-	SimulationEnvironment optionalnullable.OptionalNullable[string] `json:"simulation_environment,omitzero"`
+	SimulationEnvironment *string `json:"simulation_environment,omitzero"`
 	// Simulation/preview-side config: tools are identified by IDs, resolved to names at runtime.
 	ToolMockConfig *SimulationToolMockBehaviorConfig `json:"tool_mock_config,omitzero"`
 }
@@ -182,7 +181,7 @@ func (s *SimulationTestModel) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SimulationTestModel) GetFromConversationMetadata() optionalnullable.OptionalNullable[TestFromConversationMetadataOutput] {
+func (s *SimulationTestModel) GetFromConversationMetadata() *TestFromConversationMetadataOutput {
 	if s == nil {
 		return nil
 	}
@@ -228,7 +227,7 @@ func (s *SimulationTestModel) GetSimulationMaxTurns() *int64 {
 	return s.SimulationMaxTurns
 }
 
-func (s *SimulationTestModel) GetSimulationEnvironment() optionalnullable.OptionalNullable[string] {
+func (s *SimulationTestModel) GetSimulationEnvironment() *string {
 	if s == nil {
 		return nil
 	}

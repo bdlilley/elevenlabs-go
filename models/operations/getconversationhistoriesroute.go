@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // GetConversationHistoriesRouteSummaryMode - Whether to include transcript summaries in the response.
@@ -39,39 +38,39 @@ func (e *GetConversationHistoriesRouteSummaryMode) UnmarshalJSON(data []byte) er
 
 type GetConversationHistoriesRouteRequest struct {
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The id of the agent you're taking the action on.
-	AgentID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=agent_id"`
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// The result of the success evaluation
-	CallSuccessful optionalnullable.OptionalNullable[components.EvaluationSuccessResult] `queryParam:"style=form,explode=true,name=call_successful"`
+	CallSuccessful *components.EvaluationSuccessResult `queryParam:"style=form,explode=true,name=call_successful"`
 	// Unix timestamp (in seconds) to filter conversations up to this start date.
-	CallStartBeforeUnix optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=call_start_before_unix"`
+	CallStartBeforeUnix *int64 `queryParam:"style=form,explode=true,name=call_start_before_unix"`
 	// Unix timestamp (in seconds) to filter conversations after to this start date.
-	CallStartAfterUnix optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=call_start_after_unix"`
+	CallStartAfterUnix *int64 `queryParam:"style=form,explode=true,name=call_start_after_unix"`
 	// Minimum call duration in seconds.
-	CallDurationMinSecs optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=call_duration_min_secs"`
+	CallDurationMinSecs *int64 `queryParam:"style=form,explode=true,name=call_duration_min_secs"`
 	// Maximum call duration in seconds.
-	CallDurationMaxSecs optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=call_duration_max_secs"`
+	CallDurationMaxSecs *int64 `queryParam:"style=form,explode=true,name=call_duration_max_secs"`
 	// Maximum overall rating (1-5).
-	RatingMax optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=rating_max"`
+	RatingMax *int64 `queryParam:"style=form,explode=true,name=rating_max"`
 	// Minimum overall rating (1-5).
-	RatingMin optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=rating_min"`
+	RatingMin *int64 `queryParam:"style=form,explode=true,name=rating_min"`
 	// Filter conversations with user feedback comments.
-	HasFeedbackComment optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=has_feedback_comment"`
+	HasFeedbackComment *bool `queryParam:"style=form,explode=true,name=has_feedback_comment"`
 	// Filter conversations by the user ID who initiated them.
-	UserID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=user_id"`
+	UserID *string `queryParam:"style=form,explode=true,name=user_id"`
 	// Evaluation filters. Repeat param. Format: criteria_id:result. Example: eval=value_framing:success
-	EvaluationParams optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=evaluation_params"`
+	EvaluationParams []string `queryParam:"style=form,explode=true,name=evaluation_params"`
 	// Data collection filters. Repeat param. Format: id:op:value where op is one of eq|neq|gt|gte|lt|lte|in|exists|missing. For in, pipe-delimit values.
-	DataCollectionParams optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=data_collection_params"`
+	DataCollectionParams []string `queryParam:"style=form,explode=true,name=data_collection_params"`
 	// Filter conversations by tool names used during the call.
-	ToolNames optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=tool_names"`
+	ToolNames []string `queryParam:"style=form,explode=true,name=tool_names"`
 	// Filter conversations by tool names that had successful calls.
-	ToolNamesSuccessful optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=tool_names_successful"`
+	ToolNamesSuccessful []string `queryParam:"style=form,explode=true,name=tool_names_successful"`
 	// Filter conversations by tool names that had errored calls.
-	ToolNamesErrored optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=tool_names_errored"`
+	ToolNamesErrored []string `queryParam:"style=form,explode=true,name=tool_names_errored"`
 	// Filter conversations by detected main language (language code).
-	MainLanguages optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=main_languages"`
+	MainLanguages []string `queryParam:"style=form,explode=true,name=main_languages"`
 	// How many conversations to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Whether to include transcript summaries in the response.
@@ -79,11 +78,11 @@ type GetConversationHistoriesRouteRequest struct {
 	// Full-text or fuzzy search over transcript messages
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Enum representing the possible sources for conversation initiation.
-	ConversationInitiationSource optionalnullable.OptionalNullable[components.ConversationInitiationSource] `default:"unknown" queryParam:"style=form,explode=true,name=conversation_initiation_source"`
+	ConversationInitiationSource *components.ConversationInitiationSource `default:"unknown" queryParam:"style=form,explode=true,name=conversation_initiation_source"`
 	// Filter conversations by branch ID.
-	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
+	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
 }
 
 func (g GetConversationHistoriesRouteRequest) MarshalJSON() ([]byte, error) {
@@ -97,119 +96,119 @@ func (g *GetConversationHistoriesRouteRequest) UnmarshalJSON(data []byte) error 
 	return nil
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationHistoriesRouteRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Cursor
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetAgentID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationHistoriesRouteRequest) GetAgentID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.AgentID
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetCallSuccessful() optionalnullable.OptionalNullable[components.EvaluationSuccessResult] {
+func (g *GetConversationHistoriesRouteRequest) GetCallSuccessful() *components.EvaluationSuccessResult {
 	if g == nil {
 		return nil
 	}
 	return g.CallSuccessful
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetCallStartBeforeUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationHistoriesRouteRequest) GetCallStartBeforeUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.CallStartBeforeUnix
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetCallStartAfterUnix() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationHistoriesRouteRequest) GetCallStartAfterUnix() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.CallStartAfterUnix
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetCallDurationMinSecs() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationHistoriesRouteRequest) GetCallDurationMinSecs() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.CallDurationMinSecs
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetCallDurationMaxSecs() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationHistoriesRouteRequest) GetCallDurationMaxSecs() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.CallDurationMaxSecs
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetRatingMax() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationHistoriesRouteRequest) GetRatingMax() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.RatingMax
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetRatingMin() optionalnullable.OptionalNullable[int64] {
+func (g *GetConversationHistoriesRouteRequest) GetRatingMin() *int64 {
 	if g == nil {
 		return nil
 	}
 	return g.RatingMin
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetHasFeedbackComment() optionalnullable.OptionalNullable[bool] {
+func (g *GetConversationHistoriesRouteRequest) GetHasFeedbackComment() *bool {
 	if g == nil {
 		return nil
 	}
 	return g.HasFeedbackComment
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetUserID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationHistoriesRouteRequest) GetUserID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.UserID
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetEvaluationParams() optionalnullable.OptionalNullable[[]string] {
+func (g *GetConversationHistoriesRouteRequest) GetEvaluationParams() []string {
 	if g == nil {
 		return nil
 	}
 	return g.EvaluationParams
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetDataCollectionParams() optionalnullable.OptionalNullable[[]string] {
+func (g *GetConversationHistoriesRouteRequest) GetDataCollectionParams() []string {
 	if g == nil {
 		return nil
 	}
 	return g.DataCollectionParams
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetToolNames() optionalnullable.OptionalNullable[[]string] {
+func (g *GetConversationHistoriesRouteRequest) GetToolNames() []string {
 	if g == nil {
 		return nil
 	}
 	return g.ToolNames
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetToolNamesSuccessful() optionalnullable.OptionalNullable[[]string] {
+func (g *GetConversationHistoriesRouteRequest) GetToolNamesSuccessful() []string {
 	if g == nil {
 		return nil
 	}
 	return g.ToolNamesSuccessful
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetToolNamesErrored() optionalnullable.OptionalNullable[[]string] {
+func (g *GetConversationHistoriesRouteRequest) GetToolNamesErrored() []string {
 	if g == nil {
 		return nil
 	}
 	return g.ToolNamesErrored
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetMainLanguages() optionalnullable.OptionalNullable[[]string] {
+func (g *GetConversationHistoriesRouteRequest) GetMainLanguages() []string {
 	if g == nil {
 		return nil
 	}
@@ -230,21 +229,21 @@ func (g *GetConversationHistoriesRouteRequest) GetSummaryMode() *GetConversation
 	return g.SummaryMode
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationHistoriesRouteRequest) GetSearch() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Search
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetConversationInitiationSource() optionalnullable.OptionalNullable[components.ConversationInitiationSource] {
+func (g *GetConversationHistoriesRouteRequest) GetConversationInitiationSource() *components.ConversationInitiationSource {
 	if g == nil {
 		return nil
 	}
 	return g.ConversationInitiationSource
 }
 
-func (g *GetConversationHistoriesRouteRequest) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (g *GetConversationHistoriesRouteRequest) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -24,17 +23,17 @@ type GetPhoneNumberSIPTrunkResponseModel struct {
 	// The ID of the phone number
 	PhoneNumberID string `json:"phone_number_id"`
 	// The agent that is assigned to the phone number
-	AssignedAgent optionalnullable.OptionalNullable[PhoneNumberAgentInfo] `json:"assigned_agent,omitzero"`
+	AssignedAgent *PhoneNumberAgentInfo `json:"assigned_agent,omitzero"`
 	// Phone provider
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	provider *string `const:"sip_trunk" json:"provider"`
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	ProviderConfig optionalnullable.OptionalNullable[GetPhoneNumberOutboundSIPTrunkConfigResponseModel] `json:"provider_config,omitzero"`
+	ProviderConfig *GetPhoneNumberOutboundSIPTrunkConfigResponseModel `json:"provider_config,omitzero"`
 	// Configuration of the Outbound SIP trunk - if configured.
-	OutboundTrunk optionalnullable.OptionalNullable[GetPhoneNumberOutboundSIPTrunkConfigResponseModel] `json:"outbound_trunk,omitzero"`
+	OutboundTrunk *GetPhoneNumberOutboundSIPTrunkConfigResponseModel `json:"outbound_trunk,omitzero"`
 	// Configuration of the Inbound SIP trunk - if configured.
-	InboundTrunk optionalnullable.OptionalNullable[GetPhoneNumberInboundSIPTrunkConfigResponseModel] `json:"inbound_trunk,omitzero"`
-	LivekitStack *LivekitStackType                                                                   `default:"standard" json:"livekit_stack"`
+	InboundTrunk *GetPhoneNumberInboundSIPTrunkConfigResponseModel `json:"inbound_trunk,omitzero"`
+	LivekitStack *LivekitStackType                                 `default:"standard" json:"livekit_stack"`
 }
 
 func (g GetPhoneNumberSIPTrunkResponseModel) MarshalJSON() ([]byte, error) {
@@ -83,7 +82,7 @@ func (g *GetPhoneNumberSIPTrunkResponseModel) GetPhoneNumberID() string {
 	return g.PhoneNumberID
 }
 
-func (g *GetPhoneNumberSIPTrunkResponseModel) GetAssignedAgent() optionalnullable.OptionalNullable[PhoneNumberAgentInfo] {
+func (g *GetPhoneNumberSIPTrunkResponseModel) GetAssignedAgent() *PhoneNumberAgentInfo {
 	if g == nil {
 		return nil
 	}
@@ -94,21 +93,21 @@ func (g *GetPhoneNumberSIPTrunkResponseModel) GetProvider() *string {
 	return types.Pointer("sip_trunk")
 }
 
-func (g *GetPhoneNumberSIPTrunkResponseModel) GetProviderConfig() optionalnullable.OptionalNullable[GetPhoneNumberOutboundSIPTrunkConfigResponseModel] {
+func (g *GetPhoneNumberSIPTrunkResponseModel) GetProviderConfig() *GetPhoneNumberOutboundSIPTrunkConfigResponseModel {
 	if g == nil {
 		return nil
 	}
 	return g.ProviderConfig
 }
 
-func (g *GetPhoneNumberSIPTrunkResponseModel) GetOutboundTrunk() optionalnullable.OptionalNullable[GetPhoneNumberOutboundSIPTrunkConfigResponseModel] {
+func (g *GetPhoneNumberSIPTrunkResponseModel) GetOutboundTrunk() *GetPhoneNumberOutboundSIPTrunkConfigResponseModel {
 	if g == nil {
 		return nil
 	}
 	return g.OutboundTrunk
 }
 
-func (g *GetPhoneNumberSIPTrunkResponseModel) GetInboundTrunk() optionalnullable.OptionalNullable[GetPhoneNumberInboundSIPTrunkConfigResponseModel] {
+func (g *GetPhoneNumberSIPTrunkResponseModel) GetInboundTrunk() *GetPhoneNumberInboundSIPTrunkConfigResponseModel {
 	if g == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType string
@@ -340,8 +339,8 @@ type ConversationHistoryTranscriptSystemToolResultCommonModelOutput struct {
 	RawErrorMessage        *string                            `default:"" json:"raw_error_message"`
 	DynamicVariableUpdates []DynamicVariableUpdateCommonModel `json:"dynamic_variable_updates,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_  string                                                                                                  `const:"system" json:"type"`
-	Result optionalnullable.OptionalNullable[ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult] `json:"result,omitzero"`
+	type_  string                                                                `const:"system" json:"type"`
+	Result *ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult `json:"result,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptSystemToolResultCommonModelOutput) MarshalJSON() ([]byte, error) {
@@ -422,7 +421,7 @@ func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetType
 	return "system"
 }
 
-func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResult() optionalnullable.OptionalNullable[ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult] {
+func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResult() *ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult {
 	if c == nil {
 		return nil
 	}
@@ -431,120 +430,84 @@ func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResu
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultEndCallSuccess() *EndCallToolResultModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.EndCallToolResultModel
-		}
-		return nil
+		return v.EndCallToolResultModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultLanguageDetectionSuccess() *LanguageDetectionToolResultModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.LanguageDetectionToolResultModel
-		}
-		return nil
+		return v.LanguageDetectionToolResultModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultPlayDtmfError() *PlayDTMFResultErrorModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.PlayDTMFResultErrorModel
-		}
-		return nil
+		return v.PlayDTMFResultErrorModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultPlayDtmfSuccess() *PlayDTMFResultSuccessModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.PlayDTMFResultSuccessModel
-		}
-		return nil
+		return v.PlayDTMFResultSuccessModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultSkipTurnSuccess() *SkipTurnToolResponseModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.SkipTurnToolResponseModel
-		}
-		return nil
+		return v.SkipTurnToolResponseModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTestingToolResult() *TestToolResultModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TestToolResultModel
-		}
-		return nil
+		return v.TestToolResultModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTransferToAgentError() *TransferToAgentToolResultErrorModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TransferToAgentToolResultErrorModel
-		}
-		return nil
+		return v.TransferToAgentToolResultErrorModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTransferToAgentSuccess() *TransferToAgentToolResultSuccessModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TransferToAgentToolResultSuccessModel
-		}
-		return nil
+		return v.TransferToAgentToolResultSuccessModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTransferToNumberError() *TransferToNumberResultErrorModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TransferToNumberResultErrorModel
-		}
-		return nil
+		return v.TransferToNumberResultErrorModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTransferToNumberSipSuccess() *TransferToNumberResultSipSuccessModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TransferToNumberResultSipSuccessModel
-		}
-		return nil
+		return v.TransferToNumberResultSipSuccessModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTransferToNumberTwilioSuccess() *TransferToNumberResultTwilioSuccessModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.TransferToNumberResultTwilioSuccessModel
-		}
-		return nil
+		return v.TransferToNumberResultTwilioSuccessModel
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultVoicemailDetectionSuccess() *VoiceMailDetectionResultSuccessModel {
 	if v := c.GetResult(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.VoiceMailDetectionResultSuccessModel
-		}
-		return nil
+		return v.VoiceMailDetectionResultSuccessModel
 	}
 	return nil
 }

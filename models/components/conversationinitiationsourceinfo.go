@@ -4,15 +4,14 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // ConversationInitiationSourceInfo - Information about the source of conversation initiation
 type ConversationInitiationSourceInfo struct {
 	// Source of the conversation initiation
-	Source optionalnullable.OptionalNullable[ConversationInitiationSource] `default:"unknown" json:"source"`
+	Source *ConversationInitiationSource `default:"unknown" json:"source"`
 	// The SDK version number
-	Version optionalnullable.OptionalNullable[string] `json:"version,omitzero"`
+	Version *string `json:"version,omitzero"`
 }
 
 func (c ConversationInitiationSourceInfo) MarshalJSON() ([]byte, error) {
@@ -26,14 +25,14 @@ func (c *ConversationInitiationSourceInfo) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *ConversationInitiationSourceInfo) GetSource() optionalnullable.OptionalNullable[ConversationInitiationSource] {
+func (c *ConversationInitiationSourceInfo) GetSource() *ConversationInitiationSource {
 	if c == nil {
 		return nil
 	}
 	return c.Source
 }
 
-func (c *ConversationInitiationSourceInfo) GetVersion() optionalnullable.OptionalNullable[string] {
+func (c *ConversationInitiationSourceInfo) GetVersion() *string {
 	if c == nil {
 		return nil
 	}

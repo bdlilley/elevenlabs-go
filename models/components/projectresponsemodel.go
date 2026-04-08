@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ProjectResponseModelTargetAudience string
@@ -169,31 +168,31 @@ type ProjectResponseModel struct {
 	// The default model ID.
 	DefaultModelID string `json:"default_model_id"`
 	// The last conversion date of the project.
-	LastConversionDateUnix optionalnullable.OptionalNullable[int64] `json:"last_conversion_date_unix,omitzero"`
+	LastConversionDateUnix *int64 `json:"last_conversion_date_unix,omitzero"`
 	// Whether the project can be downloaded.
 	CanBeDownloaded bool `json:"can_be_downloaded"`
 	// The title of the project.
-	Title optionalnullable.OptionalNullable[string] `json:"title,omitzero"`
+	Title *string `json:"title,omitzero"`
 	// The author of the project.
-	Author optionalnullable.OptionalNullable[string] `json:"author,omitzero"`
+	Author *string `json:"author,omitzero"`
 	// The description of the project.
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 	// List of genres of the project.
-	Genres optionalnullable.OptionalNullable[[]string] `json:"genres,omitzero"`
+	Genres []string `json:"genres,omitzero"`
 	// The cover image URL of the project.
-	CoverImageURL optionalnullable.OptionalNullable[string] `json:"cover_image_url,omitzero"`
+	CoverImageURL *string `json:"cover_image_url,omitzero"`
 	// The target audience of the project.
-	TargetAudience optionalnullable.OptionalNullable[ProjectResponseModelTargetAudience] `json:"target_audience,omitzero"`
+	TargetAudience *ProjectResponseModelTargetAudience `json:"target_audience,omitzero"`
 	// Two-letter language code (ISO 639-1) of the language of the project.
-	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`
+	Language *string `json:"language,omitzero"`
 	// The content type of the project, e.g. 'Novel' or 'Short Story'
-	ContentType optionalnullable.OptionalNullable[string] `json:"content_type,omitzero"`
+	ContentType *string `json:"content_type,omitzero"`
 	// The original publication date of the project.
-	OriginalPublicationDate optionalnullable.OptionalNullable[string] `json:"original_publication_date,omitzero"`
+	OriginalPublicationDate *string `json:"original_publication_date,omitzero"`
 	// Whether the project contains mature content.
-	MatureContent optionalnullable.OptionalNullable[bool] `json:"mature_content,omitzero"`
+	MatureContent *bool `json:"mature_content,omitzero"`
 	// The ISBN number of the project.
-	IsbnNumber optionalnullable.OptionalNullable[string] `json:"isbn_number,omitzero"`
+	IsbnNumber *string `json:"isbn_number,omitzero"`
 	// Whether the project uses volume normalization.
 	VolumeNormalization bool `json:"volume_normalization"`
 	// The state of the project.
@@ -201,7 +200,7 @@ type ProjectResponseModel struct {
 	// The access level of the project.
 	AccessLevel ProjectResponseModelAccessLevel `json:"access_level"`
 	// Whether the project is fiction.
-	Fiction optionalnullable.OptionalNullable[ProjectResponseModelFiction] `json:"fiction,omitzero"`
+	Fiction *ProjectResponseModelFiction `json:"fiction,omitzero"`
 	// Whether quality check is enabled for this project.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -211,23 +210,23 @@ type ProjectResponseModel struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	QualityCheckOnWhenBulkConvert bool `json:"quality_check_on_when_bulk_convert"`
 	// The creation meta of the project.
-	CreationMeta optionalnullable.OptionalNullable[ProjectCreationMetaResponseModel] `json:"creation_meta,omitzero"`
+	CreationMeta *ProjectCreationMetaResponseModel `json:"creation_meta,omitzero"`
 	// The source type of the project.
-	SourceType optionalnullable.OptionalNullable[ProjectResponseModelSourceType] `json:"source_type,omitzero"`
+	SourceType *ProjectResponseModelSourceType `json:"source_type,omitzero"`
 	// Whether chapters are enabled for the project.
-	ChaptersEnabled optionalnullable.OptionalNullable[bool] `json:"chapters_enabled,omitzero"`
+	ChaptersEnabled *bool `json:"chapters_enabled,omitzero"`
 	// Whether captions are enabled for the project.
-	CaptionsEnabled optionalnullable.OptionalNullable[bool] `json:"captions_enabled,omitzero"`
+	CaptionsEnabled *bool `json:"captions_enabled,omitzero"`
 	// Global styling to be applied to all captions
-	CaptionStyle optionalnullable.OptionalNullable[CaptionStyleModel] `json:"caption_style,omitzero"`
+	CaptionStyle *CaptionStyleModel `json:"caption_style,omitzero"`
 	// Styling changes that have been made to the provided templates
-	CaptionStyleTemplateOverrides optionalnullable.OptionalNullable[map[string]CaptionStyleModel] `json:"caption_style_template_overrides,omitzero"`
+	CaptionStyleTemplateOverrides map[string]CaptionStyleModel `json:"caption_style_template_overrides,omitzero"`
 	// The public share ID of the project.
-	PublicShareID optionalnullable.OptionalNullable[string] `json:"public_share_id,omitzero"`
+	PublicShareID *string `json:"public_share_id,omitzero"`
 	// The aspect ratio of the project.
-	AspectRatio optionalnullable.OptionalNullable[ProjectResponseModelAspectRatio] `json:"aspect_ratio,omitzero"`
+	AspectRatio *ProjectResponseModelAspectRatio `json:"aspect_ratio,omitzero"`
 	// Agent-related settings for the project
-	AgentSettings optionalnullable.OptionalNullable[StudioAgentSettingsModel] `json:"agent_settings,omitzero"`
+	AgentSettings *StudioAgentSettingsModel `json:"agent_settings,omitzero"`
 }
 
 func (p ProjectResponseModel) MarshalJSON() ([]byte, error) {
@@ -290,7 +289,7 @@ func (p *ProjectResponseModel) GetDefaultModelID() string {
 	return p.DefaultModelID
 }
 
-func (p *ProjectResponseModel) GetLastConversionDateUnix() optionalnullable.OptionalNullable[int64] {
+func (p *ProjectResponseModel) GetLastConversionDateUnix() *int64 {
 	if p == nil {
 		return nil
 	}
@@ -304,77 +303,77 @@ func (p *ProjectResponseModel) GetCanBeDownloaded() bool {
 	return p.CanBeDownloaded
 }
 
-func (p *ProjectResponseModel) GetTitle() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetTitle() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Title
 }
 
-func (p *ProjectResponseModel) GetAuthor() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetAuthor() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Author
 }
 
-func (p *ProjectResponseModel) GetDescription() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetDescription() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Description
 }
 
-func (p *ProjectResponseModel) GetGenres() optionalnullable.OptionalNullable[[]string] {
+func (p *ProjectResponseModel) GetGenres() []string {
 	if p == nil {
 		return nil
 	}
 	return p.Genres
 }
 
-func (p *ProjectResponseModel) GetCoverImageURL() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetCoverImageURL() *string {
 	if p == nil {
 		return nil
 	}
 	return p.CoverImageURL
 }
 
-func (p *ProjectResponseModel) GetTargetAudience() optionalnullable.OptionalNullable[ProjectResponseModelTargetAudience] {
+func (p *ProjectResponseModel) GetTargetAudience() *ProjectResponseModelTargetAudience {
 	if p == nil {
 		return nil
 	}
 	return p.TargetAudience
 }
 
-func (p *ProjectResponseModel) GetLanguage() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetLanguage() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Language
 }
 
-func (p *ProjectResponseModel) GetContentType() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetContentType() *string {
 	if p == nil {
 		return nil
 	}
 	return p.ContentType
 }
 
-func (p *ProjectResponseModel) GetOriginalPublicationDate() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetOriginalPublicationDate() *string {
 	if p == nil {
 		return nil
 	}
 	return p.OriginalPublicationDate
 }
 
-func (p *ProjectResponseModel) GetMatureContent() optionalnullable.OptionalNullable[bool] {
+func (p *ProjectResponseModel) GetMatureContent() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.MatureContent
 }
 
-func (p *ProjectResponseModel) GetIsbnNumber() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetIsbnNumber() *string {
 	if p == nil {
 		return nil
 	}
@@ -402,7 +401,7 @@ func (p *ProjectResponseModel) GetAccessLevel() ProjectResponseModelAccessLevel 
 	return p.AccessLevel
 }
 
-func (p *ProjectResponseModel) GetFiction() optionalnullable.OptionalNullable[ProjectResponseModelFiction] {
+func (p *ProjectResponseModel) GetFiction() *ProjectResponseModelFiction {
 	if p == nil {
 		return nil
 	}
@@ -423,63 +422,63 @@ func (p *ProjectResponseModel) GetQualityCheckOnWhenBulkConvert() bool {
 	return p.QualityCheckOnWhenBulkConvert
 }
 
-func (p *ProjectResponseModel) GetCreationMeta() optionalnullable.OptionalNullable[ProjectCreationMetaResponseModel] {
+func (p *ProjectResponseModel) GetCreationMeta() *ProjectCreationMetaResponseModel {
 	if p == nil {
 		return nil
 	}
 	return p.CreationMeta
 }
 
-func (p *ProjectResponseModel) GetSourceType() optionalnullable.OptionalNullable[ProjectResponseModelSourceType] {
+func (p *ProjectResponseModel) GetSourceType() *ProjectResponseModelSourceType {
 	if p == nil {
 		return nil
 	}
 	return p.SourceType
 }
 
-func (p *ProjectResponseModel) GetChaptersEnabled() optionalnullable.OptionalNullable[bool] {
+func (p *ProjectResponseModel) GetChaptersEnabled() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.ChaptersEnabled
 }
 
-func (p *ProjectResponseModel) GetCaptionsEnabled() optionalnullable.OptionalNullable[bool] {
+func (p *ProjectResponseModel) GetCaptionsEnabled() *bool {
 	if p == nil {
 		return nil
 	}
 	return p.CaptionsEnabled
 }
 
-func (p *ProjectResponseModel) GetCaptionStyle() optionalnullable.OptionalNullable[CaptionStyleModel] {
+func (p *ProjectResponseModel) GetCaptionStyle() *CaptionStyleModel {
 	if p == nil {
 		return nil
 	}
 	return p.CaptionStyle
 }
 
-func (p *ProjectResponseModel) GetCaptionStyleTemplateOverrides() optionalnullable.OptionalNullable[map[string]CaptionStyleModel] {
+func (p *ProjectResponseModel) GetCaptionStyleTemplateOverrides() map[string]CaptionStyleModel {
 	if p == nil {
 		return nil
 	}
 	return p.CaptionStyleTemplateOverrides
 }
 
-func (p *ProjectResponseModel) GetPublicShareID() optionalnullable.OptionalNullable[string] {
+func (p *ProjectResponseModel) GetPublicShareID() *string {
 	if p == nil {
 		return nil
 	}
 	return p.PublicShareID
 }
 
-func (p *ProjectResponseModel) GetAspectRatio() optionalnullable.OptionalNullable[ProjectResponseModelAspectRatio] {
+func (p *ProjectResponseModel) GetAspectRatio() *ProjectResponseModelAspectRatio {
 	if p == nil {
 		return nil
 	}
 	return p.AspectRatio
 }
 
-func (p *ProjectResponseModel) GetAgentSettings() optionalnullable.OptionalNullable[StudioAgentSettingsModel] {
+func (p *ProjectResponseModel) GetAgentSettings() *StudioAgentSettingsModel {
 	if p == nil {
 		return nil
 	}

@@ -32,7 +32,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -47,7 +46,7 @@ func main() {
     res, err := s.PvcVoices.CreatePvcVoice(ctx, components.BodyCreatePVCVoiceV1VoicesPVCPost{
         Name: "John Smith",
         Language: "en",
-        Description: optionalnullable.From(elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news.")),
+        Description: elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news."),
     })
     if err != nil {
         log.Fatal(err)
@@ -90,7 +89,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -105,7 +103,7 @@ func main() {
     res, err := s.PvcVoices.EditPvcVoice(ctx, "21m00Tcm4TlvDq8ikWAM", &components.BodyEditPVCVoiceV1VoicesPVCVoiceIDPost{
         Name: elevenlabsgo.Pointer("John Smith"),
         Language: elevenlabsgo.Pointer("en"),
-        Description: optionalnullable.From(elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news.")),
+        Description: elevenlabsgo.Pointer("An old American male voice with a slight hoarseness in his throat. Perfect for news."),
     })
     if err != nil {
         log.Fatal(err)
@@ -206,7 +204,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -220,9 +217,9 @@ func main() {
 
     res, err := s.PvcVoices.EditPvcVoiceSample(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", &components.BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost{
         RemoveBackgroundNoise: elevenlabsgo.Pointer(true),
-        TrimStartTime: optionalnullable.From(elevenlabsgo.Pointer[int64](0)),
-        TrimEndTime: optionalnullable.From(elevenlabsgo.Pointer[int64](10)),
-        FileName: optionalnullable.From(elevenlabsgo.Pointer("sample.mp3")),
+        TrimStartTime: elevenlabsgo.Pointer[int64](0),
+        TrimEndTime: elevenlabsgo.Pointer[int64](10),
+        FileName: elevenlabsgo.Pointer("sample.mp3"),
     })
     if err != nil {
         log.Fatal(err)
@@ -704,7 +701,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -717,7 +713,7 @@ func main() {
     )
 
     res, err := s.PvcVoices.RunPvcVoiceTraining(ctx, "21m00Tcm4TlvDq8ikWAM", &components.BodyRunPVCTrainingV1VoicesPVCVoiceIDTrainPost{
-        ModelID: optionalnullable.From(elevenlabsgo.Pointer("eleven_turbo_v2")),
+        ModelID: elevenlabsgo.Pointer("eleven_turbo_v2"),
     })
     if err != nil {
         log.Fatal(err)

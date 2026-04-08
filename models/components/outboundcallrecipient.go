@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type OutboundCallRecipient struct {
-	ID                               optionalnullable.OptionalNullable[string]                                       `json:"id,omitzero"`
-	PhoneNumber                      optionalnullable.OptionalNullable[string]                                       `json:"phone_number,omitzero"`
-	WhatsappUserID                   optionalnullable.OptionalNullable[string]                                       `json:"whatsapp_user_id,omitzero"`
-	ConversationInitiationClientData optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] `json:"conversation_initiation_client_data,omitzero"`
+	ID                               *string                                       `json:"id,omitzero"`
+	PhoneNumber                      *string                                       `json:"phone_number,omitzero"`
+	WhatsappUserID                   *string                                       `json:"whatsapp_user_id,omitzero"`
+	ConversationInitiationClientData *ConversationInitiationClientDataRequestInput `json:"conversation_initiation_client_data,omitzero"`
 }
 
 func (o OutboundCallRecipient) MarshalJSON() ([]byte, error) {
@@ -25,28 +24,28 @@ func (o *OutboundCallRecipient) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *OutboundCallRecipient) GetID() optionalnullable.OptionalNullable[string] {
+func (o *OutboundCallRecipient) GetID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *OutboundCallRecipient) GetPhoneNumber() optionalnullable.OptionalNullable[string] {
+func (o *OutboundCallRecipient) GetPhoneNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PhoneNumber
 }
 
-func (o *OutboundCallRecipient) GetWhatsappUserID() optionalnullable.OptionalNullable[string] {
+func (o *OutboundCallRecipient) GetWhatsappUserID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.WhatsappUserID
 }
 
-func (o *OutboundCallRecipient) GetConversationInitiationClientData() optionalnullable.OptionalNullable[ConversationInitiationClientDataRequestInput] {
+func (o *OutboundCallRecipient) GetConversationInitiationClientData() *ConversationInitiationClientDataRequestInput {
 	if o == nil {
 		return nil
 	}

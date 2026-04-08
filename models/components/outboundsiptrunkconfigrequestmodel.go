@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type OutboundSIPTrunkConfigRequestModel struct {
@@ -15,7 +14,7 @@ type OutboundSIPTrunkConfigRequestModel struct {
 	// SIP X-* headers for INVITE request. These headers are sent as-is and may help identify this call.
 	Headers map[string]string `json:"headers,omitzero"`
 	// Optional digest authentication credentials (username/password). If not provided, ACL authentication is assumed.
-	Credentials optionalnullable.OptionalNullable[SIPTrunkCredentialsRequestModel] `json:"credentials,omitzero"`
+	Credentials *SIPTrunkCredentialsRequestModel `json:"credentials,omitzero"`
 }
 
 func (o OutboundSIPTrunkConfigRequestModel) MarshalJSON() ([]byte, error) {
@@ -57,7 +56,7 @@ func (o *OutboundSIPTrunkConfigRequestModel) GetHeaders() map[string]string {
 	return o.Headers
 }
 
-func (o *OutboundSIPTrunkConfigRequestModel) GetCredentials() optionalnullable.OptionalNullable[SIPTrunkCredentialsRequestModel] {
+func (o *OutboundSIPTrunkConfigRequestModel) GetCredentials() *SIPTrunkCredentialsRequestModel {
 	if o == nil {
 		return nil
 	}

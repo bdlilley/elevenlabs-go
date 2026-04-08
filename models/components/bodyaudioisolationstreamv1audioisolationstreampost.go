@@ -5,7 +5,6 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyAudioIsolationStreamV1AudioIsolationStreamPostAudio struct {
@@ -61,7 +60,7 @@ type BodyAudioIsolationStreamV1AudioIsolationStreamPost struct {
 	// The audio file from which vocals/speech will be isolated from.
 	Audio BodyAudioIsolationStreamV1AudioIsolationStreamPostAudio `multipartForm:"file,name=audio"`
 	// The format of input audio. Options are 'pcm_s16le_16' or 'other' For `pcm_s16le_16`, the input audio must be 16-bit PCM at a 16kHz sample rate, single channel (mono), and little-endian byte order. Latency will be lower than with passing an encoded waveform.
-	FileFormat optionalnullable.OptionalNullable[BodyAudioIsolationStreamV1AudioIsolationStreamPostFileFormat] `multipartForm:"name=file_format"`
+	FileFormat *BodyAudioIsolationStreamV1AudioIsolationStreamPostFileFormat `multipartForm:"name=file_format"`
 }
 
 func (b *BodyAudioIsolationStreamV1AudioIsolationStreamPost) GetAudio() BodyAudioIsolationStreamV1AudioIsolationStreamPostAudio {
@@ -71,7 +70,7 @@ func (b *BodyAudioIsolationStreamV1AudioIsolationStreamPost) GetAudio() BodyAudi
 	return b.Audio
 }
 
-func (b *BodyAudioIsolationStreamV1AudioIsolationStreamPost) GetFileFormat() optionalnullable.OptionalNullable[BodyAudioIsolationStreamV1AudioIsolationStreamPostFileFormat] {
+func (b *BodyAudioIsolationStreamV1AudioIsolationStreamPost) GetFileFormat() *BodyAudioIsolationStreamV1AudioIsolationStreamPostFileFormat {
 	if b == nil {
 		return nil
 	}

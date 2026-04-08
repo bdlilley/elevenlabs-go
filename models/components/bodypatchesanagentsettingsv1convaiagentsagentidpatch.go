@@ -4,21 +4,20 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch struct {
 	// Conversation configuration for an agent
-	ConversationConfig optionalnullable.OptionalNullable[map[string]any] `json:"conversation_config,omitzero"`
+	ConversationConfig map[string]any `json:"conversation_config,omitzero"`
 	// Platform settings for the agent are all settings that aren't related to the conversation orchestration and content.
-	PlatformSettings optionalnullable.OptionalNullable[map[string]any] `json:"platform_settings,omitzero"`
-	Workflow         *AgentWorkflowRequestModel                        `json:"workflow,omitzero"`
+	PlatformSettings map[string]any             `json:"platform_settings,omitzero"`
+	Workflow         *AgentWorkflowRequestModel `json:"workflow,omitzero"`
 	// A name to make the agent easier to find
-	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	Name *string `json:"name,omitzero"`
 	// Tags to help classify and filter the agent
-	Tags optionalnullable.OptionalNullable[[]string] `json:"tags,omitzero"`
+	Tags []string `json:"tags,omitzero"`
 	// Description for this version when publishing changes (only applicable for versioned agents)
-	VersionDescription optionalnullable.OptionalNullable[string] `json:"version_description,omitzero"`
+	VersionDescription *string `json:"version_description,omitzero"`
 }
 
 func (b BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) MarshalJSON() ([]byte, error) {
@@ -32,14 +31,14 @@ func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) UnmarshalJSON(dat
 	return nil
 }
 
-func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetConversationConfig() optionalnullable.OptionalNullable[map[string]any] {
+func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetConversationConfig() map[string]any {
 	if b == nil {
 		return nil
 	}
 	return b.ConversationConfig
 }
 
-func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetPlatformSettings() optionalnullable.OptionalNullable[map[string]any] {
+func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetPlatformSettings() map[string]any {
 	if b == nil {
 		return nil
 	}
@@ -53,21 +52,21 @@ func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetWorkflow() *Ag
 	return b.Workflow
 }
 
-func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetName() optionalnullable.OptionalNullable[string] {
+func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetTags() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetTags() []string {
 	if b == nil {
 		return nil
 	}
 	return b.Tags
 }
 
-func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetVersionDescription() optionalnullable.OptionalNullable[string] {
+func (b *BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch) GetVersionDescription() *string {
 	if b == nil {
 		return nil
 	}

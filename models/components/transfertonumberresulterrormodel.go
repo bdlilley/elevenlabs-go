@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,9 +11,9 @@ type TransferToNumberResultErrorModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"transfer_to_number_error" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status  *string                                   `const:"error" json:"status"`
-	Error   string                                    `json:"error"`
-	Details optionalnullable.OptionalNullable[string] `json:"details,omitzero"`
+	status  *string `const:"error" json:"status"`
+	Error   string  `json:"error"`
+	Details *string `json:"details,omitzero"`
 }
 
 func (t TransferToNumberResultErrorModel) MarshalJSON() ([]byte, error) {
@@ -43,7 +42,7 @@ func (t *TransferToNumberResultErrorModel) GetError() string {
 	return t.Error
 }
 
-func (t *TransferToNumberResultErrorModel) GetDetails() optionalnullable.OptionalNullable[string] {
+func (t *TransferToNumberResultErrorModel) GetDetails() *string {
 	if t == nil {
 		return nil
 	}

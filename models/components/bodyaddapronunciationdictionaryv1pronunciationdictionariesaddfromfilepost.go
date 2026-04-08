@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostFile struct {
@@ -70,9 +69,9 @@ type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost s
 	// A lexicon .pls file which we will use to initialize the project with.
 	File *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostFile `multipartForm:"file,name=file"`
 	// A description of the pronunciation dictionary, used for identification only.
-	Description optionalnullable.OptionalNullable[string] `multipartForm:"name=description"`
+	Description *string `multipartForm:"name=description"`
 	// Should be one of 'admin', 'editor' or 'viewer'. If not provided, defaults to no access.
-	WorkspaceAccess optionalnullable.OptionalNullable[BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWorkspaceAccess] `multipartForm:"name=workspace_access"`
+	WorkspaceAccess *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWorkspaceAccess `multipartForm:"name=workspace_access"`
 }
 
 func (b BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost) MarshalJSON() ([]byte, error) {
@@ -100,14 +99,14 @@ func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePo
 	return b.File
 }
 
-func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost) GetDescription() optionalnullable.OptionalNullable[string] {
+func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost) GetDescription() *string {
 	if b == nil {
 		return nil
 	}
 	return b.Description
 }
 
-func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost) GetWorkspaceAccess() optionalnullable.OptionalNullable[BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWorkspaceAccess] {
+func (b *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost) GetWorkspaceAccess() *BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWorkspaceAccess {
 	if b == nil {
 		return nil
 	}

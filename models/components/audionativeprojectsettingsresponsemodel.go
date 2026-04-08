@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // AudioNativeProjectSettingsResponseModelStatus - Current state of the project
@@ -46,9 +45,9 @@ type AudioNativeProjectSettingsResponseModel struct {
 	// The sessionization of the project. Specifies for how many minutes to persist the session across page reloads.
 	Sessionization int64 `json:"sessionization"`
 	// The path of the audio file.
-	AudioPath optionalnullable.OptionalNullable[string] `json:"audio_path,omitzero"`
+	AudioPath *string `json:"audio_path,omitzero"`
 	// The URL of the audio file.
-	AudioURL optionalnullable.OptionalNullable[string] `json:"audio_url,omitzero"`
+	AudioURL *string `json:"audio_url,omitzero"`
 	// Current state of the project
 	Status *AudioNativeProjectSettingsResponseModelStatus `default:"ready" json:"status"`
 }
@@ -113,14 +112,14 @@ func (a *AudioNativeProjectSettingsResponseModel) GetSessionization() int64 {
 	return a.Sessionization
 }
 
-func (a *AudioNativeProjectSettingsResponseModel) GetAudioPath() optionalnullable.OptionalNullable[string] {
+func (a *AudioNativeProjectSettingsResponseModel) GetAudioPath() *string {
 	if a == nil {
 		return nil
 	}
 	return a.AudioPath
 }
 
-func (a *AudioNativeProjectSettingsResponseModel) GetAudioURL() optionalnullable.OptionalNullable[string] {
+func (a *AudioNativeProjectSettingsResponseModel) GetAudioURL() *string {
 	if a == nil {
 		return nil
 	}

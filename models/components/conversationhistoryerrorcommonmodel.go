@@ -2,13 +2,9 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type ConversationHistoryErrorCommonModel struct {
-	Code   int64                                     `json:"code"`
-	Reason optionalnullable.OptionalNullable[string] `json:"reason,omitzero"`
+	Code   int64   `json:"code"`
+	Reason *string `json:"reason,omitzero"`
 }
 
 func (c *ConversationHistoryErrorCommonModel) GetCode() int64 {
@@ -18,7 +14,7 @@ func (c *ConversationHistoryErrorCommonModel) GetCode() int64 {
 	return c.Code
 }
 
-func (c *ConversationHistoryErrorCommonModel) GetReason() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryErrorCommonModel) GetReason() *string {
 	if c == nil {
 		return nil
 	}

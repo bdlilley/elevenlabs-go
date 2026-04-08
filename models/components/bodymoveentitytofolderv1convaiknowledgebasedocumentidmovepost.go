@@ -2,16 +2,12 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost struct {
 	// The folder to move the entities to. If not set, the entities will be moved to the root folder.
-	MoveTo optionalnullable.OptionalNullable[string] `json:"move_to,omitzero"`
+	MoveTo *string `json:"move_to,omitzero"`
 }
 
-func (b *BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost) GetMoveTo() optionalnullable.OptionalNullable[string] {
+func (b *BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost) GetMoveTo() *string {
 	if b == nil {
 		return nil
 	}

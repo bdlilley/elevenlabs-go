@@ -4,14 +4,13 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SuggestedAudioTag struct {
 	// Audio tag to use (for best performance, 1-2 words, e.g., 'happy', 'excited')
 	Tag string `json:"tag"`
 	// Optional description of when to use this tag
-	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
+	Description *string `json:"description,omitzero"`
 }
 
 func (s SuggestedAudioTag) MarshalJSON() ([]byte, error) {
@@ -32,7 +31,7 @@ func (s *SuggestedAudioTag) GetTag() string {
 	return s.Tag
 }
 
-func (s *SuggestedAudioTag) GetDescription() optionalnullable.OptionalNullable[string] {
+func (s *SuggestedAudioTag) GetDescription() *string {
 	if s == nil {
 		return nil
 	}

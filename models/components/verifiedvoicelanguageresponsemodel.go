@@ -2,21 +2,17 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type VerifiedVoiceLanguageResponseModel struct {
 	// The language of the voice.
 	Language string `json:"language"`
 	// The voice's model ID.
 	ModelID string `json:"model_id"`
 	// The voice's accent, if applicable.
-	Accent optionalnullable.OptionalNullable[string] `json:"accent,omitzero"`
+	Accent *string `json:"accent,omitzero"`
 	// The voice's locale, if applicable.
-	Locale optionalnullable.OptionalNullable[string] `json:"locale,omitzero"`
+	Locale *string `json:"locale,omitzero"`
 	// The voice's preview URL, if applicable.
-	PreviewURL optionalnullable.OptionalNullable[string] `json:"preview_url,omitzero"`
+	PreviewURL *string `json:"preview_url,omitzero"`
 }
 
 func (v *VerifiedVoiceLanguageResponseModel) GetLanguage() string {
@@ -33,21 +29,21 @@ func (v *VerifiedVoiceLanguageResponseModel) GetModelID() string {
 	return v.ModelID
 }
 
-func (v *VerifiedVoiceLanguageResponseModel) GetAccent() optionalnullable.OptionalNullable[string] {
+func (v *VerifiedVoiceLanguageResponseModel) GetAccent() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Accent
 }
 
-func (v *VerifiedVoiceLanguageResponseModel) GetLocale() optionalnullable.OptionalNullable[string] {
+func (v *VerifiedVoiceLanguageResponseModel) GetLocale() *string {
 	if v == nil {
 		return nil
 	}
 	return v.Locale
 }
 
-func (v *VerifiedVoiceLanguageResponseModel) GetPreviewURL() optionalnullable.OptionalNullable[string] {
+func (v *VerifiedVoiceLanguageResponseModel) GetPreviewURL() *string {
 	if v == nil {
 		return nil
 	}

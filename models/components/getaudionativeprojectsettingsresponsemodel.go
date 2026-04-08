@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAudioNativeProjectSettingsResponseModel struct {
 	// Whether the project is enabled.
 	Enabled bool `json:"enabled"`
 	// The ID of the latest snapshot of the project.
-	SnapshotID optionalnullable.OptionalNullable[string] `json:"snapshot_id,omitzero"`
+	SnapshotID *string `json:"snapshot_id,omitzero"`
 	// The settings of the project.
-	Settings optionalnullable.OptionalNullable[AudioNativeProjectSettingsResponseModel] `json:"settings,omitzero"`
+	Settings *AudioNativeProjectSettingsResponseModel `json:"settings,omitzero"`
 }
 
 func (g GetAudioNativeProjectSettingsResponseModel) MarshalJSON() ([]byte, error) {
@@ -34,14 +33,14 @@ func (g *GetAudioNativeProjectSettingsResponseModel) GetEnabled() bool {
 	return g.Enabled
 }
 
-func (g *GetAudioNativeProjectSettingsResponseModel) GetSnapshotID() optionalnullable.OptionalNullable[string] {
+func (g *GetAudioNativeProjectSettingsResponseModel) GetSnapshotID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.SnapshotID
 }
 
-func (g *GetAudioNativeProjectSettingsResponseModel) GetSettings() optionalnullable.OptionalNullable[AudioNativeProjectSettingsResponseModel] {
+func (g *GetAudioNativeProjectSettingsResponseModel) GetSettings() *AudioNativeProjectSettingsResponseModel {
 	if g == nil {
 		return nil
 	}

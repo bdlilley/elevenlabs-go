@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,9 +11,9 @@ type PlayDTMFResultSuccessModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"play_dtmf_success" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status    *string                                   `const:"success" json:"status"`
-	DtmfTones string                                    `json:"dtmf_tones"`
-	Reason    optionalnullable.OptionalNullable[string] `json:"reason,omitzero"`
+	status    *string `const:"success" json:"status"`
+	DtmfTones string  `json:"dtmf_tones"`
+	Reason    *string `json:"reason,omitzero"`
 }
 
 func (p PlayDTMFResultSuccessModel) MarshalJSON() ([]byte, error) {
@@ -43,7 +42,7 @@ func (p *PlayDTMFResultSuccessModel) GetDtmfTones() string {
 	return p.DtmfTones
 }
 
-func (p *PlayDTMFResultSuccessModel) GetReason() optionalnullable.OptionalNullable[string] {
+func (p *PlayDTMFResultSuccessModel) GetReason() *string {
 	if p == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseDependentAgentsResponseModelAgentType string
@@ -92,7 +91,7 @@ func (u GetKnowledgeBaseDependentAgentsResponseModelAgent) MarshalJSON() ([]byte
 type GetKnowledgeBaseDependentAgentsResponseModel struct {
 	Agents     []GetKnowledgeBaseDependentAgentsResponseModelAgent `json:"agents"`
 	Branches   []DependentBranchInfo                               `json:"branches,omitzero"`
-	NextCursor optionalnullable.OptionalNullable[string]           `json:"next_cursor,omitzero"`
+	NextCursor *string                                             `json:"next_cursor,omitzero"`
 	HasMore    bool                                                `json:"has_more"`
 }
 
@@ -121,7 +120,7 @@ func (g *GetKnowledgeBaseDependentAgentsResponseModel) GetBranches() []Dependent
 	return g.Branches
 }
 
-func (g *GetKnowledgeBaseDependentAgentsResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetKnowledgeBaseDependentAgentsResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

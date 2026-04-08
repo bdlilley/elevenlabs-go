@@ -4,24 +4,23 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationalConfigAPIModelWorkflowOverrideInput struct {
 	// Configuration for conversational transcription
-	Asr optionalnullable.OptionalNullable[ASRConversationalConfigWorkflowOverride] `json:"asr,omitzero"`
+	Asr *ASRConversationalConfigWorkflowOverride `json:"asr,omitzero"`
 	// Configuration for turn detection
-	Turn optionalnullable.OptionalNullable[TurnConfigWorkflowOverride] `json:"turn,omitzero"`
+	Turn *TurnConfigWorkflowOverride `json:"turn,omitzero"`
 	// Configuration for conversational text to speech
-	Tts optionalnullable.OptionalNullable[TTSConversationalConfigWorkflowOverrideInput] `json:"tts,omitzero"`
+	Tts *TTSConversationalConfigWorkflowOverrideInput `json:"tts,omitzero"`
 	// Configuration for conversational events
-	Conversation optionalnullable.OptionalNullable[ConversationConfigWorkflowOverride] `json:"conversation,omitzero"`
+	Conversation *ConversationConfigWorkflowOverride `json:"conversation,omitzero"`
 	// Language presets for conversations
-	LanguagePresets optionalnullable.OptionalNullable[map[string]LanguagePresetInput] `json:"language_presets,omitzero"`
+	LanguagePresets map[string]LanguagePresetInput `json:"language_presets,omitzero"`
 	// Configuration for voice activity detection
-	Vad optionalnullable.OptionalNullable[VADConfigWorkflowOverride] `json:"vad,omitzero"`
+	Vad *VADConfigWorkflowOverride `json:"vad,omitzero"`
 	// Agent specific configuration
-	Agent optionalnullable.OptionalNullable[AgentConfigAPIModelWorkflowOverrideInput] `json:"agent,omitzero"`
+	Agent *AgentConfigAPIModelWorkflowOverrideInput `json:"agent,omitzero"`
 }
 
 func (c ConversationalConfigAPIModelWorkflowOverrideInput) MarshalJSON() ([]byte, error) {
@@ -35,49 +34,49 @@ func (c *ConversationalConfigAPIModelWorkflowOverrideInput) UnmarshalJSON(data [
 	return nil
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetAsr() optionalnullable.OptionalNullable[ASRConversationalConfigWorkflowOverride] {
+func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetAsr() *ASRConversationalConfigWorkflowOverride {
 	if c == nil {
 		return nil
 	}
 	return c.Asr
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetTurn() optionalnullable.OptionalNullable[TurnConfigWorkflowOverride] {
+func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetTurn() *TurnConfigWorkflowOverride {
 	if c == nil {
 		return nil
 	}
 	return c.Turn
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetTts() optionalnullable.OptionalNullable[TTSConversationalConfigWorkflowOverrideInput] {
+func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetTts() *TTSConversationalConfigWorkflowOverrideInput {
 	if c == nil {
 		return nil
 	}
 	return c.Tts
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetConversation() optionalnullable.OptionalNullable[ConversationConfigWorkflowOverride] {
+func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetConversation() *ConversationConfigWorkflowOverride {
 	if c == nil {
 		return nil
 	}
 	return c.Conversation
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetLanguagePresets() optionalnullable.OptionalNullable[map[string]LanguagePresetInput] {
+func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetLanguagePresets() map[string]LanguagePresetInput {
 	if c == nil {
 		return nil
 	}
 	return c.LanguagePresets
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetVad() optionalnullable.OptionalNullable[VADConfigWorkflowOverride] {
+func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetVad() *VADConfigWorkflowOverride {
 	if c == nil {
 		return nil
 	}
 	return c.Vad
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetAgent() optionalnullable.OptionalNullable[AgentConfigAPIModelWorkflowOverrideInput] {
+func (c *ConversationalConfigAPIModelWorkflowOverrideInput) GetAgent() *AgentConfigAPIModelWorkflowOverrideInput {
 	if c == nil {
 		return nil
 	}

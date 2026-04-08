@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AutoSyncInfo struct {
@@ -15,7 +14,7 @@ type AutoSyncInfo struct {
 	// Number of consecutive sync failures
 	ConsecFailures *int64 `default:"0" json:"consec_failures"`
 	// Unix timestamp for the next scheduled sync or None (in case of folders)
-	NextRefreshBy optionalnullable.OptionalNullable[int64] `json:"next_refresh_by,omitzero"`
+	NextRefreshBy *int64 `json:"next_refresh_by,omitzero"`
 }
 
 func (a AutoSyncInfo) MarshalJSON() ([]byte, error) {
@@ -50,7 +49,7 @@ func (a *AutoSyncInfo) GetConsecFailures() *int64 {
 	return a.ConsecFailures
 }
 
-func (a *AutoSyncInfo) GetNextRefreshBy() optionalnullable.OptionalNullable[int64] {
+func (a *AutoSyncInfo) GetNextRefreshBy() *int64 {
 	if a == nil {
 		return nil
 	}

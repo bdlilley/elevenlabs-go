@@ -2,14 +2,10 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type EnvironmentVariablesListResponse struct {
-	EnvironmentVariables []EnvironmentVariableResponse             `json:"environment_variables"`
-	NextCursor           optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
-	HasMore              bool                                      `json:"has_more"`
+	EnvironmentVariables []EnvironmentVariableResponse `json:"environment_variables"`
+	NextCursor           *string                       `json:"next_cursor,omitzero"`
+	HasMore              bool                          `json:"has_more"`
 }
 
 func (e *EnvironmentVariablesListResponse) GetEnvironmentVariables() []EnvironmentVariableResponse {
@@ -19,7 +15,7 @@ func (e *EnvironmentVariablesListResponse) GetEnvironmentVariables() []Environme
 	return e.EnvironmentVariables
 }
 
-func (e *EnvironmentVariablesListResponse) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (e *EnvironmentVariablesListResponse) GetNextCursor() *string {
 	if e == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // Sort - Which field to sort by, one of 'created_at_unix' or 'name'.
@@ -39,13 +38,13 @@ func (e *Sort) UnmarshalJSON(data []byte) error {
 
 type GetPronunciationDictionariesMetadataRequest struct {
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// How many pronunciation dictionaries to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Which field to sort by, one of 'created_at_unix' or 'name'.
-	Sort optionalnullable.OptionalNullable[Sort] `queryParam:"style=form,explode=true,name=sort"`
+	Sort *Sort `queryParam:"style=form,explode=true,name=sort"`
 	// Which direction to sort the voices in. 'ascending' or 'descending'.
-	SortDirection optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=sort_direction"`
+	SortDirection *string `queryParam:"style=form,explode=true,name=sort_direction"`
 }
 
 func (g GetPronunciationDictionariesMetadataRequest) MarshalJSON() ([]byte, error) {
@@ -59,7 +58,7 @@ func (g *GetPronunciationDictionariesMetadataRequest) UnmarshalJSON(data []byte)
 	return nil
 }
 
-func (g *GetPronunciationDictionariesMetadataRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetPronunciationDictionariesMetadataRequest) GetCursor() *string {
 	if g == nil {
 		return nil
 	}
@@ -73,14 +72,14 @@ func (g *GetPronunciationDictionariesMetadataRequest) GetPageSize() *int64 {
 	return g.PageSize
 }
 
-func (g *GetPronunciationDictionariesMetadataRequest) GetSort() optionalnullable.OptionalNullable[Sort] {
+func (g *GetPronunciationDictionariesMetadataRequest) GetSort() *Sort {
 	if g == nil {
 		return nil
 	}
 	return g.Sort
 }
 
-func (g *GetPronunciationDictionariesMetadataRequest) GetSortDirection() optionalnullable.OptionalNullable[string] {
+func (g *GetPronunciationDictionariesMetadataRequest) GetSortDirection() *string {
 	if g == nil {
 		return nil
 	}

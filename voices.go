@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -35,7 +34,7 @@ func newVoices(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *
 
 // GetVoices - List Voices
 // Returns a list of all available voices for a user.
-func (s *Voices) GetVoices(ctx context.Context, showLegacy optionalnullable.OptionalNullable[bool], opts ...operations.Option) (*operations.GetVoicesResponse, error) {
+func (s *Voices) GetVoices(ctx context.Context, showLegacy *bool, opts ...operations.Option) (*operations.GetVoicesResponse, error) {
 	request := operations.GetVoicesRequest{
 		ShowLegacy: showLegacy,
 	}

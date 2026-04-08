@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type PaymentIntentStatus string
 
 const (
@@ -64,13 +60,13 @@ type InvoiceResponseModel struct {
 	// The amount due in cents.
 	AmountDueCents int64 `json:"amount_due_cents"`
 	// The subtotal amount in cents before tax (exclusive of tax and discounts).
-	SubtotalCents optionalnullable.OptionalNullable[int64] `json:"subtotal_cents,omitzero"`
+	SubtotalCents *int64 `json:"subtotal_cents,omitzero"`
 	// The tax amount in cents.
-	TaxCents optionalnullable.OptionalNullable[int64] `json:"tax_cents,omitzero"`
+	TaxCents *int64 `json:"tax_cents,omitzero"`
 	// Deprecated. Use [discounts] instead. The discount applied to the invoice. E.g. [20.0f] for 20% off.
-	DiscountPercentOff optionalnullable.OptionalNullable[float64] `json:"discount_percent_off,omitzero"`
+	DiscountPercentOff *float64 `json:"discount_percent_off,omitzero"`
 	// Deprecated. Use [discounts] instead. The discount applied to the invoice. E.g. [20.0f] for 20 cents off.
-	DiscountAmountOff optionalnullable.OptionalNullable[float64] `json:"discount_amount_off,omitzero"`
+	DiscountAmountOff *float64 `json:"discount_amount_off,omitzero"`
 	// The discounts applied to the invoice.
 	Discounts []DiscountResponseModel `json:"discounts"`
 	// The Unix timestamp of the next payment attempt. -1 when there is no next payment attempt.
@@ -88,28 +84,28 @@ func (i *InvoiceResponseModel) GetAmountDueCents() int64 {
 	return i.AmountDueCents
 }
 
-func (i *InvoiceResponseModel) GetSubtotalCents() optionalnullable.OptionalNullable[int64] {
+func (i *InvoiceResponseModel) GetSubtotalCents() *int64 {
 	if i == nil {
 		return nil
 	}
 	return i.SubtotalCents
 }
 
-func (i *InvoiceResponseModel) GetTaxCents() optionalnullable.OptionalNullable[int64] {
+func (i *InvoiceResponseModel) GetTaxCents() *int64 {
 	if i == nil {
 		return nil
 	}
 	return i.TaxCents
 }
 
-func (i *InvoiceResponseModel) GetDiscountPercentOff() optionalnullable.OptionalNullable[float64] {
+func (i *InvoiceResponseModel) GetDiscountPercentOff() *float64 {
 	if i == nil {
 		return nil
 	}
 	return i.DiscountPercentOff
 }
 
-func (i *InvoiceResponseModel) GetDiscountAmountOff() optionalnullable.OptionalNullable[float64] {
+func (i *InvoiceResponseModel) GetDiscountAmountOff() *float64 {
 	if i == nil {
 		return nil
 	}

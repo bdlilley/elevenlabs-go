@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -307,7 +306,7 @@ type WorkflowPhoneNumberNodeModelInput struct {
 	TransferDestination WorkflowPhoneNumberNodeModelInputTransferDestination `json:"transfer_destination"`
 	TransferType        *TransferTypeEnum                                    `default:"conference" json:"transfer_type"`
 	// DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause.
-	PostDialDigits optionalnullable.OptionalNullable[WorkflowPhoneNumberNodeModelInputPostDialDigits] `json:"post_dial_digits,omitzero"`
+	PostDialDigits *WorkflowPhoneNumberNodeModelInputPostDialDigits `json:"post_dial_digits,omitzero"`
 }
 
 func (w WorkflowPhoneNumberNodeModelInput) MarshalJSON() ([]byte, error) {
@@ -376,7 +375,7 @@ func (w *WorkflowPhoneNumberNodeModelInput) GetTransferType() *TransferTypeEnum 
 	return w.TransferType
 }
 
-func (w *WorkflowPhoneNumberNodeModelInput) GetPostDialDigits() optionalnullable.OptionalNullable[WorkflowPhoneNumberNodeModelInputPostDialDigits] {
+func (w *WorkflowPhoneNumberNodeModelInput) GetPostDialDigits() *WorkflowPhoneNumberNodeModelInputPostDialDigits {
 	if w == nil {
 		return nil
 	}
@@ -385,20 +384,14 @@ func (w *WorkflowPhoneNumberNodeModelInput) GetPostDialDigits() optionalnullable
 
 func (w *WorkflowPhoneNumberNodeModelInput) GetPostDialDigitsDynamic() *PostDialDigitsDynamicVariable {
 	if v := w.GetPostDialDigits(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.PostDialDigitsDynamicVariable
-		}
-		return nil
+		return v.PostDialDigitsDynamicVariable
 	}
 	return nil
 }
 
 func (w *WorkflowPhoneNumberNodeModelInput) GetPostDialDigitsStatic() *PostDialDigitsStatic {
 	if v := w.GetPostDialDigits(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.PostDialDigitsStatic
-		}
-		return nil
+		return v.PostDialDigitsStatic
 	}
 	return nil
 }

@@ -42,7 +42,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -69,14 +68,14 @@ func main() {
             },
         ),
         DurationScale: components.TheDurationOfTheGeneratedPodcastThisVariesDependingOnTheFormatVoiceAndLanguageShort.ToPointer(),
-        Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-        Intro: optionalnullable.From(elevenlabsgo.Pointer("Welcome to the podcast.")),
-        Outro: optionalnullable.From(elevenlabsgo.Pointer("Thank you for listening!")),
-        InstructionsPrompt: optionalnullable.From(elevenlabsgo.Pointer("Ensure the podcast remains factual, accurate and appropriate for all audiences.")),
-        Highlights: optionalnullable.From(elevenlabsgo.Pointer([]string{
+        Language: elevenlabsgo.Pointer("en"),
+        Intro: elevenlabsgo.Pointer("Welcome to the podcast."),
+        Outro: elevenlabsgo.Pointer("Thank you for listening!"),
+        InstructionsPrompt: elevenlabsgo.Pointer("Ensure the podcast remains factual, accurate and appropriate for all audiences."),
+        Highlights: []string{
             "Emphasize the importance of AI on education",
-        })),
-    }, optionalnullable.From[string](nil))
+        },
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -92,7 +91,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
 | `body`                                                                                                               | [components.BodyCreatePodcastV1StudioPodcastsPost](../../models/components/bodycreatepodcastv1studiopodcastspost.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
-| `safetyIdentifier`                                                                                                   | optionalnullable.OptionalNullable[`string`]                                                                          | :heavy_minus_sign:                                                                                                   | Used for moderation. Your workspace must be allowlisted to use this feature.                                         |
+| `safetyIdentifier`                                                                                                   | `*string`                                                                                                            | :heavy_minus_sign:                                                                                                   | Used for moderation. Your workspace must be allowlisted to use this feature.                                         |
 | `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
 
 ### Response
@@ -232,7 +231,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -246,29 +244,29 @@ func main() {
 
     res, err := s.Studio.AddProject(ctx, components.BodyCreateStudioProjectV1StudioProjectsPost{
         Name: "Project 1",
-        DefaultTitleVoiceID: optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")),
-        DefaultParagraphVoiceID: optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")),
-        DefaultModelID: optionalnullable.From(elevenlabsgo.Pointer("eleven_multilingual_v2")),
-        FromURL: optionalnullable.From(elevenlabsgo.Pointer("https://blog.elevenlabs.io/the_first_ai_that_can_laugh/")),
+        DefaultTitleVoiceID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
+        DefaultParagraphVoiceID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
+        DefaultModelID: elevenlabsgo.Pointer("eleven_multilingual_v2"),
+        FromURL: elevenlabsgo.Pointer("https://blog.elevenlabs.io/the_first_ai_that_can_laugh/"),
         FromContentJSON: elevenlabsgo.Pointer("[{\"name\": \"Chapter A\", \"blocks\": [{\"sub_type\": \"p\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"A\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"B\", \"type\": \"tts_node\"}]}, {\"sub_type\": \"h1\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"C\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"D\", \"type\": \"tts_node\"}]}]}, {\"name\": \"Chapter B\", \"blocks\": [{\"sub_type\": \"p\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"E\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"F\", \"type\": \"tts_node\"}]}, {\"sub_type\": \"h2\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"G\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"H\", \"type\": \"tts_node\"}]}]}]"),
-        Title: optionalnullable.From(elevenlabsgo.Pointer("Romeo and Juliet")),
-        Author: optionalnullable.From(elevenlabsgo.Pointer("William Shakespeare")),
-        Description: optionalnullable.From(elevenlabsgo.Pointer("A tragic love story between two young lovers.")),
+        Title: elevenlabsgo.Pointer("Romeo and Juliet"),
+        Author: elevenlabsgo.Pointer("William Shakespeare"),
+        Description: elevenlabsgo.Pointer("A tragic love story between two young lovers."),
         Genres: []string{
             "Romance",
             "Drama",
         },
-        TargetAudience: optionalnullable.From(elevenlabsgo.Pointer(components.BodyCreateStudioProjectV1StudioProjectsPostTargetAudienceAdult)),
-        Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-        ContentType: optionalnullable.From(elevenlabsgo.Pointer("Book")),
-        OriginalPublicationDate: optionalnullable.From(elevenlabsgo.Pointer("1597-01-01")),
-        MatureContent: optionalnullable.From(elevenlabsgo.Pointer(false)),
-        IsbnNumber: optionalnullable.From(elevenlabsgo.Pointer("0-306-40615-2")),
+        TargetAudience: components.BodyCreateStudioProjectV1StudioProjectsPostTargetAudienceAdult.ToPointer(),
+        Language: elevenlabsgo.Pointer("en"),
+        ContentType: elevenlabsgo.Pointer("Book"),
+        OriginalPublicationDate: elevenlabsgo.Pointer("1597-01-01"),
+        MatureContent: elevenlabsgo.Pointer(false),
+        IsbnNumber: elevenlabsgo.Pointer("0-306-40615-2"),
         PronunciationDictionaryLocators: []string{
             "{\"pronunciation_dictionary_id\": \"21m00Tcm4TlvDq8ikWAM\", \"version_id\": \"BdF0s0aZ3oFoKnDYdTox\"}",
         },
-        Fiction: optionalnullable.From(elevenlabsgo.Pointer(components.BodyCreateStudioProjectV1StudioProjectsPostFictionFiction)),
-        SourceType: optionalnullable.From(elevenlabsgo.Pointer(components.BodyCreateStudioProjectV1StudioProjectsPostSourceTypeBook)),
+        Fiction: components.BodyCreateStudioProjectV1StudioProjectsPostFictionFiction.ToPointer(),
+        SourceType: components.BodyCreateStudioProjectV1StudioProjectsPostSourceTypeBook.ToPointer(),
         VoiceSettings: []string{
             "{\"voice_id\": \"21m00Tcm4TlvDq8ikWAM\", \"stability\": 0.7, \"similarity_boost\": 0.8, \"style\": 0.5, \"speed\": 1.0, \"use_speaker_boost\": true}",
         },
@@ -314,7 +312,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -325,7 +322,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Studio.GetProjectByID(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
+    res, err := s.Studio.GetProjectByID(ctx, "21m00Tcm4TlvDq8ikWAM", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -341,7 +338,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `projectID`                                              | `string`                                                 | :heavy_check_mark:                                       | The ID of the Studio project.                            | 21m00Tcm4TlvDq8ikWAM                                     |
-| `shareID`                                                | optionalnullable.OptionalNullable[`string`]              | :heavy_minus_sign:                                       | The share ID of the project                              |                                                          |
+| `shareID`                                                | `*string`                                                | :heavy_minus_sign:                                       | The share ID of the project                              |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -368,7 +365,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -384,9 +380,9 @@ func main() {
         Name: "Project 1",
         DefaultTitleVoiceID: "21m00Tcm4TlvDq8ikWAM",
         DefaultParagraphVoiceID: "21m00Tcm4TlvDq8ikWAM",
-        Title: optionalnullable.From(elevenlabsgo.Pointer("Romeo and Juliet")),
-        Author: optionalnullable.From(elevenlabsgo.Pointer("William Shakespeare")),
-        IsbnNumber: optionalnullable.From(elevenlabsgo.Pointer("0-306-40615-2")),
+        Title: elevenlabsgo.Pointer("Romeo and Juliet"),
+        Author: elevenlabsgo.Pointer("William Shakespeare"),
+        IsbnNumber: elevenlabsgo.Pointer("0-306-40615-2"),
     })
     if err != nil {
         log.Fatal(err)
@@ -482,7 +478,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -495,7 +490,7 @@ func main() {
     )
 
     res, err := s.Studio.EditProjectContent(ctx, "21m00Tcm4TlvDq8ikWAM", &components.BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost{
-        FromURL: optionalnullable.From(elevenlabsgo.Pointer("https://blog.elevenlabs.io/the_first_ai_that_can_laugh/")),
+        FromURL: elevenlabsgo.Pointer("https://blog.elevenlabs.io/the_first_ai_that_can_laugh/"),
         FromContentJSON: elevenlabsgo.Pointer("[{\"name\": \"Chapter A\", \"blocks\": [{\"sub_type\": \"p\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"A\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"B\", \"type\": \"tts_node\"}]}, {\"sub_type\": \"h1\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"C\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"D\", \"type\": \"tts_node\"}]}]}, {\"name\": \"Chapter B\", \"blocks\": [{\"sub_type\": \"p\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"E\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"F\", \"type\": \"tts_node\"}]}, {\"sub_type\": \"h2\", \"nodes\": [{\"voice_id\": \"6lCwbsX1yVjD49QmpkT0\", \"text\": \"G\", \"type\": \"tts_node\"}, {\"voice_id\": \"6lCwbsX1yVjD49QmpkT1\", \"text\": \"H\", \"type\": \"tts_node\"}]}]}]"),
     })
     if err != nil {
@@ -856,7 +851,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -870,7 +864,7 @@ func main() {
 
     res, err := s.Studio.AddChapter(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyCreateChapterV1StudioProjectsProjectIDChaptersPost{
         Name: "Chapter 1",
-        FromURL: optionalnullable.From(elevenlabsgo.Pointer("https://blog.elevenlabs.io/the_first_ai_that_can_laugh/")),
+        FromURL: elevenlabsgo.Pointer("https://blog.elevenlabs.io/the_first_ai_that_can_laugh/"),
     })
     if err != nil {
         log.Fatal(err)
@@ -967,7 +961,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -980,7 +973,7 @@ func main() {
     )
 
     res, err := s.Studio.EditChapter(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", &components.BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost{
-        Name: optionalnullable.From(elevenlabsgo.Pointer("Chapter 1")),
+        Name: elevenlabsgo.Pointer("Chapter 1"),
     })
     if err != nil {
         log.Fatal(err)

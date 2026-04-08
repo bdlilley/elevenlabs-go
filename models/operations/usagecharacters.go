@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UsageCharactersRequest struct {
@@ -20,7 +19,7 @@ type UsageCharactersRequest struct {
 	// How to aggregate usage data over time. Can be "hour", "day", "week", "month", or "cumulative".
 	AggregationInterval *components.UsageAggregationInterval `queryParam:"style=form,explode=true,name=aggregation_interval"`
 	// Aggregation bucket size in seconds. Overrides the aggregation interval.
-	AggregationBucketSize optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=aggregation_bucket_size"`
+	AggregationBucketSize *int64 `queryParam:"style=form,explode=true,name=aggregation_bucket_size"`
 	// Which metric to aggregate.
 	Metric *components.MetricType `queryParam:"style=form,explode=true,name=metric"`
 }
@@ -71,7 +70,7 @@ func (u *UsageCharactersRequest) GetAggregationInterval() *components.UsageAggre
 	return u.AggregationInterval
 }
 
-func (u *UsageCharactersRequest) GetAggregationBucketSize() optionalnullable.OptionalNullable[int64] {
+func (u *UsageCharactersRequest) GetAggregationBucketSize() *int64 {
 	if u == nil {
 		return nil
 	}

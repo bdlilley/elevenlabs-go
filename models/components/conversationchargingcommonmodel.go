@@ -4,19 +4,18 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationChargingCommonModel struct {
-	DevDiscount            *bool                                      `default:"false" json:"dev_discount"`
-	IsBurst                *bool                                      `default:"false" json:"is_burst"`
-	Tier                   optionalnullable.OptionalNullable[string]  `json:"tier,omitzero"`
-	LlmUsage               *LLMCategoryUsage                          `json:"llm_usage,omitzero"`
-	LlmPrice               optionalnullable.OptionalNullable[float64] `json:"llm_price,omitzero"`
-	LlmCharge              optionalnullable.OptionalNullable[int64]   `json:"llm_charge,omitzero"`
-	CallCharge             optionalnullable.OptionalNullable[int64]   `json:"call_charge,omitzero"`
-	FreeMinutesConsumed    *float64                                   `default:"0" json:"free_minutes_consumed"`
-	FreeLlmDollarsConsumed *float64                                   `default:"0" json:"free_llm_dollars_consumed"`
+	DevDiscount            *bool             `default:"false" json:"dev_discount"`
+	IsBurst                *bool             `default:"false" json:"is_burst"`
+	Tier                   *string           `json:"tier,omitzero"`
+	LlmUsage               *LLMCategoryUsage `json:"llm_usage,omitzero"`
+	LlmPrice               *float64          `json:"llm_price,omitzero"`
+	LlmCharge              *int64            `json:"llm_charge,omitzero"`
+	CallCharge             *int64            `json:"call_charge,omitzero"`
+	FreeMinutesConsumed    *float64          `default:"0" json:"free_minutes_consumed"`
+	FreeLlmDollarsConsumed *float64          `default:"0" json:"free_llm_dollars_consumed"`
 }
 
 func (c ConversationChargingCommonModel) MarshalJSON() ([]byte, error) {
@@ -44,7 +43,7 @@ func (c *ConversationChargingCommonModel) GetIsBurst() *bool {
 	return c.IsBurst
 }
 
-func (c *ConversationChargingCommonModel) GetTier() optionalnullable.OptionalNullable[string] {
+func (c *ConversationChargingCommonModel) GetTier() *string {
 	if c == nil {
 		return nil
 	}
@@ -58,21 +57,21 @@ func (c *ConversationChargingCommonModel) GetLlmUsage() *LLMCategoryUsage {
 	return c.LlmUsage
 }
 
-func (c *ConversationChargingCommonModel) GetLlmPrice() optionalnullable.OptionalNullable[float64] {
+func (c *ConversationChargingCommonModel) GetLlmPrice() *float64 {
 	if c == nil {
 		return nil
 	}
 	return c.LlmPrice
 }
 
-func (c *ConversationChargingCommonModel) GetLlmCharge() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationChargingCommonModel) GetLlmCharge() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.LlmCharge
 }
 
-func (c *ConversationChargingCommonModel) GetCallCharge() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationChargingCommonModel) GetCallCharge() *int64 {
 	if c == nil {
 		return nil
 	}

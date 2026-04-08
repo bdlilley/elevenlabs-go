@@ -2,13 +2,9 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type PostAgentAvatarResponseModel struct {
-	AgentID   string                                    `json:"agent_id"`
-	AvatarURL optionalnullable.OptionalNullable[string] `json:"avatar_url,omitzero"`
+	AgentID   string  `json:"agent_id"`
+	AvatarURL *string `json:"avatar_url,omitzero"`
 }
 
 func (p *PostAgentAvatarResponseModel) GetAgentID() string {
@@ -18,7 +14,7 @@ func (p *PostAgentAvatarResponseModel) GetAgentID() string {
 	return p.AgentID
 }
 
-func (p *PostAgentAvatarResponseModel) GetAvatarURL() optionalnullable.OptionalNullable[string] {
+func (p *PostAgentAvatarResponseModel) GetAvatarURL() *string {
 	if p == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryTranscriptToolCallCommonModelInputToolDetailsType string
@@ -138,12 +137,12 @@ func (u ConversationHistoryTranscriptToolCallCommonModelInputToolDetails) Marsha
 }
 
 type ConversationHistoryTranscriptToolCallCommonModelInput struct {
-	Type              optionalnullable.OptionalNullable[ToolType]                                                         `json:"type,omitzero"`
-	RequestID         string                                                                                              `json:"request_id"`
-	ToolName          string                                                                                              `json:"tool_name"`
-	ParamsAsJSON      string                                                                                              `json:"params_as_json"`
-	ToolHasBeenCalled bool                                                                                                `json:"tool_has_been_called"`
-	ToolDetails       optionalnullable.OptionalNullable[ConversationHistoryTranscriptToolCallCommonModelInputToolDetails] `json:"tool_details,omitzero"`
+	Type              *ToolType                                                         `json:"type,omitzero"`
+	RequestID         string                                                            `json:"request_id"`
+	ToolName          string                                                            `json:"tool_name"`
+	ParamsAsJSON      string                                                            `json:"params_as_json"`
+	ToolHasBeenCalled bool                                                              `json:"tool_has_been_called"`
+	ToolDetails       *ConversationHistoryTranscriptToolCallCommonModelInputToolDetails `json:"tool_details,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptToolCallCommonModelInput) MarshalJSON() ([]byte, error) {
@@ -157,7 +156,7 @@ func (c *ConversationHistoryTranscriptToolCallCommonModelInput) UnmarshalJSON(da
 	return nil
 }
 
-func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetType() optionalnullable.OptionalNullable[ToolType] {
+func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetType() *ToolType {
 	if c == nil {
 		return nil
 	}
@@ -192,7 +191,7 @@ func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolHasBeenCa
 	return c.ToolHasBeenCalled
 }
 
-func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolDetails() optionalnullable.OptionalNullable[ConversationHistoryTranscriptToolCallCommonModelInputToolDetails] {
+func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolDetails() *ConversationHistoryTranscriptToolCallCommonModelInputToolDetails {
 	if c == nil {
 		return nil
 	}
@@ -201,40 +200,28 @@ func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolDetails()
 
 func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolDetailsAPIIntegrationWebhook() *ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsInput {
 	if v := c.GetToolDetails(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsInput
-		}
-		return nil
+		return v.ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsInput
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolDetailsClient() *ConversationHistoryTranscriptToolCallClientDetails {
 	if v := c.GetToolDetails(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ConversationHistoryTranscriptToolCallClientDetails
-		}
-		return nil
+		return v.ConversationHistoryTranscriptToolCallClientDetails
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolDetailsMcp() *ConversationHistoryTranscriptToolCallMCPDetails {
 	if v := c.GetToolDetails(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ConversationHistoryTranscriptToolCallMCPDetails
-		}
-		return nil
+		return v.ConversationHistoryTranscriptToolCallMCPDetails
 	}
 	return nil
 }
 
 func (c *ConversationHistoryTranscriptToolCallCommonModelInput) GetToolDetailsWebhook() *ConversationHistoryTranscriptToolCallWebhookDetails {
 	if v := c.GetToolDetails(); v != nil {
-		if actualValue, ok := v.Get(); ok && actualValue != nil {
-			return actualValue.ConversationHistoryTranscriptToolCallWebhookDetails
-		}
-		return nil
+		return v.ConversationHistoryTranscriptToolCallWebhookDetails
 	}
 	return nil
 }

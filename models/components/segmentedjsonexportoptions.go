@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SegmentedJSONExportOptions struct {
 	IncludeSpeakers   *bool `default:"true" json:"include_speakers"`
 	IncludeTimestamps *bool `default:"true" json:"include_timestamps"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	format                      string                                     `const:"segmented_json" json:"format"`
-	SegmentOnSilenceLongerThanS optionalnullable.OptionalNullable[float64] `json:"segment_on_silence_longer_than_s,omitzero"`
-	MaxSegmentDurationS         optionalnullable.OptionalNullable[float64] `json:"max_segment_duration_s,omitzero"`
-	MaxSegmentChars             optionalnullable.OptionalNullable[int64]   `json:"max_segment_chars,omitzero"`
+	format                      string   `const:"segmented_json" json:"format"`
+	SegmentOnSilenceLongerThanS *float64 `json:"segment_on_silence_longer_than_s,omitzero"`
+	MaxSegmentDurationS         *float64 `json:"max_segment_duration_s,omitzero"`
+	MaxSegmentChars             *int64   `json:"max_segment_chars,omitzero"`
 }
 
 func (s SegmentedJSONExportOptions) MarshalJSON() ([]byte, error) {
@@ -46,21 +45,21 @@ func (s *SegmentedJSONExportOptions) GetFormat() string {
 	return "segmented_json"
 }
 
-func (s *SegmentedJSONExportOptions) GetSegmentOnSilenceLongerThanS() optionalnullable.OptionalNullable[float64] {
+func (s *SegmentedJSONExportOptions) GetSegmentOnSilenceLongerThanS() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.SegmentOnSilenceLongerThanS
 }
 
-func (s *SegmentedJSONExportOptions) GetMaxSegmentDurationS() optionalnullable.OptionalNullable[float64] {
+func (s *SegmentedJSONExportOptions) GetMaxSegmentDurationS() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.MaxSegmentDurationS
 }
 
-func (s *SegmentedJSONExportOptions) GetMaxSegmentChars() optionalnullable.OptionalNullable[int64] {
+func (s *SegmentedJSONExportOptions) GetMaxSegmentChars() *int64 {
 	if s == nil {
 		return nil
 	}

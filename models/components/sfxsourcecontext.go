@@ -4,17 +4,16 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 // SfxSourceContext - Context for sound effect clips.
 type SfxSourceContext struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	sourceType                   *string                                           `const:"sfx" json:"source_type"`
-	SoundGenerationHistoryItemID optionalnullable.OptionalNullable[string]         `json:"sound_generation_history_item_id,omitzero"`
-	Text                         optionalnullable.OptionalNullable[string]         `json:"text,omitzero"`
-	GenerationConfig             optionalnullable.OptionalNullable[map[string]any] `json:"generation_config,omitzero"`
+	sourceType                   *string        `const:"sfx" json:"source_type"`
+	SoundGenerationHistoryItemID *string        `json:"sound_generation_history_item_id,omitzero"`
+	Text                         *string        `json:"text,omitzero"`
+	GenerationConfig             map[string]any `json:"generation_config,omitzero"`
 }
 
 func (s SfxSourceContext) MarshalJSON() ([]byte, error) {
@@ -32,21 +31,21 @@ func (s *SfxSourceContext) GetSourceType() *string {
 	return types.Pointer("sfx")
 }
 
-func (s *SfxSourceContext) GetSoundGenerationHistoryItemID() optionalnullable.OptionalNullable[string] {
+func (s *SfxSourceContext) GetSoundGenerationHistoryItemID() *string {
 	if s == nil {
 		return nil
 	}
 	return s.SoundGenerationHistoryItemID
 }
 
-func (s *SfxSourceContext) GetText() optionalnullable.OptionalNullable[string] {
+func (s *SfxSourceContext) GetText() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Text
 }
 
-func (s *SfxSourceContext) GetGenerationConfig() optionalnullable.OptionalNullable[map[string]any] {
+func (s *SfxSourceContext) GetGenerationConfig() map[string]any {
 	if s == nil {
 		return nil
 	}

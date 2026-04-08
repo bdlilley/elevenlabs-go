@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,9 +11,9 @@ type VoiceMailDetectionResultSuccessModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	resultType *string `const:"voicemail_detection_success" json:"result_type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	status           *string                                   `const:"success" json:"status"`
-	VoicemailMessage optionalnullable.OptionalNullable[string] `json:"voicemail_message,omitzero"`
-	Reason           optionalnullable.OptionalNullable[string] `json:"reason,omitzero"`
+	status           *string `const:"success" json:"status"`
+	VoicemailMessage *string `json:"voicemail_message,omitzero"`
+	Reason           *string `json:"reason,omitzero"`
 }
 
 func (v VoiceMailDetectionResultSuccessModel) MarshalJSON() ([]byte, error) {
@@ -36,14 +35,14 @@ func (v *VoiceMailDetectionResultSuccessModel) GetStatus() *string {
 	return types.Pointer("success")
 }
 
-func (v *VoiceMailDetectionResultSuccessModel) GetVoicemailMessage() optionalnullable.OptionalNullable[string] {
+func (v *VoiceMailDetectionResultSuccessModel) GetVoicemailMessage() *string {
 	if v == nil {
 		return nil
 	}
 	return v.VoicemailMessage
 }
 
-func (v *VoiceMailDetectionResultSuccessModel) GetReason() optionalnullable.OptionalNullable[string] {
+func (v *VoiceMailDetectionResultSuccessModel) GetReason() *string {
 	if v == nil {
 		return nil
 	}

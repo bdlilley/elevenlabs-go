@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AgentBranchSummary struct {
@@ -17,11 +16,11 @@ type AgentBranchSummary struct {
 	IsArchived       bool                    `json:"is_archived"`
 	ProtectionStatus *BranchProtectionStatus `default:"writer_perms_required" json:"protection_status"`
 	// Access information for the branch
-	AccessInfo optionalnullable.OptionalNullable[ResourceAccessInfo] `json:"access_info,omitzero"`
+	AccessInfo *ResourceAccessInfo `json:"access_info,omitzero"`
 	// Percentage of traffic live on the branch
 	CurrentLivePercentage *float64 `default:"0" json:"current_live_percentage"`
 	// ID of the parent branch
-	ParentBranchID optionalnullable.OptionalNullable[string] `json:"parent_branch_id,omitzero"`
+	ParentBranchID *string `json:"parent_branch_id,omitzero"`
 	// Whether a draft exists for the branch
 	DraftExists *bool `default:"false" json:"draft_exists"`
 }
@@ -93,7 +92,7 @@ func (a *AgentBranchSummary) GetProtectionStatus() *BranchProtectionStatus {
 	return a.ProtectionStatus
 }
 
-func (a *AgentBranchSummary) GetAccessInfo() optionalnullable.OptionalNullable[ResourceAccessInfo] {
+func (a *AgentBranchSummary) GetAccessInfo() *ResourceAccessInfo {
 	if a == nil {
 		return nil
 	}
@@ -107,7 +106,7 @@ func (a *AgentBranchSummary) GetCurrentLivePercentage() *float64 {
 	return a.CurrentLivePercentage
 }
 
-func (a *AgentBranchSummary) GetParentBranchID() optionalnullable.OptionalNullable[string] {
+func (a *AgentBranchSummary) GetParentBranchID() *string {
 	if a == nil {
 		return nil
 	}

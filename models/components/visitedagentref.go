@@ -2,14 +2,10 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 // VisitedAgentRef - An agent (and optional branch) that participated in the call, in first-seen transcript order.
 type VisitedAgentRef struct {
-	AgentID  string                                    `json:"agent_id"`
-	BranchID optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
+	AgentID  string  `json:"agent_id"`
+	BranchID *string `json:"branch_id,omitzero"`
 }
 
 func (v *VisitedAgentRef) GetAgentID() string {
@@ -19,7 +15,7 @@ func (v *VisitedAgentRef) GetAgentID() string {
 	return v.AgentID
 }
 
-func (v *VisitedAgentRef) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (v *VisitedAgentRef) GetBranchID() *string {
 	if v == nil {
 		return nil
 	}

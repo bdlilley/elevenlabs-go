@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type BodyInviteUserV1WorkspaceInvitesAddPost struct {
@@ -13,11 +12,11 @@ type BodyInviteUserV1WorkspaceInvitesAddPost struct {
 	// The workspace permission of the user. This is deprecated, use `seat_type` instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	WorkspacePermission optionalnullable.OptionalNullable[string] `json:"workspace_permission,omitzero"`
+	WorkspacePermission *string `json:"workspace_permission,omitzero"`
 	// The seat type of the user
-	SeatType optionalnullable.OptionalNullable[SeatType] `json:"seat_type,omitzero"`
+	SeatType *SeatType `json:"seat_type,omitzero"`
 	// The group ids of the user
-	GroupIds optionalnullable.OptionalNullable[[]string] `json:"group_ids,omitzero"`
+	GroupIds []string `json:"group_ids,omitzero"`
 }
 
 func (b BodyInviteUserV1WorkspaceInvitesAddPost) MarshalJSON() ([]byte, error) {
@@ -38,21 +37,21 @@ func (b *BodyInviteUserV1WorkspaceInvitesAddPost) GetEmail() string {
 	return b.Email
 }
 
-func (b *BodyInviteUserV1WorkspaceInvitesAddPost) GetWorkspacePermission() optionalnullable.OptionalNullable[string] {
+func (b *BodyInviteUserV1WorkspaceInvitesAddPost) GetWorkspacePermission() *string {
 	if b == nil {
 		return nil
 	}
 	return b.WorkspacePermission
 }
 
-func (b *BodyInviteUserV1WorkspaceInvitesAddPost) GetSeatType() optionalnullable.OptionalNullable[SeatType] {
+func (b *BodyInviteUserV1WorkspaceInvitesAddPost) GetSeatType() *SeatType {
 	if b == nil {
 		return nil
 	}
 	return b.SeatType
 }
 
-func (b *BodyInviteUserV1WorkspaceInvitesAddPost) GetGroupIds() optionalnullable.OptionalNullable[[]string] {
+func (b *BodyInviteUserV1WorkspaceInvitesAddPost) GetGroupIds() []string {
 	if b == nil {
 		return nil
 	}

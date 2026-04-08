@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type VerificationAttemptResponseModel struct {
@@ -19,7 +18,7 @@ type VerificationAttemptResponseModel struct {
 	// The Levenshtein distance of the verification attempt.
 	LevenshteinDistance float64 `json:"levenshtein_distance"`
 	// The recording of the verification attempt.
-	Recording optionalnullable.OptionalNullable[RecordingResponseModel] `json:"recording,omitzero"`
+	Recording *RecordingResponseModel `json:"recording,omitzero"`
 }
 
 func (v VerificationAttemptResponseModel) MarshalJSON() ([]byte, error) {
@@ -68,7 +67,7 @@ func (v *VerificationAttemptResponseModel) GetLevenshteinDistance() float64 {
 	return v.LevenshteinDistance
 }
 
-func (v *VerificationAttemptResponseModel) GetRecording() optionalnullable.OptionalNullable[RecordingResponseModel] {
+func (v *VerificationAttemptResponseModel) GetRecording() *RecordingResponseModel {
 	if v == nil {
 		return nil
 	}

@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // SortMode - Sort mode for listing tests. Use 'folders_first' to place folders before tests.
@@ -39,19 +38,19 @@ func (e *SortMode) UnmarshalJSON(data []byte) error {
 
 type ListChatResponseTestsRouteRequest struct {
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// How many Tests to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Search query to filter tests by name.
-	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Filter by parent folder ID. Use 'root' to get items in the root folder.
-	ParentFolderID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=parent_folder_id"`
+	ParentFolderID *string `queryParam:"style=form,explode=true,name=parent_folder_id"`
 	// If present, the endpoint will return only tests/folders of the given types.
-	Types optionalnullable.OptionalNullable[[]components.TestType] `queryParam:"style=form,explode=true,name=types"`
+	Types []components.TestType `queryParam:"style=form,explode=true,name=types"`
 	// Deprecated. Use the `types` query param and include `folder` instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	IncludeFolders optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=include_folders"`
+	IncludeFolders *bool `queryParam:"style=form,explode=true,name=include_folders"`
 	// Sort mode for listing tests. Use 'folders_first' to place folders before tests.
 	SortMode *SortMode `default:"default" queryParam:"style=form,explode=true,name=sort_mode"`
 }
@@ -67,7 +66,7 @@ func (l *ListChatResponseTestsRouteRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (l *ListChatResponseTestsRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (l *ListChatResponseTestsRouteRequest) GetCursor() *string {
 	if l == nil {
 		return nil
 	}
@@ -81,28 +80,28 @@ func (l *ListChatResponseTestsRouteRequest) GetPageSize() *int64 {
 	return l.PageSize
 }
 
-func (l *ListChatResponseTestsRouteRequest) GetSearch() optionalnullable.OptionalNullable[string] {
+func (l *ListChatResponseTestsRouteRequest) GetSearch() *string {
 	if l == nil {
 		return nil
 	}
 	return l.Search
 }
 
-func (l *ListChatResponseTestsRouteRequest) GetParentFolderID() optionalnullable.OptionalNullable[string] {
+func (l *ListChatResponseTestsRouteRequest) GetParentFolderID() *string {
 	if l == nil {
 		return nil
 	}
 	return l.ParentFolderID
 }
 
-func (l *ListChatResponseTestsRouteRequest) GetTypes() optionalnullable.OptionalNullable[[]components.TestType] {
+func (l *ListChatResponseTestsRouteRequest) GetTypes() []components.TestType {
 	if l == nil {
 		return nil
 	}
 	return l.Types
 }
 
-func (l *ListChatResponseTestsRouteRequest) GetIncludeFolders() optionalnullable.OptionalNullable[bool] {
+func (l *ListChatResponseTestsRouteRequest) GetIncludeFolders() *bool {
 	if l == nil {
 		return nil
 	}

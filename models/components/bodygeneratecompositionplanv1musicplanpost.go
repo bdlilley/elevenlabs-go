@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // BodyGenerateCompositionPlanV1MusicPlanPostModelID - The model to use for the generation.
@@ -37,9 +36,9 @@ type BodyGenerateCompositionPlanV1MusicPlanPost struct {
 	// A simple text prompt to compose a plan from.
 	Prompt string `json:"prompt"`
 	// The length of the composition plan to generate in milliseconds. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt.
-	MusicLengthMs optionalnullable.OptionalNullable[int64] `json:"music_length_ms,omitzero"`
+	MusicLengthMs *int64 `json:"music_length_ms,omitzero"`
 	// An optional composition plan to use as a source for the new composition plan.
-	SourceCompositionPlan optionalnullable.OptionalNullable[MusicPrompt] `json:"source_composition_plan,omitzero"`
+	SourceCompositionPlan *MusicPrompt `json:"source_composition_plan,omitzero"`
 	// The model to use for the generation.
 	ModelID *BodyGenerateCompositionPlanV1MusicPlanPostModelID `default:"music_v1" json:"model_id"`
 }
@@ -62,14 +61,14 @@ func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetPrompt() string {
 	return b.Prompt
 }
 
-func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetMusicLengthMs() optionalnullable.OptionalNullable[int64] {
+func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetMusicLengthMs() *int64 {
 	if b == nil {
 		return nil
 	}
 	return b.MusicLengthMs
 }
 
-func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetSourceCompositionPlan() optionalnullable.OptionalNullable[MusicPrompt] {
+func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetSourceCompositionPlan() *MusicPrompt {
 	if b == nil {
 		return nil
 	}

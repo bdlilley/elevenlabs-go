@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type LLMInfoModelInput struct {
@@ -22,9 +21,9 @@ type LLMInfoModelInput struct {
 	// Whether the model supports calling multiple tools in parallel.
 	SupportsParallelToolCalls bool `json:"supports_parallel_tool_calls"`
 	// Available reasoning effort levels for this model. Null if the model does not support configurable reasoning.
-	AvailableReasoningEfforts optionalnullable.OptionalNullable[[]LLMReasoningEffort] `json:"available_reasoning_efforts,omitzero"`
+	AvailableReasoningEfforts []LLMReasoningEffort `json:"available_reasoning_efforts,omitzero"`
 	// Deprecation information if this model is deprecated or scheduled for deprecation. Null if the model is not affected.
-	DeprecationInfo optionalnullable.OptionalNullable[LLMDeprecationInfoModel] `json:"deprecation_info,omitzero"`
+	DeprecationInfo *LLMDeprecationInfoModel `json:"deprecation_info,omitzero"`
 }
 
 func (l LLMInfoModelInput) MarshalJSON() ([]byte, error) {
@@ -87,14 +86,14 @@ func (l *LLMInfoModelInput) GetSupportsParallelToolCalls() bool {
 	return l.SupportsParallelToolCalls
 }
 
-func (l *LLMInfoModelInput) GetAvailableReasoningEfforts() optionalnullable.OptionalNullable[[]LLMReasoningEffort] {
+func (l *LLMInfoModelInput) GetAvailableReasoningEfforts() []LLMReasoningEffort {
 	if l == nil {
 		return nil
 	}
 	return l.AvailableReasoningEfforts
 }
 
-func (l *LLMInfoModelInput) GetDeprecationInfo() optionalnullable.OptionalNullable[LLMDeprecationInfoModel] {
+func (l *LLMInfoModelInput) GetDeprecationInfo() *LLMDeprecationInfoModel {
 	if l == nil {
 		return nil
 	}

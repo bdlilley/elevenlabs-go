@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConversationHistoryFeedbackCommonModel struct {
-	Type         optionalnullable.OptionalNullable[ConversationFeedbackType] `json:"type,omitzero"`
-	OverallScore optionalnullable.OptionalNullable[UserFeedbackScore]        `json:"overall_score,omitzero"`
-	Likes        *int64                                                      `default:"0" json:"likes"`
-	Dislikes     *int64                                                      `default:"0" json:"dislikes"`
-	Rating       optionalnullable.OptionalNullable[int64]                    `json:"rating,omitzero"`
-	Comment      optionalnullable.OptionalNullable[string]                   `json:"comment,omitzero"`
+	Type         *ConversationFeedbackType `json:"type,omitzero"`
+	OverallScore *UserFeedbackScore        `json:"overall_score,omitzero"`
+	Likes        *int64                    `default:"0" json:"likes"`
+	Dislikes     *int64                    `default:"0" json:"dislikes"`
+	Rating       *int64                    `json:"rating,omitzero"`
+	Comment      *string                   `json:"comment,omitzero"`
 }
 
 func (c ConversationHistoryFeedbackCommonModel) MarshalJSON() ([]byte, error) {
@@ -27,14 +26,14 @@ func (c *ConversationHistoryFeedbackCommonModel) UnmarshalJSON(data []byte) erro
 	return nil
 }
 
-func (c *ConversationHistoryFeedbackCommonModel) GetType() optionalnullable.OptionalNullable[ConversationFeedbackType] {
+func (c *ConversationHistoryFeedbackCommonModel) GetType() *ConversationFeedbackType {
 	if c == nil {
 		return nil
 	}
 	return c.Type
 }
 
-func (c *ConversationHistoryFeedbackCommonModel) GetOverallScore() optionalnullable.OptionalNullable[UserFeedbackScore] {
+func (c *ConversationHistoryFeedbackCommonModel) GetOverallScore() *UserFeedbackScore {
 	if c == nil {
 		return nil
 	}
@@ -55,14 +54,14 @@ func (c *ConversationHistoryFeedbackCommonModel) GetDislikes() *int64 {
 	return c.Dislikes
 }
 
-func (c *ConversationHistoryFeedbackCommonModel) GetRating() optionalnullable.OptionalNullable[int64] {
+func (c *ConversationHistoryFeedbackCommonModel) GetRating() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.Rating
 }
 
-func (c *ConversationHistoryFeedbackCommonModel) GetComment() optionalnullable.OptionalNullable[string] {
+func (c *ConversationHistoryFeedbackCommonModel) GetComment() *string {
 	if c == nil {
 		return nil
 	}

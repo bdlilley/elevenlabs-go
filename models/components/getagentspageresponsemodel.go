@@ -2,15 +2,11 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type GetAgentsPageResponseModel struct {
 	// A list of agents and their metadata
 	Agents []AgentSummaryResponseModel `json:"agents"`
 	// The next cursor to paginate through the agents
-	NextCursor optionalnullable.OptionalNullable[string] `json:"next_cursor,omitzero"`
+	NextCursor *string `json:"next_cursor,omitzero"`
 	// Whether there are more agents to paginate through
 	HasMore bool `json:"has_more"`
 }
@@ -22,7 +18,7 @@ func (g *GetAgentsPageResponseModel) GetAgents() []AgentSummaryResponseModel {
 	return g.Agents
 }
 
-func (g *GetAgentsPageResponseModel) GetNextCursor() optionalnullable.OptionalNullable[string] {
+func (g *GetAgentsPageResponseModel) GetNextCursor() *string {
 	if g == nil {
 		return nil
 	}

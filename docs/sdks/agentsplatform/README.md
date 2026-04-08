@@ -133,7 +133,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -144,7 +143,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetConversationSignedLink(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer(false), optionalnullable.From[string](nil), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetConversationSignedLink(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer(false), nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -161,8 +160,8 @@ func main() {
 | `ctx`                                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                                 | :heavy_check_mark:                                                                                                    | The context to use for the request.                                                                                   |                                                                                                                       |
 | `agentID`                                                                                                             | `string`                                                                                                              | :heavy_check_mark:                                                                                                    | The id of the agent you're taking the action on.                                                                      | 21m00Tcm4TlvDq8ikWAM                                                                                                  |
 | `includeConversationID`                                                                                               | `*bool`                                                                                                               | :heavy_minus_sign:                                                                                                    | Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again. |                                                                                                                       |
-| `branchID`                                                                                                            | optionalnullable.OptionalNullable[`string`]                                                                           | :heavy_minus_sign:                                                                                                    | The ID of the branch to use                                                                                           |                                                                                                                       |
-| `environment`                                                                                                         | optionalnullable.OptionalNullable[`string`]                                                                           | :heavy_minus_sign:                                                                                                    | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.  |                                                                                                                       |
+| `branchID`                                                                                                            | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The ID of the branch to use                                                                                           |                                                                                                                       |
+| `environment`                                                                                                         | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.  |                                                                                                                       |
 | `opts`                                                                                                                | [][operations.Option](../../models/operations/option.md)                                                              | :heavy_minus_sign:                                                                                                    | The options for this request.                                                                                         |                                                                                                                       |
 
 ### Response
@@ -191,7 +190,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -202,7 +200,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetSignedURLDeprecated(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer(false), optionalnullable.From[string](nil), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetSignedURLDeprecated(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer(false), nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -219,8 +217,8 @@ func main() {
 | `ctx`                                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                                 | :heavy_check_mark:                                                                                                    | The context to use for the request.                                                                                   |                                                                                                                       |
 | `agentID`                                                                                                             | `string`                                                                                                              | :heavy_check_mark:                                                                                                    | The id of the agent you're taking the action on.                                                                      | 21m00Tcm4TlvDq8ikWAM                                                                                                  |
 | `includeConversationID`                                                                                               | `*bool`                                                                                                               | :heavy_minus_sign:                                                                                                    | Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again. |                                                                                                                       |
-| `branchID`                                                                                                            | optionalnullable.OptionalNullable[`string`]                                                                           | :heavy_minus_sign:                                                                                                    | The ID of the branch to use                                                                                           |                                                                                                                       |
-| `environment`                                                                                                         | optionalnullable.OptionalNullable[`string`]                                                                           | :heavy_minus_sign:                                                                                                    | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.  |                                                                                                                       |
+| `branchID`                                                                                                            | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The ID of the branch to use                                                                                           |                                                                                                                       |
+| `environment`                                                                                                         | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.  |                                                                                                                       |
 | `opts`                                                                                                                | [][operations.Option](../../models/operations/option.md)                                                              | :heavy_minus_sign:                                                                                                    | The options for this request.                                                                                         |                                                                                                                       |
 
 ### Response
@@ -247,7 +245,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -258,7 +255,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetLivekitToken(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), optionalnullable.From[string](nil), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetLivekitToken(ctx, "21m00Tcm4TlvDq8ikWAM", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -274,9 +271,9 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |                                                                                                                      |
 | `agentID`                                                                                                            | `string`                                                                                                             | :heavy_check_mark:                                                                                                   | The id of the agent you're taking the action on.                                                                     | 21m00Tcm4TlvDq8ikWAM                                                                                                 |
-| `participantName`                                                                                                    | optionalnullable.OptionalNullable[`string`]                                                                          | :heavy_minus_sign:                                                                                                   | Optional custom participant name. If not provided, user ID will be used                                              |                                                                                                                      |
-| `branchID`                                                                                                           | optionalnullable.OptionalNullable[`string`]                                                                          | :heavy_minus_sign:                                                                                                   | The ID of the branch to use                                                                                          |                                                                                                                      |
-| `environment`                                                                                                        | optionalnullable.OptionalNullable[`string`]                                                                          | :heavy_minus_sign:                                                                                                   | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'. |                                                                                                                      |
+| `participantName`                                                                                                    | `*string`                                                                                                            | :heavy_minus_sign:                                                                                                   | Optional custom participant name. If not provided, user ID will be used                                              |                                                                                                                      |
+| `branchID`                                                                                                           | `*string`                                                                                                            | :heavy_minus_sign:                                                                                                   | The ID of the branch to use                                                                                          |                                                                                                                      |
+| `environment`                                                                                                        | `*string`                                                                                                            | :heavy_minus_sign:                                                                                                   | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'. |                                                                                                                      |
 | `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |                                                                                                                      |
 
 ### Response
@@ -303,7 +300,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -319,31 +315,31 @@ func main() {
         AgentID: "<id>",
         AgentPhoneNumberID: "<id>",
         ToNumber: "<value>",
-        ConversationInitiationClientData: optionalnullable.From(&components.ConversationInitiationClientDataRequestInput{
+        ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
-                Turn: optionalnullable.From(&components.TurnConfigOverride{
-                    SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                        Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                    }),
-                }),
-                Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                    VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                    Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                    Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                    SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                }),
-                Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                    FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                    Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                    Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                        Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                        Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                        ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                        KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                    }),
-                }),
+                Turn: &components.TurnConfigOverride{
+                    SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                        Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                    },
+                },
+                Tts: &components.TTSConversationalConfigOverride{
+                    VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                    Stability: elevenlabsgo.Pointer[float64](0.5),
+                    Speed: elevenlabsgo.Pointer[float64](1.0),
+                    SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                },
+                Agent: &components.AgentConfigOverrideInput{
+                    FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                    Language: elevenlabsgo.Pointer("en"),
+                    Prompt: &components.PromptAgentAPIModelOverrideInput{
+                        Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                        Llm: components.LlmGemini20Flash001.ToPointer(),
+                        ToolIds: []string{},
+                        KnowledgeBase: []components.KnowledgeBaseLocator{},
+                    },
+                },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -386,7 +382,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -402,31 +397,31 @@ func main() {
         AgentID: "<id>",
         FromNumber: "<value>",
         ToNumber: "<value>",
-        ConversationInitiationClientData: optionalnullable.From(&components.ConversationInitiationClientDataRequestInput{
+        ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
-                Turn: optionalnullable.From(&components.TurnConfigOverride{
-                    SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                        Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                    }),
-                }),
-                Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                    VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                    Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                    Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                    SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                }),
-                Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                    FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                    Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                    Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                        Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                        Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                        ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                        KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                    }),
-                }),
+                Turn: &components.TurnConfigOverride{
+                    SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                        Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                    },
+                },
+                Tts: &components.TTSConversationalConfigOverride{
+                    VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                    Stability: elevenlabsgo.Pointer[float64](0.5),
+                    Speed: elevenlabsgo.Pointer[float64](1.0),
+                    SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                },
+                Agent: &components.AgentConfigOverrideInput{
+                    FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                    Language: elevenlabsgo.Pointer("en"),
+                    Prompt: &components.PromptAgentAPIModelOverrideInput{
+                        Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                        Llm: components.LlmGemini20Flash001.ToPointer(),
+                        ToolIds: []string{},
+                        KnowledgeBase: []components.KnowledgeBaseLocator{},
+                    },
+                },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -469,7 +464,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -487,31 +481,31 @@ func main() {
         WhatsappCallPermissionRequestTemplateName: "<value>",
         WhatsappCallPermissionRequestTemplateLanguageCode: "<value>",
         AgentID: "<id>",
-        ConversationInitiationClientData: optionalnullable.From(&components.ConversationInitiationClientDataRequestInput{
+        ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
-                Turn: optionalnullable.From(&components.TurnConfigOverride{
-                    SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                        Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                    }),
-                }),
-                Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                    VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                    Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                    Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                    SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                }),
-                Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                    FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                    Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                    Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                        Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                        Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                        ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                        KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                    }),
-                }),
+                Turn: &components.TurnConfigOverride{
+                    SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                        Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                    },
+                },
+                Tts: &components.TTSConversationalConfigOverride{
+                    VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                    Stability: elevenlabsgo.Pointer[float64](0.5),
+                    Speed: elevenlabsgo.Pointer[float64](1.0),
+                    SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                },
+                Agent: &components.AgentConfigOverrideInput{
+                    FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                    Language: elevenlabsgo.Pointer("en"),
+                    Prompt: &components.PromptAgentAPIModelOverrideInput{
+                        Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                        Llm: components.LlmGemini20Flash001.ToPointer(),
+                        ToolIds: []string{},
+                        KnowledgeBase: []components.KnowledgeBaseLocator{},
+                    },
+                },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -555,7 +549,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -573,31 +566,31 @@ func main() {
         TemplateLanguageCode: "<value>",
         TemplateParams: []components.TemplateParam{},
         AgentID: "<id>",
-        ConversationInitiationClientData: optionalnullable.From(&components.ConversationInitiationClientDataRequestInput{
+        ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
-                Turn: optionalnullable.From(&components.TurnConfigOverride{
-                    SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                        Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                    }),
-                }),
-                Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                    VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                    Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                    Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                    SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                }),
-                Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                    FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                    Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                    Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                        Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                        Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                        ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                        KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                    }),
-                }),
+                Turn: &components.TurnConfigOverride{
+                    SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                        Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                    },
+                },
+                Tts: &components.TTSConversationalConfigOverride{
+                    VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                    Stability: elevenlabsgo.Pointer[float64](0.5),
+                    Speed: elevenlabsgo.Pointer[float64](1.0),
+                    SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                },
+                Agent: &components.AgentConfigOverrideInput{
+                    FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                    Language: elevenlabsgo.Pointer("en"),
+                    Prompt: &components.PromptAgentAPIModelOverrideInput{
+                        Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                        Llm: components.LlmGemini20Flash001.ToPointer(),
+                        ToolIds: []string{},
+                        KnowledgeBase: []components.KnowledgeBaseLocator{},
+                    },
+                },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -641,7 +634,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -677,27 +669,27 @@ func main() {
             LanguagePresets: map[string]components.LanguagePresetInput{
                 "key": components.LanguagePresetInput{
                     Overrides: components.ConversationConfigClientOverrideInput{
-                        Turn: optionalnullable.From(&components.TurnConfigOverride{
-                            SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                                Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                            }),
-                        }),
-                        Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                            VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                            Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                            Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                            SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                        }),
-                        Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                            FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                            Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                            Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                                Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                                Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                                ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                                KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                            }),
-                        }),
+                        Turn: &components.TurnConfigOverride{
+                            SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                                Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                            },
+                        },
+                        Tts: &components.TTSConversationalConfigOverride{
+                            VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                            Stability: elevenlabsgo.Pointer[float64](0.5),
+                            Speed: elevenlabsgo.Pointer[float64](1.0),
+                            SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                        },
+                        Agent: &components.AgentConfigOverrideInput{
+                            FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                            Language: elevenlabsgo.Pointer("en"),
+                            Prompt: &components.PromptAgentAPIModelOverrideInput{
+                                Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                                Llm: components.LlmGemini20Flash001.ToPointer(),
+                                ToolIds: []string{},
+                                KnowledgeBase: []components.KnowledgeBaseLocator{},
+                            },
+                        },
                     },
                 },
             },
@@ -706,7 +698,7 @@ func main() {
                 FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
             },
         },
-        PlatformSettings: optionalnullable.From(&components.AgentPlatformSettingsRequestModel{
+        PlatformSettings: &components.AgentPlatformSettingsRequestModel{
             Evaluation: &components.EvaluationSettingsInput{
                 Criteria: []components.PromptEvaluationCriteria{
                     components.PromptEvaluationCriteria{
@@ -717,7 +709,7 @@ func main() {
                 },
             },
             Widget: &components.WidgetConfigInput{
-                CustomAvatarPath: optionalnullable.From(elevenlabsgo.Pointer("https://example.com/avatar.png")),
+                CustomAvatarPath: elevenlabsgo.Pointer("https://example.com/avatar.png"),
             },
             DataCollection: map[string]components.LiteralJSONSchemaProperty{
                 "key": components.LiteralJSONSchemaProperty{
@@ -730,20 +722,20 @@ func main() {
                 EnableConversationInitiationClientDataFromWebhook: elevenlabsgo.Pointer(true),
             },
             WorkspaceOverrides: &components.AgentWorkspaceOverridesInput{
-                ConversationInitiationClientDataWebhook: optionalnullable.From(&components.ConversationInitiationClientDataWebhook{
+                ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{
                     URL: "https://example.com/webhook",
                     RequestHeaders: map[string]components.ConversationInitiationClientDataWebhookRequestHeaders{
                         "Content-Type": components.CreateConversationInitiationClientDataWebhookRequestHeadersStr(
                             "application/json",
                         ),
                     },
-                }),
+                },
             },
             Testing: &components.AgentTestingSettings{
                 AttachedTests: []components.AttachedTestModel{
                     components.AttachedTestModel{
                         TestID: "test_123",
-                        WorkflowNodeID: optionalnullable.From(elevenlabsgo.Pointer("node_abc")),
+                        WorkflowNodeID: elevenlabsgo.Pointer("node_abc"),
                     },
                     components.AttachedTestModel{
                         TestID: "test_456",
@@ -758,63 +750,63 @@ func main() {
                     },
                 },
                 RequireOriginHeader: elevenlabsgo.Pointer(true),
-                ShareableToken: optionalnullable.From(elevenlabsgo.Pointer("1234567890")),
+                ShareableToken: elevenlabsgo.Pointer("1234567890"),
             },
             CallLimits: &components.AgentCallLimits{},
             Privacy: &components.PrivacyConfigInput{},
-        }),
+        },
         Workflow: &components.AgentWorkflowRequestModel{
             Edges: map[string]components.WorkflowEdgeModelInput{
                 "entry_to_tool_a": components.WorkflowEdgeModelInput{
                     Source: "entry_node",
                     Target: "tool_node_a",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                         components.WorkflowUnconditionalModelInput{},
-                    ))),
+                    )),
                 },
                 "start_to_entry": components.WorkflowEdgeModelInput{
                     Source: "start_node",
                     Target: "entry_node",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                         components.WorkflowUnconditionalModelInput{},
-                    ))),
+                    )),
                 },
                 "tool_a_to_failure": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "failure_node",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_a_to_tool_b": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "tool_node_b",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                         components.WorkflowUnconditionalModelInput{},
-                    ))),
+                    )),
                 },
                 "tool_b_to_agent_transfer": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_transfer",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                         components.WorkflowResultConditionModelInput{
                             Successful: true,
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_conversation": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_conversation",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                         components.WorkflowUnconditionalModelInput{},
-                    ))),
+                    )),
                 },
                 "tool_b_to_end": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_end",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
                         components.WorkflowExpressionConditionModelInput{
                             Expression: components.CreateASTNodeInputStringLiteral(
                                 components.ASTStringNodeInput{
@@ -822,16 +814,16 @@ func main() {
                                 },
                             ),
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_phone": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_phone",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
             },
             Nodes: map[string]components.AgentWorkflowRequestModelNodes{
@@ -880,12 +872,12 @@ func main() {
                 ),
             },
         },
-        Name: optionalnullable.From(elevenlabsgo.Pointer("My agent")),
-        Tags: optionalnullable.From(elevenlabsgo.Pointer([]string{
+        Name: elevenlabsgo.Pointer("My agent"),
+        Tags: []string{
             "Customer Support",
             "Technical Help",
             "Eleven",
-        })),
+        },
     }, elevenlabsgo.Pointer(false))
     if err != nil {
         log.Fatal(err)
@@ -983,7 +975,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -994,7 +985,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", optionalnullable.From(elevenlabsgo.Pointer("agtvrsn_8901k4t9z5defmb8vh3e9361y7nj")), optionalnullable.From(elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t")))
+    res, err := s.AgentsPlatform.GetAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer("agtvrsn_8901k4t9z5defmb8vh3e9361y7nj"), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"))
     if err != nil {
         log.Fatal(err)
     }
@@ -1010,8 +1001,8 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
-| `versionID`                                              | optionalnullable.OptionalNullable[`string`]              | :heavy_minus_sign:                                       | The ID of the agent version to use                       | agtvrsn_8901k4t9z5defmb8vh3e9361y7nj                     |
-| `branchID`                                               | optionalnullable.OptionalNullable[`string`]              | :heavy_minus_sign:                                       | The ID of the branch to use                              | agtbranch_0901k4aafjxxfxt93gd841r7tv5t                   |
+| `versionID`                                              | `*string`                                                | :heavy_minus_sign:                                       | The ID of the agent version to use                       | agtvrsn_8901k4t9z5defmb8vh3e9361y7nj                     |
+| `branchID`                                               | `*string`                                                | :heavy_minus_sign:                                       | The ID of the branch to use                              | agtbranch_0901k4aafjxxfxt93gd841r7tv5t                   |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -1090,7 +1081,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -1102,76 +1092,76 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.PatchAgentSettingsRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), optionalnullable.From(elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t")), &components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch{
+    res, err := s.AgentsPlatform.PatchAgentSettingsRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"), &components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch{
         Workflow: &components.AgentWorkflowRequestModel{
             Edges: map[string]components.WorkflowEdgeModelInput{
                 "entry_to_tool_a": components.WorkflowEdgeModelInput{
                     Source: "entry_node",
                     Target: "tool_node_a",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                         components.WorkflowUnconditionalModelInput{},
-                    ))),
+                    )),
                 },
                 "start_to_entry": components.WorkflowEdgeModelInput{
                     Source: "start_node",
                     Target: "entry_node",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_a_to_failure": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "failure_node",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                         components.WorkflowUnconditionalModelInput{},
-                    ))),
+                    )),
                 },
                 "tool_a_to_tool_b": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "tool_node_b",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_agent_transfer": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_transfer",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                         components.WorkflowResultConditionModelInput{
                             Successful: false,
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_conversation": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_conversation",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_end": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_end",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                         components.WorkflowResultConditionModelInput{
                             Successful: false,
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_phone": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_phone",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                         components.WorkflowResultConditionModelInput{
                             Successful: true,
                         },
-                    ))),
+                    )),
                 },
             },
             Nodes: map[string]components.AgentWorkflowRequestModelNodes{
@@ -1208,12 +1198,12 @@ func main() {
                 ),
             },
         },
-        Name: optionalnullable.From(elevenlabsgo.Pointer("My agent")),
-        Tags: optionalnullable.From(elevenlabsgo.Pointer([]string{
+        Name: elevenlabsgo.Pointer("My agent"),
+        Tags: []string{
             "Customer Support",
             "Technical Help",
             "Eleven",
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -1231,7 +1221,7 @@ func main() {
 | `ctx`                                                                                                                                               | [context.Context](https://pkg.go.dev/context#Context)                                                                                               | :heavy_check_mark:                                                                                                                                  | The context to use for the request.                                                                                                                 |                                                                                                                                                     |
 | `agentID`                                                                                                                                           | `string`                                                                                                                                            | :heavy_check_mark:                                                                                                                                  | The id of an agent. This is returned on agent creation.                                                                                             | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                                                                                                  |
 | `enableVersioningIfNotEnabled`                                                                                                                      | `*bool`                                                                                                                                             | :heavy_minus_sign:                                                                                                                                  | Enable versioning for the agent, if not already enabled                                                                                             |                                                                                                                                                     |
-| `branchID`                                                                                                                                          | optionalnullable.OptionalNullable[`string`]                                                                                                         | :heavy_minus_sign:                                                                                                                                  | The ID of the branch to use                                                                                                                         | agtbranch_0901k4aafjxxfxt93gd841r7tv5t                                                                                                              |
+| `branchID`                                                                                                                                          | `*string`                                                                                                                                           | :heavy_minus_sign:                                                                                                                                  | The ID of the branch to use                                                                                                                         | agtbranch_0901k4aafjxxfxt93gd841r7tv5t                                                                                                              |
 | `body`                                                                                                                                              | [*components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch](../../models/components/bodypatchesanagentsettingsv1convaiagentsagentidpatch.md) | :heavy_minus_sign:                                                                                                                                  | N/A                                                                                                                                                 |                                                                                                                                                     |
 | `opts`                                                                                                                                              | [][operations.Option](../../models/operations/option.md)                                                                                            | :heavy_minus_sign:                                                                                                                                  | The options for this request.                                                                                                                       |                                                                                                                                                     |
 
@@ -1259,7 +1249,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -1270,7 +1259,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentWidgetRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetAgentWidgetRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -1286,7 +1275,7 @@ func main() {
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                                                                                           | :heavy_check_mark:                                                                                                                                              | The context to use for the request.                                                                                                                             |                                                                                                                                                                 |
 | `agentID`                                                                                                                                                       | `string`                                                                                                                                                        | :heavy_check_mark:                                                                                                                                              | The id of an agent. This is returned on agent creation.                                                                                                         | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                                                                                                              |
-| `conversationSignature`                                                                                                                                         | optionalnullable.OptionalNullable[`string`]                                                                                                                     | :heavy_minus_sign:                                                                                                                                              | An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint |                                                                                                                                                                 |
+| `conversationSignature`                                                                                                                                         | `*string`                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                              | An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint |                                                                                                                                                                 |
 | `opts`                                                                                                                                                          | [][operations.Option](../../models/operations/option.md)                                                                                                        | :heavy_minus_sign:                                                                                                                                              | The options for this request.                                                                                                                                   |                                                                                                                                                                 |
 
 ### Response
@@ -1430,7 +1419,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -1443,7 +1431,7 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.GetAgentsRoute(ctx, operations.GetAgentsRouteRequest{
-        Archived: optionalnullable.From(elevenlabsgo.Pointer(false)),
+        Archived: elevenlabsgo.Pointer(false),
     })
     if err != nil {
         log.Fatal(err)
@@ -1592,7 +1580,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -1605,7 +1592,7 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.DuplicateAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", &components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost{
-        Name: optionalnullable.From(elevenlabsgo.Pointer("My agent")),
+        Name: elevenlabsgo.Pointer("My agent"),
     })
     if err != nil {
         log.Fatal(err)
@@ -1650,7 +1637,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -1667,13 +1653,13 @@ func main() {
                 FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
             },
         },
-        ExtraEvaluationCriteria: optionalnullable.From(elevenlabsgo.Pointer([]components.PromptEvaluationCriteria{
+        ExtraEvaluationCriteria: []components.PromptEvaluationCriteria{
             components.PromptEvaluationCriteria{
                 ID: "1234567890",
                 Name: "Customer satisfaction check",
                 ConversationGoalPrompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
             },
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -1718,7 +1704,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -1735,13 +1720,13 @@ func main() {
                 FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
             },
         },
-        ExtraEvaluationCriteria: optionalnullable.From(elevenlabsgo.Pointer([]components.PromptEvaluationCriteria{
+        ExtraEvaluationCriteria: []components.PromptEvaluationCriteria{
             components.PromptEvaluationCriteria{
                 ID: "1234567890",
                 Name: "Customer satisfaction check",
                 ConversationGoalPrompt: "You are a helpful assistant that can answer questions about the topic of the conversation.",
             },
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -2059,7 +2044,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -2072,7 +2056,7 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.GetConversationHistoriesRoute(ctx, operations.GetConversationHistoriesRouteRequest{
-        AgentID: optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")),
+        AgentID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
     })
     if err != nil {
         log.Fatal(err)
@@ -2115,7 +2099,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -2128,7 +2111,7 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.GetConversationUsersRoute(ctx, operations.GetConversationUsersRouteRequest{
-        AgentID: optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")),
+        AgentID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
     })
     if err != nil {
         log.Fatal(err)
@@ -2328,7 +2311,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -2340,7 +2322,7 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.PostConversationFeedbackRoute(ctx, "21m00Tcm4TlvDq8ikWAM", components.ConversationFeedbackRequestModel{
-        Feedback: optionalnullable.From(elevenlabsgo.Pointer(components.UserFeedbackScoreLike)),
+        Feedback: components.UserFeedbackScoreLike.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -2384,7 +2366,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
@@ -2398,7 +2379,7 @@ func main() {
 
     res, err := s.AgentsPlatform.TextSearchConversationMessagesRoute(ctx, operations.TextSearchConversationMessagesRouteRequest{
         TextQuery: "refund policy",
-        AgentID: optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")),
+        AgentID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
     })
     if err != nil {
         log.Fatal(err)
@@ -2441,7 +2422,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -2452,7 +2432,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.SmartSearchConversationMessagesRoute(ctx, "Customer asking to cancel and get money back", optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")), elevenlabsgo.Pointer[int64](20), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.SmartSearchConversationMessagesRoute(ctx, "Customer asking to cancel and get money back", elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"), elevenlabsgo.Pointer[int64](20), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -2468,9 +2448,9 @@ func main() {
 | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |                                                                  |
 | `textQuery`                                                      | `string`                                                         | :heavy_check_mark:                                               | The search query text for semantic similarity matching           |                                                                  |
-| `agentID`                                                        | optionalnullable.OptionalNullable[`string`]                      | :heavy_minus_sign:                                               | The id of the agent you're taking the action on.                 | 21m00Tcm4TlvDq8ikWAM                                             |
+| `agentID`                                                        | `*string`                                                        | :heavy_minus_sign:                                               | The id of the agent you're taking the action on.                 | 21m00Tcm4TlvDq8ikWAM                                             |
 | `pageSize`                                                       | `*int64`                                                         | :heavy_minus_sign:                                               | Number of results per page. Max 50.                              |                                                                  |
-| `cursor`                                                         | optionalnullable.OptionalNullable[`string`]                      | :heavy_minus_sign:                                               | Used for fetching next page. Cursor is returned in the response. |                                                                  |
+| `cursor`                                                         | `*string`                                                        | :heavy_minus_sign:                                               | Used for fetching next page. Cursor is returned in the response. |                                                                  |
 | `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |                                                                  |
 
 ### Response
@@ -3007,7 +2987,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -3018,7 +2997,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetLiveCount(ctx, optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")))
+    res, err := s.AgentsPlatform.GetLiveCount(ctx, elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"))
     if err != nil {
         log.Fatal(err)
     }
@@ -3033,7 +3012,7 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `agentID`                                                | optionalnullable.OptionalNullable[`string`]              | :heavy_minus_sign:                                       | The id of an agent to restrict the analytics to.         | 21m00Tcm4TlvDq8ikWAM                                     |
+| `agentID`                                                | `*string`                                                | :heavy_minus_sign:                                       | The id of an agent to restrict the analytics to.         | 21m00Tcm4TlvDq8ikWAM                                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -3914,8 +3893,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
 
@@ -3926,7 +3903,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.SearchKnowledgeBaseContentRoute(ctx, "<value>", elevenlabsgo.Pointer[int64](30), optionalnullable.From[[]components.KnowledgeBaseDocumentType](nil), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.SearchKnowledgeBaseContentRoute(ctx, "<value>", elevenlabsgo.Pointer[int64](30), nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -3938,14 +3915,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                             | [context.Context](https://pkg.go.dev/context#Context)                                                                             | :heavy_check_mark:                                                                                                                | The context to use for the request.                                                                                               |
-| `query`                                                                                                                           | `string`                                                                                                                          | :heavy_check_mark:                                                                                                                | The search query text                                                                                                             |
-| `pageSize`                                                                                                                        | `*int64`                                                                                                                          | :heavy_minus_sign:                                                                                                                | How many documents to return at maximum. Can not exceed 100, defaults to 30.                                                      |
-| `types`                                                                                                                           | optionalnullable.OptionalNullable[[][components.KnowledgeBaseDocumentType](../../models/components/knowledgebasedocumenttype.md)] | :heavy_minus_sign:                                                                                                                | If present, the endpoint will return only documents of the given types.                                                           |
-| `cursor`                                                                                                                          | optionalnullable.OptionalNullable[`string`]                                                                                       | :heavy_minus_sign:                                                                                                                | Used for fetching next page. Cursor is returned in the response.                                                                  |
-| `opts`                                                                                                                            | [][operations.Option](../../models/operations/option.md)                                                                          | :heavy_minus_sign:                                                                                                                | The options for this request.                                                                                                     |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `query`                                                                                        | `string`                                                                                       | :heavy_check_mark:                                                                             | The search query text                                                                          |
+| `pageSize`                                                                                     | `*int64`                                                                                       | :heavy_minus_sign:                                                                             | How many documents to return at maximum. Can not exceed 100, defaults to 30.                   |
+| `types`                                                                                        | [][components.KnowledgeBaseDocumentType](../../models/components/knowledgebasedocumenttype.md) | :heavy_minus_sign:                                                                             | If present, the endpoint will return only documents of the given types.                        |
+| `cursor`                                                                                       | `*string`                                                                                      | :heavy_minus_sign:                                                                             | Used for fetching next page. Cursor is returned in the response.                               |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
@@ -3971,7 +3948,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -3982,7 +3958,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetKnowledgeBaseDependentAgents(ctx, "21m00Tcm4TlvDq8ikWAM", nil, elevenlabsgo.Pointer[int64](30), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetKnowledgeBaseDependentAgents(ctx, "21m00Tcm4TlvDq8ikWAM", nil, elevenlabsgo.Pointer[int64](30), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -4000,7 +3976,7 @@ func main() {
 | `documentationID`                                                                               | `string`                                                                                        | :heavy_check_mark:                                                                              | The id of a document from the knowledge base. This is returned on document addition.            | 21m00Tcm4TlvDq8ikWAM                                                                            |
 | `dependentType`                                                                                 | [*components.KnowledgeBaseDependentType](../../models/components/knowledgebasedependenttype.md) | :heavy_minus_sign:                                                                              | Type of dependent agents to return.                                                             |                                                                                                 |
 | `pageSize`                                                                                      | `*int64`                                                                                        | :heavy_minus_sign:                                                                              | How many documents to return at maximum. Can not exceed 100, defaults to 30.                    |                                                                                                 |
-| `cursor`                                                                                        | optionalnullable.OptionalNullable[`string`]                                                     | :heavy_minus_sign:                                                                              | Used for fetching next page. Cursor is returned in the response.                                |                                                                                                 |
+| `cursor`                                                                                        | `*string`                                                                                       | :heavy_minus_sign:                                                                              | Used for fetching next page. Cursor is returned in the response.                                |                                                                                                 |
 | `opts`                                                                                          | [][operations.Option](../../models/operations/option.md)                                        | :heavy_minus_sign:                                                                              | The options for this request.                                                                   |                                                                                                 |
 
 ### Response
@@ -4132,7 +4108,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -4143,7 +4118,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetDocumentationChunkFromKnowledgeBase(ctx, "21m00Tcm4TlvDq8ikWAM", "1", optionalnullable.From(elevenlabsgo.Pointer(components.EmbeddingModelEnumE5Mistral7bInstruct)))
+    res, err := s.AgentsPlatform.GetDocumentationChunkFromKnowledgeBase(ctx, "21m00Tcm4TlvDq8ikWAM", "1", components.EmbeddingModelEnumE5Mistral7bInstruct.ToPointer())
     if err != nil {
         log.Fatal(err)
     }
@@ -4155,13 +4130,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       | Example                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                             | [context.Context](https://pkg.go.dev/context#Context)                                                             | :heavy_check_mark:                                                                                                | The context to use for the request.                                                                               |                                                                                                                   |
-| `documentationID`                                                                                                 | `string`                                                                                                          | :heavy_check_mark:                                                                                                | The id of a document from the knowledge base. This is returned on document addition.                              | 21m00Tcm4TlvDq8ikWAM                                                                                              |
-| `chunkID`                                                                                                         | `string`                                                                                                          | :heavy_check_mark:                                                                                                | The id of a document RAG chunk from the knowledge base.                                                           | 1                                                                                                                 |
-| `embeddingModel`                                                                                                  | optionalnullable.OptionalNullable[[components.EmbeddingModelEnum](../../models/components/embeddingmodelenum.md)] | :heavy_minus_sign:                                                                                                | The embedding model used to retrieve the chunk.                                                                   |                                                                                                                   |
-| `opts`                                                                                                            | [][operations.Option](../../models/operations/option.md)                                                          | :heavy_minus_sign:                                                                                                | The options for this request.                                                                                     |                                                                                                                   |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |                                                                                      |
+| `documentationID`                                                                    | `string`                                                                             | :heavy_check_mark:                                                                   | The id of a document from the knowledge base. This is returned on document addition. | 21m00Tcm4TlvDq8ikWAM                                                                 |
+| `chunkID`                                                                            | `string`                                                                             | :heavy_check_mark:                                                                   | The id of a document RAG chunk from the knowledge base.                              | 1                                                                                    |
+| `embeddingModel`                                                                     | [*components.EmbeddingModelEnum](../../models/components/embeddingmodelenum.md)      | :heavy_minus_sign:                                                                   | The embedding model used to retrieve the chunk.                                      |                                                                                      |
+| `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
 
 ### Response
 
@@ -4497,7 +4472,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -4508,7 +4482,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetToolDependentAgentsRoute(ctx, "<id>", optionalnullable.From[string](nil), elevenlabsgo.Pointer[int64](30))
+    res, err := s.AgentsPlatform.GetToolDependentAgentsRoute(ctx, "<id>", nil, elevenlabsgo.Pointer[int64](30))
     if err != nil {
         log.Fatal(err)
     }
@@ -4524,7 +4498,7 @@ func main() {
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
 | `toolID`                                                                     | `string`                                                                     | :heavy_check_mark:                                                           | ID of the requested tool.                                                    |
-| `cursor`                                                                     | optionalnullable.OptionalNullable[`string`]                                  | :heavy_minus_sign:                                                           | Used for fetching next page. Cursor is returned in the response.             |
+| `cursor`                                                                     | `*string`                                                                    | :heavy_minus_sign:                                                           | Used for fetching next page. Cursor is returned in the response.             |
 | `pageSize`                                                                   | `*int64`                                                                     | :heavy_minus_sign:                                                           | How many documents to return at maximum. Can not exceed 100, defaults to 30. |
 | `opts`                                                                       | [][operations.Option](../../models/operations/option.md)                     | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
@@ -4604,7 +4578,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -4616,14 +4589,14 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.UpdateSettingsRoute(ctx, components.PatchConvAISettingsRequest{
-        ConversationInitiationClientDataWebhook: optionalnullable.From(&components.ConversationInitiationClientDataWebhook{
+        ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{
             URL: "https://example.com/webhook",
             RequestHeaders: map[string]components.ConversationInitiationClientDataWebhookRequestHeaders{
                 "Content-Type": components.CreateConversationInitiationClientDataWebhookRequestHeadersStr(
                     "application/json",
                 ),
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -4770,7 +4743,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -4781,7 +4753,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetSecretsRoute(ctx, optionalnullable.From[int64](nil), optionalnullable.From[int64](nil), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetSecretsRoute(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -4796,9 +4768,9 @@ func main() {
 | Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
-| `pageSize`                                                                                                     | optionalnullable.OptionalNullable[`int64`]                                                                     | :heavy_minus_sign:                                                                                             | How many documents to return at maximum. Can not exceed 100. If not provided, returns all secrets.             |
-| `dependencyLimit`                                                                                              | optionalnullable.OptionalNullable[`int64`]                                                                     | :heavy_minus_sign:                                                                                             | Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100. |
-| `cursor`                                                                                                       | optionalnullable.OptionalNullable[`string`]                                                                    | :heavy_minus_sign:                                                                                             | Used for fetching next page. Cursor is returned in the response.                                               |
+| `pageSize`                                                                                                     | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | How many documents to return at maximum. Can not exceed 100. If not provided, returns all secrets.             |
+| `dependencyLimit`                                                                                              | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100. |
+| `cursor`                                                                                                       | `*string`                                                                                                      | :heavy_minus_sign:                                                                                             | Used for fetching next page. Cursor is returned in the response.                                               |
 | `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
 ### Response
@@ -4991,7 +4963,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -5002,7 +4973,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetSecretDependenciesRoute(ctx, "<id>", components.SecretDependencyResourceTypeAgents, elevenlabsgo.Pointer[int64](20), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetSecretDependenciesRoute(ctx, "<id>", components.SecretDependencyResourceTypeAgents, elevenlabsgo.Pointer[int64](20), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -5028,7 +4999,7 @@ func main() {
 | `secretID`                                                                                         | `string`                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
 | `resourceType`                                                                                     | [components.SecretDependencyResourceType](../../models/components/secretdependencyresourcetype.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
 | `pageSize`                                                                                         | `*int64`                                                                                           | :heavy_minus_sign:                                                                                 | How many dependency items to return per page.                                                      |
-| `cursor`                                                                                           | optionalnullable.OptionalNullable[`string`]                                                        | :heavy_minus_sign:                                                                                 | Used for fetching next page. Cursor is returned in the response.                                   |
+| `cursor`                                                                                           | `*string`                                                                                          | :heavy_minus_sign:                                                                                 | Used for fetching next page. Cursor is returned in the response.                                   |
 | `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
 ### Response
@@ -5112,7 +5083,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -5123,7 +5093,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetWorkspaceBatchCalls(ctx, elevenlabsgo.Pointer[int64](100), optionalnullable.From[string](nil))
+    res, err := s.AgentsPlatform.GetWorkspaceBatchCalls(ctx, elevenlabsgo.Pointer[int64](100), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -5139,7 +5109,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `limit`                                                  | `*int64`                                                 | :heavy_minus_sign:                                       | N/A                                                      |
-| `lastDoc`                                                | optionalnullable.OptionalNullable[`string`]              | :heavy_minus_sign:                                       | N/A                                                      |
+| `lastDoc`                                                | `*string`                                                | :heavy_minus_sign:                                       | N/A                                                      |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -5374,7 +5344,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
@@ -5390,31 +5359,31 @@ func main() {
         AgentID: "<id>",
         AgentPhoneNumberID: "<id>",
         ToNumber: "<value>",
-        ConversationInitiationClientData: optionalnullable.From(&components.ConversationInitiationClientDataRequestInput{
+        ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
-                Turn: optionalnullable.From(&components.TurnConfigOverride{
-                    SoftTimeoutConfig: optionalnullable.From(&components.SoftTimeoutConfigOverride{
-                        Message: optionalnullable.From(elevenlabsgo.Pointer("Hhmmmm...yeah.")),
-                    }),
-                }),
-                Tts: optionalnullable.From(&components.TTSConversationalConfigOverride{
-                    VoiceID: optionalnullable.From(elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal")),
-                    Stability: optionalnullable.From(elevenlabsgo.Pointer[float64](0.5)),
-                    Speed: optionalnullable.From(elevenlabsgo.Pointer[float64](1.0)),
-                    SimilarityBoost: optionalnullable.From(elevenlabsgo.Pointer[float64](0.8)),
-                }),
-                Agent: optionalnullable.From(&components.AgentConfigOverrideInput{
-                    FirstMessage: optionalnullable.From(elevenlabsgo.Pointer("Hello, how can I help you today?")),
-                    Language: optionalnullable.From(elevenlabsgo.Pointer("en")),
-                    Prompt: optionalnullable.From(&components.PromptAgentAPIModelOverrideInput{
-                        Prompt: optionalnullable.From(elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation.")),
-                        Llm: optionalnullable.From(elevenlabsgo.Pointer(components.LlmGemini20Flash001)),
-                        ToolIds: optionalnullable.From(elevenlabsgo.Pointer([]string{})),
-                        KnowledgeBase: optionalnullable.From(elevenlabsgo.Pointer([]components.KnowledgeBaseLocator{})),
-                    }),
-                }),
+                Turn: &components.TurnConfigOverride{
+                    SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                        Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                    },
+                },
+                Tts: &components.TTSConversationalConfigOverride{
+                    VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                    Stability: elevenlabsgo.Pointer[float64](0.5),
+                    Speed: elevenlabsgo.Pointer[float64](1.0),
+                    SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                },
+                Agent: &components.AgentConfigOverrideInput{
+                    FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                    Language: elevenlabsgo.Pointer("en"),
+                    Prompt: &components.PromptAgentAPIModelOverrideInput{
+                        Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                        Llm: components.LlmGemini20Flash001.ToPointer(),
+                        ToolIds: []string{},
+                        KnowledgeBase: []components.KnowledgeBaseLocator{},
+                    },
+                },
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -5956,7 +5925,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -5968,12 +5936,12 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.AddMcpToolConfigOverrideRoute(ctx, "<id>", components.MCPToolConfigOverrideCreateRequestModel{
-        Assignments: optionalnullable.From(elevenlabsgo.Pointer([]components.DynamicVariableAssignment{
+        Assignments: []components.DynamicVariableAssignment{
             components.DynamicVariableAssignment{
                 DynamicVariable: "user_name",
                 ValuePath: "user.name",
             },
-        })),
+        },
         ToolName: "<value>",
     })
     if err != nil {
@@ -6125,7 +6093,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -6137,12 +6104,12 @@ func main() {
     )
 
     res, err := s.AgentsPlatform.UpdateMcpToolConfigOverrideRoute(ctx, "<id>", "<value>", components.MCPToolConfigOverrideUpdateRequestModel{
-        Assignments: optionalnullable.From(elevenlabsgo.Pointer([]components.DynamicVariableAssignment{
+        Assignments: []components.DynamicVariableAssignment{
             components.DynamicVariableAssignment{
                 DynamicVariable: "user_name",
                 ValuePath: "user.name",
             },
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -6451,7 +6418,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -6466,16 +6432,16 @@ func main() {
         ParentVersionID: "<id>",
         Name: "<value>",
         Description: "faithfully platter equally red",
-        Workflow: optionalnullable.From(&components.AgentWorkflowRequestModel{
+        Workflow: &components.AgentWorkflowRequestModel{
             Edges: map[string]components.WorkflowEdgeModelInput{
                 "entry_to_tool_a": components.WorkflowEdgeModelInput{
                     Source: "entry_node",
                     Target: "tool_node_a",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                         components.WorkflowResultConditionModelInput{
                             Successful: true,
                         },
-                    ))),
+                    )),
                 },
                 "start_to_entry": components.WorkflowEdgeModelInput{
                     Source: "start_node",
@@ -6484,16 +6450,16 @@ func main() {
                 "tool_a_to_failure": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "failure_node",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_a_to_tool_b": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "tool_node_b",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
                         components.WorkflowExpressionConditionModelInput{
                             Expression: components.CreateASTNodeInputAndOperator(
                                 components.ASTAndOperatorNodeInput1{
@@ -6501,39 +6467,39 @@ func main() {
                                 },
                             ),
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_agent_transfer": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_transfer",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_conversation": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_conversation",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_end": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_end",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_phone": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_phone",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
                         components.WorkflowExpressionConditionModelInput{
                             Expression: components.CreateASTNodeInputLlm(
                                 components.CreateASTLLMNodeInputASTLLMNode2(
@@ -6543,7 +6509,7 @@ func main() {
                                 ),
                             ),
                         },
-                    ))),
+                    )),
                 },
             },
             Nodes: map[string]components.AgentWorkflowRequestModelNodes{
@@ -6585,7 +6551,7 @@ func main() {
                     components.WorkflowToolNodeModelInput{},
                 ),
             },
-        }),
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -6857,7 +6823,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -6881,25 +6846,25 @@ func main() {
                 "entry_to_tool_a": components.WorkflowEdgeModelInput{
                     Source: "entry_node",
                     Target: "tool_node_a",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "start_to_entry": components.WorkflowEdgeModelInput{
                     Source: "start_node",
                     Target: "entry_node",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_a_to_failure": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "failure_node",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
                         components.WorkflowExpressionConditionModelInput{
                             Expression: components.CreateASTNodeInputStringLiteral(
                                 components.ASTStringNodeInput{
@@ -6907,50 +6872,50 @@ func main() {
                                 },
                             ),
                         },
-                    ))),
+                    )),
                 },
                 "tool_a_to_tool_b": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
                     Target: "tool_node_b",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_agent_transfer": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_transfer",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_conversation": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_conversation",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionLlm(
                         components.WorkflowLLMConditionModelInput{
                             Condition: "User's last message contains a question about our pricing.",
                         },
-                    ))),
+                    )),
                 },
                 "tool_b_to_end": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_end",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionUnconditional(
                         components.WorkflowUnconditionalModelInput{},
-                    ))),
+                    )),
                 },
                 "tool_b_to_phone": components.WorkflowEdgeModelInput{
                     Source: "tool_node_b",
                     Target: "success_phone",
-                    ForwardCondition: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionResult(
                         components.WorkflowResultConditionModelInput{
                             Successful: false,
                         },
-                    ))),
+                    )),
                 },
             },
             Nodes: map[string]components.AgentWorkflowRequestModelNodes{
@@ -6998,11 +6963,11 @@ func main() {
             },
         },
         Name: "<value>",
-        Tags: optionalnullable.From(elevenlabsgo.Pointer([]string{
+        Tags: []string{
             "Customer Support",
             "Technical Help",
             "Eleven",
-        })),
+        },
     })
     if err != nil {
         log.Fatal(err)

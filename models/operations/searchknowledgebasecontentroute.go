@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SearchKnowledgeBaseContentRouteRequest struct {
@@ -14,9 +13,9 @@ type SearchKnowledgeBaseContentRouteRequest struct {
 	// How many documents to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// If present, the endpoint will return only documents of the given types.
-	Types optionalnullable.OptionalNullable[[]components.KnowledgeBaseDocumentType] `queryParam:"style=form,explode=true,name=types"`
+	Types []components.KnowledgeBaseDocumentType `queryParam:"style=form,explode=true,name=types"`
 	// Used for fetching next page. Cursor is returned in the response.
-	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
 func (s SearchKnowledgeBaseContentRouteRequest) MarshalJSON() ([]byte, error) {
@@ -44,14 +43,14 @@ func (s *SearchKnowledgeBaseContentRouteRequest) GetPageSize() *int64 {
 	return s.PageSize
 }
 
-func (s *SearchKnowledgeBaseContentRouteRequest) GetTypes() optionalnullable.OptionalNullable[[]components.KnowledgeBaseDocumentType] {
+func (s *SearchKnowledgeBaseContentRouteRequest) GetTypes() []components.KnowledgeBaseDocumentType {
 	if s == nil {
 		return nil
 	}
 	return s.Types
 }
 
-func (s *SearchKnowledgeBaseContentRouteRequest) GetCursor() optionalnullable.OptionalNullable[string] {
+func (s *SearchKnowledgeBaseContentRouteRequest) GetCursor() *string {
 	if s == nil {
 		return nil
 	}

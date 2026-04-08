@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -12,10 +11,10 @@ import (
 type BearerAuthResponse struct {
 	Name string `json:"name"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	authType *string                                                       `const:"bearer_auth" json:"auth_type"`
-	Provider string                                                        `json:"provider"`
-	ID       string                                                        `json:"id"`
-	UsedBy   optionalnullable.OptionalNullable[AuthConnectionDependencies] `json:"used_by,omitzero"`
+	authType *string                     `const:"bearer_auth" json:"auth_type"`
+	Provider string                      `json:"provider"`
+	ID       string                      `json:"id"`
+	UsedBy   *AuthConnectionDependencies `json:"used_by,omitzero"`
 }
 
 func (b BearerAuthResponse) MarshalJSON() ([]byte, error) {
@@ -54,7 +53,7 @@ func (b *BearerAuthResponse) GetID() string {
 	return b.ID
 }
 
-func (b *BearerAuthResponse) GetUsedBy() optionalnullable.OptionalNullable[AuthConnectionDependencies] {
+func (b *BearerAuthResponse) GetUsedBy() *AuthConnectionDependencies {
 	if b == nil {
 		return nil
 	}

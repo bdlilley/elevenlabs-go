@@ -4,16 +4,15 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TestInvocationSummaryResponseModel struct {
 	// The ID of the test invocation
 	ID string `json:"id"`
 	// The ID of the agent this test invocation belongs to
-	AgentID optionalnullable.OptionalNullable[string] `json:"agent_id,omitzero"`
+	AgentID *string `json:"agent_id,omitzero"`
 	// The ID of the branch this test invocation was run on
-	BranchID optionalnullable.OptionalNullable[string] `json:"branch_id,omitzero"`
+	BranchID *string `json:"branch_id,omitzero"`
 	// Creation time of the test invocation in unix seconds
 	CreatedAtUnixSecs int64 `json:"created_at_unix_secs"`
 	// Number of test runs in this invocation
@@ -27,7 +26,7 @@ type TestInvocationSummaryResponseModel struct {
 	// Title of the test invocation - either the single test name or count of tests
 	Title string `json:"title"`
 	// The access information of the test invocation
-	AccessInfo optionalnullable.OptionalNullable[ResourceAccessInfo] `json:"access_info,omitzero"`
+	AccessInfo *ResourceAccessInfo `json:"access_info,omitzero"`
 }
 
 func (t TestInvocationSummaryResponseModel) MarshalJSON() ([]byte, error) {
@@ -48,14 +47,14 @@ func (t *TestInvocationSummaryResponseModel) GetID() string {
 	return t.ID
 }
 
-func (t *TestInvocationSummaryResponseModel) GetAgentID() optionalnullable.OptionalNullable[string] {
+func (t *TestInvocationSummaryResponseModel) GetAgentID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.AgentID
 }
 
-func (t *TestInvocationSummaryResponseModel) GetBranchID() optionalnullable.OptionalNullable[string] {
+func (t *TestInvocationSummaryResponseModel) GetBranchID() *string {
 	if t == nil {
 		return nil
 	}
@@ -104,7 +103,7 @@ func (t *TestInvocationSummaryResponseModel) GetTitle() string {
 	return t.Title
 }
 
-func (t *TestInvocationSummaryResponseModel) GetAccessInfo() optionalnullable.OptionalNullable[ResourceAccessInfo] {
+func (t *TestInvocationSummaryResponseModel) GetAccessInfo() *ResourceAccessInfo {
 	if t == nil {
 		return nil
 	}

@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetPhoneNumberInboundSIPTrunkConfigResponseModel struct {
@@ -16,9 +15,9 @@ type GetPhoneNumberInboundSIPTrunkConfigResponseModel struct {
 	// Whether authentication credentials are configured
 	HasAuthCredentials bool `json:"has_auth_credentials"`
 	// SIP trunk username (if available)
-	Username optionalnullable.OptionalNullable[string] `json:"username,omitzero"`
+	Username *string `json:"username,omitzero"`
 	// Domains of remote SIP servers used to validate TLS certificates.
-	RemoteDomains optionalnullable.OptionalNullable[[]string] `json:"remote_domains,omitzero"`
+	RemoteDomains []string `json:"remote_domains,omitzero"`
 }
 
 func (g GetPhoneNumberInboundSIPTrunkConfigResponseModel) MarshalJSON() ([]byte, error) {
@@ -60,14 +59,14 @@ func (g *GetPhoneNumberInboundSIPTrunkConfigResponseModel) GetHasAuthCredentials
 	return g.HasAuthCredentials
 }
 
-func (g *GetPhoneNumberInboundSIPTrunkConfigResponseModel) GetUsername() optionalnullable.OptionalNullable[string] {
+func (g *GetPhoneNumberInboundSIPTrunkConfigResponseModel) GetUsername() *string {
 	if g == nil {
 		return nil
 	}
 	return g.Username
 }
 
-func (g *GetPhoneNumberInboundSIPTrunkConfigResponseModel) GetRemoteDomains() optionalnullable.OptionalNullable[[]string] {
+func (g *GetPhoneNumberInboundSIPTrunkConfigResponseModel) GetRemoteDomains() []string {
 	if g == nil {
 		return nil
 	}

@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
@@ -127,11 +126,11 @@ func (u ObjectJSONSchemaPropertyOutputProperties) MarshalJSON() ([]byte, error) 
 
 type ObjectJSONSchemaPropertyOutput struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_               *string                                                `const:"object" json:"type"`
-	Required            []string                                               `json:"required,omitzero"`
-	Description         *string                                                `default:"" json:"description"`
-	Properties          map[string]ObjectJSONSchemaPropertyOutputProperties    `json:"properties,omitzero"`
-	RequiredConstraints optionalnullable.OptionalNullable[RequiredConstraints] `json:"required_constraints,omitzero"`
+	type_               *string                                             `const:"object" json:"type"`
+	Required            []string                                            `json:"required,omitzero"`
+	Description         *string                                             `default:"" json:"description"`
+	Properties          map[string]ObjectJSONSchemaPropertyOutputProperties `json:"properties,omitzero"`
+	RequiredConstraints *RequiredConstraints                                `json:"required_constraints,omitzero"`
 }
 
 func (o ObjectJSONSchemaPropertyOutput) MarshalJSON() ([]byte, error) {
@@ -170,7 +169,7 @@ func (o *ObjectJSONSchemaPropertyOutput) GetProperties() map[string]ObjectJSONSc
 	return o.Properties
 }
 
-func (o *ObjectJSONSchemaPropertyOutput) GetRequiredConstraints() optionalnullable.OptionalNullable[RequiredConstraints] {
+func (o *ObjectJSONSchemaPropertyOutput) GetRequiredConstraints() *RequiredConstraints {
 	if o == nil {
 		return nil
 	}

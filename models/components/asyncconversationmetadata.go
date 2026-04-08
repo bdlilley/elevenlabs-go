@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeliveryStatus string
@@ -32,14 +31,14 @@ func (e *DeliveryStatus) IsExact() bool {
 
 // AsyncConversationMetadata - Metadata for async conversation delivery (Zendesk, Slack, etc.).
 type AsyncConversationMetadata struct {
-	DeliveryStatus                 DeliveryStatus                            `json:"delivery_status"`
-	DeliveryTimestamp              int64                                     `json:"delivery_timestamp"`
-	DeliveryError                  optionalnullable.OptionalNullable[string] `json:"delivery_error,omitzero"`
-	ExternalSystem                 string                                    `json:"external_system"`
-	ExternalID                     string                                    `json:"external_id"`
-	RetryCount                     *int64                                    `default:"0" json:"retry_count"`
-	LastRetryTimestamp             optionalnullable.OptionalNullable[int64]  `json:"last_retry_timestamp,omitzero"`
-	LastProcessedExternalMessageID optionalnullable.OptionalNullable[string] `json:"last_processed_external_message_id,omitzero"`
+	DeliveryStatus                 DeliveryStatus `json:"delivery_status"`
+	DeliveryTimestamp              int64          `json:"delivery_timestamp"`
+	DeliveryError                  *string        `json:"delivery_error,omitzero"`
+	ExternalSystem                 string         `json:"external_system"`
+	ExternalID                     string         `json:"external_id"`
+	RetryCount                     *int64         `default:"0" json:"retry_count"`
+	LastRetryTimestamp             *int64         `json:"last_retry_timestamp,omitzero"`
+	LastProcessedExternalMessageID *string        `json:"last_processed_external_message_id,omitzero"`
 }
 
 func (a AsyncConversationMetadata) MarshalJSON() ([]byte, error) {
@@ -67,7 +66,7 @@ func (a *AsyncConversationMetadata) GetDeliveryTimestamp() int64 {
 	return a.DeliveryTimestamp
 }
 
-func (a *AsyncConversationMetadata) GetDeliveryError() optionalnullable.OptionalNullable[string] {
+func (a *AsyncConversationMetadata) GetDeliveryError() *string {
 	if a == nil {
 		return nil
 	}
@@ -95,14 +94,14 @@ func (a *AsyncConversationMetadata) GetRetryCount() *int64 {
 	return a.RetryCount
 }
 
-func (a *AsyncConversationMetadata) GetLastRetryTimestamp() optionalnullable.OptionalNullable[int64] {
+func (a *AsyncConversationMetadata) GetLastRetryTimestamp() *int64 {
 	if a == nil {
 		return nil
 	}
 	return a.LastRetryTimestamp
 }
 
-func (a *AsyncConversationMetadata) GetLastProcessedExternalMessageID() optionalnullable.OptionalNullable[string] {
+func (a *AsyncConversationMetadata) GetLastProcessedExternalMessageID() *string {
 	if a == nil {
 		return nil
 	}

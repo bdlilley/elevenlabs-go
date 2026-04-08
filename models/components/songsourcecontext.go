@@ -4,21 +4,20 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type SongSourceContext struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	sourceType         *string                                           `const:"song" json:"source_type"`
-	SongID             string                                            `json:"song_id"`
-	Title              optionalnullable.OptionalNullable[string]         `json:"title,omitzero"`
-	Description        optionalnullable.OptionalNullable[string]         `json:"description,omitzero"`
-	Genres             []string                                          `json:"genres,omitzero"`
-	Languages          []string                                          `json:"languages,omitzero"`
-	IsExplicit         optionalnullable.OptionalNullable[bool]           `json:"is_explicit,omitzero"`
-	Bpm                optionalnullable.OptionalNullable[int64]          `json:"bpm,omitzero"`
-	GenerationSettings optionalnullable.OptionalNullable[map[string]any] `json:"generation_settings,omitzero"`
+	sourceType         *string        `const:"song" json:"source_type"`
+	SongID             string         `json:"song_id"`
+	Title              *string        `json:"title,omitzero"`
+	Description        *string        `json:"description,omitzero"`
+	Genres             []string       `json:"genres,omitzero"`
+	Languages          []string       `json:"languages,omitzero"`
+	IsExplicit         *bool          `json:"is_explicit,omitzero"`
+	Bpm                *int64         `json:"bpm,omitzero"`
+	GenerationSettings map[string]any `json:"generation_settings,omitzero"`
 }
 
 func (s SongSourceContext) MarshalJSON() ([]byte, error) {
@@ -43,14 +42,14 @@ func (s *SongSourceContext) GetSongID() string {
 	return s.SongID
 }
 
-func (s *SongSourceContext) GetTitle() optionalnullable.OptionalNullable[string] {
+func (s *SongSourceContext) GetTitle() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Title
 }
 
-func (s *SongSourceContext) GetDescription() optionalnullable.OptionalNullable[string] {
+func (s *SongSourceContext) GetDescription() *string {
 	if s == nil {
 		return nil
 	}
@@ -71,21 +70,21 @@ func (s *SongSourceContext) GetLanguages() []string {
 	return s.Languages
 }
 
-func (s *SongSourceContext) GetIsExplicit() optionalnullable.OptionalNullable[bool] {
+func (s *SongSourceContext) GetIsExplicit() *bool {
 	if s == nil {
 		return nil
 	}
 	return s.IsExplicit
 }
 
-func (s *SongSourceContext) GetBpm() optionalnullable.OptionalNullable[int64] {
+func (s *SongSourceContext) GetBpm() *int64 {
 	if s == nil {
 		return nil
 	}
 	return s.Bpm
 }
 
-func (s *SongSourceContext) GetGenerationSettings() optionalnullable.OptionalNullable[map[string]any] {
+func (s *SongSourceContext) GetGenerationSettings() map[string]any {
 	if s == nil {
 		return nil
 	}

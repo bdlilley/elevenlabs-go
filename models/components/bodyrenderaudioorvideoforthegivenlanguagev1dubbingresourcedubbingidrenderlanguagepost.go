@@ -2,14 +2,10 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 type BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost struct {
 	RenderType RenderType `json:"render_type"`
 	// Whether to normalize the volume of the rendered audio.
-	NormalizeVolume optionalnullable.OptionalNullable[bool] `json:"normalize_volume,omitzero"`
+	NormalizeVolume *bool `json:"normalize_volume,omitzero"`
 }
 
 func (b *BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost) GetRenderType() RenderType {
@@ -19,7 +15,7 @@ func (b *BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRend
 	return b.RenderType
 }
 
-func (b *BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost) GetNormalizeVolume() optionalnullable.OptionalNullable[bool] {
+func (b *BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost) GetNormalizeVolume() *bool {
 	if b == nil {
 		return nil
 	}

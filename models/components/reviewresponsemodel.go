@@ -4,7 +4,6 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ReviewResponseModelReviewStatus string
@@ -69,12 +68,12 @@ func (e *RejectReason) IsExact() bool {
 }
 
 type ReviewResponseModel struct {
-	ReviewStatus    ReviewResponseModelReviewStatus                     `json:"review_status"`
-	ReviewedAtUnix  int64                                               `json:"reviewed_at_unix"`
-	ReviewedBy      optionalnullable.OptionalNullable[string]           `json:"reviewed_by,omitzero"`
-	RejectReasons   optionalnullable.OptionalNullable[[]RejectReason]   `json:"reject_reasons,omitzero"`
-	ScoresBreakdown optionalnullable.OptionalNullable[map[string]int64] `json:"scores_breakdown,omitzero"`
-	RejectedDetails optionalnullable.OptionalNullable[string]           `json:"rejected_details,omitzero"`
+	ReviewStatus    ReviewResponseModelReviewStatus `json:"review_status"`
+	ReviewedAtUnix  int64                           `json:"reviewed_at_unix"`
+	ReviewedBy      *string                         `json:"reviewed_by,omitzero"`
+	RejectReasons   []RejectReason                  `json:"reject_reasons,omitzero"`
+	ScoresBreakdown map[string]int64                `json:"scores_breakdown,omitzero"`
+	RejectedDetails *string                         `json:"rejected_details,omitzero"`
 }
 
 func (r ReviewResponseModel) MarshalJSON() ([]byte, error) {
@@ -102,28 +101,28 @@ func (r *ReviewResponseModel) GetReviewedAtUnix() int64 {
 	return r.ReviewedAtUnix
 }
 
-func (r *ReviewResponseModel) GetReviewedBy() optionalnullable.OptionalNullable[string] {
+func (r *ReviewResponseModel) GetReviewedBy() *string {
 	if r == nil {
 		return nil
 	}
 	return r.ReviewedBy
 }
 
-func (r *ReviewResponseModel) GetRejectReasons() optionalnullable.OptionalNullable[[]RejectReason] {
+func (r *ReviewResponseModel) GetRejectReasons() []RejectReason {
 	if r == nil {
 		return nil
 	}
 	return r.RejectReasons
 }
 
-func (r *ReviewResponseModel) GetScoresBreakdown() optionalnullable.OptionalNullable[map[string]int64] {
+func (r *ReviewResponseModel) GetScoresBreakdown() map[string]int64 {
 	if r == nil {
 		return nil
 	}
 	return r.ScoresBreakdown
 }
 
-func (r *ReviewResponseModel) GetRejectedDetails() optionalnullable.OptionalNullable[string] {
+func (r *ReviewResponseModel) GetRejectedDetails() *string {
 	if r == nil {
 		return nil
 	}

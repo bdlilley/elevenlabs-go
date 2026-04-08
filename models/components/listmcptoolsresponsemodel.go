@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
-)
-
 // ListMCPToolsResponseModel - Response model for testing tools available on an MCP server.
 type ListMCPToolsResponseModel struct {
 	// Indicates if the operation was successful.
@@ -13,7 +9,7 @@ type ListMCPToolsResponseModel struct {
 	// A list of tools available on the MCP server.
 	Tools []Tool `json:"tools"`
 	// Error message if the operation was not successful.
-	ErrorMessage optionalnullable.OptionalNullable[string] `json:"error_message,omitzero"`
+	ErrorMessage *string `json:"error_message,omitzero"`
 }
 
 func (l *ListMCPToolsResponseModel) GetSuccess() bool {
@@ -30,7 +26,7 @@ func (l *ListMCPToolsResponseModel) GetTools() []Tool {
 	return l.Tools
 }
 
-func (l *ListMCPToolsResponseModel) GetErrorMessage() optionalnullable.OptionalNullable[string] {
+func (l *ListMCPToolsResponseModel) GetErrorMessage() *string {
 	if l == nil {
 		return nil
 	}

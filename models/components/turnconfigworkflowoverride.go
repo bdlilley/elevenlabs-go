@@ -4,26 +4,25 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type TurnConfigWorkflowOverride struct {
 	// Maximum wait time for the user's reply before re-engaging the user
-	TurnTimeout optionalnullable.OptionalNullable[float64] `json:"turn_timeout,omitzero"`
+	TurnTimeout *float64 `json:"turn_timeout,omitzero"`
 	// How long the agent will wait for the user to start the conversation if the first message is empty. If not set, uses the regular turn_timeout.
-	InitialWaitTime optionalnullable.OptionalNullable[float64] `json:"initial_wait_time,omitzero"`
+	InitialWaitTime *float64 `json:"initial_wait_time,omitzero"`
 	// Maximum wait time since the user last spoke before terminating the call
-	SilenceEndCallTimeout optionalnullable.OptionalNullable[float64] `json:"silence_end_call_timeout,omitzero"`
+	SilenceEndCallTimeout *float64 `json:"silence_end_call_timeout,omitzero"`
 	// Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses.
-	SoftTimeoutConfig optionalnullable.OptionalNullable[SoftTimeoutConfigWorkflowOverride] `json:"soft_timeout_config,omitzero"`
+	SoftTimeoutConfig *SoftTimeoutConfigWorkflowOverride `json:"soft_timeout_config,omitzero"`
 	// The mode of turn detection
-	Mode optionalnullable.OptionalNullable[TurnMode] `default:"turn" json:"mode"`
+	Mode *TurnMode `default:"turn" json:"mode"`
 	// Controls how eager the agent is to respond. Low = less eager (waits longer), Standard = default eagerness, High = more eager (responds sooner)
-	TurnEagerness optionalnullable.OptionalNullable[TurnEagerness] `default:"normal" json:"turn_eagerness"`
+	TurnEagerness *TurnEagerness `default:"normal" json:"turn_eagerness"`
 	// Controls if the agent should be more patient when user is spelling numbers and named entities. Auto = model based, Off = never wait extra
-	SpellingPatience optionalnullable.OptionalNullable[SpellingPatience] `default:"auto" json:"spelling_patience"`
+	SpellingPatience *SpellingPatience `default:"auto" json:"spelling_patience"`
 	// When enabled, starts generating LLM responses during silence before full turn confidence is reached, reducing perceived latency. May increase LLM costs.
-	SpeculativeTurn optionalnullable.OptionalNullable[bool] `json:"speculative_turn,omitzero"`
+	SpeculativeTurn *bool `json:"speculative_turn,omitzero"`
 }
 
 func (t TurnConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -37,56 +36,56 @@ func (t *TurnConfigWorkflowOverride) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (t *TurnConfigWorkflowOverride) GetTurnTimeout() optionalnullable.OptionalNullable[float64] {
+func (t *TurnConfigWorkflowOverride) GetTurnTimeout() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.TurnTimeout
 }
 
-func (t *TurnConfigWorkflowOverride) GetInitialWaitTime() optionalnullable.OptionalNullable[float64] {
+func (t *TurnConfigWorkflowOverride) GetInitialWaitTime() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.InitialWaitTime
 }
 
-func (t *TurnConfigWorkflowOverride) GetSilenceEndCallTimeout() optionalnullable.OptionalNullable[float64] {
+func (t *TurnConfigWorkflowOverride) GetSilenceEndCallTimeout() *float64 {
 	if t == nil {
 		return nil
 	}
 	return t.SilenceEndCallTimeout
 }
 
-func (t *TurnConfigWorkflowOverride) GetSoftTimeoutConfig() optionalnullable.OptionalNullable[SoftTimeoutConfigWorkflowOverride] {
+func (t *TurnConfigWorkflowOverride) GetSoftTimeoutConfig() *SoftTimeoutConfigWorkflowOverride {
 	if t == nil {
 		return nil
 	}
 	return t.SoftTimeoutConfig
 }
 
-func (t *TurnConfigWorkflowOverride) GetMode() optionalnullable.OptionalNullable[TurnMode] {
+func (t *TurnConfigWorkflowOverride) GetMode() *TurnMode {
 	if t == nil {
 		return nil
 	}
 	return t.Mode
 }
 
-func (t *TurnConfigWorkflowOverride) GetTurnEagerness() optionalnullable.OptionalNullable[TurnEagerness] {
+func (t *TurnConfigWorkflowOverride) GetTurnEagerness() *TurnEagerness {
 	if t == nil {
 		return nil
 	}
 	return t.TurnEagerness
 }
 
-func (t *TurnConfigWorkflowOverride) GetSpellingPatience() optionalnullable.OptionalNullable[SpellingPatience] {
+func (t *TurnConfigWorkflowOverride) GetSpellingPatience() *SpellingPatience {
 	if t == nil {
 		return nil
 	}
 	return t.SpellingPatience
 }
 
-func (t *TurnConfigWorkflowOverride) GetSpeculativeTurn() optionalnullable.OptionalNullable[bool] {
+func (t *TurnConfigWorkflowOverride) GetSpeculativeTurn() *bool {
 	if t == nil {
 		return nil
 	}

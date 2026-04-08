@@ -4,12 +4,11 @@ package components
 
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
 type WhatsAppTemplateTextParam struct {
-	ParameterName optionalnullable.OptionalNullable[string] `json:"parameter_name,omitzero"`
+	ParameterName *string `json:"parameter_name,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"text" json:"type"`
 	Text  string  `json:"text"`
@@ -26,7 +25,7 @@ func (w *WhatsAppTemplateTextParam) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WhatsAppTemplateTextParam) GetParameterName() optionalnullable.OptionalNullable[string] {
+func (w *WhatsAppTemplateTextParam) GetParameterName() *string {
 	if w == nil {
 		return nil
 	}
