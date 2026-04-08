@@ -3,159 +3,16 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
-
-type UpdateToolCallUnitTestRequestDynamicVariablesType string
-
-const (
-	UpdateToolCallUnitTestRequestDynamicVariablesTypeStr     UpdateToolCallUnitTestRequestDynamicVariablesType = "str"
-	UpdateToolCallUnitTestRequestDynamicVariablesTypeNumber  UpdateToolCallUnitTestRequestDynamicVariablesType = "number"
-	UpdateToolCallUnitTestRequestDynamicVariablesTypeInteger UpdateToolCallUnitTestRequestDynamicVariablesType = "integer"
-	UpdateToolCallUnitTestRequestDynamicVariablesTypeBoolean UpdateToolCallUnitTestRequestDynamicVariablesType = "boolean"
-)
-
-type UpdateToolCallUnitTestRequestDynamicVariables struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type UpdateToolCallUnitTestRequestDynamicVariablesType
-}
-
-func CreateUpdateToolCallUnitTestRequestDynamicVariablesStr(str string) UpdateToolCallUnitTestRequestDynamicVariables {
-	typ := UpdateToolCallUnitTestRequestDynamicVariablesTypeStr
-
-	return UpdateToolCallUnitTestRequestDynamicVariables{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateUpdateToolCallUnitTestRequestDynamicVariablesNumber(number float64) UpdateToolCallUnitTestRequestDynamicVariables {
-	typ := UpdateToolCallUnitTestRequestDynamicVariablesTypeNumber
-
-	return UpdateToolCallUnitTestRequestDynamicVariables{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateUpdateToolCallUnitTestRequestDynamicVariablesInteger(integer int64) UpdateToolCallUnitTestRequestDynamicVariables {
-	typ := UpdateToolCallUnitTestRequestDynamicVariablesTypeInteger
-
-	return UpdateToolCallUnitTestRequestDynamicVariables{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateUpdateToolCallUnitTestRequestDynamicVariablesBoolean(boolean bool) UpdateToolCallUnitTestRequestDynamicVariables {
-	typ := UpdateToolCallUnitTestRequestDynamicVariablesTypeBoolean
-
-	return UpdateToolCallUnitTestRequestDynamicVariables{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *UpdateToolCallUnitTestRequestDynamicVariables) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  UpdateToolCallUnitTestRequestDynamicVariablesTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  UpdateToolCallUnitTestRequestDynamicVariablesTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  UpdateToolCallUnitTestRequestDynamicVariablesTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  UpdateToolCallUnitTestRequestDynamicVariablesTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for UpdateToolCallUnitTestRequestDynamicVariables", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for UpdateToolCallUnitTestRequestDynamicVariables", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(UpdateToolCallUnitTestRequestDynamicVariablesType)
-	switch best.Type {
-	case UpdateToolCallUnitTestRequestDynamicVariablesTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case UpdateToolCallUnitTestRequestDynamicVariablesTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case UpdateToolCallUnitTestRequestDynamicVariablesTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case UpdateToolCallUnitTestRequestDynamicVariablesTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UpdateToolCallUnitTestRequestDynamicVariables", string(data))
-}
-
-func (u UpdateToolCallUnitTestRequestDynamicVariables) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type UpdateToolCallUnitTestRequestDynamicVariables: all fields are null")
-}
 
 type UpdateToolCallUnitTestRequest struct {
 	// Metadata of a conversation this test was created from (if applicable).
 	FromConversationMetadata *TestFromConversationMetadataInput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
-	DynamicVariables map[string]*UpdateToolCallUnitTestRequestDynamicVariables `json:"dynamic_variables,omitzero"`
-	ChatHistory      []ConversationHistoryTranscriptCommonModelInput           `json:"chat_history,omitzero"`
+	DynamicVariables map[string]any                                  `json:"dynamic_variables,omitzero"`
+	ChatHistory      []ConversationHistoryTranscriptCommonModelInput `json:"chat_history,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"tool" json:"type"`
 	// How to evaluate the agent's tool call (if any). If empty, the tool call is not evaluated.
@@ -185,7 +42,7 @@ func (u *UpdateToolCallUnitTestRequest) GetFromConversationMetadata() *TestFromC
 	return u.FromConversationMetadata
 }
 
-func (u *UpdateToolCallUnitTestRequest) GetDynamicVariables() map[string]*UpdateToolCallUnitTestRequestDynamicVariables {
+func (u *UpdateToolCallUnitTestRequest) GetDynamicVariables() map[string]any {
 	if u == nil {
 		return nil
 	}

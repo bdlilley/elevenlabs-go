@@ -3,159 +3,16 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
-
-type CreateResponseUnitTestRequestDynamicVariablesType string
-
-const (
-	CreateResponseUnitTestRequestDynamicVariablesTypeStr     CreateResponseUnitTestRequestDynamicVariablesType = "str"
-	CreateResponseUnitTestRequestDynamicVariablesTypeNumber  CreateResponseUnitTestRequestDynamicVariablesType = "number"
-	CreateResponseUnitTestRequestDynamicVariablesTypeInteger CreateResponseUnitTestRequestDynamicVariablesType = "integer"
-	CreateResponseUnitTestRequestDynamicVariablesTypeBoolean CreateResponseUnitTestRequestDynamicVariablesType = "boolean"
-)
-
-type CreateResponseUnitTestRequestDynamicVariables struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type CreateResponseUnitTestRequestDynamicVariablesType
-}
-
-func CreateCreateResponseUnitTestRequestDynamicVariablesStr(str string) CreateResponseUnitTestRequestDynamicVariables {
-	typ := CreateResponseUnitTestRequestDynamicVariablesTypeStr
-
-	return CreateResponseUnitTestRequestDynamicVariables{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateResponseUnitTestRequestDynamicVariablesNumber(number float64) CreateResponseUnitTestRequestDynamicVariables {
-	typ := CreateResponseUnitTestRequestDynamicVariablesTypeNumber
-
-	return CreateResponseUnitTestRequestDynamicVariables{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateCreateResponseUnitTestRequestDynamicVariablesInteger(integer int64) CreateResponseUnitTestRequestDynamicVariables {
-	typ := CreateResponseUnitTestRequestDynamicVariablesTypeInteger
-
-	return CreateResponseUnitTestRequestDynamicVariables{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateCreateResponseUnitTestRequestDynamicVariablesBoolean(boolean bool) CreateResponseUnitTestRequestDynamicVariables {
-	typ := CreateResponseUnitTestRequestDynamicVariablesTypeBoolean
-
-	return CreateResponseUnitTestRequestDynamicVariables{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *CreateResponseUnitTestRequestDynamicVariables) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateResponseUnitTestRequestDynamicVariablesTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateResponseUnitTestRequestDynamicVariablesTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateResponseUnitTestRequestDynamicVariablesTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateResponseUnitTestRequestDynamicVariablesTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateResponseUnitTestRequestDynamicVariables", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateResponseUnitTestRequestDynamicVariables", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(CreateResponseUnitTestRequestDynamicVariablesType)
-	switch best.Type {
-	case CreateResponseUnitTestRequestDynamicVariablesTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case CreateResponseUnitTestRequestDynamicVariablesTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case CreateResponseUnitTestRequestDynamicVariablesTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case CreateResponseUnitTestRequestDynamicVariablesTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateResponseUnitTestRequestDynamicVariables", string(data))
-}
-
-func (u CreateResponseUnitTestRequestDynamicVariables) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type CreateResponseUnitTestRequestDynamicVariables: all fields are null")
-}
 
 type CreateResponseUnitTestRequest struct {
 	// Metadata of a conversation this test was created from (if applicable).
 	FromConversationMetadata *TestFromConversationMetadataInput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
-	DynamicVariables map[string]*CreateResponseUnitTestRequestDynamicVariables `json:"dynamic_variables,omitzero"`
-	ChatHistory      []ConversationHistoryTranscriptCommonModelInput           `json:"chat_history,omitzero"`
+	DynamicVariables map[string]any                                  `json:"dynamic_variables,omitzero"`
+	ChatHistory      []ConversationHistoryTranscriptCommonModelInput `json:"chat_history,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"llm" json:"type"`
 	// A prompt that evaluates whether the agent's response is successful. Should return True or False.
@@ -187,7 +44,7 @@ func (c *CreateResponseUnitTestRequest) GetFromConversationMetadata() *TestFromC
 	return c.FromConversationMetadata
 }
 
-func (c *CreateResponseUnitTestRequest) GetDynamicVariables() map[string]*CreateResponseUnitTestRequestDynamicVariables {
+func (c *CreateResponseUnitTestRequest) GetDynamicVariables() map[string]any {
 	if c == nil {
 		return nil
 	}

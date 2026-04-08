@@ -3,8 +3,182 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
+
+type AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersType string
+
+const (
+	AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeStr     AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersType = "str"
+	AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeNumber  AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersType = "number"
+	AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeInteger AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersType = "integer"
+	AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeBoolean AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersType = "boolean"
+)
+
+type AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders struct {
+	Str     *string  `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
+
+	Type AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersType
+}
+
+func CreateAgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersStr(str string) AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders {
+	typ := AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeStr
+
+	return AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateAgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersNumber(number float64) AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders {
+	typ := AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeNumber
+
+	return AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateAgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersInteger(integer int64) AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders {
+	typ := AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeInteger
+
+	return AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func CreateAgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersBoolean(boolean bool) AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders {
+	typ := AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeBoolean
+
+	return AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func (u *AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeStr,
+			Value: &str,
+		})
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeNumber,
+			Value: &number,
+		})
+	}
+
+	var integer int64 = int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeInteger,
+			Value: &integer,
+		})
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeBoolean,
+			Value: &boolean,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersType)
+	switch best.Type {
+	case AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeNumber:
+		u.Number = best.Value.(*float64)
+		return nil
+	case AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeInteger:
+		u.Integer = best.Value.(*int64)
+		return nil
+	case AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholdersTypeBoolean:
+		u.Boolean = best.Value.(*bool)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders", string(data))
+}
+
+func (u AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders: all fields are null")
+}
+
+type AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablesConfigWorkflowOverride struct {
+	// A dictionary of dynamic variable placeholders and their values
+	DynamicVariablePlaceholders map[string]AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders `json:"dynamic_variable_placeholders,omitzero"`
+	AdditionalProperties        map[string]any                                                                  `additionalProperties:"true" json:"-"`
+}
+
+func (a AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablesConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablesConfigWorkflowOverride) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablesConfigWorkflowOverride) GetDynamicVariablePlaceholders() map[string]AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablePlaceholders {
+	if a == nil {
+		return nil
+	}
+	return a.DynamicVariablePlaceholders
+}
+
+func (a *AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablesConfigWorkflowOverride) GetAdditionalProperties() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.AdditionalProperties
+}
 
 type AgentConfigAPIModelWorkflowOverrideOutput struct {
 	// If non-empty, the first message the agent will say. If empty, the agent waits for the user to start the discussion.
@@ -14,7 +188,7 @@ type AgentConfigAPIModelWorkflowOverrideOutput struct {
 	// When enabled and language is Hindi, the agent will respond in Hinglish
 	HinglishMode *bool `json:"hinglish_mode,omitzero"`
 	// Configuration for dynamic variables
-	DynamicVariables *DynamicVariablesConfigWorkflowOverride `json:"dynamic_variables,omitzero"`
+	DynamicVariables *AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablesConfigWorkflowOverride `json:"dynamic_variables,omitzero"`
 	// If true, the user will not be able to interrupt the agent while the first message is being delivered.
 	DisableFirstMessageInterruptions *bool `json:"disable_first_message_interruptions,omitzero"`
 	// If non-empty, the message the agent will send when max conversation duration is reached.
@@ -55,7 +229,7 @@ func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetHinglishMode() *bool {
 	return a.HinglishMode
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetDynamicVariables() *DynamicVariablesConfigWorkflowOverride {
+func (a *AgentConfigAPIModelWorkflowOverrideOutput) GetDynamicVariables() *AgentConfigAPIModelWorkflowOverrideOutputDynamicVariablesConfigWorkflowOverride {
 	if a == nil {
 		return nil
 	}

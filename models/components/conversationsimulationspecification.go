@@ -3,159 +3,16 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
-
-type ConversationSimulationSpecificationDynamicVariablesType string
-
-const (
-	ConversationSimulationSpecificationDynamicVariablesTypeStr     ConversationSimulationSpecificationDynamicVariablesType = "str"
-	ConversationSimulationSpecificationDynamicVariablesTypeNumber  ConversationSimulationSpecificationDynamicVariablesType = "number"
-	ConversationSimulationSpecificationDynamicVariablesTypeInteger ConversationSimulationSpecificationDynamicVariablesType = "integer"
-	ConversationSimulationSpecificationDynamicVariablesTypeBoolean ConversationSimulationSpecificationDynamicVariablesType = "boolean"
-)
-
-type ConversationSimulationSpecificationDynamicVariables struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type ConversationSimulationSpecificationDynamicVariablesType
-}
-
-func CreateConversationSimulationSpecificationDynamicVariablesStr(str string) ConversationSimulationSpecificationDynamicVariables {
-	typ := ConversationSimulationSpecificationDynamicVariablesTypeStr
-
-	return ConversationSimulationSpecificationDynamicVariables{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateConversationSimulationSpecificationDynamicVariablesNumber(number float64) ConversationSimulationSpecificationDynamicVariables {
-	typ := ConversationSimulationSpecificationDynamicVariablesTypeNumber
-
-	return ConversationSimulationSpecificationDynamicVariables{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateConversationSimulationSpecificationDynamicVariablesInteger(integer int64) ConversationSimulationSpecificationDynamicVariables {
-	typ := ConversationSimulationSpecificationDynamicVariablesTypeInteger
-
-	return ConversationSimulationSpecificationDynamicVariables{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateConversationSimulationSpecificationDynamicVariablesBoolean(boolean bool) ConversationSimulationSpecificationDynamicVariables {
-	typ := ConversationSimulationSpecificationDynamicVariablesTypeBoolean
-
-	return ConversationSimulationSpecificationDynamicVariables{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *ConversationSimulationSpecificationDynamicVariables) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationSimulationSpecificationDynamicVariablesTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationSimulationSpecificationDynamicVariablesTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationSimulationSpecificationDynamicVariablesTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationSimulationSpecificationDynamicVariablesTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationSimulationSpecificationDynamicVariables", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationSimulationSpecificationDynamicVariables", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(ConversationSimulationSpecificationDynamicVariablesType)
-	switch best.Type {
-	case ConversationSimulationSpecificationDynamicVariablesTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case ConversationSimulationSpecificationDynamicVariablesTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case ConversationSimulationSpecificationDynamicVariablesTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case ConversationSimulationSpecificationDynamicVariablesTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationSimulationSpecificationDynamicVariables", string(data))
-}
-
-func (u ConversationSimulationSpecificationDynamicVariables) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type ConversationSimulationSpecificationDynamicVariables: all fields are null")
-}
 
 // ConversationSimulationSpecification - A specification that will be used to simulate a conversation between an agent and an AI user.
 type ConversationSimulationSpecification struct {
 	SimulatedUserConfig AgentConfigAPIModelInput  `json:"simulated_user_config"`
 	ToolMockConfig      map[string]ToolMockConfig `json:"tool_mock_config,omitzero"`
 	// A partial conversation history to start the simulation from. If empty, simulation starts fresh.
-	PartialConversationHistory []ConversationHistoryTranscriptCommonModelInput                 `json:"partial_conversation_history,omitzero"`
-	DynamicVariables           map[string]*ConversationSimulationSpecificationDynamicVariables `json:"dynamic_variables,omitzero"`
+	PartialConversationHistory []ConversationHistoryTranscriptCommonModelInput `json:"partial_conversation_history,omitzero"`
+	DynamicVariables           map[string]any                                  `json:"dynamic_variables,omitzero"`
 }
 
 func (c ConversationSimulationSpecification) MarshalJSON() ([]byte, error) {
@@ -190,7 +47,7 @@ func (c *ConversationSimulationSpecification) GetPartialConversationHistory() []
 	return c.PartialConversationHistory
 }
 
-func (c *ConversationSimulationSpecification) GetDynamicVariables() map[string]*ConversationSimulationSpecificationDynamicVariables {
+func (c *ConversationSimulationSpecification) GetDynamicVariables() map[string]any {
 	if c == nil {
 		return nil
 	}

@@ -3,159 +3,16 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
-
-type CreateSimulationTestRequestDynamicVariablesType string
-
-const (
-	CreateSimulationTestRequestDynamicVariablesTypeStr     CreateSimulationTestRequestDynamicVariablesType = "str"
-	CreateSimulationTestRequestDynamicVariablesTypeNumber  CreateSimulationTestRequestDynamicVariablesType = "number"
-	CreateSimulationTestRequestDynamicVariablesTypeInteger CreateSimulationTestRequestDynamicVariablesType = "integer"
-	CreateSimulationTestRequestDynamicVariablesTypeBoolean CreateSimulationTestRequestDynamicVariablesType = "boolean"
-)
-
-type CreateSimulationTestRequestDynamicVariables struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type CreateSimulationTestRequestDynamicVariablesType
-}
-
-func CreateCreateSimulationTestRequestDynamicVariablesStr(str string) CreateSimulationTestRequestDynamicVariables {
-	typ := CreateSimulationTestRequestDynamicVariablesTypeStr
-
-	return CreateSimulationTestRequestDynamicVariables{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateSimulationTestRequestDynamicVariablesNumber(number float64) CreateSimulationTestRequestDynamicVariables {
-	typ := CreateSimulationTestRequestDynamicVariablesTypeNumber
-
-	return CreateSimulationTestRequestDynamicVariables{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateCreateSimulationTestRequestDynamicVariablesInteger(integer int64) CreateSimulationTestRequestDynamicVariables {
-	typ := CreateSimulationTestRequestDynamicVariablesTypeInteger
-
-	return CreateSimulationTestRequestDynamicVariables{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateCreateSimulationTestRequestDynamicVariablesBoolean(boolean bool) CreateSimulationTestRequestDynamicVariables {
-	typ := CreateSimulationTestRequestDynamicVariablesTypeBoolean
-
-	return CreateSimulationTestRequestDynamicVariables{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *CreateSimulationTestRequestDynamicVariables) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateSimulationTestRequestDynamicVariablesTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateSimulationTestRequestDynamicVariablesTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateSimulationTestRequestDynamicVariablesTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  CreateSimulationTestRequestDynamicVariablesTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateSimulationTestRequestDynamicVariables", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateSimulationTestRequestDynamicVariables", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(CreateSimulationTestRequestDynamicVariablesType)
-	switch best.Type {
-	case CreateSimulationTestRequestDynamicVariablesTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case CreateSimulationTestRequestDynamicVariablesTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case CreateSimulationTestRequestDynamicVariablesTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case CreateSimulationTestRequestDynamicVariablesTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateSimulationTestRequestDynamicVariables", string(data))
-}
-
-func (u CreateSimulationTestRequestDynamicVariables) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type CreateSimulationTestRequestDynamicVariables: all fields are null")
-}
 
 type CreateSimulationTestRequest struct {
 	// Metadata of a conversation this test was created from (if applicable).
 	FromConversationMetadata *TestFromConversationMetadataInput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
-	DynamicVariables map[string]*CreateSimulationTestRequestDynamicVariables `json:"dynamic_variables,omitzero"`
-	ChatHistory      []ConversationHistoryTranscriptCommonModelInput         `json:"chat_history,omitzero"`
+	DynamicVariables map[string]any                                  `json:"dynamic_variables,omitzero"`
+	ChatHistory      []ConversationHistoryTranscriptCommonModelInput `json:"chat_history,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"simulation" json:"type"`
 	// A prompt that evaluates whether the agent's response is successful. Should return True or False.
@@ -191,7 +48,7 @@ func (c *CreateSimulationTestRequest) GetFromConversationMetadata() *TestFromCon
 	return c.FromConversationMetadata
 }
 
-func (c *CreateSimulationTestRequest) GetDynamicVariables() map[string]*CreateSimulationTestRequestDynamicVariables {
+func (c *CreateSimulationTestRequest) GetDynamicVariables() map[string]any {
 	if c == nil {
 		return nil
 	}

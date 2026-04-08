@@ -3,151 +3,8 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
-
-type ConversationInitiationClientDataRequestInputDynamicVariablesType string
-
-const (
-	ConversationInitiationClientDataRequestInputDynamicVariablesTypeStr     ConversationInitiationClientDataRequestInputDynamicVariablesType = "str"
-	ConversationInitiationClientDataRequestInputDynamicVariablesTypeNumber  ConversationInitiationClientDataRequestInputDynamicVariablesType = "number"
-	ConversationInitiationClientDataRequestInputDynamicVariablesTypeInteger ConversationInitiationClientDataRequestInputDynamicVariablesType = "integer"
-	ConversationInitiationClientDataRequestInputDynamicVariablesTypeBoolean ConversationInitiationClientDataRequestInputDynamicVariablesType = "boolean"
-)
-
-type ConversationInitiationClientDataRequestInputDynamicVariables struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type ConversationInitiationClientDataRequestInputDynamicVariablesType
-}
-
-func CreateConversationInitiationClientDataRequestInputDynamicVariablesStr(str string) ConversationInitiationClientDataRequestInputDynamicVariables {
-	typ := ConversationInitiationClientDataRequestInputDynamicVariablesTypeStr
-
-	return ConversationInitiationClientDataRequestInputDynamicVariables{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateConversationInitiationClientDataRequestInputDynamicVariablesNumber(number float64) ConversationInitiationClientDataRequestInputDynamicVariables {
-	typ := ConversationInitiationClientDataRequestInputDynamicVariablesTypeNumber
-
-	return ConversationInitiationClientDataRequestInputDynamicVariables{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateConversationInitiationClientDataRequestInputDynamicVariablesInteger(integer int64) ConversationInitiationClientDataRequestInputDynamicVariables {
-	typ := ConversationInitiationClientDataRequestInputDynamicVariablesTypeInteger
-
-	return ConversationInitiationClientDataRequestInputDynamicVariables{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateConversationInitiationClientDataRequestInputDynamicVariablesBoolean(boolean bool) ConversationInitiationClientDataRequestInputDynamicVariables {
-	typ := ConversationInitiationClientDataRequestInputDynamicVariablesTypeBoolean
-
-	return ConversationInitiationClientDataRequestInputDynamicVariables{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *ConversationInitiationClientDataRequestInputDynamicVariables) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationInitiationClientDataRequestInputDynamicVariablesTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationInitiationClientDataRequestInputDynamicVariablesTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationInitiationClientDataRequestInputDynamicVariablesTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConversationInitiationClientDataRequestInputDynamicVariablesTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataRequestInputDynamicVariables", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataRequestInputDynamicVariables", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(ConversationInitiationClientDataRequestInputDynamicVariablesType)
-	switch best.Type {
-	case ConversationInitiationClientDataRequestInputDynamicVariablesTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case ConversationInitiationClientDataRequestInputDynamicVariablesTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case ConversationInitiationClientDataRequestInputDynamicVariablesTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case ConversationInitiationClientDataRequestInputDynamicVariablesTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConversationInitiationClientDataRequestInputDynamicVariables", string(data))
-}
-
-func (u ConversationInitiationClientDataRequestInputDynamicVariables) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type ConversationInitiationClientDataRequestInputDynamicVariables: all fields are null")
-}
 
 type ConversationInitiationClientDataRequestInput struct {
 	ConversationConfigOverride *ConversationConfigClientOverrideInput `json:"conversation_config_override,omitzero"`
@@ -159,8 +16,8 @@ type ConversationInitiationClientDataRequestInput struct {
 	// ID of the agent branch to use for this conversation
 	BranchID *string `json:"branch_id,omitzero"`
 	// Environment to use for resolving environment variables
-	Environment      *string                                                                  `json:"environment,omitzero"`
-	DynamicVariables map[string]*ConversationInitiationClientDataRequestInputDynamicVariables `json:"dynamic_variables,omitzero"`
+	Environment      *string        `json:"environment,omitzero"`
+	DynamicVariables map[string]any `json:"dynamic_variables,omitzero"`
 }
 
 func (c ConversationInitiationClientDataRequestInput) MarshalJSON() ([]byte, error) {
@@ -216,7 +73,7 @@ func (c *ConversationInitiationClientDataRequestInput) GetEnvironment() *string 
 	return c.Environment
 }
 
-func (c *ConversationInitiationClientDataRequestInput) GetDynamicVariables() map[string]*ConversationInitiationClientDataRequestInputDynamicVariables {
+func (c *ConversationInitiationClientDataRequestInput) GetDynamicVariables() map[string]any {
 	if c == nil {
 		return nil
 	}

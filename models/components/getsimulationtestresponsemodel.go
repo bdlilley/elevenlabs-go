@@ -3,159 +3,16 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/types"
 )
-
-type GetSimulationTestResponseModelDynamicVariablesType string
-
-const (
-	GetSimulationTestResponseModelDynamicVariablesTypeStr     GetSimulationTestResponseModelDynamicVariablesType = "str"
-	GetSimulationTestResponseModelDynamicVariablesTypeNumber  GetSimulationTestResponseModelDynamicVariablesType = "number"
-	GetSimulationTestResponseModelDynamicVariablesTypeInteger GetSimulationTestResponseModelDynamicVariablesType = "integer"
-	GetSimulationTestResponseModelDynamicVariablesTypeBoolean GetSimulationTestResponseModelDynamicVariablesType = "boolean"
-)
-
-type GetSimulationTestResponseModelDynamicVariables struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type GetSimulationTestResponseModelDynamicVariablesType
-}
-
-func CreateGetSimulationTestResponseModelDynamicVariablesStr(str string) GetSimulationTestResponseModelDynamicVariables {
-	typ := GetSimulationTestResponseModelDynamicVariablesTypeStr
-
-	return GetSimulationTestResponseModelDynamicVariables{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateGetSimulationTestResponseModelDynamicVariablesNumber(number float64) GetSimulationTestResponseModelDynamicVariables {
-	typ := GetSimulationTestResponseModelDynamicVariablesTypeNumber
-
-	return GetSimulationTestResponseModelDynamicVariables{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateGetSimulationTestResponseModelDynamicVariablesInteger(integer int64) GetSimulationTestResponseModelDynamicVariables {
-	typ := GetSimulationTestResponseModelDynamicVariablesTypeInteger
-
-	return GetSimulationTestResponseModelDynamicVariables{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateGetSimulationTestResponseModelDynamicVariablesBoolean(boolean bool) GetSimulationTestResponseModelDynamicVariables {
-	typ := GetSimulationTestResponseModelDynamicVariablesTypeBoolean
-
-	return GetSimulationTestResponseModelDynamicVariables{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *GetSimulationTestResponseModelDynamicVariables) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  GetSimulationTestResponseModelDynamicVariablesTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  GetSimulationTestResponseModelDynamicVariablesTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  GetSimulationTestResponseModelDynamicVariablesTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  GetSimulationTestResponseModelDynamicVariablesTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetSimulationTestResponseModelDynamicVariables", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetSimulationTestResponseModelDynamicVariables", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(GetSimulationTestResponseModelDynamicVariablesType)
-	switch best.Type {
-	case GetSimulationTestResponseModelDynamicVariablesTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case GetSimulationTestResponseModelDynamicVariablesTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case GetSimulationTestResponseModelDynamicVariablesTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case GetSimulationTestResponseModelDynamicVariablesTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetSimulationTestResponseModelDynamicVariables", string(data))
-}
-
-func (u GetSimulationTestResponseModelDynamicVariables) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type GetSimulationTestResponseModelDynamicVariables: all fields are null")
-}
 
 type GetSimulationTestResponseModel struct {
 	// Metadata of a conversation this test was created from (if applicable).
 	FromConversationMetadata *TestFromConversationMetadataOutput `json:"from_conversation_metadata,omitzero"`
 	// Dynamic variables to replace in the agent config during testing
-	DynamicVariables map[string]*GetSimulationTestResponseModelDynamicVariables `json:"dynamic_variables,omitzero"`
-	ChatHistory      []ConversationHistoryTranscriptCommonModelOutput           `json:"chat_history,omitzero"`
+	DynamicVariables map[string]any                                   `json:"dynamic_variables,omitzero"`
+	ChatHistory      []ConversationHistoryTranscriptCommonModelOutput `json:"chat_history,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"simulation" json:"type"`
 	// A prompt that evaluates whether the agent's response is successful. Should return True or False.
@@ -190,7 +47,7 @@ func (g *GetSimulationTestResponseModel) GetFromConversationMetadata() *TestFrom
 	return g.FromConversationMetadata
 }
 
-func (g *GetSimulationTestResponseModel) GetDynamicVariables() map[string]*GetSimulationTestResponseModelDynamicVariables {
+func (g *GetSimulationTestResponseModel) GetDynamicVariables() map[string]any {
 	if g == nil {
 		return nil
 	}

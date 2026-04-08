@@ -20,4 +20,107 @@ actions:
           description: ElevenLabs API
   - target: $.paths[*][*].parameters[?(@.name == 'xi-api-key')]
     remove: true
-
+  - target: "$.components.schemas['AgentConfigAPIModel-Input'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['AgentConfigAPIModel-Output'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['AgentConfigAPIModelWorkflowOverride-Input'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['AgentConfigAPIModelWorkflowOverride-Output'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ApiIntegrationWebhookToolConfig-Input'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ApiIntegrationWebhookToolConfig-Output'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ClientToolConfig-Input'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ClientToolConfig-Output'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ConversationInitiationClientDataInternal'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ConversationInitiationClientDataRequest-Input'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ConversationInitiationClientDataRequest-Output'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ConversationSimulationSpecification'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['CreateResponseUnitTestRequest'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['CreateSimulationTestRequest'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['CreateToolCallUnitTestRequest'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['GetResponseUnitTestResponseModel'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['GetSimulationTestResponseModel'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['GetToolCallUnitTestResponseModel'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ResponseUnitTestModel'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['SimulationTestModel'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['ToolCallUnitTestModel'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['UpdateResponseUnitTestRequest'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['UpdateSimulationTestRequest'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['UpdateToolCallUnitTestRequest'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['WebhookToolConfig-Input'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true
+  - target: "$.components.schemas['WebhookToolConfig-Output'].properties.dynamic_variables"
+    update:
+      type: object
+      additionalProperties: true

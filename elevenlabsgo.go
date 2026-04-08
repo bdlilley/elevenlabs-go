@@ -56,7 +56,9 @@ func Pointer[T any](v T) *T { return &v }
 type ElevenlabsGo struct {
 	SDKVersion string
 	// Accesses your speech history. Your speech history is a list of all your created audio including its metadata using our text-to-speech and speech-to-speech models.
-	SpeechHistory   *SpeechHistory
+	SpeechHistory *SpeechHistory
+	// Sound Generation
+	// Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects models in the world.
 	SoundGeneration *SoundGeneration
 	// Audio Isolation
 	// Removes background noise from audio
@@ -64,7 +66,9 @@ type ElevenlabsGo struct {
 	// Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
 	Samples *Samples
 	// Convert text into lifelike speech using a voice of your choice.
-	TextToSpeech   *TextToSpeech
+	TextToSpeech *TextToSpeech
+	// Text To Dialogue (Multi-Voice)
+	// Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
 	TextToDialogue *TextToDialogue
 	// Create speech by combining the style and content of an audio file you upload with a voice of your choice.
 	SpeechToSpeech *SpeechToSpeech
@@ -173,9 +177,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *ElevenlabsGo {
 	sdk := &ElevenlabsGo{
-		SDKVersion: "0.3.0",
+		SDKVersion: "0.5.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 0.3.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent:  "speakeasy-sdk/go 0.5.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
