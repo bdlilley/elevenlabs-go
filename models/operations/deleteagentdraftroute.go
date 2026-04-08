@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteAgentDraftRouteRequest struct {
@@ -12,8 +11,6 @@ type DeleteAgentDraftRouteRequest struct {
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
 	// The ID of the agent branch to use
 	BranchID string `queryParam:"style=form,explode=true,name=branch_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteAgentDraftRouteRequest) GetAgentID() string {
@@ -28,13 +25,6 @@ func (d *DeleteAgentDraftRouteRequest) GetBranchID() string {
 		return ""
 	}
 	return d.BranchID
-}
-
-func (d *DeleteAgentDraftRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteAgentDraftRouteResponse struct {

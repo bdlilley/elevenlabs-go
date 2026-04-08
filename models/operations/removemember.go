@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RemoveMemberRequest struct {
 	// The ID of the target group.
-	GroupID string `pathParam:"style=simple,explode=false,name=group_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                         `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIDMembersRemovePost `request:"mediaType=application/json"`
+	GroupID string                                                                            `pathParam:"style=simple,explode=false,name=group_id"`
+	Body    components.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIDMembersRemovePost `request:"mediaType=application/json"`
 }
 
 func (r *RemoveMemberRequest) GetGroupID() string {
@@ -21,13 +18,6 @@ func (r *RemoveMemberRequest) GetGroupID() string {
 		return ""
 	}
 	return r.GroupID
-}
-
-func (r *RemoveMemberRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XiAPIKey
 }
 
 func (r *RemoveMemberRequest) GetBody() components.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIDMembersRemovePost {

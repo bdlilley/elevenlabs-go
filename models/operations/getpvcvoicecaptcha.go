@@ -4,14 +4,11 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetPvcVoiceCaptchaRequest struct {
 	// Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
 	VoiceID string `pathParam:"style=simple,explode=false,name=voice_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetPvcVoiceCaptchaRequest) GetVoiceID() string {
@@ -19,13 +16,6 @@ func (g *GetPvcVoiceCaptchaRequest) GetVoiceID() string {
 		return ""
 	}
 	return g.VoiceID
-}
-
-func (g *GetPvcVoiceCaptchaRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetPvcVoiceCaptchaResponse struct {

@@ -17,8 +17,6 @@ type GetLivekitTokenRequest struct {
 	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
 	// The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.
 	Environment optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=environment"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetLivekitTokenRequest) GetAgentID() string {
@@ -47,13 +45,6 @@ func (g *GetLivekitTokenRequest) GetEnvironment() optionalnullable.OptionalNulla
 		return nil
 	}
 	return g.Environment
-}
-
-func (g *GetLivekitTokenRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetLivekitTokenResponse struct {

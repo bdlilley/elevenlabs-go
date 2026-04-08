@@ -6,7 +6,6 @@ import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -14,11 +13,10 @@ func main() {
 	ctx := context.Background()
 
 	s := elevenlabsgo.New(
-		"https://api.example.com",
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
+	res, err := s.GetUserSubscriptionInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}

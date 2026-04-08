@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdateAgentResponseTestRouteTestRequestType string
@@ -129,10 +128,8 @@ func (u UpdateAgentResponseTestRouteTestRequest) MarshalJSON() ([]byte, error) {
 
 type UpdateAgentResponseTestRouteRequest struct {
 	// The id of a chat response test. This is returned on test creation.
-	TestID string `pathParam:"style=simple,explode=false,name=test_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     UpdateAgentResponseTestRouteTestRequest   `request:"mediaType=application/json"`
+	TestID string                                  `pathParam:"style=simple,explode=false,name=test_id"`
+	Body   UpdateAgentResponseTestRouteTestRequest `request:"mediaType=application/json"`
 }
 
 func (u *UpdateAgentResponseTestRouteRequest) GetTestID() string {
@@ -140,13 +137,6 @@ func (u *UpdateAgentResponseTestRouteRequest) GetTestID() string {
 		return ""
 	}
 	return u.TestID
-}
-
-func (u *UpdateAgentResponseTestRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdateAgentResponseTestRouteRequest) GetBody() UpdateAgentResponseTestRouteTestRequest {

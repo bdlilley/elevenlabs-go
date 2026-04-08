@@ -4,14 +4,11 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteServiceAccountAPIKeyRequest struct {
 	ServiceAccountUserID string `pathParam:"style=simple,explode=false,name=service_account_user_id"`
 	APIKeyID             string `pathParam:"style=simple,explode=false,name=api_key_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteServiceAccountAPIKeyRequest) GetServiceAccountUserID() string {
@@ -26,13 +23,6 @@ func (d *DeleteServiceAccountAPIKeyRequest) GetAPIKeyID() string {
 		return ""
 	}
 	return d.APIKeyID
-}
-
-func (d *DeleteServiceAccountAPIKeyRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteServiceAccountAPIKeyResponse struct {

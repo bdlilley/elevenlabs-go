@@ -4,15 +4,12 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type EditServiceAccountAPIKeyRequest struct {
-	ServiceAccountUserID string `pathParam:"style=simple,explode=false,name=service_account_user_id"`
-	APIKeyID             string `pathParam:"style=simple,explode=false,name=api_key_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                        `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch `request:"mediaType=application/json"`
+	ServiceAccountUserID string                                                                                           `pathParam:"style=simple,explode=false,name=service_account_user_id"`
+	APIKeyID             string                                                                                           `pathParam:"style=simple,explode=false,name=api_key_id"`
+	Body                 components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch `request:"mediaType=application/json"`
 }
 
 func (e *EditServiceAccountAPIKeyRequest) GetServiceAccountUserID() string {
@@ -27,13 +24,6 @@ func (e *EditServiceAccountAPIKeyRequest) GetAPIKeyID() string {
 		return ""
 	}
 	return e.APIKeyID
-}
-
-func (e *EditServiceAccountAPIKeyRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if e == nil {
-		return nil
-	}
-	return e.XiAPIKey
 }
 
 func (e *EditServiceAccountAPIKeyRequest) GetBody() components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch {

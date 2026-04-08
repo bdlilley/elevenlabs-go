@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type AddProjectRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]              `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreateStudioProjectV1StudioProjectsPost `request:"mediaType=multipart/form-data"`
-}
-
-func (a *AddProjectRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
-}
-
-func (a *AddProjectRequest) GetBody() components.BodyCreateStudioProjectV1StudioProjectsPost {
-	if a == nil {
-		return components.BodyCreateStudioProjectV1StudioProjectsPost{}
-	}
-	return a.Body
-}
 
 type AddProjectResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

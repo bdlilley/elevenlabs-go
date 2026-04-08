@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type CreateAgentTestFolderRouteRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                           `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost `request:"mediaType=application/json"`
-}
-
-func (c *CreateAgentTestFolderRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
-}
-
-func (c *CreateAgentTestFolderRouteRequest) GetBody() components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost {
-	if c == nil {
-		return components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost{}
-	}
-	return c.Body
-}
 
 type CreateAgentTestFolderRouteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

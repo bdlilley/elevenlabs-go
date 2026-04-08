@@ -34,7 +34,14 @@ func newAgentsPlatform(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration,
 
 // GetConversationSignedLink - Get Signed Url
 // Get a signed url to start a conversation with an agent with an agent that requires authorization
-func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, request operations.GetConversationSignedLinkRequest, opts ...operations.Option) (*operations.GetConversationSignedLinkResponse, error) {
+func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, agentID string, includeConversationID *bool, branchID optionalnullable.OptionalNullable[string], environment optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetConversationSignedLinkResponse, error) {
+	request := operations.GetConversationSignedLinkRequest{
+		AgentID:               agentID,
+		IncludeConversationID: includeConversationID,
+		BranchID:              branchID,
+		Environment:           environment,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -84,8 +91,6 @@ func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, request 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -272,7 +277,14 @@ func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, request 
 // Get a signed url to start a conversation with an agent with an agent that requires authorization
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, request operations.GetSignedURLDeprecatedRequest, opts ...operations.Option) (*operations.GetSignedURLDeprecatedResponse, error) {
+func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, agentID string, includeConversationID *bool, branchID optionalnullable.OptionalNullable[string], environment optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSignedURLDeprecatedResponse, error) {
+	request := operations.GetSignedURLDeprecatedRequest{
+		AgentID:               agentID,
+		IncludeConversationID: includeConversationID,
+		BranchID:              branchID,
+		Environment:           environment,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -322,8 +334,6 @@ func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, request ope
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -508,7 +518,14 @@ func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, request ope
 
 // GetLivekitToken - Get Webrtc Token
 // Get a WebRTC session token for real-time communication.
-func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, request operations.GetLivekitTokenRequest, opts ...operations.Option) (*operations.GetLivekitTokenResponse, error) {
+func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, agentID string, participantName optionalnullable.OptionalNullable[string], branchID optionalnullable.OptionalNullable[string], environment optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetLivekitTokenResponse, error) {
+	request := operations.GetLivekitTokenRequest{
+		AgentID:         agentID,
+		ParticipantName: participantName,
+		BranchID:        branchID,
+		Environment:     environment,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -558,8 +575,6 @@ func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, request operations
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -744,12 +759,7 @@ func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, request operations
 
 // HandleTwilioOutboundCall - Handle An Outbound Call Via Twilio
 // Handle an outbound call via Twilio
-func (s *AgentsPlatform) HandleTwilioOutboundCall(ctx context.Context, body components.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.HandleTwilioOutboundCallResponse, error) {
-	request := operations.HandleTwilioOutboundCallRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) HandleTwilioOutboundCall(ctx context.Context, request components.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost, opts ...operations.Option) (*operations.HandleTwilioOutboundCallResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -781,7 +791,7 @@ func (s *AgentsPlatform) HandleTwilioOutboundCall(ctx context.Context, body comp
 		OperationID:      "handle_twilio_outbound_call",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -806,8 +816,6 @@ func (s *AgentsPlatform) HandleTwilioOutboundCall(ctx context.Context, body comp
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -988,12 +996,7 @@ func (s *AgentsPlatform) HandleTwilioOutboundCall(ctx context.Context, body comp
 
 // RegisterTwilioCall - Register A Twilio Call And Return Twiml
 // Register a Twilio call and return TwiML to connect the call
-func (s *AgentsPlatform) RegisterTwilioCall(ctx context.Context, body components.BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RegisterTwilioCallResponse, error) {
-	request := operations.RegisterTwilioCallRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) RegisterTwilioCall(ctx context.Context, request components.BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost, opts ...operations.Option) (*operations.RegisterTwilioCallResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1025,7 +1028,7 @@ func (s *AgentsPlatform) RegisterTwilioCall(ctx context.Context, body components
 		OperationID:      "register_twilio_call",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1050,8 +1053,6 @@ func (s *AgentsPlatform) RegisterTwilioCall(ctx context.Context, body components
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1228,12 +1229,7 @@ func (s *AgentsPlatform) RegisterTwilioCall(ctx context.Context, body components
 
 // WhatsappOutboundCall - Make An Outbound Call Via Whatsapp
 // Make an outbound call via WhatsApp
-func (s *AgentsPlatform) WhatsappOutboundCall(ctx context.Context, body components.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.WhatsappOutboundCallResponse, error) {
-	request := operations.WhatsappOutboundCallRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) WhatsappOutboundCall(ctx context.Context, request components.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost, opts ...operations.Option) (*operations.WhatsappOutboundCallResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1265,7 +1261,7 @@ func (s *AgentsPlatform) WhatsappOutboundCall(ctx context.Context, body componen
 		OperationID:      "whatsapp_outbound_call",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1290,8 +1286,6 @@ func (s *AgentsPlatform) WhatsappOutboundCall(ctx context.Context, body componen
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1472,12 +1466,7 @@ func (s *AgentsPlatform) WhatsappOutboundCall(ctx context.Context, body componen
 
 // WhatsappOutboundMessage - Send An Outbound Message Via Whatsapp
 // Send an outbound message via WhatsApp
-func (s *AgentsPlatform) WhatsappOutboundMessage(ctx context.Context, body components.BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.WhatsappOutboundMessageResponse, error) {
-	request := operations.WhatsappOutboundMessageRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) WhatsappOutboundMessage(ctx context.Context, request components.BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost, opts ...operations.Option) (*operations.WhatsappOutboundMessageResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1509,7 +1498,7 @@ func (s *AgentsPlatform) WhatsappOutboundMessage(ctx context.Context, body compo
 		OperationID:      "whatsapp_outbound_message",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1534,8 +1523,6 @@ func (s *AgentsPlatform) WhatsappOutboundMessage(ctx context.Context, body compo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1716,10 +1703,9 @@ func (s *AgentsPlatform) WhatsappOutboundMessage(ctx context.Context, body compo
 
 // CreateAgentRoute - Create Agent
 // Create an agent from a config object
-func (s *AgentsPlatform) CreateAgentRoute(ctx context.Context, body components.BodyCreateAgentV1ConvaiAgentsCreatePost, enableVersioning *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAgentRouteResponse, error) {
+func (s *AgentsPlatform) CreateAgentRoute(ctx context.Context, body components.BodyCreateAgentV1ConvaiAgentsCreatePost, enableVersioning *bool, opts ...operations.Option) (*operations.CreateAgentRouteResponse, error) {
 	request := operations.CreateAgentRouteRequest{
 		EnableVersioning: enableVersioning,
-		XiAPIKey:         xiAPIKey,
 		Body:             body,
 	}
 
@@ -1779,8 +1765,6 @@ func (s *AgentsPlatform) CreateAgentRoute(ctx context.Context, body components.B
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -1965,10 +1949,9 @@ func (s *AgentsPlatform) CreateAgentRoute(ctx context.Context, body components.B
 
 // GetAgentSummariesRoute - Get Agent Summaries
 // Returns summaries for the specified agents.
-func (s *AgentsPlatform) GetAgentSummariesRoute(ctx context.Context, agentIds []string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentSummariesRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentSummariesRoute(ctx context.Context, agentIds []string, opts ...operations.Option) (*operations.GetAgentSummariesRouteResponse, error) {
 	request := operations.GetAgentSummariesRouteRequest{
 		AgentIds: agentIds,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2020,8 +2003,6 @@ func (s *AgentsPlatform) GetAgentSummariesRoute(ctx context.Context, agentIds []
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -2206,12 +2187,11 @@ func (s *AgentsPlatform) GetAgentSummariesRoute(ctx context.Context, agentIds []
 
 // GetAgentRoute - Get Agent
 // Retrieve config for an agent
-func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, versionID optionalnullable.OptionalNullable[string], branchID optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, versionID optionalnullable.OptionalNullable[string], branchID optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentRouteResponse, error) {
 	request := operations.GetAgentRouteRequest{
 		AgentID:   agentID,
 		VersionID: versionID,
 		BranchID:  branchID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2263,8 +2243,6 @@ func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, vers
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -2449,10 +2427,9 @@ func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, vers
 
 // DeleteAgentRoute - Delete Agent
 // Delete an agent
-func (s *AgentsPlatform) DeleteAgentRoute(ctx context.Context, agentID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteAgentRouteResponse, error) {
+func (s *AgentsPlatform) DeleteAgentRoute(ctx context.Context, agentID string, opts ...operations.Option) (*operations.DeleteAgentRouteResponse, error) {
 	request := operations.DeleteAgentRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
+		AgentID: agentID,
 	}
 
 	o := operations.Options{}
@@ -2504,8 +2481,6 @@ func (s *AgentsPlatform) DeleteAgentRoute(ctx context.Context, agentID string, x
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2669,7 +2644,14 @@ func (s *AgentsPlatform) DeleteAgentRoute(ctx context.Context, agentID string, x
 
 // PatchAgentSettingsRoute - Patches An Agent Settings
 // Patches an Agent settings
-func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, request operations.PatchAgentSettingsRouteRequest, opts ...operations.Option) (*operations.PatchAgentSettingsRouteResponse, error) {
+func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, agentID string, enableVersioningIfNotEnabled *bool, branchID optionalnullable.OptionalNullable[string], body *components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch, opts ...operations.Option) (*operations.PatchAgentSettingsRouteResponse, error) {
+	request := operations.PatchAgentSettingsRouteRequest{
+		AgentID:                      agentID,
+		EnableVersioningIfNotEnabled: enableVersioningIfNotEnabled,
+		BranchID:                     branchID,
+		Body:                         body,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2726,8 +2708,6 @@ func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, request op
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -2912,11 +2892,10 @@ func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, request op
 
 // GetAgentWidgetRoute - Get Agent Widget Config
 // Retrieve the widget configuration for an agent
-func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string, conversationSignature optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentWidgetRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string, conversationSignature optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentWidgetRouteResponse, error) {
 	request := operations.GetAgentWidgetRouteRequest{
 		AgentID:               agentID,
 		ConversationSignature: conversationSignature,
-		XiAPIKey:              xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2968,8 +2947,6 @@ func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -3154,10 +3131,9 @@ func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string
 
 // GetAgentLinkRoute - Get Shareable Agent Link
 // Get the current link used to share the agent with others
-func (s *AgentsPlatform) GetAgentLinkRoute(ctx context.Context, agentID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentLinkRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentLinkRoute(ctx context.Context, agentID string, opts ...operations.Option) (*operations.GetAgentLinkRouteResponse, error) {
 	request := operations.GetAgentLinkRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
+		AgentID: agentID,
 	}
 
 	o := operations.Options{}
@@ -3209,8 +3185,6 @@ func (s *AgentsPlatform) GetAgentLinkRoute(ctx context.Context, agentID string, 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3391,11 +3365,10 @@ func (s *AgentsPlatform) GetAgentLinkRoute(ctx context.Context, agentID string, 
 
 // PostAgentAvatarRoute - Post Agent Avatar
 // Sets the avatar for an agent displayed in the widget
-func (s *AgentsPlatform) PostAgentAvatarRoute(ctx context.Context, agentID string, body components.BodyPostAgentAvatarV1ConvaiAgentsAgentIDAvatarPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.PostAgentAvatarRouteResponse, error) {
+func (s *AgentsPlatform) PostAgentAvatarRoute(ctx context.Context, agentID string, body components.BodyPostAgentAvatarV1ConvaiAgentsAgentIDAvatarPost, opts ...operations.Option) (*operations.PostAgentAvatarRouteResponse, error) {
 	request := operations.PostAgentAvatarRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -3454,8 +3427,6 @@ func (s *AgentsPlatform) PostAgentAvatarRoute(ctx context.Context, agentID strin
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3687,8 +3658,6 @@ func (s *AgentsPlatform) GetAgentsRoute(ctx context.Context, request operations.
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -3872,10 +3841,9 @@ func (s *AgentsPlatform) GetAgentsRoute(ctx context.Context, request operations.
 
 // GetAgentKnowledgeBaseSize - Returns The Size Of The Agent'S Knowledge Base
 // Returns the number of pages in the agent's knowledge base.
-func (s *AgentsPlatform) GetAgentKnowledgeBaseSize(ctx context.Context, agentID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentKnowledgeBaseSizeResponse, error) {
+func (s *AgentsPlatform) GetAgentKnowledgeBaseSize(ctx context.Context, agentID string, opts ...operations.Option) (*operations.GetAgentKnowledgeBaseSizeResponse, error) {
 	request := operations.GetAgentKnowledgeBaseSizeRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
+		AgentID: agentID,
 	}
 
 	o := operations.Options{}
@@ -3927,8 +3895,6 @@ func (s *AgentsPlatform) GetAgentKnowledgeBaseSize(ctx context.Context, agentID 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4109,11 +4075,10 @@ func (s *AgentsPlatform) GetAgentKnowledgeBaseSize(ctx context.Context, agentID 
 
 // GetAgentLlmExpectedCostCalculation - Calculate Expected Llm Usage For An Agent
 // Calculates expected number of LLM tokens needed for the specified agent.
-func (s *AgentsPlatform) GetAgentLlmExpectedCostCalculation(ctx context.Context, agentID string, body components.LLMUsageCalculatorRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentLlmExpectedCostCalculationResponse, error) {
+func (s *AgentsPlatform) GetAgentLlmExpectedCostCalculation(ctx context.Context, agentID string, body components.LLMUsageCalculatorRequestModel, opts ...operations.Option) (*operations.GetAgentLlmExpectedCostCalculationResponse, error) {
 	request := operations.GetAgentLlmExpectedCostCalculationRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -4172,8 +4137,6 @@ func (s *AgentsPlatform) GetAgentLlmExpectedCostCalculation(ctx context.Context,
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4354,11 +4317,10 @@ func (s *AgentsPlatform) GetAgentLlmExpectedCostCalculation(ctx context.Context,
 
 // DuplicateAgentRoute - Duplicate Agent
 // Create a new agent by duplicating an existing one
-func (s *AgentsPlatform) DuplicateAgentRoute(ctx context.Context, agentID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost, opts ...operations.Option) (*operations.DuplicateAgentRouteResponse, error) {
+func (s *AgentsPlatform) DuplicateAgentRoute(ctx context.Context, agentID string, body *components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost, opts ...operations.Option) (*operations.DuplicateAgentRouteResponse, error) {
 	request := operations.DuplicateAgentRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -4417,8 +4379,6 @@ func (s *AgentsPlatform) DuplicateAgentRoute(ctx context.Context, agentID string
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4599,11 +4559,10 @@ func (s *AgentsPlatform) DuplicateAgentRoute(ctx context.Context, agentID string
 
 // RunConversationSimulationRoute - Simulates A Conversation
 // Run a conversation between the agent and a simulated user.
-func (s *AgentsPlatform) RunConversationSimulationRoute(ctx context.Context, agentID string, body components.BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RunConversationSimulationRouteResponse, error) {
+func (s *AgentsPlatform) RunConversationSimulationRoute(ctx context.Context, agentID string, body components.BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost, opts ...operations.Option) (*operations.RunConversationSimulationRouteResponse, error) {
 	request := operations.RunConversationSimulationRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -4662,8 +4621,6 @@ func (s *AgentsPlatform) RunConversationSimulationRoute(ctx context.Context, age
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4844,11 +4801,10 @@ func (s *AgentsPlatform) RunConversationSimulationRoute(ctx context.Context, age
 
 // RunConversationSimulationRouteStream - Simulates A Conversation (Stream)
 // Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
-func (s *AgentsPlatform) RunConversationSimulationRouteStream(ctx context.Context, agentID string, body components.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIDSimulateConversationStreamPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RunConversationSimulationRouteStreamResponse, error) {
+func (s *AgentsPlatform) RunConversationSimulationRouteStream(ctx context.Context, agentID string, body components.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIDSimulateConversationStreamPost, opts ...operations.Option) (*operations.RunConversationSimulationRouteStreamResponse, error) {
 	request := operations.RunConversationSimulationRouteStreamRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -4907,8 +4863,6 @@ func (s *AgentsPlatform) RunConversationSimulationRouteStream(ctx context.Contex
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -5070,12 +5024,7 @@ func (s *AgentsPlatform) RunConversationSimulationRouteStream(ctx context.Contex
 
 // CreateAgentTestFolderRoute - Create Agent Test Folder
 // Creates a folder for organizing agent tests.
-func (s *AgentsPlatform) CreateAgentTestFolderRoute(ctx context.Context, body components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAgentTestFolderRouteResponse, error) {
-	request := operations.CreateAgentTestFolderRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreateAgentTestFolderRoute(ctx context.Context, request components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost, opts ...operations.Option) (*operations.CreateAgentTestFolderRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5107,7 +5056,7 @@ func (s *AgentsPlatform) CreateAgentTestFolderRoute(ctx context.Context, body co
 		OperationID:      "create_agent_test_folder_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -5132,8 +5081,6 @@ func (s *AgentsPlatform) CreateAgentTestFolderRoute(ctx context.Context, body co
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -5314,10 +5261,9 @@ func (s *AgentsPlatform) CreateAgentTestFolderRoute(ctx context.Context, body co
 
 // GetAgentTestFolderRoute - Get Agent Test Folder By Id
 // Gets an agent test folder by ID, including its folder path.
-func (s *AgentsPlatform) GetAgentTestFolderRoute(ctx context.Context, folderID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentTestFolderRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentTestFolderRoute(ctx context.Context, folderID string, opts ...operations.Option) (*operations.GetAgentTestFolderRouteResponse, error) {
 	request := operations.GetAgentTestFolderRouteRequest{
 		FolderID: folderID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -5369,8 +5315,6 @@ func (s *AgentsPlatform) GetAgentTestFolderRoute(ctx context.Context, folderID s
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -5551,11 +5495,10 @@ func (s *AgentsPlatform) GetAgentTestFolderRoute(ctx context.Context, folderID s
 
 // DeleteAgentTestFolderRoute - Delete Agent Test Folder
 // Deletes an agent test folder by ID. Use force=true to delete a non-empty folder and all its contents.
-func (s *AgentsPlatform) DeleteAgentTestFolderRoute(ctx context.Context, folderID string, force *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteAgentTestFolderRouteResponse, error) {
+func (s *AgentsPlatform) DeleteAgentTestFolderRoute(ctx context.Context, folderID string, force *bool, opts ...operations.Option) (*operations.DeleteAgentTestFolderRouteResponse, error) {
 	request := operations.DeleteAgentTestFolderRouteRequest{
 		FolderID: folderID,
 		Force:    force,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -5607,8 +5550,6 @@ func (s *AgentsPlatform) DeleteAgentTestFolderRoute(ctx context.Context, folderI
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -5774,10 +5715,9 @@ func (s *AgentsPlatform) DeleteAgentTestFolderRoute(ctx context.Context, folderI
 
 // UpdateAgentTestFolderRoute - Update Agent Test Folder
 // Updates an agent test folder. Currently only supports updating the folder name.
-func (s *AgentsPlatform) UpdateAgentTestFolderRoute(ctx context.Context, folderID string, body components.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIDPatch, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateAgentTestFolderRouteResponse, error) {
+func (s *AgentsPlatform) UpdateAgentTestFolderRoute(ctx context.Context, folderID string, body components.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIDPatch, opts ...operations.Option) (*operations.UpdateAgentTestFolderRouteResponse, error) {
 	request := operations.UpdateAgentTestFolderRouteRequest{
 		FolderID: folderID,
-		XiAPIKey: xiAPIKey,
 		Body:     body,
 	}
 
@@ -5837,8 +5777,6 @@ func (s *AgentsPlatform) UpdateAgentTestFolderRoute(ctx context.Context, folderI
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -6019,12 +5957,7 @@ func (s *AgentsPlatform) UpdateAgentTestFolderRoute(ctx context.Context, folderI
 
 // AgentTestingBulkMoveRoute - Bulk Move Tests To Folder
 // Moves multiple tests or folders from one folder to another.
-func (s *AgentsPlatform) AgentTestingBulkMoveRoute(ctx context.Context, body components.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AgentTestingBulkMoveRouteResponse, error) {
-	request := operations.AgentTestingBulkMoveRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) AgentTestingBulkMoveRoute(ctx context.Context, request components.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost, opts ...operations.Option) (*operations.AgentTestingBulkMoveRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -6056,7 +5989,7 @@ func (s *AgentsPlatform) AgentTestingBulkMoveRoute(ctx context.Context, body com
 		OperationID:      "agent_testing_bulk_move_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -6081,8 +6014,6 @@ func (s *AgentsPlatform) AgentTestingBulkMoveRoute(ctx context.Context, body com
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -6313,8 +6244,6 @@ func (s *AgentsPlatform) GetConversationHistoriesRoute(ctx context.Context, requ
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -6550,8 +6479,6 @@ func (s *AgentsPlatform) GetConversationUsersRoute(ctx context.Context, request 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -6735,10 +6662,9 @@ func (s *AgentsPlatform) GetConversationUsersRoute(ctx context.Context, request 
 
 // GetConversationHistoryRoute - Get Conversation Details
 // Get the details of a particular conversation
-func (s *AgentsPlatform) GetConversationHistoryRoute(ctx context.Context, conversationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetConversationHistoryRouteResponse, error) {
+func (s *AgentsPlatform) GetConversationHistoryRoute(ctx context.Context, conversationID string, opts ...operations.Option) (*operations.GetConversationHistoryRouteResponse, error) {
 	request := operations.GetConversationHistoryRouteRequest{
 		ConversationID: conversationID,
-		XiAPIKey:       xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -6790,8 +6716,6 @@ func (s *AgentsPlatform) GetConversationHistoryRoute(ctx context.Context, conver
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -6972,10 +6896,9 @@ func (s *AgentsPlatform) GetConversationHistoryRoute(ctx context.Context, conver
 
 // DeleteConversationRoute - Delete Conversation
 // Delete a particular conversation
-func (s *AgentsPlatform) DeleteConversationRoute(ctx context.Context, conversationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteConversationRouteResponse, error) {
+func (s *AgentsPlatform) DeleteConversationRoute(ctx context.Context, conversationID string, opts ...operations.Option) (*operations.DeleteConversationRouteResponse, error) {
 	request := operations.DeleteConversationRouteRequest{
 		ConversationID: conversationID,
-		XiAPIKey:       xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -7027,8 +6950,6 @@ func (s *AgentsPlatform) DeleteConversationRoute(ctx context.Context, conversati
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -7209,10 +7130,9 @@ func (s *AgentsPlatform) DeleteConversationRoute(ctx context.Context, conversati
 
 // GetConversationAudioRoute - Get Conversation Audio
 // Get the audio recording of a particular conversation
-func (s *AgentsPlatform) GetConversationAudioRoute(ctx context.Context, conversationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetConversationAudioRouteResponse, error) {
+func (s *AgentsPlatform) GetConversationAudioRoute(ctx context.Context, conversationID string, opts ...operations.Option) (*operations.GetConversationAudioRouteResponse, error) {
 	request := operations.GetConversationAudioRouteRequest{
 		ConversationID: conversationID,
-		XiAPIKey:       xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -7264,8 +7184,6 @@ func (s *AgentsPlatform) GetConversationAudioRoute(ctx context.Context, conversa
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -7720,8 +7638,6 @@ func (s *AgentsPlatform) TextSearchConversationMessagesRoute(ctx context.Context
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -7905,7 +7821,14 @@ func (s *AgentsPlatform) TextSearchConversationMessagesRoute(ctx context.Context
 
 // SmartSearchConversationMessagesRoute - Smart Search Conversation Messages
 // Search conversation transcripts by semantic similarity to surface relevant messages based on meaning and intent, rather than exact keyword matches
-func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Context, request operations.SmartSearchConversationMessagesRouteRequest, opts ...operations.Option) (*operations.SmartSearchConversationMessagesRouteResponse, error) {
+func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Context, textQuery string, agentID optionalnullable.OptionalNullable[string], pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SmartSearchConversationMessagesRouteResponse, error) {
+	request := operations.SmartSearchConversationMessagesRouteRequest{
+		TextQuery: textQuery,
+		AgentID:   agentID,
+		PageSize:  pageSize,
+		Cursor:    cursor,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -7955,8 +7878,6 @@ func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Contex
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -8141,11 +8062,7 @@ func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Contex
 
 // ListPhoneNumbersRoute - List Phone Numbers
 // Retrieve all Phone Numbers
-func (s *AgentsPlatform) ListPhoneNumbersRoute(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListPhoneNumbersRouteResponse, error) {
-	request := operations.ListPhoneNumbersRouteRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *AgentsPlatform) ListPhoneNumbersRoute(ctx context.Context, opts ...operations.Option) (*operations.ListPhoneNumbersRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -8195,8 +8112,6 @@ func (s *AgentsPlatform) ListPhoneNumbersRoute(ctx context.Context, xiAPIKey opt
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -8377,12 +8292,7 @@ func (s *AgentsPlatform) ListPhoneNumbersRoute(ctx context.Context, xiAPIKey opt
 
 // CreatePhoneNumberRoute - Import Phone Number
 // Import Phone Number from provider configuration (Twilio or SIP trunk)
-func (s *AgentsPlatform) CreatePhoneNumberRoute(ctx context.Context, body operations.PhoneRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreatePhoneNumberRouteResponse, error) {
-	request := operations.CreatePhoneNumberRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreatePhoneNumberRoute(ctx context.Context, request operations.PhoneRequest, opts ...operations.Option) (*operations.CreatePhoneNumberRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -8414,7 +8324,7 @@ func (s *AgentsPlatform) CreatePhoneNumberRoute(ctx context.Context, body operat
 		OperationID:      "create_phone_number_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -8439,8 +8349,6 @@ func (s *AgentsPlatform) CreatePhoneNumberRoute(ctx context.Context, body operat
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -8621,10 +8529,9 @@ func (s *AgentsPlatform) CreatePhoneNumberRoute(ctx context.Context, body operat
 
 // GetPhoneNumberRoute - Get Phone Number
 // Retrieve Phone Number details by ID
-func (s *AgentsPlatform) GetPhoneNumberRoute(ctx context.Context, phoneNumberID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPhoneNumberRouteResponse, error) {
+func (s *AgentsPlatform) GetPhoneNumberRoute(ctx context.Context, phoneNumberID string, opts ...operations.Option) (*operations.GetPhoneNumberRouteResponse, error) {
 	request := operations.GetPhoneNumberRouteRequest{
 		PhoneNumberID: phoneNumberID,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -8676,8 +8583,6 @@ func (s *AgentsPlatform) GetPhoneNumberRoute(ctx context.Context, phoneNumberID 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -8858,10 +8763,9 @@ func (s *AgentsPlatform) GetPhoneNumberRoute(ctx context.Context, phoneNumberID 
 
 // DeletePhoneNumberRoute - Delete Phone Number
 // Delete Phone Number by ID
-func (s *AgentsPlatform) DeletePhoneNumberRoute(ctx context.Context, phoneNumberID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeletePhoneNumberRouteResponse, error) {
+func (s *AgentsPlatform) DeletePhoneNumberRoute(ctx context.Context, phoneNumberID string, opts ...operations.Option) (*operations.DeletePhoneNumberRouteResponse, error) {
 	request := operations.DeletePhoneNumberRouteRequest{
 		PhoneNumberID: phoneNumberID,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -8913,8 +8817,6 @@ func (s *AgentsPlatform) DeletePhoneNumberRoute(ctx context.Context, phoneNumber
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -9095,10 +8997,9 @@ func (s *AgentsPlatform) DeletePhoneNumberRoute(ctx context.Context, phoneNumber
 
 // UpdatePhoneNumberRoute - Update Phone Number
 // Update assigned agent of a phone number
-func (s *AgentsPlatform) UpdatePhoneNumberRoute(ctx context.Context, phoneNumberID string, body components.UpdatePhoneNumberRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdatePhoneNumberRouteResponse, error) {
+func (s *AgentsPlatform) UpdatePhoneNumberRoute(ctx context.Context, phoneNumberID string, body components.UpdatePhoneNumberRequest, opts ...operations.Option) (*operations.UpdatePhoneNumberRouteResponse, error) {
 	request := operations.UpdatePhoneNumberRouteRequest{
 		PhoneNumberID: phoneNumberID,
-		XiAPIKey:      xiAPIKey,
 		Body:          body,
 	}
 
@@ -9158,8 +9059,6 @@ func (s *AgentsPlatform) UpdatePhoneNumberRoute(ctx context.Context, phoneNumber
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -9577,11 +9476,7 @@ func (s *AgentsPlatform) GetPublicLlmExpectedCostCalculation(ctx context.Context
 
 // ListAvailableLlms - List Available Llms
 // Returns a list of available LLM models that can be used with agents, including their capabilities and any deprecation status. The response is filtered based on the data residency of the deployment and any compliance requirements (e.g. HIPAA) of the workspace subscription.
-func (s *AgentsPlatform) ListAvailableLlms(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListAvailableLlmsResponse, error) {
-	request := operations.ListAvailableLlmsRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *AgentsPlatform) ListAvailableLlms(ctx context.Context, opts ...operations.Option) (*operations.ListAvailableLlmsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -9631,8 +9526,6 @@ func (s *AgentsPlatform) ListAvailableLlms(ctx context.Context, xiAPIKey optiona
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -9813,10 +9706,9 @@ func (s *AgentsPlatform) ListAvailableLlms(ctx context.Context, xiAPIKey optiona
 
 // UploadFileRoute - Upload File
 // Upload an image or PDF file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
-func (s *AgentsPlatform) UploadFileRoute(ctx context.Context, conversationID string, body components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UploadFileRouteResponse, error) {
+func (s *AgentsPlatform) UploadFileRoute(ctx context.Context, conversationID string, body components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPost, opts ...operations.Option) (*operations.UploadFileRouteResponse, error) {
 	request := operations.UploadFileRouteRequest{
 		ConversationID: conversationID,
-		XiAPIKey:       xiAPIKey,
 		Body:           body,
 	}
 
@@ -9876,8 +9768,6 @@ func (s *AgentsPlatform) UploadFileRoute(ctx context.Context, conversationID str
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -10058,11 +9948,10 @@ func (s *AgentsPlatform) UploadFileRoute(ctx context.Context, conversationID str
 
 // CancelFileUploadRoute - Delete File Upload
 // Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
-func (s *AgentsPlatform) CancelFileUploadRoute(ctx context.Context, fileID string, conversationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CancelFileUploadRouteResponse, error) {
+func (s *AgentsPlatform) CancelFileUploadRoute(ctx context.Context, fileID string, conversationID string, opts ...operations.Option) (*operations.CancelFileUploadRouteResponse, error) {
 	request := operations.CancelFileUploadRouteRequest{
 		FileID:         fileID,
 		ConversationID: conversationID,
-		XiAPIKey:       xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -10114,8 +10003,6 @@ func (s *AgentsPlatform) CancelFileUploadRoute(ctx context.Context, fileID strin
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -10296,10 +10183,9 @@ func (s *AgentsPlatform) CancelFileUploadRoute(ctx context.Context, fileID strin
 
 // GetLiveCount - Get Live Count
 // Get the live count of the ongoing conversations.
-func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetLiveCountResponse, error) {
+func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetLiveCountResponse, error) {
 	request := operations.GetLiveCountRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
+		AgentID: agentID,
 	}
 
 	o := operations.Options{}
@@ -10351,8 +10237,6 @@ func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID optionalnulla
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -10537,10 +10421,9 @@ func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID optionalnulla
 
 // GetAgentKnowledgeBaseSummariesRoute - Get Knowledge Base Summaries By Ids
 // Gets multiple knowledge base document summaries by their IDs.
-func (s *AgentsPlatform) GetAgentKnowledgeBaseSummariesRoute(ctx context.Context, documentIds []string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentKnowledgeBaseSummariesRouteResponse, error) {
+func (s *AgentsPlatform) GetAgentKnowledgeBaseSummariesRoute(ctx context.Context, documentIds []string, opts ...operations.Option) (*operations.GetAgentKnowledgeBaseSummariesRouteResponse, error) {
 	request := operations.GetAgentKnowledgeBaseSummariesRouteRequest{
 		DocumentIds: documentIds,
-		XiAPIKey:    xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -10592,8 +10475,6 @@ func (s *AgentsPlatform) GetAgentKnowledgeBaseSummariesRoute(ctx context.Context
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -10829,8 +10710,6 @@ func (s *AgentsPlatform) GetKnowledgeBaseListRoute(ctx context.Context, request 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -11016,11 +10895,10 @@ func (s *AgentsPlatform) GetKnowledgeBaseListRoute(ctx context.Context, request 
 // Uploads a file or reference a webpage to use as part of the shared knowledge base
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *AgentsPlatform) AddDocumentationToKnowledgeBase(ctx context.Context, agentID *string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost, opts ...operations.Option) (*operations.AddDocumentationToKnowledgeBaseResponse, error) {
+func (s *AgentsPlatform) AddDocumentationToKnowledgeBase(ctx context.Context, agentID *string, body *components.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost, opts ...operations.Option) (*operations.AddDocumentationToKnowledgeBaseResponse, error) {
 	request := operations.AddDocumentationToKnowledgeBaseRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -11079,8 +10957,6 @@ func (s *AgentsPlatform) AddDocumentationToKnowledgeBase(ctx context.Context, ag
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -11265,12 +11141,7 @@ func (s *AgentsPlatform) AddDocumentationToKnowledgeBase(ctx context.Context, ag
 
 // CreateURLDocumentRoute - Create Url Document
 // Create a knowledge base document generated by scraping the given webpage.
-func (s *AgentsPlatform) CreateURLDocumentRoute(ctx context.Context, body components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateURLDocumentRouteResponse, error) {
-	request := operations.CreateURLDocumentRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreateURLDocumentRoute(ctx context.Context, request components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost, opts ...operations.Option) (*operations.CreateURLDocumentRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -11302,7 +11173,7 @@ func (s *AgentsPlatform) CreateURLDocumentRoute(ctx context.Context, body compon
 		OperationID:      "create_url_document_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -11327,8 +11198,6 @@ func (s *AgentsPlatform) CreateURLDocumentRoute(ctx context.Context, body compon
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -11509,12 +11378,7 @@ func (s *AgentsPlatform) CreateURLDocumentRoute(ctx context.Context, body compon
 
 // CreateFileDocumentRoute - Create File Document
 // Create a knowledge base document generated form the uploaded file.
-func (s *AgentsPlatform) CreateFileDocumentRoute(ctx context.Context, body components.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateFileDocumentRouteResponse, error) {
-	request := operations.CreateFileDocumentRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreateFileDocumentRoute(ctx context.Context, request components.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost, opts ...operations.Option) (*operations.CreateFileDocumentRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -11546,7 +11410,7 @@ func (s *AgentsPlatform) CreateFileDocumentRoute(ctx context.Context, body compo
 		OperationID:      "create_file_document_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -11571,8 +11435,6 @@ func (s *AgentsPlatform) CreateFileDocumentRoute(ctx context.Context, body compo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -11753,12 +11615,7 @@ func (s *AgentsPlatform) CreateFileDocumentRoute(ctx context.Context, body compo
 
 // CreateTextDocumentRoute - Create Text Document
 // Create a knowledge base document containing the provided text.
-func (s *AgentsPlatform) CreateTextDocumentRoute(ctx context.Context, body components.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateTextDocumentRouteResponse, error) {
-	request := operations.CreateTextDocumentRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreateTextDocumentRoute(ctx context.Context, request components.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost, opts ...operations.Option) (*operations.CreateTextDocumentRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -11790,7 +11647,7 @@ func (s *AgentsPlatform) CreateTextDocumentRoute(ctx context.Context, body compo
 		OperationID:      "create_text_document_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -11815,8 +11672,6 @@ func (s *AgentsPlatform) CreateTextDocumentRoute(ctx context.Context, body compo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -11997,11 +11852,10 @@ func (s *AgentsPlatform) CreateTextDocumentRoute(ctx context.Context, body compo
 
 // GetDocumentationFromKnowledgeBase - Get Documentation From Knowledge Base
 // Get details about a specific documentation making up the agent's knowledge base
-func (s *AgentsPlatform) GetDocumentationFromKnowledgeBase(ctx context.Context, documentationID string, agentID *string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetDocumentationFromKnowledgeBaseResponse, error) {
+func (s *AgentsPlatform) GetDocumentationFromKnowledgeBase(ctx context.Context, documentationID string, agentID *string, opts ...operations.Option) (*operations.GetDocumentationFromKnowledgeBaseResponse, error) {
 	request := operations.GetDocumentationFromKnowledgeBaseRequest{
 		DocumentationID: documentationID,
 		AgentID:         agentID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -12053,8 +11907,6 @@ func (s *AgentsPlatform) GetDocumentationFromKnowledgeBase(ctx context.Context, 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -12239,11 +12091,10 @@ func (s *AgentsPlatform) GetDocumentationFromKnowledgeBase(ctx context.Context, 
 
 // DeleteKnowledgeBaseDocument - Delete Knowledge Base Document Or Folder
 // Delete a document or folder from the knowledge base.
-func (s *AgentsPlatform) DeleteKnowledgeBaseDocument(ctx context.Context, documentationID string, force *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteKnowledgeBaseDocumentResponse, error) {
+func (s *AgentsPlatform) DeleteKnowledgeBaseDocument(ctx context.Context, documentationID string, force *bool, opts ...operations.Option) (*operations.DeleteKnowledgeBaseDocumentResponse, error) {
 	request := operations.DeleteKnowledgeBaseDocumentRequest{
 		DocumentationID: documentationID,
 		Force:           force,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -12295,8 +12146,6 @@ func (s *AgentsPlatform) DeleteKnowledgeBaseDocument(ctx context.Context, docume
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -12481,10 +12330,9 @@ func (s *AgentsPlatform) DeleteKnowledgeBaseDocument(ctx context.Context, docume
 
 // UpdateDocumentRoute - Update Document
 // Update the name of a document
-func (s *AgentsPlatform) UpdateDocumentRoute(ctx context.Context, documentationID string, body components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateDocumentRouteResponse, error) {
+func (s *AgentsPlatform) UpdateDocumentRoute(ctx context.Context, documentationID string, body components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch, opts ...operations.Option) (*operations.UpdateDocumentRouteResponse, error) {
 	request := operations.UpdateDocumentRouteRequest{
 		DocumentationID: documentationID,
-		XiAPIKey:        xiAPIKey,
 		Body:            body,
 	}
 
@@ -12544,8 +12392,6 @@ func (s *AgentsPlatform) UpdateDocumentRoute(ctx context.Context, documentationI
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -12726,11 +12572,7 @@ func (s *AgentsPlatform) UpdateDocumentRoute(ctx context.Context, documentationI
 
 // GetRagIndexOverview - Get Rag Index Overview.
 // Provides total size and other information of RAG indexes used by knowledgebase documents
-func (s *AgentsPlatform) GetRagIndexOverview(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetRagIndexOverviewResponse, error) {
-	request := operations.GetRagIndexOverviewRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *AgentsPlatform) GetRagIndexOverview(ctx context.Context, opts ...operations.Option) (*operations.GetRagIndexOverviewResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -12780,8 +12622,6 @@ func (s *AgentsPlatform) GetRagIndexOverview(ctx context.Context, xiAPIKey optio
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -12962,12 +12802,7 @@ func (s *AgentsPlatform) GetRagIndexOverview(ctx context.Context, xiAPIKey optio
 
 // GetOrCreateRagIndexes - Compute Rag Indexes In Batch
 // Retrieves and/or creates RAG indexes for multiple knowledge base documents in a single request. Maximum 100 items per request.
-func (s *AgentsPlatform) GetOrCreateRagIndexes(ctx context.Context, body components.BodyComputeRAGIndexesInBatchV1ConvaiKnowledgeBaseRAGIndexPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetOrCreateRagIndexesResponse, error) {
-	request := operations.GetOrCreateRagIndexesRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) GetOrCreateRagIndexes(ctx context.Context, request components.BodyComputeRAGIndexesInBatchV1ConvaiKnowledgeBaseRAGIndexPost, opts ...operations.Option) (*operations.GetOrCreateRagIndexesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -12999,7 +12834,7 @@ func (s *AgentsPlatform) GetOrCreateRagIndexes(ctx context.Context, body compone
 		OperationID:      "get_or_create_rag_indexes",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -13024,8 +12859,6 @@ func (s *AgentsPlatform) GetOrCreateRagIndexes(ctx context.Context, body compone
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -13206,10 +13039,9 @@ func (s *AgentsPlatform) GetOrCreateRagIndexes(ctx context.Context, body compone
 
 // RefreshURLDocumentRoute - Refresh Url Document Content
 // Manually refresh a URL document by re-fetching its content from the source URL.
-func (s *AgentsPlatform) RefreshURLDocumentRoute(ctx context.Context, documentationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RefreshURLDocumentRouteResponse, error) {
+func (s *AgentsPlatform) RefreshURLDocumentRoute(ctx context.Context, documentationID string, opts ...operations.Option) (*operations.RefreshURLDocumentRouteResponse, error) {
 	request := operations.RefreshURLDocumentRouteRequest{
 		DocumentationID: documentationID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -13261,8 +13093,6 @@ func (s *AgentsPlatform) RefreshURLDocumentRoute(ctx context.Context, documentat
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -13443,10 +13273,9 @@ func (s *AgentsPlatform) RefreshURLDocumentRoute(ctx context.Context, documentat
 
 // GetRagIndexes - Get Rag Indexes Of The Specified Knowledgebase Document.
 // Provides information about all RAG indexes of the specified knowledgebase document.
-func (s *AgentsPlatform) GetRagIndexes(ctx context.Context, documentationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetRagIndexesResponse, error) {
+func (s *AgentsPlatform) GetRagIndexes(ctx context.Context, documentationID string, opts ...operations.Option) (*operations.GetRagIndexesResponse, error) {
 	request := operations.GetRagIndexesRequest{
 		DocumentationID: documentationID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -13498,8 +13327,6 @@ func (s *AgentsPlatform) GetRagIndexes(ctx context.Context, documentationID stri
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -13680,10 +13507,9 @@ func (s *AgentsPlatform) GetRagIndexes(ctx context.Context, documentationID stri
 
 // RagIndexStatus - Compute Rag Index.
 // In case the document is not RAG indexed, it triggers rag indexing task, otherwise it just returns the current status.
-func (s *AgentsPlatform) RagIndexStatus(ctx context.Context, documentationID string, body components.RAGIndexRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RagIndexStatusResponse, error) {
+func (s *AgentsPlatform) RagIndexStatus(ctx context.Context, documentationID string, body components.RAGIndexRequestModel, opts ...operations.Option) (*operations.RagIndexStatusResponse, error) {
 	request := operations.RagIndexStatusRequest{
 		DocumentationID: documentationID,
-		XiAPIKey:        xiAPIKey,
 		Body:            body,
 	}
 
@@ -13743,8 +13569,6 @@ func (s *AgentsPlatform) RagIndexStatus(ctx context.Context, documentationID str
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -13925,11 +13749,10 @@ func (s *AgentsPlatform) RagIndexStatus(ctx context.Context, documentationID str
 
 // DeleteRagIndex - Delete Rag Index.
 // Delete RAG index for the knowledgebase document.
-func (s *AgentsPlatform) DeleteRagIndex(ctx context.Context, documentationID string, ragIndexID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteRagIndexResponse, error) {
+func (s *AgentsPlatform) DeleteRagIndex(ctx context.Context, documentationID string, ragIndexID string, opts ...operations.Option) (*operations.DeleteRagIndexResponse, error) {
 	request := operations.DeleteRagIndexRequest{
 		DocumentationID: documentationID,
 		RagIndexID:      ragIndexID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -13981,8 +13804,6 @@ func (s *AgentsPlatform) DeleteRagIndex(ctx context.Context, documentationID str
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -14163,7 +13984,14 @@ func (s *AgentsPlatform) DeleteRagIndex(ctx context.Context, documentationID str
 
 // SearchKnowledgeBaseContentRoute - Search Knowledge Base Content
 // Fuzzy text search over knowledge base document content
-func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, request operations.SearchKnowledgeBaseContentRouteRequest, opts ...operations.Option) (*operations.SearchKnowledgeBaseContentRouteResponse, error) {
+func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, query string, pageSize *int64, types optionalnullable.OptionalNullable[[]components.KnowledgeBaseDocumentType], cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SearchKnowledgeBaseContentRouteResponse, error) {
+	request := operations.SearchKnowledgeBaseContentRouteRequest{
+		Query:    query,
+		PageSize: pageSize,
+		Types:    types,
+		Cursor:   cursor,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -14213,8 +14041,6 @@ func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, re
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -14399,7 +14225,14 @@ func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, re
 
 // GetKnowledgeBaseDependentAgents - Get Dependent Agents List
 // Get a list of agents depending on this knowledge base document
-func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, request operations.GetKnowledgeBaseDependentAgentsRequest, opts ...operations.Option) (*operations.GetKnowledgeBaseDependentAgentsResponse, error) {
+func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, documentationID string, dependentType *components.KnowledgeBaseDependentType, pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetKnowledgeBaseDependentAgentsResponse, error) {
+	request := operations.GetKnowledgeBaseDependentAgentsRequest{
+		DocumentationID: documentationID,
+		DependentType:   dependentType,
+		PageSize:        pageSize,
+		Cursor:          cursor,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -14449,8 +14282,6 @@ func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, re
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -14635,10 +14466,9 @@ func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, re
 
 // GetKnowledgeBaseContent - Get Document Content
 // Get the entire content of a document from the knowledge base
-func (s *AgentsPlatform) GetKnowledgeBaseContent(ctx context.Context, documentationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetKnowledgeBaseContentResponse, error) {
+func (s *AgentsPlatform) GetKnowledgeBaseContent(ctx context.Context, documentationID string, opts ...operations.Option) (*operations.GetKnowledgeBaseContentResponse, error) {
 	request := operations.GetKnowledgeBaseContentRequest{
 		DocumentationID: documentationID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -14690,8 +14520,6 @@ func (s *AgentsPlatform) GetKnowledgeBaseContent(ctx context.Context, documentat
 	}
 	req.Header.Set("Accept", "text/html")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -14868,10 +14696,9 @@ func (s *AgentsPlatform) GetKnowledgeBaseContent(ctx context.Context, documentat
 
 // GetKnowledgeBaseSourceFileURL - Get Document Source File Url
 // Get a signed URL to download the original source file of a file-type document from the knowledge base
-func (s *AgentsPlatform) GetKnowledgeBaseSourceFileURL(ctx context.Context, documentationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetKnowledgeBaseSourceFileURLResponse, error) {
+func (s *AgentsPlatform) GetKnowledgeBaseSourceFileURL(ctx context.Context, documentationID string, opts ...operations.Option) (*operations.GetKnowledgeBaseSourceFileURLResponse, error) {
 	request := operations.GetKnowledgeBaseSourceFileURLRequest{
 		DocumentationID: documentationID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -14923,8 +14750,6 @@ func (s *AgentsPlatform) GetKnowledgeBaseSourceFileURL(ctx context.Context, docu
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -15105,12 +14930,11 @@ func (s *AgentsPlatform) GetKnowledgeBaseSourceFileURL(ctx context.Context, docu
 
 // GetDocumentationChunkFromKnowledgeBase - Get Documentation Chunk From Knowledge Base
 // Get details about a specific documentation part used by RAG.
-func (s *AgentsPlatform) GetDocumentationChunkFromKnowledgeBase(ctx context.Context, documentationID string, chunkID string, embeddingModel optionalnullable.OptionalNullable[components.EmbeddingModelEnum], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetDocumentationChunkFromKnowledgeBaseResponse, error) {
+func (s *AgentsPlatform) GetDocumentationChunkFromKnowledgeBase(ctx context.Context, documentationID string, chunkID string, embeddingModel optionalnullable.OptionalNullable[components.EmbeddingModelEnum], opts ...operations.Option) (*operations.GetDocumentationChunkFromKnowledgeBaseResponse, error) {
 	request := operations.GetDocumentationChunkFromKnowledgeBaseRequest{
 		DocumentationID: documentationID,
 		ChunkID:         chunkID,
 		EmbeddingModel:  embeddingModel,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -15162,8 +14986,6 @@ func (s *AgentsPlatform) GetDocumentationChunkFromKnowledgeBase(ctx context.Cont
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -15399,8 +15221,6 @@ func (s *AgentsPlatform) GetToolsRoute(ctx context.Context, request operations.G
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -15584,12 +15404,7 @@ func (s *AgentsPlatform) GetToolsRoute(ctx context.Context, request operations.G
 
 // AddToolRoute - Add Tool
 // Add a new tool to the available tools in the workspace.
-func (s *AgentsPlatform) AddToolRoute(ctx context.Context, body components.ToolRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddToolRouteResponse, error) {
-	request := operations.AddToolRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) AddToolRoute(ctx context.Context, request components.ToolRequestModel, opts ...operations.Option) (*operations.AddToolRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -15621,7 +15436,7 @@ func (s *AgentsPlatform) AddToolRoute(ctx context.Context, body components.ToolR
 		OperationID:      "add_tool_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -15646,8 +15461,6 @@ func (s *AgentsPlatform) AddToolRoute(ctx context.Context, body components.ToolR
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -15828,10 +15641,9 @@ func (s *AgentsPlatform) AddToolRoute(ctx context.Context, body components.ToolR
 
 // GetToolRoute - Get Tool
 // Get tool that is available in the workspace.
-func (s *AgentsPlatform) GetToolRoute(ctx context.Context, toolID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetToolRouteResponse, error) {
+func (s *AgentsPlatform) GetToolRoute(ctx context.Context, toolID string, opts ...operations.Option) (*operations.GetToolRouteResponse, error) {
 	request := operations.GetToolRouteRequest{
-		ToolID:   toolID,
-		XiAPIKey: xiAPIKey,
+		ToolID: toolID,
 	}
 
 	o := operations.Options{}
@@ -15883,8 +15695,6 @@ func (s *AgentsPlatform) GetToolRoute(ctx context.Context, toolID string, xiAPIK
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -16065,11 +15875,10 @@ func (s *AgentsPlatform) GetToolRoute(ctx context.Context, toolID string, xiAPIK
 
 // DeleteToolRoute - Delete Tool
 // Delete tool from the workspace.
-func (s *AgentsPlatform) DeleteToolRoute(ctx context.Context, toolID string, force *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteToolRouteResponse, error) {
+func (s *AgentsPlatform) DeleteToolRoute(ctx context.Context, toolID string, force *bool, opts ...operations.Option) (*operations.DeleteToolRouteResponse, error) {
 	request := operations.DeleteToolRouteRequest{
-		ToolID:   toolID,
-		Force:    force,
-		XiAPIKey: xiAPIKey,
+		ToolID: toolID,
+		Force:  force,
 	}
 
 	o := operations.Options{}
@@ -16121,8 +15930,6 @@ func (s *AgentsPlatform) DeleteToolRoute(ctx context.Context, toolID string, for
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -16307,11 +16114,10 @@ func (s *AgentsPlatform) DeleteToolRoute(ctx context.Context, toolID string, for
 
 // UpdateToolRoute - Update Tool
 // Update tool that is available in the workspace.
-func (s *AgentsPlatform) UpdateToolRoute(ctx context.Context, toolID string, body components.ToolRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateToolRouteResponse, error) {
+func (s *AgentsPlatform) UpdateToolRoute(ctx context.Context, toolID string, body components.ToolRequestModel, opts ...operations.Option) (*operations.UpdateToolRouteResponse, error) {
 	request := operations.UpdateToolRouteRequest{
-		ToolID:   toolID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		ToolID: toolID,
+		Body:   body,
 	}
 
 	o := operations.Options{}
@@ -16370,8 +16176,6 @@ func (s *AgentsPlatform) UpdateToolRoute(ctx context.Context, toolID string, bod
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -16552,12 +16356,11 @@ func (s *AgentsPlatform) UpdateToolRoute(ctx context.Context, toolID string, bod
 
 // GetToolDependentAgentsRoute - Get Dependent Agents List
 // Get a list of agents depending on this tool
-func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID string, cursor optionalnullable.OptionalNullable[string], pageSize *int64, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetToolDependentAgentsRouteResponse, error) {
+func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID string, cursor optionalnullable.OptionalNullable[string], pageSize *int64, opts ...operations.Option) (*operations.GetToolDependentAgentsRouteResponse, error) {
 	request := operations.GetToolDependentAgentsRouteRequest{
 		ToolID:   toolID,
 		Cursor:   cursor,
 		PageSize: pageSize,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -16609,8 +16412,6 @@ func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -16795,11 +16596,7 @@ func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID
 
 // GetSettingsRoute - Get Convai Settings
 // Retrieve Convai settings for the workspace
-func (s *AgentsPlatform) GetSettingsRoute(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSettingsRouteResponse, error) {
-	request := operations.GetSettingsRouteRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *AgentsPlatform) GetSettingsRoute(ctx context.Context, opts ...operations.Option) (*operations.GetSettingsRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -16849,8 +16646,6 @@ func (s *AgentsPlatform) GetSettingsRoute(ctx context.Context, xiAPIKey optional
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -17031,12 +16826,7 @@ func (s *AgentsPlatform) GetSettingsRoute(ctx context.Context, xiAPIKey optional
 
 // UpdateSettingsRoute - Update Convai Settings
 // Update Convai settings for the workspace
-func (s *AgentsPlatform) UpdateSettingsRoute(ctx context.Context, body components.PatchConvAISettingsRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateSettingsRouteResponse, error) {
-	request := operations.UpdateSettingsRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) UpdateSettingsRoute(ctx context.Context, request components.PatchConvAISettingsRequest, opts ...operations.Option) (*operations.UpdateSettingsRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -17068,7 +16858,7 @@ func (s *AgentsPlatform) UpdateSettingsRoute(ctx context.Context, body component
 		OperationID:      "update_settings_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -17093,8 +16883,6 @@ func (s *AgentsPlatform) UpdateSettingsRoute(ctx context.Context, body component
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -17275,11 +17063,7 @@ func (s *AgentsPlatform) UpdateSettingsRoute(ctx context.Context, body component
 
 // GetDashboardSettingsRoute - Get Convai Dashboard Settings
 // Retrieve Convai dashboard settings for the workspace
-func (s *AgentsPlatform) GetDashboardSettingsRoute(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetDashboardSettingsRouteResponse, error) {
-	request := operations.GetDashboardSettingsRouteRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *AgentsPlatform) GetDashboardSettingsRoute(ctx context.Context, opts ...operations.Option) (*operations.GetDashboardSettingsRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -17329,8 +17113,6 @@ func (s *AgentsPlatform) GetDashboardSettingsRoute(ctx context.Context, xiAPIKey
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -17511,12 +17293,7 @@ func (s *AgentsPlatform) GetDashboardSettingsRoute(ctx context.Context, xiAPIKey
 
 // UpdateDashboardSettingsRoute - Update Convai Dashboard Settings
 // Update Convai dashboard settings for the workspace
-func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, body components.PatchConvAIDashboardSettingsRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateDashboardSettingsRouteResponse, error) {
-	request := operations.UpdateDashboardSettingsRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, request components.PatchConvAIDashboardSettingsRequest, opts ...operations.Option) (*operations.UpdateDashboardSettingsRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -17548,7 +17325,7 @@ func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, body 
 		OperationID:      "update_dashboard_settings_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -17573,8 +17350,6 @@ func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, body 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -17755,11 +17530,11 @@ func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, body 
 
 // GetSecretsRoute - Get Convai Workspace Secrets
 // Get all workspace secrets for the user
-func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize optionalnullable.OptionalNullable[int64], cursor optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSecretsRouteResponse, error) {
+func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize optionalnullable.OptionalNullable[int64], dependencyLimit optionalnullable.OptionalNullable[int64], cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSecretsRouteResponse, error) {
 	request := operations.GetSecretsRouteRequest{
-		PageSize: pageSize,
-		Cursor:   cursor,
-		XiAPIKey: xiAPIKey,
+		PageSize:        pageSize,
+		DependencyLimit: dependencyLimit,
+		Cursor:          cursor,
 	}
 
 	o := operations.Options{}
@@ -17811,8 +17586,6 @@ func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize optionaln
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -17997,12 +17770,7 @@ func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize optionaln
 
 // CreateSecretRoute - Create Convai Workspace Secret
 // Create a new secret for the workspace
-func (s *AgentsPlatform) CreateSecretRoute(ctx context.Context, body components.PostWorkspaceSecretRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateSecretRouteResponse, error) {
-	request := operations.CreateSecretRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreateSecretRoute(ctx context.Context, request components.PostWorkspaceSecretRequest, opts ...operations.Option) (*operations.CreateSecretRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -18034,7 +17802,7 @@ func (s *AgentsPlatform) CreateSecretRoute(ctx context.Context, body components.
 		OperationID:      "create_secret_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -18059,8 +17827,6 @@ func (s *AgentsPlatform) CreateSecretRoute(ctx context.Context, body components.
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -18241,10 +18007,9 @@ func (s *AgentsPlatform) CreateSecretRoute(ctx context.Context, body components.
 
 // DeleteSecretRoute - Delete Convai Workspace Secret
 // Delete a workspace secret if it's not in use
-func (s *AgentsPlatform) DeleteSecretRoute(ctx context.Context, secretID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteSecretRouteResponse, error) {
+func (s *AgentsPlatform) DeleteSecretRoute(ctx context.Context, secretID string, opts ...operations.Option) (*operations.DeleteSecretRouteResponse, error) {
 	request := operations.DeleteSecretRouteRequest{
 		SecretID: secretID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -18296,8 +18061,6 @@ func (s *AgentsPlatform) DeleteSecretRoute(ctx context.Context, secretID string,
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -18459,10 +18222,9 @@ func (s *AgentsPlatform) DeleteSecretRoute(ctx context.Context, secretID string,
 
 // UpdateSecretRoute - Update Convai Workspace Secret
 // Update an existing secret for the workspace
-func (s *AgentsPlatform) UpdateSecretRoute(ctx context.Context, secretID string, body components.PatchWorkspaceSecretRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateSecretRouteResponse, error) {
+func (s *AgentsPlatform) UpdateSecretRoute(ctx context.Context, secretID string, body components.PatchWorkspaceSecretRequest, opts ...operations.Option) (*operations.UpdateSecretRouteResponse, error) {
 	request := operations.UpdateSecretRouteRequest{
 		SecretID: secretID,
-		XiAPIKey: xiAPIKey,
 		Body:     body,
 	}
 
@@ -18522,8 +18284,6 @@ func (s *AgentsPlatform) UpdateSecretRoute(ctx context.Context, secretID string,
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -18702,14 +18462,250 @@ func (s *AgentsPlatform) UpdateSecretRoute(ctx context.Context, secretID string,
 
 }
 
-// CreateBatchCall - Submit A Batch Call Request.
-// Submit a batch call request to schedule calls for multiple recipients.
-func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, body components.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateBatchCallResponse, error) {
-	request := operations.CreateBatchCallRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+// GetSecretDependenciesRoute - Get Secret Dependencies By Type
+// Get paginated list of resources that depend on a specific secret, filtered by resource type.
+func (s *AgentsPlatform) GetSecretDependenciesRoute(ctx context.Context, secretID string, resourceType components.SecretDependencyResourceType, pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSecretDependenciesRouteResponse, error) {
+	request := operations.GetSecretDependenciesRouteRequest{
+		SecretID:     secretID,
+		ResourceType: resourceType,
+		PageSize:     pageSize,
+		Cursor:       cursor,
 	}
 
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/convai/secrets/{secret_id}/dependencies/{resource_type}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "get_secret_dependencies_route",
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"429",
+				"500",
+				"502",
+				"503",
+				"504",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.GetSecretDependenciesRouteResponse{
+		HTTPMeta: components.HTTPMetadata{
+			Request:  req,
+			Response: httpRes,
+		},
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.GetSecretDependenciesResponseModel
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.GetSecretDependenciesResponseModel = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 422:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.HTTPValidationError
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	default:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
+	}
+
+	return res, nil
+
+}
+
+// CreateBatchCall - Submit A Batch Call Request.
+// Submit a batch call request to schedule calls for multiple recipients.
+func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, request components.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost, opts ...operations.Option) (*operations.CreateBatchCallResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -18741,7 +18737,7 @@ func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, body components.Bo
 		OperationID:      "create_batch_call",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -18766,8 +18762,6 @@ func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, body components.Bo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -18948,11 +18942,10 @@ func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, body components.Bo
 
 // GetWorkspaceBatchCalls - Get All Batch Calls For A Workspace.
 // Get all batch calls for the current workspace.
-func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int64, lastDoc optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetWorkspaceBatchCallsResponse, error) {
+func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int64, lastDoc optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetWorkspaceBatchCallsResponse, error) {
 	request := operations.GetWorkspaceBatchCallsRequest{
-		Limit:    limit,
-		LastDoc:  lastDoc,
-		XiAPIKey: xiAPIKey,
+		Limit:   limit,
+		LastDoc: lastDoc,
 	}
 
 	o := operations.Options{}
@@ -19004,8 +18997,6 @@ func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int6
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -19190,10 +19181,9 @@ func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int6
 
 // GetBatchCall - Get A Batch Call By Id.
 // Get detailed information about a batch call including all recipients.
-func (s *AgentsPlatform) GetBatchCall(ctx context.Context, batchID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetBatchCallResponse, error) {
+func (s *AgentsPlatform) GetBatchCall(ctx context.Context, batchID string, opts ...operations.Option) (*operations.GetBatchCallResponse, error) {
 	request := operations.GetBatchCallRequest{
-		BatchID:  batchID,
-		XiAPIKey: xiAPIKey,
+		BatchID: batchID,
 	}
 
 	o := operations.Options{}
@@ -19245,8 +19235,6 @@ func (s *AgentsPlatform) GetBatchCall(ctx context.Context, batchID string, xiAPI
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -19427,10 +19415,9 @@ func (s *AgentsPlatform) GetBatchCall(ctx context.Context, batchID string, xiAPI
 
 // DeleteBatchCall - Delete A Batch Call.
 // Permanently delete a batch call and all recipient records. Conversations remain in history.
-func (s *AgentsPlatform) DeleteBatchCall(ctx context.Context, batchID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteBatchCallResponse, error) {
+func (s *AgentsPlatform) DeleteBatchCall(ctx context.Context, batchID string, opts ...operations.Option) (*operations.DeleteBatchCallResponse, error) {
 	request := operations.DeleteBatchCallRequest{
-		BatchID:  batchID,
-		XiAPIKey: xiAPIKey,
+		BatchID: batchID,
 	}
 
 	o := operations.Options{}
@@ -19482,8 +19469,6 @@ func (s *AgentsPlatform) DeleteBatchCall(ctx context.Context, batchID string, xi
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -19645,10 +19630,9 @@ func (s *AgentsPlatform) DeleteBatchCall(ctx context.Context, batchID string, xi
 
 // CancelBatchCall - Cancel A Batch Call.
 // Cancel a running batch call and set all recipients to cancelled status.
-func (s *AgentsPlatform) CancelBatchCall(ctx context.Context, batchID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CancelBatchCallResponse, error) {
+func (s *AgentsPlatform) CancelBatchCall(ctx context.Context, batchID string, opts ...operations.Option) (*operations.CancelBatchCallResponse, error) {
 	request := operations.CancelBatchCallRequest{
-		BatchID:  batchID,
-		XiAPIKey: xiAPIKey,
+		BatchID: batchID,
 	}
 
 	o := operations.Options{}
@@ -19700,8 +19684,6 @@ func (s *AgentsPlatform) CancelBatchCall(ctx context.Context, batchID string, xi
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -19882,10 +19864,9 @@ func (s *AgentsPlatform) CancelBatchCall(ctx context.Context, batchID string, xi
 
 // RetryBatchCall - Retry A Batch Call.
 // Retry a batch call, calling failed and no-response recipients again.
-func (s *AgentsPlatform) RetryBatchCall(ctx context.Context, batchID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RetryBatchCallResponse, error) {
+func (s *AgentsPlatform) RetryBatchCall(ctx context.Context, batchID string, opts ...operations.Option) (*operations.RetryBatchCallResponse, error) {
 	request := operations.RetryBatchCallRequest{
-		BatchID:  batchID,
-		XiAPIKey: xiAPIKey,
+		BatchID: batchID,
 	}
 
 	o := operations.Options{}
@@ -19937,8 +19918,6 @@ func (s *AgentsPlatform) RetryBatchCall(ctx context.Context, batchID string, xiA
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -20119,12 +20098,7 @@ func (s *AgentsPlatform) RetryBatchCall(ctx context.Context, batchID string, xiA
 
 // HandleSipTrunkOutboundCall - Handle An Outbound Call Via Sip Trunk
 // Handle an outbound call via SIP trunk
-func (s *AgentsPlatform) HandleSipTrunkOutboundCall(ctx context.Context, body components.BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.HandleSipTrunkOutboundCallResponse, error) {
-	request := operations.HandleSipTrunkOutboundCallRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) HandleSipTrunkOutboundCall(ctx context.Context, request components.BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost, opts ...operations.Option) (*operations.HandleSipTrunkOutboundCallResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -20156,7 +20130,7 @@ func (s *AgentsPlatform) HandleSipTrunkOutboundCall(ctx context.Context, body co
 		OperationID:      "handle_sip_trunk_outbound_call",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -20181,8 +20155,6 @@ func (s *AgentsPlatform) HandleSipTrunkOutboundCall(ctx context.Context, body co
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -20363,11 +20335,7 @@ func (s *AgentsPlatform) HandleSipTrunkOutboundCall(ctx context.Context, body co
 
 // ListMcpServersRoute - List Mcp Servers
 // Retrieve all MCP server configurations available in the workspace.
-func (s *AgentsPlatform) ListMcpServersRoute(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListMcpServersRouteResponse, error) {
-	request := operations.ListMcpServersRouteRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *AgentsPlatform) ListMcpServersRoute(ctx context.Context, opts ...operations.Option) (*operations.ListMcpServersRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -20417,8 +20385,6 @@ func (s *AgentsPlatform) ListMcpServersRoute(ctx context.Context, xiAPIKey optio
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -20599,12 +20565,7 @@ func (s *AgentsPlatform) ListMcpServersRoute(ctx context.Context, xiAPIKey optio
 
 // CreateMcpServerRoute - Create Mcp Server
 // Create a new MCP server configuration in the workspace.
-func (s *AgentsPlatform) CreateMcpServerRoute(ctx context.Context, body components.MCPServerRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateMcpServerRouteResponse, error) {
-	request := operations.CreateMcpServerRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreateMcpServerRoute(ctx context.Context, request components.MCPServerRequestModel, opts ...operations.Option) (*operations.CreateMcpServerRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -20636,7 +20597,7 @@ func (s *AgentsPlatform) CreateMcpServerRoute(ctx context.Context, body componen
 		OperationID:      "create_mcp_server_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -20661,8 +20622,6 @@ func (s *AgentsPlatform) CreateMcpServerRoute(ctx context.Context, body componen
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -20843,10 +20802,9 @@ func (s *AgentsPlatform) CreateMcpServerRoute(ctx context.Context, body componen
 
 // GetMcpRoute - Get Mcp Server
 // Retrieve a specific MCP server configuration from the workspace.
-func (s *AgentsPlatform) GetMcpRoute(ctx context.Context, mcpServerID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetMcpRouteResponse, error) {
+func (s *AgentsPlatform) GetMcpRoute(ctx context.Context, mcpServerID string, opts ...operations.Option) (*operations.GetMcpRouteResponse, error) {
 	request := operations.GetMcpRouteRequest{
 		McpServerID: mcpServerID,
-		XiAPIKey:    xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -20898,8 +20856,6 @@ func (s *AgentsPlatform) GetMcpRoute(ctx context.Context, mcpServerID string, xi
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -21080,10 +21036,9 @@ func (s *AgentsPlatform) GetMcpRoute(ctx context.Context, mcpServerID string, xi
 
 // DeleteMcpServerRoute - Delete Mcp Server
 // Delete a specific MCP server configuration from the workspace.
-func (s *AgentsPlatform) DeleteMcpServerRoute(ctx context.Context, mcpServerID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteMcpServerRouteResponse, error) {
+func (s *AgentsPlatform) DeleteMcpServerRoute(ctx context.Context, mcpServerID string, opts ...operations.Option) (*operations.DeleteMcpServerRouteResponse, error) {
 	request := operations.DeleteMcpServerRouteRequest{
 		McpServerID: mcpServerID,
-		XiAPIKey:    xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -21135,8 +21090,6 @@ func (s *AgentsPlatform) DeleteMcpServerRoute(ctx context.Context, mcpServerID s
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -21317,10 +21270,9 @@ func (s *AgentsPlatform) DeleteMcpServerRoute(ctx context.Context, mcpServerID s
 
 // UpdateMcpServerConfigRoute - Update Mcp Server Configuration
 // Update the configuration settings for an MCP server.
-func (s *AgentsPlatform) UpdateMcpServerConfigRoute(ctx context.Context, mcpServerID string, body components.MCPServerConfigUpdateRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateMcpServerConfigRouteResponse, error) {
+func (s *AgentsPlatform) UpdateMcpServerConfigRoute(ctx context.Context, mcpServerID string, body components.MCPServerConfigUpdateRequestModel, opts ...operations.Option) (*operations.UpdateMcpServerConfigRouteResponse, error) {
 	request := operations.UpdateMcpServerConfigRouteRequest{
 		McpServerID: mcpServerID,
-		XiAPIKey:    xiAPIKey,
 		Body:        body,
 	}
 
@@ -21380,8 +21332,6 @@ func (s *AgentsPlatform) UpdateMcpServerConfigRoute(ctx context.Context, mcpServ
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -21562,10 +21512,9 @@ func (s *AgentsPlatform) UpdateMcpServerConfigRoute(ctx context.Context, mcpServ
 
 // ListMcpServerToolsRoute - List Mcp Server Tools
 // Retrieve all tools available for a specific MCP server configuration.
-func (s *AgentsPlatform) ListMcpServerToolsRoute(ctx context.Context, mcpServerID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListMcpServerToolsRouteResponse, error) {
+func (s *AgentsPlatform) ListMcpServerToolsRoute(ctx context.Context, mcpServerID string, opts ...operations.Option) (*operations.ListMcpServerToolsRouteResponse, error) {
 	request := operations.ListMcpServerToolsRouteRequest{
 		McpServerID: mcpServerID,
-		XiAPIKey:    xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -21617,8 +21566,6 @@ func (s *AgentsPlatform) ListMcpServerToolsRoute(ctx context.Context, mcpServerI
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -21801,10 +21748,9 @@ func (s *AgentsPlatform) ListMcpServerToolsRoute(ctx context.Context, mcpServerI
 // Update the approval policy configuration for an MCP server. DEPRECATED: Use PATCH /mcp-servers/{id} endpoint instead.
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-func (s *AgentsPlatform) UpdateMcpServerApprovalPolicyRoute(ctx context.Context, mcpServerID string, body components.MCPApprovalPolicyUpdateRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateMcpServerApprovalPolicyRouteResponse, error) {
+func (s *AgentsPlatform) UpdateMcpServerApprovalPolicyRoute(ctx context.Context, mcpServerID string, body components.MCPApprovalPolicyUpdateRequestModel, opts ...operations.Option) (*operations.UpdateMcpServerApprovalPolicyRouteResponse, error) {
 	request := operations.UpdateMcpServerApprovalPolicyRouteRequest{
 		McpServerID: mcpServerID,
-		XiAPIKey:    xiAPIKey,
 		Body:        body,
 	}
 
@@ -21864,8 +21810,6 @@ func (s *AgentsPlatform) UpdateMcpServerApprovalPolicyRoute(ctx context.Context,
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -22046,10 +21990,9 @@ func (s *AgentsPlatform) UpdateMcpServerApprovalPolicyRoute(ctx context.Context,
 
 // AddMcpServerToolApprovalRoute - Create Mcp Server Tool Approval
 // Add approval for a specific MCP tool when using per-tool approval mode.
-func (s *AgentsPlatform) AddMcpServerToolApprovalRoute(ctx context.Context, mcpServerID string, body components.MCPToolAddApprovalRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddMcpServerToolApprovalRouteResponse, error) {
+func (s *AgentsPlatform) AddMcpServerToolApprovalRoute(ctx context.Context, mcpServerID string, body components.MCPToolAddApprovalRequestModel, opts ...operations.Option) (*operations.AddMcpServerToolApprovalRouteResponse, error) {
 	request := operations.AddMcpServerToolApprovalRouteRequest{
 		McpServerID: mcpServerID,
-		XiAPIKey:    xiAPIKey,
 		Body:        body,
 	}
 
@@ -22109,8 +22052,6 @@ func (s *AgentsPlatform) AddMcpServerToolApprovalRoute(ctx context.Context, mcpS
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -22291,11 +22232,10 @@ func (s *AgentsPlatform) AddMcpServerToolApprovalRoute(ctx context.Context, mcpS
 
 // RemoveMcpServerToolApprovalRoute - Delete Mcp Server Tool Approval
 // Remove approval for a specific MCP tool when using per-tool approval mode.
-func (s *AgentsPlatform) RemoveMcpServerToolApprovalRoute(ctx context.Context, mcpServerID string, toolName string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RemoveMcpServerToolApprovalRouteResponse, error) {
+func (s *AgentsPlatform) RemoveMcpServerToolApprovalRoute(ctx context.Context, mcpServerID string, toolName string, opts ...operations.Option) (*operations.RemoveMcpServerToolApprovalRouteResponse, error) {
 	request := operations.RemoveMcpServerToolApprovalRouteRequest{
 		McpServerID: mcpServerID,
 		ToolName:    toolName,
-		XiAPIKey:    xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -22347,8 +22287,6 @@ func (s *AgentsPlatform) RemoveMcpServerToolApprovalRoute(ctx context.Context, m
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -22529,10 +22467,9 @@ func (s *AgentsPlatform) RemoveMcpServerToolApprovalRoute(ctx context.Context, m
 
 // AddMcpToolConfigOverrideRoute - Create Mcp Tool Configuration Override
 // Create configuration overrides for a specific MCP tool.
-func (s *AgentsPlatform) AddMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, body components.MCPToolConfigOverrideCreateRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddMcpToolConfigOverrideRouteResponse, error) {
+func (s *AgentsPlatform) AddMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, body components.MCPToolConfigOverrideCreateRequestModel, opts ...operations.Option) (*operations.AddMcpToolConfigOverrideRouteResponse, error) {
 	request := operations.AddMcpToolConfigOverrideRouteRequest{
 		McpServerID: mcpServerID,
-		XiAPIKey:    xiAPIKey,
 		Body:        body,
 	}
 
@@ -22592,8 +22529,6 @@ func (s *AgentsPlatform) AddMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -22776,11 +22711,10 @@ func (s *AgentsPlatform) AddMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 
 // GetMcpToolConfigOverrideRoute - Get Mcp Tool Configuration Override
 // Retrieve configuration overrides for a specific MCP tool.
-func (s *AgentsPlatform) GetMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, toolName string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetMcpToolConfigOverrideRouteResponse, error) {
+func (s *AgentsPlatform) GetMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, toolName string, opts ...operations.Option) (*operations.GetMcpToolConfigOverrideRouteResponse, error) {
 	request := operations.GetMcpToolConfigOverrideRouteRequest{
 		McpServerID: mcpServerID,
 		ToolName:    toolName,
-		XiAPIKey:    xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -22832,8 +22766,6 @@ func (s *AgentsPlatform) GetMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -23016,11 +22948,10 @@ func (s *AgentsPlatform) GetMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 
 // RemoveMcpToolConfigOverrideRoute - Delete Mcp Tool Configuration Override
 // Remove configuration overrides for a specific MCP tool.
-func (s *AgentsPlatform) RemoveMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, toolName string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RemoveMcpToolConfigOverrideRouteResponse, error) {
+func (s *AgentsPlatform) RemoveMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, toolName string, opts ...operations.Option) (*operations.RemoveMcpToolConfigOverrideRouteResponse, error) {
 	request := operations.RemoveMcpToolConfigOverrideRouteRequest{
 		McpServerID: mcpServerID,
 		ToolName:    toolName,
-		XiAPIKey:    xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -23072,8 +23003,6 @@ func (s *AgentsPlatform) RemoveMcpToolConfigOverrideRoute(ctx context.Context, m
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -23254,11 +23183,10 @@ func (s *AgentsPlatform) RemoveMcpToolConfigOverrideRoute(ctx context.Context, m
 
 // UpdateMcpToolConfigOverrideRoute - Update Mcp Tool Configuration Override
 // Update configuration overrides for a specific MCP tool.
-func (s *AgentsPlatform) UpdateMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, toolName string, body components.MCPToolConfigOverrideUpdateRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateMcpToolConfigOverrideRouteResponse, error) {
+func (s *AgentsPlatform) UpdateMcpToolConfigOverrideRoute(ctx context.Context, mcpServerID string, toolName string, body components.MCPToolConfigOverrideUpdateRequestModel, opts ...operations.Option) (*operations.UpdateMcpToolConfigOverrideRouteResponse, error) {
 	request := operations.UpdateMcpToolConfigOverrideRouteRequest{
 		McpServerID: mcpServerID,
 		ToolName:    toolName,
-		XiAPIKey:    xiAPIKey,
 		Body:        body,
 	}
 
@@ -23318,8 +23246,6 @@ func (s *AgentsPlatform) UpdateMcpToolConfigOverrideRoute(ctx context.Context, m
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -23502,10 +23428,9 @@ func (s *AgentsPlatform) UpdateMcpToolConfigOverrideRoute(ctx context.Context, m
 
 // GetWhatsappAccount - Get Whatsapp Account
 // Get a WhatsApp account
-func (s *AgentsPlatform) GetWhatsappAccount(ctx context.Context, phoneNumberID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetWhatsappAccountResponse, error) {
+func (s *AgentsPlatform) GetWhatsappAccount(ctx context.Context, phoneNumberID string, opts ...operations.Option) (*operations.GetWhatsappAccountResponse, error) {
 	request := operations.GetWhatsappAccountRequest{
 		PhoneNumberID: phoneNumberID,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -23557,8 +23482,6 @@ func (s *AgentsPlatform) GetWhatsappAccount(ctx context.Context, phoneNumberID s
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -23739,10 +23662,9 @@ func (s *AgentsPlatform) GetWhatsappAccount(ctx context.Context, phoneNumberID s
 
 // DeleteWhatsappAccount - Delete Whatsapp Account
 // Delete a WhatsApp account
-func (s *AgentsPlatform) DeleteWhatsappAccount(ctx context.Context, phoneNumberID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteWhatsappAccountResponse, error) {
+func (s *AgentsPlatform) DeleteWhatsappAccount(ctx context.Context, phoneNumberID string, opts ...operations.Option) (*operations.DeleteWhatsappAccountResponse, error) {
 	request := operations.DeleteWhatsappAccountRequest{
 		PhoneNumberID: phoneNumberID,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -23794,8 +23716,6 @@ func (s *AgentsPlatform) DeleteWhatsappAccount(ctx context.Context, phoneNumberI
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -23976,10 +23896,9 @@ func (s *AgentsPlatform) DeleteWhatsappAccount(ctx context.Context, phoneNumberI
 
 // UpdateWhatsappAccount - Update Whatsapp Account
 // Update a WhatsApp account
-func (s *AgentsPlatform) UpdateWhatsappAccount(ctx context.Context, phoneNumberID string, body components.UpdateWhatsAppAccountRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateWhatsappAccountResponse, error) {
+func (s *AgentsPlatform) UpdateWhatsappAccount(ctx context.Context, phoneNumberID string, body components.UpdateWhatsAppAccountRequest, opts ...operations.Option) (*operations.UpdateWhatsappAccountResponse, error) {
 	request := operations.UpdateWhatsappAccountRequest{
 		PhoneNumberID: phoneNumberID,
-		XiAPIKey:      xiAPIKey,
 		Body:          body,
 	}
 
@@ -24039,8 +23958,6 @@ func (s *AgentsPlatform) UpdateWhatsappAccount(ctx context.Context, phoneNumberI
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -24221,11 +24138,7 @@ func (s *AgentsPlatform) UpdateWhatsappAccount(ctx context.Context, phoneNumberI
 
 // ListWhatsappAccounts - List Whatsapp Accounts
 // List all WhatsApp accounts
-func (s *AgentsPlatform) ListWhatsappAccounts(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListWhatsappAccountsResponse, error) {
-	request := operations.ListWhatsappAccountsRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *AgentsPlatform) ListWhatsappAccounts(ctx context.Context, opts ...operations.Option) (*operations.ListWhatsappAccountsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -24275,8 +24188,6 @@ func (s *AgentsPlatform) ListWhatsappAccounts(ctx context.Context, xiAPIKey opti
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -24457,12 +24368,11 @@ func (s *AgentsPlatform) ListWhatsappAccounts(ctx context.Context, xiAPIKey opti
 
 // GetBranchesRoute - List Agent Branches
 // Returns a list of branches an agent has
-func (s *AgentsPlatform) GetBranchesRoute(ctx context.Context, agentID string, includeArchived *bool, limit *int64, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetBranchesRouteResponse, error) {
+func (s *AgentsPlatform) GetBranchesRoute(ctx context.Context, agentID string, includeArchived *bool, limit *int64, opts ...operations.Option) (*operations.GetBranchesRouteResponse, error) {
 	request := operations.GetBranchesRouteRequest{
 		AgentID:         agentID,
 		IncludeArchived: includeArchived,
 		Limit:           limit,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -24514,8 +24424,6 @@ func (s *AgentsPlatform) GetBranchesRoute(ctx context.Context, agentID string, i
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -24700,11 +24608,10 @@ func (s *AgentsPlatform) GetBranchesRoute(ctx context.Context, agentID string, i
 
 // CreateBranchRoute - Create A New Branch
 // Create a new branch from a given version of any branch
-func (s *AgentsPlatform) CreateBranchRoute(ctx context.Context, agentID string, body components.BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateBranchRouteResponse, error) {
+func (s *AgentsPlatform) CreateBranchRoute(ctx context.Context, agentID string, body components.BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost, opts ...operations.Option) (*operations.CreateBranchRouteResponse, error) {
 	request := operations.CreateBranchRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -24763,8 +24670,6 @@ func (s *AgentsPlatform) CreateBranchRoute(ctx context.Context, agentID string, 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -24945,11 +24850,10 @@ func (s *AgentsPlatform) CreateBranchRoute(ctx context.Context, agentID string, 
 
 // GetBranchRoute - Get Agent Branch
 // Get information about a single agent branch
-func (s *AgentsPlatform) GetBranchRoute(ctx context.Context, agentID string, branchID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetBranchRouteResponse, error) {
+func (s *AgentsPlatform) GetBranchRoute(ctx context.Context, agentID string, branchID string, opts ...operations.Option) (*operations.GetBranchRouteResponse, error) {
 	request := operations.GetBranchRouteRequest{
 		AgentID:  agentID,
 		BranchID: branchID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -25001,8 +24905,6 @@ func (s *AgentsPlatform) GetBranchRoute(ctx context.Context, agentID string, bra
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -25183,11 +25085,10 @@ func (s *AgentsPlatform) GetBranchRoute(ctx context.Context, agentID string, bra
 
 // UpdateBranchRoute - Update Agent Branch
 // Update agent branch properties such as archiving status and protection level
-func (s *AgentsPlatform) UpdateBranchRoute(ctx context.Context, agentID string, branchID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch, opts ...operations.Option) (*operations.UpdateBranchRouteResponse, error) {
+func (s *AgentsPlatform) UpdateBranchRoute(ctx context.Context, agentID string, branchID string, body *components.BodyUpdateAgentBranchV1ConvaiAgentsAgentIDBranchesBranchIDPatch, opts ...operations.Option) (*operations.UpdateBranchRouteResponse, error) {
 	request := operations.UpdateBranchRouteRequest{
 		AgentID:  agentID,
 		BranchID: branchID,
-		XiAPIKey: xiAPIKey,
 		Body:     body,
 	}
 
@@ -25247,8 +25148,6 @@ func (s *AgentsPlatform) UpdateBranchRoute(ctx context.Context, agentID string, 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -25429,7 +25328,14 @@ func (s *AgentsPlatform) UpdateBranchRoute(ctx context.Context, agentID string, 
 
 // MergeBranchIntoTarget - Merge A Branch Into A Target Branch
 // Merge a branch into a target branch
-func (s *AgentsPlatform) MergeBranchIntoTarget(ctx context.Context, request operations.MergeBranchIntoTargetRequest, opts ...operations.Option) (*operations.MergeBranchIntoTargetResponse, error) {
+func (s *AgentsPlatform) MergeBranchIntoTarget(ctx context.Context, agentID string, sourceBranchID string, targetBranchID string, body *components.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIDBranchesSourceBranchIDMergePost, opts ...operations.Option) (*operations.MergeBranchIntoTargetResponse, error) {
+	request := operations.MergeBranchIntoTargetRequest{
+		AgentID:        agentID,
+		SourceBranchID: sourceBranchID,
+		TargetBranchID: targetBranchID,
+		Body:           body,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -25486,8 +25392,6 @@ func (s *AgentsPlatform) MergeBranchIntoTarget(ctx context.Context, request oper
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -25672,11 +25576,10 @@ func (s *AgentsPlatform) MergeBranchIntoTarget(ctx context.Context, request oper
 
 // CreateAgentDeploymentRoute - Create Or Update Deployments
 // Create a new deployment for an agent
-func (s *AgentsPlatform) CreateAgentDeploymentRoute(ctx context.Context, agentID string, body components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAgentDeploymentRouteResponse, error) {
+func (s *AgentsPlatform) CreateAgentDeploymentRoute(ctx context.Context, agentID string, body components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost, opts ...operations.Option) (*operations.CreateAgentDeploymentRouteResponse, error) {
 	request := operations.CreateAgentDeploymentRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -25735,8 +25638,6 @@ func (s *AgentsPlatform) CreateAgentDeploymentRoute(ctx context.Context, agentID
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -25917,11 +25818,10 @@ func (s *AgentsPlatform) CreateAgentDeploymentRoute(ctx context.Context, agentID
 
 // CreateAgentDraftRoute - Create Agent Draft
 // Create a new draft for an agent
-func (s *AgentsPlatform) CreateAgentDraftRoute(ctx context.Context, agentID string, branchID string, body components.BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAgentDraftRouteResponse, error) {
+func (s *AgentsPlatform) CreateAgentDraftRoute(ctx context.Context, agentID string, branchID string, body components.BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost, opts ...operations.Option) (*operations.CreateAgentDraftRouteResponse, error) {
 	request := operations.CreateAgentDraftRouteRequest{
 		AgentID:  agentID,
 		BranchID: branchID,
-		XiAPIKey: xiAPIKey,
 		Body:     body,
 	}
 
@@ -25981,8 +25881,6 @@ func (s *AgentsPlatform) CreateAgentDraftRoute(ctx context.Context, agentID stri
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -26167,11 +26065,10 @@ func (s *AgentsPlatform) CreateAgentDraftRoute(ctx context.Context, agentID stri
 
 // DeleteAgentDraftRoute - Delete Agent Draft
 // Delete a draft for an agent
-func (s *AgentsPlatform) DeleteAgentDraftRoute(ctx context.Context, agentID string, branchID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteAgentDraftRouteResponse, error) {
+func (s *AgentsPlatform) DeleteAgentDraftRoute(ctx context.Context, agentID string, branchID string, opts ...operations.Option) (*operations.DeleteAgentDraftRouteResponse, error) {
 	request := operations.DeleteAgentDraftRouteRequest{
 		AgentID:  agentID,
 		BranchID: branchID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -26223,8 +26120,6 @@ func (s *AgentsPlatform) DeleteAgentDraftRoute(ctx context.Context, agentID stri
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -26460,8 +26355,6 @@ func (s *AgentsPlatform) ListEnvironmentVariables(ctx context.Context, request o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -26647,12 +26540,7 @@ func (s *AgentsPlatform) ListEnvironmentVariables(ctx context.Context, request o
 
 // CreateEnvironmentVariable - Create Environment Variable
 // Create a new environment variable for the workspace
-func (s *AgentsPlatform) CreateEnvironmentVariable(ctx context.Context, body operations.AgentsPlatformCreateEnvironmentVariableRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateEnvironmentVariableResponse, error) {
-	request := operations.CreateEnvironmentVariableRequestRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AgentsPlatform) CreateEnvironmentVariable(ctx context.Context, request operations.CreateEnvironmentVariableRequest, opts ...operations.Option) (*operations.CreateEnvironmentVariableResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -26684,7 +26572,7 @@ func (s *AgentsPlatform) CreateEnvironmentVariable(ctx context.Context, body ope
 		OperationID:      "create_environment_variable",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -26709,8 +26597,6 @@ func (s *AgentsPlatform) CreateEnvironmentVariable(ctx context.Context, body ope
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -26895,10 +26781,9 @@ func (s *AgentsPlatform) CreateEnvironmentVariable(ctx context.Context, body ope
 
 // GetEnvironmentVariable - Get Environment Variable
 // Get a specific environment variable by ID
-func (s *AgentsPlatform) GetEnvironmentVariable(ctx context.Context, envVarID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetEnvironmentVariableResponse, error) {
+func (s *AgentsPlatform) GetEnvironmentVariable(ctx context.Context, envVarID string, opts ...operations.Option) (*operations.GetEnvironmentVariableResponse, error) {
 	request := operations.GetEnvironmentVariableRequest{
 		EnvVarID: envVarID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -26950,8 +26835,6 @@ func (s *AgentsPlatform) GetEnvironmentVariable(ctx context.Context, envVarID st
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -27134,10 +27017,9 @@ func (s *AgentsPlatform) GetEnvironmentVariable(ctx context.Context, envVarID st
 
 // UpdateEnvironmentVariable - Update Environment Variable
 // Replace an environment variable's values. Use null to remove an environment (except production).
-func (s *AgentsPlatform) UpdateEnvironmentVariable(ctx context.Context, envVarID string, body components.UpdateEnvironmentVariableRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateEnvironmentVariableResponse, error) {
+func (s *AgentsPlatform) UpdateEnvironmentVariable(ctx context.Context, envVarID string, body components.UpdateEnvironmentVariableRequest, opts ...operations.Option) (*operations.UpdateEnvironmentVariableResponse, error) {
 	request := operations.UpdateEnvironmentVariableRequest{
 		EnvVarID: envVarID,
-		XiAPIKey: xiAPIKey,
 		Body:     body,
 	}
 
@@ -27197,8 +27079,6 @@ func (s *AgentsPlatform) UpdateEnvironmentVariable(ctx context.Context, envVarID
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

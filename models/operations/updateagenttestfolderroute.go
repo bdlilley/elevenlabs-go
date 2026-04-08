@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdateAgentTestFolderRouteRequest struct {
 	// The folder ID.
-	FolderID string `pathParam:"style=simple,explode=false,name=folder_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                    `header:"style=simple,explode=false,name=xi-api-key"`
+	FolderID string                                                                       `pathParam:"style=simple,explode=false,name=folder_id"`
 	Body     components.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIDPatch `request:"mediaType=application/json"`
 }
 
@@ -21,13 +18,6 @@ func (u *UpdateAgentTestFolderRouteRequest) GetFolderID() string {
 		return ""
 	}
 	return u.FolderID
-}
-
-func (u *UpdateAgentTestFolderRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdateAgentTestFolderRouteRequest) GetBody() components.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIDPatch {

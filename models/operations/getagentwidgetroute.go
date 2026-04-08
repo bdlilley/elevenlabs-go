@@ -13,8 +13,6 @@ type GetAgentWidgetRouteRequest struct {
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
 	// An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint
 	ConversationSignature optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=conversation_signature"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetAgentWidgetRouteRequest) GetAgentID() string {
@@ -29,13 +27,6 @@ func (g *GetAgentWidgetRouteRequest) GetConversationSignature() optionalnullable
 		return nil
 	}
 	return g.ConversationSignature
-}
-
-func (g *GetAgentWidgetRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetAgentWidgetRouteResponse struct {

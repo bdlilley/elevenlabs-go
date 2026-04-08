@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 )
@@ -33,10 +32,9 @@ func newAgentsWorkspaceAnalytics(rootSDK *ElevenlabsGo, sdkConfig config.SDKConf
 
 // RunConversationAnalysis - Run Conversation Analysis
 // Run the analysis for a conversation using the agent's current evaluation criteria and data collection settings.
-func (s *AgentsWorkspaceAnalytics) RunConversationAnalysis(ctx context.Context, conversationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RunConversationAnalysisResponse, error) {
+func (s *AgentsWorkspaceAnalytics) RunConversationAnalysis(ctx context.Context, conversationID string, opts ...operations.Option) (*operations.RunConversationAnalysisResponse, error) {
 	request := operations.RunConversationAnalysisRequest{
 		ConversationID: conversationID,
-		XiAPIKey:       xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -88,8 +86,6 @@ func (s *AgentsWorkspaceAnalytics) RunConversationAnalysis(ctx context.Context, 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

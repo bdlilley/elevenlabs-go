@@ -12,6 +12,7 @@ import (
 type DependentUnknownAgentIdentifier struct {
 	// If the agent is a transitive dependent, contains IDs of the resources that the agent depends on directly.
 	ReferencedResourceIds []string `json:"referenced_resource_ids,omitzero"`
+	ID                    string   `json:"id"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"unknown" json:"type"`
 }
@@ -32,6 +33,13 @@ func (d *DependentUnknownAgentIdentifier) GetReferencedResourceIds() []string {
 		return nil
 	}
 	return d.ReferencedResourceIds
+}
+
+func (d *DependentUnknownAgentIdentifier) GetID() string {
+	if d == nil {
+		return ""
+	}
+	return d.ID
 }
 
 func (d *DependentUnknownAgentIdentifier) GetType() *string {

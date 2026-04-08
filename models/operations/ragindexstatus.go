@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RagIndexStatusRequest struct {
 	// The id of a document from the knowledge base. This is returned on document addition.
-	DocumentationID string `pathParam:"style=simple,explode=false,name=documentation_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.RAGIndexRequestModel           `request:"mediaType=application/json"`
+	DocumentationID string                          `pathParam:"style=simple,explode=false,name=documentation_id"`
+	Body            components.RAGIndexRequestModel `request:"mediaType=application/json"`
 }
 
 func (r *RagIndexStatusRequest) GetDocumentationID() string {
@@ -21,13 +18,6 @@ func (r *RagIndexStatusRequest) GetDocumentationID() string {
 		return ""
 	}
 	return r.DocumentationID
-}
-
-func (r *RagIndexStatusRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XiAPIKey
 }
 
 func (r *RagIndexStatusRequest) GetBody() components.RAGIndexRequestModel {

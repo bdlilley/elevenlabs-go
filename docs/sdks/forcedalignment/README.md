@@ -23,7 +23,6 @@ import(
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"os"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -31,7 +30,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -46,7 +44,7 @@ func main() {
             Content: example,
         },
         Text: "<value>",
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -58,12 +56,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `body`                                                                                                                                                    | [components.BodyCreateForcedAlignmentV1ForcedAlignmentPost](../../models/components/bodycreateforcedalignmentv1forcedalignmentpost.md)                    | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                                                                              | Type                                                                                                                                   | Required                                                                                                                               | Description                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                  | :heavy_check_mark:                                                                                                                     | The context to use for the request.                                                                                                    |
+| `request`                                                                                                                              | [components.BodyCreateForcedAlignmentV1ForcedAlignmentPost](../../models/components/bodycreateforcedalignmentv1forcedalignmentpost.md) | :heavy_check_mark:                                                                                                                     | The request object to use for the request.                                                                                             |
+| `opts`                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                               | :heavy_minus_sign:                                                                                                                     | The options for this request.                                                                                                          |
 
 ### Response
 

@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 )
@@ -34,11 +33,10 @@ func newSamples(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks 
 
 // DeleteSample - Delete Sample
 // Removes a sample by its ID.
-func (s *Samples) DeleteSample(ctx context.Context, voiceID string, sampleID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteSampleResponse, error) {
+func (s *Samples) DeleteSample(ctx context.Context, voiceID string, sampleID string, opts ...operations.Option) (*operations.DeleteSampleResponse, error) {
 	request := operations.DeleteSampleRequest{
 		VoiceID:  voiceID,
 		SampleID: sampleID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -90,8 +88,6 @@ func (s *Samples) DeleteSample(ctx context.Context, voiceID string, sampleID str
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -272,11 +268,10 @@ func (s *Samples) DeleteSample(ctx context.Context, voiceID string, sampleID str
 
 // GetAudioFromSample - Get Audio From Sample
 // Returns the audio corresponding to a sample attached to a voice.
-func (s *Samples) GetAudioFromSample(ctx context.Context, voiceID string, sampleID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAudioFromSampleResponse, error) {
+func (s *Samples) GetAudioFromSample(ctx context.Context, voiceID string, sampleID string, opts ...operations.Option) (*operations.GetAudioFromSampleResponse, error) {
 	request := operations.GetAudioFromSampleRequest{
 		VoiceID:  voiceID,
 		SampleID: sampleID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -328,8 +323,6 @@ func (s *Samples) GetAudioFromSample(ctx context.Context, voiceID string, sample
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

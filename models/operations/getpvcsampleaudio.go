@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetPvcSampleAudioRequest struct {
@@ -15,8 +14,6 @@ type GetPvcSampleAudioRequest struct {
 	SampleID string `pathParam:"style=simple,explode=false,name=sample_id"`
 	// If set will remove background noise for voice samples using our audio isolation model. If the samples do not include background noise, it can make the quality worse.
 	RemoveBackgroundNoise *bool `default:"false" queryParam:"style=form,explode=true,name=remove_background_noise"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetPvcSampleAudioRequest) MarshalJSON() ([]byte, error) {
@@ -49,13 +46,6 @@ func (g *GetPvcSampleAudioRequest) GetRemoveBackgroundNoise() *bool {
 		return nil
 	}
 	return g.RemoveBackgroundNoise
-}
-
-func (g *GetPvcSampleAudioRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetPvcSampleAudioResponse struct {

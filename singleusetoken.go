@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 )
@@ -33,10 +32,9 @@ func newSingleUseToken(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration,
 
 // GetSingleUseToken - Create Single Use Token
 // Generate a time limited single-use token with embedded authentication for frontend clients.
-func (s *SingleUseToken) GetSingleUseToken(ctx context.Context, tokenType components.SingleUseTokenType, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSingleUseTokenResponse, error) {
+func (s *SingleUseToken) GetSingleUseToken(ctx context.Context, tokenType components.SingleUseTokenType, opts ...operations.Option) (*operations.GetSingleUseTokenResponse, error) {
 	request := operations.GetSingleUseTokenRequest{
 		TokenType: tokenType,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -88,8 +86,6 @@ func (s *SingleUseToken) GetSingleUseToken(ctx context.Context, tokenType compon
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type ComposePlanRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]             `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyGenerateCompositionPlanV1MusicPlanPost `request:"mediaType=application/json"`
-}
-
-func (c *ComposePlanRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
-}
-
-func (c *ComposePlanRequest) GetBody() components.BodyGenerateCompositionPlanV1MusicPlanPost {
-	if c == nil {
-		return components.BodyGenerateCompositionPlanV1MusicPlanPost{}
-	}
-	return c.Body
-}
 
 type ComposePlanResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

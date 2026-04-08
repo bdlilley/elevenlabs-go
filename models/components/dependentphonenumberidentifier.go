@@ -2,11 +2,26 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
 type DependentPhoneNumberIdentifier struct {
 	PhoneNumberID string            `json:"phone_number_id"`
 	PhoneNumber   string            `json:"phone_number"`
 	Label         string            `json:"label"`
 	Provider      TelephonyProvider `json:"provider"`
+}
+
+func (d DependentPhoneNumberIdentifier) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DependentPhoneNumberIdentifier) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DependentPhoneNumberIdentifier) GetPhoneNumberID() string {

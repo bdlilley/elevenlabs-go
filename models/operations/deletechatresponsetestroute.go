@@ -4,14 +4,11 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteChatResponseTestRouteRequest struct {
 	// The id of a chat response test. This is returned on test creation.
 	TestID string `pathParam:"style=simple,explode=false,name=test_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteChatResponseTestRouteRequest) GetTestID() string {
@@ -19,13 +16,6 @@ func (d *DeleteChatResponseTestRouteRequest) GetTestID() string {
 		return ""
 	}
 	return d.TestID
-}
-
-func (d *DeleteChatResponseTestRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteChatResponseTestRouteResponse struct {

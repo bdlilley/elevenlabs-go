@@ -23,8 +23,6 @@ type UsageCharactersRequest struct {
 	AggregationBucketSize optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=aggregation_bucket_size"`
 	// Which metric to aggregate.
 	Metric *components.MetricType `queryParam:"style=form,explode=true,name=metric"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (u UsageCharactersRequest) MarshalJSON() ([]byte, error) {
@@ -85,13 +83,6 @@ func (u *UsageCharactersRequest) GetMetric() *components.MetricType {
 		return nil
 	}
 	return u.Metric
-}
-
-func (u *UsageCharactersRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 type UsageCharactersResponse struct {

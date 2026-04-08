@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type HandleTwilioOutboundCallRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                  `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost `request:"mediaType=application/json"`
-}
-
-func (h *HandleTwilioOutboundCallRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if h == nil {
-		return nil
-	}
-	return h.XiAPIKey
-}
-
-func (h *HandleTwilioOutboundCallRequest) GetBody() components.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost {
-	if h == nil {
-		return components.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost{}
-	}
-	return h.Body
-}
 
 type HandleTwilioOutboundCallResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

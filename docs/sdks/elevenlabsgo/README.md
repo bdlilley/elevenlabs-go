@@ -34,7 +34,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 )
@@ -43,11 +42,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
+    res, err := s.GetUserSubscriptionInfo(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -65,11 +63,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -95,7 +92,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -103,11 +99,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.GetUserInfo(ctx, optionalnullable.From[string](nil))
+    res, err := s.GetUserInfo(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -119,11 +114,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -157,7 +151,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -208,7 +201,6 @@ import(
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -216,7 +208,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -224,7 +215,7 @@ func main() {
         components.CreateSimulationTestRequest{
             Name: "<value>",
         },
-    ), optionalnullable.From[string](nil))
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -236,12 +227,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `body`                                                                                                                                                    | [operations.CreateAgentResponseTestRouteTestRequest](../../models/operations/createagentresponsetestroutetestrequest.md)                                  | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |
+| `request`                                                                                                                | [operations.CreateAgentResponseTestRouteTestRequest](../../models/operations/createagentresponsetestroutetestrequest.md) | :heavy_check_mark:                                                                                                       | The request object to use for the request.                                                                               |
+| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |
 
 ### Response
 
@@ -267,7 +257,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 )
@@ -276,11 +265,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.GetAgentResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", optionalnullable.From[string](nil))
+    res, err := s.GetAgentResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT")
     if err != nil {
         log.Fatal(err)
     }
@@ -300,12 +288,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               | Example                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |                                                                                                                                                           |
-| `testID`                                                                                                                                                  | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The id of a chat response test. This is returned on test creation.                                                                                        | TeaqRRdTcIfIu2i7BYfT                                                                                                                                      |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |                                                                                                                                                           |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |                                                                                                                                                           |
+| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |                                                                    |
+| `testID`                                                           | `string`                                                           | :heavy_check_mark:                                                 | The id of a chat response test. This is returned on test creation. | TeaqRRdTcIfIu2i7BYfT                                               |
+| `opts`                                                             | [][operations.Option](../../models/operations/option.md)           | :heavy_minus_sign:                                                 | The options for this request.                                      |                                                                    |
 
 ### Response
 
@@ -333,7 +320,6 @@ import(
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -341,7 +327,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -349,7 +334,7 @@ func main() {
         components.UpdateToolCallUnitTestRequest{
             Name: "<value>",
         },
-    ), optionalnullable.From[string](nil))
+    ))
     if err != nil {
         log.Fatal(err)
     }
@@ -369,13 +354,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               | Example                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |                                                                                                                                                           |
-| `testID`                                                                                                                                                  | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The id of a chat response test. This is returned on test creation.                                                                                        | TeaqRRdTcIfIu2i7BYfT                                                                                                                                      |
-| `body`                                                                                                                                                    | [operations.UpdateAgentResponseTestRouteTestRequest](../../models/operations/updateagentresponsetestroutetestrequest.md)                                  | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |                                                                                                                                                           |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |                                                                                                                                                           |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |                                                                                                                                                           |
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |                                                                                                                          |
+| `testID`                                                                                                                 | `string`                                                                                                                 | :heavy_check_mark:                                                                                                       | The id of a chat response test. This is returned on test creation.                                                       | TeaqRRdTcIfIu2i7BYfT                                                                                                     |
+| `body`                                                                                                                   | [operations.UpdateAgentResponseTestRouteTestRequest](../../models/operations/updateagentresponsetestroutetestrequest.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
+| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |                                                                                                                          |
 
 ### Response
 
@@ -401,7 +385,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -409,11 +392,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.DeleteChatResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", optionalnullable.From[string](nil))
+    res, err := s.DeleteChatResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT")
     if err != nil {
         log.Fatal(err)
     }
@@ -425,12 +407,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               | Example                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |                                                                                                                                                           |
-| `testID`                                                                                                                                                  | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The id of a chat response test. This is returned on test creation.                                                                                        | TeaqRRdTcIfIu2i7BYfT                                                                                                                                      |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |                                                                                                                                                           |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |                                                                                                                                                           |
+| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |                                                                    |
+| `testID`                                                           | `string`                                                           | :heavy_check_mark:                                                 | The id of a chat response test. This is returned on test creation. | TeaqRRdTcIfIu2i7BYfT                                               |
+| `opts`                                                             | [][operations.Option](../../models/operations/option.md)           | :heavy_minus_sign:                                                 | The options for this request.                                      |                                                                    |
 
 ### Response
 
@@ -457,7 +438,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -465,7 +445,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -474,7 +453,7 @@ func main() {
             "test_id_1",
             "test_id_2",
         },
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -486,12 +465,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `body`                                                                                                                                                    | [components.ListTestsByIdsRequestModel](../../models/components/listtestsbyidsrequestmodel.md)                                                            | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `request`                                                                                      | [components.ListTestsByIdsRequestModel](../../models/components/listtestsbyidsrequestmodel.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 ### Response
 
@@ -525,7 +503,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -579,11 +556,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ListTestInvocationsRoute(ctx, "<id>", elevenlabsgo.Pointer[int64](30), optionalnullable.From[string](nil), optionalnullable.From[string](nil))
+    res, err := s.ListTestInvocationsRoute(ctx, "<id>", elevenlabsgo.Pointer[int64](30), optionalnullable.From[string](nil))
     if err != nil {
         log.Fatal(err)
     }
@@ -595,14 +571,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `agentID`                                                                                                                                                 | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | Filter by agent ID                                                                                                                                        |
-| `pageSize`                                                                                                                                                | `*int64`                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                        | How many Tests to return at maximum. Can not exceed 100, defaults to 30.                                                                                  |
-| `cursor`                                                                                                                                                  | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Used for fetching next page. Cursor is returned in the response.                                                                                          |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
+| `agentID`                                                                | `string`                                                                 | :heavy_check_mark:                                                       | Filter by agent ID                                                       |
+| `pageSize`                                                               | `*int64`                                                                 | :heavy_minus_sign:                                                       | How many Tests to return at maximum. Can not exceed 100, defaults to 30. |
+| `cursor`                                                                 | optionalnullable.OptionalNullable[`string`]                              | :heavy_minus_sign:                                                       | Used for fetching next page. Cursor is returned in the response.         |
+| `opts`                                                                   | [][operations.Option](../../models/operations/option.md)                 | :heavy_minus_sign:                                                       | The options for this request.                                            |
 
 ### Response
 
@@ -637,7 +612,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -868,7 +842,7 @@ func main() {
                 },
             }),
         }),
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -880,13 +854,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               | Example                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |                                                                                                                                                           |
-| `agentID`                                                                                                                                                 | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The id of an agent. This is returned on agent creation.                                                                                                   | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                                                                                                        |
-| `body`                                                                                                                                                    | [components.RunAgentTestsRequestModel](../../models/components/runagenttestsrequestmodel.md)                                                              | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |                                                                                                                                                           |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |                                                                                                                                                           |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |                                                                                                                                                           |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  | Example                                                                                      |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |                                                                                              |
+| `agentID`                                                                                    | `string`                                                                                     | :heavy_check_mark:                                                                           | The id of an agent. This is returned on agent creation.                                      | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                                           |
+| `body`                                                                                       | [components.RunAgentTestsRequestModel](../../models/components/runagenttestsrequestmodel.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |                                                                                              |
+| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |                                                                                              |
 
 ### Response
 
@@ -912,7 +885,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -920,11 +892,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.GetTestInvocationRoute(ctx, "<id>", optionalnullable.From[string](nil))
+    res, err := s.GetTestInvocationRoute(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -936,12 +907,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `testInvocationID`                                                                                                                                        | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The id of a test invocation. This is returned when tests are run.                                                                                         |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
+| `testInvocationID`                                                | `string`                                                          | :heavy_check_mark:                                                | The id of a test invocation. This is returned when tests are run. |
+| `opts`                                                            | [][operations.Option](../../models/operations/option.md)          | :heavy_minus_sign:                                                | The options for this request.                                     |
 
 ### Response
 
@@ -976,7 +946,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -1218,7 +1187,7 @@ func main() {
             }),
         }),
         AgentID: "<id>",
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1230,13 +1199,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `testInvocationID`                                                                                                                                        | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The id of a test invocation. This is returned when tests are run.                                                                                         |
-| `body`                                                                                                                                                    | [components.ResubmitTestsRequestModel](../../models/components/resubmittestsrequestmodel.md)                                                              | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `testInvocationID`                                                                           | `string`                                                                                     | :heavy_check_mark:                                                                           | The id of a test invocation. This is returned when tests are run.                            |
+| `body`                                                                                       | [components.ResubmitTestsRequestModel](../../models/components/resubmittestsrequestmodel.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
 ### Response
 
@@ -1269,7 +1237,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 

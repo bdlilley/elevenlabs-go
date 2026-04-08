@@ -5,17 +5,14 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdateSpeakerRequest struct {
 	// ID of the dubbing project.
 	DubbingID string `pathParam:"style=simple,explode=false,name=dubbing_id"`
 	// ID of the speaker.
-	SpeakerID string `pathParam:"style=simple,explode=false,name=speaker_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch `request:"mediaType=application/json"`
+	SpeakerID string                                                                                   `pathParam:"style=simple,explode=false,name=speaker_id"`
+	Body      *components.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch `request:"mediaType=application/json"`
 }
 
 func (u UpdateSpeakerRequest) MarshalJSON() ([]byte, error) {
@@ -41,13 +38,6 @@ func (u *UpdateSpeakerRequest) GetSpeakerID() string {
 		return ""
 	}
 	return u.SpeakerID
-}
-
-func (u *UpdateSpeakerRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdateSpeakerRequest) GetBody() *components.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch {

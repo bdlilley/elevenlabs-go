@@ -76,8 +76,6 @@ type GetLibraryVoicesRequest struct {
 	// Sort criteria
 	Sort optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=sort"`
 	Page *int64                                    `default:"0" queryParam:"style=form,explode=true,name=page"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetLibraryVoicesRequest) MarshalJSON() ([]byte, error) {
@@ -215,13 +213,6 @@ func (g *GetLibraryVoicesRequest) GetPage() *int64 {
 		return nil
 	}
 	return g.Page
-}
-
-func (g *GetLibraryVoicesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetLibraryVoicesResponse struct {

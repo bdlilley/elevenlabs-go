@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type InviteUsersBulkRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                       `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost `request:"mediaType=application/json"`
-}
-
-func (i *InviteUsersBulkRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if i == nil {
-		return nil
-	}
-	return i.XiAPIKey
-}
-
-func (i *InviteUsersBulkRequest) GetBody() components.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost {
-	if i == nil {
-		return components.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost{}
-	}
-	return i.Body
-}
 
 type InviteUsersBulkResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

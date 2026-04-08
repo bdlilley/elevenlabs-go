@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetMcpRouteRequest struct {
 	// ID of the MCP Server.
 	McpServerID string `pathParam:"style=simple,explode=false,name=mcp_server_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetMcpRouteRequest) GetMcpServerID() string {
@@ -20,13 +17,6 @@ func (g *GetMcpRouteRequest) GetMcpServerID() string {
 		return ""
 	}
 	return g.McpServerID
-}
-
-func (g *GetMcpRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetMcpRouteResponse struct {

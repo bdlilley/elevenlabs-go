@@ -5,39 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type GetSimilarLibraryVoicesRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                  `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost `request:"mediaType=multipart/form-data"`
-}
-
-func (g GetSimilarLibraryVoicesRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GetSimilarLibraryVoicesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (g *GetSimilarLibraryVoicesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
-}
-
-func (g *GetSimilarLibraryVoicesRequest) GetBody() *components.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost {
-	if g == nil {
-		return nil
-	}
-	return g.Body
-}
 
 type GetSimilarLibraryVoicesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

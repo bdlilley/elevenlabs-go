@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetKnowledgeBaseSourceFileURLRequest struct {
 	// The id of a document from the knowledge base. This is returned on document addition.
 	DocumentationID string `pathParam:"style=simple,explode=false,name=documentation_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetKnowledgeBaseSourceFileURLRequest) GetDocumentationID() string {
@@ -20,13 +17,6 @@ func (g *GetKnowledgeBaseSourceFileURLRequest) GetDocumentationID() string {
 		return ""
 	}
 	return g.DocumentationID
-}
-
-func (g *GetKnowledgeBaseSourceFileURLRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetKnowledgeBaseSourceFileURLResponse struct {

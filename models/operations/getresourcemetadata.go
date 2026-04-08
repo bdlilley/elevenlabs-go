@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetResourceMetadataRequest struct {
@@ -13,8 +12,6 @@ type GetResourceMetadataRequest struct {
 	ResourceID string `pathParam:"style=simple,explode=false,name=resource_id"`
 	// Resource type of the target resource.
 	ResourceType components.WorkspaceResourceType `queryParam:"style=form,explode=true,name=resource_type"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetResourceMetadataRequest) GetResourceID() string {
@@ -29,13 +26,6 @@ func (g *GetResourceMetadataRequest) GetResourceType() components.WorkspaceResou
 		return components.WorkspaceResourceType("")
 	}
 	return g.ResourceType
-}
-
-func (g *GetResourceMetadataRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetResourceMetadataResponse struct {

@@ -5,17 +5,14 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type EditChapterRequest struct {
 	// The ID of the Studio project.
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
 	// The ID of the chapter.
-	ChapterID string `pathParam:"style=simple,explode=false,name=chapter_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                   `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost `request:"mediaType=application/json"`
+	ChapterID string                                                                      `pathParam:"style=simple,explode=false,name=chapter_id"`
+	Body      *components.BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost `request:"mediaType=application/json"`
 }
 
 func (e EditChapterRequest) MarshalJSON() ([]byte, error) {
@@ -41,13 +38,6 @@ func (e *EditChapterRequest) GetChapterID() string {
 		return ""
 	}
 	return e.ChapterID
-}
-
-func (e *EditChapterRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if e == nil {
-		return nil
-	}
-	return e.XiAPIKey
 }
 
 func (e *EditChapterRequest) GetBody() *components.BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost {

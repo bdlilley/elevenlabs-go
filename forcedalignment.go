@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -35,12 +34,7 @@ func newForcedAlignment(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration
 
 // ForcedAlignment - Create Forced Alignment
 // Force align an audio file to text. Use this endpoint to get the timing information for each character and word in an audio file based on a provided text transcript.
-func (s *ForcedAlignment) ForcedAlignment(ctx context.Context, body components.BodyCreateForcedAlignmentV1ForcedAlignmentPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ForcedAlignmentResponse, error) {
-	request := operations.ForcedAlignmentRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *ForcedAlignment) ForcedAlignment(ctx context.Context, request components.BodyCreateForcedAlignmentV1ForcedAlignmentPost, opts ...operations.Option) (*operations.ForcedAlignmentResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -72,7 +66,7 @@ func (s *ForcedAlignment) ForcedAlignment(ctx context.Context, body components.B
 		OperationID:      "forced_alignment",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -97,8 +91,6 @@ func (s *ForcedAlignment) ForcedAlignment(ctx context.Context, body components.B
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetSpeakerAudioRequest struct {
@@ -15,8 +14,6 @@ type GetSpeakerAudioRequest struct {
 	SampleID string `pathParam:"style=simple,explode=false,name=sample_id"`
 	// Speaker ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id}/samples/{sample_id}/speakers to list all the available speakers for a sample.
 	SpeakerID string `pathParam:"style=simple,explode=false,name=speaker_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetSpeakerAudioRequest) GetVoiceID() string {
@@ -38,13 +35,6 @@ func (g *GetSpeakerAudioRequest) GetSpeakerID() string {
 		return ""
 	}
 	return g.SpeakerID
-}
-
-func (g *GetSpeakerAudioRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetSpeakerAudioResponse struct {

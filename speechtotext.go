@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -35,10 +34,9 @@ func newSpeechToText(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, h
 
 // SpeechToText - Speech To Text
 // Transcribe an audio or video file. If webhook is set to true, the request will be processed asynchronously and results sent to configured webhooks. When use_multi_channel is true and the provided audio has multiple channels, a 'transcripts' object with separate transcripts for each channel is returned. Otherwise, returns a single transcript. The optional webhook_metadata parameter allows you to attach custom data that will be included in webhook responses for request correlation and tracking.
-func (s *SpeechToText) SpeechToText(ctx context.Context, body components.BodySpeechToTextV1SpeechToTextPost, enableLogging *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SpeechToTextResponse, error) {
+func (s *SpeechToText) SpeechToText(ctx context.Context, body components.BodySpeechToTextV1SpeechToTextPost, enableLogging *bool, opts ...operations.Option) (*operations.SpeechToTextResponse, error) {
 	request := operations.SpeechToTextRequest{
 		EnableLogging: enableLogging,
-		XiAPIKey:      xiAPIKey,
 		Body:          body,
 	}
 
@@ -98,8 +96,6 @@ func (s *SpeechToText) SpeechToText(ctx context.Context, body components.BodySpe
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -286,10 +282,9 @@ func (s *SpeechToText) SpeechToText(ctx context.Context, body components.BodySpe
 
 // GetTranscriptByID - Get Transcript By Id
 // Retrieve a previously generated transcript by its ID.
-func (s *SpeechToText) GetTranscriptByID(ctx context.Context, transcriptionID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetTranscriptByIDResponse, error) {
+func (s *SpeechToText) GetTranscriptByID(ctx context.Context, transcriptionID string, opts ...operations.Option) (*operations.GetTranscriptByIDResponse, error) {
 	request := operations.GetTranscriptByIDRequest{
 		TranscriptionID: transcriptionID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -341,8 +336,6 @@ func (s *SpeechToText) GetTranscriptByID(ctx context.Context, transcriptionID st
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -527,10 +520,9 @@ func (s *SpeechToText) GetTranscriptByID(ctx context.Context, transcriptionID st
 
 // DeleteTranscriptByID - Delete Transcript By Id
 // Delete a previously generated transcript by its ID.
-func (s *SpeechToText) DeleteTranscriptByID(ctx context.Context, transcriptionID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteTranscriptByIDResponse, error) {
+func (s *SpeechToText) DeleteTranscriptByID(ctx context.Context, transcriptionID string, opts ...operations.Option) (*operations.DeleteTranscriptByIDResponse, error) {
 	request := operations.DeleteTranscriptByIDRequest{
 		TranscriptionID: transcriptionID,
-		XiAPIKey:        xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -582,8 +574,6 @@ func (s *SpeechToText) DeleteTranscriptByID(ctx context.Context, transcriptionID
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

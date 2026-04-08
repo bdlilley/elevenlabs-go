@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,10 +33,9 @@ func newTextToDialogue(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration,
 
 // TextToDialogue - Text To Dialogue (Multi-Voice)
 // Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
-func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.BodyTextToDialogueMultiVoiceV1TextToDialoguePost, outputFormat *operations.TextToDialogueOutputFormatOfTheGeneratedAudio, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToDialogueResponse, error) {
+func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.BodyTextToDialogueMultiVoiceV1TextToDialoguePost, outputFormat *operations.TextToDialogueOutputFormatOfTheGeneratedAudio, opts ...operations.Option) (*operations.TextToDialogueResponse, error) {
 	request := operations.TextToDialogueRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -97,8 +95,6 @@ func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.Bod
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -275,10 +271,9 @@ func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.Bod
 
 // TextToDialogueStream - Text To Dialogue (Multi-Voice) Streaming
 // Converts a list of text and voice ID pairs into speech (dialogue) and returns an audio stream.
-func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body components.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToDialogueStreamResponse, error) {
+func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body components.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToDialogueStreamResponse, error) {
 	request := operations.TextToDialogueStreamRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -338,8 +333,6 @@ func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body componen
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -516,10 +509,9 @@ func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body componen
 
 // TextToDialogueStreamWithTimestamps - Text To Dialogue Streaming With Timestamps
 // Converts a list of text and voice ID pairs into speech (dialogue) and returns a stream of JSON blobs containing audio as a base64 encoded string and timestamps
-func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context, body components.BodyTextToDialogueStreamWithTimestamps, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToDialogueStreamWithTimestampsResponse, error) {
+func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context, body components.BodyTextToDialogueStreamWithTimestamps, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToDialogueStreamWithTimestampsResponse, error) {
 	request := operations.TextToDialogueStreamWithTimestampsRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -579,8 +571,6 @@ func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context,
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -765,10 +755,9 @@ func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context,
 
 // TextToDialogueFullWithTimestamps - Text To Dialogue With Timestamps
 // Generate dialogue from text with precise character-level timing information for audio-text synchronization.
-func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, body components.BodyTextToDialogueFullWithTimestamps, outputFormat *operations.TextToDialogueFullWithTimestampsOutputFormatOfTheGeneratedAudio, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToDialogueFullWithTimestampsResponse, error) {
+func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, body components.BodyTextToDialogueFullWithTimestamps, outputFormat *operations.TextToDialogueFullWithTimestampsOutputFormatOfTheGeneratedAudio, opts ...operations.Option) (*operations.TextToDialogueFullWithTimestampsResponse, error) {
 	request := operations.TextToDialogueFullWithTimestampsRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -828,8 +817,6 @@ func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, b
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)

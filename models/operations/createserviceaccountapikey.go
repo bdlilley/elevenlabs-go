@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type CreateServiceAccountAPIKeyRequest struct {
-	ServiceAccountUserID string `pathParam:"style=simple,explode=false,name=service_account_user_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                 `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost `request:"mediaType=application/json"`
+	ServiceAccountUserID string                                                                                    `pathParam:"style=simple,explode=false,name=service_account_user_id"`
+	Body                 components.BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost `request:"mediaType=application/json"`
 }
 
 func (c *CreateServiceAccountAPIKeyRequest) GetServiceAccountUserID() string {
@@ -20,13 +17,6 @@ func (c *CreateServiceAccountAPIKeyRequest) GetServiceAccountUserID() string {
 		return ""
 	}
 	return c.ServiceAccountUserID
-}
-
-func (c *CreateServiceAccountAPIKeyRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
 }
 
 func (c *CreateServiceAccountAPIKeyRequest) GetBody() components.BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost {

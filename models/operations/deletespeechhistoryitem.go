@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteSpeechHistoryItemRequest struct {
 	// History item ID to be used, you can use GET https://api.elevenlabs.io/v1/history to receive a list of history items and their IDs.
 	HistoryItemID string `pathParam:"style=simple,explode=false,name=history_item_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteSpeechHistoryItemRequest) GetHistoryItemID() string {
@@ -20,13 +17,6 @@ func (d *DeleteSpeechHistoryItemRequest) GetHistoryItemID() string {
 		return ""
 	}
 	return d.HistoryItemID
-}
-
-func (d *DeleteSpeechHistoryItemRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteSpeechHistoryItemResponse struct {

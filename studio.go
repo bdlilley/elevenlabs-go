@@ -34,10 +34,9 @@ func newStudio(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *
 
 // CreatePodcast - Create Podcast
 // Create and auto-convert a podcast project. Currently, the LLM cost is covered by us but you will still be charged for the audio generation. In the future, you will be charged for both the LLM and audio generation costs.
-func (s *Studio) CreatePodcast(ctx context.Context, body components.BodyCreatePodcastV1StudioPodcastsPost, safetyIdentifier optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreatePodcastResponse, error) {
+func (s *Studio) CreatePodcast(ctx context.Context, body components.BodyCreatePodcastV1StudioPodcastsPost, safetyIdentifier optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreatePodcastResponse, error) {
 	request := operations.CreatePodcastRequest{
 		SafetyIdentifier: safetyIdentifier,
-		XiAPIKey:         xiAPIKey,
 		Body:             body,
 	}
 
@@ -279,10 +278,9 @@ func (s *Studio) CreatePodcast(ctx context.Context, body components.BodyCreatePo
 
 // UpdatePronunciationDictionaries - Create Pronunciation Dictionaries
 // Create a set of pronunciation dictionaries acting on a project. This will automatically mark text within this project as requiring reconverting where the new dictionary would apply or the old one no longer does.
-func (s *Studio) UpdatePronunciationDictionaries(ctx context.Context, projectID string, body components.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIDPronunciationDictionariesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdatePronunciationDictionariesResponse, error) {
+func (s *Studio) UpdatePronunciationDictionaries(ctx context.Context, projectID string, body components.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIDPronunciationDictionariesPost, opts ...operations.Option) (*operations.UpdatePronunciationDictionariesResponse, error) {
 	request := operations.UpdatePronunciationDictionariesRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -342,8 +340,6 @@ func (s *Studio) UpdatePronunciationDictionaries(ctx context.Context, projectID 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -524,11 +520,7 @@ func (s *Studio) UpdatePronunciationDictionaries(ctx context.Context, projectID 
 
 // GetProjects - List Studio Projects
 // Returns a list of your Studio projects with metadata.
-func (s *Studio) GetProjects(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetProjectsResponse, error) {
-	request := operations.GetProjectsRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *Studio) GetProjects(ctx context.Context, opts ...operations.Option) (*operations.GetProjectsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -578,8 +570,6 @@ func (s *Studio) GetProjects(ctx context.Context, xiAPIKey optionalnullable.Opti
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -760,12 +750,7 @@ func (s *Studio) GetProjects(ctx context.Context, xiAPIKey optionalnullable.Opti
 
 // AddProject - Create Studio Project
 // Creates a new Studio project, it can be either initialized as blank, from a document or from a URL.
-func (s *Studio) AddProject(ctx context.Context, body components.BodyCreateStudioProjectV1StudioProjectsPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddProjectResponse, error) {
-	request := operations.AddProjectRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Studio) AddProject(ctx context.Context, request components.BodyCreateStudioProjectV1StudioProjectsPost, opts ...operations.Option) (*operations.AddProjectResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -797,7 +782,7 @@ func (s *Studio) AddProject(ctx context.Context, body components.BodyCreateStudi
 		OperationID:      "add_project",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -822,8 +807,6 @@ func (s *Studio) AddProject(ctx context.Context, body components.BodyCreateStudi
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1004,11 +987,10 @@ func (s *Studio) AddProject(ctx context.Context, body components.BodyCreateStudi
 
 // GetProjectByID - Get Studio Project
 // Returns information about a specific Studio project. This endpoint returns more detailed information about a project than `GET /v1/studio`.
-func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetProjectByIDResponse, error) {
+func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetProjectByIDResponse, error) {
 	request := operations.GetProjectByIDRequest{
 		ProjectID: projectID,
 		ShareID:   shareID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1060,8 +1042,6 @@ func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID o
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -1246,10 +1226,9 @@ func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID o
 
 // EditProject - Update Studio Project
 // Updates the specified Studio project by setting the values of the parameters passed.
-func (s *Studio) EditProject(ctx context.Context, projectID string, body components.BodyUpdateStudioProjectV1StudioProjectsProjectIDPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.EditProjectResponse, error) {
+func (s *Studio) EditProject(ctx context.Context, projectID string, body components.BodyUpdateStudioProjectV1StudioProjectsProjectIDPost, opts ...operations.Option) (*operations.EditProjectResponse, error) {
 	request := operations.EditProjectRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -1309,8 +1288,6 @@ func (s *Studio) EditProject(ctx context.Context, projectID string, body compone
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1491,10 +1468,9 @@ func (s *Studio) EditProject(ctx context.Context, projectID string, body compone
 
 // DeleteProject - Delete Studio Project
 // Deletes a Studio project.
-func (s *Studio) DeleteProject(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteProjectResponse, error) {
+func (s *Studio) DeleteProject(ctx context.Context, projectID string, opts ...operations.Option) (*operations.DeleteProjectResponse, error) {
 	request := operations.DeleteProjectRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1546,8 +1522,6 @@ func (s *Studio) DeleteProject(ctx context.Context, projectID string, xiAPIKey o
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1728,10 +1702,9 @@ func (s *Studio) DeleteProject(ctx context.Context, projectID string, xiAPIKey o
 
 // EditProjectContent - Update Studio Project Content
 // Updates Studio project content.
-func (s *Studio) EditProjectContent(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost, opts ...operations.Option) (*operations.EditProjectContentResponse, error) {
+func (s *Studio) EditProjectContent(ctx context.Context, projectID string, body *components.BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost, opts ...operations.Option) (*operations.EditProjectContentResponse, error) {
 	request := operations.EditProjectContentRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -1791,8 +1764,6 @@ func (s *Studio) EditProjectContent(ctx context.Context, projectID string, xiAPI
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1973,10 +1944,9 @@ func (s *Studio) EditProjectContent(ctx context.Context, projectID string, xiAPI
 
 // ConvertProjectEndpoint - Convert Studio Project
 // Starts conversion of a Studio project and all of its chapters.
-func (s *Studio) ConvertProjectEndpoint(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ConvertProjectEndpointResponse, error) {
+func (s *Studio) ConvertProjectEndpoint(ctx context.Context, projectID string, opts ...operations.Option) (*operations.ConvertProjectEndpointResponse, error) {
 	request := operations.ConvertProjectEndpointRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2028,8 +1998,6 @@ func (s *Studio) ConvertProjectEndpoint(ctx context.Context, projectID string, x
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2210,10 +2178,9 @@ func (s *Studio) ConvertProjectEndpoint(ctx context.Context, projectID string, x
 
 // GetProjectSnapshots - List Studio Project Snapshots
 // Retrieves a list of snapshots for a Studio project.
-func (s *Studio) GetProjectSnapshots(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetProjectSnapshotsResponse, error) {
+func (s *Studio) GetProjectSnapshots(ctx context.Context, projectID string, opts ...operations.Option) (*operations.GetProjectSnapshotsResponse, error) {
 	request := operations.GetProjectSnapshotsRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2265,8 +2232,6 @@ func (s *Studio) GetProjectSnapshots(ctx context.Context, projectID string, xiAP
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2447,11 +2412,10 @@ func (s *Studio) GetProjectSnapshots(ctx context.Context, projectID string, xiAP
 
 // GetProjectSnapshotEndpoint - Get Project Snapshot
 // Returns the project snapshot.
-func (s *Studio) GetProjectSnapshotEndpoint(ctx context.Context, projectID string, projectSnapshotID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetProjectSnapshotEndpointResponse, error) {
+func (s *Studio) GetProjectSnapshotEndpoint(ctx context.Context, projectID string, projectSnapshotID string, opts ...operations.Option) (*operations.GetProjectSnapshotEndpointResponse, error) {
 	request := operations.GetProjectSnapshotEndpointRequest{
 		ProjectID:         projectID,
 		ProjectSnapshotID: projectSnapshotID,
-		XiAPIKey:          xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2503,8 +2467,6 @@ func (s *Studio) GetProjectSnapshotEndpoint(ctx context.Context, projectID strin
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2685,11 +2647,10 @@ func (s *Studio) GetProjectSnapshotEndpoint(ctx context.Context, projectID strin
 
 // StreamProjectSnapshotAudioEndpoint - Stream Studio Project Audio
 // Stream the audio from a Studio project snapshot.
-func (s *Studio) StreamProjectSnapshotAudioEndpoint(ctx context.Context, projectID string, projectSnapshotID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyStreamStudioProjectAudioV1StudioProjectsProjectIDSnapshotsProjectSnapshotIDStreamPost, opts ...operations.Option) (*operations.StreamProjectSnapshotAudioEndpointResponse, error) {
+func (s *Studio) StreamProjectSnapshotAudioEndpoint(ctx context.Context, projectID string, projectSnapshotID string, body *components.BodyStreamStudioProjectAudioV1StudioProjectsProjectIDSnapshotsProjectSnapshotIDStreamPost, opts ...operations.Option) (*operations.StreamProjectSnapshotAudioEndpointResponse, error) {
 	request := operations.StreamProjectSnapshotAudioEndpointRequest{
 		ProjectID:         projectID,
 		ProjectSnapshotID: projectSnapshotID,
-		XiAPIKey:          xiAPIKey,
 		Body:              body,
 	}
 
@@ -2749,8 +2710,6 @@ func (s *Studio) StreamProjectSnapshotAudioEndpoint(ctx context.Context, project
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2912,11 +2871,10 @@ func (s *Studio) StreamProjectSnapshotAudioEndpoint(ctx context.Context, project
 
 // StreamProjectSnapshotArchiveEndpoint - Stream Archive With Studio Project Audio
 // Returns a compressed archive of the Studio project's audio.
-func (s *Studio) StreamProjectSnapshotArchiveEndpoint(ctx context.Context, projectID string, projectSnapshotID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.StreamProjectSnapshotArchiveEndpointResponse, error) {
+func (s *Studio) StreamProjectSnapshotArchiveEndpoint(ctx context.Context, projectID string, projectSnapshotID string, opts ...operations.Option) (*operations.StreamProjectSnapshotArchiveEndpointResponse, error) {
 	request := operations.StreamProjectSnapshotArchiveEndpointRequest{
 		ProjectID:         projectID,
 		ProjectSnapshotID: projectSnapshotID,
-		XiAPIKey:          xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2968,8 +2926,6 @@ func (s *Studio) StreamProjectSnapshotArchiveEndpoint(ctx context.Context, proje
 	}
 	req.Header.Set("Accept", "application/x-zip")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3142,10 +3098,9 @@ func (s *Studio) StreamProjectSnapshotArchiveEndpoint(ctx context.Context, proje
 
 // GetChapters - List Chapters
 // Returns a list of a Studio project's chapters.
-func (s *Studio) GetChapters(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetChaptersResponse, error) {
+func (s *Studio) GetChapters(ctx context.Context, projectID string, opts ...operations.Option) (*operations.GetChaptersResponse, error) {
 	request := operations.GetChaptersRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -3197,8 +3152,6 @@ func (s *Studio) GetChapters(ctx context.Context, projectID string, xiAPIKey opt
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3379,10 +3332,9 @@ func (s *Studio) GetChapters(ctx context.Context, projectID string, xiAPIKey opt
 
 // AddChapter - Create Chapter
 // Creates a new chapter either as blank or from a URL.
-func (s *Studio) AddChapter(ctx context.Context, projectID string, body components.BodyCreateChapterV1StudioProjectsProjectIDChaptersPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddChapterResponse, error) {
+func (s *Studio) AddChapter(ctx context.Context, projectID string, body components.BodyCreateChapterV1StudioProjectsProjectIDChaptersPost, opts ...operations.Option) (*operations.AddChapterResponse, error) {
 	request := operations.AddChapterRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -3442,8 +3394,6 @@ func (s *Studio) AddChapter(ctx context.Context, projectID string, body componen
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3624,11 +3574,10 @@ func (s *Studio) AddChapter(ctx context.Context, projectID string, body componen
 
 // GetChapterByIDEndpoint - Get Chapter
 // Returns information about a specific chapter.
-func (s *Studio) GetChapterByIDEndpoint(ctx context.Context, projectID string, chapterID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetChapterByIDEndpointResponse, error) {
+func (s *Studio) GetChapterByIDEndpoint(ctx context.Context, projectID string, chapterID string, opts ...operations.Option) (*operations.GetChapterByIDEndpointResponse, error) {
 	request := operations.GetChapterByIDEndpointRequest{
 		ProjectID: projectID,
 		ChapterID: chapterID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -3680,8 +3629,6 @@ func (s *Studio) GetChapterByIDEndpoint(ctx context.Context, projectID string, c
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3862,11 +3809,10 @@ func (s *Studio) GetChapterByIDEndpoint(ctx context.Context, projectID string, c
 
 // EditChapter - Update Chapter
 // Updates a chapter.
-func (s *Studio) EditChapter(ctx context.Context, projectID string, chapterID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost, opts ...operations.Option) (*operations.EditChapterResponse, error) {
+func (s *Studio) EditChapter(ctx context.Context, projectID string, chapterID string, body *components.BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost, opts ...operations.Option) (*operations.EditChapterResponse, error) {
 	request := operations.EditChapterRequest{
 		ProjectID: projectID,
 		ChapterID: chapterID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -3926,8 +3872,6 @@ func (s *Studio) EditChapter(ctx context.Context, projectID string, chapterID st
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4108,11 +4052,10 @@ func (s *Studio) EditChapter(ctx context.Context, projectID string, chapterID st
 
 // DeleteChapterEndpoint - Delete Chapter
 // Deletes a chapter.
-func (s *Studio) DeleteChapterEndpoint(ctx context.Context, projectID string, chapterID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteChapterEndpointResponse, error) {
+func (s *Studio) DeleteChapterEndpoint(ctx context.Context, projectID string, chapterID string, opts ...operations.Option) (*operations.DeleteChapterEndpointResponse, error) {
 	request := operations.DeleteChapterEndpointRequest{
 		ProjectID: projectID,
 		ChapterID: chapterID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -4164,8 +4107,6 @@ func (s *Studio) DeleteChapterEndpoint(ctx context.Context, projectID string, ch
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4346,11 +4287,10 @@ func (s *Studio) DeleteChapterEndpoint(ctx context.Context, projectID string, ch
 
 // ConvertChapterEndpoint - Convert Chapter
 // Starts conversion of a specific chapter.
-func (s *Studio) ConvertChapterEndpoint(ctx context.Context, projectID string, chapterID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ConvertChapterEndpointResponse, error) {
+func (s *Studio) ConvertChapterEndpoint(ctx context.Context, projectID string, chapterID string, opts ...operations.Option) (*operations.ConvertChapterEndpointResponse, error) {
 	request := operations.ConvertChapterEndpointRequest{
 		ProjectID: projectID,
 		ChapterID: chapterID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -4402,8 +4342,6 @@ func (s *Studio) ConvertChapterEndpoint(ctx context.Context, projectID string, c
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4584,11 +4522,10 @@ func (s *Studio) ConvertChapterEndpoint(ctx context.Context, projectID string, c
 
 // GetChapterSnapshots - List Chapter Snapshots
 // Gets information about all the snapshots of a chapter. Each snapshot can be downloaded as audio. Whenever a chapter is converted a snapshot will automatically be created.
-func (s *Studio) GetChapterSnapshots(ctx context.Context, projectID string, chapterID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetChapterSnapshotsResponse, error) {
+func (s *Studio) GetChapterSnapshots(ctx context.Context, projectID string, chapterID string, opts ...operations.Option) (*operations.GetChapterSnapshotsResponse, error) {
 	request := operations.GetChapterSnapshotsRequest{
 		ProjectID: projectID,
 		ChapterID: chapterID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -4640,8 +4577,6 @@ func (s *Studio) GetChapterSnapshots(ctx context.Context, projectID string, chap
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4822,12 +4757,11 @@ func (s *Studio) GetChapterSnapshots(ctx context.Context, projectID string, chap
 
 // GetChapterSnapshotEndpoint - Get Chapter Snapshot
 // Returns the chapter snapshot.
-func (s *Studio) GetChapterSnapshotEndpoint(ctx context.Context, projectID string, chapterID string, chapterSnapshotID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetChapterSnapshotEndpointResponse, error) {
+func (s *Studio) GetChapterSnapshotEndpoint(ctx context.Context, projectID string, chapterID string, chapterSnapshotID string, opts ...operations.Option) (*operations.GetChapterSnapshotEndpointResponse, error) {
 	request := operations.GetChapterSnapshotEndpointRequest{
 		ProjectID:         projectID,
 		ChapterID:         chapterID,
 		ChapterSnapshotID: chapterSnapshotID,
-		XiAPIKey:          xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -4879,8 +4813,6 @@ func (s *Studio) GetChapterSnapshotEndpoint(ctx context.Context, projectID strin
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -5061,7 +4993,14 @@ func (s *Studio) GetChapterSnapshotEndpoint(ctx context.Context, projectID strin
 
 // StreamChapterSnapshotAudio - Stream Chapter Audio
 // Stream the audio from a chapter snapshot. Use `GET /v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots` to return the snapshots of a chapter.
-func (s *Studio) StreamChapterSnapshotAudio(ctx context.Context, request operations.StreamChapterSnapshotAudioRequest, opts ...operations.Option) (*operations.StreamChapterSnapshotAudioResponse, error) {
+func (s *Studio) StreamChapterSnapshotAudio(ctx context.Context, projectID string, chapterID string, chapterSnapshotID string, body *components.BodyStreamChapterAudioV1StudioProjectsProjectIDChaptersChapterIDSnapshotsChapterSnapshotIDStreamPost, opts ...operations.Option) (*operations.StreamChapterSnapshotAudioResponse, error) {
+	request := operations.StreamChapterSnapshotAudioRequest{
+		ProjectID:         projectID,
+		ChapterID:         chapterID,
+		ChapterSnapshotID: chapterSnapshotID,
+		Body:              body,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -5118,8 +5057,6 @@ func (s *Studio) StreamChapterSnapshotAudio(ctx context.Context, request operati
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -5292,10 +5229,9 @@ func (s *Studio) StreamChapterSnapshotAudio(ctx context.Context, request operati
 
 // GetProjectMutedTracksEndpoint - Get Project Muted Tracks
 // Returns a list of chapter IDs that have muted tracks in a project.
-func (s *Studio) GetProjectMutedTracksEndpoint(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetProjectMutedTracksEndpointResponse, error) {
+func (s *Studio) GetProjectMutedTracksEndpoint(ctx context.Context, projectID string, opts ...operations.Option) (*operations.GetProjectMutedTracksEndpointResponse, error) {
 	request := operations.GetProjectMutedTracksEndpointRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -5347,8 +5283,6 @@ func (s *Studio) GetProjectMutedTracksEndpoint(ctx context.Context, projectID st
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

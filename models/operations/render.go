@@ -5,16 +5,13 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RenderRequest struct {
 	// ID of the dubbing project.
 	DubbingID string `pathParam:"style=simple,explode=false,name=dubbing_id"`
 	// The target language code to render, eg. 'es'. To render the source track use 'original'.
-	Language string `pathParam:"style=simple,explode=false,name=language"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                        `header:"style=simple,explode=false,name=xi-api-key"`
+	Language string                                                                                           `pathParam:"style=simple,explode=false,name=language"`
 	Body     components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost `request:"mediaType=application/json"`
 }
 
@@ -30,13 +27,6 @@ func (r *RenderRequest) GetLanguage() string {
 		return ""
 	}
 	return r.Language
-}
-
-func (r *RenderRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XiAPIKey
 }
 
 func (r *RenderRequest) GetBody() components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost {

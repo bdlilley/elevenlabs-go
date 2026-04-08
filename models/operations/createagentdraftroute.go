@@ -4,16 +4,13 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type CreateAgentDraftRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
 	// The ID of the agent branch to use
-	BranchID string `queryParam:"style=form,explode=true,name=branch_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                      `header:"style=simple,explode=false,name=xi-api-key"`
+	BranchID string                                                         `queryParam:"style=form,explode=true,name=branch_id"`
 	Body     components.BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost `request:"mediaType=application/json"`
 }
 
@@ -29,13 +26,6 @@ func (c *CreateAgentDraftRouteRequest) GetBranchID() string {
 		return ""
 	}
 	return c.BranchID
-}
-
-func (c *CreateAgentDraftRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
 }
 
 func (c *CreateAgentDraftRouteRequest) GetBody() components.BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost {

@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteWorkspaceWebhookRouteRequest struct {
 	// The unique ID for the webhook
 	WebhookID string `pathParam:"style=simple,explode=false,name=webhook_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteWorkspaceWebhookRouteRequest) GetWebhookID() string {
@@ -20,13 +17,6 @@ func (d *DeleteWorkspaceWebhookRouteRequest) GetWebhookID() string {
 		return ""
 	}
 	return d.WebhookID
-}
-
-func (d *DeleteWorkspaceWebhookRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteWorkspaceWebhookRouteResponse struct {

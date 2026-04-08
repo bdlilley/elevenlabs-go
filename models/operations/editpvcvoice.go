@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type EditPvcVoiceRequest struct {
 	// Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-	VoiceID string `pathParam:"style=simple,explode=false,name=voice_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]          `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyEditPVCVoiceV1VoicesPVCVoiceIDPost `request:"mediaType=application/json"`
+	VoiceID string                                             `pathParam:"style=simple,explode=false,name=voice_id"`
+	Body    *components.BodyEditPVCVoiceV1VoicesPVCVoiceIDPost `request:"mediaType=application/json"`
 }
 
 func (e EditPvcVoiceRequest) MarshalJSON() ([]byte, error) {
@@ -32,13 +29,6 @@ func (e *EditPvcVoiceRequest) GetVoiceID() string {
 		return ""
 	}
 	return e.VoiceID
-}
-
-func (e *EditPvcVoiceRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if e == nil {
-		return nil
-	}
-	return e.XiAPIKey
 }
 
 func (e *EditPvcVoiceRequest) GetBody() *components.BodyEditPVCVoiceV1VoicesPVCVoiceIDPost {

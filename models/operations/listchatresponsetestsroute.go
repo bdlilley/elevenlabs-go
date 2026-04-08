@@ -54,8 +54,6 @@ type ListChatResponseTestsRouteRequest struct {
 	IncludeFolders optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=include_folders"`
 	// Sort mode for listing tests. Use 'folders_first' to place folders before tests.
 	SortMode *SortMode `default:"default" queryParam:"style=form,explode=true,name=sort_mode"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (l ListChatResponseTestsRouteRequest) MarshalJSON() ([]byte, error) {
@@ -116,13 +114,6 @@ func (l *ListChatResponseTestsRouteRequest) GetSortMode() *SortMode {
 		return nil
 	}
 	return l.SortMode
-}
-
-func (l *ListChatResponseTestsRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if l == nil {
-		return nil
-	}
-	return l.XiAPIKey
 }
 
 type ListChatResponseTestsRouteResponse struct {

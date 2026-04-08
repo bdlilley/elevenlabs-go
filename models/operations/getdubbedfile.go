@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"io"
 )
 
@@ -13,8 +12,6 @@ type GetDubbedFileRequest struct {
 	DubbingID string `pathParam:"style=simple,explode=false,name=dubbing_id"`
 	// ID of the language.
 	LanguageCode string `pathParam:"style=simple,explode=false,name=language_code"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetDubbedFileRequest) GetDubbingID() string {
@@ -29,13 +26,6 @@ func (g *GetDubbedFileRequest) GetLanguageCode() string {
 		return ""
 	}
 	return g.LanguageCode
-}
-
-func (g *GetDubbedFileRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetDubbedFileResponse struct {

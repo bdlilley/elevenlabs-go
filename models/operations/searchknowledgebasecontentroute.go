@@ -17,8 +17,6 @@ type SearchKnowledgeBaseContentRouteRequest struct {
 	Types optionalnullable.OptionalNullable[[]components.KnowledgeBaseDocumentType] `queryParam:"style=form,explode=true,name=types"`
 	// Used for fetching next page. Cursor is returned in the response.
 	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (s SearchKnowledgeBaseContentRouteRequest) MarshalJSON() ([]byte, error) {
@@ -58,13 +56,6 @@ func (s *SearchKnowledgeBaseContentRouteRequest) GetCursor() optionalnullable.Op
 		return nil
 	}
 	return s.Cursor
-}
-
-func (s *SearchKnowledgeBaseContentRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if s == nil {
-		return nil
-	}
-	return s.XiAPIKey
 }
 
 type SearchKnowledgeBaseContentRouteResponse struct {

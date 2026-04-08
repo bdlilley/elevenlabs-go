@@ -8,53 +8,52 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
-type AgentsPlatformCreateEnvironmentVariableRequestType string
+type CreateEnvironmentVariableRequestType string
 
 const (
-	AgentsPlatformCreateEnvironmentVariableRequestTypeString         AgentsPlatformCreateEnvironmentVariableRequestType = "string"
-	AgentsPlatformCreateEnvironmentVariableRequestTypeSecret         AgentsPlatformCreateEnvironmentVariableRequestType = "secret"
-	AgentsPlatformCreateEnvironmentVariableRequestTypeAuthConnection AgentsPlatformCreateEnvironmentVariableRequestType = "auth_connection"
+	CreateEnvironmentVariableRequestTypeString         CreateEnvironmentVariableRequestType = "string"
+	CreateEnvironmentVariableRequestTypeSecret         CreateEnvironmentVariableRequestType = "secret"
+	CreateEnvironmentVariableRequestTypeAuthConnection CreateEnvironmentVariableRequestType = "auth_connection"
 )
 
-type AgentsPlatformCreateEnvironmentVariableRequest struct {
+type CreateEnvironmentVariableRequest struct {
 	CreateStringEnvironmentVariableRequest         *components.CreateStringEnvironmentVariableRequest         `queryParam:"inline" union:"member"`
 	CreateSecretEnvironmentVariableRequest         *components.CreateSecretEnvironmentVariableRequest         `queryParam:"inline" union:"member"`
 	CreateAuthConnectionEnvironmentVariableRequest *components.CreateAuthConnectionEnvironmentVariableRequest `queryParam:"inline" union:"member"`
 
-	Type AgentsPlatformCreateEnvironmentVariableRequestType
+	Type CreateEnvironmentVariableRequestType
 }
 
-func CreateAgentsPlatformCreateEnvironmentVariableRequestString(stringT components.CreateStringEnvironmentVariableRequest) AgentsPlatformCreateEnvironmentVariableRequest {
-	typ := AgentsPlatformCreateEnvironmentVariableRequestTypeString
+func CreateCreateEnvironmentVariableRequestString(stringT components.CreateStringEnvironmentVariableRequest) CreateEnvironmentVariableRequest {
+	typ := CreateEnvironmentVariableRequestTypeString
 
-	return AgentsPlatformCreateEnvironmentVariableRequest{
+	return CreateEnvironmentVariableRequest{
 		CreateStringEnvironmentVariableRequest: &stringT,
 		Type:                                   typ,
 	}
 }
 
-func CreateAgentsPlatformCreateEnvironmentVariableRequestSecret(secret components.CreateSecretEnvironmentVariableRequest) AgentsPlatformCreateEnvironmentVariableRequest {
-	typ := AgentsPlatformCreateEnvironmentVariableRequestTypeSecret
+func CreateCreateEnvironmentVariableRequestSecret(secret components.CreateSecretEnvironmentVariableRequest) CreateEnvironmentVariableRequest {
+	typ := CreateEnvironmentVariableRequestTypeSecret
 
-	return AgentsPlatformCreateEnvironmentVariableRequest{
+	return CreateEnvironmentVariableRequest{
 		CreateSecretEnvironmentVariableRequest: &secret,
 		Type:                                   typ,
 	}
 }
 
-func CreateAgentsPlatformCreateEnvironmentVariableRequestAuthConnection(authConnection components.CreateAuthConnectionEnvironmentVariableRequest) AgentsPlatformCreateEnvironmentVariableRequest {
-	typ := AgentsPlatformCreateEnvironmentVariableRequestTypeAuthConnection
+func CreateCreateEnvironmentVariableRequestAuthConnection(authConnection components.CreateAuthConnectionEnvironmentVariableRequest) CreateEnvironmentVariableRequest {
+	typ := CreateEnvironmentVariableRequestTypeAuthConnection
 
-	return AgentsPlatformCreateEnvironmentVariableRequest{
+	return CreateEnvironmentVariableRequest{
 		CreateAuthConnectionEnvironmentVariableRequest: &authConnection,
 		Type: typ,
 	}
 }
 
-func (u *AgentsPlatformCreateEnvironmentVariableRequest) UnmarshalJSON(data []byte) error {
+func (u *CreateEnvironmentVariableRequest) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
 		Type string `json:"type"`
@@ -69,36 +68,36 @@ func (u *AgentsPlatformCreateEnvironmentVariableRequest) UnmarshalJSON(data []by
 	case "string":
 		createStringEnvironmentVariableRequest := new(components.CreateStringEnvironmentVariableRequest)
 		if err := utils.UnmarshalJSON(data, &createStringEnvironmentVariableRequest, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == string) type components.CreateStringEnvironmentVariableRequest within AgentsPlatformCreateEnvironmentVariableRequest: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == string) type components.CreateStringEnvironmentVariableRequest within CreateEnvironmentVariableRequest: %w", string(data), err)
 		}
 
 		u.CreateStringEnvironmentVariableRequest = createStringEnvironmentVariableRequest
-		u.Type = AgentsPlatformCreateEnvironmentVariableRequestTypeString
+		u.Type = CreateEnvironmentVariableRequestTypeString
 		return nil
 	case "secret":
 		createSecretEnvironmentVariableRequest := new(components.CreateSecretEnvironmentVariableRequest)
 		if err := utils.UnmarshalJSON(data, &createSecretEnvironmentVariableRequest, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == secret) type components.CreateSecretEnvironmentVariableRequest within AgentsPlatformCreateEnvironmentVariableRequest: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == secret) type components.CreateSecretEnvironmentVariableRequest within CreateEnvironmentVariableRequest: %w", string(data), err)
 		}
 
 		u.CreateSecretEnvironmentVariableRequest = createSecretEnvironmentVariableRequest
-		u.Type = AgentsPlatformCreateEnvironmentVariableRequestTypeSecret
+		u.Type = CreateEnvironmentVariableRequestTypeSecret
 		return nil
 	case "auth_connection":
 		createAuthConnectionEnvironmentVariableRequest := new(components.CreateAuthConnectionEnvironmentVariableRequest)
 		if err := utils.UnmarshalJSON(data, &createAuthConnectionEnvironmentVariableRequest, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Type == auth_connection) type components.CreateAuthConnectionEnvironmentVariableRequest within AgentsPlatformCreateEnvironmentVariableRequest: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == auth_connection) type components.CreateAuthConnectionEnvironmentVariableRequest within CreateEnvironmentVariableRequest: %w", string(data), err)
 		}
 
 		u.CreateAuthConnectionEnvironmentVariableRequest = createAuthConnectionEnvironmentVariableRequest
-		u.Type = AgentsPlatformCreateEnvironmentVariableRequestTypeAuthConnection
+		u.Type = CreateEnvironmentVariableRequestTypeAuthConnection
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentsPlatformCreateEnvironmentVariableRequest", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateEnvironmentVariableRequest", string(data))
 }
 
-func (u AgentsPlatformCreateEnvironmentVariableRequest) MarshalJSON() ([]byte, error) {
+func (u CreateEnvironmentVariableRequest) MarshalJSON() ([]byte, error) {
 	if u.CreateStringEnvironmentVariableRequest != nil {
 		return utils.MarshalJSON(u.CreateStringEnvironmentVariableRequest, "", true)
 	}
@@ -111,39 +110,7 @@ func (u AgentsPlatformCreateEnvironmentVariableRequest) MarshalJSON() ([]byte, e
 		return utils.MarshalJSON(u.CreateAuthConnectionEnvironmentVariableRequest, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type AgentsPlatformCreateEnvironmentVariableRequest: all fields are null")
-}
-
-type CreateEnvironmentVariableRequestRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]      `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     AgentsPlatformCreateEnvironmentVariableRequest `request:"mediaType=application/json"`
-}
-
-func (c *CreateEnvironmentVariableRequestRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
-}
-
-func (c *CreateEnvironmentVariableRequestRequest) GetBody() AgentsPlatformCreateEnvironmentVariableRequest {
-	if c == nil {
-		return AgentsPlatformCreateEnvironmentVariableRequest{}
-	}
-	return c.Body
-}
-
-func (c *CreateEnvironmentVariableRequestRequest) GetBodyString() *components.CreateStringEnvironmentVariableRequest {
-	return c.GetBody().CreateStringEnvironmentVariableRequest
-}
-
-func (c *CreateEnvironmentVariableRequestRequest) GetBodySecret() *components.CreateSecretEnvironmentVariableRequest {
-	return c.GetBody().CreateSecretEnvironmentVariableRequest
-}
-
-func (c *CreateEnvironmentVariableRequestRequest) GetBodyAuthConnection() *components.CreateAuthConnectionEnvironmentVariableRequest {
-	return c.GetBody().CreateAuthConnectionEnvironmentVariableRequest
+	return nil, errors.New("could not marshal union type CreateEnvironmentVariableRequest: all fields are null")
 }
 
 type CreateEnvironmentVariableResponse struct {

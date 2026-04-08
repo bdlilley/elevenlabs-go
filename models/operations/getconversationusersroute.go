@@ -25,8 +25,6 @@ type GetConversationUsersRouteRequest struct {
 	SortBy *components.UsersSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
 	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetConversationUsersRouteRequest) MarshalJSON() ([]byte, error) {
@@ -94,13 +92,6 @@ func (g *GetConversationUsersRouteRequest) GetCursor() optionalnullable.Optional
 		return nil
 	}
 	return g.Cursor
-}
-
-func (g *GetConversationUsersRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetConversationUsersRouteResponse struct {

@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteDubbingRequest struct {
 	// ID of the dubbing project.
 	DubbingID string `pathParam:"style=simple,explode=false,name=dubbing_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteDubbingRequest) GetDubbingID() string {
@@ -20,13 +17,6 @@ func (d *DeleteDubbingRequest) GetDubbingID() string {
 		return ""
 	}
 	return d.DubbingID
-}
-
-func (d *DeleteDubbingRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteDubbingResponse struct {

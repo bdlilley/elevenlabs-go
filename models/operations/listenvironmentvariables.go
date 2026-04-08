@@ -51,8 +51,6 @@ type ListEnvironmentVariablesRequest struct {
 	Environment optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=environment"`
 	// Filter by variable type
 	Type optionalnullable.OptionalNullable[Type] `queryParam:"style=form,explode=true,name=type"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (l ListEnvironmentVariablesRequest) MarshalJSON() ([]byte, error) {
@@ -99,13 +97,6 @@ func (l *ListEnvironmentVariablesRequest) GetType() optionalnullable.OptionalNul
 		return nil
 	}
 	return l.Type
-}
-
-func (l *ListEnvironmentVariablesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if l == nil {
-		return nil
-	}
-	return l.XiAPIKey
 }
 
 type ListEnvironmentVariablesResponse struct {

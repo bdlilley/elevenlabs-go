@@ -35,10 +35,9 @@ func newVoices(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *
 
 // GetVoices - List Voices
 // Returns a list of all available voices for a user.
-func (s *Voices) GetVoices(ctx context.Context, showLegacy optionalnullable.OptionalNullable[bool], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetVoicesResponse, error) {
+func (s *Voices) GetVoices(ctx context.Context, showLegacy optionalnullable.OptionalNullable[bool], opts ...operations.Option) (*operations.GetVoicesResponse, error) {
 	request := operations.GetVoicesRequest{
 		ShowLegacy: showLegacy,
-		XiAPIKey:   xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -90,8 +89,6 @@ func (s *Voices) GetVoices(ctx context.Context, showLegacy optionalnullable.Opti
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -326,8 +323,6 @@ func (s *Voices) GetUserVoicesV2(ctx context.Context, request operations.GetUser
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -717,10 +712,9 @@ func (s *Voices) GetVoiceSettingsDefault(ctx context.Context, opts ...operations
 
 // GetVoiceSettings - Get Voice Settings
 // Returns the settings for a specific voice. "similarity_boost" corresponds to"Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
-func (s *Voices) GetVoiceSettings(ctx context.Context, voiceID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetVoiceSettingsResponse, error) {
+func (s *Voices) GetVoiceSettings(ctx context.Context, voiceID string, opts ...operations.Option) (*operations.GetVoiceSettingsResponse, error) {
 	request := operations.GetVoiceSettingsRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
+		VoiceID: voiceID,
 	}
 
 	o := operations.Options{}
@@ -772,8 +766,6 @@ func (s *Voices) GetVoiceSettings(ctx context.Context, voiceID string, xiAPIKey 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -954,11 +946,10 @@ func (s *Voices) GetVoiceSettings(ctx context.Context, voiceID string, xiAPIKey 
 
 // GetVoiceByID - Get Voice
 // Returns metadata about a specific voice.
-func (s *Voices) GetVoiceByID(ctx context.Context, voiceID string, withSettings *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetVoiceByIDResponse, error) {
+func (s *Voices) GetVoiceByID(ctx context.Context, voiceID string, withSettings *bool, opts ...operations.Option) (*operations.GetVoiceByIDResponse, error) {
 	request := operations.GetVoiceByIDRequest{
 		VoiceID:      voiceID,
 		WithSettings: withSettings,
-		XiAPIKey:     xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1010,8 +1001,6 @@ func (s *Voices) GetVoiceByID(ctx context.Context, voiceID string, withSettings 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -1196,10 +1185,9 @@ func (s *Voices) GetVoiceByID(ctx context.Context, voiceID string, withSettings 
 
 // DeleteVoice - Delete Voice
 // Deletes a voice by its ID.
-func (s *Voices) DeleteVoice(ctx context.Context, voiceID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteVoiceResponse, error) {
+func (s *Voices) DeleteVoice(ctx context.Context, voiceID string, opts ...operations.Option) (*operations.DeleteVoiceResponse, error) {
 	request := operations.DeleteVoiceRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
+		VoiceID: voiceID,
 	}
 
 	o := operations.Options{}
@@ -1251,8 +1239,6 @@ func (s *Voices) DeleteVoice(ctx context.Context, voiceID string, xiAPIKey optio
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1433,11 +1419,10 @@ func (s *Voices) DeleteVoice(ctx context.Context, voiceID string, xiAPIKey optio
 
 // EditVoiceSettings - Edit Voice Settings
 // Edit your settings for a specific voice. "similarity_boost" corresponds to "Clarity + Similarity Enhancement" in the web app and "stability" corresponds to "Stability" slider in the web app.
-func (s *Voices) EditVoiceSettings(ctx context.Context, voiceID string, body components.VoiceSettingsResponseModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.EditVoiceSettingsResponse, error) {
+func (s *Voices) EditVoiceSettings(ctx context.Context, voiceID string, body components.VoiceSettingsResponseModel, opts ...operations.Option) (*operations.EditVoiceSettingsResponse, error) {
 	request := operations.EditVoiceSettingsRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		VoiceID: voiceID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -1496,8 +1481,6 @@ func (s *Voices) EditVoiceSettings(ctx context.Context, voiceID string, body com
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1678,12 +1661,7 @@ func (s *Voices) EditVoiceSettings(ctx context.Context, voiceID string, body com
 
 // AddVoice - Add Voice
 // Add a new voice to your collection of voices in VoiceLab.
-func (s *Voices) AddVoice(ctx context.Context, body components.BodyAddVoiceV1VoicesAddPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddVoiceResponse, error) {
-	request := operations.AddVoiceRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Voices) AddVoice(ctx context.Context, request components.BodyAddVoiceV1VoicesAddPost, opts ...operations.Option) (*operations.AddVoiceResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1715,7 +1693,7 @@ func (s *Voices) AddVoice(ctx context.Context, body components.BodyAddVoiceV1Voi
 		OperationID:      "add_voice",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1740,8 +1718,6 @@ func (s *Voices) AddVoice(ctx context.Context, body components.BodyAddVoiceV1Voi
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1922,11 +1898,10 @@ func (s *Voices) AddVoice(ctx context.Context, body components.BodyAddVoiceV1Voi
 
 // EditVoice - Edit Voice
 // Edit a voice created by you.
-func (s *Voices) EditVoice(ctx context.Context, voiceID string, body components.BodyEditVoiceV1VoicesVoiceIDEditPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.EditVoiceResponse, error) {
+func (s *Voices) EditVoice(ctx context.Context, voiceID string, body components.BodyEditVoiceV1VoicesVoiceIDEditPost, opts ...operations.Option) (*operations.EditVoiceResponse, error) {
 	request := operations.EditVoiceRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		VoiceID: voiceID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -1985,8 +1960,6 @@ func (s *Voices) EditVoice(ctx context.Context, voiceID string, body components.
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2167,11 +2140,10 @@ func (s *Voices) EditVoice(ctx context.Context, voiceID string, body components.
 
 // AddSharingVoice - Add Shared Voice
 // Add a shared voice to your collection of voices.
-func (s *Voices) AddSharingVoice(ctx context.Context, publicUserID string, voiceID string, body components.BodyAddSharedVoiceV1VoicesAddPublicUserIDVoiceIDPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddSharingVoiceResponse, error) {
+func (s *Voices) AddSharingVoice(ctx context.Context, publicUserID string, voiceID string, body components.BodyAddSharedVoiceV1VoicesAddPublicUserIDVoiceIDPost, opts ...operations.Option) (*operations.AddSharingVoiceResponse, error) {
 	request := operations.AddSharingVoiceRequest{
 		PublicUserID: publicUserID,
 		VoiceID:      voiceID,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -2231,8 +2203,6 @@ func (s *Voices) AddSharingVoice(ctx context.Context, publicUserID string, voice
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2464,8 +2434,6 @@ func (s *Voices) GetLibraryVoices(ctx context.Context, request operations.GetLib
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -2649,12 +2617,7 @@ func (s *Voices) GetLibraryVoices(ctx context.Context, request operations.GetLib
 
 // GetSimilarLibraryVoices - Get Similar Library Voices
 // Returns a list of shared voices similar to the provided audio sample. If neither similarity_threshold nor top_k is provided, we will apply default values.
-func (s *Voices) GetSimilarLibraryVoices(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost, opts ...operations.Option) (*operations.GetSimilarLibraryVoicesResponse, error) {
-	request := operations.GetSimilarLibraryVoicesRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Voices) GetSimilarLibraryVoices(ctx context.Context, request *components.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost, opts ...operations.Option) (*operations.GetSimilarLibraryVoicesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2686,7 +2649,7 @@ func (s *Voices) GetSimilarLibraryVoices(ctx context.Context, xiAPIKey optionaln
 		OperationID:      "get_similar_library_voices",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -2711,8 +2674,6 @@ func (s *Voices) GetSimilarLibraryVoices(ctx context.Context, xiAPIKey optionaln
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

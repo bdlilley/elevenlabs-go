@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type AddFromFileRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                            `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost `request:"mediaType=multipart/form-data"`
-}
-
-func (a *AddFromFileRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
-}
-
-func (a *AddFromFileRequest) GetBody() components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost {
-	if a == nil {
-		return components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost{}
-	}
-	return a.Body
-}
 
 type AddFromFileResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type CreateURLDocumentRouteRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                    `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost `request:"mediaType=application/json"`
-}
-
-func (c *CreateURLDocumentRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
-}
-
-func (c *CreateURLDocumentRouteRequest) GetBody() components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost {
-	if c == nil {
-		return components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost{}
-	}
-	return c.Body
-}
 
 type CreateURLDocumentRouteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

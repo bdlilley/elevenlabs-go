@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 )
@@ -33,10 +32,9 @@ func newResource(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks
 
 // GetDubbingResource - Get The Dubbing Resource For An Id.
 // Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
-func (s *Resource) GetDubbingResource(ctx context.Context, dubbingID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetDubbingResourceResponse, error) {
+func (s *Resource) GetDubbingResource(ctx context.Context, dubbingID string, opts ...operations.Option) (*operations.GetDubbingResourceResponse, error) {
 	request := operations.GetDubbingResourceRequest{
 		DubbingID: dubbingID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -88,8 +86,6 @@ func (s *Resource) GetDubbingResource(ctx context.Context, dubbingID string, xiA
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -270,10 +266,9 @@ func (s *Resource) GetDubbingResource(ctx context.Context, dubbingID string, xiA
 
 // AddLanguage - Add A Language To The Resource
 // Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not automatically generate transcripts/translations/audio.
-func (s *Resource) AddLanguage(ctx context.Context, dubbingID string, body components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddLanguageResponse, error) {
+func (s *Resource) AddLanguage(ctx context.Context, dubbingID string, body components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost, opts ...operations.Option) (*operations.AddLanguageResponse, error) {
 	request := operations.AddLanguageRequest{
 		DubbingID: dubbingID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -333,8 +328,6 @@ func (s *Resource) AddLanguage(ctx context.Context, dubbingID string, body compo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -515,11 +508,10 @@ func (s *Resource) AddLanguage(ctx context.Context, dubbingID string, body compo
 
 // CreateClip - Create A Segment For The Speaker
 // Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
-func (s *Resource) CreateClip(ctx context.Context, dubbingID string, speakerID string, body components.SegmentCreatePayload, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateClipResponse, error) {
+func (s *Resource) CreateClip(ctx context.Context, dubbingID string, speakerID string, body components.SegmentCreatePayload, opts ...operations.Option) (*operations.CreateClipResponse, error) {
 	request := operations.CreateClipRequest{
 		DubbingID: dubbingID,
 		SpeakerID: speakerID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -579,8 +571,6 @@ func (s *Resource) CreateClip(ctx context.Context, dubbingID string, speakerID s
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -761,7 +751,14 @@ func (s *Resource) CreateClip(ctx context.Context, dubbingID string, speakerID s
 
 // UpdateSegmentLanguage - Modify A Single Segment
 // Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
-func (s *Resource) UpdateSegmentLanguage(ctx context.Context, request operations.UpdateSegmentLanguageRequest, opts ...operations.Option) (*operations.UpdateSegmentLanguageResponse, error) {
+func (s *Resource) UpdateSegmentLanguage(ctx context.Context, dubbingID string, segmentID string, language string, body components.SegmentUpdatePayload, opts ...operations.Option) (*operations.UpdateSegmentLanguageResponse, error) {
+	request := operations.UpdateSegmentLanguageRequest{
+		DubbingID: dubbingID,
+		SegmentID: segmentID,
+		Language:  language,
+		Body:      body,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -818,8 +815,6 @@ func (s *Resource) UpdateSegmentLanguage(ctx context.Context, request operations
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1000,10 +995,9 @@ func (s *Resource) UpdateSegmentLanguage(ctx context.Context, request operations
 
 // MigrateSegments - Move Segments Between Speakers
 // Change the attribution of one or more segments to a different speaker.
-func (s *Resource) MigrateSegments(ctx context.Context, dubbingID string, body components.BodyMoveSegmentsBetweenSpeakersV1DubbingResourceDubbingIDMigrateSegmentsPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.MigrateSegmentsResponse, error) {
+func (s *Resource) MigrateSegments(ctx context.Context, dubbingID string, body components.BodyMoveSegmentsBetweenSpeakersV1DubbingResourceDubbingIDMigrateSegmentsPost, opts ...operations.Option) (*operations.MigrateSegmentsResponse, error) {
 	request := operations.MigrateSegmentsRequest{
 		DubbingID: dubbingID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -1063,8 +1057,6 @@ func (s *Resource) MigrateSegments(ctx context.Context, dubbingID string, body c
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1245,11 +1237,10 @@ func (s *Resource) MigrateSegments(ctx context.Context, dubbingID string, body c
 
 // DeleteSegment - Deletes A Single Segment
 // Deletes a single segment from the dubbing.
-func (s *Resource) DeleteSegment(ctx context.Context, dubbingID string, segmentID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteSegmentResponse, error) {
+func (s *Resource) DeleteSegment(ctx context.Context, dubbingID string, segmentID string, opts ...operations.Option) (*operations.DeleteSegmentResponse, error) {
 	request := operations.DeleteSegmentRequest{
 		DubbingID: dubbingID,
 		SegmentID: segmentID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1301,8 +1292,6 @@ func (s *Resource) DeleteSegment(ctx context.Context, dubbingID string, segmentI
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1483,10 +1472,9 @@ func (s *Resource) DeleteSegment(ctx context.Context, dubbingID string, segmentI
 
 // Transcribe - Transcribes Segments
 // Regenerate the transcriptions for the specified segments. Does not automatically regenerate translations or dubs.
-func (s *Resource) Transcribe(ctx context.Context, dubbingID string, body components.BodyTranscribesSegmentsV1DubbingResourceDubbingIDTranscribePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TranscribeResponse, error) {
+func (s *Resource) Transcribe(ctx context.Context, dubbingID string, body components.BodyTranscribesSegmentsV1DubbingResourceDubbingIDTranscribePost, opts ...operations.Option) (*operations.TranscribeResponse, error) {
 	request := operations.TranscribeRequest{
 		DubbingID: dubbingID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -1546,8 +1534,6 @@ func (s *Resource) Transcribe(ctx context.Context, dubbingID string, body compon
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1728,10 +1714,9 @@ func (s *Resource) Transcribe(ctx context.Context, dubbingID string, body compon
 
 // Translate - Translates All Or Some Segments And Languages
 // Regenerate the translations for either the entire resource or the specified segments/languages. Will automatically transcribe missing transcriptions. Will not automatically regenerate the dubs.
-func (s *Resource) Translate(ctx context.Context, dubbingID string, body components.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDTranslatePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TranslateResponse, error) {
+func (s *Resource) Translate(ctx context.Context, dubbingID string, body components.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDTranslatePost, opts ...operations.Option) (*operations.TranslateResponse, error) {
 	request := operations.TranslateRequest{
 		DubbingID: dubbingID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -1791,8 +1776,6 @@ func (s *Resource) Translate(ctx context.Context, dubbingID string, body compone
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1973,10 +1956,9 @@ func (s *Resource) Translate(ctx context.Context, dubbingID string, body compone
 
 // Dub - Dubs All Or Some Segments And Languages
 // Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
-func (s *Resource) Dub(ctx context.Context, dubbingID string, body components.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDDubPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DubResponse, error) {
+func (s *Resource) Dub(ctx context.Context, dubbingID string, body components.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDDubPost, opts ...operations.Option) (*operations.DubResponse, error) {
 	request := operations.DubRequest{
 		DubbingID: dubbingID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -2036,8 +2018,6 @@ func (s *Resource) Dub(ctx context.Context, dubbingID string, body components.Bo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2218,11 +2198,10 @@ func (s *Resource) Dub(ctx context.Context, dubbingID string, body components.Bo
 
 // UpdateSpeaker - Update Metadata For A Speaker
 // Amend the metadata associated with a speaker, such as their voice. Both voice cloning and using voices from the ElevenLabs library are supported.
-func (s *Resource) UpdateSpeaker(ctx context.Context, dubbingID string, speakerID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch, opts ...operations.Option) (*operations.UpdateSpeakerResponse, error) {
+func (s *Resource) UpdateSpeaker(ctx context.Context, dubbingID string, speakerID string, body *components.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch, opts ...operations.Option) (*operations.UpdateSpeakerResponse, error) {
 	request := operations.UpdateSpeakerRequest{
 		DubbingID: dubbingID,
 		SpeakerID: speakerID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -2282,8 +2261,6 @@ func (s *Resource) UpdateSpeaker(ctx context.Context, dubbingID string, speakerI
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2463,10 +2440,9 @@ func (s *Resource) UpdateSpeaker(ctx context.Context, dubbingID string, speakerI
 }
 
 // CreateSpeaker - Create A New Speaker
-func (s *Resource) CreateSpeaker(ctx context.Context, dubbingID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyCreateANewSpeakerV1DubbingResourceDubbingIDSpeakerPost, opts ...operations.Option) (*operations.CreateSpeakerResponse, error) {
+func (s *Resource) CreateSpeaker(ctx context.Context, dubbingID string, body *components.BodyCreateANewSpeakerV1DubbingResourceDubbingIDSpeakerPost, opts ...operations.Option) (*operations.CreateSpeakerResponse, error) {
 	request := operations.CreateSpeakerRequest{
 		DubbingID: dubbingID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -2526,8 +2502,6 @@ func (s *Resource) CreateSpeaker(ctx context.Context, dubbingID string, xiAPIKey
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2708,11 +2682,10 @@ func (s *Resource) CreateSpeaker(ctx context.Context, dubbingID string, xiAPIKey
 
 // GetSimilarVoicesForSpeaker - Search The Elevenlabs Library For Voices Similar To A Speaker.
 // Fetch the top 10 similar voices to a speaker, including the voice IDs, names, descriptions, and, where possible, a sample audio recording.
-func (s *Resource) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID string, speakerID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSimilarVoicesForSpeakerResponse, error) {
+func (s *Resource) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID string, speakerID string, opts ...operations.Option) (*operations.GetSimilarVoicesForSpeakerResponse, error) {
 	request := operations.GetSimilarVoicesForSpeakerRequest{
 		DubbingID: dubbingID,
 		SpeakerID: speakerID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2764,8 +2737,6 @@ func (s *Resource) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID str
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2946,11 +2917,10 @@ func (s *Resource) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID str
 
 // Render Audio Or Video For The Given Language
 // Regenerate the output media for a language using the latest Studio state. Please ensure all segments have been dubbed before rendering, otherwise they will be omitted. Renders are generated asynchronously, and to check the status of all renders please use the 'Get Dubbing Resource' endpoint.
-func (s *Resource) Render(ctx context.Context, dubbingID string, language string, body components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RenderResponse, error) {
+func (s *Resource) Render(ctx context.Context, dubbingID string, language string, body components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost, opts ...operations.Option) (*operations.RenderResponse, error) {
 	request := operations.RenderRequest{
 		DubbingID: dubbingID,
 		Language:  language,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -3010,8 +2980,6 @@ func (s *Resource) Render(ctx context.Context, dubbingID string, language string
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdateSecretRouteRequest struct {
-	SecretID string `pathParam:"style=simple,explode=false,name=secret_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.PatchWorkspaceSecretRequest    `request:"mediaType=application/json"`
+	SecretID string                                 `pathParam:"style=simple,explode=false,name=secret_id"`
+	Body     components.PatchWorkspaceSecretRequest `request:"mediaType=application/json"`
 }
 
 func (u *UpdateSecretRouteRequest) GetSecretID() string {
@@ -20,13 +17,6 @@ func (u *UpdateSecretRouteRequest) GetSecretID() string {
 		return ""
 	}
 	return u.SecretID
-}
-
-func (u *UpdateSecretRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdateSecretRouteRequest) GetBody() components.PatchWorkspaceSecretRequest {

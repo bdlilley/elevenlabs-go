@@ -11,7 +11,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -33,10 +32,9 @@ func newVideoToMusic(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, h
 
 // VideoToMusic - Video To Music
 // Generate background music from one or more video files. Videos are combined in order. Optional description and style tags influence the generated music.
-func (s *VideoToMusic) VideoToMusic(ctx context.Context, body components.BodyVideoToMusicV1MusicVideoToMusicPost, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.VideoToMusicResponse, error) {
+func (s *VideoToMusic) VideoToMusic(ctx context.Context, body components.BodyVideoToMusicV1MusicVideoToMusicPost, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.VideoToMusicResponse, error) {
 	request := operations.VideoToMusicRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -96,8 +94,6 @@ func (s *VideoToMusic) VideoToMusic(ctx context.Context, body components.BodyVid
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)

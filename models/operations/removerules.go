@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RemoveRulesRequest struct {
 	// The id of the pronunciation dictionary
-	PronunciationDictionaryID string `pathParam:"style=simple,explode=false,name=pronunciation_dictionary_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                                                   `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDRemoveRulesPost `request:"mediaType=application/json"`
+	PronunciationDictionaryID string                                                                                                                      `pathParam:"style=simple,explode=false,name=pronunciation_dictionary_id"`
+	Body                      components.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDRemoveRulesPost `request:"mediaType=application/json"`
 }
 
 func (r *RemoveRulesRequest) GetPronunciationDictionaryID() string {
@@ -21,13 +18,6 @@ func (r *RemoveRulesRequest) GetPronunciationDictionaryID() string {
 		return ""
 	}
 	return r.PronunciationDictionaryID
-}
-
-func (r *RemoveRulesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XiAPIKey
 }
 
 func (r *RemoveRulesRequest) GetBody() components.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDRemoveRulesPost {

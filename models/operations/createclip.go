@@ -5,17 +5,14 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type CreateClipRequest struct {
 	// ID of the dubbing project.
 	DubbingID string `pathParam:"style=simple,explode=false,name=dubbing_id"`
 	// ID of the speaker.
-	SpeakerID string `pathParam:"style=simple,explode=false,name=speaker_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.SegmentCreatePayload           `request:"mediaType=application/json"`
+	SpeakerID string                          `pathParam:"style=simple,explode=false,name=speaker_id"`
+	Body      components.SegmentCreatePayload `request:"mediaType=application/json"`
 }
 
 func (c *CreateClipRequest) GetDubbingID() string {
@@ -30,13 +27,6 @@ func (c *CreateClipRequest) GetSpeakerID() string {
 		return ""
 	}
 	return c.SpeakerID
-}
-
-func (c *CreateClipRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
 }
 
 func (c *CreateClipRequest) GetBody() components.SegmentCreatePayload {

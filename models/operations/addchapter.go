@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AddChapterRequest struct {
 	// The ID of the Studio project.
-	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                         `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreateChapterV1StudioProjectsProjectIDChaptersPost `request:"mediaType=application/json"`
+	ProjectID string                                                            `pathParam:"style=simple,explode=false,name=project_id"`
+	Body      components.BodyCreateChapterV1StudioProjectsProjectIDChaptersPost `request:"mediaType=application/json"`
 }
 
 func (a *AddChapterRequest) GetProjectID() string {
@@ -21,13 +18,6 @@ func (a *AddChapterRequest) GetProjectID() string {
 		return ""
 	}
 	return a.ProjectID
-}
-
-func (a *AddChapterRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
 }
 
 func (a *AddChapterRequest) GetBody() components.BodyCreateChapterV1StudioProjectsProjectIDChaptersPost {

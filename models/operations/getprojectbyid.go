@@ -13,8 +13,6 @@ type GetProjectByIDRequest struct {
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
 	// The share ID of the project
 	ShareID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=share_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetProjectByIDRequest) GetProjectID() string {
@@ -29,13 +27,6 @@ func (g *GetProjectByIDRequest) GetShareID() optionalnullable.OptionalNullable[s
 		return nil
 	}
 	return g.ShareID
-}
-
-func (g *GetProjectByIDRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetProjectByIDResponse struct {

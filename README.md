@@ -26,6 +26,7 @@ ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. 
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
 * [Development](#development)
   * [Maturity](#maturity)
@@ -54,7 +55,6 @@ import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -62,11 +62,10 @@ func main() {
 	ctx := context.Background()
 
 	s := elevenlabsgo.New(
-		"https://api.example.com",
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
+	res, err := s.GetUserSubscriptionInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -103,7 +102,6 @@ import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -111,11 +109,10 @@ func main() {
 	ctx := context.Background()
 
 	s := elevenlabsgo.New(
-		"https://api.example.com",
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
+	res, err := s.GetUserSubscriptionInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -236,6 +233,7 @@ func main() {
 * [CreateSecretRoute](docs/sdks/agentsplatform/README.md#createsecretroute) - Create Convai Workspace Secret
 * [DeleteSecretRoute](docs/sdks/agentsplatform/README.md#deletesecretroute) - Delete Convai Workspace Secret
 * [UpdateSecretRoute](docs/sdks/agentsplatform/README.md#updatesecretroute) - Update Convai Workspace Secret
+* [GetSecretDependenciesRoute](docs/sdks/agentsplatform/README.md#getsecretdependenciesroute) - Get Secret Dependencies By Type
 * [CreateBatchCall](docs/sdks/agentsplatform/README.md#createbatchcall) - Submit A Batch Call Request.
 * [GetWorkspaceBatchCalls](docs/sdks/agentsplatform/README.md#getworkspacebatchcalls) - Get All Batch Calls For A Workspace.
 * [GetBatchCall](docs/sdks/agentsplatform/README.md#getbatchcall) - Get A Batch Call By Id.
@@ -553,7 +551,6 @@ import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"log"
 	"models/operations"
@@ -563,11 +560,10 @@ func main() {
 	ctx := context.Background()
 
 	s := elevenlabsgo.New(
-		"https://api.example.com",
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil), operations.WithRetries(
+	res, err := s.GetUserSubscriptionInfo(ctx, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -602,7 +598,6 @@ import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"log"
 )
@@ -611,7 +606,6 @@ func main() {
 	ctx := context.Background()
 
 	s := elevenlabsgo.New(
-		"https://api.example.com",
 		elevenlabsgo.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
@@ -626,7 +620,7 @@ func main() {
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
+	res, err := s.GetUserSubscriptionInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -668,7 +662,6 @@ import (
 	"errors"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -676,11 +669,10 @@ func main() {
 	ctx := context.Background()
 
 	s := elevenlabsgo.New(
-		"https://api.example.com",
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
+	res, err := s.GetUserSubscriptionInfo(ctx)
 	if err != nil {
 
 		var e *apierrors.HTTPValidationError
@@ -699,6 +691,48 @@ func main() {
 
 ```
 <!-- End Error Handling [errors] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Override Server URL Per-Client
+
+The default server can be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
+```go
+package main
+
+import (
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := elevenlabsgo.New(
+		elevenlabsgo.WithServerURL("https://api.elevenlabs.io"),
+		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+	)
+
+	res, err := s.GetUserSubscriptionInfo(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.ExtendedSubscriptionResponseModel != nil {
+		switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
+		case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
+			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
+		case components.PendingChangeTypePendingCancellationResponseModel:
+			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
+		}
+
+	}
+}
+
+```
+<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client

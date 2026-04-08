@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAgentLlmExpectedCostCalculationRequest struct {
-	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.LLMUsageCalculatorRequestModel `request:"mediaType=application/json"`
+	AgentID string                                    `pathParam:"style=simple,explode=false,name=agent_id"`
+	Body    components.LLMUsageCalculatorRequestModel `request:"mediaType=application/json"`
 }
 
 func (g *GetAgentLlmExpectedCostCalculationRequest) GetAgentID() string {
@@ -20,13 +17,6 @@ func (g *GetAgentLlmExpectedCostCalculationRequest) GetAgentID() string {
 		return ""
 	}
 	return g.AgentID
-}
-
-func (g *GetAgentLlmExpectedCostCalculationRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 func (g *GetAgentLlmExpectedCostCalculationRequest) GetBody() components.LLMUsageCalculatorRequestModel {

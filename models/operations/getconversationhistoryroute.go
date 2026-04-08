@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetConversationHistoryRouteRequest struct {
 	// The id of the conversation you're taking the action on.
 	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetConversationHistoryRouteRequest) GetConversationID() string {
@@ -20,13 +17,6 @@ func (g *GetConversationHistoryRouteRequest) GetConversationID() string {
 		return ""
 	}
 	return g.ConversationID
-}
-
-func (g *GetConversationHistoryRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetConversationHistoryRouteResponse struct {

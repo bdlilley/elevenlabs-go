@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,10 +33,9 @@ func newTextToVoice(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, ho
 
 // TextToVoice - Generate A Voice Preview From Description
 // Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
-func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePreviewsRequestModel, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToVoiceResponse, error) {
+func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePreviewsRequestModel, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToVoiceResponse, error) {
 	request := operations.TextToVoiceRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -97,8 +95,6 @@ func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePrev
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -283,12 +279,7 @@ func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePrev
 
 // CreateVoice - Create A New Voice From Voice Preview
 // Create a voice from previously generated voice preview. This endpoint should be called after you fetched a generated_voice_id using POST /v1/text-to-voice/design or POST /v1/text-to-voice/:voice_id/remix.
-func (s *TextToVoice) CreateVoice(ctx context.Context, body components.BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateVoiceResponse, error) {
-	request := operations.CreateVoiceRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *TextToVoice) CreateVoice(ctx context.Context, request components.BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost, opts ...operations.Option) (*operations.CreateVoiceResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -320,7 +311,7 @@ func (s *TextToVoice) CreateVoice(ctx context.Context, body components.BodyCreat
 		OperationID:      "create_voice",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -345,8 +336,6 @@ func (s *TextToVoice) CreateVoice(ctx context.Context, body components.BodyCreat
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -527,10 +516,9 @@ func (s *TextToVoice) CreateVoice(ctx context.Context, body components.BodyCreat
 
 // TextToVoiceDesign - Design A Voice.
 // Design a voice via a prompt. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. To create a voice use the generated_voice_id of the preferred preview with the /v1/text-to-voice endpoint.
-func (s *TextToVoice) TextToVoiceDesign(ctx context.Context, body components.VoiceDesignRequestModel, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToVoiceDesignResponse, error) {
+func (s *TextToVoice) TextToVoiceDesign(ctx context.Context, body components.VoiceDesignRequestModel, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToVoiceDesignResponse, error) {
 	request := operations.TextToVoiceDesignRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -590,8 +578,6 @@ func (s *TextToVoice) TextToVoiceDesign(ctx context.Context, body components.Voi
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -776,11 +762,10 @@ func (s *TextToVoice) TextToVoiceDesign(ctx context.Context, body components.Voi
 
 // TextToVoiceRemix - Remix A Voice.
 // Remix an existing voice via a prompt. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. To create a voice use the generated_voice_id of the preferred preview with the /v1/text-to-voice endpoint.
-func (s *TextToVoice) TextToVoiceRemix(ctx context.Context, voiceID string, body components.VoiceRemixRequestModel, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToVoiceRemixResponse, error) {
+func (s *TextToVoice) TextToVoiceRemix(ctx context.Context, voiceID string, body components.VoiceRemixRequestModel, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToVoiceRemixResponse, error) {
 	request := operations.TextToVoiceRemixRequest{
 		VoiceID:      voiceID,
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -840,8 +825,6 @@ func (s *TextToVoice) TextToVoiceRemix(ctx context.Context, voiceID string, body
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -1026,10 +1009,9 @@ func (s *TextToVoice) TextToVoiceRemix(ctx context.Context, voiceID string, body
 
 // TextToVoicePreviewStream - Text To Voice Preview Streaming
 // Stream a voice preview that was created via the /v1/text-to-voice/design endpoint.
-func (s *TextToVoice) TextToVoicePreviewStream(ctx context.Context, generatedVoiceID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.TextToVoicePreviewStreamResponse, error) {
+func (s *TextToVoice) TextToVoicePreviewStream(ctx context.Context, generatedVoiceID string, opts ...operations.Option) (*operations.TextToVoicePreviewStreamResponse, error) {
 	request := operations.TextToVoicePreviewStreamRequest{
 		GeneratedVoiceID: generatedVoiceID,
-		XiAPIKey:         xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1081,8 +1063,6 @@ func (s *TextToVoice) TextToVoicePreviewStream(ctx context.Context, generatedVoi
 	}
 	req.Header.Set("Accept", "audio/mpeg")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

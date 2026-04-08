@@ -4,28 +4,7 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type AudioIsolationStreamRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                     `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyAudioIsolationStreamV1AudioIsolationStreamPost `request:"mediaType=multipart/form-data"`
-}
-
-func (a *AudioIsolationStreamRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
-}
-
-func (a *AudioIsolationStreamRequest) GetBody() components.BodyAudioIsolationStreamV1AudioIsolationStreamPost {
-	if a == nil {
-		return components.BodyAudioIsolationStreamV1AudioIsolationStreamPost{}
-	}
-	return a.Body
-}
 
 type AudioIsolationStreamResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

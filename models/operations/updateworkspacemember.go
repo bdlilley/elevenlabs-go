@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type UpdateWorkspaceMemberRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]         `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyUpdateMemberV1WorkspaceMembersPost `request:"mediaType=application/json"`
-}
-
-func (u *UpdateWorkspaceMemberRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
-}
-
-func (u *UpdateWorkspaceMemberRequest) GetBody() components.BodyUpdateMemberV1WorkspaceMembersPost {
-	if u == nil {
-		return components.BodyUpdateMemberV1WorkspaceMembersPost{}
-	}
-	return u.Body
-}
 
 type UpdateWorkspaceMemberResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

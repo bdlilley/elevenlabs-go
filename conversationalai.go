@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,12 +33,7 @@ func newConversationalAI(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguratio
 
 // CreateFolderRoute - Create Folder
 // Create a folder used for grouping documents together.
-func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, body components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateFolderRouteResponse, error) {
-	request := operations.CreateFolderRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, request components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost, opts ...operations.Option) (*operations.CreateFolderRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -71,7 +65,7 @@ func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, body component
 		OperationID:      "create_folder_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +90,6 @@ func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, body component
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -278,10 +270,9 @@ func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, body component
 
 // PostKnowledgeBaseMoveRoute - Move Entity To Folder
 // Moves the entity from one folder to another.
-func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, documentID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost, opts ...operations.Option) (*operations.PostKnowledgeBaseMoveRouteResponse, error) {
+func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, documentID string, body *components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost, opts ...operations.Option) (*operations.PostKnowledgeBaseMoveRouteResponse, error) {
 	request := operations.PostKnowledgeBaseMoveRouteRequest{
 		DocumentID: documentID,
-		XiAPIKey:   xiAPIKey,
 		Body:       body,
 	}
 
@@ -341,8 +332,6 @@ func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, docum
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -504,12 +493,7 @@ func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, docum
 
 // PostKnowledgeBaseBulkMoveRoute - Bulk Move Entities To Folder
 // Moves multiple entities from one folder to another.
-func (s *ConversationalAI) PostKnowledgeBaseBulkMoveRoute(ctx context.Context, body components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.PostKnowledgeBaseBulkMoveRouteResponse, error) {
-	request := operations.PostKnowledgeBaseBulkMoveRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *ConversationalAI) PostKnowledgeBaseBulkMoveRoute(ctx context.Context, request components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost, opts ...operations.Option) (*operations.PostKnowledgeBaseBulkMoveRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -541,7 +525,7 @@ func (s *ConversationalAI) PostKnowledgeBaseBulkMoveRoute(ctx context.Context, b
 		OperationID:      "post_knowledge_base_bulk_move_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -566,8 +550,6 @@ func (s *ConversationalAI) PostKnowledgeBaseBulkMoveRoute(ctx context.Context, b
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

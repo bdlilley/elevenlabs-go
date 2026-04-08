@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetMcpToolConfigOverrideRouteRequest struct {
@@ -13,8 +12,6 @@ type GetMcpToolConfigOverrideRouteRequest struct {
 	McpServerID string `pathParam:"style=simple,explode=false,name=mcp_server_id"`
 	// Name of the MCP tool to retrieve config overrides for.
 	ToolName string `pathParam:"style=simple,explode=false,name=tool_name"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetMcpToolConfigOverrideRouteRequest) GetMcpServerID() string {
@@ -29,13 +26,6 @@ func (g *GetMcpToolConfigOverrideRouteRequest) GetToolName() string {
 		return ""
 	}
 	return g.ToolName
-}
-
-func (g *GetMcpToolConfigOverrideRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetMcpToolConfigOverrideRouteResponse struct {

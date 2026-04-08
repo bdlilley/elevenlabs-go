@@ -21,6 +21,12 @@ import (
 	"time"
 )
 
+// ServerList contains the list of servers available to the SDK
+var ServerList = []string{
+	// ElevenLabs API
+	"https://api.elevenlabs.io",
+}
+
 // HTTPClient provides an interface for supplying the SDK with a custom HTTP client
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
@@ -53,26 +59,18 @@ type ElevenlabsGo struct {
 	// Accesses your speech history. Your speech history is a list of all your created audio including its metadata using our text-to-speech and speech-to-speech models.
 	SpeechHistory   *SpeechHistory
 	SoundGeneration *SoundGeneration
-	// Audio Isolation
-	// Removes background noise from audio
-	AudioIsolation *AudioIsolation
+	AudioIsolation  *AudioIsolation
 	// Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
 	Samples *Samples
 	// Convert text into lifelike speech using a voice of your choice.
-	TextToSpeech *TextToSpeech
-	// Text To Dialogue (Multi-Voice)
-	// Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
+	TextToSpeech   *TextToSpeech
 	TextToDialogue *TextToDialogue
 	// Create speech by combining the style and content of an audio file you upload with a voice of your choice.
 	SpeechToSpeech *SpeechToSpeech
-	// Generate A Voice Preview From Description
-	// Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
-	TextToVoice *TextToVoice
+	TextToVoice    *TextToVoice
 	// Access to voices created either by you or ElevenLabs.
-	Voices *Voices
-	Studio *Studio
-	// Video To Music
-	// Generate background music from one or more video files. Videos are combined in order. Optional description and style tags influence the generated music.
+	Voices       *Voices
+	Studio       *Studio
 	VideoToMusic *VideoToMusic
 	Dubbing      *Dubbing
 	Resource     *Resource
@@ -119,6 +117,17 @@ func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOptio
 	}
 }
 
+// WithServerIndex allows the overriding of the default server by index
+func WithServerIndex(serverIndex int) SDKOption {
+	return func(sdk *ElevenlabsGo) {
+		if serverIndex < 0 || serverIndex >= len(ServerList) {
+			panic(fmt.Errorf("server index %d out of range", serverIndex))
+		}
+
+		sdk.sdkConfiguration.ServerIndex = serverIndex
+	}
+}
+
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *ElevenlabsGo) {
@@ -156,12 +165,13 @@ func WithTimeout(timeout time.Duration) SDKOption {
 	}
 }
 
-// New creates a new instance of the SDK with the provided serverURL and options
-func New(serverURL string, opts ...SDKOption) *ElevenlabsGo {
+// New creates a new instance of the SDK with the provided options
+func New(opts ...SDKOption) *ElevenlabsGo {
 	sdk := &ElevenlabsGo{
-		SDKVersion: "0.1.0",
+		SDKVersion: "0.2.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent: "speakeasy-sdk/go 0.1.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent:  "speakeasy-sdk/go 0.2.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
 	}
@@ -173,8 +183,6 @@ func New(serverURL string, opts ...SDKOption) *ElevenlabsGo {
 	if sdk.sdkConfiguration.Client == nil {
 		sdk.sdkConfiguration.Client = &http.Client{Timeout: 60 * time.Second}
 	}
-
-	sdk.sdkConfiguration.ServerURL = serverURL
 
 	sdk.sdkConfiguration = sdk.hooks.SDKInit(sdk.sdkConfiguration)
 
@@ -211,11 +219,7 @@ func New(serverURL string, opts ...SDKOption) *ElevenlabsGo {
 
 // GetUserSubscriptionInfo - Get User Subscription Info
 // Gets extended information about the users subscription
-func (s *ElevenlabsGo) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetUserSubscriptionInfoResponse, error) {
-	request := operations.GetUserSubscriptionInfoRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *ElevenlabsGo) GetUserSubscriptionInfo(ctx context.Context, opts ...operations.Option) (*operations.GetUserSubscriptionInfoResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -265,8 +269,6 @@ func (s *ElevenlabsGo) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey opt
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -447,11 +449,7 @@ func (s *ElevenlabsGo) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey opt
 
 // GetUserInfo - Get User Info
 // Gets information about the user
-func (s *ElevenlabsGo) GetUserInfo(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetUserInfoResponse, error) {
-	request := operations.GetUserInfoRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *ElevenlabsGo) GetUserInfo(ctx context.Context, opts ...operations.Option) (*operations.GetUserInfoResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -501,8 +499,6 @@ func (s *ElevenlabsGo) GetUserInfo(ctx context.Context, xiAPIKey optionalnullabl
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -734,8 +730,6 @@ func (s *ElevenlabsGo) UsageCharacters(ctx context.Context, request operations.U
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -919,12 +913,7 @@ func (s *ElevenlabsGo) UsageCharacters(ctx context.Context, request operations.U
 
 // CreateAgentResponseTestRoute - Create Agent Response Test
 // Creates a new agent response test.
-func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, body operations.CreateAgentResponseTestRouteTestRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAgentResponseTestRouteResponse, error) {
-	request := operations.CreateAgentResponseTestRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, request operations.CreateAgentResponseTestRouteTestRequest, opts ...operations.Option) (*operations.CreateAgentResponseTestRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -956,7 +945,7 @@ func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, body op
 		OperationID:      "create_agent_response_test_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -981,8 +970,6 @@ func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, body op
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1163,10 +1150,9 @@ func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, body op
 
 // GetAgentResponseTestRoute - Get Agent Response Test By Id
 // Gets an agent response test by ID.
-func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID string, opts ...operations.Option) (*operations.GetAgentResponseTestRouteResponse, error) {
 	request := operations.GetAgentResponseTestRouteRequest{
-		TestID:   testID,
-		XiAPIKey: xiAPIKey,
+		TestID: testID,
 	}
 
 	o := operations.Options{}
@@ -1218,8 +1204,6 @@ func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID str
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1400,11 +1384,10 @@ func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID str
 
 // UpdateAgentResponseTestRoute - Update Agent Response Test
 // Updates an agent response test by ID.
-func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID string, body operations.UpdateAgentResponseTestRouteTestRequest, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID string, body operations.UpdateAgentResponseTestRouteTestRequest, opts ...operations.Option) (*operations.UpdateAgentResponseTestRouteResponse, error) {
 	request := operations.UpdateAgentResponseTestRouteRequest{
-		TestID:   testID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		TestID: testID,
+		Body:   body,
 	}
 
 	o := operations.Options{}
@@ -1463,8 +1446,6 @@ func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1645,10 +1626,9 @@ func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID 
 
 // DeleteChatResponseTestRoute - Delete Agent Response Test
 // Deletes an agent response test by ID.
-func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteChatResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID string, opts ...operations.Option) (*operations.DeleteChatResponseTestRouteResponse, error) {
 	request := operations.DeleteChatResponseTestRouteRequest{
-		TestID:   testID,
-		XiAPIKey: xiAPIKey,
+		TestID: testID,
 	}
 
 	o := operations.Options{}
@@ -1700,8 +1680,6 @@ func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID s
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1882,12 +1860,7 @@ func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID s
 
 // GetAgentResponseTestsSummariesRoute - Get Agent Response Test Summaries By Ids
 // Gets multiple agent response tests by their IDs. Returns a dictionary mapping test IDs to test summaries.
-func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, body components.ListTestsByIdsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAgentResponseTestsSummariesRouteResponse, error) {
-	request := operations.GetAgentResponseTestsSummariesRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, request components.ListTestsByIdsRequestModel, opts ...operations.Option) (*operations.GetAgentResponseTestsSummariesRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1919,7 +1892,7 @@ func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, 
 		OperationID:      "get_agent_response_tests_summaries_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1944,8 +1917,6 @@ func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2177,8 +2148,6 @@ func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
-
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -2362,12 +2331,11 @@ func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request o
 
 // ListTestInvocationsRoute - List Test Invocations
 // Lists all test invocations with pagination support and optional search filtering.
-func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID string, pageSize *int64, cursor optionalnullable.OptionalNullable[string], xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
+func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID string, pageSize *int64, cursor optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
 	request := operations.ListTestInvocationsRouteRequest{
 		AgentID:  agentID,
 		PageSize: pageSize,
 		Cursor:   cursor,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2419,8 +2387,6 @@ func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID str
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -2605,11 +2571,10 @@ func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID str
 
 // RunAgentTestSuiteRoute - Run Tests On The Agent
 // Run selected tests on the agent with provided configuration. If the agent configuration is provided, it will be used to override default agent configuration.
-func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID string, body components.RunAgentTestsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RunAgentTestSuiteRouteResponse, error) {
+func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID string, body components.RunAgentTestsRequestModel, opts ...operations.Option) (*operations.RunAgentTestSuiteRouteResponse, error) {
 	request := operations.RunAgentTestSuiteRouteRequest{
-		AgentID:  agentID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		AgentID: agentID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -2668,8 +2633,6 @@ func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID strin
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2850,10 +2813,9 @@ func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID strin
 
 // GetTestInvocationRoute - Get Test Invocation
 // Gets a test invocation by ID.
-func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocationID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetTestInvocationRouteResponse, error) {
+func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocationID string, opts ...operations.Option) (*operations.GetTestInvocationRouteResponse, error) {
 	request := operations.GetTestInvocationRouteRequest{
 		TestInvocationID: testInvocationID,
-		XiAPIKey:         xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2905,8 +2867,6 @@ func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocatio
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3087,10 +3047,9 @@ func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocatio
 
 // ResubmitTestsRoute - Resubmit Tests
 // Resubmits specific test runs from a test invocation.
-func (s *ElevenlabsGo) ResubmitTestsRoute(ctx context.Context, testInvocationID string, body components.ResubmitTestsRequestModel, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ResubmitTestsRouteResponse, error) {
+func (s *ElevenlabsGo) ResubmitTestsRoute(ctx context.Context, testInvocationID string, body components.ResubmitTestsRequestModel, opts ...operations.Option) (*operations.ResubmitTestsRouteResponse, error) {
 	request := operations.ResubmitTestsRouteRequest{
 		TestInvocationID: testInvocationID,
-		XiAPIKey:         xiAPIKey,
 		Body:             body,
 	}
 
@@ -3150,8 +3109,6 @@ func (s *ElevenlabsGo) ResubmitTestsRoute(ctx context.Context, testInvocationID 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

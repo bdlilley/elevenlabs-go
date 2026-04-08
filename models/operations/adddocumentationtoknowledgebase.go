@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AddDocumentationToKnowledgeBaseRequest struct {
-	AgentID *string `default:"" queryParam:"style=form,explode=true,name=agent_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                   `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost `request:"mediaType=multipart/form-data"`
+	AgentID *string                                                     `default:"" queryParam:"style=form,explode=true,name=agent_id"`
+	Body    *components.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost `request:"mediaType=multipart/form-data"`
 }
 
 func (a AddDocumentationToKnowledgeBaseRequest) MarshalJSON() ([]byte, error) {
@@ -31,13 +28,6 @@ func (a *AddDocumentationToKnowledgeBaseRequest) GetAgentID() *string {
 		return nil
 	}
 	return a.AgentID
-}
-
-func (a *AddDocumentationToKnowledgeBaseRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
 }
 
 func (a *AddDocumentationToKnowledgeBaseRequest) GetBody() *components.BodyAddToKnowledgeBaseV1ConvaiKnowledgeBasePost {

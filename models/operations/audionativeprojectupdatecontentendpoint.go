@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AudioNativeProjectUpdateContentEndpointRequest struct {
 	// The ID of the Studio project.
-	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                        `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIDContentPost `request:"mediaType=multipart/form-data"`
+	ProjectID string                                                                           `pathParam:"style=simple,explode=false,name=project_id"`
+	Body      *components.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIDContentPost `request:"mediaType=multipart/form-data"`
 }
 
 func (a AudioNativeProjectUpdateContentEndpointRequest) MarshalJSON() ([]byte, error) {
@@ -32,13 +29,6 @@ func (a *AudioNativeProjectUpdateContentEndpointRequest) GetProjectID() string {
 		return ""
 	}
 	return a.ProjectID
-}
-
-func (a *AudioNativeProjectUpdateContentEndpointRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
 }
 
 func (a *AudioNativeProjectUpdateContentEndpointRequest) GetBody() *components.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIDContentPost {

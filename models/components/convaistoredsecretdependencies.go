@@ -247,11 +247,17 @@ func (u ConvAIStoredSecretDependenciesMcpServer) MarshalJSON() ([]byte, error) {
 }
 
 type ConvAIStoredSecretDependencies struct {
-	Tools        []ConvAIStoredSecretDependenciesTool      `json:"tools"`
-	Agents       []ConvAIStoredSecretDependenciesAgent     `json:"agents"`
-	Others       []SecretDependencyType                    `json:"others"`
-	PhoneNumbers []DependentPhoneNumberIdentifier          `json:"phone_numbers,omitzero"`
-	McpServers   []ConvAIStoredSecretDependenciesMcpServer `json:"mcp_servers,omitzero"`
+	Tools []ConvAIStoredSecretDependenciesTool `json:"tools"`
+	// Whether there are more tool dependents beyond the returned preview
+	ToolsHasMore *bool                                 `default:"false" json:"tools_has_more"`
+	Agents       []ConvAIStoredSecretDependenciesAgent `json:"agents"`
+	// Whether there are more agent dependents beyond the returned preview
+	AgentsHasMore *bool                            `default:"false" json:"agents_has_more"`
+	PhoneNumbers  []DependentPhoneNumberIdentifier `json:"phone_numbers,omitzero"`
+	// Whether there are more phone number dependents beyond the returned preview
+	PhoneNumbersHasMore *bool                                     `default:"false" json:"phone_numbers_has_more"`
+	McpServers          []ConvAIStoredSecretDependenciesMcpServer `json:"mcp_servers,omitzero"`
+	Others              []SecretDependencyType                    `json:"others"`
 }
 
 func (c ConvAIStoredSecretDependencies) MarshalJSON() ([]byte, error) {
@@ -272,6 +278,13 @@ func (c *ConvAIStoredSecretDependencies) GetTools() []ConvAIStoredSecretDependen
 	return c.Tools
 }
 
+func (c *ConvAIStoredSecretDependencies) GetToolsHasMore() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.ToolsHasMore
+}
+
 func (c *ConvAIStoredSecretDependencies) GetAgents() []ConvAIStoredSecretDependenciesAgent {
 	if c == nil {
 		return []ConvAIStoredSecretDependenciesAgent{}
@@ -279,11 +292,11 @@ func (c *ConvAIStoredSecretDependencies) GetAgents() []ConvAIStoredSecretDepende
 	return c.Agents
 }
 
-func (c *ConvAIStoredSecretDependencies) GetOthers() []SecretDependencyType {
+func (c *ConvAIStoredSecretDependencies) GetAgentsHasMore() *bool {
 	if c == nil {
-		return []SecretDependencyType{}
+		return nil
 	}
-	return c.Others
+	return c.AgentsHasMore
 }
 
 func (c *ConvAIStoredSecretDependencies) GetPhoneNumbers() []DependentPhoneNumberIdentifier {
@@ -293,9 +306,23 @@ func (c *ConvAIStoredSecretDependencies) GetPhoneNumbers() []DependentPhoneNumbe
 	return c.PhoneNumbers
 }
 
+func (c *ConvAIStoredSecretDependencies) GetPhoneNumbersHasMore() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.PhoneNumbersHasMore
+}
+
 func (c *ConvAIStoredSecretDependencies) GetMcpServers() []ConvAIStoredSecretDependenciesMcpServer {
 	if c == nil {
 		return nil
 	}
 	return c.McpServers
+}
+
+func (c *ConvAIStoredSecretDependencies) GetOthers() []SecretDependencyType {
+	if c == nil {
+		return []SecretDependencyType{}
+	}
+	return c.Others
 }

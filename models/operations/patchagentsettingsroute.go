@@ -14,9 +14,7 @@ type PatchAgentSettingsRouteRequest struct {
 	// Enable versioning for the agent, if not already enabled
 	EnableVersioningIfNotEnabled *bool `default:"false" queryParam:"style=form,explode=true,name=enable_versioning_if_not_enabled"`
 	// The ID of the branch to use
-	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                        `header:"style=simple,explode=false,name=xi-api-key"`
+	BranchID optionalnullable.OptionalNullable[string]                        `queryParam:"style=form,explode=true,name=branch_id"`
 	Body     *components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch `request:"mediaType=application/json"`
 }
 
@@ -50,13 +48,6 @@ func (p *PatchAgentSettingsRouteRequest) GetBranchID() optionalnullable.Optional
 		return nil
 	}
 	return p.BranchID
-}
-
-func (p *PatchAgentSettingsRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.XiAPIKey
 }
 
 func (p *PatchAgentSettingsRouteRequest) GetBody() *components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch {

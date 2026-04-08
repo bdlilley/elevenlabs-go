@@ -1,7 +1,7 @@
 overlay: 1.0.0
 info:
   title: Add ElevenLabs API Key Security
-  version: 0.0.1
+  version: 0.0.2
 actions:
   - target: $.components
     update:
@@ -15,3 +15,9 @@ actions:
     update:
       security:
         - apiKey: []
+      servers:
+        - url: https://api.elevenlabs.io
+          description: ElevenLabs API
+  - target: $.paths[*][*].parameters[?(@.name == 'xi-api-key')]
+    remove: true
+

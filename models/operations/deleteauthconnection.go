@@ -4,13 +4,10 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteAuthConnectionRequest struct {
 	AuthConnectionID string `pathParam:"style=simple,explode=false,name=auth_connection_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteAuthConnectionRequest) GetAuthConnectionID() string {
@@ -18,13 +15,6 @@ func (d *DeleteAuthConnectionRequest) GetAuthConnectionID() string {
 		return ""
 	}
 	return d.AuthConnectionID
-}
-
-func (d *DeleteAuthConnectionRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteAuthConnectionResponse struct {

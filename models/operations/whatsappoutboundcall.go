@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type WhatsappOutboundCallRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                    `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost `request:"mediaType=application/json"`
-}
-
-func (w *WhatsappOutboundCallRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if w == nil {
-		return nil
-	}
-	return w.XiAPIKey
-}
-
-func (w *WhatsappOutboundCallRequest) GetBody() components.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost {
-	if w == nil {
-		return components.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost{}
-	}
-	return w.Body
-}
 
 type WhatsappOutboundCallResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

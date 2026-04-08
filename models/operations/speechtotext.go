@@ -7,15 +7,12 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SpeechToTextRequest struct {
 	// When enable_logging is set to false zero retention mode will be used for the request. This will mean log and transcript storage features are unavailable for this request. Zero retention mode may only be used by enterprise customers.
-	EnableLogging *bool `default:"true" queryParam:"style=form,explode=true,name=enable_logging"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]     `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodySpeechToTextV1SpeechToTextPost `request:"mediaType=multipart/form-data"`
+	EnableLogging *bool                                         `default:"true" queryParam:"style=form,explode=true,name=enable_logging"`
+	Body          components.BodySpeechToTextV1SpeechToTextPost `request:"mediaType=multipart/form-data"`
 }
 
 func (s SpeechToTextRequest) MarshalJSON() ([]byte, error) {
@@ -34,13 +31,6 @@ func (s *SpeechToTextRequest) GetEnableLogging() *bool {
 		return nil
 	}
 	return s.EnableLogging
-}
-
-func (s *SpeechToTextRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if s == nil {
-		return nil
-	}
-	return s.XiAPIKey
 }
 
 func (s *SpeechToTextRequest) GetBody() components.BodySpeechToTextV1SpeechToTextPost {

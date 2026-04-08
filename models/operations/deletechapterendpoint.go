@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteChapterEndpointRequest struct {
@@ -13,8 +12,6 @@ type DeleteChapterEndpointRequest struct {
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
 	// The ID of the chapter.
 	ChapterID string `pathParam:"style=simple,explode=false,name=chapter_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteChapterEndpointRequest) GetProjectID() string {
@@ -29,13 +26,6 @@ func (d *DeleteChapterEndpointRequest) GetChapterID() string {
 		return ""
 	}
 	return d.ChapterID
-}
-
-func (d *DeleteChapterEndpointRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteChapterEndpointResponse struct {

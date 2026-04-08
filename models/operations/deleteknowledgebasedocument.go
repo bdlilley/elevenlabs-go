@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteKnowledgeBaseDocumentRequest struct {
@@ -13,8 +12,6 @@ type DeleteKnowledgeBaseDocumentRequest struct {
 	DocumentationID string `pathParam:"style=simple,explode=false,name=documentation_id"`
 	// If set to true, the document or folder will be deleted regardless of whether it is used by any agents and it will be removed from the dependent agents. For non-empty folders, this will also delete all child documents and folders.
 	Force *bool `default:"false" queryParam:"style=form,explode=true,name=force"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d DeleteKnowledgeBaseDocumentRequest) MarshalJSON() ([]byte, error) {
@@ -40,13 +37,6 @@ func (d *DeleteKnowledgeBaseDocumentRequest) GetForce() *bool {
 		return nil
 	}
 	return d.Force
-}
-
-func (d *DeleteKnowledgeBaseDocumentRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteKnowledgeBaseDocumentResponse struct {

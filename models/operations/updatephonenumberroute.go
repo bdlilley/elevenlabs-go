@@ -8,15 +8,12 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdatePhoneNumberRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
-	PhoneNumberID string `pathParam:"style=simple,explode=false,name=phone_number_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.UpdatePhoneNumberRequest       `request:"mediaType=application/json"`
+	PhoneNumberID string                              `pathParam:"style=simple,explode=false,name=phone_number_id"`
+	Body          components.UpdatePhoneNumberRequest `request:"mediaType=application/json"`
 }
 
 func (u *UpdatePhoneNumberRouteRequest) GetPhoneNumberID() string {
@@ -24,13 +21,6 @@ func (u *UpdatePhoneNumberRouteRequest) GetPhoneNumberID() string {
 		return ""
 	}
 	return u.PhoneNumberID
-}
-
-func (u *UpdatePhoneNumberRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdatePhoneNumberRouteRequest) GetBody() components.UpdatePhoneNumberRequest {

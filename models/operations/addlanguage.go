@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AddLanguageRequest struct {
 	// ID of the dubbing project.
-	DubbingID string `pathParam:"style=simple,explode=false,name=dubbing_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                      `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost `request:"mediaType=application/json"`
+	DubbingID string                                                                         `pathParam:"style=simple,explode=false,name=dubbing_id"`
+	Body      components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost `request:"mediaType=application/json"`
 }
 
 func (a *AddLanguageRequest) GetDubbingID() string {
@@ -21,13 +18,6 @@ func (a *AddLanguageRequest) GetDubbingID() string {
 		return ""
 	}
 	return a.DubbingID
-}
-
-func (a *AddLanguageRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
 }
 
 func (a *AddLanguageRequest) GetBody() components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost {

@@ -4,15 +4,12 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ResubmitTestsRouteRequest struct {
 	// The id of a test invocation. This is returned when tests are run.
-	TestInvocationID string `pathParam:"style=simple,explode=false,name=test_invocation_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.ResubmitTestsRequestModel      `request:"mediaType=application/json"`
+	TestInvocationID string                               `pathParam:"style=simple,explode=false,name=test_invocation_id"`
+	Body             components.ResubmitTestsRequestModel `request:"mediaType=application/json"`
 }
 
 func (r *ResubmitTestsRouteRequest) GetTestInvocationID() string {
@@ -20,13 +17,6 @@ func (r *ResubmitTestsRouteRequest) GetTestInvocationID() string {
 		return ""
 	}
 	return r.TestInvocationID
-}
-
-func (r *ResubmitTestsRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XiAPIKey
 }
 
 func (r *ResubmitTestsRouteRequest) GetBody() components.ResubmitTestsRequestModel {

@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type SearchGroupsRequest struct {
 	// Name of the target group.
 	Name string `queryParam:"style=form,explode=true,name=name"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (s *SearchGroupsRequest) GetName() string {
@@ -20,13 +17,6 @@ func (s *SearchGroupsRequest) GetName() string {
 		return ""
 	}
 	return s.Name
-}
-
-func (s *SearchGroupsRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if s == nil {
-		return nil
-	}
-	return s.XiAPIKey
 }
 
 type SearchGroupsResponse struct {

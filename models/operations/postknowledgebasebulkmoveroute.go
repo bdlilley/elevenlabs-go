@@ -4,28 +4,7 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type PostKnowledgeBaseBulkMoveRouteRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost `request:"mediaType=application/json"`
-}
-
-func (p *PostKnowledgeBaseBulkMoveRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.XiAPIKey
-}
-
-func (p *PostKnowledgeBaseBulkMoveRouteRequest) GetBody() components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost {
-	if p == nil {
-		return components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost{}
-	}
-	return p.Body
-}
 
 type PostKnowledgeBaseBulkMoveRouteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

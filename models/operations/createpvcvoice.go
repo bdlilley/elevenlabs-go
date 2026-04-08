@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type CreatePvcVoiceRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]    `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreatePVCVoiceV1VoicesPVCPost `request:"mediaType=application/json"`
-}
-
-func (c *CreatePvcVoiceRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
-}
-
-func (c *CreatePvcVoiceRequest) GetBody() components.BodyCreatePVCVoiceV1VoicesPVCPost {
-	if c == nil {
-		return components.BodyCreatePVCVoiceV1VoicesPVCPost{}
-	}
-	return c.Body
-}
 
 type CreatePvcVoiceResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

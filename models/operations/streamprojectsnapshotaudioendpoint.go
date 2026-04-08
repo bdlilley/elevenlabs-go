@@ -5,17 +5,14 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type StreamProjectSnapshotAudioEndpointRequest struct {
 	// The ID of the Studio project.
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
 	// The ID of the Studio project snapshot.
-	ProjectSnapshotID string `pathParam:"style=simple,explode=false,name=project_snapshot_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                             `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyStreamStudioProjectAudioV1StudioProjectsProjectIDSnapshotsProjectSnapshotIDStreamPost `request:"mediaType=application/json"`
+	ProjectSnapshotID string                                                                                                `pathParam:"style=simple,explode=false,name=project_snapshot_id"`
+	Body              *components.BodyStreamStudioProjectAudioV1StudioProjectsProjectIDSnapshotsProjectSnapshotIDStreamPost `request:"mediaType=application/json"`
 }
 
 func (s StreamProjectSnapshotAudioEndpointRequest) MarshalJSON() ([]byte, error) {
@@ -41,13 +38,6 @@ func (s *StreamProjectSnapshotAudioEndpointRequest) GetProjectSnapshotID() strin
 		return ""
 	}
 	return s.ProjectSnapshotID
-}
-
-func (s *StreamProjectSnapshotAudioEndpointRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if s == nil {
-		return nil
-	}
-	return s.XiAPIKey
 }
 
 func (s *StreamProjectSnapshotAudioEndpointRequest) GetBody() *components.BodyStreamStudioProjectAudioV1StudioProjectsProjectIDSnapshotsProjectSnapshotIDStreamPost {

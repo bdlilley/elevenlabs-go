@@ -38,7 +38,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -46,11 +45,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.GetDubbingResource(ctx, "<id>", optionalnullable.From[string](nil))
+    res, err := s.Dubbing.GetDubbingResource(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -62,12 +60,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `dubbingID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the dubbing project.                                                                                                                                |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `dubbingID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the dubbing project.                               |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -94,7 +91,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -102,13 +98,12 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.AddLanguage(ctx, "<id>", components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost{
         Language: nil,
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -125,7 +120,6 @@ func main() {
 | `ctx`                                                                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                            | :heavy_check_mark:                                                                                                                                                               | The context to use for the request.                                                                                                                                              |
 | `dubbingID`                                                                                                                                                                      | `string`                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                               | ID of the dubbing project.                                                                                                                                                       |
 | `body`                                                                                                                                                                           | [components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost](../../models/components/bodyaddalanguagetotheresourcev1dubbingresourcedubbingidlanguagepost.md) | :heavy_check_mark:                                                                                                                                                               | N/A                                                                                                                                                                              |
-| `xiAPIKey`                                                                                                                                                                       | optionalnullable.OptionalNullable[`string`]                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                               | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                        |
 | `opts`                                                                                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                                                                                         | :heavy_minus_sign:                                                                                                                                                               | The options for this request.                                                                                                                                                    |
 
 ### Response
@@ -153,7 +147,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -161,14 +154,13 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.CreateClip(ctx, "<id>", "<id>", components.SegmentCreatePayload{
         StartTime: 4694.58,
         EndTime: 6710.18,
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -180,14 +172,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `dubbingID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the dubbing project.                                                                                                                                |
-| `speakerID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the speaker.                                                                                                                                        |
-| `body`                                                                                                                                                    | [components.SegmentCreatePayload](../../models/components/segmentcreatepayload.md)                                                                        | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `dubbingID`                                                                        | `string`                                                                           | :heavy_check_mark:                                                                 | ID of the dubbing project.                                                         |
+| `speakerID`                                                                        | `string`                                                                           | :heavy_check_mark:                                                                 | ID of the speaker.                                                                 |
+| `body`                                                                             | [components.SegmentCreatePayload](../../models/components/segmentcreatepayload.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `opts`                                                                             | [][operations.Option](../../models/operations/option.md)                           | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
 ### Response
 
@@ -214,7 +205,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
 
@@ -222,16 +212,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.UpdateSegmentLanguage(ctx, operations.UpdateSegmentLanguageRequest{
-        DubbingID: "<id>",
-        SegmentID: "<id>",
-        Language: "<value>",
-        Body: components.SegmentUpdatePayload{},
-    })
+    res, err := s.Dubbing.UpdateSegmentLanguage(ctx, "<id>", "<id>", "<value>", components.SegmentUpdatePayload{})
     if err != nil {
         log.Fatal(err)
     }
@@ -243,11 +227,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `request`                                                                                          | [operations.UpdateSegmentLanguageRequest](../../models/operations/updatesegmentlanguagerequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
-| `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `dubbingID`                                                                        | `string`                                                                           | :heavy_check_mark:                                                                 | ID of the dubbing project.                                                         |
+| `segmentID`                                                                        | `string`                                                                           | :heavy_check_mark:                                                                 | ID of the segment                                                                  |
+| `language`                                                                         | `string`                                                                           | :heavy_check_mark:                                                                 | ID of the language.                                                                |
+| `body`                                                                             | [components.SegmentUpdatePayload](../../models/components/segmentupdatepayload.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `opts`                                                                             | [][operations.Option](../../models/operations/option.md)                           | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
 ### Response
 
@@ -274,7 +261,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -282,7 +268,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -293,7 +278,7 @@ func main() {
             "<value 3>",
         },
         SpeakerID: "<id>",
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -310,7 +295,6 @@ func main() {
 | `ctx`                                                                                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                 | The context to use for the request.                                                                                                                                                                |
 | `dubbingID`                                                                                                                                                                                        | `string`                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                 | ID of the dubbing project.                                                                                                                                                                         |
 | `body`                                                                                                                                                                                             | [components.BodyMoveSegmentsBetweenSpeakersV1DubbingResourceDubbingIDMigrateSegmentsPost](../../models/components/bodymovesegmentsbetweenspeakersv1dubbingresourcedubbingidmigratesegmentspost.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
-| `xiAPIKey`                                                                                                                                                                                         | optionalnullable.OptionalNullable[`string`]                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                 | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                                          |
 | `opts`                                                                                                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                 | The options for this request.                                                                                                                                                                      |
 
 ### Response
@@ -337,7 +321,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -345,11 +328,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.DeleteSegment(ctx, "<id>", "<id>", optionalnullable.From[string](nil))
+    res, err := s.Dubbing.DeleteSegment(ctx, "<id>", "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -361,13 +343,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `dubbingID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the dubbing project.                                                                                                                                |
-| `segmentID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the segment                                                                                                                                         |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `dubbingID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the dubbing project.                               |
+| `segmentID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the segment                                        |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -394,7 +375,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -402,7 +382,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -410,7 +389,7 @@ func main() {
         Segments: []string{
             "<value 1>",
         },
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -427,7 +406,6 @@ func main() {
 | `ctx`                                                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                    | :heavy_check_mark:                                                                                                                                                       | The context to use for the request.                                                                                                                                      |
 | `dubbingID`                                                                                                                                                              | `string`                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                       | ID of the dubbing project.                                                                                                                                               |
 | `body`                                                                                                                                                                   | [components.BodyTranscribesSegmentsV1DubbingResourceDubbingIDTranscribePost](../../models/components/bodytranscribessegmentsv1dubbingresourcedubbingidtranscribepost.md) | :heavy_check_mark:                                                                                                                                                       | N/A                                                                                                                                                                      |
-| `xiAPIKey`                                                                                                                                                               | optionalnullable.OptionalNullable[`string`]                                                                                                                              | :heavy_minus_sign:                                                                                                                                                       | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                |
 | `opts`                                                                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                                                                 | :heavy_minus_sign:                                                                                                                                                       | The options for this request.                                                                                                                                            |
 
 ### Response
@@ -455,7 +433,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -463,7 +440,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -476,7 +452,7 @@ func main() {
             "<value 1>",
             "<value 2>",
         },
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -493,7 +469,6 @@ func main() {
 | `ctx`                                                                                                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                             | The context to use for the request.                                                                                                                                                                            |
 | `dubbingID`                                                                                                                                                                                                    | `string`                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                             | ID of the dubbing project.                                                                                                                                                                                     |
 | `body`                                                                                                                                                                                                         | [components.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDTranslatePost](../../models/components/bodytranslatesallorsomesegmentsandlanguagesv1dubbingresourcedubbingidtranslatepost.md) | :heavy_check_mark:                                                                                                                                                                                             | N/A                                                                                                                                                                                                            |
-| `xiAPIKey`                                                                                                                                                                                                     | optionalnullable.OptionalNullable[`string`]                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                             | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                                                      |
 | `opts`                                                                                                                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                             | The options for this request.                                                                                                                                                                                  |
 
 ### Response
@@ -521,7 +496,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -529,7 +503,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -539,7 +512,7 @@ func main() {
             "<value 1>",
             "<value 2>",
         },
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -556,7 +529,6 @@ func main() {
 | `ctx`                                                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                     | The context to use for the request.                                                                                                                                                    |
 | `dubbingID`                                                                                                                                                                            | `string`                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                     | ID of the dubbing project.                                                                                                                                                             |
 | `body`                                                                                                                                                                                 | [components.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDDubPost](../../models/components/bodydubsallorsomesegmentsandlanguagesv1dubbingresourcedubbingiddubpost.md) | :heavy_check_mark:                                                                                                                                                                     | N/A                                                                                                                                                                                    |
-| `xiAPIKey`                                                                                                                                                                             | optionalnullable.OptionalNullable[`string`]                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                     | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                              |
 | `opts`                                                                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                     | The options for this request.                                                                                                                                                          |
 
 ### Response
@@ -583,7 +555,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -591,11 +562,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.UpdateSpeaker(ctx, "<id>", "<id>", optionalnullable.From[string](nil), nil)
+    res, err := s.Dubbing.UpdateSpeaker(ctx, "<id>", "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -612,7 +582,6 @@ func main() {
 | `ctx`                                                                                                                                                                                               | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                  | The context to use for the request.                                                                                                                                                                 |
 | `dubbingID`                                                                                                                                                                                         | `string`                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                  | ID of the dubbing project.                                                                                                                                                                          |
 | `speakerID`                                                                                                                                                                                         | `string`                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                  | ID of the speaker.                                                                                                                                                                                  |
-| `xiAPIKey`                                                                                                                                                                                          | optionalnullable.OptionalNullable[`string`]                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                  | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                                           |
 | `body`                                                                                                                                                                                              | [*components.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch](../../models/components/bodyupdatemetadataforaspeakerv1dubbingresourcedubbingidspeakerspeakeridpatch.md) | :heavy_minus_sign:                                                                                                                                                                                  | N/A                                                                                                                                                                                                 |
 | `opts`                                                                                                                                                                                              | [][operations.Option](../../models/operations/option.md)                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                  | The options for this request.                                                                                                                                                                       |
 
@@ -640,7 +609,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -648,11 +616,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.CreateSpeaker(ctx, "<id>", optionalnullable.From[string](nil), nil)
+    res, err := s.Dubbing.CreateSpeaker(ctx, "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -668,7 +635,6 @@ func main() {
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                                                                                           | :heavy_check_mark:                                                                                                                                              | The context to use for the request.                                                                                                                             |
 | `dubbingID`                                                                                                                                                     | `string`                                                                                                                                                        | :heavy_check_mark:                                                                                                                                              | ID of the dubbing project.                                                                                                                                      |
-| `xiAPIKey`                                                                                                                                                      | optionalnullable.OptionalNullable[`string`]                                                                                                                     | :heavy_minus_sign:                                                                                                                                              | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.       |
 | `body`                                                                                                                                                          | [*components.BodyCreateANewSpeakerV1DubbingResourceDubbingIDSpeakerPost](../../models/components/bodycreateanewspeakerv1dubbingresourcedubbingidspeakerpost.md) | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |
 | `opts`                                                                                                                                                          | [][operations.Option](../../models/operations/option.md)                                                                                                        | :heavy_minus_sign:                                                                                                                                              | The options for this request.                                                                                                                                   |
 
@@ -696,7 +662,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -704,11 +669,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.GetSimilarVoicesForSpeaker(ctx, "<id>", "<id>", optionalnullable.From[string](nil))
+    res, err := s.Dubbing.GetSimilarVoicesForSpeaker(ctx, "<id>", "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -720,13 +684,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `dubbingID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the dubbing project.                                                                                                                                |
-| `speakerID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the speaker.                                                                                                                                        |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `dubbingID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the dubbing project.                               |
+| `speakerID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the speaker.                                       |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -753,7 +716,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -761,13 +723,12 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.Render(ctx, "<id>", "<value>", components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost{
         RenderType: components.RenderTypeMp3,
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -785,7 +746,6 @@ func main() {
 | `dubbingID`                                                                                                                                                                                                          | `string`                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                   | ID of the dubbing project.                                                                                                                                                                                           |
 | `language`                                                                                                                                                                                                           | `string`                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                   | The target language code to render, eg. 'es'. To render the source track use 'original'.                                                                                                                             |
 | `body`                                                                                                                                                                                                               | [components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost](../../models/components/bodyrenderaudioorvideoforthegivenlanguagev1dubbingresourcedubbingidrenderlanguagepost.md) | :heavy_check_mark:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
-| `xiAPIKey`                                                                                                                                                                                                           | optionalnullable.OptionalNullable[`string`]                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                   | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                                                            |
 | `opts`                                                                                                                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                   | The options for this request.                                                                                                                                                                                        |
 
 ### Response
@@ -820,7 +780,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -866,7 +825,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -874,11 +832,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.CreateDubbing(ctx, optionalnullable.From[string](nil), nil)
+    res, err := s.Dubbing.CreateDubbing(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -890,12 +847,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `body`                                                                                                                                                    | [*components.BodyDubAVideoOrAnAudioFileV1DubbingPost](../../models/components/bodydubavideooranaudiofilev1dubbingpost.md)                                 | :heavy_minus_sign:                                                                                                                                        | N/A                                                                                                                                                       |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |
+| `request`                                                                                                                | [components.BodyDubAVideoOrAnAudioFileV1DubbingPost](../../models/components/bodydubavideooranaudiofilev1dubbingpost.md) | :heavy_check_mark:                                                                                                       | The request object to use for the request.                                                                               |
+| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |
 
 ### Response
 
@@ -921,7 +877,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -929,11 +884,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.GetDubbedMetadata(ctx, "<id>", optionalnullable.From[string](nil))
+    res, err := s.Dubbing.GetDubbedMetadata(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -945,12 +899,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `dubbingID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the dubbing project.                                                                                                                                |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `dubbingID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the dubbing project.                               |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -976,7 +929,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -984,11 +936,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.DeleteDubbing(ctx, "<id>", optionalnullable.From[string](nil))
+    res, err := s.Dubbing.DeleteDubbing(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -1000,12 +951,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `dubbingID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the dubbing project.                                                                                                                                |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `dubbingID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the dubbing project.                               |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -1031,7 +981,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -1039,11 +988,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.GetDubbedFile(ctx, "<id>", "<value>", optionalnullable.From[string](nil))
+    res, err := s.Dubbing.GetDubbedFile(ctx, "<id>", "<value>")
     if err != nil {
         log.Fatal(err)
     }
@@ -1055,13 +1003,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `dubbingID`                                                                                                                                               | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the dubbing project.                                                                                                                                |
-| `languageCode`                                                                                                                                            | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | ID of the language.                                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `dubbingID`                                              | `string`                                                 | :heavy_check_mark:                                       | ID of the dubbing project.                               |
+| `languageCode`                                           | `string`                                                 | :heavy_check_mark:                                       | ID of the language.                                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -1090,7 +1037,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -1098,11 +1044,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.GetDubbedTranscriptFile(ctx, "<id>", "source", operations.GetDubbedTranscriptFileFormatTypeSrt.ToPointer(), optionalnullable.From[string](nil))
+    res, err := s.Dubbing.GetDubbedTranscriptFile(ctx, "<id>", "source", operations.GetDubbedTranscriptFileFormatTypeSrt.ToPointer())
     if err != nil {
         log.Fatal(err)
     }
@@ -1126,7 +1071,6 @@ func main() {
 | `dubbingID`                                                                                                                                                                  | `string`                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | ID of the dubbing project.                                                                                                                                                   |                                                                                                                                                                              |
 | `languageCode`                                                                                                                                                               | `string`                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | ISO-693 language code to retrieve the transcript for. Use 'source' to fetch the transcript of the original media.                                                            | **Example 1:** source<br/>**Example 2:** en<br/>**Example 3:** fra                                                                                                           |
 | `formatType`                                                                                                                                                                 | [*operations.GetDubbedTranscriptFileFormatType](../../models/operations/getdubbedtranscriptfileformattype.md)                                                                | :heavy_minus_sign:                                                                                                                                                           | Format to return transcript in. For subtitles use either 'srt' or 'webvtt', and for a full transcript use 'json'. The 'json' format is not yet supported for Dubbing Studio. |                                                                                                                                                                              |
-| `xiAPIKey`                                                                                                                                                                   | optionalnullable.OptionalNullable[`string`]                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                           | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                    |                                                                                                                                                                              |
 | `opts`                                                                                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                                                                                     | :heavy_minus_sign:                                                                                                                                                           | The options for this request.                                                                                                                                                |                                                                                                                                                                              |
 
 ### Response
@@ -1154,7 +1098,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -1162,11 +1105,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Dubbing.GetDubbingTranscripts(ctx, "<id>", "source", operations.GetDubbingTranscriptsFormatTypeSrt, optionalnullable.From[string](nil))
+    res, err := s.Dubbing.GetDubbingTranscripts(ctx, "<id>", "source", operations.GetDubbingTranscriptsFormatTypeSrt)
     if err != nil {
         log.Fatal(err)
     }
@@ -1184,7 +1126,6 @@ func main() {
 | `dubbingID`                                                                                                                                                                  | `string`                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | ID of the dubbing project.                                                                                                                                                   |                                                                                                                                                                              |
 | `languageCode`                                                                                                                                                               | `string`                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | ISO-693 language code to retrieve the transcript for. Use 'source' to fetch the transcript of the original media.                                                            | **Example 1:** source<br/>**Example 2:** en<br/>**Example 3:** fra                                                                                                           |
 | `formatType`                                                                                                                                                                 | [operations.GetDubbingTranscriptsFormatType](../../models/operations/getdubbingtranscriptsformattype.md)                                                                     | :heavy_check_mark:                                                                                                                                                           | Format to return transcript in. For subtitles use either 'srt' or 'webvtt', and for a full transcript use 'json'. The 'json' format is not yet supported for Dubbing Studio. | **Example 1:** srt<br/>**Example 2:** webvtt<br/>**Example 3:** json                                                                                                         |
-| `xiAPIKey`                                                                                                                                                                   | optionalnullable.OptionalNullable[`string`]                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                           | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                    |                                                                                                                                                                              |
 | `opts`                                                                                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                                                                                     | :heavy_minus_sign:                                                                                                                                                           | The options for this request.                                                                                                                                                |                                                                                                                                                                              |
 
 ### Response

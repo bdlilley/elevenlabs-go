@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PatchPronunciationDictionaryRequest struct {
 	// The id of the pronunciation dictionary
-	PronunciationDictionaryID string `pathParam:"style=simple,explode=false,name=pronunciation_dictionary_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                              `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDPatch `request:"mediaType=application/json"`
+	PronunciationDictionaryID string                                                                                                 `pathParam:"style=simple,explode=false,name=pronunciation_dictionary_id"`
+	Body                      *components.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDPatch `request:"mediaType=application/json"`
 }
 
 func (p PatchPronunciationDictionaryRequest) MarshalJSON() ([]byte, error) {
@@ -32,13 +29,6 @@ func (p *PatchPronunciationDictionaryRequest) GetPronunciationDictionaryID() str
 		return ""
 	}
 	return p.PronunciationDictionaryID
-}
-
-func (p *PatchPronunciationDictionaryRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.XiAPIKey
 }
 
 func (p *PatchPronunciationDictionaryRequest) GetBody() *components.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDPatch {

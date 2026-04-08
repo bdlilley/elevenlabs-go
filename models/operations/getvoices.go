@@ -11,8 +11,6 @@ import (
 type GetVoicesRequest struct {
 	// If set to true, legacy premade voices will be included in responses from /v1/voices
 	ShowLegacy optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=show_legacy"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetVoicesRequest) GetShowLegacy() optionalnullable.OptionalNullable[bool] {
@@ -20,13 +18,6 @@ func (g *GetVoicesRequest) GetShowLegacy() optionalnullable.OptionalNullable[boo
 		return nil
 	}
 	return g.ShowLegacy
-}
-
-func (g *GetVoicesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetVoicesResponse struct {

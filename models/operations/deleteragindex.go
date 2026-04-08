@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteRagIndexRequest struct {
@@ -13,8 +12,6 @@ type DeleteRagIndexRequest struct {
 	DocumentationID string `pathParam:"style=simple,explode=false,name=documentation_id"`
 	// The id of RAG index of document from the knowledge base.
 	RagIndexID string `pathParam:"style=simple,explode=false,name=rag_index_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteRagIndexRequest) GetDocumentationID() string {
@@ -29,13 +26,6 @@ func (d *DeleteRagIndexRequest) GetRagIndexID() string {
 		return ""
 	}
 	return d.RagIndexID
-}
-
-func (d *DeleteRagIndexRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteRagIndexResponse struct {

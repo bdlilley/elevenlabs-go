@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -35,10 +34,9 @@ func newWorkspace(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hook
 
 // GetServiceAccountAPIKeysRoute - Get Service Account Api Keys Route
 // Get all API keys for a service account
-func (s *Workspace) GetServiceAccountAPIKeysRoute(ctx context.Context, serviceAccountUserID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetServiceAccountAPIKeysRouteResponse, error) {
+func (s *Workspace) GetServiceAccountAPIKeysRoute(ctx context.Context, serviceAccountUserID string, opts ...operations.Option) (*operations.GetServiceAccountAPIKeysRouteResponse, error) {
 	request := operations.GetServiceAccountAPIKeysRouteRequest{
 		ServiceAccountUserID: serviceAccountUserID,
-		XiAPIKey:             xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -90,8 +88,6 @@ func (s *Workspace) GetServiceAccountAPIKeysRoute(ctx context.Context, serviceAc
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -272,10 +268,9 @@ func (s *Workspace) GetServiceAccountAPIKeysRoute(ctx context.Context, serviceAc
 
 // CreateServiceAccountAPIKey - Create Service Account Api Key
 // Create a new API key for a service account
-func (s *Workspace) CreateServiceAccountAPIKey(ctx context.Context, serviceAccountUserID string, body components.BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateServiceAccountAPIKeyResponse, error) {
+func (s *Workspace) CreateServiceAccountAPIKey(ctx context.Context, serviceAccountUserID string, body components.BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost, opts ...operations.Option) (*operations.CreateServiceAccountAPIKeyResponse, error) {
 	request := operations.CreateServiceAccountAPIKeyRequest{
 		ServiceAccountUserID: serviceAccountUserID,
-		XiAPIKey:             xiAPIKey,
 		Body:                 body,
 	}
 
@@ -335,8 +330,6 @@ func (s *Workspace) CreateServiceAccountAPIKey(ctx context.Context, serviceAccou
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -517,11 +510,10 @@ func (s *Workspace) CreateServiceAccountAPIKey(ctx context.Context, serviceAccou
 
 // DeleteServiceAccountAPIKey - Delete Service Account Api Key
 // Delete an existing API key for a service account
-func (s *Workspace) DeleteServiceAccountAPIKey(ctx context.Context, serviceAccountUserID string, apiKeyID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteServiceAccountAPIKeyResponse, error) {
+func (s *Workspace) DeleteServiceAccountAPIKey(ctx context.Context, serviceAccountUserID string, apiKeyID string, opts ...operations.Option) (*operations.DeleteServiceAccountAPIKeyResponse, error) {
 	request := operations.DeleteServiceAccountAPIKeyRequest{
 		ServiceAccountUserID: serviceAccountUserID,
 		APIKeyID:             apiKeyID,
-		XiAPIKey:             xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -573,8 +565,6 @@ func (s *Workspace) DeleteServiceAccountAPIKey(ctx context.Context, serviceAccou
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -755,11 +745,10 @@ func (s *Workspace) DeleteServiceAccountAPIKey(ctx context.Context, serviceAccou
 
 // EditServiceAccountAPIKey - Edit Service Account Api Key
 // Update an existing API key for a service account
-func (s *Workspace) EditServiceAccountAPIKey(ctx context.Context, serviceAccountUserID string, apiKeyID string, body components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.EditServiceAccountAPIKeyResponse, error) {
+func (s *Workspace) EditServiceAccountAPIKey(ctx context.Context, serviceAccountUserID string, apiKeyID string, body components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch, opts ...operations.Option) (*operations.EditServiceAccountAPIKeyResponse, error) {
 	request := operations.EditServiceAccountAPIKeyRequest{
 		ServiceAccountUserID: serviceAccountUserID,
 		APIKeyID:             apiKeyID,
-		XiAPIKey:             xiAPIKey,
 		Body:                 body,
 	}
 
@@ -819,8 +808,6 @@ func (s *Workspace) EditServiceAccountAPIKey(ctx context.Context, serviceAccount
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1001,11 +988,7 @@ func (s *Workspace) EditServiceAccountAPIKey(ctx context.Context, serviceAccount
 
 // ListAuthConnections - Get Workspace Auth Connections
 // Get all auth connections for the workspace
-func (s *Workspace) ListAuthConnections(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ListAuthConnectionsResponse, error) {
-	request := operations.ListAuthConnectionsRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *Workspace) ListAuthConnections(ctx context.Context, opts ...operations.Option) (*operations.ListAuthConnectionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1055,8 +1038,6 @@ func (s *Workspace) ListAuthConnections(ctx context.Context, xiAPIKey optionalnu
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1237,12 +1218,7 @@ func (s *Workspace) ListAuthConnections(ctx context.Context, xiAPIKey optionalnu
 
 // CreateAuthConnection - Create Workspace Auth Connection
 // Create a new OAuth2 auth connection for the workspace
-func (s *Workspace) CreateAuthConnection(ctx context.Context, body operations.CreateAuthConnectionRequestBody, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAuthConnectionResponse, error) {
-	request := operations.CreateAuthConnectionRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Workspace) CreateAuthConnection(ctx context.Context, request operations.CreateAuthConnectionRequestBody, opts ...operations.Option) (*operations.CreateAuthConnectionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1274,7 +1250,7 @@ func (s *Workspace) CreateAuthConnection(ctx context.Context, body operations.Cr
 		OperationID:      "create_auth_connection",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1299,8 +1275,6 @@ func (s *Workspace) CreateAuthConnection(ctx context.Context, body operations.Cr
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1481,10 +1455,9 @@ func (s *Workspace) CreateAuthConnection(ctx context.Context, body operations.Cr
 
 // DeleteAuthConnection - Delete Workspace Auth Connection
 // Delete an auth connection
-func (s *Workspace) DeleteAuthConnection(ctx context.Context, authConnectionID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteAuthConnectionResponse, error) {
+func (s *Workspace) DeleteAuthConnection(ctx context.Context, authConnectionID string, opts ...operations.Option) (*operations.DeleteAuthConnectionResponse, error) {
 	request := operations.DeleteAuthConnectionRequest{
 		AuthConnectionID: authConnectionID,
-		XiAPIKey:         xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1536,8 +1509,6 @@ func (s *Workspace) DeleteAuthConnection(ctx context.Context, authConnectionID s
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1718,11 +1689,7 @@ func (s *Workspace) DeleteAuthConnection(ctx context.Context, authConnectionID s
 
 // GetWorkspaceServiceAccounts - Get Workspace Service Accounts
 // List all service accounts in the workspace
-func (s *Workspace) GetWorkspaceServiceAccounts(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetWorkspaceServiceAccountsResponse, error) {
-	request := operations.GetWorkspaceServiceAccountsRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *Workspace) GetWorkspaceServiceAccounts(ctx context.Context, opts ...operations.Option) (*operations.GetWorkspaceServiceAccountsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1772,8 +1739,6 @@ func (s *Workspace) GetWorkspaceServiceAccounts(ctx context.Context, xiAPIKey op
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1954,11 +1919,7 @@ func (s *Workspace) GetWorkspaceServiceAccounts(ctx context.Context, xiAPIKey op
 
 // GetGroupsEndpoint - Get All Groups
 // Get all groups in the workspace
-func (s *Workspace) GetGroupsEndpoint(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetGroupsEndpointResponse, error) {
-	request := operations.GetGroupsEndpointRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *Workspace) GetGroupsEndpoint(ctx context.Context, opts ...operations.Option) (*operations.GetGroupsEndpointResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2008,8 +1969,6 @@ func (s *Workspace) GetGroupsEndpoint(ctx context.Context, xiAPIKey optionalnull
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2190,10 +2149,9 @@ func (s *Workspace) GetGroupsEndpoint(ctx context.Context, xiAPIKey optionalnull
 
 // SearchGroups - Search User Groups
 // Searches for user groups in the workspace. Multiple or no groups may be returned.
-func (s *Workspace) SearchGroups(ctx context.Context, name string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SearchGroupsResponse, error) {
+func (s *Workspace) SearchGroups(ctx context.Context, name string, opts ...operations.Option) (*operations.SearchGroupsResponse, error) {
 	request := operations.SearchGroupsRequest{
-		Name:     name,
-		XiAPIKey: xiAPIKey,
+		Name: name,
 	}
 
 	o := operations.Options{}
@@ -2245,8 +2203,6 @@ func (s *Workspace) SearchGroups(ctx context.Context, name string, xiAPIKey opti
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -2431,11 +2387,10 @@ func (s *Workspace) SearchGroups(ctx context.Context, name string, xiAPIKey opti
 
 // RemoveMember - Delete Member From User Group
 // Removes a member from the specified group. Requires `group_members_manage` permission.
-func (s *Workspace) RemoveMember(ctx context.Context, groupID string, body components.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIDMembersRemovePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RemoveMemberResponse, error) {
+func (s *Workspace) RemoveMember(ctx context.Context, groupID string, body components.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIDMembersRemovePost, opts ...operations.Option) (*operations.RemoveMemberResponse, error) {
 	request := operations.RemoveMemberRequest{
-		GroupID:  groupID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		GroupID: groupID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -2494,8 +2449,6 @@ func (s *Workspace) RemoveMember(ctx context.Context, groupID string, body compo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2676,11 +2629,10 @@ func (s *Workspace) RemoveMember(ctx context.Context, groupID string, body compo
 
 // AddMember - Add Member To User Group
 // Adds a member of your workspace to the specified group. Requires `group_members_manage` permission.
-func (s *Workspace) AddMember(ctx context.Context, groupID string, body components.BodyAddMemberToUserGroupV1WorkspaceGroupsGroupIDMembersPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddMemberResponse, error) {
+func (s *Workspace) AddMember(ctx context.Context, groupID string, body components.BodyAddMemberToUserGroupV1WorkspaceGroupsGroupIDMembersPost, opts ...operations.Option) (*operations.AddMemberResponse, error) {
 	request := operations.AddMemberRequest{
-		GroupID:  groupID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		GroupID: groupID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -2739,8 +2691,6 @@ func (s *Workspace) AddMember(ctx context.Context, groupID string, body componen
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2921,12 +2871,7 @@ func (s *Workspace) AddMember(ctx context.Context, groupID string, body componen
 
 // InviteUser - Invite User
 // Sends an email invitation to join your workspace to the provided email. If the user doesn't have an account they will be prompted to create one. If the user accepts this invite they will be added as a user to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace members with the WORKSPACE_MEMBERS_INVITE permission. If the user is already in the workspace a 400 error will be returned.
-func (s *Workspace) InviteUser(ctx context.Context, body components.BodyInviteUserV1WorkspaceInvitesAddPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.InviteUserResponse, error) {
-	request := operations.InviteUserRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Workspace) InviteUser(ctx context.Context, request components.BodyInviteUserV1WorkspaceInvitesAddPost, opts ...operations.Option) (*operations.InviteUserResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2958,7 +2903,7 @@ func (s *Workspace) InviteUser(ctx context.Context, body components.BodyInviteUs
 		OperationID:      "invite_user",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -2983,8 +2928,6 @@ func (s *Workspace) InviteUser(ctx context.Context, body components.BodyInviteUs
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3165,12 +3108,7 @@ func (s *Workspace) InviteUser(ctx context.Context, body components.BodyInviteUs
 
 // InviteUsersBulk - Invite Multiple Users
 // Sends email invitations to join your workspace to the provided emails. Requires all email addresses to be part of a verified domain. If the users don't have an account they will be prompted to create one. If the users accept these invites they will be added as users to your workspace and your subscription using one of your seats. This endpoint may only be called by workspace members with the WORKSPACE_MEMBERS_INVITE permission.
-func (s *Workspace) InviteUsersBulk(ctx context.Context, body components.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.InviteUsersBulkResponse, error) {
-	request := operations.InviteUsersBulkRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Workspace) InviteUsersBulk(ctx context.Context, request components.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost, opts ...operations.Option) (*operations.InviteUsersBulkResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3202,7 +3140,7 @@ func (s *Workspace) InviteUsersBulk(ctx context.Context, body components.BodyInv
 		OperationID:      "invite_users_bulk",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -3227,8 +3165,6 @@ func (s *Workspace) InviteUsersBulk(ctx context.Context, body components.BodyInv
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3409,12 +3345,7 @@ func (s *Workspace) InviteUsersBulk(ctx context.Context, body components.BodyInv
 
 // DeleteInvite - Delete Existing Invitation
 // Invalidates an existing email invitation. The invitation will still show up in the inbox it has been delivered to, but activating it to join the workspace won't work. This endpoint may only be called by workspace members with the WORKSPACE_MEMBERS_INVITE permission.
-func (s *Workspace) DeleteInvite(ctx context.Context, body components.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteInviteResponse, error) {
-	request := operations.DeleteInviteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Workspace) DeleteInvite(ctx context.Context, request components.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete, opts ...operations.Option) (*operations.DeleteInviteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3446,7 +3377,7 @@ func (s *Workspace) DeleteInvite(ctx context.Context, body components.BodyDelete
 		OperationID:      "delete_invite",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -3471,8 +3402,6 @@ func (s *Workspace) DeleteInvite(ctx context.Context, body components.BodyDelete
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3653,12 +3582,7 @@ func (s *Workspace) DeleteInvite(ctx context.Context, body components.BodyDelete
 
 // UpdateWorkspaceMember - Update Member
 // Updates attributes of a workspace member. Apart from the email identifier, all parameters will remain unchanged unless specified. This endpoint may only be called by workspace administrators.
-func (s *Workspace) UpdateWorkspaceMember(ctx context.Context, body components.BodyUpdateMemberV1WorkspaceMembersPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UpdateWorkspaceMemberResponse, error) {
-	request := operations.UpdateWorkspaceMemberRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Workspace) UpdateWorkspaceMember(ctx context.Context, request components.BodyUpdateMemberV1WorkspaceMembersPost, opts ...operations.Option) (*operations.UpdateWorkspaceMemberResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -3690,7 +3614,7 @@ func (s *Workspace) UpdateWorkspaceMember(ctx context.Context, body components.B
 		OperationID:      "update_workspace_member",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -3715,8 +3639,6 @@ func (s *Workspace) UpdateWorkspaceMember(ctx context.Context, body components.B
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3897,11 +3819,10 @@ func (s *Workspace) UpdateWorkspaceMember(ctx context.Context, body components.B
 
 // GetResourceMetadata - Get Resource
 // Gets the metadata of a resource by ID.
-func (s *Workspace) GetResourceMetadata(ctx context.Context, resourceID string, resourceType components.WorkspaceResourceType, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetResourceMetadataResponse, error) {
+func (s *Workspace) GetResourceMetadata(ctx context.Context, resourceID string, resourceType components.WorkspaceResourceType, opts ...operations.Option) (*operations.GetResourceMetadataResponse, error) {
 	request := operations.GetResourceMetadataRequest{
 		ResourceID:   resourceID,
 		ResourceType: resourceType,
-		XiAPIKey:     xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -3953,8 +3874,6 @@ func (s *Workspace) GetResourceMetadata(ctx context.Context, resourceID string, 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -4139,10 +4058,9 @@ func (s *Workspace) GetResourceMetadata(ctx context.Context, resourceID string, 
 
 // ShareResourceEndpoint - Share Workspace Resource
 // Grants a role on a workspace resource to a user or a group. It overrides any existing role this user/service account/group/workspace api key has on the resource. To target a user or service account, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. The resource will be shared with the service account associated with the api key. You must have admin access to the resource to share it.
-func (s *Workspace) ShareResourceEndpoint(ctx context.Context, resourceID string, body components.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ShareResourceEndpointResponse, error) {
+func (s *Workspace) ShareResourceEndpoint(ctx context.Context, resourceID string, body components.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePost, opts ...operations.Option) (*operations.ShareResourceEndpointResponse, error) {
 	request := operations.ShareResourceEndpointRequest{
 		ResourceID: resourceID,
-		XiAPIKey:   xiAPIKey,
 		Body:       body,
 	}
 
@@ -4202,8 +4120,6 @@ func (s *Workspace) ShareResourceEndpoint(ctx context.Context, resourceID string
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4384,10 +4300,9 @@ func (s *Workspace) ShareResourceEndpoint(ctx context.Context, resourceID string
 
 // UnshareResourceEndpoint - Unshare Workspace Resource
 // Removes any existing role on a workspace resource from a user, service account, group or workspace api key. To target a user or service account, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. The resource will be unshared from the service account associated with the api key. You must have admin access to the resource to unshare it. You cannot remove permissions from the user who created the resource.
-func (s *Workspace) UnshareResourceEndpoint(ctx context.Context, resourceID string, body components.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UnshareResourceEndpointResponse, error) {
+func (s *Workspace) UnshareResourceEndpoint(ctx context.Context, resourceID string, body components.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost, opts ...operations.Option) (*operations.UnshareResourceEndpointResponse, error) {
 	request := operations.UnshareResourceEndpointRequest{
 		ResourceID: resourceID,
-		XiAPIKey:   xiAPIKey,
 		Body:       body,
 	}
 
@@ -4447,8 +4362,6 @@ func (s *Workspace) UnshareResourceEndpoint(ctx context.Context, resourceID stri
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -4629,10 +4542,9 @@ func (s *Workspace) UnshareResourceEndpoint(ctx context.Context, resourceID stri
 
 // GetWorkspaceWebhooksRoute - List Workspace Webhooks
 // List all webhooks for a workspace
-func (s *Workspace) GetWorkspaceWebhooksRoute(ctx context.Context, includeUsages *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetWorkspaceWebhooksRouteResponse, error) {
+func (s *Workspace) GetWorkspaceWebhooksRoute(ctx context.Context, includeUsages *bool, opts ...operations.Option) (*operations.GetWorkspaceWebhooksRouteResponse, error) {
 	request := operations.GetWorkspaceWebhooksRouteRequest{
 		IncludeUsages: includeUsages,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -4684,8 +4596,6 @@ func (s *Workspace) GetWorkspaceWebhooksRoute(ctx context.Context, includeUsages
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -4870,12 +4780,7 @@ func (s *Workspace) GetWorkspaceWebhooksRoute(ctx context.Context, includeUsages
 
 // CreateWorkspaceWebhookRoute - Create Workspace Webhook
 // Create a new webhook for the workspace with the specified authentication type.
-func (s *Workspace) CreateWorkspaceWebhookRoute(ctx context.Context, body components.BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateWorkspaceWebhookRouteResponse, error) {
-	request := operations.CreateWorkspaceWebhookRouteRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *Workspace) CreateWorkspaceWebhookRoute(ctx context.Context, request components.BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost, opts ...operations.Option) (*operations.CreateWorkspaceWebhookRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -4907,7 +4812,7 @@ func (s *Workspace) CreateWorkspaceWebhookRoute(ctx context.Context, body compon
 		OperationID:      "create_workspace_webhook_route",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -4932,8 +4837,6 @@ func (s *Workspace) CreateWorkspaceWebhookRoute(ctx context.Context, body compon
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -5114,10 +5017,9 @@ func (s *Workspace) CreateWorkspaceWebhookRoute(ctx context.Context, body compon
 
 // DeleteWorkspaceWebhookRoute - Delete Workspace Webhook
 // Delete the specified workspace webhook
-func (s *Workspace) DeleteWorkspaceWebhookRoute(ctx context.Context, webhookID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteWorkspaceWebhookRouteResponse, error) {
+func (s *Workspace) DeleteWorkspaceWebhookRoute(ctx context.Context, webhookID string, opts ...operations.Option) (*operations.DeleteWorkspaceWebhookRouteResponse, error) {
 	request := operations.DeleteWorkspaceWebhookRouteRequest{
 		WebhookID: webhookID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -5169,8 +5071,6 @@ func (s *Workspace) DeleteWorkspaceWebhookRoute(ctx context.Context, webhookID s
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -5351,10 +5251,9 @@ func (s *Workspace) DeleteWorkspaceWebhookRoute(ctx context.Context, webhookID s
 
 // EditWorkspaceWebhookRoute - Update Workspace Webhook
 // Update the specified workspace webhook
-func (s *Workspace) EditWorkspaceWebhookRoute(ctx context.Context, webhookID string, body components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.EditWorkspaceWebhookRouteResponse, error) {
+func (s *Workspace) EditWorkspaceWebhookRoute(ctx context.Context, webhookID string, body components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch, opts ...operations.Option) (*operations.EditWorkspaceWebhookRouteResponse, error) {
 	request := operations.EditWorkspaceWebhookRouteRequest{
 		WebhookID: webhookID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -5414,8 +5313,6 @@ func (s *Workspace) EditWorkspaceWebhookRoute(ctx context.Context, webhookID str
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type UpdateDashboardSettingsRouteRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]      `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.PatchConvAIDashboardSettingsRequest `request:"mediaType=application/json"`
-}
-
-func (u *UpdateDashboardSettingsRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
-}
-
-func (u *UpdateDashboardSettingsRouteRequest) GetBody() components.PatchConvAIDashboardSettingsRequest {
-	if u == nil {
-		return components.PatchConvAIDashboardSettingsRequest{}
-	}
-	return u.Body
-}
 
 type UpdateDashboardSettingsRouteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

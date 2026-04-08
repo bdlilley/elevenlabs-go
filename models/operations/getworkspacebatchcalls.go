@@ -11,8 +11,6 @@ import (
 type GetWorkspaceBatchCallsRequest struct {
 	Limit   *int64                                    `default:"100" queryParam:"style=form,explode=true,name=limit"`
 	LastDoc optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=last_doc"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetWorkspaceBatchCallsRequest) MarshalJSON() ([]byte, error) {
@@ -38,13 +36,6 @@ func (g *GetWorkspaceBatchCallsRequest) GetLastDoc() optionalnullable.OptionalNu
 		return nil
 	}
 	return g.LastDoc
-}
-
-func (g *GetWorkspaceBatchCallsRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetWorkspaceBatchCallsResponse struct {

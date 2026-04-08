@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AddMemberRequest struct {
 	// The ID of the target group.
-	GroupID string `pathParam:"style=simple,explode=false,name=group_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                              `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyAddMemberToUserGroupV1WorkspaceGroupsGroupIDMembersPost `request:"mediaType=application/json"`
+	GroupID string                                                                 `pathParam:"style=simple,explode=false,name=group_id"`
+	Body    components.BodyAddMemberToUserGroupV1WorkspaceGroupsGroupIDMembersPost `request:"mediaType=application/json"`
 }
 
 func (a *AddMemberRequest) GetGroupID() string {
@@ -21,13 +18,6 @@ func (a *AddMemberRequest) GetGroupID() string {
 		return ""
 	}
 	return a.GroupID
-}
-
-func (a *AddMemberRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
 }
 
 func (a *AddMemberRequest) GetBody() components.BodyAddMemberToUserGroupV1WorkspaceGroupsGroupIDMembersPost {

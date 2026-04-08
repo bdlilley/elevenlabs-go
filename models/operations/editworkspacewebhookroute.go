@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type EditWorkspaceWebhookRouteRequest struct {
 	// The unique ID for the webhook
-	WebhookID string `pathParam:"style=simple,explode=false,name=webhook_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                              `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch `request:"mediaType=application/json"`
+	WebhookID string                                                                 `pathParam:"style=simple,explode=false,name=webhook_id"`
+	Body      components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch `request:"mediaType=application/json"`
 }
 
 func (e *EditWorkspaceWebhookRouteRequest) GetWebhookID() string {
@@ -21,13 +18,6 @@ func (e *EditWorkspaceWebhookRouteRequest) GetWebhookID() string {
 		return ""
 	}
 	return e.WebhookID
-}
-
-func (e *EditWorkspaceWebhookRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if e == nil {
-		return nil
-	}
-	return e.XiAPIKey
 }
 
 func (e *EditWorkspaceWebhookRouteRequest) GetBody() components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch {

@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type AddFromRulesRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                             `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost `request:"mediaType=application/json"`
-}
-
-func (a *AddFromRulesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
-}
-
-func (a *AddFromRulesRequest) GetBody() components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost {
-	if a == nil {
-		return components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost{}
-	}
-	return a.Body
-}
 
 type AddFromRulesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

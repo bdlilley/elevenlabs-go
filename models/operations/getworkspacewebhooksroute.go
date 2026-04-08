@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetWorkspaceWebhooksRouteRequest struct {
 	// Whether to include active usages of the webhook, only usable by admins
 	IncludeUsages *bool `default:"false" queryParam:"style=form,explode=true,name=include_usages"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetWorkspaceWebhooksRouteRequest) MarshalJSON() ([]byte, error) {
@@ -31,13 +28,6 @@ func (g *GetWorkspaceWebhooksRouteRequest) GetIncludeUsages() *bool {
 		return nil
 	}
 	return g.IncludeUsages
-}
-
-func (g *GetWorkspaceWebhooksRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetWorkspaceWebhooksRouteResponse struct {

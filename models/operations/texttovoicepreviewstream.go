@@ -4,15 +4,12 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"io"
 )
 
 type TextToVoicePreviewStreamRequest struct {
 	// The generated_voice_id to stream.
 	GeneratedVoiceID string `pathParam:"style=simple,explode=false,name=generated_voice_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (t *TextToVoicePreviewStreamRequest) GetGeneratedVoiceID() string {
@@ -20,13 +17,6 @@ func (t *TextToVoicePreviewStreamRequest) GetGeneratedVoiceID() string {
 		return ""
 	}
 	return t.GeneratedVoiceID
-}
-
-func (t *TextToVoicePreviewStreamRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if t == nil {
-		return nil
-	}
-	return t.XiAPIKey
 }
 
 type TextToVoicePreviewStreamResponse struct {

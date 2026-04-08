@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteAgentTestFolderRouteRequest struct {
@@ -13,8 +12,6 @@ type DeleteAgentTestFolderRouteRequest struct {
 	FolderID string `pathParam:"style=simple,explode=false,name=folder_id"`
 	// Force delete. Required for deleting non-empty folders.
 	Force *bool `default:"false" queryParam:"style=form,explode=true,name=force"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d DeleteAgentTestFolderRouteRequest) MarshalJSON() ([]byte, error) {
@@ -40,13 +37,6 @@ func (d *DeleteAgentTestFolderRouteRequest) GetForce() *bool {
 		return nil
 	}
 	return d.Force
-}
-
-func (d *DeleteAgentTestFolderRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteAgentTestFolderRouteResponse struct {

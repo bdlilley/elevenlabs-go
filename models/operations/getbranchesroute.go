@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetBranchesRouteRequest struct {
@@ -15,8 +14,6 @@ type GetBranchesRouteRequest struct {
 	IncludeArchived *bool `default:"false" queryParam:"style=form,explode=true,name=include_archived"`
 	// How many results at most should be returned
 	Limit *int64 `default:"100" queryParam:"style=form,explode=true,name=limit"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetBranchesRouteRequest) MarshalJSON() ([]byte, error) {
@@ -49,13 +46,6 @@ func (g *GetBranchesRouteRequest) GetLimit() *int64 {
 		return nil
 	}
 	return g.Limit
-}
-
-func (g *GetBranchesRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetBranchesRouteResponse struct {

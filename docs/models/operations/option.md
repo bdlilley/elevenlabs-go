@@ -23,6 +23,14 @@ elevenlabsgo.WithTemplatedServerURL("https://{host}:{port}", map[string]string{
 })
 ```
 
+### WithServerIndex
+
+WithServerIndex allows the overriding of the default server by index.
+
+```go
+elevenlabsgo.WithServerIndex(1)
+```
+
 ### WithClient
 
 WithClient allows the overriding of the default HTTP client used by the SDK.

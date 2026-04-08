@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type CreateAgentRouteRequest struct {
 	// Enable versioning for the agent
-	EnableVersioning *bool `default:"false" queryParam:"style=form,explode=true,name=enable_versioning"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]          `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreateAgentV1ConvaiAgentsCreatePost `request:"mediaType=application/json"`
+	EnableVersioning *bool                                              `default:"false" queryParam:"style=form,explode=true,name=enable_versioning"`
+	Body             components.BodyCreateAgentV1ConvaiAgentsCreatePost `request:"mediaType=application/json"`
 }
 
 func (c CreateAgentRouteRequest) MarshalJSON() ([]byte, error) {
@@ -32,13 +29,6 @@ func (c *CreateAgentRouteRequest) GetEnableVersioning() *bool {
 		return nil
 	}
 	return c.EnableVersioning
-}
-
-func (c *CreateAgentRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
 }
 
 func (c *CreateAgentRouteRequest) GetBody() components.BodyCreateAgentV1ConvaiAgentsCreatePost {

@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type CreateAgentDeploymentRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
-	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                    `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost `request:"mediaType=application/json"`
+	AgentID string                                                                       `pathParam:"style=simple,explode=false,name=agent_id"`
+	Body    components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost `request:"mediaType=application/json"`
 }
 
 func (c *CreateAgentDeploymentRouteRequest) GetAgentID() string {
@@ -21,13 +18,6 @@ func (c *CreateAgentDeploymentRouteRequest) GetAgentID() string {
 		return ""
 	}
 	return c.AgentID
-}
-
-func (c *CreateAgentDeploymentRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
 }
 
 func (c *CreateAgentDeploymentRouteRequest) GetBody() components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost {

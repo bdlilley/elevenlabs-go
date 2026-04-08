@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type CreateAudioNativeProjectRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                        `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost `request:"mediaType=multipart/form-data"`
-}
-
-func (c *CreateAudioNativeProjectRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
-}
-
-func (c *CreateAudioNativeProjectRequest) GetBody() components.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost {
-	if c == nil {
-		return components.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost{}
-	}
-	return c.Body
-}
 
 type CreateAudioNativeProjectResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

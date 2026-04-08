@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetBranchRouteRequest struct {
@@ -13,8 +12,6 @@ type GetBranchRouteRequest struct {
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
 	// Unique identifier for the branch.
 	BranchID string `pathParam:"style=simple,explode=false,name=branch_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetBranchRouteRequest) GetAgentID() string {
@@ -29,13 +26,6 @@ func (g *GetBranchRouteRequest) GetBranchID() string {
 		return ""
 	}
 	return g.BranchID
-}
-
-func (g *GetBranchRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetBranchRouteResponse struct {

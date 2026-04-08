@@ -8,14 +8,11 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAgentSummariesRouteRequest struct {
 	// List of agent IDs to fetch summaries for
 	AgentIds []string `queryParam:"style=form,explode=true,name=agent_ids"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetAgentSummariesRouteRequest) GetAgentIds() []string {
@@ -23,13 +20,6 @@ func (g *GetAgentSummariesRouteRequest) GetAgentIds() []string {
 		return []string{}
 	}
 	return g.AgentIds
-}
-
-func (g *GetAgentSummariesRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetAgentSummariesRouteResponseBodyType string

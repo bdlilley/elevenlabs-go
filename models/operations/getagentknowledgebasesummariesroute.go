@@ -8,14 +8,11 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetAgentKnowledgeBaseSummariesRouteRequest struct {
 	// The ids of knowledge base documents.
 	DocumentIds []string `queryParam:"style=form,explode=true,name=document_ids"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetAgentKnowledgeBaseSummariesRouteRequest) GetDocumentIds() []string {
@@ -23,13 +20,6 @@ func (g *GetAgentKnowledgeBaseSummariesRouteRequest) GetDocumentIds() []string {
 		return []string{}
 	}
 	return g.DocumentIds
-}
-
-func (g *GetAgentKnowledgeBaseSummariesRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetAgentKnowledgeBaseSummariesRouteResponseBodyType string

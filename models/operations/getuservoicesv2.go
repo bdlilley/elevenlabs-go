@@ -31,8 +31,6 @@ type GetUserVoicesV2Request struct {
 	IncludeTotalCount *bool `default:"true" queryParam:"style=form,explode=true,name=include_total_count"`
 	// Voice IDs to lookup by. Maximum 100 voice IDs.
 	VoiceIds optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=voice_ids"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetUserVoicesV2Request) MarshalJSON() ([]byte, error) {
@@ -121,13 +119,6 @@ func (g *GetUserVoicesV2Request) GetVoiceIds() optionalnullable.OptionalNullable
 		return nil
 	}
 	return g.VoiceIds
-}
-
-func (g *GetUserVoicesV2Request) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 // #region class-body-getuservoicesv2request

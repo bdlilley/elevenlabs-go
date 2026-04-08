@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,10 +33,9 @@ func newSoundGeneration(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration
 
 // SoundGeneration - Sound Generation
 // Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects models in the world.
-func (s *SoundGeneration) SoundGeneration(ctx context.Context, body components.BodySoundGenerationV1SoundGenerationPost, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SoundGenerationResponse, error) {
+func (s *SoundGeneration) SoundGeneration(ctx context.Context, body components.BodySoundGenerationV1SoundGenerationPost, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.SoundGenerationResponse, error) {
 	request := operations.SoundGenerationRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -97,8 +95,6 @@ func (s *SoundGeneration) SoundGeneration(ctx context.Context, body components.B
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)

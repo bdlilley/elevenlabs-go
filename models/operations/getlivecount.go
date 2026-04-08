@@ -11,8 +11,6 @@ import (
 type GetLiveCountRequest struct {
 	// The id of an agent to restrict the analytics to.
 	AgentID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=agent_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetLiveCountRequest) GetAgentID() optionalnullable.OptionalNullable[string] {
@@ -20,13 +18,6 @@ func (g *GetLiveCountRequest) GetAgentID() optionalnullable.OptionalNullable[str
 		return nil
 	}
 	return g.AgentID
-}
-
-func (g *GetLiveCountRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetLiveCountResponse struct {

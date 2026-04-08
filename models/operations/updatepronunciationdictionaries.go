@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdatePronunciationDictionariesRequest struct {
 	// The ID of the Studio project.
-	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                            `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIDPronunciationDictionariesPost `request:"mediaType=application/json"`
+	ProjectID string                                                                                               `pathParam:"style=simple,explode=false,name=project_id"`
+	Body      components.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIDPronunciationDictionariesPost `request:"mediaType=application/json"`
 }
 
 func (u *UpdatePronunciationDictionariesRequest) GetProjectID() string {
@@ -21,13 +18,6 @@ func (u *UpdatePronunciationDictionariesRequest) GetProjectID() string {
 		return ""
 	}
 	return u.ProjectID
-}
-
-func (u *UpdatePronunciationDictionariesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdatePronunciationDictionariesRequest) GetBody() components.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIDPronunciationDictionariesPost {

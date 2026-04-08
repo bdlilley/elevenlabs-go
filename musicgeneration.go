@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,12 +33,7 @@ func newMusicGeneration(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration
 
 // ComposePlan - Generate Composition Plan
 // Generate a composition plan from a prompt.
-func (s *MusicGeneration) ComposePlan(ctx context.Context, body components.BodyGenerateCompositionPlanV1MusicPlanPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.ComposePlanResponse, error) {
-	request := operations.ComposePlanRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *MusicGeneration) ComposePlan(ctx context.Context, request components.BodyGenerateCompositionPlanV1MusicPlanPost, opts ...operations.Option) (*operations.ComposePlanResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -71,7 +65,7 @@ func (s *MusicGeneration) ComposePlan(ctx context.Context, body components.BodyG
 		OperationID:      "compose_plan",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +90,6 @@ func (s *MusicGeneration) ComposePlan(ctx context.Context, body components.BodyG
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -278,10 +270,9 @@ func (s *MusicGeneration) ComposePlan(ctx context.Context, body components.BodyG
 
 // Generate - Compose Music
 // Compose a song from a prompt or a composition plan.
-func (s *MusicGeneration) Generate(ctx context.Context, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyComposeMusicV1MusicPost, opts ...operations.Option) (*operations.GenerateResponse, error) {
+func (s *MusicGeneration) Generate(ctx context.Context, outputFormat *components.AllowedOutputFormats, body *components.BodyComposeMusicV1MusicPost, opts ...operations.Option) (*operations.GenerateResponse, error) {
 	request := operations.GenerateRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -341,8 +332,6 @@ func (s *MusicGeneration) Generate(ctx context.Context, outputFormat *components
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -521,10 +510,9 @@ func (s *MusicGeneration) Generate(ctx context.Context, outputFormat *components
 
 // ComposeDetailed - Compose Music With A Detailed Response
 // Compose a song from a prompt or a composition plan.
-func (s *MusicGeneration) ComposeDetailed(ctx context.Context, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost, opts ...operations.Option) (*operations.ComposeDetailedResponse, error) {
+func (s *MusicGeneration) ComposeDetailed(ctx context.Context, outputFormat *components.AllowedOutputFormats, body *components.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost, opts ...operations.Option) (*operations.ComposeDetailedResponse, error) {
 	request := operations.ComposeDetailedRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -584,8 +572,6 @@ func (s *MusicGeneration) ComposeDetailed(ctx context.Context, outputFormat *com
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -764,10 +750,9 @@ func (s *MusicGeneration) ComposeDetailed(ctx context.Context, outputFormat *com
 
 // StreamCompose - Stream Composed Music
 // Stream a composed song from a prompt or a composition plan.
-func (s *MusicGeneration) StreamCompose(ctx context.Context, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyStreamComposedMusicV1MusicStreamPost, opts ...operations.Option) (*operations.StreamComposeResponse, error) {
+func (s *MusicGeneration) StreamCompose(ctx context.Context, outputFormat *components.AllowedOutputFormats, body *components.BodyStreamComposedMusicV1MusicStreamPost, opts ...operations.Option) (*operations.StreamComposeResponse, error) {
 	request := operations.StreamComposeRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -827,8 +812,6 @@ func (s *MusicGeneration) StreamCompose(ctx context.Context, outputFormat *compo
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -1007,12 +990,7 @@ func (s *MusicGeneration) StreamCompose(ctx context.Context, outputFormat *compo
 
 // UploadSong - Upload Music
 // Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
-func (s *MusicGeneration) UploadSong(ctx context.Context, body components.BodyUploadMusicV1MusicUploadPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.UploadSongResponse, error) {
-	request := operations.UploadSongRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *MusicGeneration) UploadSong(ctx context.Context, request components.BodyUploadMusicV1MusicUploadPost, opts ...operations.Option) (*operations.UploadSongResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1044,7 +1022,7 @@ func (s *MusicGeneration) UploadSong(ctx context.Context, body components.BodyUp
 		OperationID:      "upload_song",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1069,8 +1047,6 @@ func (s *MusicGeneration) UploadSong(ctx context.Context, body components.BodyUp
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1251,10 +1227,9 @@ func (s *MusicGeneration) UploadSong(ctx context.Context, body components.BodyUp
 
 // SeparateSongStems - Stem Separation
 // Separate an audio file into individual stems. This endpoint might have high latency, depending on the length of the audio file.
-func (s *MusicGeneration) SeparateSongStems(ctx context.Context, body components.BodyStemSeparationV1MusicStemSeparationPost, outputFormat *components.AllowedOutputFormats, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SeparateSongStemsResponse, error) {
+func (s *MusicGeneration) SeparateSongStems(ctx context.Context, body components.BodyStemSeparationV1MusicStemSeparationPost, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.SeparateSongStemsResponse, error) {
 	request := operations.SeparateSongStemsRequest{
 		OutputFormat: outputFormat,
-		XiAPIKey:     xiAPIKey,
 		Body:         body,
 	}
 
@@ -1314,8 +1289,6 @@ func (s *MusicGeneration) SeparateSongStems(ctx context.Context, body components
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)

@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UploadFileRouteRequest struct {
-	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                             `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPost `request:"mediaType=multipart/form-data"`
+	ConversationID string                                                                `pathParam:"style=simple,explode=false,name=conversation_id"`
+	Body           components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPost `request:"mediaType=multipart/form-data"`
 }
 
 func (u *UploadFileRouteRequest) GetConversationID() string {
@@ -20,13 +17,6 @@ func (u *UploadFileRouteRequest) GetConversationID() string {
 		return ""
 	}
 	return u.ConversationID
-}
-
-func (u *UploadFileRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UploadFileRouteRequest) GetBody() components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPost {

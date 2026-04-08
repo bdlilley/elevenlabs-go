@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteSampleRequest struct {
@@ -13,8 +12,6 @@ type DeleteSampleRequest struct {
 	VoiceID string `pathParam:"style=simple,explode=false,name=voice_id"`
 	// Sample ID to be used, you can use GET https://api.elevenlabs.io/v1/voices/{voice_id} to list all the available samples for a voice.
 	SampleID string `pathParam:"style=simple,explode=false,name=sample_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteSampleRequest) GetVoiceID() string {
@@ -29,13 +26,6 @@ func (d *DeleteSampleRequest) GetSampleID() string {
 		return ""
 	}
 	return d.SampleID
-}
-
-func (d *DeleteSampleRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteSampleResponse struct {

@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"io"
 )
 
@@ -13,8 +12,6 @@ type GetPronunciationDictionaryVersionPlsRequest struct {
 	DictionaryID string `pathParam:"style=simple,explode=false,name=dictionary_id"`
 	// The id of the pronunciation dictionary version
 	VersionID string `pathParam:"style=simple,explode=false,name=version_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetPronunciationDictionaryVersionPlsRequest) GetDictionaryID() string {
@@ -29,13 +26,6 @@ func (g *GetPronunciationDictionaryVersionPlsRequest) GetVersionID() string {
 		return ""
 	}
 	return g.VersionID
-}
-
-func (g *GetPronunciationDictionaryVersionPlsRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetPronunciationDictionaryVersionPlsResponse struct {

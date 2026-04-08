@@ -5,13 +5,10 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetEnvironmentVariableRequest struct {
 	EnvVarID string `pathParam:"style=simple,explode=false,name=env_var_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetEnvironmentVariableRequest) GetEnvVarID() string {
@@ -19,13 +16,6 @@ func (g *GetEnvironmentVariableRequest) GetEnvVarID() string {
 		return ""
 	}
 	return g.EnvVarID
-}
-
-func (g *GetEnvironmentVariableRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetEnvironmentVariableResponse struct {

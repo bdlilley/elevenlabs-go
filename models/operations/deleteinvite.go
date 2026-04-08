@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type DeleteInviteRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                       `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete `request:"mediaType=application/json"`
-}
-
-func (d *DeleteInviteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
-}
-
-func (d *DeleteInviteRequest) GetBody() components.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete {
-	if d == nil {
-		return components.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete{}
-	}
-	return d.Body
-}
 
 type DeleteInviteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

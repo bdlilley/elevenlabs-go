@@ -27,8 +27,6 @@ type GetToolsRouteRequest struct {
 	SortBy optionalnullable.OptionalNullable[components.ToolSortBy] `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
 	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetToolsRouteRequest) MarshalJSON() ([]byte, error) {
@@ -96,13 +94,6 @@ func (g *GetToolsRouteRequest) GetCursor() optionalnullable.OptionalNullable[str
 		return nil
 	}
 	return g.Cursor
-}
-
-func (g *GetToolsRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetToolsRouteResponse struct {

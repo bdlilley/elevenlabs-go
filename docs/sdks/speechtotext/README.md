@@ -33,7 +33,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -45,7 +44,7 @@ func main() {
         WebhookMetadata: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWebhookMetadataStr(
             "{\"user_id\": \"123\", \"session_id\": \"abc-def-ghi\"}",
         ))),
-    }, elevenlabsgo.Pointer(true), optionalnullable.From[string](nil))
+    }, elevenlabsgo.Pointer(true))
     if err != nil {
         log.Fatal(err)
     }
@@ -81,7 +80,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -93,7 +91,7 @@ func main() {
         WebhookMetadata: optionalnullable.From(elevenlabsgo.Pointer(components.CreateWebhookMetadataStr(
             "{\"user_id\": \"123\", \"session_id\": \"abc-def-ghi\"}",
         ))),
-    }, elevenlabsgo.Pointer(true), optionalnullable.From[string](nil))
+    }, elevenlabsgo.Pointer(true))
     if err != nil {
         log.Fatal(err)
     }
@@ -118,7 +116,6 @@ func main() {
 | `ctx`                                                                                                                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                       | The context to use for the request.                                                                                                                                                                                                      |
 | `body`                                                                                                                                                                                                                                   | [components.BodySpeechToTextV1SpeechToTextPost](../../models/components/bodyspeechtotextv1speechtotextpost.md)                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                      |
 | `enableLogging`                                                                                                                                                                                                                          | `*bool`                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                       | When enable_logging is set to false zero retention mode will be used for the request. This will mean log and transcript storage features are unavailable for this request. Zero retention mode may only be used by enterprise customers. |
-| `xiAPIKey`                                                                                                                                                                                                                               | optionalnullable.OptionalNullable[`string`]                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                       | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.                                                                                |
 | `opts`                                                                                                                                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                       | The options for this request.                                                                                                                                                                                                            |
 
 ### Response
@@ -145,7 +142,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
 )
@@ -154,11 +150,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.SpeechToText.GetTranscriptByID(ctx, "<id>", optionalnullable.From[string](nil))
+    res, err := s.SpeechToText.GetTranscriptByID(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -176,12 +171,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `transcriptionID`                                                                                                                                         | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The unique ID of the transcript to retrieve                                                                                                               |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `transcriptionID`                                        | `string`                                                 | :heavy_check_mark:                                       | The unique ID of the transcript to retrieve              |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -207,7 +201,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -215,11 +208,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.SpeechToText.DeleteTranscriptByID(ctx, "<id>", optionalnullable.From[string](nil))
+    res, err := s.SpeechToText.DeleteTranscriptByID(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -231,12 +223,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `transcriptionID`                                                                                                                                         | `string`                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The unique ID of the transcript to delete                                                                                                                 |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `transcriptionID`                                        | `string`                                                 | :heavy_check_mark:                                       | The unique ID of the transcript to delete                |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 

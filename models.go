@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -35,11 +34,7 @@ func newModels(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks *
 
 // GetModels - Get Models
 // Gets a list of available models.
-func (s *Models) GetModels(ctx context.Context, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetModelsResponse, error) {
-	request := operations.GetModelsRequest{
-		XiAPIKey: xiAPIKey,
-	}
-
+func (s *Models) GetModels(ctx context.Context, opts ...operations.Option) (*operations.GetModelsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -89,8 +84,6 @@ func (s *Models) GetModels(ctx context.Context, xiAPIKey optionalnullable.Option
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

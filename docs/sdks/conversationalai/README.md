@@ -22,7 +22,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -30,13 +29,12 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.ConversationalAI.CreateFolderRoute(ctx, components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost{
         Name: "<value>",
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -48,12 +46,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                 | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                     | :heavy_check_mark:                                                                                                                                        | The context to use for the request.                                                                                                                       |
-| `body`                                                                                                                                                    | [components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost](../../models/components/bodycreatefolderv1convaiknowledgebasefolderpost.md)                  | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
-| `xiAPIKey`                                                                                                                                                | optionalnullable.OptionalNullable[`string`]                                                                                                               | :heavy_minus_sign:                                                                                                                                        | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website. |
-| `opts`                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                        | The options for this request.                                                                                                                             |
+| Parameter                                                                                                                                | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                    | :heavy_check_mark:                                                                                                                       | The context to use for the request.                                                                                                      |
+| `request`                                                                                                                                | [components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost](../../models/components/bodycreatefolderv1convaiknowledgebasefolderpost.md) | :heavy_check_mark:                                                                                                                       | The request object to use for the request.                                                                                               |
+| `opts`                                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                                 | :heavy_minus_sign:                                                                                                                       | The options for this request.                                                                                                            |
 
 ### Response
 
@@ -79,7 +76,6 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -87,11 +83,10 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ConversationalAI.PostKnowledgeBaseMoveRoute(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), nil)
+    res, err := s.ConversationalAI.PostKnowledgeBaseMoveRoute(ctx, "21m00Tcm4TlvDq8ikWAM", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -107,7 +102,6 @@ func main() {
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                 | :heavy_check_mark:                                                                                                                                                    | The context to use for the request.                                                                                                                                   |                                                                                                                                                                       |
 | `documentID`                                                                                                                                                          | `string`                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                    | The id of a document from the knowledge base. This is returned on document addition.                                                                                  | 21m00Tcm4TlvDq8ikWAM                                                                                                                                                  |
-| `xiAPIKey`                                                                                                                                                            | optionalnullable.OptionalNullable[`string`]                                                                                                                           | :heavy_minus_sign:                                                                                                                                                    | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.             |                                                                                                                                                                       |
 | `body`                                                                                                                                                                | [*components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost](../../models/components/bodymoveentitytofolderv1convaiknowledgebasedocumentidmovepost.md) | :heavy_minus_sign:                                                                                                                                                    | N/A                                                                                                                                                                   |                                                                                                                                                                       |
 | `opts`                                                                                                                                                                | [][operations.Option](../../models/operations/option.md)                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | The options for this request.                                                                                                                                         |                                                                                                                                                                       |
 
@@ -136,7 +130,6 @@ import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"log"
 )
 
@@ -144,7 +137,6 @@ func main() {
     ctx := context.Background()
 
     s := elevenlabsgo.New(
-        "https://api.example.com",
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
@@ -153,7 +145,7 @@ func main() {
             "21m00Tcm4TlvDq8ikWAM",
             "31m00Tcm4TlvDq8ikWBM",
         },
-    }, optionalnullable.From[string](nil))
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -168,8 +160,7 @@ func main() {
 | Parameter                                                                                                                                                            | Type                                                                                                                                                                 | Required                                                                                                                                                             | Description                                                                                                                                                          |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                | :heavy_check_mark:                                                                                                                                                   | The context to use for the request.                                                                                                                                  |
-| `body`                                                                                                                                                               | [components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost](../../models/components/bodybulkmoveentitiestofolderv1convaiknowledgebasebulkmovepost.md) | :heavy_check_mark:                                                                                                                                                   | N/A                                                                                                                                                                  |
-| `xiAPIKey`                                                                                                                                                           | optionalnullable.OptionalNullable[`string`]                                                                                                                          | :heavy_minus_sign:                                                                                                                                                   | Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.            |
+| `request`                                                                                                                                                            | [components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost](../../models/components/bodybulkmoveentitiestofolderv1convaiknowledgebasebulkmovepost.md) | :heavy_check_mark:                                                                                                                                                   | The request object to use for the request.                                                                                                                           |
 | `opts`                                                                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                   | The options for this request.                                                                                                                                        |
 
 ### Response

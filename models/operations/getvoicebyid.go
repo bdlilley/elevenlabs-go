@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetVoiceByIDRequest struct {
@@ -15,8 +14,6 @@ type GetVoiceByIDRequest struct {
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	WithSettings *bool `default:"true" queryParam:"style=form,explode=true,name=with_settings"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetVoiceByIDRequest) MarshalJSON() ([]byte, error) {
@@ -42,13 +39,6 @@ func (g *GetVoiceByIDRequest) GetWithSettings() *bool {
 		return nil
 	}
 	return g.WithSettings
-}
-
-func (g *GetVoiceByIDRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetVoiceByIDResponse struct {

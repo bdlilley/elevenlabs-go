@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type ConvertProjectEndpointRequest struct {
 	// The ID of the Studio project.
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (c *ConvertProjectEndpointRequest) GetProjectID() string {
@@ -20,13 +17,6 @@ func (c *ConvertProjectEndpointRequest) GetProjectID() string {
 		return ""
 	}
 	return c.ProjectID
-}
-
-func (c *ConvertProjectEndpointRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
 }
 
 type ConvertProjectEndpointResponse struct {

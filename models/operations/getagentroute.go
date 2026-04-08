@@ -15,8 +15,6 @@ type GetAgentRouteRequest struct {
 	VersionID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=version_id"`
 	// The ID of the branch to use
 	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetAgentRouteRequest) GetAgentID() string {
@@ -38,13 +36,6 @@ func (g *GetAgentRouteRequest) GetBranchID() optionalnullable.OptionalNullable[s
 		return nil
 	}
 	return g.BranchID
-}
-
-func (g *GetAgentRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetAgentRouteResponse struct {

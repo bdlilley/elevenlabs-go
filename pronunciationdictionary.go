@@ -34,12 +34,7 @@ func newPronunciationDictionary(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfi
 
 // AddFromFile - Add A Pronunciation Dictionary
 // Creates a new pronunciation dictionary from a lexicon .PLS file
-func (s *PronunciationDictionary) AddFromFile(ctx context.Context, body components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddFromFileResponse, error) {
-	request := operations.AddFromFileRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *PronunciationDictionary) AddFromFile(ctx context.Context, request components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost, opts ...operations.Option) (*operations.AddFromFileResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -71,7 +66,7 @@ func (s *PronunciationDictionary) AddFromFile(ctx context.Context, body componen
 		OperationID:      "add_from_file",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +91,6 @@ func (s *PronunciationDictionary) AddFromFile(ctx context.Context, body componen
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -278,12 +271,7 @@ func (s *PronunciationDictionary) AddFromFile(ctx context.Context, body componen
 
 // AddFromRules - Add A Pronunciation Dictionary
 // Creates a new pronunciation dictionary from provided rules.
-func (s *PronunciationDictionary) AddFromRules(ctx context.Context, body components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddFromRulesResponse, error) {
-	request := operations.AddFromRulesRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *PronunciationDictionary) AddFromRules(ctx context.Context, request components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost, opts ...operations.Option) (*operations.AddFromRulesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -315,7 +303,7 @@ func (s *PronunciationDictionary) AddFromRules(ctx context.Context, body compone
 		OperationID:      "add_from_rules",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -340,8 +328,6 @@ func (s *PronunciationDictionary) AddFromRules(ctx context.Context, body compone
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -522,10 +508,9 @@ func (s *PronunciationDictionary) AddFromRules(ctx context.Context, body compone
 
 // GetPronunciationDictionaryMetadata - Get Metadata For A Pronunciation Dictionary
 // Get metadata for a pronunciation dictionary
-func (s *PronunciationDictionary) GetPronunciationDictionaryMetadata(ctx context.Context, pronunciationDictionaryID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPronunciationDictionaryMetadataResponse, error) {
+func (s *PronunciationDictionary) GetPronunciationDictionaryMetadata(ctx context.Context, pronunciationDictionaryID string, opts ...operations.Option) (*operations.GetPronunciationDictionaryMetadataResponse, error) {
 	request := operations.GetPronunciationDictionaryMetadataRequest{
 		PronunciationDictionaryID: pronunciationDictionaryID,
-		XiAPIKey:                  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -577,8 +562,6 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryMetadata(ctx context
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -759,10 +742,9 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryMetadata(ctx context
 
 // PatchPronunciationDictionary - Update Pronunciation Dictionary
 // Partially update the pronunciation dictionary without changing the version
-func (s *PronunciationDictionary) PatchPronunciationDictionary(ctx context.Context, pronunciationDictionaryID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDPatch, opts ...operations.Option) (*operations.PatchPronunciationDictionaryResponse, error) {
+func (s *PronunciationDictionary) PatchPronunciationDictionary(ctx context.Context, pronunciationDictionaryID string, body *components.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDPatch, opts ...operations.Option) (*operations.PatchPronunciationDictionaryResponse, error) {
 	request := operations.PatchPronunciationDictionaryRequest{
 		PronunciationDictionaryID: pronunciationDictionaryID,
-		XiAPIKey:                  xiAPIKey,
 		Body:                      body,
 	}
 
@@ -822,8 +804,6 @@ func (s *PronunciationDictionary) PatchPronunciationDictionary(ctx context.Conte
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1004,10 +984,9 @@ func (s *PronunciationDictionary) PatchPronunciationDictionary(ctx context.Conte
 
 // SetRules - Set Rules On The Pronunciation Dictionary
 // Replaces all existing rules on the pronunciation dictionary with the provided ones.
-func (s *PronunciationDictionary) SetRules(ctx context.Context, pronunciationDictionaryID string, body components.BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDSetRulesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.SetRulesResponse, error) {
+func (s *PronunciationDictionary) SetRules(ctx context.Context, pronunciationDictionaryID string, body components.BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDSetRulesPost, opts ...operations.Option) (*operations.SetRulesResponse, error) {
 	request := operations.SetRulesRequest{
 		PronunciationDictionaryID: pronunciationDictionaryID,
-		XiAPIKey:                  xiAPIKey,
 		Body:                      body,
 	}
 
@@ -1067,8 +1046,6 @@ func (s *PronunciationDictionary) SetRules(ctx context.Context, pronunciationDic
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1249,10 +1226,9 @@ func (s *PronunciationDictionary) SetRules(ctx context.Context, pronunciationDic
 
 // AddRules - Add Rules To The Pronunciation Dictionary
 // Add rules to the pronunciation dictionary. If a rule with the same string_to_replace already exists, it will be replaced.
-func (s *PronunciationDictionary) AddRules(ctx context.Context, pronunciationDictionaryID string, body components.BodyAddRulesToThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDAddRulesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddRulesResponse, error) {
+func (s *PronunciationDictionary) AddRules(ctx context.Context, pronunciationDictionaryID string, body components.BodyAddRulesToThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDAddRulesPost, opts ...operations.Option) (*operations.AddRulesResponse, error) {
 	request := operations.AddRulesRequest{
 		PronunciationDictionaryID: pronunciationDictionaryID,
-		XiAPIKey:                  xiAPIKey,
 		Body:                      body,
 	}
 
@@ -1312,8 +1288,6 @@ func (s *PronunciationDictionary) AddRules(ctx context.Context, pronunciationDic
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1494,10 +1468,9 @@ func (s *PronunciationDictionary) AddRules(ctx context.Context, pronunciationDic
 
 // RemoveRules - Remove Rules From The Pronunciation Dictionary
 // Remove rules from the pronunciation dictionary
-func (s *PronunciationDictionary) RemoveRules(ctx context.Context, pronunciationDictionaryID string, body components.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDRemoveRulesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RemoveRulesResponse, error) {
+func (s *PronunciationDictionary) RemoveRules(ctx context.Context, pronunciationDictionaryID string, body components.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDRemoveRulesPost, opts ...operations.Option) (*operations.RemoveRulesResponse, error) {
 	request := operations.RemoveRulesRequest{
 		PronunciationDictionaryID: pronunciationDictionaryID,
-		XiAPIKey:                  xiAPIKey,
 		Body:                      body,
 	}
 
@@ -1557,8 +1530,6 @@ func (s *PronunciationDictionary) RemoveRules(ctx context.Context, pronunciation
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1739,11 +1710,10 @@ func (s *PronunciationDictionary) RemoveRules(ctx context.Context, pronunciation
 
 // GetPronunciationDictionaryVersionPls - Get A Pls File With A Pronunciation Dictionary Version Rules
 // Get a PLS file with a pronunciation dictionary version rules
-func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx context.Context, dictionaryID string, versionID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPronunciationDictionaryVersionPlsResponse, error) {
+func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx context.Context, dictionaryID string, versionID string, opts ...operations.Option) (*operations.GetPronunciationDictionaryVersionPlsResponse, error) {
 	request := operations.GetPronunciationDictionaryVersionPlsRequest{
 		DictionaryID: dictionaryID,
 		VersionID:    versionID,
-		XiAPIKey:     xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1795,8 +1765,6 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx conte
 	}
 	req.Header.Set("Accept", "text/plain")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1971,7 +1939,14 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx conte
 
 // GetPronunciationDictionariesMetadata - Get Pronunciation Dictionaries
 // Get a list of the pronunciation dictionaries you have access to and their metadata
-func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx context.Context, request operations.GetPronunciationDictionariesMetadataRequest, opts ...operations.Option) (*operations.GetPronunciationDictionariesMetadataResponse, error) {
+func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx context.Context, cursor optionalnullable.OptionalNullable[string], pageSize *int64, sort optionalnullable.OptionalNullable[operations.Sort], sortDirection optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPronunciationDictionariesMetadataResponse, error) {
+	request := operations.GetPronunciationDictionariesMetadataRequest{
+		Cursor:        cursor,
+		PageSize:      pageSize,
+		Sort:          sort,
+		SortDirection: sortDirection,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2021,8 +1996,6 @@ func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx conte
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)

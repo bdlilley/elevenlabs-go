@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type AddPvcVoiceSamplesRequest struct {
 	// Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-	VoiceID string `pathParam:"style=simple,explode=false,name=voice_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                        `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyAddSamplesToPVCVoiceV1VoicesPVCVoiceIDSamplesPost `request:"mediaType=multipart/form-data"`
+	VoiceID string                                                           `pathParam:"style=simple,explode=false,name=voice_id"`
+	Body    components.BodyAddSamplesToPVCVoiceV1VoicesPVCVoiceIDSamplesPost `request:"mediaType=multipart/form-data"`
 }
 
 func (a *AddPvcVoiceSamplesRequest) GetVoiceID() string {
@@ -21,13 +18,6 @@ func (a *AddPvcVoiceSamplesRequest) GetVoiceID() string {
 		return ""
 	}
 	return a.VoiceID
-}
-
-func (a *AddPvcVoiceSamplesRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if a == nil {
-		return nil
-	}
-	return a.XiAPIKey
 }
 
 func (a *AddPvcVoiceSamplesRequest) GetBody() components.BodyAddSamplesToPVCVoiceV1VoicesPVCVoiceIDSamplesPost {

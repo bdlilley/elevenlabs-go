@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,12 +33,7 @@ func newPvcVoices(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hook
 
 // CreatePvcVoice - Create Pvc Voice
 // Creates a new PVC voice with metadata but no samples
-func (s *PvcVoices) CreatePvcVoice(ctx context.Context, body components.BodyCreatePVCVoiceV1VoicesPVCPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreatePvcVoiceResponse, error) {
-	request := operations.CreatePvcVoiceRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *PvcVoices) CreatePvcVoice(ctx context.Context, request components.BodyCreatePVCVoiceV1VoicesPVCPost, opts ...operations.Option) (*operations.CreatePvcVoiceResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -71,7 +65,7 @@ func (s *PvcVoices) CreatePvcVoice(ctx context.Context, body components.BodyCrea
 		OperationID:      "create_pvc_voice",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +90,6 @@ func (s *PvcVoices) CreatePvcVoice(ctx context.Context, body components.BodyCrea
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -278,11 +270,10 @@ func (s *PvcVoices) CreatePvcVoice(ctx context.Context, body components.BodyCrea
 
 // EditPvcVoice - Edit Pvc Voice
 // Edit PVC voice metadata
-func (s *PvcVoices) EditPvcVoice(ctx context.Context, voiceID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyEditPVCVoiceV1VoicesPVCVoiceIDPost, opts ...operations.Option) (*operations.EditPvcVoiceResponse, error) {
+func (s *PvcVoices) EditPvcVoice(ctx context.Context, voiceID string, body *components.BodyEditPVCVoiceV1VoicesPVCVoiceIDPost, opts ...operations.Option) (*operations.EditPvcVoiceResponse, error) {
 	request := operations.EditPvcVoiceRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		VoiceID: voiceID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -341,8 +332,6 @@ func (s *PvcVoices) EditPvcVoice(ctx context.Context, voiceID string, xiAPIKey o
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -523,11 +512,10 @@ func (s *PvcVoices) EditPvcVoice(ctx context.Context, voiceID string, xiAPIKey o
 
 // AddPvcVoiceSamples - Add Samples To Pvc Voice
 // Add audio samples to a PVC voice
-func (s *PvcVoices) AddPvcVoiceSamples(ctx context.Context, voiceID string, body components.BodyAddSamplesToPVCVoiceV1VoicesPVCVoiceIDSamplesPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AddPvcVoiceSamplesResponse, error) {
+func (s *PvcVoices) AddPvcVoiceSamples(ctx context.Context, voiceID string, body components.BodyAddSamplesToPVCVoiceV1VoicesPVCVoiceIDSamplesPost, opts ...operations.Option) (*operations.AddPvcVoiceSamplesResponse, error) {
 	request := operations.AddPvcVoiceSamplesRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		VoiceID: voiceID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -586,8 +574,6 @@ func (s *PvcVoices) AddPvcVoiceSamples(ctx context.Context, voiceID string, body
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -768,11 +754,10 @@ func (s *PvcVoices) AddPvcVoiceSamples(ctx context.Context, voiceID string, body
 
 // EditPvcVoiceSample - Update Pvc Voice Sample
 // Update a PVC voice sample - apply noise removal, select speaker, change trim times or file name.
-func (s *PvcVoices) EditPvcVoiceSample(ctx context.Context, voiceID string, sampleID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost, opts ...operations.Option) (*operations.EditPvcVoiceSampleResponse, error) {
+func (s *PvcVoices) EditPvcVoiceSample(ctx context.Context, voiceID string, sampleID string, body *components.BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost, opts ...operations.Option) (*operations.EditPvcVoiceSampleResponse, error) {
 	request := operations.EditPvcVoiceSampleRequest{
 		VoiceID:  voiceID,
 		SampleID: sampleID,
-		XiAPIKey: xiAPIKey,
 		Body:     body,
 	}
 
@@ -832,8 +817,6 @@ func (s *PvcVoices) EditPvcVoiceSample(ctx context.Context, voiceID string, samp
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1014,11 +997,10 @@ func (s *PvcVoices) EditPvcVoiceSample(ctx context.Context, voiceID string, samp
 
 // DeletePvcVoiceSample - Delete Pvc Voice Sample
 // Delete a sample from a PVC voice.
-func (s *PvcVoices) DeletePvcVoiceSample(ctx context.Context, voiceID string, sampleID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeletePvcVoiceSampleResponse, error) {
+func (s *PvcVoices) DeletePvcVoiceSample(ctx context.Context, voiceID string, sampleID string, opts ...operations.Option) (*operations.DeletePvcVoiceSampleResponse, error) {
 	request := operations.DeletePvcVoiceSampleRequest{
 		VoiceID:  voiceID,
 		SampleID: sampleID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1070,8 +1052,6 @@ func (s *PvcVoices) DeletePvcVoiceSample(ctx context.Context, voiceID string, sa
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1252,12 +1232,11 @@ func (s *PvcVoices) DeletePvcVoiceSample(ctx context.Context, voiceID string, sa
 
 // GetPvcSampleAudio - Retrieve Voice Sample Audio
 // Retrieve the first 30 seconds of voice sample audio with or without noise removal.
-func (s *PvcVoices) GetPvcSampleAudio(ctx context.Context, voiceID string, sampleID string, removeBackgroundNoise *bool, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPvcSampleAudioResponse, error) {
+func (s *PvcVoices) GetPvcSampleAudio(ctx context.Context, voiceID string, sampleID string, removeBackgroundNoise *bool, opts ...operations.Option) (*operations.GetPvcSampleAudioResponse, error) {
 	request := operations.GetPvcSampleAudioRequest{
 		VoiceID:               voiceID,
 		SampleID:              sampleID,
 		RemoveBackgroundNoise: removeBackgroundNoise,
-		XiAPIKey:              xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1309,8 +1288,6 @@ func (s *PvcVoices) GetPvcSampleAudio(ctx context.Context, voiceID string, sampl
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -1495,11 +1472,10 @@ func (s *PvcVoices) GetPvcSampleAudio(ctx context.Context, voiceID string, sampl
 
 // GetPvcSampleVisualWaveform - Retrieve Voice Sample Visual Waveform
 // Retrieve the visual waveform of a voice sample.
-func (s *PvcVoices) GetPvcSampleVisualWaveform(ctx context.Context, voiceID string, sampleID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPvcSampleVisualWaveformResponse, error) {
+func (s *PvcVoices) GetPvcSampleVisualWaveform(ctx context.Context, voiceID string, sampleID string, opts ...operations.Option) (*operations.GetPvcSampleVisualWaveformResponse, error) {
 	request := operations.GetPvcSampleVisualWaveformRequest{
 		VoiceID:  voiceID,
 		SampleID: sampleID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1551,8 +1527,6 @@ func (s *PvcVoices) GetPvcSampleVisualWaveform(ctx context.Context, voiceID stri
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1733,11 +1707,10 @@ func (s *PvcVoices) GetPvcSampleVisualWaveform(ctx context.Context, voiceID stri
 
 // GetPvcSampleSpeakers - Retrieve Speaker Separation Status
 // Retrieve the status of the speaker separation process and the list of detected speakers if complete.
-func (s *PvcVoices) GetPvcSampleSpeakers(ctx context.Context, voiceID string, sampleID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPvcSampleSpeakersResponse, error) {
+func (s *PvcVoices) GetPvcSampleSpeakers(ctx context.Context, voiceID string, sampleID string, opts ...operations.Option) (*operations.GetPvcSampleSpeakersResponse, error) {
 	request := operations.GetPvcSampleSpeakersRequest{
 		VoiceID:  voiceID,
 		SampleID: sampleID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -1789,8 +1762,6 @@ func (s *PvcVoices) GetPvcSampleSpeakers(ctx context.Context, voiceID string, sa
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1971,11 +1942,10 @@ func (s *PvcVoices) GetPvcSampleSpeakers(ctx context.Context, voiceID string, sa
 
 // StartSpeakerSeparation - Start Speaker Separation
 // Start speaker separation process for a sample
-func (s *PvcVoices) StartSpeakerSeparation(ctx context.Context, voiceID string, sampleID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.StartSpeakerSeparationResponse, error) {
+func (s *PvcVoices) StartSpeakerSeparation(ctx context.Context, voiceID string, sampleID string, opts ...operations.Option) (*operations.StartSpeakerSeparationResponse, error) {
 	request := operations.StartSpeakerSeparationRequest{
 		VoiceID:  voiceID,
 		SampleID: sampleID,
-		XiAPIKey: xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2027,8 +1997,6 @@ func (s *PvcVoices) StartSpeakerSeparation(ctx context.Context, voiceID string, 
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2209,12 +2177,11 @@ func (s *PvcVoices) StartSpeakerSeparation(ctx context.Context, voiceID string, 
 
 // GetSpeakerAudio - Retrieve Separated Speaker Audio
 // Retrieve the separated audio for a specific speaker.
-func (s *PvcVoices) GetSpeakerAudio(ctx context.Context, voiceID string, sampleID string, speakerID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSpeakerAudioResponse, error) {
+func (s *PvcVoices) GetSpeakerAudio(ctx context.Context, voiceID string, sampleID string, speakerID string, opts ...operations.Option) (*operations.GetSpeakerAudioResponse, error) {
 	request := operations.GetSpeakerAudioRequest{
 		VoiceID:   voiceID,
 		SampleID:  sampleID,
 		SpeakerID: speakerID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -2266,8 +2233,6 @@ func (s *PvcVoices) GetSpeakerAudio(ctx context.Context, voiceID string, sampleI
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2448,10 +2413,9 @@ func (s *PvcVoices) GetSpeakerAudio(ctx context.Context, voiceID string, sampleI
 
 // GetPvcVoiceCaptcha - Get Pvc Voice Captcha
 // Get captcha for PVC voice verification.
-func (s *PvcVoices) GetPvcVoiceCaptcha(ctx context.Context, voiceID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetPvcVoiceCaptchaResponse, error) {
+func (s *PvcVoices) GetPvcVoiceCaptcha(ctx context.Context, voiceID string, opts ...operations.Option) (*operations.GetPvcVoiceCaptchaResponse, error) {
 	request := operations.GetPvcVoiceCaptchaRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
+		VoiceID: voiceID,
 	}
 
 	o := operations.Options{}
@@ -2503,8 +2467,6 @@ func (s *PvcVoices) GetPvcVoiceCaptcha(ctx context.Context, voiceID string, xiAP
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2666,11 +2628,10 @@ func (s *PvcVoices) GetPvcVoiceCaptcha(ctx context.Context, voiceID string, xiAP
 
 // VerifyPvcVoiceCaptcha - Verify Pvc Voice Captcha
 // Submit captcha verification for PVC voice.
-func (s *PvcVoices) VerifyPvcVoiceCaptcha(ctx context.Context, voiceID string, body components.BodyVerifyPVCVoiceCaptchaV1VoicesPVCVoiceIDCaptchaPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.VerifyPvcVoiceCaptchaResponse, error) {
+func (s *PvcVoices) VerifyPvcVoiceCaptcha(ctx context.Context, voiceID string, body components.BodyVerifyPVCVoiceCaptchaV1VoicesPVCVoiceIDCaptchaPost, opts ...operations.Option) (*operations.VerifyPvcVoiceCaptchaResponse, error) {
 	request := operations.VerifyPvcVoiceCaptchaRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		VoiceID: voiceID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -2729,8 +2690,6 @@ func (s *PvcVoices) VerifyPvcVoiceCaptcha(ctx context.Context, voiceID string, b
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2911,11 +2870,10 @@ func (s *PvcVoices) VerifyPvcVoiceCaptcha(ctx context.Context, voiceID string, b
 
 // RunPvcVoiceTraining - Run Pvc Training
 // Start PVC training process for a voice.
-func (s *PvcVoices) RunPvcVoiceTraining(ctx context.Context, voiceID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyRunPVCTrainingV1VoicesPVCVoiceIDTrainPost, opts ...operations.Option) (*operations.RunPvcVoiceTrainingResponse, error) {
+func (s *PvcVoices) RunPvcVoiceTraining(ctx context.Context, voiceID string, body *components.BodyRunPVCTrainingV1VoicesPVCVoiceIDTrainPost, opts ...operations.Option) (*operations.RunPvcVoiceTrainingResponse, error) {
 	request := operations.RunPvcVoiceTrainingRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		VoiceID: voiceID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -2974,8 +2932,6 @@ func (s *PvcVoices) RunPvcVoiceTraining(ctx context.Context, voiceID string, xiA
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -3156,11 +3112,10 @@ func (s *PvcVoices) RunPvcVoiceTraining(ctx context.Context, voiceID string, xiA
 
 // RequestPvcManualVerification - Request Manual Verification
 // Request manual verification for a PVC voice.
-func (s *PvcVoices) RequestPvcManualVerification(ctx context.Context, voiceID string, body components.BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.RequestPvcManualVerificationResponse, error) {
+func (s *PvcVoices) RequestPvcManualVerification(ctx context.Context, voiceID string, body components.BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost, opts ...operations.Option) (*operations.RequestPvcManualVerificationResponse, error) {
 	request := operations.RequestPvcManualVerificationRequest{
-		VoiceID:  voiceID,
-		XiAPIKey: xiAPIKey,
-		Body:     body,
+		VoiceID: voiceID,
+		Body:    body,
 	}
 
 	o := operations.Options{}
@@ -3219,8 +3174,6 @@ func (s *PvcVoices) RequestPvcManualVerification(ctx context.Context, voiceID st
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

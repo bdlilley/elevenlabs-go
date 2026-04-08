@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type CreateAgentResponseTestRouteTestRequestType string
@@ -124,26 +123,6 @@ func (u CreateAgentResponseTestRouteTestRequest) MarshalJSON() ([]byte, error) {
 	}
 
 	return nil, errors.New("could not marshal union type CreateAgentResponseTestRouteTestRequest: all fields are null")
-}
-
-type CreateAgentResponseTestRouteRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     CreateAgentResponseTestRouteTestRequest   `request:"mediaType=application/json"`
-}
-
-func (c *CreateAgentResponseTestRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
-}
-
-func (c *CreateAgentResponseTestRouteRequest) GetBody() CreateAgentResponseTestRouteTestRequest {
-	if c == nil {
-		return CreateAgentResponseTestRouteTestRequest{}
-	}
-	return c.Body
 }
 
 type CreateAgentResponseTestRouteResponse struct {

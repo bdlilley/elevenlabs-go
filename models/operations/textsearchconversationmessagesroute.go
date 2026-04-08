@@ -84,8 +84,6 @@ type TextSearchConversationMessagesRouteRequest struct {
 	SortBy *components.MessageSearchSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
 	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (t TextSearchConversationMessagesRouteRequest) MarshalJSON() ([]byte, error) {
@@ -258,13 +256,6 @@ func (t *TextSearchConversationMessagesRouteRequest) GetCursor() optionalnullabl
 		return nil
 	}
 	return t.Cursor
-}
-
-func (t *TextSearchConversationMessagesRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if t == nil {
-		return nil
-	}
-	return t.XiAPIKey
 }
 
 type TextSearchConversationMessagesRouteResponse struct {

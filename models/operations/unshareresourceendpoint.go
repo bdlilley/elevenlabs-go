@@ -4,15 +4,12 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UnshareResourceEndpointRequest struct {
 	// The ID of the target resource.
-	ResourceID string `pathParam:"style=simple,explode=false,name=resource_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                        `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost `request:"mediaType=application/json"`
+	ResourceID string                                                                           `pathParam:"style=simple,explode=false,name=resource_id"`
+	Body       components.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost `request:"mediaType=application/json"`
 }
 
 func (u *UnshareResourceEndpointRequest) GetResourceID() string {
@@ -20,13 +17,6 @@ func (u *UnshareResourceEndpointRequest) GetResourceID() string {
 		return ""
 	}
 	return u.ResourceID
-}
-
-func (u *UnshareResourceEndpointRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UnshareResourceEndpointRequest) GetBody() components.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost {

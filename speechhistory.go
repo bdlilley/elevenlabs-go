@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -85,8 +84,6 @@ func (s *SpeechHistory) GetSpeechHistory(ctx context.Context, request operations
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -271,10 +268,9 @@ func (s *SpeechHistory) GetSpeechHistory(ctx context.Context, request operations
 
 // GetSpeechHistoryItemByID - Get History Item
 // Retrieves a history item.
-func (s *SpeechHistory) GetSpeechHistoryItemByID(ctx context.Context, historyItemID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetSpeechHistoryItemByIDResponse, error) {
+func (s *SpeechHistory) GetSpeechHistoryItemByID(ctx context.Context, historyItemID string, opts ...operations.Option) (*operations.GetSpeechHistoryItemByIDResponse, error) {
 	request := operations.GetSpeechHistoryItemByIDRequest{
 		HistoryItemID: historyItemID,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -326,8 +322,6 @@ func (s *SpeechHistory) GetSpeechHistoryItemByID(ctx context.Context, historyIte
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -508,10 +502,9 @@ func (s *SpeechHistory) GetSpeechHistoryItemByID(ctx context.Context, historyIte
 
 // DeleteSpeechHistoryItem - Delete History Item
 // Delete a history item by its ID
-func (s *SpeechHistory) DeleteSpeechHistoryItem(ctx context.Context, historyItemID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DeleteSpeechHistoryItemResponse, error) {
+func (s *SpeechHistory) DeleteSpeechHistoryItem(ctx context.Context, historyItemID string, opts ...operations.Option) (*operations.DeleteSpeechHistoryItemResponse, error) {
 	request := operations.DeleteSpeechHistoryItemRequest{
 		HistoryItemID: historyItemID,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -563,8 +556,6 @@ func (s *SpeechHistory) DeleteSpeechHistoryItem(ctx context.Context, historyItem
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -745,10 +736,9 @@ func (s *SpeechHistory) DeleteSpeechHistoryItem(ctx context.Context, historyItem
 
 // GetAudioFullFromSpeechHistoryItem - Get Audio From History Item
 // Returns the audio of an history item.
-func (s *SpeechHistory) GetAudioFullFromSpeechHistoryItem(ctx context.Context, historyItemID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAudioFullFromSpeechHistoryItemResponse, error) {
+func (s *SpeechHistory) GetAudioFullFromSpeechHistoryItem(ctx context.Context, historyItemID string, opts ...operations.Option) (*operations.GetAudioFullFromSpeechHistoryItemResponse, error) {
 	request := operations.GetAudioFullFromSpeechHistoryItemRequest{
 		HistoryItemID: historyItemID,
-		XiAPIKey:      xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -800,8 +790,6 @@ func (s *SpeechHistory) GetAudioFullFromSpeechHistoryItem(ctx context.Context, h
 	}
 	req.Header.Set("Accept", "audio/mpeg")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -974,12 +962,7 @@ func (s *SpeechHistory) GetAudioFullFromSpeechHistoryItem(ctx context.Context, h
 
 // DownloadSpeechHistoryItems - Download History Items
 // Download one or more history items. If one history item ID is provided, we will return a single audio file. If more than one history item IDs are provided, we will provide the history items packed into a .zip file.
-func (s *SpeechHistory) DownloadSpeechHistoryItems(ctx context.Context, body components.BodyDownloadHistoryItemsV1HistoryDownloadPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.DownloadSpeechHistoryItemsResponse, error) {
-	request := operations.DownloadSpeechHistoryItemsRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *SpeechHistory) DownloadSpeechHistoryItems(ctx context.Context, request components.BodyDownloadHistoryItemsV1HistoryDownloadPost, opts ...operations.Option) (*operations.DownloadSpeechHistoryItemsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1011,7 +994,7 @@ func (s *SpeechHistory) DownloadSpeechHistoryItems(ctx context.Context, body com
 		OperationID:      "download_speech_history_items",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -1036,8 +1019,6 @@ func (s *SpeechHistory) DownloadSpeechHistoryItems(ctx context.Context, body com
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

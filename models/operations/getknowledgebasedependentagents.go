@@ -17,8 +17,6 @@ type GetKnowledgeBaseDependentAgentsRequest struct {
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Used for fetching next page. Cursor is returned in the response.
 	Cursor optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=cursor"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetKnowledgeBaseDependentAgentsRequest) MarshalJSON() ([]byte, error) {
@@ -58,13 +56,6 @@ func (g *GetKnowledgeBaseDependentAgentsRequest) GetCursor() optionalnullable.Op
 		return nil
 	}
 	return g.Cursor
-}
-
-func (g *GetKnowledgeBaseDependentAgentsRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetKnowledgeBaseDependentAgentsResponse struct {

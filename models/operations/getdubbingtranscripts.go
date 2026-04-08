@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 // GetDubbingTranscriptsFormatType - Format to return transcript in. For subtitles use either 'srt' or 'webvtt', and for a full transcript use 'json'. The 'json' format is not yet supported for Dubbing Studio.
@@ -47,8 +46,6 @@ type GetDubbingTranscriptsRequest struct {
 	LanguageCode string `pathParam:"style=simple,explode=false,name=language_code"`
 	// Format to return transcript in. For subtitles use either 'srt' or 'webvtt', and for a full transcript use 'json'. The 'json' format is not yet supported for Dubbing Studio.
 	FormatType GetDubbingTranscriptsFormatType `pathParam:"style=simple,explode=false,name=format_type"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetDubbingTranscriptsRequest) GetDubbingID() string {
@@ -70,13 +67,6 @@ func (g *GetDubbingTranscriptsRequest) GetFormatType() GetDubbingTranscriptsForm
 		return GetDubbingTranscriptsFormatType("")
 	}
 	return g.FormatType
-}
-
-func (g *GetDubbingTranscriptsRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetDubbingTranscriptsResponse struct {

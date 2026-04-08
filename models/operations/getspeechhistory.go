@@ -83,8 +83,6 @@ type GetSpeechHistoryRequest struct {
 	Search optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=search"`
 	// Source of the generated history item
 	Source optionalnullable.OptionalNullable[Source] `queryParam:"style=form,explode=true,name=source"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetSpeechHistoryRequest) MarshalJSON() ([]byte, error) {
@@ -159,13 +157,6 @@ func (g *GetSpeechHistoryRequest) GetSource() optionalnullable.OptionalNullable[
 		return nil
 	}
 	return g.Source
-}
-
-func (g *GetSpeechHistoryRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetSpeechHistoryResponse struct {

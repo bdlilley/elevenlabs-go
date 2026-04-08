@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteSegmentRequest struct {
@@ -13,8 +12,6 @@ type DeleteSegmentRequest struct {
 	DubbingID string `pathParam:"style=simple,explode=false,name=dubbing_id"`
 	// ID of the segment
 	SegmentID string `pathParam:"style=simple,explode=false,name=segment_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteSegmentRequest) GetDubbingID() string {
@@ -29,13 +26,6 @@ func (d *DeleteSegmentRequest) GetSegmentID() string {
 		return ""
 	}
 	return d.SegmentID
-}
-
-func (d *DeleteSegmentRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteSegmentResponse struct {

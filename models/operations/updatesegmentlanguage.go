@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdateSegmentLanguageRequest struct {
@@ -14,10 +13,8 @@ type UpdateSegmentLanguageRequest struct {
 	// ID of the segment
 	SegmentID string `pathParam:"style=simple,explode=false,name=segment_id"`
 	// ID of the language.
-	Language string `pathParam:"style=simple,explode=false,name=language"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.SegmentUpdatePayload           `request:"mediaType=application/json"`
+	Language string                          `pathParam:"style=simple,explode=false,name=language"`
+	Body     components.SegmentUpdatePayload `request:"mediaType=application/json"`
 }
 
 func (u *UpdateSegmentLanguageRequest) GetDubbingID() string {
@@ -39,13 +36,6 @@ func (u *UpdateSegmentLanguageRequest) GetLanguage() string {
 		return ""
 	}
 	return u.Language
-}
-
-func (u *UpdateSegmentLanguageRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdateSegmentLanguageRequest) GetBody() components.SegmentUpdatePayload {

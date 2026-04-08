@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type RemoveMcpServerToolApprovalRouteRequest struct {
@@ -13,8 +12,6 @@ type RemoveMcpServerToolApprovalRouteRequest struct {
 	McpServerID string `pathParam:"style=simple,explode=false,name=mcp_server_id"`
 	// Name of the MCP tool to remove approval for.
 	ToolName string `pathParam:"style=simple,explode=false,name=tool_name"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (r *RemoveMcpServerToolApprovalRouteRequest) GetMcpServerID() string {
@@ -29,13 +26,6 @@ func (r *RemoveMcpServerToolApprovalRouteRequest) GetToolName() string {
 		return ""
 	}
 	return r.ToolName
-}
-
-func (r *RemoveMcpServerToolApprovalRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XiAPIKey
 }
 
 type RemoveMcpServerToolApprovalRouteResponse struct {

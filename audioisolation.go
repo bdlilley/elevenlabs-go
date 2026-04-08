@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,12 +33,7 @@ func newAudioIsolation(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration,
 
 // AudioIsolation - Audio Isolation
 // Removes background noise from audio
-func (s *AudioIsolation) AudioIsolation(ctx context.Context, body components.BodyAudioIsolationV1AudioIsolationPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AudioIsolationResponse, error) {
-	request := operations.AudioIsolationRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AudioIsolation) AudioIsolation(ctx context.Context, request components.BodyAudioIsolationV1AudioIsolationPost, opts ...operations.Option) (*operations.AudioIsolationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -71,7 +65,7 @@ func (s *AudioIsolation) AudioIsolation(ctx context.Context, body components.Bod
 		OperationID:      "audio_isolation",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +90,6 @@ func (s *AudioIsolation) AudioIsolation(ctx context.Context, body components.Bod
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -259,12 +251,7 @@ func (s *AudioIsolation) AudioIsolation(ctx context.Context, body components.Bod
 
 // AudioIsolationStream - Audio Isolation Stream
 // Removes background noise from audio and streams the result
-func (s *AudioIsolation) AudioIsolationStream(ctx context.Context, body components.BodyAudioIsolationStreamV1AudioIsolationStreamPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AudioIsolationStreamResponse, error) {
-	request := operations.AudioIsolationStreamRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AudioIsolation) AudioIsolationStream(ctx context.Context, request components.BodyAudioIsolationStreamV1AudioIsolationStreamPost, opts ...operations.Option) (*operations.AudioIsolationStreamResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -296,7 +283,7 @@ func (s *AudioIsolation) AudioIsolationStream(ctx context.Context, body componen
 		OperationID:      "audio_isolation_stream",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -321,8 +308,6 @@ func (s *AudioIsolation) AudioIsolationStream(ctx context.Context, body componen
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

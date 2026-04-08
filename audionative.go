@@ -12,7 +12,6 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/apierrors"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"net/url"
@@ -34,12 +33,7 @@ func newAudioNative(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, ho
 
 // CreateAudioNativeProject - Creates Audio Native Enabled Project.
 // Creates Audio Native enabled project, optionally starts conversion and returns project ID and embeddable HTML snippet.
-func (s *AudioNative) CreateAudioNativeProject(ctx context.Context, body components.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.CreateAudioNativeProjectResponse, error) {
-	request := operations.CreateAudioNativeProjectRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AudioNative) CreateAudioNativeProject(ctx context.Context, request components.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost, opts ...operations.Option) (*operations.CreateAudioNativeProjectResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -71,7 +65,7 @@ func (s *AudioNative) CreateAudioNativeProject(ctx context.Context, body compone
 		OperationID:      "create_audio_native_project",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}
@@ -96,8 +90,6 @@ func (s *AudioNative) CreateAudioNativeProject(ctx context.Context, body compone
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -278,10 +270,9 @@ func (s *AudioNative) CreateAudioNativeProject(ctx context.Context, body compone
 
 // GetAudioNativeProjectSettingsEndpoint - Get Audio Native Project Settings
 // Get player settings for the specific project.
-func (s *AudioNative) GetAudioNativeProjectSettingsEndpoint(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.GetAudioNativeProjectSettingsEndpointResponse, error) {
+func (s *AudioNative) GetAudioNativeProjectSettingsEndpoint(ctx context.Context, projectID string, opts ...operations.Option) (*operations.GetAudioNativeProjectSettingsEndpointResponse, error) {
 	request := operations.GetAudioNativeProjectSettingsEndpointRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 	}
 
 	o := operations.Options{}
@@ -333,8 +324,6 @@ func (s *AudioNative) GetAudioNativeProjectSettingsEndpoint(ctx context.Context,
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -515,10 +504,9 @@ func (s *AudioNative) GetAudioNativeProjectSettingsEndpoint(ctx context.Context,
 
 // AudioNativeProjectUpdateContentEndpoint - Update Audio-Native Project Content
 // Updates content for the specific AudioNative Project.
-func (s *AudioNative) AudioNativeProjectUpdateContentEndpoint(ctx context.Context, projectID string, xiAPIKey optionalnullable.OptionalNullable[string], body *components.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIDContentPost, opts ...operations.Option) (*operations.AudioNativeProjectUpdateContentEndpointResponse, error) {
+func (s *AudioNative) AudioNativeProjectUpdateContentEndpoint(ctx context.Context, projectID string, body *components.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIDContentPost, opts ...operations.Option) (*operations.AudioNativeProjectUpdateContentEndpointResponse, error) {
 	request := operations.AudioNativeProjectUpdateContentEndpointRequest{
 		ProjectID: projectID,
-		XiAPIKey:  xiAPIKey,
 		Body:      body,
 	}
 
@@ -578,8 +566,6 @@ func (s *AudioNative) AudioNativeProjectUpdateContentEndpoint(ctx context.Contex
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -760,12 +746,7 @@ func (s *AudioNative) AudioNativeProjectUpdateContentEndpoint(ctx context.Contex
 
 // AudioNativeUpdateContentFromURL - Update Audio-Native Content From Url
 // Finds an AudioNative project matching the provided URL, extracts content from the URL, updates the project content, and queues it for conversion and auto-publishing.
-func (s *AudioNative) AudioNativeUpdateContentFromURL(ctx context.Context, body components.BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost, xiAPIKey optionalnullable.OptionalNullable[string], opts ...operations.Option) (*operations.AudioNativeUpdateContentFromURLResponse, error) {
-	request := operations.AudioNativeUpdateContentFromURLRequest{
-		XiAPIKey: xiAPIKey,
-		Body:     body,
-	}
-
+func (s *AudioNative) AudioNativeUpdateContentFromURL(ctx context.Context, request components.BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost, opts ...operations.Option) (*operations.AudioNativeUpdateContentFromURLResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -797,7 +778,7 @@ func (s *AudioNative) AudioNativeUpdateContentFromURL(ctx context.Context, body 
 		OperationID:      "audio_native_update_content_from_url",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -822,8 +803,6 @@ func (s *AudioNative) AudioNativeUpdateContentFromURL(ctx context.Context, body 
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
 	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

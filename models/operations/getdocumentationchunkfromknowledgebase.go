@@ -15,8 +15,6 @@ type GetDocumentationChunkFromKnowledgeBaseRequest struct {
 	ChunkID string `pathParam:"style=simple,explode=false,name=chunk_id"`
 	// The embedding model used to retrieve the chunk.
 	EmbeddingModel optionalnullable.OptionalNullable[components.EmbeddingModelEnum] `default:"e5_mistral_7b_instruct" queryParam:"style=form,explode=true,name=embedding_model"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetDocumentationChunkFromKnowledgeBaseRequest) MarshalJSON() ([]byte, error) {
@@ -49,13 +47,6 @@ func (g *GetDocumentationChunkFromKnowledgeBaseRequest) GetEmbeddingModel() opti
 		return nil
 	}
 	return g.EmbeddingModel
-}
-
-func (g *GetDocumentationChunkFromKnowledgeBaseRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetDocumentationChunkFromKnowledgeBaseResponse struct {

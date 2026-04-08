@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DuplicateAgentRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
-	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                        `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost `request:"mediaType=application/json"`
+	AgentID string                                                           `pathParam:"style=simple,explode=false,name=agent_id"`
+	Body    *components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost `request:"mediaType=application/json"`
 }
 
 func (d DuplicateAgentRouteRequest) MarshalJSON() ([]byte, error) {
@@ -32,13 +29,6 @@ func (d *DuplicateAgentRouteRequest) GetAgentID() string {
 		return ""
 	}
 	return d.AgentID
-}
-
-func (d *DuplicateAgentRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 func (d *DuplicateAgentRouteRequest) GetBody() *components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost {

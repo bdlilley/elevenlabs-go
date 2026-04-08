@@ -112,8 +112,6 @@ type ListDubsRequest struct {
 	orderBy *string `const:"created_at" queryParam:"style=form,explode=true,name=order_by"`
 	// The order direction to use for results from this query.
 	OrderDirection *OrderDirection `default:"DESCENDING" queryParam:"style=form,explode=true,name=order_direction"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (l ListDubsRequest) MarshalJSON() ([]byte, error) {
@@ -164,13 +162,6 @@ func (l *ListDubsRequest) GetOrderDirection() *OrderDirection {
 		return nil
 	}
 	return l.OrderDirection
-}
-
-func (l *ListDubsRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if l == nil {
-		return nil
-	}
-	return l.XiAPIKey
 }
 
 type ListDubsResponse struct {

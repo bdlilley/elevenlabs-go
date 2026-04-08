@@ -5,28 +5,7 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type GetAgentResponseTestsSummariesRouteRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.ListTestsByIdsRequestModel     `request:"mediaType=application/json"`
-}
-
-func (g *GetAgentResponseTestsSummariesRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
-}
-
-func (g *GetAgentResponseTestsSummariesRouteRequest) GetBody() components.ListTestsByIdsRequestModel {
-	if g == nil {
-		return components.ListTestsByIdsRequestModel{}
-	}
-	return g.Body
-}
 
 type GetAgentResponseTestsSummariesRouteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

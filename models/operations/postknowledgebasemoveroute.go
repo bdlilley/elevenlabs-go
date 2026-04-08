@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PostKnowledgeBaseMoveRouteRequest struct {
 	// The id of a document from the knowledge base. This is returned on document addition.
-	DocumentID string `pathParam:"style=simple,explode=false,name=document_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                 `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost `request:"mediaType=application/json"`
+	DocumentID string                                                                    `pathParam:"style=simple,explode=false,name=document_id"`
+	Body       *components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost `request:"mediaType=application/json"`
 }
 
 func (p PostKnowledgeBaseMoveRouteRequest) MarshalJSON() ([]byte, error) {
@@ -32,13 +29,6 @@ func (p *PostKnowledgeBaseMoveRouteRequest) GetDocumentID() string {
 		return ""
 	}
 	return p.DocumentID
-}
-
-func (p *PostKnowledgeBaseMoveRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.XiAPIKey
 }
 
 func (p *PostKnowledgeBaseMoveRouteRequest) GetBody() *components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost {

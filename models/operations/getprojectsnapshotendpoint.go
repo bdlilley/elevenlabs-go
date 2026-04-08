@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetProjectSnapshotEndpointRequest struct {
@@ -13,8 +12,6 @@ type GetProjectSnapshotEndpointRequest struct {
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
 	// The ID of the Studio project snapshot.
 	ProjectSnapshotID string `pathParam:"style=simple,explode=false,name=project_snapshot_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetProjectSnapshotEndpointRequest) GetProjectID() string {
@@ -29,13 +26,6 @@ func (g *GetProjectSnapshotEndpointRequest) GetProjectSnapshotID() string {
 		return ""
 	}
 	return g.ProjectSnapshotID
-}
-
-func (g *GetProjectSnapshotEndpointRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetProjectSnapshotEndpointResponse struct {

@@ -10,10 +10,8 @@ import (
 
 type CreatePodcastRequest struct {
 	// Used for moderation. Your workspace must be allowlisted to use this feature.
-	SafetyIdentifier optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=safety-identifier"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]        `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyCreatePodcastV1StudioPodcastsPost `request:"mediaType=application/json"`
+	SafetyIdentifier optionalnullable.OptionalNullable[string]        `header:"style=simple,explode=false,name=safety-identifier"`
+	Body             components.BodyCreatePodcastV1StudioPodcastsPost `request:"mediaType=application/json"`
 }
 
 func (c *CreatePodcastRequest) GetSafetyIdentifier() optionalnullable.OptionalNullable[string] {
@@ -21,13 +19,6 @@ func (c *CreatePodcastRequest) GetSafetyIdentifier() optionalnullable.OptionalNu
 		return nil
 	}
 	return c.SafetyIdentifier
-}
-
-func (c *CreatePodcastRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XiAPIKey
 }
 
 func (c *CreatePodcastRequest) GetBody() components.BodyCreatePodcastV1StudioPodcastsPost {

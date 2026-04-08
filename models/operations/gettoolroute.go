@@ -5,14 +5,11 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetToolRouteRequest struct {
 	// ID of the requested tool.
 	ToolID string `pathParam:"style=simple,explode=false,name=tool_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetToolRouteRequest) GetToolID() string {
@@ -20,13 +17,6 @@ func (g *GetToolRouteRequest) GetToolID() string {
 		return ""
 	}
 	return g.ToolID
-}
-
-func (g *GetToolRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetToolRouteResponse struct {

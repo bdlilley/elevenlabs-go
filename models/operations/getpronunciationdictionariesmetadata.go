@@ -46,8 +46,6 @@ type GetPronunciationDictionariesMetadataRequest struct {
 	Sort optionalnullable.OptionalNullable[Sort] `queryParam:"style=form,explode=true,name=sort"`
 	// Which direction to sort the voices in. 'ascending' or 'descending'.
 	SortDirection optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=sort_direction"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetPronunciationDictionariesMetadataRequest) MarshalJSON() ([]byte, error) {
@@ -87,13 +85,6 @@ func (g *GetPronunciationDictionariesMetadataRequest) GetSortDirection() optiona
 		return nil
 	}
 	return g.SortDirection
-}
-
-func (g *GetPronunciationDictionariesMetadataRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetPronunciationDictionariesMetadataResponse struct {

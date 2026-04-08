@@ -4,28 +4,7 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
-
-type RegisterTwilioCallRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                      `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost `request:"mediaType=application/json"`
-}
-
-func (r *RegisterTwilioCallRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XiAPIKey
-}
-
-func (r *RegisterTwilioCallRequest) GetBody() components.BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost {
-	if r == nil {
-		return components.BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost{}
-	}
-	return r.Body
-}
 
 type RegisterTwilioCallResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

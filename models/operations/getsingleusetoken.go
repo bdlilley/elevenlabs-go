@@ -5,13 +5,10 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type GetSingleUseTokenRequest struct {
 	TokenType components.SingleUseTokenType `pathParam:"style=simple,explode=false,name=token_type"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g *GetSingleUseTokenRequest) GetTokenType() components.SingleUseTokenType {
@@ -19,13 +16,6 @@ func (g *GetSingleUseTokenRequest) GetTokenType() components.SingleUseTokenType 
 		return components.SingleUseTokenType("")
 	}
 	return g.TokenType
-}
-
-func (g *GetSingleUseTokenRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetSingleUseTokenResponse struct {

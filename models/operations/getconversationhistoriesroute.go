@@ -84,8 +84,6 @@ type GetConversationHistoriesRouteRequest struct {
 	ConversationInitiationSource optionalnullable.OptionalNullable[components.ConversationInitiationSource] `default:"unknown" queryParam:"style=form,explode=true,name=conversation_initiation_source"`
 	// Filter conversations by branch ID.
 	BranchID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=branch_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (g GetConversationHistoriesRouteRequest) MarshalJSON() ([]byte, error) {
@@ -251,13 +249,6 @@ func (g *GetConversationHistoriesRouteRequest) GetBranchID() optionalnullable.Op
 		return nil
 	}
 	return g.BranchID
-}
-
-func (g *GetConversationHistoriesRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XiAPIKey
 }
 
 type GetConversationHistoriesRouteResponse struct {

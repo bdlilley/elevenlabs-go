@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type PostAgentAvatarRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
-	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                     `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyPostAgentAvatarV1ConvaiAgentsAgentIDAvatarPost `request:"mediaType=multipart/form-data"`
+	AgentID string                                                        `pathParam:"style=simple,explode=false,name=agent_id"`
+	Body    components.BodyPostAgentAvatarV1ConvaiAgentsAgentIDAvatarPost `request:"mediaType=multipart/form-data"`
 }
 
 func (p *PostAgentAvatarRouteRequest) GetAgentID() string {
@@ -21,13 +18,6 @@ func (p *PostAgentAvatarRouteRequest) GetAgentID() string {
 		return ""
 	}
 	return p.AgentID
-}
-
-func (p *PostAgentAvatarRouteRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if p == nil {
-		return nil
-	}
-	return p.XiAPIKey
 }
 
 func (p *PostAgentAvatarRouteRequest) GetBody() components.BodyPostAgentAvatarV1ConvaiAgentsAgentIDAvatarPost {

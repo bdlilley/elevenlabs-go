@@ -5,7 +5,6 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type MergeBranchIntoTargetRequest struct {
@@ -14,10 +13,8 @@ type MergeBranchIntoTargetRequest struct {
 	// Unique identifier for the source branch to merge from.
 	SourceBranchID string `pathParam:"style=simple,explode=false,name=source_branch_id"`
 	// The ID of the target branch to merge into.
-	TargetBranchID string `queryParam:"style=form,explode=true,name=target_branch_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                                                         `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     *components.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIDBranchesSourceBranchIDMergePost `request:"mediaType=application/json"`
+	TargetBranchID string                                                                                            `queryParam:"style=form,explode=true,name=target_branch_id"`
+	Body           *components.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIDBranchesSourceBranchIDMergePost `request:"mediaType=application/json"`
 }
 
 func (m MergeBranchIntoTargetRequest) MarshalJSON() ([]byte, error) {
@@ -50,13 +47,6 @@ func (m *MergeBranchIntoTargetRequest) GetTargetBranchID() string {
 		return ""
 	}
 	return m.TargetBranchID
-}
-
-func (m *MergeBranchIntoTargetRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if m == nil {
-		return nil
-	}
-	return m.XiAPIKey
 }
 
 func (m *MergeBranchIntoTargetRequest) GetBody() *components.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIDBranchesSourceBranchIDMergePost {

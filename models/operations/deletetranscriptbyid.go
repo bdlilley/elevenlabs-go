@@ -4,14 +4,11 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type DeleteTranscriptByIDRequest struct {
 	// The unique ID of the transcript to delete
 	TranscriptionID string `pathParam:"style=simple,explode=false,name=transcription_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
 }
 
 func (d *DeleteTranscriptByIDRequest) GetTranscriptionID() string {
@@ -19,13 +16,6 @@ func (d *DeleteTranscriptByIDRequest) GetTranscriptionID() string {
 		return ""
 	}
 	return d.TranscriptionID
-}
-
-func (d *DeleteTranscriptByIDRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
 }
 
 type DeleteTranscriptByIDResponse struct {

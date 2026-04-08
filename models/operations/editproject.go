@@ -5,15 +5,12 @@ package operations
 import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type EditProjectRequest struct {
 	// The ID of the Studio project.
-	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                       `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyUpdateStudioProjectV1StudioProjectsProjectIDPost `request:"mediaType=application/json"`
+	ProjectID string                                                          `pathParam:"style=simple,explode=false,name=project_id"`
+	Body      components.BodyUpdateStudioProjectV1StudioProjectsProjectIDPost `request:"mediaType=application/json"`
 }
 
 func (e *EditProjectRequest) GetProjectID() string {
@@ -21,13 +18,6 @@ func (e *EditProjectRequest) GetProjectID() string {
 		return ""
 	}
 	return e.ProjectID
-}
-
-func (e *EditProjectRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if e == nil {
-		return nil
-	}
-	return e.XiAPIKey
 }
 
 func (e *EditProjectRequest) GetBody() components.BodyUpdateStudioProjectV1StudioProjectsProjectIDPost {

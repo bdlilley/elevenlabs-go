@@ -4,29 +4,8 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 	"io"
 )
-
-type DownloadSpeechHistoryItemsRequest struct {
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string]                `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.BodyDownloadHistoryItemsV1HistoryDownloadPost `request:"mediaType=application/json"`
-}
-
-func (d *DownloadSpeechHistoryItemsRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if d == nil {
-		return nil
-	}
-	return d.XiAPIKey
-}
-
-func (d *DownloadSpeechHistoryItemsRequest) GetBody() components.BodyDownloadHistoryItemsV1HistoryDownloadPost {
-	if d == nil {
-		return components.BodyDownloadHistoryItemsV1HistoryDownloadPost{}
-	}
-	return d.Body
-}
 
 type DownloadSpeechHistoryItemsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`

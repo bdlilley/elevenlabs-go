@@ -4,14 +4,11 @@ package operations
 
 import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/optionalnullable"
 )
 
 type UpdateWhatsappAccountRequest struct {
-	PhoneNumberID string `pathParam:"style=simple,explode=false,name=phone_number_id"`
-	// Your API key. This is required by most endpoints to access our API programmatically. You can view your xi-api-key using the 'Profile' tab on the website.
-	XiAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=xi-api-key"`
-	Body     components.UpdateWhatsAppAccountRequest   `request:"mediaType=application/json"`
+	PhoneNumberID string                                  `pathParam:"style=simple,explode=false,name=phone_number_id"`
+	Body          components.UpdateWhatsAppAccountRequest `request:"mediaType=application/json"`
 }
 
 func (u *UpdateWhatsappAccountRequest) GetPhoneNumberID() string {
@@ -19,13 +16,6 @@ func (u *UpdateWhatsappAccountRequest) GetPhoneNumberID() string {
 		return ""
 	}
 	return u.PhoneNumberID
-}
-
-func (u *UpdateWhatsappAccountRequest) GetXiAPIKey() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XiAPIKey
 }
 
 func (u *UpdateWhatsappAccountRequest) GetBody() components.UpdateWhatsAppAccountRequest {
