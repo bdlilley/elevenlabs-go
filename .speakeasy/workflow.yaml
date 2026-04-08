@@ -1,6 +1,9 @@
 workflowVersion: 1.0.0
+speakeasyVersion: latest
 sources:
     elevenlabs-go:
         inputs:
             - location: https://api.elevenlabs.io/openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/kudos/elevenlabs-go/elevenlabs-go
 targets: {}
