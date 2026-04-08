@@ -1,7 +1,7 @@
 configVersion: 2.0.0
 generation:
   apiName: elevenlabs-go
-  sdkClassName: SDK
+  sdkClassName: elevenlabs-go 
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
