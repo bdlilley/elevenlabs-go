@@ -5,12 +5,12 @@ management:
   docVersion: "1.0"
   speakeasyVersion: 1.761.1
   generationVersion: 2.879.6
-  releaseVersion: 0.0.3
-  configChecksum: 7ad96ec96893deb9828d1fc2eb6e7e2c
+  releaseVersion: 0.0.4
+  configChecksum: 24b13a520954b2f155a7d51a23a56bc5
 persistentEdits:
-  generation_id: 5d2a0332-6639-4e8c-b40a-df262e0d5cc9
-  pristine_commit_hash: 7915d055e1f3f7f02e46c4baa8d237bacdde847d
-  pristine_tree_hash: 336d3949e56668e0d80bbb56f876f72af072ec08
+  generation_id: 1eafc64a-c7f1-49b9-af6b-a1437ca38a41
+  pristine_commit_hash: f8d8dd132e3d7298849e2479ecf8802ace1201ce
+  pristine_tree_hash: e446293935b7b83b8449a1fde90be2336cd46f8e
 features:
   go:
     acceptHeaders: 2.81.2
@@ -7931,8 +7931,8 @@ trackedFiles:
     pristine_git_object: 90bd79a0224946ed3020db2c4af2785724d8b0ba
   elevenlabsgo.go:
     id: b4556aeb4759
-    last_write_checksum: sha1:ae86bf5b6ee376657125744cb993044100706024
-    pristine_git_object: 20faad584a787c6bd2a62a088cb3be38babcd24f
+    last_write_checksum: sha1:f34ec900f9549fdc5c6d621bee612fa01f80626b
+    pristine_git_object: f5ec7fb64d9f9982b4d5a209f8b0b60f267ab4bd
   enterprise.go:
     id: 4d99e07227a2
     last_write_checksum: sha1:cf99b02040d22c66ad39a059bdcace9a64fd24e0

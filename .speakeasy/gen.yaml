@@ -1,7 +1,6 @@
 configVersion: 2.0.0
 generation:
   sdkClassName: elevenlabs-go
-  baseServerURL: "https://api.elevenlabs.io"
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
@@ -32,8 +31,9 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
   apiName: elevenlabs-go
+  baseServerURL: https://api.elevenlabs.io
 go:
-  version: 0.0.3
+  version: 0.0.5
   additionalDependencies: {}
   baseErrorName: SDKError
   clientServerStatusCodesAsErrors: true

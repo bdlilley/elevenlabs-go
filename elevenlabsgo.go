@@ -63,8 +63,10 @@ type ElevenlabsGo struct {
 	SpeechToSpeech *SpeechToSpeech
 	TextToVoice    *TextToVoice
 	// Access to voices created either by you or ElevenLabs.
-	Voices       *Voices
-	Studio       *Studio
+	Voices *Voices
+	Studio *Studio
+	// Video To Music
+	// Generate background music from one or more video files. Videos are combined in order. Optional description and style tags influence the generated music.
 	VideoToMusic *VideoToMusic
 	Dubbing      *Dubbing
 	Resource     *Resource
@@ -134,9 +136,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided serverURL and options
 func New(serverURL string, opts ...SDKOption) *ElevenlabsGo {
 	sdk := &ElevenlabsGo{
-		SDKVersion: "0.0.3",
+		SDKVersion: "0.0.4",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent: "speakeasy-sdk/go 0.0.3 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent: "speakeasy-sdk/go 0.0.4 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
 		},
 		hooks: hooks.New(),
 	}
