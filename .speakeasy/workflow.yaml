@@ -6,4 +6,7 @@ sources:
             - location: https://api.elevenlabs.io/openapi.json
         registry:
             location: registry.speakeasyapi.dev/kudos/elevenlabs-go/elevenlabs-go
-targets: {}
+targets:
+    elevenlabs-go:
+        target: go
+        source: elevenlabs-go
