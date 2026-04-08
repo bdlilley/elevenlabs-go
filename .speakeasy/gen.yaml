@@ -63,5 +63,5 @@ go:
   respectRequiredFields: false
   respectTitlesForPrimitiveUnionMembers: true
   responseFormat: envelope-http
-  sdkPackageName: ""
+  sdkPackageName: "elevenlabsgo"
   unionStrategy: populated-fields
