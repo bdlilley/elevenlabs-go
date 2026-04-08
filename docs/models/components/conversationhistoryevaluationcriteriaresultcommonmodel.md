@@ -1,0 +1,10 @@
+# ConversationHistoryEvaluationCriteriaResultCommonModel
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `CriteriaID`                                                                             | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Result`                                                                                 | [components.EvaluationSuccessResult](../../models/components/evaluationsuccessresult.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Rationale`                                                                              | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |

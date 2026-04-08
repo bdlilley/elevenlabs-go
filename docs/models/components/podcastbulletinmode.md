@@ -1,0 +1,9 @@
+# PodcastBulletinMode
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `Type`                                                                                   | `string`                                                                                 | :heavy_check_mark:                                                                       | The type of podcast to create.                                                           |                                                                                          |
+| `Bulletin`                                                                               | [components.PodcastBulletinModeData](../../models/components/podcastbulletinmodedata.md) | :heavy_check_mark:                                                                       | N/A                                                                                      | {<br/>"host_voice_id": "aw1NgEzBg83R7vgmiJt6"<br/>}                                      |

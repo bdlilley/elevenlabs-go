@@ -1,0 +1,27 @@
+# WidgetStyles
+
+
+## Fields
+
+| Field                                                     | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `Base`                                                    | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The base background color.                                |
+| `BaseHover`                                               | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of the base background when hovered.            |
+| `BaseActive`                                              | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of the base background when active (clicked).   |
+| `BaseBorder`                                              | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of the border against the base background.      |
+| `BaseSubtle`                                              | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of subtle text against the base background.     |
+| `BasePrimary`                                             | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of primary text against the base background.    |
+| `BaseError`                                               | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of error text against the base background.      |
+| `Accent`                                                  | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The accent background color.                              |
+| `AccentHover`                                             | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of the accent background when hovered.          |
+| `AccentActive`                                            | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of the accent background when active (clicked). |
+| `AccentBorder`                                            | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of the border against the accent background.    |
+| `AccentSubtle`                                            | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of subtle text against the accent background.   |
+| `AccentPrimary`                                           | optionalnullable.OptionalNullable[`string`]               | :heavy_minus_sign:                                        | The color of primary text against the accent background.  |
+| `OverlayPadding`                                          | optionalnullable.OptionalNullable[`float64`]              | :heavy_minus_sign:                                        | The padding around the edges of the viewport.             |
+| `ButtonRadius`                                            | optionalnullable.OptionalNullable[`float64`]              | :heavy_minus_sign:                                        | The radius of the buttons.                                |
+| `InputRadius`                                             | optionalnullable.OptionalNullable[`float64`]              | :heavy_minus_sign:                                        | The radius of the input fields.                           |
+| `BubbleRadius`                                            | optionalnullable.OptionalNullable[`float64`]              | :heavy_minus_sign:                                        | The radius of the chat bubbles.                           |
+| `SheetRadius`                                             | optionalnullable.OptionalNullable[`float64`]              | :heavy_minus_sign:                                        | The default radius of sheets.                             |
+| `CompactSheetRadius`                                      | optionalnullable.OptionalNullable[`float64`]              | :heavy_minus_sign:                                        | The radius of the sheet in compact mode.                  |
+| `DropdownSheetRadius`                                     | optionalnullable.OptionalNullable[`float64`]              | :heavy_minus_sign:                                        | The radius of the dropdown sheet.                         |

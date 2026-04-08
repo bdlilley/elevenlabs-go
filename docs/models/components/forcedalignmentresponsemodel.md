@@ -1,0 +1,12 @@
+# ForcedAlignmentResponseModel
+
+Model representing the response from the aligner service.
+
+
+## Fields
+
+| Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `Characters`                                                                                                           | [][components.ForcedAlignmentCharacterResponseModel](../../models/components/forcedalignmentcharacterresponsemodel.md) | :heavy_check_mark:                                                                                                     | List of characters with their timing information.                                                                      |
+| `Words`                                                                                                                | [][components.ForcedAlignmentWordResponseModel](../../models/components/forcedalignmentwordresponsemodel.md)           | :heavy_check_mark:                                                                                                     | List of words with their timing information.                                                                           |
+| `Loss`                                                                                                                 | `float64`                                                                                                              | :heavy_check_mark:                                                                                                     | The average alignment loss/confidence score for the entire transcript, calculated from all characters.                 |

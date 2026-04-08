@@ -1,0 +1,12 @@
+# SoftTimeoutConfig
+
+Configuration for soft timeout functionality during LLM response generation.
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `TimeoutSeconds`                                                                                            | `*float64`                                                                                                  | :heavy_minus_sign:                                                                                          | Time in seconds before showing the predefined message while waiting for LLM response. Set to -1 to disable. |
+| `Message`                                                                                                   | `*string`                                                                                                   | :heavy_minus_sign:                                                                                          | Message to show when soft timeout is reached while waiting for LLM response                                 |
+| `UseLlmGeneratedMessage`                                                                                    | `*bool`                                                                                                     | :heavy_minus_sign:                                                                                          | If enabled, the soft timeout message will be generated dynamically instead of using the static message.     |

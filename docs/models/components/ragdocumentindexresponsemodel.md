@@ -1,0 +1,12 @@
+# RAGDocumentIndexResponseModel
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ID`                                                                                 | `string`                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Model`                                                                              | [*components.EmbeddingModelEnum](../../models/components/embeddingmodelenum.md)      | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `Status`                                                                             | [components.RAGIndexStatus](../../models/components/ragindexstatus.md)               | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `ProgressPercentage`                                                                 | `float64`                                                                            | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `DocumentModelIndexUsage`                                                            | [components.RAGDocumentIndexUsage](../../models/components/ragdocumentindexusage.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |

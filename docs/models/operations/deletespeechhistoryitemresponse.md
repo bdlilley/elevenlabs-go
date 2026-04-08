@@ -1,0 +1,9 @@
+# DeleteSpeechHistoryItemResponse
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `DeleteHistoryItemResponse`                                                                   | [*components.DeleteHistoryItemResponse](../../models/components/deletehistoryitemresponse.md) | :heavy_minus_sign:                                                                            | Successful Response                                                                           | {<br/>"status": "ok"<br/>}                                                                    |

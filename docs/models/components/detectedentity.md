@@ -1,0 +1,11 @@
+# DetectedEntity
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `Text`                                                                             | `string`                                                                           | :heavy_check_mark:                                                                 | The text that was identified as an entity.                                         |
+| `EntityType`                                                                       | `string`                                                                           | :heavy_check_mark:                                                                 | The type of entity detected (e.g., 'credit_card', 'email_address', 'person_name'). |
+| `StartChar`                                                                        | `int64`                                                                            | :heavy_check_mark:                                                                 | Start character position in the transcript text.                                   |
+| `EndChar`                                                                          | `int64`                                                                            | :heavy_check_mark:                                                                 | End character position in the transcript text.                                     |

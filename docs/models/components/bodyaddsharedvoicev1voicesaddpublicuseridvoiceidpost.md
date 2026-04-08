@@ -1,0 +1,9 @@
+# BodyAddSharedVoiceV1VoicesAddPublicUserIDVoiceIDPost
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `NewName`                                                                                   | `string`                                                                                    | :heavy_check_mark:                                                                          | The name that identifies this voice. This will be displayed in the dropdown of the website. | John Smith                                                                                  |
+| `Bookmarked`                                                                                | `*bool`                                                                                     | :heavy_minus_sign:                                                                          | N/A                                                                                         |                                                                                             |

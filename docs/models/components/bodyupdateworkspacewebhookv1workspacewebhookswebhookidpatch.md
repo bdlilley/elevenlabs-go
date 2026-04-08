@@ -1,0 +1,10 @@
+# BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `IsDisabled`                                                                   | `bool`                                                                         | :heavy_check_mark:                                                             | Whether to disable or enable the webhook                                       | true                                                                           |
+| `Name`                                                                         | `string`                                                                       | :heavy_check_mark:                                                             | The display name of the webhook (used for display purposes only).              | My Callback Webhook                                                            |
+| `RetryEnabled`                                                                 | optionalnullable.OptionalNullable[`bool`]                                      | :heavy_minus_sign:                                                             | Whether to enable automatic retries for transient failures (5xx, 429, timeout) | true                                                                           |

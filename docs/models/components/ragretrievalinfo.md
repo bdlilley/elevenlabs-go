@@ -1,0 +1,11 @@
+# RagRetrievalInfo
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Chunks`                                                                        | [][components.RagChunkMetadata](../../models/components/ragchunkmetadata.md)    | :heavy_check_mark:                                                              | N/A                                                                             |
+| `EmbeddingModel`                                                                | [*components.EmbeddingModelEnum](../../models/components/embeddingmodelenum.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `RetrievalQuery`                                                                | `string`                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `RagLatencySecs`                                                                | `float64`                                                                       | :heavy_check_mark:                                                              | N/A                                                                             |

@@ -1,0 +1,9 @@
+# TranslateResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `SegmentTranslationResponse`                                                                    | [*components.SegmentTranslationResponse](../../models/components/segmenttranslationresponse.md) | :heavy_minus_sign:                                                                              | Successful Response                                                                             |

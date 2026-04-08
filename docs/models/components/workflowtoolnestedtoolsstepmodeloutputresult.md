@@ -1,0 +1,47 @@
+# WorkflowToolNestedToolsStepModelOutputResult
+
+
+## Supported Types
+
+### ConversationHistoryTranscriptOtherToolsResultCommonModel
+
+```go
+workflowToolNestedToolsStepModelOutputResult := components.CreateWorkflowToolNestedToolsStepModelOutputResultConversationHistoryTranscriptOtherToolsResultCommonModel(components.ConversationHistoryTranscriptOtherToolsResultCommonModel{/* values here */})
+```
+
+### ConversationHistoryTranscriptSystemToolResultCommonModelOutput
+
+```go
+workflowToolNestedToolsStepModelOutputResult := components.CreateWorkflowToolNestedToolsStepModelOutputResultConversationHistoryTranscriptSystemToolResultCommonModelOutput(components.ConversationHistoryTranscriptSystemToolResultCommonModelOutput{/* values here */})
+```
+
+### ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput
+
+```go
+workflowToolNestedToolsStepModelOutputResult := components.CreateWorkflowToolNestedToolsStepModelOutputResultConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput(components.ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput{/* values here */})
+```
+
+### ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput
+
+```go
+workflowToolNestedToolsStepModelOutputResult := components.CreateWorkflowToolNestedToolsStepModelOutputResultConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput(components.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch workflowToolNestedToolsStepModelOutputResult.Type {
+	case components.WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptOtherToolsResultCommonModel:
+		// workflowToolNestedToolsStepModelOutputResult.ConversationHistoryTranscriptOtherToolsResultCommonModel is populated
+	case components.WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptSystemToolResultCommonModelOutput:
+		// workflowToolNestedToolsStepModelOutputResult.ConversationHistoryTranscriptSystemToolResultCommonModelOutput is populated
+	case components.WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput:
+		// workflowToolNestedToolsStepModelOutputResult.ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput is populated
+	case components.WorkflowToolNestedToolsStepModelOutputResultTypeConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput:
+		// workflowToolNestedToolsStepModelOutputResult.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput is populated
+	default:
+		// Unknown type - use workflowToolNestedToolsStepModelOutputResult.GetUnknownRaw() for raw JSON
+}
+```

@@ -1,0 +1,11 @@
+# ResourceAccessInfo
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `IsCreator`                                                                            | `bool`                                                                                 | :heavy_check_mark:                                                                     | Whether the user making the request is the creator of the agent                        |
+| `CreatorName`                                                                          | `string`                                                                               | :heavy_check_mark:                                                                     | Name of the agent's creator                                                            |
+| `CreatorEmail`                                                                         | `string`                                                                               | :heavy_check_mark:                                                                     | Email of the agent's creator                                                           |
+| `Role`                                                                                 | [components.ResourceAccessInfoRole](../../models/components/resourceaccessinforole.md) | :heavy_check_mark:                                                                     | The role of the user making the request                                                |

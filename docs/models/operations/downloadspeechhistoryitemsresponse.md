@@ -1,0 +1,9 @@
+# DownloadSpeechHistoryItemsResponse
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `HTTPMeta`                                                                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                 | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `ResponseStream`                                                                                                   | `io.ReadCloser`                                                                                                    | :heavy_minus_sign:                                                                                                 | The requested audio file, or a zip file containing multiple audio files when multiple history items are requested. |

@@ -1,0 +1,9 @@
+# BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `EntityIds`                                                                                    | []`string`                                                                                     | :heavy_check_mark:                                                                             | The IDs of tests or folders to move.                                                           |
+| `MoveTo`                                                                                       | optionalnullable.OptionalNullable[`string`]                                                    | :heavy_minus_sign:                                                                             | The folder to move the entities to. If not set, the entities will be moved to the root folder. |

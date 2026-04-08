@@ -1,0 +1,12 @@
+# PendingClipTask
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `Type`                                                                           | [components.PendingClipTaskType](../../models/components/pendingcliptasktype.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Progress`                                                                       | `*float64`                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `StartedAtMs`                                                                    | `*int64`                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `UpdatedAtMs`                                                                    | `*int64`                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `Metadata`                                                                       | map[string]`any`                                                                 | :heavy_minus_sign:                                                               | N/A                                                                              |

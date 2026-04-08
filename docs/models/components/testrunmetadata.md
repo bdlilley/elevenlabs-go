@@ -1,0 +1,11 @@
+# TestRunMetadata
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `WorkspaceID`                                                                             | `string`                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `TestName`                                                                                | `string`                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `RanByUserEmail`                                                                          | `string`                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `TestType`                                                                                | [*components.TestRunMetadataTestType](../../models/components/testrunmetadatatesttype.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |

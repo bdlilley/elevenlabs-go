@@ -1,0 +1,9 @@
+# HistoryAlignmentsResponseModel
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `Alignment`                                                                                          | [components.HistoryAlignmentResponseModel](../../models/components/historyalignmentresponsemodel.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `NormalizedAlignment`                                                                                | [components.HistoryAlignmentResponseModel](../../models/components/historyalignmentresponsemodel.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

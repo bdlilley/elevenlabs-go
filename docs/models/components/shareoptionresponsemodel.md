@@ -1,0 +1,10 @@
+# ShareOptionResponseModel
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Name`                                                                                             | `string`                                                                                           | :heavy_check_mark:                                                                                 | The name of the principal.                                                                         |
+| `ID`                                                                                               | `string`                                                                                           | :heavy_check_mark:                                                                                 | The ID of the principal.                                                                           |
+| `Type`                                                                                             | [components.ShareOptionResponseModelType](../../models/components/shareoptionresponsemodeltype.md) | :heavy_check_mark:                                                                                 | The type of the principal: user, group, or service account (under 'key').                          |

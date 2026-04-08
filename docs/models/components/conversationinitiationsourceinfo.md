@@ -1,0 +1,11 @@
+# ConversationInitiationSourceInfo
+
+Information about the source of conversation initiation
+
+
+## Fields
+
+| Field                                                                                                                                 | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `Source`                                                                                                                              | optionalnullable.OptionalNullable[[components.ConversationInitiationSource](../../models/components/conversationinitiationsource.md)] | :heavy_minus_sign:                                                                                                                    | Source of the conversation initiation                                                                                                 |
+| `Version`                                                                                                                             | optionalnullable.OptionalNullable[`string`]                                                                                           | :heavy_minus_sign:                                                                                                                    | The SDK version number                                                                                                                |

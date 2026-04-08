@@ -1,0 +1,9 @@
+# CreatePvcVoiceResponse
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                    | :heavy_check_mark:                                                                    | N/A                                                                                   |                                                                                       |
+| `AddVoiceResponseModel`                                                               | [*components.AddVoiceResponseModel](../../models/components/addvoiceresponsemodel.md) | :heavy_minus_sign:                                                                    | Successful Response                                                                   | {<br/>"voice_id": "b38kUX8pkfYO2kHyqfFy"<br/>}                                        |

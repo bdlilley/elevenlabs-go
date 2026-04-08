@@ -1,0 +1,49 @@
+# ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost
+
+Successful Response
+
+
+## Supported Types
+
+### GetKnowledgeBaseURLResponseModel
+
+```go
+responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost := operations.CreateResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostURLObj(components.GetKnowledgeBaseURLResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseFileResponseModel
+
+```go
+responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost := operations.CreateResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostFile(components.GetKnowledgeBaseFileResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseTextResponseModel
+
+```go
+responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost := operations.CreateResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostText(components.GetKnowledgeBaseTextResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseFolderResponseModel
+
+```go
+responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost := operations.CreateResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostFolder(components.GetKnowledgeBaseFolderResponseModel{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.Type {
+	case operations.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeURLObj:
+		// responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseURLResponseModel is populated
+	case operations.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFile:
+		// responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseFileResponseModel is populated
+	case operations.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeText:
+		// responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseTextResponseModel is populated
+	case operations.ResponseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPostTypeFolder:
+		// responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetKnowledgeBaseFolderResponseModel is populated
+	default:
+		// Unknown type - use responseRefreshURLDocumentContentV1ConvaiKnowledgeBaseDocumentationIDRefreshPost.GetUnknownRaw() for raw JSON
+}
+```

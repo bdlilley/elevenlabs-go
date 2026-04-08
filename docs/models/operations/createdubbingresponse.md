@@ -1,0 +1,9 @@
+# CreateDubbingResponse
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                      | :heavy_check_mark:                                                                      | N/A                                                                                     |                                                                                         |
+| `DoDubbingResponseModel`                                                                | [*components.DoDubbingResponseModel](../../models/components/dodubbingresponsemodel.md) | :heavy_minus_sign:                                                                      | Successful Response                                                                     | {<br/>"dubbing_id": "21m00Tcm4TlvDq8ikWAM",<br/>"expected_duration_sec": 127.5<br/>}    |

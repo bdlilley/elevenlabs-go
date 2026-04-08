@@ -1,0 +1,11 @@
+# LLMInputOutputTokensUsage
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Input`                                                                                 | [*components.LLMTokensCategoryUsage](../../models/components/llmtokenscategoryusage.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `InputCacheRead`                                                                        | [*components.LLMTokensCategoryUsage](../../models/components/llmtokenscategoryusage.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `InputCacheWrite`                                                                       | [*components.LLMTokensCategoryUsage](../../models/components/llmtokenscategoryusage.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `OutputTotal`                                                                           | [*components.LLMTokensCategoryUsage](../../models/components/llmtokenscategoryusage.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |

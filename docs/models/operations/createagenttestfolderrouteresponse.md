@@ -1,0 +1,9 @@
+# CreateAgentTestFolderRouteResponse
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                              | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `CreateAgentTestFolderResponseModel`                                                                            | [*components.CreateAgentTestFolderResponseModel](../../models/components/createagenttestfolderresponsemodel.md) | :heavy_minus_sign:                                                                                              | Folder successfully created                                                                                     |

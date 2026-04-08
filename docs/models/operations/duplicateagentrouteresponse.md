@@ -1,0 +1,9 @@
+# DuplicateAgentRouteResponse
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                          | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |
+| `CreateAgentResponseModel`                                                                  | [*components.CreateAgentResponseModel](../../models/components/createagentresponsemodel.md) | :heavy_minus_sign:                                                                          | Successful Response                                                                         | {<br/>"agent_id": "J3Pbu5gP6NNKBscdCdwB"<br/>}                                              |

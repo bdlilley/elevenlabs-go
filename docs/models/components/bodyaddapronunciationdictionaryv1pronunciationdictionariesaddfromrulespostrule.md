@@ -1,0 +1,29 @@
+# BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRule
+
+
+## Supported Types
+
+### PronunciationDictionaryAliasRuleRequestModel
+
+```go
+bodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRule := components.CreateBodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRuleAlias(components.PronunciationDictionaryAliasRuleRequestModel{/* values here */})
+```
+
+### PronunciationDictionaryPhonemeRuleRequestModel
+
+```go
+bodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRule := components.CreateBodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRulePhoneme(components.PronunciationDictionaryPhonemeRuleRequestModel{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch bodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRule.Type {
+	case components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRuleTypeAlias:
+		// bodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRule.PronunciationDictionaryAliasRuleRequestModel is populated
+	case components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRuleTypePhoneme:
+		// bodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPostRule.PronunciationDictionaryPhonemeRuleRequestModel is populated
+}
+```

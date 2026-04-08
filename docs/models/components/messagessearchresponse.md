@@ -1,0 +1,11 @@
+# MessagesSearchResponse
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Meta`                                                                               | [*components.ListResponseMeta](../../models/components/listresponsemeta.md)          | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `Results`                                                                            | [][components.MessagesSearchResult](../../models/components/messagessearchresult.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `NextCursor`                                                                         | optionalnullable.OptionalNullable[`string`]                                          | :heavy_minus_sign:                                                                   | Cursor for the next page of results                                                  |
+| `HasMore`                                                                            | `bool`                                                                               | :heavy_check_mark:                                                                   | Whether there are more results available                                             |

@@ -1,0 +1,13 @@
+# ForcedAlignmentWordResponseModel
+
+Model representing a single word with its timing information from the aligner.
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `Text`                                                                                                 | `string`                                                                                               | :heavy_check_mark:                                                                                     | The word that was transcribed.                                                                         |
+| `Start`                                                                                                | `float64`                                                                                              | :heavy_check_mark:                                                                                     | The start time of the word in seconds.                                                                 |
+| `End`                                                                                                  | `float64`                                                                                              | :heavy_check_mark:                                                                                     | The end time of the word in seconds.                                                                   |
+| `Loss`                                                                                                 | `float64`                                                                                              | :heavy_check_mark:                                                                                     | The average alignment loss/confidence score for this word, calculated from its constituent characters. |

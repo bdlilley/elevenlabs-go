@@ -1,0 +1,11 @@
+# KnowledgeBaseLocator
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Type`                                                                                       | [components.KnowledgeBaseDocumentType](../../models/components/knowledgebasedocumenttype.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `Name`                                                                                       | `string`                                                                                     | :heavy_check_mark:                                                                           | The name of the knowledge base                                                               |
+| `ID`                                                                                         | `string`                                                                                     | :heavy_check_mark:                                                                           | The ID of the knowledge base                                                                 |
+| `UsageMode`                                                                                  | [*components.DocumentUsageModeEnum](../../models/components/documentusagemodeenum.md)        | :heavy_minus_sign:                                                                           | N/A                                                                                          |

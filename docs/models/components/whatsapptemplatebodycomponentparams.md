@@ -1,0 +1,9 @@
+# WhatsAppTemplateBodyComponentParams
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Type`                                                                                         | `*string`                                                                                      | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `Parameters`                                                                                   | [][components.WhatsAppTemplateTextParam](../../models/components/whatsapptemplatetextparam.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

@@ -1,0 +1,9 @@
+# HandleSipTrunkOutboundCallResponse
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                  | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `SIPTrunkOutboundCallResponse`                                                                      | [*components.SIPTrunkOutboundCallResponse](../../models/components/siptrunkoutboundcallresponse.md) | :heavy_minus_sign:                                                                                  | Successful Response                                                                                 |

@@ -1,0 +1,12 @@
+# ChapterSnapshotResponseModel
+
+
+## Fields
+
+| Field                                      | Type                                       | Required                                   | Description                                |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| `ChapterSnapshotID`                        | `string`                                   | :heavy_check_mark:                         | The ID of the chapter snapshot.            |
+| `ProjectID`                                | `string`                                   | :heavy_check_mark:                         | The ID of the project.                     |
+| `ChapterID`                                | `string`                                   | :heavy_check_mark:                         | The ID of the chapter.                     |
+| `CreatedAtUnix`                            | `int64`                                    | :heavy_check_mark:                         | The creation date of the chapter snapshot. |
+| `Name`                                     | `string`                                   | :heavy_check_mark:                         | The name of the chapter snapshot.          |

@@ -1,0 +1,9 @@
+# ConstantSchemaOverride
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Source`                                                                                                         | `*string`                                                                                                        | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `ConstantValue`                                                                                                  | [components.ConstantSchemaOverrideConstantValue](../../models/components/constantschemaoverrideconstantvalue.md) | :heavy_check_mark:                                                                                               | The constant value to use                                                                                        |

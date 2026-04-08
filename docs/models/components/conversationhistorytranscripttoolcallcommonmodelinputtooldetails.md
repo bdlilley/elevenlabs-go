@@ -1,0 +1,45 @@
+# ConversationHistoryTranscriptToolCallCommonModelInputToolDetails
+
+
+## Supported Types
+
+### ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsInput
+
+```go
+conversationHistoryTranscriptToolCallCommonModelInputToolDetails := components.CreateConversationHistoryTranscriptToolCallCommonModelInputToolDetailsAPIIntegrationWebhook(components.ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsInput{/* values here */})
+```
+
+### ConversationHistoryTranscriptToolCallClientDetails
+
+```go
+conversationHistoryTranscriptToolCallCommonModelInputToolDetails := components.CreateConversationHistoryTranscriptToolCallCommonModelInputToolDetailsClient(components.ConversationHistoryTranscriptToolCallClientDetails{/* values here */})
+```
+
+### ConversationHistoryTranscriptToolCallMCPDetails
+
+```go
+conversationHistoryTranscriptToolCallCommonModelInputToolDetails := components.CreateConversationHistoryTranscriptToolCallCommonModelInputToolDetailsMcp(components.ConversationHistoryTranscriptToolCallMCPDetails{/* values here */})
+```
+
+### ConversationHistoryTranscriptToolCallWebhookDetails
+
+```go
+conversationHistoryTranscriptToolCallCommonModelInputToolDetails := components.CreateConversationHistoryTranscriptToolCallCommonModelInputToolDetailsWebhook(components.ConversationHistoryTranscriptToolCallWebhookDetails{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch conversationHistoryTranscriptToolCallCommonModelInputToolDetails.Type {
+	case components.ConversationHistoryTranscriptToolCallCommonModelInputToolDetailsTypeAPIIntegrationWebhook:
+		// conversationHistoryTranscriptToolCallCommonModelInputToolDetails.ConversationHistoryTranscriptToolCallAPIIntegrationWebhookDetailsInput is populated
+	case components.ConversationHistoryTranscriptToolCallCommonModelInputToolDetailsTypeClient:
+		// conversationHistoryTranscriptToolCallCommonModelInputToolDetails.ConversationHistoryTranscriptToolCallClientDetails is populated
+	case components.ConversationHistoryTranscriptToolCallCommonModelInputToolDetailsTypeMcp:
+		// conversationHistoryTranscriptToolCallCommonModelInputToolDetails.ConversationHistoryTranscriptToolCallMCPDetails is populated
+	case components.ConversationHistoryTranscriptToolCallCommonModelInputToolDetailsTypeWebhook:
+		// conversationHistoryTranscriptToolCallCommonModelInputToolDetails.ConversationHistoryTranscriptToolCallWebhookDetails is populated
+}
+```

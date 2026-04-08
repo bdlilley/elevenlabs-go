@@ -1,0 +1,9 @@
+# GetToolDependentAgentsRouteResponse
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| `GetToolDependentAgentsResponseModel`                                                                             | [*components.GetToolDependentAgentsResponseModel](../../models/components/gettooldependentagentsresponsemodel.md) | :heavy_minus_sign:                                                                                                | Successful Response                                                                                               |

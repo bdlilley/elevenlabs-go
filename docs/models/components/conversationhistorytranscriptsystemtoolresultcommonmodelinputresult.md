@@ -1,0 +1,109 @@
+# ConversationHistoryTranscriptSystemToolResultCommonModelInputResult
+
+
+## Supported Types
+
+### EndCallToolResultModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultEndCallSuccess(components.EndCallToolResultModel{/* values here */})
+```
+
+### LanguageDetectionToolResultModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultLanguageDetectionSuccess(components.LanguageDetectionToolResultModel{/* values here */})
+```
+
+### PlayDTMFResultErrorModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultPlayDtmfError(components.PlayDTMFResultErrorModel{/* values here */})
+```
+
+### PlayDTMFResultSuccessModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultPlayDtmfSuccess(components.PlayDTMFResultSuccessModel{/* values here */})
+```
+
+### SkipTurnToolResponseModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultSkipTurnSuccess(components.SkipTurnToolResponseModel{/* values here */})
+```
+
+### TestToolResultModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTestingToolResult(components.TestToolResultModel{/* values here */})
+```
+
+### TransferToAgentToolResultErrorModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTransferToAgentError(components.TransferToAgentToolResultErrorModel{/* values here */})
+```
+
+### TransferToAgentToolResultSuccessModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTransferToAgentSuccess(components.TransferToAgentToolResultSuccessModel{/* values here */})
+```
+
+### TransferToNumberResultErrorModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTransferToNumberError(components.TransferToNumberResultErrorModel{/* values here */})
+```
+
+### TransferToNumberResultSipSuccessModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTransferToNumberSipSuccess(components.TransferToNumberResultSipSuccessModel{/* values here */})
+```
+
+### TransferToNumberResultTwilioSuccessModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTransferToNumberTwilioSuccess(components.TransferToNumberResultTwilioSuccessModel{/* values here */})
+```
+
+### VoiceMailDetectionResultSuccessModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultVoicemailDetectionSuccess(components.VoiceMailDetectionResultSuccessModel{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch conversationHistoryTranscriptSystemToolResultCommonModelInputResult.Type {
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeEndCallSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.EndCallToolResultModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeLanguageDetectionSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.LanguageDetectionToolResultModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypePlayDtmfError:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDTMFResultErrorModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypePlayDtmfSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.PlayDTMFResultSuccessModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeSkipTurnSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.SkipTurnToolResponseModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTestingToolResult:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TestToolResultModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToAgentError:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentToolResultErrorModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToAgentSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentToolResultSuccessModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToNumberError:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberResultErrorModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToNumberSipSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberResultSipSuccessModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToNumberTwilioSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberResultTwilioSuccessModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeVoicemailDetectionSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.VoiceMailDetectionResultSuccessModel is populated
+}
+```

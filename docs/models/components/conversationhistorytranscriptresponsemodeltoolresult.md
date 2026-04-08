@@ -1,0 +1,47 @@
+# ConversationHistoryTranscriptResponseModelToolResult
+
+
+## Supported Types
+
+### ConversationHistoryTranscriptOtherToolsResultCommonModel
+
+```go
+conversationHistoryTranscriptResponseModelToolResult := components.CreateConversationHistoryTranscriptResponseModelToolResultConversationHistoryTranscriptOtherToolsResultCommonModel(components.ConversationHistoryTranscriptOtherToolsResultCommonModel{/* values here */})
+```
+
+### ConversationHistoryTranscriptSystemToolResultCommonModelOutput
+
+```go
+conversationHistoryTranscriptResponseModelToolResult := components.CreateConversationHistoryTranscriptResponseModelToolResultConversationHistoryTranscriptSystemToolResultCommonModelOutput(components.ConversationHistoryTranscriptSystemToolResultCommonModelOutput{/* values here */})
+```
+
+### ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput
+
+```go
+conversationHistoryTranscriptResponseModelToolResult := components.CreateConversationHistoryTranscriptResponseModelToolResultConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput(components.ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput{/* values here */})
+```
+
+### ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput
+
+```go
+conversationHistoryTranscriptResponseModelToolResult := components.CreateConversationHistoryTranscriptResponseModelToolResultConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput(components.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch conversationHistoryTranscriptResponseModelToolResult.Type {
+	case components.ConversationHistoryTranscriptResponseModelToolResultTypeConversationHistoryTranscriptOtherToolsResultCommonModel:
+		// conversationHistoryTranscriptResponseModelToolResult.ConversationHistoryTranscriptOtherToolsResultCommonModel is populated
+	case components.ConversationHistoryTranscriptResponseModelToolResultTypeConversationHistoryTranscriptSystemToolResultCommonModelOutput:
+		// conversationHistoryTranscriptResponseModelToolResult.ConversationHistoryTranscriptSystemToolResultCommonModelOutput is populated
+	case components.ConversationHistoryTranscriptResponseModelToolResultTypeConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput:
+		// conversationHistoryTranscriptResponseModelToolResult.ConversationHistoryTranscriptAPIIntegrationWebhookToolsResultCommonModelOutput is populated
+	case components.ConversationHistoryTranscriptResponseModelToolResultTypeConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput:
+		// conversationHistoryTranscriptResponseModelToolResult.ConversationHistoryTranscriptWorkflowToolsResultCommonModelOutput is populated
+	default:
+		// Unknown type - use conversationHistoryTranscriptResponseModelToolResult.GetUnknownRaw() for raw JSON
+}
+```

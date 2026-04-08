@@ -1,0 +1,9 @@
+# GetSpeakerAudioResponse
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `SpeakerAudioResponseModel`                                                                   | [*components.SpeakerAudioResponseModel](../../models/components/speakeraudioresponsemodel.md) | :heavy_minus_sign:                                                                            | Successful Response                                                                           | {<br/>"audio_base_64": "audio_base_64",<br/>"duration_secs": 5,<br/>"media_type": "audio/mpeg"<br/>} |

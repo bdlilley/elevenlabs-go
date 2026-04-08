@@ -1,0 +1,9 @@
+# DefaultSharingGroupResponseModel
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `Group`                                                                                          | [components.WorkspaceGroupResponseModel](../../models/components/workspacegroupresponsemodel.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `PermissionLevel`                                                                                | [components.PermissionLevel](../../models/components/permissionlevel.md)                         | :heavy_check_mark:                                                                               | The permission level to grant to the group                                                       |

@@ -1,0 +1,9 @@
+# GetAgentLinkRouteResponse
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `GetAgentLinkResponseModel`                                                                   | [*components.GetAgentLinkResponseModel](../../models/components/getagentlinkresponsemodel.md) | :heavy_minus_sign:                                                                            | Successful Response                                                                           | {<br/>"agent_id": "J3Pbu5gP6NNKBscdCdwB"<br/>}                                                |

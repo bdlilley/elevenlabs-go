@@ -1,0 +1,9 @@
+# GetLiveCountResponse
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                  | :heavy_check_mark:                                                                  | N/A                                                                                 |                                                                                     |
+| `GetLiveCountResponse`                                                              | [*components.GetLiveCountResponse](../../models/components/getlivecountresponse.md) | :heavy_minus_sign:                                                                  | Successful Response                                                                 | {<br/>"count": 42<br/>}                                                             |

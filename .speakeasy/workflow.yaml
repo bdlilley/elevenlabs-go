@@ -1,0 +1,6 @@
+workflowVersion: 1.0.0
+sources:
+    elevenlabs-go:
+        inputs:
+            - location: https://api.elevenlabs.io/openapi.json
+targets: {}

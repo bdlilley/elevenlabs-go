@@ -1,0 +1,9 @@
+# BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIDBranchesSourceBranchIDMergePost
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `ArchiveSourceBranch`                                                                       | `*bool`                                                                                     | :heavy_minus_sign:                                                                          | Whether to archive the source branch after merging                                          |
+| `Force`                                                                                     | `*bool`                                                                                     | :heavy_minus_sign:                                                                          | Force source branch changes onto the target, overriding timestamp-based conflict resolution |

@@ -1,0 +1,9 @@
+# DubbingTranscriptResponseModel
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `Language`                                                                                       | `string`                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `Utterances`                                                                                     | [][components.DubbingTranscriptUtterance](../../models/components/dubbingtranscriptutterance.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

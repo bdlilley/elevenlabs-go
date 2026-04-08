@@ -1,0 +1,12 @@
+# SpeakerTrack
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ID`                                                                                 | `string`                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `MediaRef`                                                                           | [components.DubbingMediaReference](../../models/components/dubbingmediareference.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `SpeakerName`                                                                        | `string`                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Voices`                                                                             | map[string]`string`                                                                  | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Segments`                                                                           | []`string`                                                                           | :heavy_check_mark:                                                                   | N/A                                                                                  |

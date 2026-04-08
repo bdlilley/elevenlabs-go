@@ -1,0 +1,9 @@
+# TextToVoiceResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `VoicePreviewsResponseModel`                                                                    | [*components.VoicePreviewsResponseModel](../../models/components/voicepreviewsresponsemodel.md) | :heavy_minus_sign:                                                                              | Successful Response                                                                             |

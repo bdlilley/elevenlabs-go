@@ -1,0 +1,10 @@
+# GetAgentsPageResponseModel
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Agents`                                                                                       | [][components.AgentSummaryResponseModel](../../models/components/agentsummaryresponsemodel.md) | :heavy_check_mark:                                                                             | A list of agents and their metadata                                                            |
+| `NextCursor`                                                                                   | optionalnullable.OptionalNullable[`string`]                                                    | :heavy_minus_sign:                                                                             | The next cursor to paginate through the agents                                                 |
+| `HasMore`                                                                                      | `bool`                                                                                         | :heavy_check_mark:                                                                             | Whether there are more agents to paginate through                                              |

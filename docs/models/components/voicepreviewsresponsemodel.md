@@ -1,0 +1,9 @@
+# VoicePreviewsResponseModel
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Previews`                                                                                     | [][components.VoicePreviewResponseModel](../../models/components/voicepreviewresponsemodel.md) | :heavy_check_mark:                                                                             | The previews of the generated voices.                                                          |
+| `Text`                                                                                         | `string`                                                                                       | :heavy_check_mark:                                                                             | The text used to preview the voices.                                                           |

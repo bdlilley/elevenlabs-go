@@ -1,0 +1,11 @@
+# Contributor
+
+
+## Fields
+
+| Field                                       | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `Name`                                      | `string`                                    | :heavy_check_mark:                          | N/A                                         |
+| `Role`                                      | `string`                                    | :heavy_check_mark:                          | N/A                                         |
+| `Bio`                                       | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |
+| `ProfileID`                                 | optionalnullable.OptionalNullable[`string`] | :heavy_minus_sign:                          | N/A                                         |

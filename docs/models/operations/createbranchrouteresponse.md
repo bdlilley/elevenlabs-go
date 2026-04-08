@@ -1,0 +1,9 @@
+# CreateBranchRouteResponse
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                      | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `CreateAgentBranchResponseModel`                                                                        | [*components.CreateAgentBranchResponseModel](../../models/components/createagentbranchresponsemodel.md) | :heavy_minus_sign:                                                                                      | Successful Response                                                                                     |

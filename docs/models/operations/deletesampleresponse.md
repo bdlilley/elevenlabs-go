@@ -1,0 +1,9 @@
+# DeleteSampleResponse
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `DeleteSampleResponseModel`                                                                   | [*components.DeleteSampleResponseModel](../../models/components/deletesampleresponsemodel.md) | :heavy_minus_sign:                                                                            | Successful Response                                                                           | {<br/>"status": "ok"<br/>}                                                                    |

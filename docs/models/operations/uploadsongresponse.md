@@ -1,0 +1,9 @@
+# UploadSongResponse
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |
+| `MusicUploadResponse`                                                             | [*components.MusicUploadResponse](../../models/components/musicuploadresponse.md) | :heavy_minus_sign:                                                                | Successfully uploaded music file with optional composition plan                   | {<br/>"song_id": "jR4Xz8kL2mNpQ9wVtY1b"<br/>}                                     |

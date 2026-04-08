@@ -1,0 +1,9 @@
+# ToolResponseMockConfigOutput
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ParameterConditions`                                                                          | [][components.UnitTestToolCallParameter](../../models/components/unittesttoolcallparameter.md) | :heavy_minus_sign:                                                                             | If the list is empty, the mock will always activate.                                           |
+| `MockResult`                                                                                   | `string`                                                                                       | :heavy_check_mark:                                                                             | The return value the LLM sees when this mock is active.                                        |

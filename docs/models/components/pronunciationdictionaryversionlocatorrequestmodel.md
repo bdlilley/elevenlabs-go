@@ -1,0 +1,9 @@
+# PronunciationDictionaryVersionLocatorRequestModel
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `PronunciationDictionaryID`                                                                              | `string`                                                                                                 | :heavy_check_mark:                                                                                       | The ID of the pronunciation dictionary.                                                                  |
+| `VersionID`                                                                                              | optionalnullable.OptionalNullable[`string`]                                                              | :heavy_minus_sign:                                                                                       | The ID of the version of the pronunciation dictionary. If not provided, the latest version will be used. |

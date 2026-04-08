@@ -1,0 +1,9 @@
+# DeleteVoiceResponse
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                          | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |
+| `DeleteVoiceResponseModel`                                                                  | [*components.DeleteVoiceResponseModel](../../models/components/deletevoiceresponsemodel.md) | :heavy_minus_sign:                                                                          | Successful Response                                                                         | {<br/>"status": "ok"<br/>}                                                                  |

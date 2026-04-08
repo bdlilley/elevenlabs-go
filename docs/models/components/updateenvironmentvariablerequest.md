@@ -1,0 +1,8 @@
+# UpdateEnvironmentVariableRequest
+
+
+## Fields
+
+| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `Values`                                                                                                                           | map[string][*components.UpdateEnvironmentVariableRequestValues](../../models/components/updateenvironmentvariablerequestvalues.md) | :heavy_check_mark:                                                                                                                 | Values to replace. Set to null to remove an environment (except 'production').                                                     |

@@ -1,0 +1,49 @@
+# ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet
+
+Successful Response
+
+
+## Supported Types
+
+### GetKnowledgeBaseURLResponseModel
+
+```go
+responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet := operations.CreateResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetURLObj(components.GetKnowledgeBaseURLResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseFileResponseModel
+
+```go
+responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet := operations.CreateResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetFile(components.GetKnowledgeBaseFileResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseTextResponseModel
+
+```go
+responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet := operations.CreateResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetText(components.GetKnowledgeBaseTextResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseFolderResponseModel
+
+```go
+responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet := operations.CreateResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetFolder(components.GetKnowledgeBaseFolderResponseModel{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.Type {
+	case operations.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeURLObj:
+		// responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetKnowledgeBaseURLResponseModel is populated
+	case operations.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFile:
+		// responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetKnowledgeBaseFileResponseModel is populated
+	case operations.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeText:
+		// responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetKnowledgeBaseTextResponseModel is populated
+	case operations.ResponseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGetTypeFolder:
+		// responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetKnowledgeBaseFolderResponseModel is populated
+	default:
+		// Unknown type - use responseGetDocumentationFromKnowledgeBaseV1ConvaiKnowledgeBaseDocumentationIDGet.GetUnknownRaw() for raw JSON
+}
+```

@@ -1,0 +1,9 @@
+# AddVoiceResponse
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                          | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |
+| `AddVoiceIVCResponseModel`                                                                  | [*components.AddVoiceIVCResponseModel](../../models/components/addvoiceivcresponsemodel.md) | :heavy_minus_sign:                                                                          | Successful Response                                                                         | {<br/>"requires_verification": false,<br/>"voice_id": "c38kUX8pkfYO2kHyqfFy"<br/>}          |

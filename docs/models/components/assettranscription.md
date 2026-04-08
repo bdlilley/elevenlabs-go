@@ -1,0 +1,10 @@
+# AssetTranscription
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `LanguageCode`                                                                           | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Text`                                                                                   | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Words`                                                                                  | [][components.AssetTranscriptionWord](../../models/components/assettranscriptionword.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |

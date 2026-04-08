@@ -1,0 +1,10 @@
+# DubbingMetadataPageResponseModel
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `Dubs`                                                                                     | [][components.DubbingMetadataResponse](../../models/components/dubbingmetadataresponse.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `NextCursor`                                                                               | `*string`                                                                                  | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `HasMore`                                                                                  | `bool`                                                                                     | :heavy_check_mark:                                                                         | N/A                                                                                        |

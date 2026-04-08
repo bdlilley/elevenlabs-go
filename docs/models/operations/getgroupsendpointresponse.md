@@ -1,0 +1,9 @@
+# GetGroupsEndpointResponse
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                  | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                          | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `ResponseGetAllGroupsV1WorkspaceGroupsGet`                                                                  | map[string][components.WorkspaceGroupResponseModel](../../models/components/workspacegroupresponsemodel.md) | :heavy_minus_sign:                                                                                          | Successful Response                                                                                         |
