@@ -69,7 +69,7 @@ func (s *PronunciationDictionary) AddFromFile(ctx context.Context, body componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_from_file",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -98,6 +98,10 @@ func (s *PronunciationDictionary) AddFromFile(ctx context.Context, body componen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -309,7 +313,7 @@ func (s *PronunciationDictionary) AddFromRules(ctx context.Context, body compone
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_from_rules",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -338,6 +342,10 @@ func (s *PronunciationDictionary) AddFromRules(ctx context.Context, body compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -549,7 +557,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryMetadata(ctx context
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_pronunciation_dictionary_metadata",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -571,6 +579,10 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryMetadata(ctx context
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -783,7 +795,7 @@ func (s *PronunciationDictionary) PatchPronunciationDictionary(ctx context.Conte
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "patch_pronunciation_dictionary",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -812,6 +824,10 @@ func (s *PronunciationDictionary) PatchPronunciationDictionary(ctx context.Conte
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1024,7 +1040,7 @@ func (s *PronunciationDictionary) SetRules(ctx context.Context, pronunciationDic
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "set_rules",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1053,6 +1069,10 @@ func (s *PronunciationDictionary) SetRules(ctx context.Context, pronunciationDic
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1265,7 +1285,7 @@ func (s *PronunciationDictionary) AddRules(ctx context.Context, pronunciationDic
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_rules",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1294,6 +1314,10 @@ func (s *PronunciationDictionary) AddRules(ctx context.Context, pronunciationDic
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1506,7 +1530,7 @@ func (s *PronunciationDictionary) RemoveRules(ctx context.Context, pronunciation
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "remove_rules",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1535,6 +1559,10 @@ func (s *PronunciationDictionary) RemoveRules(ctx context.Context, pronunciation
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1747,7 +1775,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx conte
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_pronunciation_dictionary_version_pls",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1769,6 +1797,10 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx conte
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1969,7 +2001,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx conte
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_pronunciation_dictionaries_metadata",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1994,6 +2026,10 @@ func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx conte
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {

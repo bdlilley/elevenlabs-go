@@ -34,6 +34,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.MusicGeneration.ComposePlan(ctx, components.BodyGenerateCompositionPlanV1MusicPlanPost{
@@ -122,6 +123,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.MusicGeneration.Generate(ctx, nil, optionalnullable.From[string](nil), &components.BodyComposeMusicV1MusicPost{
@@ -210,6 +212,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.MusicGeneration.ComposeDetailed(ctx, nil, optionalnullable.From[string](nil), &components.BodyComposeMusicWithADetailedResponseV1MusicDetailedPost{
@@ -298,6 +301,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.MusicGeneration.StreamCompose(ctx, nil, optionalnullable.From[string](nil), &components.BodyStreamComposedMusicV1MusicStreamPost{
@@ -387,6 +391,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     example, fileErr := os.Open("example.file")
@@ -453,6 +458,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     example, fileErr := os.Open("example.file")

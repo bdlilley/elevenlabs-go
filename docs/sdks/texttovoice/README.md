@@ -33,6 +33,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToVoice.TextToVoice(ctx, components.VoicePreviewsRequestModel{
@@ -94,6 +95,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToVoice.CreateVoice(ctx, components.BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost{
@@ -156,6 +158,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToVoice.TextToVoiceDesign(ctx, components.VoiceDesignRequestModel{
@@ -222,6 +225,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToVoice.TextToVoiceRemix(ctx, "21m00Tcm4TlvDq8ikWAM", components.VoiceRemixRequestModel{
@@ -287,6 +291,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToVoice.TextToVoicePreviewStream(ctx, "37HceQefKmEi3bGovXjL", optionalnullable.From[string](nil))

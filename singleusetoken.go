@@ -68,7 +68,7 @@ func (s *SingleUseToken) GetSingleUseToken(ctx context.Context, tokenType compon
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_single_use_token",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -90,6 +90,10 @@ func (s *SingleUseToken) GetSingleUseToken(ctx context.Context, tokenType compon
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

@@ -69,7 +69,7 @@ func (s *PvcVoices) CreatePvcVoice(ctx context.Context, body components.BodyCrea
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_pvc_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -98,6 +98,10 @@ func (s *PvcVoices) CreatePvcVoice(ctx context.Context, body components.BodyCrea
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -310,7 +314,7 @@ func (s *PvcVoices) EditPvcVoice(ctx context.Context, voiceID string, xiAPIKey o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_pvc_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -339,6 +343,10 @@ func (s *PvcVoices) EditPvcVoice(ctx context.Context, voiceID string, xiAPIKey o
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -551,7 +559,7 @@ func (s *PvcVoices) AddPvcVoiceSamples(ctx context.Context, voiceID string, body
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_pvc_voice_samples",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -580,6 +588,10 @@ func (s *PvcVoices) AddPvcVoiceSamples(ctx context.Context, voiceID string, body
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -793,7 +805,7 @@ func (s *PvcVoices) EditPvcVoiceSample(ctx context.Context, voiceID string, samp
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_pvc_voice_sample",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -822,6 +834,10 @@ func (s *PvcVoices) EditPvcVoiceSample(ctx context.Context, voiceID string, samp
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1034,7 +1050,7 @@ func (s *PvcVoices) DeletePvcVoiceSample(ctx context.Context, voiceID string, sa
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_pvc_voice_sample",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1056,6 +1072,10 @@ func (s *PvcVoices) DeletePvcVoiceSample(ctx context.Context, voiceID string, sa
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1269,7 +1289,7 @@ func (s *PvcVoices) GetPvcSampleAudio(ctx context.Context, voiceID string, sampl
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_pvc_sample_audio",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1294,6 +1314,10 @@ func (s *PvcVoices) GetPvcSampleAudio(ctx context.Context, voiceID string, sampl
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1507,7 +1531,7 @@ func (s *PvcVoices) GetPvcSampleVisualWaveform(ctx context.Context, voiceID stri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_pvc_sample_visual_waveform",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1529,6 +1553,10 @@ func (s *PvcVoices) GetPvcSampleVisualWaveform(ctx context.Context, voiceID stri
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1741,7 +1769,7 @@ func (s *PvcVoices) GetPvcSampleSpeakers(ctx context.Context, voiceID string, sa
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_pvc_sample_speakers",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1763,6 +1791,10 @@ func (s *PvcVoices) GetPvcSampleSpeakers(ctx context.Context, voiceID string, sa
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1975,7 +2007,7 @@ func (s *PvcVoices) StartSpeakerSeparation(ctx context.Context, voiceID string, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "start_speaker_separation",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1997,6 +2029,10 @@ func (s *PvcVoices) StartSpeakerSeparation(ctx context.Context, voiceID string, 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2210,7 +2246,7 @@ func (s *PvcVoices) GetSpeakerAudio(ctx context.Context, voiceID string, sampleI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_speaker_audio",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2232,6 +2268,10 @@ func (s *PvcVoices) GetSpeakerAudio(ctx context.Context, voiceID string, sampleI
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2443,7 +2483,7 @@ func (s *PvcVoices) GetPvcVoiceCaptcha(ctx context.Context, voiceID string, xiAP
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_pvc_voice_captcha",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2465,6 +2505,10 @@ func (s *PvcVoices) GetPvcVoiceCaptcha(ctx context.Context, voiceID string, xiAP
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2658,7 +2702,7 @@ func (s *PvcVoices) VerifyPvcVoiceCaptcha(ctx context.Context, voiceID string, b
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "verify_pvc_voice_captcha",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -2687,6 +2731,10 @@ func (s *PvcVoices) VerifyPvcVoiceCaptcha(ctx context.Context, voiceID string, b
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2899,7 +2947,7 @@ func (s *PvcVoices) RunPvcVoiceTraining(ctx context.Context, voiceID string, xiA
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "run_pvc_voice_training",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2928,6 +2976,10 @@ func (s *PvcVoices) RunPvcVoiceTraining(ctx context.Context, voiceID string, xiA
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3140,7 +3192,7 @@ func (s *PvcVoices) RequestPvcManualVerification(ctx context.Context, voiceID st
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "request_pvc_manual_verification",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -3169,6 +3221,10 @@ func (s *PvcVoices) RequestPvcManualVerification(ctx context.Context, voiceID st
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

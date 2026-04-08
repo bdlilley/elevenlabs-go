@@ -32,6 +32,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToDialogue.TextToDialogue(ctx, components.BodyTextToDialogueMultiVoiceV1TextToDialoguePost{
@@ -110,6 +111,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToDialogue.TextToDialogueStream(ctx, components.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost{
@@ -188,6 +190,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToDialogue.TextToDialogueStreamWithTimestamps(ctx, components.BodyTextToDialogueStreamWithTimestamps{
@@ -266,6 +269,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToDialogue.TextToDialogueFullWithTimestamps(ctx, components.BodyTextToDialogueFullWithTimestamps{

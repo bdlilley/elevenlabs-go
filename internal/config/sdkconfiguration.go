@@ -3,6 +3,7 @@
 package config
 
 import (
+	"context"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"net/http"
 	"time"
@@ -13,8 +14,8 @@ type HTTPClient interface {
 }
 
 type SDKConfiguration struct {
-	Client HTTPClient
-
+	Client      HTTPClient
+	Security    func(context.Context) (interface{}, error)
 	ServerURL   string
 	UserAgent   string
 	RetryConfig *retry.Config

@@ -31,6 +31,22 @@ WithClient allows the overriding of the default HTTP client used by the SDK.
 elevenlabsgo.WithClient(httpClient)
 ```
 
+### WithSecurity
+
+WithSecurity configures the SDK to use the provided security details.
+
+```go
+elevenlabsgo.WithSecurity(/* ... */)
+```
+
+### WithSecuritySource
+
+WithSecuritySource configures the SDK to invoke the provided function on each method call to determine authentication.
+
+```go
+elevenlabsgo.WithSecuritySource(/* ... */)
+```
+
 ### WithRetryConfig
 
 WithRetryConfig allows setting the default retry configuration used by the SDK for all supported operations.

@@ -31,6 +31,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.ConversationalAI.CreateFolderRoute(ctx, components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost{
@@ -87,6 +88,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.ConversationalAI.PostKnowledgeBaseMoveRoute(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), nil)
@@ -143,6 +145,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.ConversationalAI.PostKnowledgeBaseBulkMoveRoute(ctx, components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost{

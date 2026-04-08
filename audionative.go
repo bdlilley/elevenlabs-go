@@ -69,7 +69,7 @@ func (s *AudioNative) CreateAudioNativeProject(ctx context.Context, body compone
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_audio_native_project",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -98,6 +98,10 @@ func (s *AudioNative) CreateAudioNativeProject(ctx context.Context, body compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -309,7 +313,7 @@ func (s *AudioNative) GetAudioNativeProjectSettingsEndpoint(ctx context.Context,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_audio_native_project_settings_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -331,6 +335,10 @@ func (s *AudioNative) GetAudioNativeProjectSettingsEndpoint(ctx context.Context,
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -543,7 +551,7 @@ func (s *AudioNative) AudioNativeProjectUpdateContentEndpoint(ctx context.Contex
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "audio_native_project_update_content_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -572,6 +580,10 @@ func (s *AudioNative) AudioNativeProjectUpdateContentEndpoint(ctx context.Contex
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -783,7 +795,7 @@ func (s *AudioNative) AudioNativeUpdateContentFromURL(ctx context.Context, body 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "audio_native_update_content_from_url",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -812,6 +824,10 @@ func (s *AudioNative) AudioNativeUpdateContentFromURL(ctx context.Context, body 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

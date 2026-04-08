@@ -69,7 +69,7 @@ func (s *MusicGeneration) ComposePlan(ctx context.Context, body components.BodyG
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "compose_plan",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -98,6 +98,10 @@ func (s *MusicGeneration) ComposePlan(ctx context.Context, body components.BodyG
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -310,7 +314,7 @@ func (s *MusicGeneration) Generate(ctx context.Context, outputFormat *components
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "generate",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -342,6 +346,10 @@ func (s *MusicGeneration) Generate(ctx context.Context, outputFormat *components
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -549,7 +557,7 @@ func (s *MusicGeneration) ComposeDetailed(ctx context.Context, outputFormat *com
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "compose_detailed",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -581,6 +589,10 @@ func (s *MusicGeneration) ComposeDetailed(ctx context.Context, outputFormat *com
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -788,7 +800,7 @@ func (s *MusicGeneration) StreamCompose(ctx context.Context, outputFormat *compo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "stream_compose",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -820,6 +832,10 @@ func (s *MusicGeneration) StreamCompose(ctx context.Context, outputFormat *compo
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1026,7 +1042,7 @@ func (s *MusicGeneration) UploadSong(ctx context.Context, body components.BodyUp
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "upload_song",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -1055,6 +1071,10 @@ func (s *MusicGeneration) UploadSong(ctx context.Context, body components.BodyUp
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1267,7 +1287,7 @@ func (s *MusicGeneration) SeparateSongStems(ctx context.Context, body components
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "separate_song_stems",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -1299,6 +1319,10 @@ func (s *MusicGeneration) SeparateSongStems(ctx context.Context, body components
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {

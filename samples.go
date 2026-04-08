@@ -70,7 +70,7 @@ func (s *Samples) DeleteSample(ctx context.Context, voiceID string, sampleID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_sample",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -92,6 +92,10 @@ func (s *Samples) DeleteSample(ctx context.Context, voiceID string, sampleID str
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -304,7 +308,7 @@ func (s *Samples) GetAudioFromSample(ctx context.Context, voiceID string, sample
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_audio_from_sample",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -326,6 +330,10 @@ func (s *Samples) GetAudioFromSample(ctx context.Context, voiceID string, sample
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

@@ -22,6 +22,7 @@ ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. 
 * [elevenlabs-go](#elevenlabs-go)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -62,6 +63,7 @@ func main() {
 
 	s := elevenlabsgo.New(
 		"https://api.example.com",
+		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
 	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
@@ -81,6 +83,55 @@ func main() {
 
 ```
 <!-- End SDK Example Usage [usage] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name     | Type   | Scheme  |
+| -------- | ------ | ------- |
+| `APIKey` | apiKey | API key |
+
+You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
+```go
+package main
+
+import (
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"github.com/bdlilley/elevenlabs-go/optionalnullable"
+	"log"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := elevenlabsgo.New(
+		"https://api.example.com",
+		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+	)
+
+	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.ExtendedSubscriptionResponseModel != nil {
+		switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
+		case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
+			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
+		case components.PendingChangeTypePendingCancellationResponseModel:
+			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
+		}
+
+	}
+}
+
+```
+<!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -513,6 +564,7 @@ func main() {
 
 	s := elevenlabsgo.New(
 		"https://api.example.com",
+		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
 	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil), operations.WithRetries(
@@ -571,6 +623,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
+		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
 	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
@@ -624,6 +677,7 @@ func main() {
 
 	s := elevenlabsgo.New(
 		"https://api.example.com",
+		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
 	res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))

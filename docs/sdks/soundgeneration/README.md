@@ -29,6 +29,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SoundGeneration.SoundGeneration(ctx, components.BodySoundGenerationV1SoundGenerationPost{

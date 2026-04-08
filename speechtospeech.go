@@ -63,7 +63,7 @@ func (s *SpeechToSpeech) SpeechToSpeechFull(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "speech_to_speech_full",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -95,6 +95,10 @@ func (s *SpeechToSpeech) SpeechToSpeechFull(ctx context.Context, request operati
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -294,7 +298,7 @@ func (s *SpeechToSpeech) SpeechToSpeechStream(ctx context.Context, request opera
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "speech_to_speech_stream",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -326,6 +330,10 @@ func (s *SpeechToSpeech) SpeechToSpeechStream(ctx context.Context, request opera
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {

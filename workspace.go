@@ -70,7 +70,7 @@ func (s *Workspace) GetServiceAccountAPIKeysRoute(ctx context.Context, serviceAc
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_service_account_api_keys_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -92,6 +92,10 @@ func (s *Workspace) GetServiceAccountAPIKeysRoute(ctx context.Context, serviceAc
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -304,7 +308,7 @@ func (s *Workspace) CreateServiceAccountAPIKey(ctx context.Context, serviceAccou
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_service_account_api_key",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -333,6 +337,10 @@ func (s *Workspace) CreateServiceAccountAPIKey(ctx context.Context, serviceAccou
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -545,7 +553,7 @@ func (s *Workspace) DeleteServiceAccountAPIKey(ctx context.Context, serviceAccou
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_service_account_api_key",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -567,6 +575,10 @@ func (s *Workspace) DeleteServiceAccountAPIKey(ctx context.Context, serviceAccou
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -780,7 +792,7 @@ func (s *Workspace) EditServiceAccountAPIKey(ctx context.Context, serviceAccount
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_service_account_api_key",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -809,6 +821,10 @@ func (s *Workspace) EditServiceAccountAPIKey(ctx context.Context, serviceAccount
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1019,7 +1035,7 @@ func (s *Workspace) ListAuthConnections(ctx context.Context, xiAPIKey optionalnu
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_auth_connections",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1041,6 +1057,10 @@ func (s *Workspace) ListAuthConnections(ctx context.Context, xiAPIKey optionalnu
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1252,7 +1272,7 @@ func (s *Workspace) CreateAuthConnection(ctx context.Context, body operations.Cr
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_auth_connection",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1281,6 +1301,10 @@ func (s *Workspace) CreateAuthConnection(ctx context.Context, body operations.Cr
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1492,7 +1516,7 @@ func (s *Workspace) DeleteAuthConnection(ctx context.Context, authConnectionID s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_auth_connection",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1514,6 +1538,10 @@ func (s *Workspace) DeleteAuthConnection(ctx context.Context, authConnectionID s
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1724,7 +1752,7 @@ func (s *Workspace) GetWorkspaceServiceAccounts(ctx context.Context, xiAPIKey op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_workspace_service_accounts",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1746,6 +1774,10 @@ func (s *Workspace) GetWorkspaceServiceAccounts(ctx context.Context, xiAPIKey op
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1956,7 +1988,7 @@ func (s *Workspace) GetGroupsEndpoint(ctx context.Context, xiAPIKey optionalnull
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_groups_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1978,6 +2010,10 @@ func (s *Workspace) GetGroupsEndpoint(ctx context.Context, xiAPIKey optionalnull
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2189,7 +2225,7 @@ func (s *Workspace) SearchGroups(ctx context.Context, name string, xiAPIKey opti
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "search_groups",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2214,6 +2250,10 @@ func (s *Workspace) SearchGroups(ctx context.Context, name string, xiAPIKey opti
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2427,7 +2467,7 @@ func (s *Workspace) RemoveMember(ctx context.Context, groupID string, body compo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "remove_member",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2456,6 +2496,10 @@ func (s *Workspace) RemoveMember(ctx context.Context, groupID string, body compo
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2668,7 +2712,7 @@ func (s *Workspace) AddMember(ctx context.Context, groupID string, body componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_member",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2697,6 +2741,10 @@ func (s *Workspace) AddMember(ctx context.Context, groupID string, body componen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2908,7 +2956,7 @@ func (s *Workspace) InviteUser(ctx context.Context, body components.BodyInviteUs
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "invite_user",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2937,6 +2985,10 @@ func (s *Workspace) InviteUser(ctx context.Context, body components.BodyInviteUs
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3148,7 +3200,7 @@ func (s *Workspace) InviteUsersBulk(ctx context.Context, body components.BodyInv
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "invite_users_bulk",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -3177,6 +3229,10 @@ func (s *Workspace) InviteUsersBulk(ctx context.Context, body components.BodyInv
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3388,7 +3444,7 @@ func (s *Workspace) DeleteInvite(ctx context.Context, body components.BodyDelete
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_invite",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -3417,6 +3473,10 @@ func (s *Workspace) DeleteInvite(ctx context.Context, body components.BodyDelete
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3628,7 +3688,7 @@ func (s *Workspace) UpdateWorkspaceMember(ctx context.Context, body components.B
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_workspace_member",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -3657,6 +3717,10 @@ func (s *Workspace) UpdateWorkspaceMember(ctx context.Context, body components.B
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3869,7 +3933,7 @@ func (s *Workspace) GetResourceMetadata(ctx context.Context, resourceID string, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_resource_metadata",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3894,6 +3958,10 @@ func (s *Workspace) GetResourceMetadata(ctx context.Context, resourceID string, 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -4107,7 +4175,7 @@ func (s *Workspace) ShareResourceEndpoint(ctx context.Context, resourceID string
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "share_resource_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -4136,6 +4204,10 @@ func (s *Workspace) ShareResourceEndpoint(ctx context.Context, resourceID string
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4348,7 +4420,7 @@ func (s *Workspace) UnshareResourceEndpoint(ctx context.Context, resourceID stri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "unshare_resource_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -4377,6 +4449,10 @@ func (s *Workspace) UnshareResourceEndpoint(ctx context.Context, resourceID stri
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4588,7 +4664,7 @@ func (s *Workspace) GetWorkspaceWebhooksRoute(ctx context.Context, includeUsages
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_workspace_webhooks_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4613,6 +4689,10 @@ func (s *Workspace) GetWorkspaceWebhooksRoute(ctx context.Context, includeUsages
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -4825,7 +4905,7 @@ func (s *Workspace) CreateWorkspaceWebhookRoute(ctx context.Context, body compon
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_workspace_webhook_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -4854,6 +4934,10 @@ func (s *Workspace) CreateWorkspaceWebhookRoute(ctx context.Context, body compon
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5065,7 +5149,7 @@ func (s *Workspace) DeleteWorkspaceWebhookRoute(ctx context.Context, webhookID s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_workspace_webhook_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5087,6 +5171,10 @@ func (s *Workspace) DeleteWorkspaceWebhookRoute(ctx context.Context, webhookID s
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5299,7 +5387,7 @@ func (s *Workspace) EditWorkspaceWebhookRoute(ctx context.Context, webhookID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_workspace_webhook_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -5328,6 +5416,10 @@ func (s *Workspace) EditWorkspaceWebhookRoute(ctx context.Context, webhookID str
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

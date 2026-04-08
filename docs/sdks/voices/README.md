@@ -41,6 +41,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.GetVoices(ctx, optionalnullable.From(elevenlabsgo.Pointer(true)), optionalnullable.From[string](nil))
@@ -96,6 +97,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.GetUserVoicesV2(ctx, operations.GetUserVoicesV2Request{
@@ -152,6 +154,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.GetVoiceSettingsDefault(ctx)
@@ -203,6 +206,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.GetVoiceSettings(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -257,6 +261,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.GetVoiceByID(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer(true), optionalnullable.From[string](nil))
@@ -312,6 +317,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.DeleteVoice(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -367,6 +373,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.EditVoiceSettings(ctx, "21m00Tcm4TlvDq8ikWAM", components.VoiceSettingsResponseModel{
@@ -429,6 +436,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.AddVoice(ctx, components.BodyAddVoiceV1VoicesAddPost{
@@ -492,6 +500,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.EditVoice(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyEditVoiceV1VoicesVoiceIDEditPost{
@@ -555,6 +564,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.AddSharingVoice(ctx, "63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74d1265a574ca", "21m00Tcm4TlvDq8ikWAM", components.BodyAddSharedVoiceV1VoicesAddPublicUserIDVoiceIDPost{
@@ -614,6 +624,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.GetLibraryVoices(ctx, operations.GetLibraryVoicesRequest{
@@ -683,6 +694,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Voices.GetSimilarLibraryVoices(ctx, optionalnullable.From[string](nil), &components.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost{

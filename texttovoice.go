@@ -70,7 +70,7 @@ func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePrev
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -102,6 +102,10 @@ func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePrev
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -314,7 +318,7 @@ func (s *TextToVoice) CreateVoice(ctx context.Context, body components.BodyCreat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -343,6 +347,10 @@ func (s *TextToVoice) CreateVoice(ctx context.Context, body components.BodyCreat
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -555,7 +563,7 @@ func (s *TextToVoice) TextToVoiceDesign(ctx context.Context, body components.Voi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_voice_design",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -587,6 +595,10 @@ func (s *TextToVoice) TextToVoiceDesign(ctx context.Context, body components.Voi
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -801,7 +813,7 @@ func (s *TextToVoice) TextToVoiceRemix(ctx context.Context, voiceID string, body
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_voice_remix",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -833,6 +845,10 @@ func (s *TextToVoice) TextToVoiceRemix(ctx context.Context, voiceID string, body
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1045,7 +1061,7 @@ func (s *TextToVoice) TextToVoicePreviewStream(ctx context.Context, generatedVoi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_voice_preview_stream",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1067,6 +1083,10 @@ func (s *TextToVoice) TextToVoicePreviewStream(ctx context.Context, generatedVoi
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

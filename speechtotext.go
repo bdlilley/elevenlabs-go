@@ -71,7 +71,7 @@ func (s *SpeechToText) SpeechToText(ctx context.Context, body components.BodySpe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "speech_to_text",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -103,6 +103,10 @@ func (s *SpeechToText) SpeechToText(ctx context.Context, body components.BodySpe
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -317,7 +321,7 @@ func (s *SpeechToText) GetTranscriptByID(ctx context.Context, transcriptionID st
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_transcript_by_id",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -339,6 +343,10 @@ func (s *SpeechToText) GetTranscriptByID(ctx context.Context, transcriptionID st
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -554,7 +562,7 @@ func (s *SpeechToText) DeleteTranscriptByID(ctx context.Context, transcriptionID
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_transcript_by_id",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -576,6 +584,10 @@ func (s *SpeechToText) DeleteTranscriptByID(ctx context.Context, transcriptionID
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

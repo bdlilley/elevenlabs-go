@@ -35,6 +35,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechHistory.GetSpeechHistory(ctx, operations.GetSpeechHistoryRequest{
@@ -95,6 +96,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechHistory.GetSpeechHistoryItemByID(ctx, "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -149,6 +151,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechHistory.DeleteSpeechHistoryItem(ctx, "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -203,6 +206,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechHistory.GetAudioFullFromSpeechHistoryItem(ctx, "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -258,6 +262,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechHistory.DownloadSpeechHistoryItems(ctx, components.BodyDownloadHistoryItemsV1HistoryDownloadPost{

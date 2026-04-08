@@ -70,7 +70,7 @@ func (s *Voices) GetVoices(ctx context.Context, showLegacy optionalnullable.Opti
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_voices",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -95,6 +95,10 @@ func (s *Voices) GetVoices(ctx context.Context, showLegacy optionalnullable.Opti
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -302,7 +306,7 @@ func (s *Voices) GetUserVoicesV2(ctx context.Context, request operations.GetUser
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_user_voices_v2",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -327,6 +331,10 @@ func (s *Voices) GetUserVoicesV2(ctx context.Context, request operations.GetUser
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -534,7 +542,7 @@ func (s *Voices) GetVoiceSettingsDefault(ctx context.Context, opts ...operations
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_voice_settings_default",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -554,6 +562,10 @@ func (s *Voices) GetVoiceSettingsDefault(ctx context.Context, opts ...operations
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -740,7 +752,7 @@ func (s *Voices) GetVoiceSettings(ctx context.Context, voiceID string, xiAPIKey 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_voice_settings",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -762,6 +774,10 @@ func (s *Voices) GetVoiceSettings(ctx context.Context, voiceID string, xiAPIKey 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -974,7 +990,7 @@ func (s *Voices) GetVoiceByID(ctx context.Context, voiceID string, withSettings 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_voice_by_id",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -999,6 +1015,10 @@ func (s *Voices) GetVoiceByID(ctx context.Context, voiceID string, withSettings 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1211,7 +1231,7 @@ func (s *Voices) DeleteVoice(ctx context.Context, voiceID string, xiAPIKey optio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1233,6 +1253,10 @@ func (s *Voices) DeleteVoice(ctx context.Context, voiceID string, xiAPIKey optio
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1445,7 +1469,7 @@ func (s *Voices) EditVoiceSettings(ctx context.Context, voiceID string, body com
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_voice_settings",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1474,6 +1498,10 @@ func (s *Voices) EditVoiceSettings(ctx context.Context, voiceID string, body com
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1685,7 +1713,7 @@ func (s *Voices) AddVoice(ctx context.Context, body components.BodyAddVoiceV1Voi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -1714,6 +1742,10 @@ func (s *Voices) AddVoice(ctx context.Context, body components.BodyAddVoiceV1Voi
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1926,7 +1958,7 @@ func (s *Voices) EditVoice(ctx context.Context, voiceID string, body components.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -1955,6 +1987,10 @@ func (s *Voices) EditVoice(ctx context.Context, voiceID string, body components.
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2168,7 +2204,7 @@ func (s *Voices) AddSharingVoice(ctx context.Context, publicUserID string, voice
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_sharing_voice",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2197,6 +2233,10 @@ func (s *Voices) AddSharingVoice(ctx context.Context, publicUserID string, voice
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2403,7 +2443,7 @@ func (s *Voices) GetLibraryVoices(ctx context.Context, request operations.GetLib
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_library_voices",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2428,6 +2468,10 @@ func (s *Voices) GetLibraryVoices(ctx context.Context, request operations.GetLib
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2640,7 +2684,7 @@ func (s *Voices) GetSimilarLibraryVoices(ctx context.Context, xiAPIKey optionaln
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_similar_library_voices",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -2669,6 +2713,10 @@ func (s *Voices) GetSimilarLibraryVoices(ctx context.Context, xiAPIKey optionaln
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

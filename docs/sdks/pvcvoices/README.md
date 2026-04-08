@@ -42,6 +42,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.CreatePvcVoice(ctx, components.BodyCreatePVCVoiceV1VoicesPVCPost{
@@ -101,6 +102,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.EditPvcVoice(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), &components.BodyEditPVCVoiceV1VoicesPVCVoiceIDPost{
@@ -161,6 +163,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.AddPvcVoiceSamples(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyAddSamplesToPVCVoiceV1VoicesPVCVoiceIDSamplesPost{
@@ -220,6 +223,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.EditPvcVoiceSample(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil), &components.BodyUpdatePVCVoiceSampleV1VoicesPVCVoiceIDSamplesSampleIDPost{
@@ -281,6 +285,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.DeletePvcVoiceSample(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -336,6 +341,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.GetPvcSampleAudio(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", elevenlabsgo.Pointer(true), optionalnullable.From[string](nil))
@@ -392,6 +398,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.GetPvcSampleVisualWaveform(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -447,6 +454,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.GetPvcSampleSpeakers(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -502,6 +510,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.StartSpeakerSeparation(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -557,6 +566,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.GetSpeakerAudio(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -613,6 +623,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.GetPvcVoiceCaptcha(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -669,6 +680,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     example, fileErr := os.Open("example.file")
@@ -735,6 +747,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.RunPvcVoiceTraining(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), &components.BodyRunPVCTrainingV1VoicesPVCVoiceIDTrainPost{
@@ -793,6 +806,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PvcVoices.RequestPvcManualVerification(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyRequestManualVerificationV1VoicesPvcVoiceIDVerificationPost{

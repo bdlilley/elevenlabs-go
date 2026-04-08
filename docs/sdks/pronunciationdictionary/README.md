@@ -37,6 +37,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.AddFromFile(ctx, components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost{
@@ -96,6 +97,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.AddFromRules(ctx, components.BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromRulesPost{
@@ -163,6 +165,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.GetPronunciationDictionaryMetadata(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -218,6 +221,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.PatchPronunciationDictionary(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), &components.BodyUpdatePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDPatch{
@@ -277,6 +281,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.SetRules(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodySetRulesOnThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDSetRulesPost{
@@ -343,6 +348,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.AddRules(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyAddRulesToThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDAddRulesPost{
@@ -408,6 +414,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.RemoveRules(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyRemoveRulesFromThePronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIDRemoveRulesPost{
@@ -467,6 +474,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.GetPronunciationDictionaryVersionPls(ctx, "21m00Tcm4TlvDq8ikWAM", "BdF0s0aZ3oFoKnDYdTox", optionalnullable.From[string](nil))
@@ -523,6 +531,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.PronunciationDictionary.GetPronunciationDictionariesMetadata(ctx, operations.GetPronunciationDictionariesMetadataRequest{

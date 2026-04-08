@@ -70,7 +70,7 @@ func (s *ForcedAlignment) ForcedAlignment(ctx context.Context, body components.B
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "forced_alignment",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -99,6 +99,10 @@ func (s *ForcedAlignment) ForcedAlignment(ctx context.Context, body components.B
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

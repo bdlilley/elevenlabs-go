@@ -53,15 +53,21 @@ type ElevenlabsGo struct {
 	// Accesses your speech history. Your speech history is a list of all your created audio including its metadata using our text-to-speech and speech-to-speech models.
 	SpeechHistory   *SpeechHistory
 	SoundGeneration *SoundGeneration
-	AudioIsolation  *AudioIsolation
+	// Audio Isolation
+	// Removes background noise from audio
+	AudioIsolation *AudioIsolation
 	// Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
 	Samples *Samples
 	// Convert text into lifelike speech using a voice of your choice.
-	TextToSpeech   *TextToSpeech
+	TextToSpeech *TextToSpeech
+	// Text To Dialogue (Multi-Voice)
+	// Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
 	TextToDialogue *TextToDialogue
 	// Create speech by combining the style and content of an audio file you upload with a voice of your choice.
 	SpeechToSpeech *SpeechToSpeech
-	TextToVoice    *TextToVoice
+	// Generate A Voice Preview From Description
+	// Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
+	TextToVoice *TextToVoice
 	// Access to voices created either by you or ElevenLabs.
 	Voices *Voices
 	Studio *Studio
@@ -120,6 +126,23 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
+// WithSecurity configures the SDK to use the provided security details
+func WithSecurity(apiKey string) SDKOption {
+	return func(sdk *ElevenlabsGo) {
+		security := components.Security{APIKey: apiKey}
+		sdk.sdkConfiguration.Security = utils.AsSecuritySource(&security)
+	}
+}
+
+// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
+func WithSecuritySource(security func(context.Context) (components.Security, error)) SDKOption {
+	return func(sdk *ElevenlabsGo) {
+		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
+			return security(ctx)
+		}
+	}
+}
+
 func WithRetryConfig(retryConfig retry.Config) SDKOption {
 	return func(sdk *ElevenlabsGo) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
@@ -136,9 +159,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided serverURL and options
 func New(serverURL string, opts ...SDKOption) *ElevenlabsGo {
 	sdk := &ElevenlabsGo{
-		SDKVersion: "0.0.4",
+		SDKVersion: "0.1.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent: "speakeasy-sdk/go 0.0.4 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent: "speakeasy-sdk/go 0.1.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
 		},
 		hooks: hooks.New(),
 	}
@@ -222,7 +245,7 @@ func (s *ElevenlabsGo) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey opt
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_user_subscription_info",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -244,6 +267,10 @@ func (s *ElevenlabsGo) GetUserSubscriptionInfo(ctx context.Context, xiAPIKey opt
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -454,7 +481,7 @@ func (s *ElevenlabsGo) GetUserInfo(ctx context.Context, xiAPIKey optionalnullabl
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_user_info",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -476,6 +503,10 @@ func (s *ElevenlabsGo) GetUserInfo(ctx context.Context, xiAPIKey optionalnullabl
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -682,7 +713,7 @@ func (s *ElevenlabsGo) UsageCharacters(ctx context.Context, request operations.U
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "usage_characters",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -707,6 +738,10 @@ func (s *ElevenlabsGo) UsageCharacters(ctx context.Context, request operations.U
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -919,7 +954,7 @@ func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, body op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_agent_response_test_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -948,6 +983,10 @@ func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, body op
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1159,7 +1198,7 @@ func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_response_test_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1181,6 +1220,10 @@ func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID str
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1393,7 +1436,7 @@ func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_agent_response_test_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1422,6 +1465,10 @@ func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1633,7 +1680,7 @@ func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_chat_response_test_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1655,6 +1702,10 @@ func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID s
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1866,7 +1917,7 @@ func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_response_tests_summaries_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1895,6 +1946,10 @@ func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2101,7 +2156,7 @@ func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_chat_response_tests_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2126,6 +2181,10 @@ func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request o
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2340,7 +2399,7 @@ func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_test_invocations_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2365,6 +2424,10 @@ func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID str
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2578,7 +2641,7 @@ func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID strin
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "run_agent_test_suite_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2607,6 +2670,10 @@ func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID strin
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2818,7 +2885,7 @@ func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocatio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_test_invocation_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2840,6 +2907,10 @@ func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocatio
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3052,7 +3123,7 @@ func (s *ElevenlabsGo) ResubmitTestsRoute(ctx context.Context, testInvocationID 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "resubmit_tests_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -3081,6 +3152,10 @@ func (s *ElevenlabsGo) ResubmitTestsRoute(ctx context.Context, testInvocationID 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3286,7 +3361,7 @@ func (s *ElevenlabsGo) RedirectToMintlify(ctx context.Context, opts ...operation
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "redirect_to_mintlify",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3306,6 +3381,10 @@ func (s *ElevenlabsGo) RedirectToMintlify(ctx context.Context, opts ...operation
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

@@ -4,6 +4,8 @@ sources:
     elevenlabs-go:
         inputs:
             - location: https://api.elevenlabs.io/openapi.json
+        overlays:
+            - location: overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/kudos/elevenlabs-go/elevenlabs-go
 targets:

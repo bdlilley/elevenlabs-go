@@ -68,7 +68,7 @@ func (s *Enterprise) GetDubbingResource(ctx context.Context, dubbingID string, x
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_dubbing_resource",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -90,6 +90,10 @@ func (s *Enterprise) GetDubbingResource(ctx context.Context, dubbingID string, x
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -302,7 +306,7 @@ func (s *Enterprise) AddLanguage(ctx context.Context, dubbingID string, body com
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_language",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -331,6 +335,10 @@ func (s *Enterprise) AddLanguage(ctx context.Context, dubbingID string, body com
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -544,7 +552,7 @@ func (s *Enterprise) CreateClip(ctx context.Context, dubbingID string, speakerID
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_clip",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -573,6 +581,10 @@ func (s *Enterprise) CreateClip(ctx context.Context, dubbingID string, speakerID
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -779,7 +791,7 @@ func (s *Enterprise) UpdateSegmentLanguage(ctx context.Context, request operatio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_segment_language",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -808,6 +820,10 @@ func (s *Enterprise) UpdateSegmentLanguage(ctx context.Context, request operatio
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1020,7 +1036,7 @@ func (s *Enterprise) MigrateSegments(ctx context.Context, dubbingID string, body
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "migrate_segments",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1049,6 +1065,10 @@ func (s *Enterprise) MigrateSegments(ctx context.Context, dubbingID string, body
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1261,7 +1281,7 @@ func (s *Enterprise) DeleteSegment(ctx context.Context, dubbingID string, segmen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_segment",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1283,6 +1303,10 @@ func (s *Enterprise) DeleteSegment(ctx context.Context, dubbingID string, segmen
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1495,7 +1519,7 @@ func (s *Enterprise) Transcribe(ctx context.Context, dubbingID string, body comp
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "transcribe",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1524,6 +1548,10 @@ func (s *Enterprise) Transcribe(ctx context.Context, dubbingID string, body comp
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1736,7 +1764,7 @@ func (s *Enterprise) Translate(ctx context.Context, dubbingID string, body compo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "translate",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1765,6 +1793,10 @@ func (s *Enterprise) Translate(ctx context.Context, dubbingID string, body compo
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1977,7 +2009,7 @@ func (s *Enterprise) Dub(ctx context.Context, dubbingID string, body components.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "dub",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2006,6 +2038,10 @@ func (s *Enterprise) Dub(ctx context.Context, dubbingID string, body components.
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2219,7 +2255,7 @@ func (s *Enterprise) UpdateSpeaker(ctx context.Context, dubbingID string, speake
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_speaker",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2248,6 +2284,10 @@ func (s *Enterprise) UpdateSpeaker(ctx context.Context, dubbingID string, speake
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2459,7 +2499,7 @@ func (s *Enterprise) CreateSpeaker(ctx context.Context, dubbingID string, xiAPIK
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_speaker",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2488,6 +2528,10 @@ func (s *Enterprise) CreateSpeaker(ctx context.Context, dubbingID string, xiAPIK
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2700,7 +2744,7 @@ func (s *Enterprise) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_similar_voices_for_speaker",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2722,6 +2766,10 @@ func (s *Enterprise) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID s
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2935,7 +2983,7 @@ func (s *Enterprise) Render(ctx context.Context, dubbingID string, language stri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "render",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2964,6 +3012,10 @@ func (s *Enterprise) Render(ctx context.Context, dubbingID string, language stri
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

@@ -47,6 +47,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.GetDubbingResource(ctx, "<id>", optionalnullable.From[string](nil))
@@ -102,6 +103,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.AddLanguage(ctx, "<id>", components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost{
@@ -160,6 +162,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.CreateClip(ctx, "<id>", "<id>", components.SegmentCreatePayload{
@@ -220,6 +223,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.UpdateSegmentLanguage(ctx, operations.UpdateSegmentLanguageRequest{
@@ -279,6 +283,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.MigrateSegments(ctx, "<id>", components.BodyMoveSegmentsBetweenSpeakersV1DubbingResourceDubbingIDMigrateSegmentsPost{
@@ -341,6 +346,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.DeleteSegment(ctx, "<id>", "<id>", optionalnullable.From[string](nil))
@@ -397,6 +403,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.Transcribe(ctx, "<id>", components.BodyTranscribesSegmentsV1DubbingResourceDubbingIDTranscribePost{
@@ -457,6 +464,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.Translate(ctx, "<id>", components.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDTranslatePost{
@@ -522,6 +530,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.Dub(ctx, "<id>", components.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDDubPost{
@@ -583,6 +592,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.UpdateSpeaker(ctx, "<id>", "<id>", optionalnullable.From[string](nil), nil)
@@ -639,6 +649,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.CreateSpeaker(ctx, "<id>", optionalnullable.From[string](nil), nil)
@@ -694,6 +705,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.GetSimilarVoicesForSpeaker(ctx, "<id>", "<id>", optionalnullable.From[string](nil))
@@ -750,6 +762,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.Render(ctx, "<id>", "<value>", components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost{
@@ -808,6 +821,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.ListDubs(ctx, operations.ListDubsRequest{})
@@ -861,6 +875,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.CreateDubbing(ctx, optionalnullable.From[string](nil), nil)
@@ -915,6 +930,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.GetDubbedMetadata(ctx, "<id>", optionalnullable.From[string](nil))
@@ -969,6 +985,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.DeleteDubbing(ctx, "<id>", optionalnullable.From[string](nil))
@@ -1023,6 +1040,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.GetDubbedFile(ctx, "<id>", "<value>", optionalnullable.From[string](nil))
@@ -1081,6 +1099,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.GetDubbedTranscriptFile(ctx, "<id>", "source", operations.GetDubbedTranscriptFileFormatTypeSrt.ToPointer(), optionalnullable.From[string](nil))
@@ -1144,6 +1163,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Dubbing.GetDubbingTranscripts(ctx, "<id>", "source", operations.GetDubbingTranscriptsFormatTypeSrt, optionalnullable.From[string](nil))

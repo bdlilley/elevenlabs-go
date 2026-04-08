@@ -2,8 +2,8 @@ speakeasyVersion: 1.761.1
 sources:
     elevenlabs-go:
         sourceNamespace: elevenlabs-go
-        sourceRevisionDigest: sha256:b171a9841aaeaaf057b3282b0027f5af21495fefcd839f112ed4b742f055c067
-        sourceBlobDigest: sha256:20111f21b6ed7473aeeb6a46cf2e1b81cea488c85c6e54626ebbb38c45cf0957
+        sourceRevisionDigest: sha256:30617f6bf9aec241e55fbfc58950d8713c6d5607ce3e06b7f488c3446716b955
+        sourceBlobDigest: sha256:d993dfeee8226a8a7a412e67fe607c99fdecdc8661955880ceef26ac68ca6b84
         tags:
             - latest
             - "1.0"
@@ -11,10 +11,10 @@ targets:
     elevenlabs-go:
         source: elevenlabs-go
         sourceNamespace: elevenlabs-go
-        sourceRevisionDigest: sha256:b171a9841aaeaaf057b3282b0027f5af21495fefcd839f112ed4b742f055c067
-        sourceBlobDigest: sha256:20111f21b6ed7473aeeb6a46cf2e1b81cea488c85c6e54626ebbb38c45cf0957
+        sourceRevisionDigest: sha256:30617f6bf9aec241e55fbfc58950d8713c6d5607ce3e06b7f488c3446716b955
+        sourceBlobDigest: sha256:d993dfeee8226a8a7a412e67fe607c99fdecdc8661955880ceef26ac68ca6b84
         codeSamplesNamespace: elevenlabs-go-code-samples
-        codeSamplesRevisionDigest: sha256:7fd145a2c7bfaf6bc43562af4c08064cab56107ef8161d45b2a33c8be21878ac
+        codeSamplesRevisionDigest: sha256:e43123968a4e13e3095c0459bae1e9f928d50f8d06bae86144b0c1f940c0abf2
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -22,6 +22,8 @@ workflow:
         elevenlabs-go:
             inputs:
                 - location: https://api.elevenlabs.io/openapi.json
+            overlays:
+                - location: overlay.yaml
             registry:
                 location: registry.speakeasyapi.dev/kudos/elevenlabs-go/elevenlabs-go
     targets:

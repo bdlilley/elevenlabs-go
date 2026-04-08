@@ -52,6 +52,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.GetServiceAccountAPIKeysRoute(ctx, "<id>", optionalnullable.From[string](nil))
@@ -107,6 +108,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.CreateServiceAccountAPIKey(ctx, "<id>", components.BodyCreateServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysPost{
@@ -167,6 +169,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.DeleteServiceAccountAPIKey(ctx, "<id>", "<id>", optionalnullable.From[string](nil))
@@ -223,6 +226,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.EditServiceAccountAPIKey(ctx, "<id>", "<id>", components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch{
@@ -285,6 +289,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.ListAuthConnections(ctx, optionalnullable.From[string](nil))
@@ -340,6 +345,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.CreateAuthConnection(ctx, operations.CreateCreateAuthConnectionRequestBodyCreatePrivateKeyJWTRequest(
@@ -423,6 +429,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.DeleteAuthConnection(ctx, "<id>", optionalnullable.From[string](nil))
@@ -477,6 +484,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.GetWorkspaceServiceAccounts(ctx, optionalnullable.From[string](nil))
@@ -530,6 +538,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.GetGroupsEndpoint(ctx, optionalnullable.From[string](nil))
@@ -583,6 +592,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.SearchGroups(ctx, "<value>", optionalnullable.From[string](nil))
@@ -638,6 +648,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.RemoveMember(ctx, "<id>", components.BodyDeleteMemberFromUserGroupV1WorkspaceGroupsGroupIDMembersRemovePost{
@@ -696,6 +707,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.AddMember(ctx, "<id>", components.BodyAddMemberToUserGroupV1WorkspaceGroupsGroupIDMembersPost{
@@ -754,6 +766,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.InviteUser(ctx, components.BodyInviteUserV1WorkspaceInvitesAddPost{
@@ -815,6 +828,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.InviteUsersBulk(ctx, components.BodyInviteMultipleUsersV1WorkspaceInvitesAddBulkPost{
@@ -878,6 +892,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.DeleteInvite(ctx, components.BodyDeleteExistingInvitationV1WorkspaceInvitesDelete{
@@ -935,6 +950,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.UpdateWorkspaceMember(ctx, components.BodyUpdateMemberV1WorkspaceMembersPost{
@@ -992,6 +1008,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.GetResourceMetadata(ctx, "<id>", components.WorkspaceResourceTypeVoiceCollection, optionalnullable.From[string](nil))
@@ -1048,6 +1065,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.ShareResourceEndpoint(ctx, "<id>", components.BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePost{
@@ -1107,6 +1125,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.UnshareResourceEndpoint(ctx, "<id>", components.BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost{
@@ -1164,6 +1183,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.GetWorkspaceWebhooksRoute(ctx, elevenlabsgo.Pointer(false), optionalnullable.From[string](nil))
@@ -1219,6 +1239,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.CreateWorkspaceWebhookRoute(ctx, components.BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost{
@@ -1278,6 +1299,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.DeleteWorkspaceWebhookRoute(ctx, "G007vmtq9uWYl7SUW9zGS8GZZa1K", optionalnullable.From[string](nil))
@@ -1333,6 +1355,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Workspace.EditWorkspaceWebhookRoute(ctx, "G007vmtq9uWYl7SUW9zGS8GZZa1K", components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch{

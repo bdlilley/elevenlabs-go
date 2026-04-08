@@ -44,6 +44,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.GetUserSubscriptionInfo(ctx, optionalnullable.From[string](nil))
@@ -103,6 +104,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.GetUserInfo(ctx, optionalnullable.From[string](nil))
@@ -156,6 +158,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.UsageCharacters(ctx, operations.UsageCharactersRequest{
@@ -214,6 +217,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.CreateAgentResponseTestRoute(ctx, operations.CreateCreateAgentResponseTestRouteTestRequestCreateSimulationTestRequest(
@@ -273,6 +277,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.GetAgentResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", optionalnullable.From[string](nil))
@@ -337,6 +342,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.UpdateAgentResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", operations.CreateUpdateAgentResponseTestRouteTestRequestUpdateToolCallUnitTestRequest(
@@ -404,6 +410,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.DeleteChatResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", optionalnullable.From[string](nil))
@@ -459,6 +466,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.GetAgentResponseTestsSummariesRoute(ctx, components.ListTestsByIdsRequestModel{
@@ -518,6 +526,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.ListChatResponseTestsRoute(ctx, operations.ListChatResponseTestsRouteRequest{})
@@ -571,6 +580,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.ListTestInvocationsRoute(ctx, "<id>", elevenlabsgo.Pointer[int64](30), optionalnullable.From[string](nil), optionalnullable.From[string](nil))
@@ -628,6 +638,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.RunAgentTestSuiteRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.RunAgentTestsRequestModel{
@@ -910,6 +921,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.GetTestInvocationRoute(ctx, "<id>", optionalnullable.From[string](nil))
@@ -965,6 +977,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.ResubmitTestsRoute(ctx, "<id>", components.ResubmitTestsRequestModel{
@@ -1257,6 +1270,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.RedirectToMintlify(ctx)

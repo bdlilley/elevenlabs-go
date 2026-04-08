@@ -70,7 +70,7 @@ func (s *SoundGeneration) SoundGeneration(ctx context.Context, body components.B
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "sound_generation",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -102,6 +102,10 @@ func (s *SoundGeneration) SoundGeneration(ctx context.Context, body components.B
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {

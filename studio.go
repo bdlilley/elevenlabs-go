@@ -70,7 +70,7 @@ func (s *Studio) CreatePodcast(ctx context.Context, body components.BodyCreatePo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_podcast",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -99,6 +99,10 @@ func (s *Studio) CreatePodcast(ctx context.Context, body components.BodyCreatePo
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -311,7 +315,7 @@ func (s *Studio) UpdatePronunciationDictionaries(ctx context.Context, projectID 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_pronunciation_dictionaries",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -340,6 +344,10 @@ func (s *Studio) UpdatePronunciationDictionaries(ctx context.Context, projectID 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -550,7 +558,7 @@ func (s *Studio) GetProjects(ctx context.Context, xiAPIKey optionalnullable.Opti
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_projects",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -572,6 +580,10 @@ func (s *Studio) GetProjects(ctx context.Context, xiAPIKey optionalnullable.Opti
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -783,7 +795,7 @@ func (s *Studio) AddProject(ctx context.Context, body components.BodyCreateStudi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_project",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -812,6 +824,10 @@ func (s *Studio) AddProject(ctx context.Context, body components.BodyCreateStudi
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1024,7 +1040,7 @@ func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_project_by_id",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1049,6 +1065,10 @@ func (s *Studio) GetProjectByID(ctx context.Context, projectID string, shareID o
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1262,7 +1282,7 @@ func (s *Studio) EditProject(ctx context.Context, projectID string, body compone
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_project",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1291,6 +1311,10 @@ func (s *Studio) EditProject(ctx context.Context, projectID string, body compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1502,7 +1526,7 @@ func (s *Studio) DeleteProject(ctx context.Context, projectID string, xiAPIKey o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_project",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1524,6 +1548,10 @@ func (s *Studio) DeleteProject(ctx context.Context, projectID string, xiAPIKey o
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1736,7 +1764,7 @@ func (s *Studio) EditProjectContent(ctx context.Context, projectID string, xiAPI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_project_content",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -1765,6 +1793,10 @@ func (s *Studio) EditProjectContent(ctx context.Context, projectID string, xiAPI
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1976,7 +2008,7 @@ func (s *Studio) ConvertProjectEndpoint(ctx context.Context, projectID string, x
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "convert_project_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1998,6 +2030,10 @@ func (s *Studio) ConvertProjectEndpoint(ctx context.Context, projectID string, x
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2209,7 +2245,7 @@ func (s *Studio) GetProjectSnapshots(ctx context.Context, projectID string, xiAP
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_project_snapshots",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2231,6 +2267,10 @@ func (s *Studio) GetProjectSnapshots(ctx context.Context, projectID string, xiAP
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2443,7 +2483,7 @@ func (s *Studio) GetProjectSnapshotEndpoint(ctx context.Context, projectID strin
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_project_snapshot_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2465,6 +2505,10 @@ func (s *Studio) GetProjectSnapshotEndpoint(ctx context.Context, projectID strin
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2678,7 +2722,7 @@ func (s *Studio) StreamProjectSnapshotAudioEndpoint(ctx context.Context, project
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "stream_project_snapshot_audio_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2707,6 +2751,10 @@ func (s *Studio) StreamProjectSnapshotAudioEndpoint(ctx context.Context, project
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2900,7 +2948,7 @@ func (s *Studio) StreamProjectSnapshotArchiveEndpoint(ctx context.Context, proje
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "stream_project_snapshot_archive_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2922,6 +2970,10 @@ func (s *Studio) StreamProjectSnapshotArchiveEndpoint(ctx context.Context, proje
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3125,7 +3177,7 @@ func (s *Studio) GetChapters(ctx context.Context, projectID string, xiAPIKey opt
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_chapters",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3147,6 +3199,10 @@ func (s *Studio) GetChapters(ctx context.Context, projectID string, xiAPIKey opt
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3359,7 +3415,7 @@ func (s *Studio) AddChapter(ctx context.Context, projectID string, body componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_chapter",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -3388,6 +3444,10 @@ func (s *Studio) AddChapter(ctx context.Context, projectID string, body componen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3600,7 +3660,7 @@ func (s *Studio) GetChapterByIDEndpoint(ctx context.Context, projectID string, c
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_chapter_by_id_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3622,6 +3682,10 @@ func (s *Studio) GetChapterByIDEndpoint(ctx context.Context, projectID string, c
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3835,7 +3899,7 @@ func (s *Studio) EditChapter(ctx context.Context, projectID string, chapterID st
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "edit_chapter",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -3864,6 +3928,10 @@ func (s *Studio) EditChapter(ctx context.Context, projectID string, chapterID st
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4076,7 +4144,7 @@ func (s *Studio) DeleteChapterEndpoint(ctx context.Context, projectID string, ch
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_chapter_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4098,6 +4166,10 @@ func (s *Studio) DeleteChapterEndpoint(ctx context.Context, projectID string, ch
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4310,7 +4382,7 @@ func (s *Studio) ConvertChapterEndpoint(ctx context.Context, projectID string, c
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "convert_chapter_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4332,6 +4404,10 @@ func (s *Studio) ConvertChapterEndpoint(ctx context.Context, projectID string, c
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4544,7 +4620,7 @@ func (s *Studio) GetChapterSnapshots(ctx context.Context, projectID string, chap
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_chapter_snapshots",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4566,6 +4642,10 @@ func (s *Studio) GetChapterSnapshots(ctx context.Context, projectID string, chap
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4779,7 +4859,7 @@ func (s *Studio) GetChapterSnapshotEndpoint(ctx context.Context, projectID strin
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_chapter_snapshot_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -4801,6 +4881,10 @@ func (s *Studio) GetChapterSnapshotEndpoint(ctx context.Context, projectID strin
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5007,7 +5091,7 @@ func (s *Studio) StreamChapterSnapshotAudio(ctx context.Context, request operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "stream_chapter_snapshot_audio",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -5036,6 +5120,10 @@ func (s *Studio) StreamChapterSnapshotAudio(ctx context.Context, request operati
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5239,7 +5327,7 @@ func (s *Studio) GetProjectMutedTracksEndpoint(ctx context.Context, projectID st
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_project_muted_tracks_endpoint",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5261,6 +5349,10 @@ func (s *Studio) GetProjectMutedTracksEndpoint(ctx context.Context, projectID st
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

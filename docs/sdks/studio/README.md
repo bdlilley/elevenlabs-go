@@ -51,6 +51,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.CreatePodcast(ctx, components.BodyCreatePodcastV1StudioPodcastsPost{
@@ -130,6 +131,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.UpdatePronunciationDictionaries(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyCreatePronunciationDictionariesV1StudioProjectsProjectIDPronunciationDictionariesPost{
@@ -193,6 +195,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetProjects(ctx, optionalnullable.From[string](nil))
@@ -247,6 +250,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.AddProject(ctx, components.BodyCreateStudioProjectV1StudioProjectsPost{
@@ -329,6 +333,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetProjectByID(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), optionalnullable.From[string](nil))
@@ -385,6 +390,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.EditProject(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyUpdateStudioProjectV1StudioProjectsProjectIDPost{
@@ -447,6 +453,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.DeleteProject(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -502,6 +509,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.EditProjectContent(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), &components.BodyUpdateStudioProjectContentV1StudioProjectsProjectIDContentPost{
@@ -560,6 +568,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.ConvertProjectEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -614,6 +623,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetProjectSnapshots(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -668,6 +678,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetProjectSnapshotEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -723,6 +734,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.StreamProjectSnapshotAudioEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), nil)
@@ -779,6 +791,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.StreamProjectSnapshotArchiveEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -834,6 +847,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetChapters(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -889,6 +903,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.AddChapter(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyCreateChapterV1StudioProjectsProjectIDChaptersPost{
@@ -947,6 +962,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetChapterByIDEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -1003,6 +1019,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.EditChapter(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), &components.BodyUpdateChapterV1StudioProjectsProjectIDChaptersChapterIDPost{
@@ -1061,6 +1078,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.DeleteChapterEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -1116,6 +1134,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.ConvertChapterEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -1171,6 +1190,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetChapterSnapshots(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -1226,6 +1246,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetChapterSnapshotEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -1282,6 +1303,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.StreamChapterSnapshotAudio(ctx, operations.StreamChapterSnapshotAudioRequest{
@@ -1339,6 +1361,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Studio.GetProjectMutedTracksEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))

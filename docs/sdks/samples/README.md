@@ -31,6 +31,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Samples.DeleteSample(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))
@@ -86,6 +87,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.Samples.GetAudioFromSample(ctx, "21m00Tcm4TlvDq8ikWAM", "VW7YKqPnjY4h39yTbx2L", optionalnullable.From[string](nil))

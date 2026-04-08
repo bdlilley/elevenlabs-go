@@ -69,7 +69,7 @@ func (s *AudioIsolation) AudioIsolation(ctx context.Context, body components.Bod
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "audio_isolation",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -98,6 +98,10 @@ func (s *AudioIsolation) AudioIsolation(ctx context.Context, body components.Bod
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -290,7 +294,7 @@ func (s *AudioIsolation) AudioIsolationStream(ctx context.Context, body componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "audio_isolation_stream",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -319,6 +323,10 @@ func (s *AudioIsolation) AudioIsolationStream(ctx context.Context, body componen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

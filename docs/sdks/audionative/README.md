@@ -32,6 +32,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AudioNative.CreateAudioNativeProject(ctx, components.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost{
@@ -91,6 +92,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AudioNative.GetAudioNativeProjectSettingsEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -145,6 +147,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AudioNative.AudioNativeProjectUpdateContentEndpoint(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil), nil)
@@ -201,6 +204,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AudioNative.AudioNativeUpdateContentFromURL(ctx, components.BodyUpdateAudioNativeContentFromURLV1AudioNativeContentPost{

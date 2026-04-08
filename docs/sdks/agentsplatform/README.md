@@ -141,6 +141,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetConversationSignedLink(ctx, operations.GetConversationSignedLinkRequest{
@@ -198,6 +199,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetSignedURLDeprecated(ctx, operations.GetSignedURLDeprecatedRequest{
@@ -253,6 +255,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetLivekitToken(ctx, operations.GetLivekitTokenRequest{
@@ -309,6 +312,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.HandleTwilioOutboundCall(ctx, components.BodyHandleAnOutboundCallViaTwilioV1ConvaiTwilioOutboundCallPost{
@@ -393,6 +397,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RegisterTwilioCall(ctx, components.BodyRegisterATwilioCallAndReturnTwiMLV1ConvaiTwilioRegisterCallPost{
@@ -477,6 +482,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.WhatsappOutboundCall(ctx, components.BodyMakeAnOutboundCallViaWhatsAppV1ConvaiWhatsappOutboundCallPost{
@@ -563,6 +569,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.WhatsappOutboundMessage(ctx, components.BodySendAnOutboundMessageViaWhatsAppV1ConvaiWhatsappOutboundMessagePost{
@@ -650,6 +657,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateAgentRoute(ctx, components.BodyCreateAgentV1ConvaiAgentsCreatePost{
@@ -939,6 +947,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentSummariesRoute(ctx, []string{
@@ -995,6 +1004,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", optionalnullable.From(elevenlabsgo.Pointer("agtvrsn_8901k4t9z5defmb8vh3e9361y7nj")), optionalnullable.From(elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t")), optionalnullable.From[string](nil))
@@ -1051,6 +1061,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", optionalnullable.From[string](nil))
@@ -1107,6 +1118,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.PatchAgentSettingsRoute(ctx, operations.PatchAgentSettingsRouteRequest{
@@ -1276,6 +1288,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentWidgetRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", optionalnullable.From[string](nil), optionalnullable.From[string](nil))
@@ -1331,6 +1344,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentLinkRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", optionalnullable.From[string](nil))
@@ -1387,6 +1401,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     example, fileErr := os.Open("example.file")
@@ -1453,6 +1468,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentsRoute(ctx, operations.GetAgentsRouteRequest{
@@ -1508,6 +1524,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentKnowledgeBaseSize(ctx, "<id>", optionalnullable.From[string](nil))
@@ -1563,6 +1580,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentLlmExpectedCostCalculation(ctx, "<id>", components.LLMUsageCalculatorRequestModel{}, optionalnullable.From[string](nil))
@@ -1619,6 +1637,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DuplicateAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", optionalnullable.From[string](nil), &components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost{
@@ -1677,6 +1696,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RunConversationSimulationRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost{
@@ -1746,6 +1766,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RunConversationSimulationRouteStream(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodySimulatesAConversationStreamV1ConvaiAgentsAgentIDSimulateConversationStreamPost{
@@ -1815,6 +1836,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateAgentTestFolderRoute(ctx, components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost{
@@ -1871,6 +1893,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentTestFolderRoute(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm", optionalnullable.From[string](nil))
@@ -1925,6 +1948,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteAgentTestFolderRoute(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm", elevenlabsgo.Pointer(false), optionalnullable.From[string](nil))
@@ -1981,6 +2005,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateAgentTestFolderRoute(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm", components.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIDPatch{
@@ -2039,6 +2064,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.AgentTestingBulkMoveRoute(ctx, components.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost{
@@ -2099,6 +2125,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetConversationHistoriesRoute(ctx, operations.GetConversationHistoriesRouteRequest{
@@ -2155,6 +2182,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetConversationUsersRoute(ctx, operations.GetConversationUsersRouteRequest{
@@ -2210,6 +2238,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetConversationHistoryRoute(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -2264,6 +2293,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteConversationRoute(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -2318,6 +2348,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetConversationAudioRoute(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -2373,6 +2404,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.PostConversationFeedbackRoute(ctx, "21m00Tcm4TlvDq8ikWAM", components.ConversationFeedbackRequestModel{
@@ -2430,6 +2462,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.TextSearchConversationMessagesRoute(ctx, operations.TextSearchConversationMessagesRouteRequest{
@@ -2487,6 +2520,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.SmartSearchConversationMessagesRoute(ctx, operations.SmartSearchConversationMessagesRouteRequest{
@@ -2543,6 +2577,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.ListPhoneNumbersRoute(ctx, optionalnullable.From[string](nil))
@@ -2598,6 +2633,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreatePhoneNumberRoute(ctx, operations.CreatePhoneRequestCreateTwilioPhoneNumberRequest(
@@ -2660,6 +2696,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetPhoneNumberRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", optionalnullable.From[string](nil))
@@ -2720,6 +2757,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeletePhoneNumberRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", optionalnullable.From[string](nil))
@@ -2776,6 +2814,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdatePhoneNumberRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", components.UpdatePhoneNumberRequest{}, optionalnullable.From[string](nil))
@@ -2837,6 +2876,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetPublicLlmExpectedCostCalculation(ctx, components.LLMUsageCalculatorPublicRequestModel{
@@ -2894,6 +2934,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.ListAvailableLlms(ctx, optionalnullable.From[string](nil))
@@ -2949,6 +2990,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     example, fileErr := os.Open("example.file")
@@ -3014,6 +3056,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CancelFileUploadRoute(ctx, "<id>", "<id>", optionalnullable.From[string](nil))
@@ -3069,6 +3112,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetLiveCount(ctx, optionalnullable.From(elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM")), optionalnullable.From[string](nil))
@@ -3123,6 +3167,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetAgentKnowledgeBaseSummariesRoute(ctx, []string{
@@ -3180,6 +3225,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetKnowledgeBaseListRoute(ctx, operations.GetKnowledgeBaseListRouteRequest{})
@@ -3235,6 +3281,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.AddDocumentationToKnowledgeBase(ctx, elevenlabsgo.Pointer(""), optionalnullable.From[string](nil), nil)
@@ -3291,6 +3338,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateURLDocumentRoute(ctx, components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost{
@@ -3349,6 +3397,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     example, fileErr := os.Open("example.file")
@@ -3414,6 +3463,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateTextDocumentRoute(ctx, components.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost{
@@ -3471,6 +3521,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetDocumentationFromKnowledgeBase(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer(""), optionalnullable.From[string](nil))
@@ -3536,6 +3587,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteKnowledgeBaseDocument(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer(false), optionalnullable.From[string](nil))
@@ -3593,6 +3645,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateDocumentRoute(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch{
@@ -3660,6 +3713,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetRagIndexOverview(ctx, optionalnullable.From[string](nil))
@@ -3714,6 +3768,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetOrCreateRagIndexes(ctx, components.BodyComputeRAGIndexesInBatchV1ConvaiKnowledgeBaseRAGIndexPost{
@@ -3776,6 +3831,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RefreshURLDocumentRoute(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -3840,6 +3896,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetRagIndexes(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -3895,6 +3952,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RagIndexStatus(ctx, "21m00Tcm4TlvDq8ikWAM", components.RAGIndexRequestModel{}, optionalnullable.From[string](nil))
@@ -3950,6 +4008,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteRagIndex(ctx, "21m00Tcm4TlvDq8ikWAM", "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -4005,6 +4064,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.SearchKnowledgeBaseContentRoute(ctx, operations.SearchKnowledgeBaseContentRouteRequest{
@@ -4060,6 +4120,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetKnowledgeBaseDependentAgents(ctx, operations.GetKnowledgeBaseDependentAgentsRequest{
@@ -4115,6 +4176,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetKnowledgeBaseContent(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -4169,6 +4231,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetKnowledgeBaseSourceFileURL(ctx, "21m00Tcm4TlvDq8ikWAM", optionalnullable.From[string](nil))
@@ -4224,6 +4287,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetDocumentationChunkFromKnowledgeBase(ctx, "21m00Tcm4TlvDq8ikWAM", "1", optionalnullable.From(elevenlabsgo.Pointer(components.EmbeddingModelEnumE5Mistral7bInstruct)), optionalnullable.From[string](nil))
@@ -4280,6 +4344,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetToolsRoute(ctx, operations.GetToolsRouteRequest{})
@@ -4334,6 +4399,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.AddToolRoute(ctx, components.ToolRequestModel{
@@ -4406,6 +4472,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetToolRoute(ctx, "<id>", optionalnullable.From[string](nil))
@@ -4470,6 +4537,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteToolRoute(ctx, "<id>", elevenlabsgo.Pointer(false), optionalnullable.From[string](nil))
@@ -4526,6 +4594,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateToolRoute(ctx, "<id>", components.ToolRequestModel{
@@ -4598,6 +4667,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetToolDependentAgentsRoute(ctx, "<id>", optionalnullable.From[string](nil), elevenlabsgo.Pointer[int64](30), optionalnullable.From[string](nil))
@@ -4654,6 +4724,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetSettingsRoute(ctx, optionalnullable.From[string](nil))
@@ -4708,6 +4779,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateSettingsRoute(ctx, components.PatchConvAISettingsRequest{
@@ -4771,6 +4843,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetDashboardSettingsRoute(ctx, optionalnullable.From[string](nil))
@@ -4825,6 +4898,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateDashboardSettingsRoute(ctx, components.PatchConvAIDashboardSettingsRequest{}, optionalnullable.From[string](nil))
@@ -4879,6 +4953,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetSecretsRoute(ctx, optionalnullable.From[int64](nil), optionalnullable.From[string](nil), optionalnullable.From[string](nil))
@@ -4935,6 +5010,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateSecretRoute(ctx, components.PostWorkspaceSecretRequest{
@@ -4992,6 +5068,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteSecretRoute(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5047,6 +5124,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateSecretRoute(ctx, "<id>", components.PatchWorkspaceSecretRequest{
@@ -5106,6 +5184,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateBatchCall(ctx, components.BodySubmitABatchCallRequestV1ConvaiBatchCallingSubmitPost{
@@ -5164,6 +5243,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetWorkspaceBatchCalls(ctx, elevenlabsgo.Pointer[int64](100), optionalnullable.From[string](nil), optionalnullable.From[string](nil))
@@ -5219,6 +5299,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetBatchCall(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5273,6 +5354,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteBatchCall(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5327,6 +5409,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CancelBatchCall(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5381,6 +5464,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RetryBatchCall(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5436,6 +5520,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.HandleSipTrunkOutboundCall(ctx, components.BodyHandleAnOutboundCallViaSIPTrunkV1ConvaiSIPTrunkOutboundCallPost{
@@ -5519,6 +5604,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.ListMcpServersRoute(ctx, optionalnullable.From[string](nil))
@@ -5573,6 +5659,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateMcpServerRoute(ctx, components.MCPServerRequestModel{
@@ -5645,6 +5732,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetMcpRoute(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5699,6 +5787,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteMcpServerRoute(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5754,6 +5843,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateMcpServerConfigRoute(ctx, "<id>", components.MCPServerConfigUpdateRequestModel{}, optionalnullable.From[string](nil))
@@ -5809,6 +5899,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.ListMcpServerToolsRoute(ctx, "<id>", optionalnullable.From[string](nil))
@@ -5866,6 +5957,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateMcpServerApprovalPolicyRoute(ctx, "<id>", components.MCPApprovalPolicyUpdateRequestModel{}, optionalnullable.From[string](nil))
@@ -5922,6 +6014,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.AddMcpServerToolApprovalRoute(ctx, "<id>", components.MCPToolAddApprovalRequestModel{
@@ -5980,6 +6073,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RemoveMcpServerToolApprovalRoute(ctx, "<id>", "<value>", optionalnullable.From[string](nil))
@@ -6036,6 +6130,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.AddMcpToolConfigOverrideRoute(ctx, "<id>", components.MCPToolConfigOverrideCreateRequestModel{
@@ -6099,6 +6194,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetMcpToolConfigOverrideRoute(ctx, "<id>", "<value>", optionalnullable.From[string](nil))
@@ -6154,6 +6250,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.RemoveMcpToolConfigOverrideRoute(ctx, "<id>", "<value>", optionalnullable.From[string](nil))
@@ -6210,6 +6307,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateMcpToolConfigOverrideRoute(ctx, "<id>", "<value>", components.MCPToolConfigOverrideUpdateRequestModel{
@@ -6273,6 +6371,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetWhatsappAccount(ctx, "<id>", optionalnullable.From[string](nil))
@@ -6327,6 +6426,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteWhatsappAccount(ctx, "<id>", optionalnullable.From[string](nil))
@@ -6382,6 +6482,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateWhatsappAccount(ctx, "<id>", components.UpdateWhatsAppAccountRequest{}, optionalnullable.From[string](nil))
@@ -6437,6 +6538,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.ListWhatsappAccounts(ctx, optionalnullable.From[string](nil))
@@ -6490,6 +6592,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetBranchesRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), elevenlabsgo.Pointer[int64](100), optionalnullable.From[string](nil))
@@ -6547,6 +6650,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateBranchRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost{
@@ -6726,6 +6830,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetBranchRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", optionalnullable.From[string](nil))
@@ -6781,6 +6886,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateBranchRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", optionalnullable.From[string](nil), nil)
@@ -6837,6 +6943,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.MergeBranchIntoTarget(ctx, operations.MergeBranchIntoTargetRequest{
@@ -6895,6 +7002,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateAgentDeploymentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost{
@@ -6962,6 +7070,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateAgentDraftRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", components.BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost{
@@ -7153,6 +7262,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.DeleteAgentDraftRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", optionalnullable.From[string](nil))
@@ -7208,6 +7318,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.ListEnvironmentVariables(ctx, operations.ListEnvironmentVariablesRequest{})
@@ -7263,6 +7374,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.CreateEnvironmentVariable(ctx, operations.CreateAgentsPlatformCreateEnvironmentVariableRequestAuthConnection(
@@ -7333,6 +7445,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.GetEnvironmentVariable(ctx, "<id>", optionalnullable.From[string](nil))
@@ -7396,6 +7509,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsPlatform.UpdateEnvironmentVariable(ctx, "<id>", components.UpdateEnvironmentVariableRequest{

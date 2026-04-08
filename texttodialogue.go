@@ -70,7 +70,7 @@ func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.Bod
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_dialogue",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -102,6 +102,10 @@ func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.Bod
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -307,7 +311,7 @@ func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_dialogue_stream",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -339,6 +343,10 @@ func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body componen
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -544,7 +552,7 @@ func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_dialogue_stream_with_timestamps",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -576,6 +584,10 @@ func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context,
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -789,7 +801,7 @@ func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, b
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_to_dialogue_full_with_timestamps",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -821,6 +833,10 @@ func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, b
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {

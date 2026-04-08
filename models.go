@@ -69,7 +69,7 @@ func (s *Models) GetModels(ctx context.Context, xiAPIKey optionalnullable.Option
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_models",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -91,6 +91,10 @@ func (s *Models) GetModels(ctx context.Context, xiAPIKey optionalnullable.Option
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

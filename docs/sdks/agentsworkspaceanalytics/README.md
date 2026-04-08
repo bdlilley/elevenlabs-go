@@ -28,6 +28,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.AgentsWorkspaceAnalytics.RunConversationAnalysis(ctx, "<id>", optionalnullable.From[string](nil))

@@ -64,7 +64,7 @@ func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, request 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_conversation_signed_link",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -89,6 +89,10 @@ func (s *AgentsPlatform) GetConversationSignedLink(ctx context.Context, request 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -298,7 +302,7 @@ func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, request ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_signed_url_deprecated",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -323,6 +327,10 @@ func (s *AgentsPlatform) GetSignedURLDeprecated(ctx context.Context, request ope
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -530,7 +538,7 @@ func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, request operations
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_livekit_token",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -555,6 +563,10 @@ func (s *AgentsPlatform) GetLivekitToken(ctx context.Context, request operations
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -767,7 +779,7 @@ func (s *AgentsPlatform) HandleTwilioOutboundCall(ctx context.Context, body comp
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "handle_twilio_outbound_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -796,6 +808,10 @@ func (s *AgentsPlatform) HandleTwilioOutboundCall(ctx context.Context, body comp
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1007,7 +1023,7 @@ func (s *AgentsPlatform) RegisterTwilioCall(ctx context.Context, body components
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "register_twilio_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1036,6 +1052,10 @@ func (s *AgentsPlatform) RegisterTwilioCall(ctx context.Context, body components
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1243,7 +1263,7 @@ func (s *AgentsPlatform) WhatsappOutboundCall(ctx context.Context, body componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "whatsapp_outbound_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1272,6 +1292,10 @@ func (s *AgentsPlatform) WhatsappOutboundCall(ctx context.Context, body componen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1483,7 +1507,7 @@ func (s *AgentsPlatform) WhatsappOutboundMessage(ctx context.Context, body compo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "whatsapp_outbound_message",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1512,6 +1536,10 @@ func (s *AgentsPlatform) WhatsappOutboundMessage(ctx context.Context, body compo
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -1724,7 +1752,7 @@ func (s *AgentsPlatform) CreateAgentRoute(ctx context.Context, body components.B
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_agent_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1756,6 +1784,10 @@ func (s *AgentsPlatform) CreateAgentRoute(ctx context.Context, body components.B
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -1968,7 +2000,7 @@ func (s *AgentsPlatform) GetAgentSummariesRoute(ctx context.Context, agentIds []
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_summaries_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1993,6 +2025,10 @@ func (s *AgentsPlatform) GetAgentSummariesRoute(ctx context.Context, agentIds []
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2207,7 +2243,7 @@ func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, vers
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2232,6 +2268,10 @@ func (s *AgentsPlatform) GetAgentRoute(ctx context.Context, agentID string, vers
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2444,7 +2484,7 @@ func (s *AgentsPlatform) DeleteAgentRoute(ctx context.Context, agentID string, x
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_agent_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2466,6 +2506,10 @@ func (s *AgentsPlatform) DeleteAgentRoute(ctx context.Context, agentID string, x
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -2655,7 +2699,7 @@ func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, request op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "patch_agent_settings_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -2687,6 +2731,10 @@ func (s *AgentsPlatform) PatchAgentSettingsRoute(ctx context.Context, request op
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2900,7 +2948,7 @@ func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_widget_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -2925,6 +2973,10 @@ func (s *AgentsPlatform) GetAgentWidgetRoute(ctx context.Context, agentID string
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -3137,7 +3189,7 @@ func (s *AgentsPlatform) GetAgentLinkRoute(ctx context.Context, agentID string, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_link_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3159,6 +3211,10 @@ func (s *AgentsPlatform) GetAgentLinkRoute(ctx context.Context, agentID string, 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3371,7 +3427,7 @@ func (s *AgentsPlatform) PostAgentAvatarRoute(ctx context.Context, agentID strin
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "post_agent_avatar_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -3400,6 +3456,10 @@ func (s *AgentsPlatform) PostAgentAvatarRoute(ctx context.Context, agentID strin
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -3606,7 +3666,7 @@ func (s *AgentsPlatform) GetAgentsRoute(ctx context.Context, request operations.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agents_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3631,6 +3691,10 @@ func (s *AgentsPlatform) GetAgentsRoute(ctx context.Context, request operations.
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -3843,7 +3907,7 @@ func (s *AgentsPlatform) GetAgentKnowledgeBaseSize(ctx context.Context, agentID 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_knowledge_base_size",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -3865,6 +3929,10 @@ func (s *AgentsPlatform) GetAgentKnowledgeBaseSize(ctx context.Context, agentID 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4077,7 +4145,7 @@ func (s *AgentsPlatform) GetAgentLlmExpectedCostCalculation(ctx context.Context,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_llm_expected_cost_calculation",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -4106,6 +4174,10 @@ func (s *AgentsPlatform) GetAgentLlmExpectedCostCalculation(ctx context.Context,
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4318,7 +4390,7 @@ func (s *AgentsPlatform) DuplicateAgentRoute(ctx context.Context, agentID string
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "duplicate_agent_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -4347,6 +4419,10 @@ func (s *AgentsPlatform) DuplicateAgentRoute(ctx context.Context, agentID string
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4559,7 +4635,7 @@ func (s *AgentsPlatform) RunConversationSimulationRoute(ctx context.Context, age
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "run_conversation_simulation_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -4588,6 +4664,10 @@ func (s *AgentsPlatform) RunConversationSimulationRoute(ctx context.Context, age
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -4800,7 +4880,7 @@ func (s *AgentsPlatform) RunConversationSimulationRouteStream(ctx context.Contex
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "run_conversation_simulation_route_stream",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -4829,6 +4909,10 @@ func (s *AgentsPlatform) RunConversationSimulationRouteStream(ctx context.Contex
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5021,7 +5105,7 @@ func (s *AgentsPlatform) CreateAgentTestFolderRoute(ctx context.Context, body co
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_agent_test_folder_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -5050,6 +5134,10 @@ func (s *AgentsPlatform) CreateAgentTestFolderRoute(ctx context.Context, body co
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5261,7 +5349,7 @@ func (s *AgentsPlatform) GetAgentTestFolderRoute(ctx context.Context, folderID s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_test_folder_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5283,6 +5371,10 @@ func (s *AgentsPlatform) GetAgentTestFolderRoute(ctx context.Context, folderID s
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5495,7 +5587,7 @@ func (s *AgentsPlatform) DeleteAgentTestFolderRoute(ctx context.Context, folderI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_agent_test_folder_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -5520,6 +5612,10 @@ func (s *AgentsPlatform) DeleteAgentTestFolderRoute(ctx context.Context, folderI
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -5714,7 +5810,7 @@ func (s *AgentsPlatform) UpdateAgentTestFolderRoute(ctx context.Context, folderI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_agent_test_folder_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -5743,6 +5839,10 @@ func (s *AgentsPlatform) UpdateAgentTestFolderRoute(ctx context.Context, folderI
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -5954,7 +6054,7 @@ func (s *AgentsPlatform) AgentTestingBulkMoveRoute(ctx context.Context, body com
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "agent_testing_bulk_move_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -5983,6 +6083,10 @@ func (s *AgentsPlatform) AgentTestingBulkMoveRoute(ctx context.Context, body com
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -6189,7 +6293,7 @@ func (s *AgentsPlatform) GetConversationHistoriesRoute(ctx context.Context, requ
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_conversation_histories_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6214,6 +6318,10 @@ func (s *AgentsPlatform) GetConversationHistoriesRoute(ctx context.Context, requ
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -6421,7 +6529,7 @@ func (s *AgentsPlatform) GetConversationUsersRoute(ctx context.Context, request 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_conversation_users_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6446,6 +6554,10 @@ func (s *AgentsPlatform) GetConversationUsersRoute(ctx context.Context, request 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -6658,7 +6770,7 @@ func (s *AgentsPlatform) GetConversationHistoryRoute(ctx context.Context, conver
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_conversation_history_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6680,6 +6792,10 @@ func (s *AgentsPlatform) GetConversationHistoryRoute(ctx context.Context, conver
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -6891,7 +7007,7 @@ func (s *AgentsPlatform) DeleteConversationRoute(ctx context.Context, conversati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_conversation_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -6913,6 +7029,10 @@ func (s *AgentsPlatform) DeleteConversationRoute(ctx context.Context, conversati
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -7124,7 +7244,7 @@ func (s *AgentsPlatform) GetConversationAudioRoute(ctx context.Context, conversa
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_conversation_audio_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7146,6 +7266,10 @@ func (s *AgentsPlatform) GetConversationAudioRoute(ctx context.Context, conversa
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -7338,7 +7462,7 @@ func (s *AgentsPlatform) PostConversationFeedbackRoute(ctx context.Context, conv
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "post_conversation_feedback_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -7364,6 +7488,10 @@ func (s *AgentsPlatform) PostConversationFeedbackRoute(ctx context.Context, conv
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -7571,7 +7699,7 @@ func (s *AgentsPlatform) TextSearchConversationMessagesRoute(ctx context.Context
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "text_search_conversation_messages_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7596,6 +7724,10 @@ func (s *AgentsPlatform) TextSearchConversationMessagesRoute(ctx context.Context
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -7803,7 +7935,7 @@ func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Contex
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "smart_search_conversation_messages_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -7828,6 +7960,10 @@ func (s *AgentsPlatform) SmartSearchConversationMessagesRoute(ctx context.Contex
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -8039,7 +8175,7 @@ func (s *AgentsPlatform) ListPhoneNumbersRoute(ctx context.Context, xiAPIKey opt
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_phone_numbers_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -8061,6 +8197,10 @@ func (s *AgentsPlatform) ListPhoneNumbersRoute(ctx context.Context, xiAPIKey opt
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -8272,7 +8412,7 @@ func (s *AgentsPlatform) CreatePhoneNumberRoute(ctx context.Context, body operat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_phone_number_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -8301,6 +8441,10 @@ func (s *AgentsPlatform) CreatePhoneNumberRoute(ctx context.Context, body operat
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -8512,7 +8656,7 @@ func (s *AgentsPlatform) GetPhoneNumberRoute(ctx context.Context, phoneNumberID 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_phone_number_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -8534,6 +8678,10 @@ func (s *AgentsPlatform) GetPhoneNumberRoute(ctx context.Context, phoneNumberID 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -8745,7 +8893,7 @@ func (s *AgentsPlatform) DeletePhoneNumberRoute(ctx context.Context, phoneNumber
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_phone_number_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -8767,6 +8915,10 @@ func (s *AgentsPlatform) DeletePhoneNumberRoute(ctx context.Context, phoneNumber
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -8979,7 +9131,7 @@ func (s *AgentsPlatform) UpdatePhoneNumberRoute(ctx context.Context, phoneNumber
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_phone_number_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -9008,6 +9160,10 @@ func (s *AgentsPlatform) UpdatePhoneNumberRoute(ctx context.Context, phoneNumber
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -9214,7 +9370,7 @@ func (s *AgentsPlatform) GetPublicLlmExpectedCostCalculation(ctx context.Context
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_public_llm_expected_cost_calculation",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -9240,6 +9396,10 @@ func (s *AgentsPlatform) GetPublicLlmExpectedCostCalculation(ctx context.Context
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -9451,7 +9611,7 @@ func (s *AgentsPlatform) ListAvailableLlms(ctx context.Context, xiAPIKey optiona
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_available_llms",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -9473,6 +9633,10 @@ func (s *AgentsPlatform) ListAvailableLlms(ctx context.Context, xiAPIKey optiona
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -9685,7 +9849,7 @@ func (s *AgentsPlatform) UploadFileRoute(ctx context.Context, conversationID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "upload_file_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -9714,6 +9878,10 @@ func (s *AgentsPlatform) UploadFileRoute(ctx context.Context, conversationID str
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -9926,7 +10094,7 @@ func (s *AgentsPlatform) CancelFileUploadRoute(ctx context.Context, fileID strin
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "cancel_file_upload_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -9948,6 +10116,10 @@ func (s *AgentsPlatform) CancelFileUploadRoute(ctx context.Context, fileID strin
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -10159,7 +10331,7 @@ func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID optionalnulla
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_live_count",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -10184,6 +10356,10 @@ func (s *AgentsPlatform) GetLiveCount(ctx context.Context, agentID optionalnulla
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -10396,7 +10572,7 @@ func (s *AgentsPlatform) GetAgentKnowledgeBaseSummariesRoute(ctx context.Context
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_agent_knowledge_base_summaries_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -10421,6 +10597,10 @@ func (s *AgentsPlatform) GetAgentKnowledgeBaseSummariesRoute(ctx context.Context
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -10628,7 +10808,7 @@ func (s *AgentsPlatform) GetKnowledgeBaseListRoute(ctx context.Context, request 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_knowledge_base_list_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -10653,6 +10833,10 @@ func (s *AgentsPlatform) GetKnowledgeBaseListRoute(ctx context.Context, request 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -10868,7 +11052,7 @@ func (s *AgentsPlatform) AddDocumentationToKnowledgeBase(ctx context.Context, ag
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_documentation_to_knowledge_base",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -10900,6 +11084,10 @@ func (s *AgentsPlatform) AddDocumentationToKnowledgeBase(ctx context.Context, ag
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -11112,7 +11300,7 @@ func (s *AgentsPlatform) CreateURLDocumentRoute(ctx context.Context, body compon
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_url_document_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -11141,6 +11329,10 @@ func (s *AgentsPlatform) CreateURLDocumentRoute(ctx context.Context, body compon
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -11352,7 +11544,7 @@ func (s *AgentsPlatform) CreateFileDocumentRoute(ctx context.Context, body compo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_file_document_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
@@ -11381,6 +11573,10 @@ func (s *AgentsPlatform) CreateFileDocumentRoute(ctx context.Context, body compo
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -11592,7 +11788,7 @@ func (s *AgentsPlatform) CreateTextDocumentRoute(ctx context.Context, body compo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_text_document_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -11621,6 +11817,10 @@ func (s *AgentsPlatform) CreateTextDocumentRoute(ctx context.Context, body compo
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -11833,7 +12033,7 @@ func (s *AgentsPlatform) GetDocumentationFromKnowledgeBase(ctx context.Context, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_documentation_from_knowledge_base",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -11858,6 +12058,10 @@ func (s *AgentsPlatform) GetDocumentationFromKnowledgeBase(ctx context.Context, 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -12071,7 +12275,7 @@ func (s *AgentsPlatform) DeleteKnowledgeBaseDocument(ctx context.Context, docume
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_knowledge_base_document",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -12096,6 +12300,10 @@ func (s *AgentsPlatform) DeleteKnowledgeBaseDocument(ctx context.Context, docume
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -12309,7 +12517,7 @@ func (s *AgentsPlatform) UpdateDocumentRoute(ctx context.Context, documentationI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_document_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -12338,6 +12546,10 @@ func (s *AgentsPlatform) UpdateDocumentRoute(ctx context.Context, documentationI
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -12548,7 +12760,7 @@ func (s *AgentsPlatform) GetRagIndexOverview(ctx context.Context, xiAPIKey optio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_rag_index_overview",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -12570,6 +12782,10 @@ func (s *AgentsPlatform) GetRagIndexOverview(ctx context.Context, xiAPIKey optio
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -12781,7 +12997,7 @@ func (s *AgentsPlatform) GetOrCreateRagIndexes(ctx context.Context, body compone
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_or_create_rag_indexes",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -12810,6 +13026,10 @@ func (s *AgentsPlatform) GetOrCreateRagIndexes(ctx context.Context, body compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -13021,7 +13241,7 @@ func (s *AgentsPlatform) RefreshURLDocumentRoute(ctx context.Context, documentat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "refresh_url_document_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -13043,6 +13263,10 @@ func (s *AgentsPlatform) RefreshURLDocumentRoute(ctx context.Context, documentat
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -13254,7 +13478,7 @@ func (s *AgentsPlatform) GetRagIndexes(ctx context.Context, documentationID stri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_rag_indexes",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -13276,6 +13500,10 @@ func (s *AgentsPlatform) GetRagIndexes(ctx context.Context, documentationID stri
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -13488,7 +13716,7 @@ func (s *AgentsPlatform) RagIndexStatus(ctx context.Context, documentationID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "rag_index_status",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -13517,6 +13745,10 @@ func (s *AgentsPlatform) RagIndexStatus(ctx context.Context, documentationID str
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -13729,7 +13961,7 @@ func (s *AgentsPlatform) DeleteRagIndex(ctx context.Context, documentationID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_rag_index",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -13751,6 +13983,10 @@ func (s *AgentsPlatform) DeleteRagIndex(ctx context.Context, documentationID str
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -13957,7 +14193,7 @@ func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, re
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "search_knowledge_base_content_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -13982,6 +14218,10 @@ func (s *AgentsPlatform) SearchKnowledgeBaseContentRoute(ctx context.Context, re
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -14189,7 +14429,7 @@ func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, re
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_knowledge_base_dependent_agents",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -14214,6 +14454,10 @@ func (s *AgentsPlatform) GetKnowledgeBaseDependentAgents(ctx context.Context, re
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -14426,7 +14670,7 @@ func (s *AgentsPlatform) GetKnowledgeBaseContent(ctx context.Context, documentat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_knowledge_base_content",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -14448,6 +14692,10 @@ func (s *AgentsPlatform) GetKnowledgeBaseContent(ctx context.Context, documentat
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -14655,7 +14903,7 @@ func (s *AgentsPlatform) GetKnowledgeBaseSourceFileURL(ctx context.Context, docu
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_knowledge_base_source_file_url",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -14677,6 +14925,10 @@ func (s *AgentsPlatform) GetKnowledgeBaseSourceFileURL(ctx context.Context, docu
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -14890,7 +15142,7 @@ func (s *AgentsPlatform) GetDocumentationChunkFromKnowledgeBase(ctx context.Cont
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_documentation_chunk_from_knowledge_base",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -14915,6 +15167,10 @@ func (s *AgentsPlatform) GetDocumentationChunkFromKnowledgeBase(ctx context.Cont
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -15122,7 +15378,7 @@ func (s *AgentsPlatform) GetToolsRoute(ctx context.Context, request operations.G
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_tools_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -15147,6 +15403,10 @@ func (s *AgentsPlatform) GetToolsRoute(ctx context.Context, request operations.G
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -15359,7 +15619,7 @@ func (s *AgentsPlatform) AddToolRoute(ctx context.Context, body components.ToolR
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_tool_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -15388,6 +15648,10 @@ func (s *AgentsPlatform) AddToolRoute(ctx context.Context, body components.ToolR
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -15599,7 +15863,7 @@ func (s *AgentsPlatform) GetToolRoute(ctx context.Context, toolID string, xiAPIK
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_tool_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -15621,6 +15885,10 @@ func (s *AgentsPlatform) GetToolRoute(ctx context.Context, toolID string, xiAPIK
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -15833,7 +16101,7 @@ func (s *AgentsPlatform) DeleteToolRoute(ctx context.Context, toolID string, for
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_tool_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -15858,6 +16126,10 @@ func (s *AgentsPlatform) DeleteToolRoute(ctx context.Context, toolID string, for
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -16071,7 +16343,7 @@ func (s *AgentsPlatform) UpdateToolRoute(ctx context.Context, toolID string, bod
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_tool_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -16100,6 +16372,10 @@ func (s *AgentsPlatform) UpdateToolRoute(ctx context.Context, toolID string, bod
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -16313,7 +16589,7 @@ func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_tool_dependent_agents_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -16338,6 +16614,10 @@ func (s *AgentsPlatform) GetToolDependentAgentsRoute(ctx context.Context, toolID
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -16549,7 +16829,7 @@ func (s *AgentsPlatform) GetSettingsRoute(ctx context.Context, xiAPIKey optional
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_settings_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -16571,6 +16851,10 @@ func (s *AgentsPlatform) GetSettingsRoute(ctx context.Context, xiAPIKey optional
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -16782,7 +17066,7 @@ func (s *AgentsPlatform) UpdateSettingsRoute(ctx context.Context, body component
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_settings_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -16811,6 +17095,10 @@ func (s *AgentsPlatform) UpdateSettingsRoute(ctx context.Context, body component
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -17021,7 +17309,7 @@ func (s *AgentsPlatform) GetDashboardSettingsRoute(ctx context.Context, xiAPIKey
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_dashboard_settings_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -17043,6 +17331,10 @@ func (s *AgentsPlatform) GetDashboardSettingsRoute(ctx context.Context, xiAPIKey
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -17254,7 +17546,7 @@ func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, body 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_dashboard_settings_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -17283,6 +17575,10 @@ func (s *AgentsPlatform) UpdateDashboardSettingsRoute(ctx context.Context, body 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -17495,7 +17791,7 @@ func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize optionaln
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_secrets_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -17520,6 +17816,10 @@ func (s *AgentsPlatform) GetSecretsRoute(ctx context.Context, pageSize optionaln
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -17732,7 +18032,7 @@ func (s *AgentsPlatform) CreateSecretRoute(ctx context.Context, body components.
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_secret_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -17761,6 +18061,10 @@ func (s *AgentsPlatform) CreateSecretRoute(ctx context.Context, body components.
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -17972,7 +18276,7 @@ func (s *AgentsPlatform) DeleteSecretRoute(ctx context.Context, secretID string,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_secret_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -17994,6 +18298,10 @@ func (s *AgentsPlatform) DeleteSecretRoute(ctx context.Context, secretID string,
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -18187,7 +18495,7 @@ func (s *AgentsPlatform) UpdateSecretRoute(ctx context.Context, secretID string,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_secret_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -18216,6 +18524,10 @@ func (s *AgentsPlatform) UpdateSecretRoute(ctx context.Context, secretID string,
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -18427,7 +18739,7 @@ func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, body components.Bo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_batch_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -18456,6 +18768,10 @@ func (s *AgentsPlatform) CreateBatchCall(ctx context.Context, body components.Bo
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -18668,7 +18984,7 @@ func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int6
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_workspace_batch_calls",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -18693,6 +19009,10 @@ func (s *AgentsPlatform) GetWorkspaceBatchCalls(ctx context.Context, limit *int6
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -18905,7 +19225,7 @@ func (s *AgentsPlatform) GetBatchCall(ctx context.Context, batchID string, xiAPI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_batch_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -18927,6 +19247,10 @@ func (s *AgentsPlatform) GetBatchCall(ctx context.Context, batchID string, xiAPI
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -19138,7 +19462,7 @@ func (s *AgentsPlatform) DeleteBatchCall(ctx context.Context, batchID string, xi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_batch_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -19160,6 +19484,10 @@ func (s *AgentsPlatform) DeleteBatchCall(ctx context.Context, batchID string, xi
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -19352,7 +19680,7 @@ func (s *AgentsPlatform) CancelBatchCall(ctx context.Context, batchID string, xi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "cancel_batch_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -19374,6 +19702,10 @@ func (s *AgentsPlatform) CancelBatchCall(ctx context.Context, batchID string, xi
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -19585,7 +19917,7 @@ func (s *AgentsPlatform) RetryBatchCall(ctx context.Context, batchID string, xiA
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "retry_batch_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -19607,6 +19939,10 @@ func (s *AgentsPlatform) RetryBatchCall(ctx context.Context, batchID string, xiA
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -19818,7 +20154,7 @@ func (s *AgentsPlatform) HandleSipTrunkOutboundCall(ctx context.Context, body co
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "handle_sip_trunk_outbound_call",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -19847,6 +20183,10 @@ func (s *AgentsPlatform) HandleSipTrunkOutboundCall(ctx context.Context, body co
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -20057,7 +20397,7 @@ func (s *AgentsPlatform) ListMcpServersRoute(ctx context.Context, xiAPIKey optio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_mcp_servers_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -20079,6 +20419,10 @@ func (s *AgentsPlatform) ListMcpServersRoute(ctx context.Context, xiAPIKey optio
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -20290,7 +20634,7 @@ func (s *AgentsPlatform) CreateMcpServerRoute(ctx context.Context, body componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_mcp_server_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -20319,6 +20663,10 @@ func (s *AgentsPlatform) CreateMcpServerRoute(ctx context.Context, body componen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -20530,7 +20878,7 @@ func (s *AgentsPlatform) GetMcpRoute(ctx context.Context, mcpServerID string, xi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_mcp_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -20552,6 +20900,10 @@ func (s *AgentsPlatform) GetMcpRoute(ctx context.Context, mcpServerID string, xi
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -20763,7 +21115,7 @@ func (s *AgentsPlatform) DeleteMcpServerRoute(ctx context.Context, mcpServerID s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_mcp_server_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -20785,6 +21137,10 @@ func (s *AgentsPlatform) DeleteMcpServerRoute(ctx context.Context, mcpServerID s
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -20997,7 +21353,7 @@ func (s *AgentsPlatform) UpdateMcpServerConfigRoute(ctx context.Context, mcpServ
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_mcp_server_config_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -21026,6 +21382,10 @@ func (s *AgentsPlatform) UpdateMcpServerConfigRoute(ctx context.Context, mcpServ
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -21237,7 +21597,7 @@ func (s *AgentsPlatform) ListMcpServerToolsRoute(ctx context.Context, mcpServerI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_mcp_server_tools_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -21259,6 +21619,10 @@ func (s *AgentsPlatform) ListMcpServerToolsRoute(ctx context.Context, mcpServerI
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -21473,7 +21837,7 @@ func (s *AgentsPlatform) UpdateMcpServerApprovalPolicyRoute(ctx context.Context,
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_mcp_server_approval_policy_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -21502,6 +21866,10 @@ func (s *AgentsPlatform) UpdateMcpServerApprovalPolicyRoute(ctx context.Context,
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -21714,7 +22082,7 @@ func (s *AgentsPlatform) AddMcpServerToolApprovalRoute(ctx context.Context, mcpS
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_mcp_server_tool_approval_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -21743,6 +22111,10 @@ func (s *AgentsPlatform) AddMcpServerToolApprovalRoute(ctx context.Context, mcpS
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -21955,7 +22327,7 @@ func (s *AgentsPlatform) RemoveMcpServerToolApprovalRoute(ctx context.Context, m
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "remove_mcp_server_tool_approval_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -21977,6 +22349,10 @@ func (s *AgentsPlatform) RemoveMcpServerToolApprovalRoute(ctx context.Context, m
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -22189,7 +22565,7 @@ func (s *AgentsPlatform) AddMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "add_mcp_tool_config_override_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -22218,6 +22594,10 @@ func (s *AgentsPlatform) AddMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -22432,7 +22812,7 @@ func (s *AgentsPlatform) GetMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_mcp_tool_config_override_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -22454,6 +22834,10 @@ func (s *AgentsPlatform) GetMcpToolConfigOverrideRoute(ctx context.Context, mcpS
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -22668,7 +23052,7 @@ func (s *AgentsPlatform) RemoveMcpToolConfigOverrideRoute(ctx context.Context, m
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "remove_mcp_tool_config_override_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -22690,6 +23074,10 @@ func (s *AgentsPlatform) RemoveMcpToolConfigOverrideRoute(ctx context.Context, m
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -22903,7 +23291,7 @@ func (s *AgentsPlatform) UpdateMcpToolConfigOverrideRoute(ctx context.Context, m
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_mcp_tool_config_override_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -22932,6 +23320,10 @@ func (s *AgentsPlatform) UpdateMcpToolConfigOverrideRoute(ctx context.Context, m
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -23145,7 +23537,7 @@ func (s *AgentsPlatform) GetWhatsappAccount(ctx context.Context, phoneNumberID s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_whatsapp_account",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -23167,6 +23559,10 @@ func (s *AgentsPlatform) GetWhatsappAccount(ctx context.Context, phoneNumberID s
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -23378,7 +23774,7 @@ func (s *AgentsPlatform) DeleteWhatsappAccount(ctx context.Context, phoneNumberI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_whatsapp_account",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -23400,6 +23796,10 @@ func (s *AgentsPlatform) DeleteWhatsappAccount(ctx context.Context, phoneNumberI
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -23612,7 +24012,7 @@ func (s *AgentsPlatform) UpdateWhatsappAccount(ctx context.Context, phoneNumberI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_whatsapp_account",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -23641,6 +24041,10 @@ func (s *AgentsPlatform) UpdateWhatsappAccount(ctx context.Context, phoneNumberI
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -23851,7 +24255,7 @@ func (s *AgentsPlatform) ListWhatsappAccounts(ctx context.Context, xiAPIKey opti
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_whatsapp_accounts",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -23873,6 +24277,10 @@ func (s *AgentsPlatform) ListWhatsappAccounts(ctx context.Context, xiAPIKey opti
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -24086,7 +24494,7 @@ func (s *AgentsPlatform) GetBranchesRoute(ctx context.Context, agentID string, i
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_branches_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -24111,6 +24519,10 @@ func (s *AgentsPlatform) GetBranchesRoute(ctx context.Context, agentID string, i
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -24324,7 +24736,7 @@ func (s *AgentsPlatform) CreateBranchRoute(ctx context.Context, agentID string, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_branch_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -24353,6 +24765,10 @@ func (s *AgentsPlatform) CreateBranchRoute(ctx context.Context, agentID string, 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -24565,7 +24981,7 @@ func (s *AgentsPlatform) GetBranchRoute(ctx context.Context, agentID string, bra
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_branch_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -24587,6 +25003,10 @@ func (s *AgentsPlatform) GetBranchRoute(ctx context.Context, agentID string, bra
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -24800,7 +25220,7 @@ func (s *AgentsPlatform) UpdateBranchRoute(ctx context.Context, agentID string, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_branch_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -24829,6 +25249,10 @@ func (s *AgentsPlatform) UpdateBranchRoute(ctx context.Context, agentID string, 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -25035,7 +25459,7 @@ func (s *AgentsPlatform) MergeBranchIntoTarget(ctx context.Context, request oper
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "merge_branch_into_target",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -25067,6 +25491,10 @@ func (s *AgentsPlatform) MergeBranchIntoTarget(ctx context.Context, request oper
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -25280,7 +25708,7 @@ func (s *AgentsPlatform) CreateAgentDeploymentRoute(ctx context.Context, agentID
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_agent_deployment_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -25309,6 +25737,10 @@ func (s *AgentsPlatform) CreateAgentDeploymentRoute(ctx context.Context, agentID
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -25522,7 +25954,7 @@ func (s *AgentsPlatform) CreateAgentDraftRoute(ctx context.Context, agentID stri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_agent_draft_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -25554,6 +25986,10 @@ func (s *AgentsPlatform) CreateAgentDraftRoute(ctx context.Context, agentID stri
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -25767,7 +26203,7 @@ func (s *AgentsPlatform) DeleteAgentDraftRoute(ctx context.Context, agentID stri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_agent_draft_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -25792,6 +26228,10 @@ func (s *AgentsPlatform) DeleteAgentDraftRoute(ctx context.Context, agentID stri
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -25999,7 +26439,7 @@ func (s *AgentsPlatform) ListEnvironmentVariables(ctx context.Context, request o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_environment_variables",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -26024,6 +26464,10 @@ func (s *AgentsPlatform) ListEnvironmentVariables(ctx context.Context, request o
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -26238,7 +26682,7 @@ func (s *AgentsPlatform) CreateEnvironmentVariable(ctx context.Context, body ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_environment_variable",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -26267,6 +26711,10 @@ func (s *AgentsPlatform) CreateEnvironmentVariable(ctx context.Context, body ope
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -26482,7 +26930,7 @@ func (s *AgentsPlatform) GetEnvironmentVariable(ctx context.Context, envVarID st
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_environment_variable",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -26504,6 +26952,10 @@ func (s *AgentsPlatform) GetEnvironmentVariable(ctx context.Context, envVarID st
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -26718,7 +27170,7 @@ func (s *AgentsPlatform) UpdateEnvironmentVariable(ctx context.Context, envVarID
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_environment_variable",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -26747,6 +27199,10 @@ func (s *AgentsPlatform) UpdateEnvironmentVariable(ctx context.Context, envVarID
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

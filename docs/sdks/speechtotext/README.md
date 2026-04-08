@@ -34,6 +34,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechToText.SpeechToText(ctx, components.BodySpeechToTextV1SpeechToTextPost{
@@ -81,6 +82,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechToText.SpeechToText(ctx, components.BodySpeechToTextV1SpeechToTextPost{
@@ -153,6 +155,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechToText.GetTranscriptByID(ctx, "<id>", optionalnullable.From[string](nil))
@@ -213,6 +216,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SpeechToText.DeleteTranscriptByID(ctx, "<id>", optionalnullable.From[string](nil))

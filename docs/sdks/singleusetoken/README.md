@@ -29,6 +29,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.SingleUseToken.GetSingleUseToken(ctx, components.SingleUseTokenTypeRealtimeScribe, optionalnullable.From[string](nil))

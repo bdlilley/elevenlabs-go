@@ -65,7 +65,7 @@ func (s *SpeechHistory) GetSpeechHistory(ctx context.Context, request operations
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_speech_history",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -90,6 +90,10 @@ func (s *SpeechHistory) GetSpeechHistory(ctx context.Context, request operations
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -302,7 +306,7 @@ func (s *SpeechHistory) GetSpeechHistoryItemByID(ctx context.Context, historyIte
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_speech_history_item_by_id",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -324,6 +328,10 @@ func (s *SpeechHistory) GetSpeechHistoryItemByID(ctx context.Context, historyIte
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -535,7 +543,7 @@ func (s *SpeechHistory) DeleteSpeechHistoryItem(ctx context.Context, historyItem
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_speech_history_item",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -557,6 +565,10 @@ func (s *SpeechHistory) DeleteSpeechHistoryItem(ctx context.Context, historyItem
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -768,7 +780,7 @@ func (s *SpeechHistory) GetAudioFullFromSpeechHistoryItem(ctx context.Context, h
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_audio_full_from_speech_history_item",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -790,6 +802,10 @@ func (s *SpeechHistory) GetAudioFullFromSpeechHistoryItem(ctx context.Context, h
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -993,7 +1009,7 @@ func (s *SpeechHistory) DownloadSpeechHistoryItems(ctx context.Context, body com
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "download_speech_history_items",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -1022,6 +1038,10 @@ func (s *SpeechHistory) DownloadSpeechHistoryItems(ctx context.Context, body com
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

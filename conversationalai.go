@@ -69,7 +69,7 @@ func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, body component
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_folder_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -98,6 +98,10 @@ func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, body component
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -310,7 +314,7 @@ func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, docum
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "post_knowledge_base_move_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -339,6 +343,10 @@ func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, docum
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
@@ -531,7 +539,7 @@ func (s *ConversationalAI) PostKnowledgeBaseBulkMoveRoute(ctx context.Context, b
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "post_knowledge_base_bulk_move_route",
-		SecuritySource:   nil,
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -560,6 +568,10 @@ func (s *ConversationalAI) PostKnowledgeBaseBulkMoveRoute(ctx context.Context, b
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)

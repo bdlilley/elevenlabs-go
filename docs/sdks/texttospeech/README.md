@@ -35,6 +35,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToSpeech.TextToSpeechFull(ctx, operations.TextToSpeechFullRequest{
@@ -123,6 +124,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToSpeech.TextToSpeechFullWithTimestamps(ctx, operations.TextToSpeechFullWithTimestampsRequest{
@@ -212,6 +214,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToSpeech.TextToSpeechStream(ctx, operations.TextToSpeechStreamRequest{
@@ -301,6 +304,7 @@ func main() {
 
     s := elevenlabsgo.New(
         "https://api.example.com",
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
     res, err := s.TextToSpeech.TextToSpeechStreamWithTimestamps(ctx, operations.TextToSpeechStreamWithTimestampsRequest{
