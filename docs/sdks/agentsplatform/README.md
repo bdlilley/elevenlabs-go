@@ -11,78 +11,78 @@
 * [RegisterTwilioCall](#registertwiliocall) - Register A Twilio Call And Return Twiml
 * [WhatsappOutboundCall](#whatsappoutboundcall) - Make An Outbound Call Via Whatsapp
 * [WhatsappOutboundMessage](#whatsappoutboundmessage) - Send An Outbound Message Via Whatsapp
-* [CreateAgentRoute](#createagentroute) - Create Agent
-* [GetAgentSummariesRoute](#getagentsummariesroute) - Get Agent Summaries
-* [GetAgentRoute](#getagentroute) - Get Agent
-* [DeleteAgentRoute](#deleteagentroute) - Delete Agent
-* [PatchAgentSettingsRoute](#patchagentsettingsroute) - Patches An Agent Settings
-* [GetAgentWidgetRoute](#getagentwidgetroute) - Get Agent Widget Config
-* [GetAgentLinkRoute](#getagentlinkroute) - Get Shareable Agent Link
-* [PostAgentAvatarRoute](#postagentavatarroute) - Post Agent Avatar
-* [GetAgentsRoute](#getagentsroute) - List Agents
+* [CreateAgent](#createagent) - Create Agent
+* [GetAgentSummaries](#getagentsummaries) - Get Agent Summaries
+* [GetAgent](#getagent) - Get Agent
+* [PatchAgentSettings](#patchagentsettings) - Patches An Agent Settings
+* [DeleteAgent](#deleteagent) - Delete Agent
+* [GetAgentWidget](#getagentwidget) - Get Agent Widget Config
+* [GetAgentLink](#getagentlink) - Get Shareable Agent Link
+* [PostAgentAvatar](#postagentavatar) - Post Agent Avatar
+* [GetAgents](#getagents) - List Agents
 * [GetAgentKnowledgeBaseSize](#getagentknowledgebasesize) - Returns The Size Of The Agent'S Knowledge Base
 * [GetAgentLlmExpectedCostCalculation](#getagentllmexpectedcostcalculation) - Calculate Expected Llm Usage For An Agent
-* [DuplicateAgentRoute](#duplicateagentroute) - Duplicate Agent
-* [RunConversationSimulationRoute](#runconversationsimulationroute) - Simulates A Conversation
+* [DuplicateAgent](#duplicateagent) - Duplicate Agent
+* [RunConversationSimulation](#runconversationsimulation) - Simulates A Conversation
 * [RunConversationSimulationRouteStream](#runconversationsimulationroutestream) - Simulates A Conversation (Stream)
-* [CreateAgentTestFolderRoute](#createagenttestfolderroute) - Create Agent Test Folder
-* [GetAgentTestFolderRoute](#getagenttestfolderroute) - Get Agent Test Folder By Id
-* [DeleteAgentTestFolderRoute](#deleteagenttestfolderroute) - Delete Agent Test Folder
-* [UpdateAgentTestFolderRoute](#updateagenttestfolderroute) - Update Agent Test Folder
-* [AgentTestingBulkMoveRoute](#agenttestingbulkmoveroute) - Bulk Move Tests To Folder
-* [GetConversationHistoriesRoute](#getconversationhistoriesroute) - Get Conversations
-* [GetConversationUsersRoute](#getconversationusersroute) - Get Conversation Users
-* [GetConversationHistoryRoute](#getconversationhistoryroute) - Get Conversation Details
-* [DeleteConversationRoute](#deleteconversationroute) - Delete Conversation
-* [GetConversationAudioRoute](#getconversationaudioroute) - Get Conversation Audio
-* [PostConversationFeedbackRoute](#postconversationfeedbackroute) - Send Conversation Feedback
-* [TextSearchConversationMessagesRoute](#textsearchconversationmessagesroute) - Text Search Conversation Messages
-* [SmartSearchConversationMessagesRoute](#smartsearchconversationmessagesroute) - Smart Search Conversation Messages
-* [ListPhoneNumbersRoute](#listphonenumbersroute) - List Phone Numbers
-* [CreatePhoneNumberRoute](#createphonenumberroute) - Import Phone Number
-* [GetPhoneNumberRoute](#getphonenumberroute) - Get Phone Number
-* [DeletePhoneNumberRoute](#deletephonenumberroute) - Delete Phone Number
-* [UpdatePhoneNumberRoute](#updatephonenumberroute) - Update Phone Number
+* [CreateAgentTestFolder](#createagenttestfolder) - Create Agent Test Folder
+* [GetAgentTestFolder](#getagenttestfolder) - Get Agent Test Folder By Id
+* [UpdateAgentTestFolder](#updateagenttestfolder) - Update Agent Test Folder
+* [DeleteAgentTestFolder](#deleteagenttestfolder) - Delete Agent Test Folder
+* [AgentTestingBulkMove](#agenttestingbulkmove) - Bulk Move Tests To Folder
+* [GetConversationHistories](#getconversationhistories) - Get Conversations
+* [GetConversationUsers](#getconversationusers) - Get Conversation Users
+* [GetConversationHistory](#getconversationhistory) - Get Conversation Details
+* [DeleteConversation](#deleteconversation) - Delete Conversation
+* [GetConversationAudio](#getconversationaudio) - Get Conversation Audio
+* [PostConversationFeedback](#postconversationfeedback) - Send Conversation Feedback
+* [TextSearchConversationMessages](#textsearchconversationmessages) - Text Search Conversation Messages
+* [SmartSearchConversationMessages](#smartsearchconversationmessages) - Smart Search Conversation Messages
+* [CreatePhoneNumber](#createphonenumber) - Import Phone Number
+* [ListPhoneNumbers](#listphonenumbers) - List Phone Numbers
+* [GetPhoneNumber](#getphonenumber) - Get Phone Number
+* [DeletePhoneNumber](#deletephonenumber) - Delete Phone Number
+* [UpdatePhoneNumber](#updatephonenumber) - Update Phone Number
 * [GetPublicLlmExpectedCostCalculation](#getpublicllmexpectedcostcalculation) - Calculate Expected Llm Usage
 * [ListAvailableLlms](#listavailablellms) - List Available Llms
-* [UploadFileRoute](#uploadfileroute) - Upload File
-* [CancelFileUploadRoute](#cancelfileuploadroute) - Delete File Upload
+* [UploadFile](#uploadfile) - Upload File
+* [CancelFileUpload](#cancelfileupload) - Delete File Upload
 * [GetLiveCount](#getlivecount) - Get Live Count
-* [GetAgentKnowledgeBaseSummariesRoute](#getagentknowledgebasesummariesroute) - Get Knowledge Base Summaries By Ids
-* [GetKnowledgeBaseListRoute](#getknowledgebaselistroute) - Get Knowledge Base List
+* [GetAgentKnowledgeBaseSummaries](#getagentknowledgebasesummaries) - Get Knowledge Base Summaries By Ids
+* [GetKnowledgeBaseList](#getknowledgebaselist) - Get Knowledge Base List
 * [~~AddDocumentationToKnowledgeBase~~](#adddocumentationtoknowledgebase) - Add To Knowledge Base :warning: **Deprecated**
-* [CreateURLDocumentRoute](#createurldocumentroute) - Create Url Document
-* [CreateFileDocumentRoute](#createfiledocumentroute) - Create File Document
-* [CreateTextDocumentRoute](#createtextdocumentroute) - Create Text Document
+* [CreateURLDocument](#createurldocument) - Create Url Document
+* [CreateFileDocument](#createfiledocument) - Create File Document
+* [CreateTextDocument](#createtextdocument) - Create Text Document
+* [UpdateDocument](#updatedocument) - Update Document
 * [GetDocumentationFromKnowledgeBase](#getdocumentationfromknowledgebase) - Get Documentation From Knowledge Base
 * [DeleteKnowledgeBaseDocument](#deleteknowledgebasedocument) - Delete Knowledge Base Document Or Folder
-* [UpdateDocumentRoute](#updatedocumentroute) - Update Document
 * [GetRagIndexOverview](#getragindexoverview) - Get Rag Index Overview.
 * [GetOrCreateRagIndexes](#getorcreateragindexes) - Compute Rag Indexes In Batch
-* [RefreshURLDocumentRoute](#refreshurldocumentroute) - Refresh Url Document Content
+* [RefreshURLDocument](#refreshurldocument) - Refresh Url Document Content
 * [GetRagIndexes](#getragindexes) - Get Rag Indexes Of The Specified Knowledgebase Document.
 * [RagIndexStatus](#ragindexstatus) - Compute Rag Index.
 * [DeleteRagIndex](#deleteragindex) - Delete Rag Index.
-* [SearchKnowledgeBaseContentRoute](#searchknowledgebasecontentroute) - Search Knowledge Base Content
+* [SearchKnowledgeBaseContent](#searchknowledgebasecontent) - Search Knowledge Base Content
 * [GetKnowledgeBaseDependentAgents](#getknowledgebasedependentagents) - Get Dependent Agents List
 * [GetKnowledgeBaseContent](#getknowledgebasecontent) - Get Document Content
 * [GetKnowledgeBaseSourceFileURL](#getknowledgebasesourcefileurl) - Get Document Source File Url
 * [GetDocumentationChunkFromKnowledgeBase](#getdocumentationchunkfromknowledgebase) - Get Documentation Chunk From Knowledge Base
-* [GetToolsRoute](#gettoolsroute) - Get Tools
-* [AddToolRoute](#addtoolroute) - Add Tool
-* [GetToolRoute](#gettoolroute) - Get Tool
-* [DeleteToolRoute](#deletetoolroute) - Delete Tool
-* [UpdateToolRoute](#updatetoolroute) - Update Tool
-* [GetToolDependentAgentsRoute](#gettooldependentagentsroute) - Get Dependent Agents List
-* [GetSettingsRoute](#getsettingsroute) - Get Convai Settings
-* [UpdateSettingsRoute](#updatesettingsroute) - Update Convai Settings
-* [GetDashboardSettingsRoute](#getdashboardsettingsroute) - Get Convai Dashboard Settings
-* [UpdateDashboardSettingsRoute](#updatedashboardsettingsroute) - Update Convai Dashboard Settings
-* [GetSecretsRoute](#getsecretsroute) - Get Convai Workspace Secrets
-* [CreateSecretRoute](#createsecretroute) - Create Convai Workspace Secret
-* [DeleteSecretRoute](#deletesecretroute) - Delete Convai Workspace Secret
-* [UpdateSecretRoute](#updatesecretroute) - Update Convai Workspace Secret
-* [GetSecretDependenciesRoute](#getsecretdependenciesroute) - Get Secret Dependencies By Type
+* [AddTool](#addtool) - Add Tool
+* [GetTools](#gettools) - Get Tools
+* [GetTool](#gettool) - Get Tool
+* [UpdateTool](#updatetool) - Update Tool
+* [DeleteTool](#deletetool) - Delete Tool
+* [GetToolDependentAgents](#gettooldependentagents) - Get Dependent Agents List
+* [GetSettings](#getsettings) - Get Convai Settings
+* [UpdateSettings](#updatesettings) - Update Convai Settings
+* [GetDashboardSettings](#getdashboardsettings) - Get Convai Dashboard Settings
+* [UpdateDashboardSettings](#updatedashboardsettings) - Update Convai Dashboard Settings
+* [CreateSecret](#createsecret) - Create Convai Workspace Secret
+* [GetSecrets](#getsecrets) - Get Convai Workspace Secrets
+* [DeleteSecret](#deletesecret) - Delete Convai Workspace Secret
+* [UpdateSecret](#updatesecret) - Update Convai Workspace Secret
+* [GetSecretDependencies](#getsecretdependencies) - Get Secret Dependencies By Type
 * [CreateBatchCall](#createbatchcall) - Submit A Batch Call Request.
 * [GetWorkspaceBatchCalls](#getworkspacebatchcalls) - Get All Batch Calls For A Workspace.
 * [GetBatchCall](#getbatchcall) - Get A Batch Call By Id.
@@ -90,31 +90,31 @@
 * [CancelBatchCall](#cancelbatchcall) - Cancel A Batch Call.
 * [RetryBatchCall](#retrybatchcall) - Retry A Batch Call.
 * [HandleSipTrunkOutboundCall](#handlesiptrunkoutboundcall) - Handle An Outbound Call Via Sip Trunk
-* [ListMcpServersRoute](#listmcpserversroute) - List Mcp Servers
-* [CreateMcpServerRoute](#createmcpserverroute) - Create Mcp Server
-* [GetMcpRoute](#getmcproute) - Get Mcp Server
-* [DeleteMcpServerRoute](#deletemcpserverroute) - Delete Mcp Server
-* [UpdateMcpServerConfigRoute](#updatemcpserverconfigroute) - Update Mcp Server Configuration
-* [ListMcpServerToolsRoute](#listmcpservertoolsroute) - List Mcp Server Tools
-* [~~UpdateMcpServerApprovalPolicyRoute~~](#updatemcpserverapprovalpolicyroute) - Update Mcp Server Approval Policy :warning: **Deprecated**
-* [AddMcpServerToolApprovalRoute](#addmcpservertoolapprovalroute) - Create Mcp Server Tool Approval
-* [RemoveMcpServerToolApprovalRoute](#removemcpservertoolapprovalroute) - Delete Mcp Server Tool Approval
-* [AddMcpToolConfigOverrideRoute](#addmcptoolconfigoverrideroute) - Create Mcp Tool Configuration Override
-* [GetMcpToolConfigOverrideRoute](#getmcptoolconfigoverrideroute) - Get Mcp Tool Configuration Override
-* [RemoveMcpToolConfigOverrideRoute](#removemcptoolconfigoverrideroute) - Delete Mcp Tool Configuration Override
-* [UpdateMcpToolConfigOverrideRoute](#updatemcptoolconfigoverrideroute) - Update Mcp Tool Configuration Override
+* [CreateMcpServer](#createmcpserver) - Create Mcp Server
+* [ListMcpServers](#listmcpservers) - List Mcp Servers
+* [GetMcp](#getmcp) - Get Mcp Server
+* [DeleteMcpServer](#deletemcpserver) - Delete Mcp Server
+* [UpdateMcpServerConfig](#updatemcpserverconfig) - Update Mcp Server Configuration
+* [ListMcpServerTools](#listmcpservertools) - List Mcp Server Tools
+* [~~UpdateMcpServerApprovalPolicy~~](#updatemcpserverapprovalpolicy) - Update Mcp Server Approval Policy :warning: **Deprecated**
+* [AddMcpServerToolApproval](#addmcpservertoolapproval) - Create Mcp Server Tool Approval
+* [RemoveMcpServerToolApproval](#removemcpservertoolapproval) - Delete Mcp Server Tool Approval
+* [AddMcpToolConfigOverride](#addmcptoolconfigoverride) - Create Mcp Tool Configuration Override
+* [GetMcpToolConfigOverride](#getmcptoolconfigoverride) - Get Mcp Tool Configuration Override
+* [UpdateMcpToolConfigOverride](#updatemcptoolconfigoverride) - Update Mcp Tool Configuration Override
+* [RemoveMcpToolConfigOverride](#removemcptoolconfigoverride) - Delete Mcp Tool Configuration Override
 * [GetWhatsappAccount](#getwhatsappaccount) - Get Whatsapp Account
 * [DeleteWhatsappAccount](#deletewhatsappaccount) - Delete Whatsapp Account
 * [UpdateWhatsappAccount](#updatewhatsappaccount) - Update Whatsapp Account
 * [ListWhatsappAccounts](#listwhatsappaccounts) - List Whatsapp Accounts
-* [GetBranchesRoute](#getbranchesroute) - List Agent Branches
-* [CreateBranchRoute](#createbranchroute) - Create A New Branch
-* [GetBranchRoute](#getbranchroute) - Get Agent Branch
-* [UpdateBranchRoute](#updatebranchroute) - Update Agent Branch
+* [CreateBranch](#createbranch) - Create A New Branch
+* [GetBranches](#getbranches) - List Agent Branches
+* [GetBranch](#getbranch) - Get Agent Branch
+* [UpdateBranch](#updatebranch) - Update Agent Branch
 * [MergeBranchIntoTarget](#mergebranchintotarget) - Merge A Branch Into A Target Branch
-* [CreateAgentDeploymentRoute](#createagentdeploymentroute) - Create Or Update Deployments
-* [CreateAgentDraftRoute](#createagentdraftroute) - Create Agent Draft
-* [DeleteAgentDraftRoute](#deleteagentdraftroute) - Delete Agent Draft
+* [CreateAgentDeployment](#createagentdeployment) - Create Or Update Deployments
+* [CreateAgentDraft](#createagentdraft) - Create Agent Draft
+* [DeleteAgentDraft](#deleteagentdraft) - Delete Agent Draft
 * [ListEnvironmentVariables](#listenvironmentvariables) - List Environment Variables
 * [CreateEnvironmentVariable](#createenvironmentvariable) - Create Environment Variable
 * [GetEnvironmentVariable](#getenvironmentvariable) - Get Environment Variable
@@ -620,7 +620,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateAgentRoute
+## CreateAgent
 
 Create an agent from a config object
 
@@ -644,7 +644,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateAgentRoute(ctx, components.BodyCreateAgentV1ConvaiAgentsCreatePost{
+    res, err := s.AgentsPlatform.CreateAgent(ctx, components.BodyCreateAgentV1ConvaiAgentsCreatePost{
         ConversationConfig: components.ConversationalConfigAPIModelInput{
             Asr: &components.ASRConversationalConfig{
                 Keywords: []string{
@@ -908,7 +908,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentSummariesRoute
+## GetAgentSummaries
 
 Returns summaries for the specified agents.
 
@@ -931,7 +931,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentSummariesRoute(ctx, []string{
+    res, err := s.AgentsPlatform.GetAgentSummaries(ctx, []string{
         "J3Pbu5gP6NNKBscdCdwB",
     })
     if err != nil {
@@ -962,7 +962,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentRoute
+## GetAgent
 
 Retrieve config for an agent
 
@@ -985,7 +985,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer("agtvrsn_8901k4t9z5defmb8vh3e9361y7nj"), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"))
+    res, err := s.AgentsPlatform.GetAgent(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer("agtvrsn_8901k4t9z5defmb8vh3e9361y7nj"), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"))
     if err != nil {
         log.Fatal(err)
     }
@@ -1016,59 +1016,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteAgentRoute
-
-Delete an agent
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="delete_agent_route" method="delete" path="/v1/convai/agents/{agent_id}" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.DeleteAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
-
-### Response
-
-**[*operations.DeleteAgentRouteResponse](../../models/operations/deleteagentrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## PatchAgentSettingsRoute
+## PatchAgentSettings
 
 Patches an Agent settings
 
@@ -1092,7 +1040,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.PatchAgentSettingsRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"), &components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch{
+    res, err := s.AgentsPlatform.PatchAgentSettings(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"), &components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch{
         Workflow: &components.AgentWorkflowRequestModel{
             Edges: map[string]components.WorkflowEdgeModelInput{
                 "entry_to_tool_a": components.WorkflowEdgeModelInput{
@@ -1236,7 +1184,59 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentWidgetRoute
+## DeleteAgent
+
+Delete an agent
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="delete_agent_route" method="delete" path="/v1/convai/agents/{agent_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.DeleteAgent(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.DeleteAgentRouteResponse](../../models/operations/deleteagentrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetAgentWidget
 
 Retrieve the widget configuration for an agent
 
@@ -1259,7 +1259,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentWidgetRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", nil)
+    res, err := s.AgentsPlatform.GetAgentWidget(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -1289,7 +1289,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentLinkRoute
+## GetAgentLink
 
 Get the current link used to share the agent with others
 
@@ -1312,7 +1312,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentLinkRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz")
+    res, err := s.AgentsPlatform.GetAgentLink(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz")
     if err != nil {
         log.Fatal(err)
     }
@@ -1341,7 +1341,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## PostAgentAvatarRoute
+## PostAgentAvatar
 
 Sets the avatar for an agent displayed in the widget
 
@@ -1371,7 +1371,7 @@ func main() {
         panic(fileErr)
     }
 
-    res, err := s.AgentsPlatform.PostAgentAvatarRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyPostAgentAvatarV1ConvaiAgentsAgentIDAvatarPost{
+    res, err := s.AgentsPlatform.PostAgentAvatar(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyPostAgentAvatarV1ConvaiAgentsAgentIDAvatarPost{
         AvatarFile: components.AvatarFile{
             FileName: "example.file",
             Content: example,
@@ -1406,7 +1406,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentsRoute
+## GetAgents
 
 Returns a list of your agents and their metadata.
 
@@ -1430,7 +1430,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentsRoute(ctx, operations.GetAgentsRouteRequest{
+    res, err := s.AgentsPlatform.GetAgents(ctx, operations.GetAgentsRouteRequest{
         Archived: elevenlabsgo.Pointer(false),
     })
     if err != nil {
@@ -1567,7 +1567,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DuplicateAgentRoute
+## DuplicateAgent
 
 Create a new agent by duplicating an existing one
 
@@ -1591,7 +1591,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.DuplicateAgentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", &components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost{
+    res, err := s.AgentsPlatform.DuplicateAgent(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", &components.BodyDuplicateAgentV1ConvaiAgentsAgentIDDuplicatePost{
         Name: elevenlabsgo.Pointer("My agent"),
     })
     if err != nil {
@@ -1623,7 +1623,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## RunConversationSimulationRoute
+## RunConversationSimulation
 
 Run a conversation between the agent and a simulated user.
 
@@ -1647,7 +1647,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.RunConversationSimulationRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost{
+    res, err := s.AgentsPlatform.RunConversationSimulation(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodySimulatesAConversationV1ConvaiAgentsAgentIDSimulateConversationPost{
         SimulationSpecification: components.ConversationSimulationSpecification{
             SimulatedUserConfig: components.AgentConfigAPIModelInput{
                 FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
@@ -1757,7 +1757,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateAgentTestFolderRoute
+## CreateAgentTestFolder
 
 Creates a folder for organizing agent tests.
 
@@ -1781,7 +1781,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateAgentTestFolderRoute(ctx, components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost{
+    res, err := s.AgentsPlatform.CreateAgentTestFolder(ctx, components.BodyCreateAgentTestFolderV1ConvaiAgentTestingFoldersPost{
         Name: "<value>",
     })
     if err != nil {
@@ -1812,7 +1812,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentTestFolderRoute
+## GetAgentTestFolder
 
 Gets an agent test folder by ID, including its folder path.
 
@@ -1835,7 +1835,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentTestFolderRoute(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm")
+    res, err := s.AgentsPlatform.GetAgentTestFolder(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm")
     if err != nil {
         log.Fatal(err)
     }
@@ -1864,60 +1864,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteAgentTestFolderRoute
-
-Deletes an agent test folder by ID. Use force=true to delete a non-empty folder and all its contents.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="delete_agent_test_folder_route" method="delete" path="/v1/convai/agent-testing/folders/{folder_id}" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.DeleteAgentTestFolderRoute(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm", elevenlabsgo.Pointer(false))
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `folderID`                                               | `string`                                                 | :heavy_check_mark:                                       | The folder ID.                                           | tfld_7301khxdkycse5f88fzjdtrterzm                        |
-| `force`                                                  | `*bool`                                                  | :heavy_minus_sign:                                       | Force delete. Required for deleting non-empty folders.   |                                                          |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
-
-### Response
-
-**[*operations.DeleteAgentTestFolderRouteResponse](../../models/operations/deleteagenttestfolderrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## UpdateAgentTestFolderRoute
+## UpdateAgentTestFolder
 
 Updates an agent test folder. Currently only supports updating the folder name.
 
@@ -1941,7 +1888,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateAgentTestFolderRoute(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm", components.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIDPatch{
+    res, err := s.AgentsPlatform.UpdateAgentTestFolder(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm", components.BodyUpdateAgentTestFolderV1ConvaiAgentTestingFoldersFolderIDPatch{
         Name: "<value>",
     })
     if err != nil {
@@ -1973,7 +1920,60 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## AgentTestingBulkMoveRoute
+## DeleteAgentTestFolder
+
+Deletes an agent test folder by ID. Use force=true to delete a non-empty folder and all its contents.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="delete_agent_test_folder_route" method="delete" path="/v1/convai/agent-testing/folders/{folder_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.DeleteAgentTestFolder(ctx, "tfld_7301khxdkycse5f88fzjdtrterzm", elevenlabsgo.Pointer(false))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `folderID`                                               | `string`                                                 | :heavy_check_mark:                                       | The folder ID.                                           | tfld_7301khxdkycse5f88fzjdtrterzm                        |
+| `force`                                                  | `*bool`                                                  | :heavy_minus_sign:                                       | Force delete. Required for deleting non-empty folders.   |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.DeleteAgentTestFolderRouteResponse](../../models/operations/deleteagenttestfolderrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## AgentTestingBulkMove
 
 Moves multiple tests or folders from one folder to another.
 
@@ -1997,7 +1997,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.AgentTestingBulkMoveRoute(ctx, components.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost{
+    res, err := s.AgentsPlatform.AgentTestingBulkMove(ctx, components.BodyBulkMoveTestsToFolderV1ConvaiAgentTestingBulkMovePost{
         EntityIds: []string{
             "<value 1>",
             "<value 2>",
@@ -2031,7 +2031,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetConversationHistoriesRoute
+## GetConversationHistories
 
 Get all conversations of agents that user owns. With option to restrict to a specific agent.
 
@@ -2055,7 +2055,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetConversationHistoriesRoute(ctx, operations.GetConversationHistoriesRouteRequest{
+    res, err := s.AgentsPlatform.GetConversationHistories(ctx, operations.GetConversationHistoriesRouteRequest{
         AgentID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
     })
     if err != nil {
@@ -2086,7 +2086,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetConversationUsersRoute
+## GetConversationUsers
 
 Get distinct users from conversations with pagination.
 
@@ -2110,7 +2110,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetConversationUsersRoute(ctx, operations.GetConversationUsersRouteRequest{
+    res, err := s.AgentsPlatform.GetConversationUsers(ctx, operations.GetConversationUsersRouteRequest{
         AgentID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
     })
     if err != nil {
@@ -2141,7 +2141,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetConversationHistoryRoute
+## GetConversationHistory
 
 Get the details of a particular conversation
 
@@ -2164,7 +2164,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetConversationHistoryRoute(ctx, "21m00Tcm4TlvDq8ikWAM")
+    res, err := s.AgentsPlatform.GetConversationHistory(ctx, "21m00Tcm4TlvDq8ikWAM")
     if err != nil {
         log.Fatal(err)
     }
@@ -2193,7 +2193,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteConversationRoute
+## DeleteConversation
 
 Delete a particular conversation
 
@@ -2216,7 +2216,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.DeleteConversationRoute(ctx, "21m00Tcm4TlvDq8ikWAM")
+    res, err := s.AgentsPlatform.DeleteConversation(ctx, "21m00Tcm4TlvDq8ikWAM")
     if err != nil {
         log.Fatal(err)
     }
@@ -2245,7 +2245,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetConversationAudioRoute
+## GetConversationAudio
 
 Get the audio recording of a particular conversation
 
@@ -2268,7 +2268,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetConversationAudioRoute(ctx, "21m00Tcm4TlvDq8ikWAM")
+    res, err := s.AgentsPlatform.GetConversationAudio(ctx, "21m00Tcm4TlvDq8ikWAM")
     if err != nil {
         log.Fatal(err)
     }
@@ -2297,7 +2297,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## PostConversationFeedbackRoute
+## PostConversationFeedback
 
 Send the feedback for the given conversation
 
@@ -2321,7 +2321,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.PostConversationFeedbackRoute(ctx, "21m00Tcm4TlvDq8ikWAM", components.ConversationFeedbackRequestModel{
+    res, err := s.AgentsPlatform.PostConversationFeedback(ctx, "21m00Tcm4TlvDq8ikWAM", components.ConversationFeedbackRequestModel{
         Feedback: components.UserFeedbackScoreLike.ToPointer(),
     })
     if err != nil {
@@ -2353,7 +2353,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## TextSearchConversationMessagesRoute
+## TextSearchConversationMessages
 
 Search through conversation transcript messages by full-text and fuzzy search
 
@@ -2377,7 +2377,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.TextSearchConversationMessagesRoute(ctx, operations.TextSearchConversationMessagesRouteRequest{
+    res, err := s.AgentsPlatform.TextSearchConversationMessages(ctx, operations.TextSearchConversationMessagesRouteRequest{
         TextQuery: "refund policy",
         AgentID: elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"),
     })
@@ -2409,7 +2409,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## SmartSearchConversationMessagesRoute
+## SmartSearchConversationMessages
 
 Search conversation transcripts by semantic similarity to surface relevant messages based on meaning and intent, rather than exact keyword matches
 
@@ -2432,7 +2432,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.SmartSearchConversationMessagesRoute(ctx, "Customer asking to cancel and get money back", elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"), elevenlabsgo.Pointer[int64](20), nil)
+    res, err := s.AgentsPlatform.SmartSearchConversationMessages(ctx, "Customer asking to cancel and get money back", elevenlabsgo.Pointer("21m00Tcm4TlvDq8ikWAM"), elevenlabsgo.Pointer[int64](20), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -2464,58 +2464,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## ListPhoneNumbersRoute
-
-Retrieve all Phone Numbers
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="list_phone_numbers_route" method="get" path="/v1/convai/phone-numbers" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.ListPhoneNumbersRoute(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ResponseListPhoneNumbersV1ConvaiPhoneNumbersGet != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.ListPhoneNumbersRouteResponse](../../models/operations/listphonenumbersrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## CreatePhoneNumberRoute
+## CreatePhoneNumber
 
 Import Phone Number from provider configuration (Twilio or SIP trunk)
 
@@ -2540,7 +2489,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreatePhoneNumberRoute(ctx, operations.CreatePhoneRequestCreateTwilioPhoneNumberRequest(
+    res, err := s.AgentsPlatform.CreatePhoneNumber(ctx, operations.CreatePhoneRequestCreateTwilioPhoneNumberRequest(
         components.CreateTwilioPhoneNumberRequest{
             PhoneNumber: "1-844-780-5664",
             Label: "<value>",
@@ -2576,7 +2525,58 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetPhoneNumberRoute
+## ListPhoneNumbers
+
+Retrieve all Phone Numbers
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="list_phone_numbers_route" method="get" path="/v1/convai/phone-numbers" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.ListPhoneNumbers(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponseListPhoneNumbersV1ConvaiPhoneNumbersGet != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.ListPhoneNumbersRouteResponse](../../models/operations/listphonenumbersrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetPhoneNumber
 
 Retrieve Phone Number details by ID
 
@@ -2600,7 +2600,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetPhoneNumberRoute(ctx, "TeaqRRdTcIfIu2i7BYfT")
+    res, err := s.AgentsPlatform.GetPhoneNumber(ctx, "TeaqRRdTcIfIu2i7BYfT")
     if err != nil {
         log.Fatal(err)
     }
@@ -2635,7 +2635,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeletePhoneNumberRoute
+## DeletePhoneNumber
 
 Delete Phone Number by ID
 
@@ -2658,7 +2658,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.DeletePhoneNumberRoute(ctx, "TeaqRRdTcIfIu2i7BYfT")
+    res, err := s.AgentsPlatform.DeletePhoneNumber(ctx, "TeaqRRdTcIfIu2i7BYfT")
     if err != nil {
         log.Fatal(err)
     }
@@ -2687,7 +2687,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdatePhoneNumberRoute
+## UpdatePhoneNumber
 
 Update assigned agent of a phone number
 
@@ -2712,7 +2712,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdatePhoneNumberRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", components.UpdatePhoneNumberRequest{})
+    res, err := s.AgentsPlatform.UpdatePhoneNumber(ctx, "TeaqRRdTcIfIu2i7BYfT", components.UpdatePhoneNumberRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -2856,7 +2856,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UploadFileRoute
+## UploadFile
 
 Upload an image or PDF file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
 
@@ -2886,7 +2886,7 @@ func main() {
         panic(fileErr)
     }
 
-    res, err := s.AgentsPlatform.UploadFileRoute(ctx, "<id>", components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPost{
+    res, err := s.AgentsPlatform.UploadFile(ctx, "<id>", components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPost{
         File: components.BodyUploadFileV1ConvaiConversationsConversationIDFilesPostFile{
             FileName: "example.file",
             Content: example,
@@ -2921,7 +2921,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CancelFileUploadRoute
+## CancelFileUpload
 
 Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
 
@@ -2944,7 +2944,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CancelFileUploadRoute(ctx, "<id>", "<id>")
+    res, err := s.AgentsPlatform.CancelFileUpload(ctx, "<id>", "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -3026,7 +3026,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentKnowledgeBaseSummariesRoute
+## GetAgentKnowledgeBaseSummaries
 
 Gets multiple knowledge base document summaries by their IDs.
 
@@ -3049,7 +3049,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetAgentKnowledgeBaseSummariesRoute(ctx, []string{
+    res, err := s.AgentsPlatform.GetAgentKnowledgeBaseSummaries(ctx, []string{
         "21m00Tcm4TlvDq8ikWAM",
         "31n11Udm5UmwEr9jkXBN",
     })
@@ -3081,7 +3081,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetKnowledgeBaseListRoute
+## GetKnowledgeBaseList
 
 Get a list of available knowledge base documents
 
@@ -3105,7 +3105,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetKnowledgeBaseListRoute(ctx, operations.GetKnowledgeBaseListRouteRequest{})
+    res, err := s.AgentsPlatform.GetKnowledgeBaseList(ctx, operations.GetKnowledgeBaseListRouteRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -3189,7 +3189,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateURLDocumentRoute
+## CreateURLDocument
 
 Create a knowledge base document generated by scraping the given webpage.
 
@@ -3213,7 +3213,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateURLDocumentRoute(ctx, components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost{
+    res, err := s.AgentsPlatform.CreateURLDocument(ctx, components.BodyCreateURLDocumentV1ConvaiKnowledgeBaseURLPost{
         URL: "https://clueless-marketplace.biz/",
     })
     if err != nil {
@@ -3244,7 +3244,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateFileDocumentRoute
+## CreateFileDocument
 
 Create a knowledge base document generated form the uploaded file.
 
@@ -3274,7 +3274,7 @@ func main() {
         panic(fileErr)
     }
 
-    res, err := s.AgentsPlatform.CreateFileDocumentRoute(ctx, components.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost{
+    res, err := s.AgentsPlatform.CreateFileDocument(ctx, components.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePost{
         File: components.BodyCreateFileDocumentV1ConvaiKnowledgeBaseFilePostFile{
             FileName: "example.file",
             Content: example,
@@ -3308,7 +3308,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateTextDocumentRoute
+## CreateTextDocument
 
 Create a knowledge base document containing the provided text.
 
@@ -3332,7 +3332,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateTextDocumentRoute(ctx, components.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost{
+    res, err := s.AgentsPlatform.CreateTextDocument(ctx, components.BodyCreateTextDocumentV1ConvaiKnowledgeBaseTextPost{
         Text: "<value>",
     })
     if err != nil {
@@ -3355,6 +3355,73 @@ func main() {
 ### Response
 
 **[*operations.CreateTextDocumentRouteResponse](../../models/operations/createtextdocumentrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## UpdateDocument
+
+Update the name of a document
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="update_document_route" method="patch" path="/v1/convai/knowledge-base/{documentation_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+	"github.com/bdlilley/elevenlabs-go/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.UpdateDocument(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch{
+        Name: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch != nil {
+        switch res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.Type {
+            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeURLObj:
+                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseURLResponseModel is populated
+            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFile:
+                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseFileResponseModel is populated
+            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeText:
+                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseTextResponseModel is populated
+            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFolder:
+                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseFolderResponseModel is populated
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                        | Type                                                                                                                                                             | Required                                                                                                                                                         | Description                                                                                                                                                      | Example                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                                                            | :heavy_check_mark:                                                                                                                                               | The context to use for the request.                                                                                                                              |                                                                                                                                                                  |
+| `documentationID`                                                                                                                                                | `string`                                                                                                                                                         | :heavy_check_mark:                                                                                                                                               | The id of a document from the knowledge base. This is returned on document addition.                                                                             | 21m00Tcm4TlvDq8ikWAM                                                                                                                                             |
+| `body`                                                                                                                                                           | [components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch](../../models/components/bodyupdatedocumentv1convaiknowledgebasedocumentationidpatch.md) | :heavy_check_mark:                                                                                                                                               | N/A                                                                                                                                                              |                                                                                                                                                                  |
+| `opts`                                                                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                                                                         | :heavy_minus_sign:                                                                                                                                               | The options for this request.                                                                                                                                    |                                                                                                                                                                  |
+
+### Response
+
+**[*operations.UpdateDocumentRouteResponse](../../models/operations/updatedocumentrouteresponse.md), error**
 
 ### Errors
 
@@ -3480,73 +3547,6 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateDocumentRoute
-
-Update the name of a document
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="update_document_route" method="patch" path="/v1/convai/knowledge-base/{documentation_id}" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/models/components"
-	"log"
-	"github.com/bdlilley/elevenlabs-go/models/operations"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.UpdateDocumentRoute(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch{
-        Name: "<value>",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch != nil {
-        switch res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.Type {
-            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeURLObj:
-                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseURLResponseModel is populated
-            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFile:
-                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseFileResponseModel is populated
-            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeText:
-                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseTextResponseModel is populated
-            case operations.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatchTypeFolder:
-                // res.ResponseUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch.GetKnowledgeBaseFolderResponseModel is populated
-        }
-
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                        | Type                                                                                                                                                             | Required                                                                                                                                                         | Description                                                                                                                                                      | Example                                                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                                                            | :heavy_check_mark:                                                                                                                                               | The context to use for the request.                                                                                                                              |                                                                                                                                                                  |
-| `documentationID`                                                                                                                                                | `string`                                                                                                                                                         | :heavy_check_mark:                                                                                                                                               | The id of a document from the knowledge base. This is returned on document addition.                                                                             | 21m00Tcm4TlvDq8ikWAM                                                                                                                                             |
-| `body`                                                                                                                                                           | [components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch](../../models/components/bodyupdatedocumentv1convaiknowledgebasedocumentationidpatch.md) | :heavy_check_mark:                                                                                                                                               | N/A                                                                                                                                                              |                                                                                                                                                                  |
-| `opts`                                                                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                                                                         | :heavy_minus_sign:                                                                                                                                               | The options for this request.                                                                                                                                    |                                                                                                                                                                  |
-
-### Response
-
-**[*operations.UpdateDocumentRouteResponse](../../models/operations/updatedocumentrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
 ## GetRagIndexOverview
 
 Provides total size and other information of RAG indexes used by knowledgebase documents
@@ -3658,7 +3658,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## RefreshURLDocumentRoute
+## RefreshURLDocument
 
 Manually refresh a URL document by re-fetching its content from the source URL.
 
@@ -3682,7 +3682,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.RefreshURLDocumentRoute(ctx, "21m00Tcm4TlvDq8ikWAM")
+    res, err := s.AgentsPlatform.RefreshURLDocument(ctx, "21m00Tcm4TlvDq8ikWAM")
     if err != nil {
         log.Fatal(err)
     }
@@ -3880,7 +3880,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## SearchKnowledgeBaseContentRoute
+## SearchKnowledgeBaseContent
 
 Fuzzy text search over knowledge base document content
 
@@ -3903,7 +3903,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.SearchKnowledgeBaseContentRoute(ctx, "<value>", elevenlabsgo.Pointer[int64](30), nil, nil)
+    res, err := s.AgentsPlatform.SearchKnowledgeBaseContent(ctx, "<value>", elevenlabsgo.Pointer[int64](30), nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -4149,60 +4149,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetToolsRoute
-
-Get all available tools in the workspace.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="get_tools_route" method="get" path="/v1/convai/tools" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.GetToolsRoute(ctx, operations.GetToolsRouteRequest{})
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ToolsResponseModel != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [operations.GetToolsRouteRequest](../../models/operations/gettoolsrouterequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `opts`                                                                             | [][operations.Option](../../models/operations/option.md)                           | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
-
-### Response
-
-**[*operations.GetToolsRouteResponse](../../models/operations/gettoolsrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## AddToolRoute
+## AddTool
 
 Add a new tool to the available tools in the workspace.
 
@@ -4226,7 +4173,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.AddToolRoute(ctx, components.ToolRequestModel{
+    res, err := s.AgentsPlatform.AddTool(ctx, components.ToolRequestModel{
         ToolConfig: components.CreateToolRequestModelToolConfigClient(
             components.ClientToolConfigInput{
                 Name: "<value>",
@@ -4272,7 +4219,60 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetToolRoute
+## GetTools
+
+Get all available tools in the workspace.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_tools_route" method="get" path="/v1/convai/tools" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetTools(ctx, operations.GetToolsRouteRequest{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ToolsResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `request`                                                                          | [operations.GetToolsRouteRequest](../../models/operations/gettoolsrouterequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `opts`                                                                             | [][operations.Option](../../models/operations/option.md)                           | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
+
+### Response
+
+**[*operations.GetToolsRouteResponse](../../models/operations/gettoolsrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetTool
 
 Get tool that is available in the workspace.
 
@@ -4296,7 +4296,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetToolRoute(ctx, "<id>")
+    res, err := s.AgentsPlatform.GetTool(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -4335,60 +4335,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteToolRoute
-
-Delete tool from the workspace.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="delete_tool_route" method="delete" path="/v1/convai/tools/{tool_id}" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.DeleteToolRoute(ctx, "<id>", elevenlabsgo.Pointer(false))
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.Any != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                              | Type                                                                                                                                                   | Required                                                                                                                                               | Description                                                                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                  | :heavy_check_mark:                                                                                                                                     | The context to use for the request.                                                                                                                    |
-| `toolID`                                                                                                                                               | `string`                                                                                                                                               | :heavy_check_mark:                                                                                                                                     | ID of the requested tool.                                                                                                                              |
-| `force`                                                                                                                                                | `*bool`                                                                                                                                                | :heavy_minus_sign:                                                                                                                                     | If set to true, the tool will be deleted regardless of whether it is used by any agents and it will be removed from the dependent agents and branches. |
-| `opts`                                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                                               | :heavy_minus_sign:                                                                                                                                     | The options for this request.                                                                                                                          |
-
-### Response
-
-**[*operations.DeleteToolRouteResponse](../../models/operations/deletetoolrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## UpdateToolRoute
+## UpdateTool
 
 Update tool that is available in the workspace.
 
@@ -4412,7 +4359,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateToolRoute(ctx, "<id>", components.ToolRequestModel{
+    res, err := s.AgentsPlatform.UpdateTool(ctx, "<id>", components.ToolRequestModel{
         ToolConfig: components.CreateToolRequestModelToolConfigClient(
             components.ClientToolConfigInput{
                 Name: "<value>",
@@ -4459,7 +4406,60 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetToolDependentAgentsRoute
+## DeleteTool
+
+Delete tool from the workspace.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="delete_tool_route" method="delete" path="/v1/convai/tools/{tool_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.DeleteTool(ctx, "<id>", elevenlabsgo.Pointer(false))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Any != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                              | Type                                                                                                                                                   | Required                                                                                                                                               | Description                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                  | :heavy_check_mark:                                                                                                                                     | The context to use for the request.                                                                                                                    |
+| `toolID`                                                                                                                                               | `string`                                                                                                                                               | :heavy_check_mark:                                                                                                                                     | ID of the requested tool.                                                                                                                              |
+| `force`                                                                                                                                                | `*bool`                                                                                                                                                | :heavy_minus_sign:                                                                                                                                     | If set to true, the tool will be deleted regardless of whether it is used by any agents and it will be removed from the dependent agents and branches. |
+| `opts`                                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                                               | :heavy_minus_sign:                                                                                                                                     | The options for this request.                                                                                                                          |
+
+### Response
+
+**[*operations.DeleteToolRouteResponse](../../models/operations/deletetoolrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetToolDependentAgents
 
 Get a list of agents depending on this tool
 
@@ -4482,7 +4482,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetToolDependentAgentsRoute(ctx, "<id>", nil, elevenlabsgo.Pointer[int64](30))
+    res, err := s.AgentsPlatform.GetToolDependentAgents(ctx, "<id>", nil, elevenlabsgo.Pointer[int64](30))
     if err != nil {
         log.Fatal(err)
     }
@@ -4513,7 +4513,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetSettingsRoute
+## GetSettings
 
 Retrieve Convai settings for the workspace
 
@@ -4536,7 +4536,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetSettingsRoute(ctx)
+    res, err := s.AgentsPlatform.GetSettings(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -4564,7 +4564,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateSettingsRoute
+## UpdateSettings
 
 Update Convai settings for the workspace
 
@@ -4588,7 +4588,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateSettingsRoute(ctx, components.PatchConvAISettingsRequest{
+    res, err := s.AgentsPlatform.UpdateSettings(ctx, components.PatchConvAISettingsRequest{
         ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{
             URL: "https://example.com/webhook",
             RequestHeaders: map[string]components.ConversationInitiationClientDataWebhookRequestHeaders{
@@ -4626,7 +4626,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetDashboardSettingsRoute
+## GetDashboardSettings
 
 Retrieve Convai dashboard settings for the workspace
 
@@ -4649,7 +4649,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetDashboardSettingsRoute(ctx)
+    res, err := s.AgentsPlatform.GetDashboardSettings(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -4677,7 +4677,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateDashboardSettingsRoute
+## UpdateDashboardSettings
 
 Update Convai dashboard settings for the workspace
 
@@ -4701,7 +4701,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateDashboardSettingsRoute(ctx, components.PatchConvAIDashboardSettingsRequest{})
+    res, err := s.AgentsPlatform.UpdateDashboardSettings(ctx, components.PatchConvAIDashboardSettingsRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -4730,61 +4730,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetSecretsRoute
-
-Get all workspace secrets for the user
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="get_secrets_route" method="get" path="/v1/convai/secrets" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.GetSecretsRoute(ctx, nil, nil, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.GetWorkspaceSecretsResponseModel != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
-| `pageSize`                                                                                                     | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | How many documents to return at maximum. Can not exceed 100. If not provided, returns all secrets.             |
-| `dependencyLimit`                                                                                              | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100. |
-| `cursor`                                                                                                       | `*string`                                                                                                      | :heavy_minus_sign:                                                                                             | Used for fetching next page. Cursor is returned in the response.                                               |
-| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
-
-### Response
-
-**[*operations.GetSecretsRouteResponse](../../models/operations/getsecretsrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## CreateSecretRoute
+## CreateSecret
 
 Create a new secret for the workspace
 
@@ -4808,7 +4754,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateSecretRoute(ctx, components.PostWorkspaceSecretRequest{
+    res, err := s.AgentsPlatform.CreateSecret(ctx, components.PostWorkspaceSecretRequest{
         Name: "<value>",
         Value: "<value>",
     })
@@ -4840,7 +4786,61 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteSecretRoute
+## GetSecrets
+
+Get all workspace secrets for the user
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_secrets_route" method="get" path="/v1/convai/secrets" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetSecrets(ctx, nil, nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetWorkspaceSecretsResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
+| `pageSize`                                                                                                     | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | How many documents to return at maximum. Can not exceed 100. If not provided, returns all secrets.             |
+| `dependencyLimit`                                                                                              | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100. |
+| `cursor`                                                                                                       | `*string`                                                                                                      | :heavy_minus_sign:                                                                                             | Used for fetching next page. Cursor is returned in the response.                                               |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
+
+### Response
+
+**[*operations.GetSecretsRouteResponse](../../models/operations/getsecretsrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## DeleteSecret
 
 Delete a workspace secret if it's not in use
 
@@ -4863,7 +4863,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.DeleteSecretRoute(ctx, "<id>")
+    res, err := s.AgentsPlatform.DeleteSecret(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -4892,7 +4892,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateSecretRoute
+## UpdateSecret
 
 Update an existing secret for the workspace
 
@@ -4916,7 +4916,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateSecretRoute(ctx, "<id>", components.PatchWorkspaceSecretRequest{
+    res, err := s.AgentsPlatform.UpdateSecret(ctx, "<id>", components.PatchWorkspaceSecretRequest{
         Name: "<value>",
         Value: "<value>",
     })
@@ -4949,7 +4949,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetSecretDependenciesRoute
+## GetSecretDependencies
 
 Get paginated list of resources that depend on a specific secret, filtered by resource type.
 
@@ -4973,7 +4973,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetSecretDependenciesRoute(ctx, "<id>", components.SecretDependencyResourceTypeAgents, elevenlabsgo.Pointer[int64](20), nil)
+    res, err := s.AgentsPlatform.GetSecretDependencies(ctx, "<id>", components.SecretDependencyResourceTypeAgents, elevenlabsgo.Pointer[int64](20), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -5413,58 +5413,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## ListMcpServersRoute
-
-Retrieve all MCP server configurations available in the workspace.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="list_mcp_servers_route" method="get" path="/v1/convai/mcp-servers" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.ListMcpServersRoute(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.MCPServersResponseModel != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.ListMcpServersRouteResponse](../../models/operations/listmcpserversrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## CreateMcpServerRoute
+## CreateMcpServer
 
 Create a new MCP server configuration in the workspace.
 
@@ -5488,7 +5437,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateMcpServerRoute(ctx, components.MCPServerRequestModel{
+    res, err := s.AgentsPlatform.CreateMcpServer(ctx, components.MCPServerRequestModel{
         Config: components.MCPServerConfigInput{
             URL: components.CreateMCPServerConfigInputURLStr(
                 "https://babyish-injunction.info",
@@ -5535,7 +5484,58 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetMcpRoute
+## ListMcpServers
+
+Retrieve all MCP server configurations available in the workspace.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="list_mcp_servers_route" method="get" path="/v1/convai/mcp-servers" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.ListMcpServers(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.MCPServersResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.ListMcpServersRouteResponse](../../models/operations/listmcpserversrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetMcp
 
 Retrieve a specific MCP server configuration from the workspace.
 
@@ -5558,7 +5558,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetMcpRoute(ctx, "<id>")
+    res, err := s.AgentsPlatform.GetMcp(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -5587,7 +5587,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteMcpServerRoute
+## DeleteMcpServer
 
 Delete a specific MCP server configuration from the workspace.
 
@@ -5610,7 +5610,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.DeleteMcpServerRoute(ctx, "<id>")
+    res, err := s.AgentsPlatform.DeleteMcpServer(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -5639,7 +5639,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateMcpServerConfigRoute
+## UpdateMcpServerConfig
 
 Update the configuration settings for an MCP server.
 
@@ -5663,7 +5663,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateMcpServerConfigRoute(ctx, "<id>", components.MCPServerConfigUpdateRequestModel{})
+    res, err := s.AgentsPlatform.UpdateMcpServerConfig(ctx, "<id>", components.MCPServerConfigUpdateRequestModel{})
     if err != nil {
         log.Fatal(err)
     }
@@ -5693,7 +5693,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## ListMcpServerToolsRoute
+## ListMcpServerTools
 
 Retrieve all tools available for a specific MCP server configuration.
 
@@ -5716,7 +5716,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.ListMcpServerToolsRoute(ctx, "<id>")
+    res, err := s.AgentsPlatform.ListMcpServerTools(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -5745,7 +5745,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## ~~UpdateMcpServerApprovalPolicyRoute~~
+## ~~UpdateMcpServerApprovalPolicy~~
 
 Update the approval policy configuration for an MCP server. DEPRECATED: Use PATCH /mcp-servers/{id} endpoint instead.
 
@@ -5771,7 +5771,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateMcpServerApprovalPolicyRoute(ctx, "<id>", components.MCPApprovalPolicyUpdateRequestModel{})
+    res, err := s.AgentsPlatform.UpdateMcpServerApprovalPolicy(ctx, "<id>", components.MCPApprovalPolicyUpdateRequestModel{})
     if err != nil {
         log.Fatal(err)
     }
@@ -5801,7 +5801,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## AddMcpServerToolApprovalRoute
+## AddMcpServerToolApproval
 
 Add approval for a specific MCP tool when using per-tool approval mode.
 
@@ -5825,7 +5825,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.AddMcpServerToolApprovalRoute(ctx, "<id>", components.MCPToolAddApprovalRequestModel{
+    res, err := s.AgentsPlatform.AddMcpServerToolApproval(ctx, "<id>", components.MCPToolAddApprovalRequestModel{
         ToolName: "<value>",
         ToolDescription: "<value>",
     })
@@ -5858,7 +5858,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## RemoveMcpServerToolApprovalRoute
+## RemoveMcpServerToolApproval
 
 Remove approval for a specific MCP tool when using per-tool approval mode.
 
@@ -5881,7 +5881,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.RemoveMcpServerToolApprovalRoute(ctx, "<id>", "<value>")
+    res, err := s.AgentsPlatform.RemoveMcpServerToolApproval(ctx, "<id>", "<value>")
     if err != nil {
         log.Fatal(err)
     }
@@ -5911,7 +5911,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## AddMcpToolConfigOverrideRoute
+## AddMcpToolConfigOverride
 
 Create configuration overrides for a specific MCP tool.
 
@@ -5935,7 +5935,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.AddMcpToolConfigOverrideRoute(ctx, "<id>", components.MCPToolConfigOverrideCreateRequestModel{
+    res, err := s.AgentsPlatform.AddMcpToolConfigOverride(ctx, "<id>", components.MCPToolConfigOverrideCreateRequestModel{
         Assignments: []components.DynamicVariableAssignment{
             components.DynamicVariableAssignment{
                 DynamicVariable: "user_name",
@@ -5973,7 +5973,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetMcpToolConfigOverrideRoute
+## GetMcpToolConfigOverride
 
 Retrieve configuration overrides for a specific MCP tool.
 
@@ -5996,7 +5996,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetMcpToolConfigOverrideRoute(ctx, "<id>", "<value>")
+    res, err := s.AgentsPlatform.GetMcpToolConfigOverride(ctx, "<id>", "<value>")
     if err != nil {
         log.Fatal(err)
     }
@@ -6026,60 +6026,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## RemoveMcpToolConfigOverrideRoute
-
-Remove configuration overrides for a specific MCP tool.
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="remove_mcp_tool_config_override_route" method="delete" path="/v1/convai/mcp-servers/{mcp_server_id}/tool-configs/{tool_name}" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.RemoveMcpToolConfigOverrideRoute(ctx, "<id>", "<value>")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.MCPServerResponseModel != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `mcpServerID`                                            | `string`                                                 | :heavy_check_mark:                                       | ID of the MCP Server.                                    |
-| `toolName`                                               | `string`                                                 | :heavy_check_mark:                                       | Name of the MCP tool to remove config overrides for.     |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.RemoveMcpToolConfigOverrideRouteResponse](../../models/operations/removemcptoolconfigoverriderouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## UpdateMcpToolConfigOverrideRoute
+## UpdateMcpToolConfigOverride
 
 Update configuration overrides for a specific MCP tool.
 
@@ -6103,7 +6050,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateMcpToolConfigOverrideRoute(ctx, "<id>", "<value>", components.MCPToolConfigOverrideUpdateRequestModel{
+    res, err := s.AgentsPlatform.UpdateMcpToolConfigOverride(ctx, "<id>", "<value>", components.MCPToolConfigOverrideUpdateRequestModel{
         Assignments: []components.DynamicVariableAssignment{
             components.DynamicVariableAssignment{
                 DynamicVariable: "user_name",
@@ -6133,6 +6080,59 @@ func main() {
 ### Response
 
 **[*operations.UpdateMcpToolConfigOverrideRouteResponse](../../models/operations/updatemcptoolconfigoverriderouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## RemoveMcpToolConfigOverride
+
+Remove configuration overrides for a specific MCP tool.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="remove_mcp_tool_config_override_route" method="delete" path="/v1/convai/mcp-servers/{mcp_server_id}/tool-configs/{tool_name}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.RemoveMcpToolConfigOverride(ctx, "<id>", "<value>")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.MCPServerResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `mcpServerID`                                            | `string`                                                 | :heavy_check_mark:                                       | ID of the MCP Server.                                    |
+| `toolName`                                               | `string`                                                 | :heavy_check_mark:                                       | Name of the MCP tool to remove config overrides for.     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.RemoveMcpToolConfigOverrideRouteResponse](../../models/operations/removemcptoolconfigoverriderouteresponse.md), error**
 
 ### Errors
 
@@ -6350,61 +6350,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetBranchesRoute
-
-Returns a list of branches an agent has
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="get_branches_route" method="get" path="/v1/convai/agents/{agent_id}/branches" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.AgentsPlatform.GetBranchesRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), elevenlabsgo.Pointer[int64](100))
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ListResponseAgentBranchSummary != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
-| `includeArchived`                                        | `*bool`                                                  | :heavy_minus_sign:                                       | Whether archived branches should be included             |                                                          |
-| `limit`                                                  | `*int64`                                                 | :heavy_minus_sign:                                       | How many results at most should be returned              |                                                          |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
-
-### Response
-
-**[*operations.GetBranchesRouteResponse](../../models/operations/getbranchesrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## CreateBranchRoute
+## CreateBranch
 
 Create a new branch from a given version of any branch
 
@@ -6428,7 +6374,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateBranchRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost{
+    res, err := s.AgentsPlatform.CreateBranch(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyCreateANewBranchV1ConvaiAgentsAgentIDBranchesPost{
         ParentVersionID: "<id>",
         Name: "<value>",
         Description: "faithfully platter equally red",
@@ -6582,7 +6528,61 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetBranchRoute
+## GetBranches
+
+Returns a list of branches an agent has
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_branches_route" method="get" path="/v1/convai/agents/{agent_id}/branches" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetBranches(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), elevenlabsgo.Pointer[int64](100))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListResponseAgentBranchSummary != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
+| `includeArchived`                                        | `*bool`                                                  | :heavy_minus_sign:                                       | Whether archived branches should be included             |                                                          |
+| `limit`                                                  | `*int64`                                                 | :heavy_minus_sign:                                       | How many results at most should be returned              |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.GetBranchesRouteResponse](../../models/operations/getbranchesrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetBranch
 
 Get information about a single agent branch
 
@@ -6605,7 +6605,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetBranchRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t")
+    res, err := s.AgentsPlatform.GetBranch(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t")
     if err != nil {
         log.Fatal(err)
     }
@@ -6635,7 +6635,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateBranchRoute
+## UpdateBranch
 
 Update agent branch properties such as archiving status and protection level
 
@@ -6658,7 +6658,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateBranchRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", nil)
+    res, err := s.AgentsPlatform.UpdateBranch(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbranch_0901k4aafjxxfxt93gd841r7tv5t", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -6744,7 +6744,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateAgentDeploymentRoute
+## CreateAgentDeployment
 
 Create a new deployment for an agent
 
@@ -6768,7 +6768,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateAgentDeploymentRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost{
+    res, err := s.AgentsPlatform.CreateAgentDeployment(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.BodyCreateOrUpdateDeploymentsV1ConvaiAgentsAgentIDDeploymentsPost{
         DeploymentRequest: components.AgentDeploymentRequest{
             Requests: []components.AgentDeploymentRequestItem{
                 components.AgentDeploymentRequestItem{
@@ -6809,7 +6809,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateAgentDraftRoute
+## CreateAgentDraft
 
 Create a new draft for an agent
 
@@ -6833,7 +6833,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreateAgentDraftRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", components.BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost{
+    res, err := s.AgentsPlatform.CreateAgentDraft(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", components.BodyCreateAgentDraftV1ConvaiAgentsAgentIDDraftsPost{
         ConversationConfig: map[string]any{
             "key": "<value>",
             "key1": "<value>",
@@ -6999,7 +6999,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteAgentDraftRoute
+## DeleteAgentDraft
 
 Delete a draft for an agent
 
@@ -7022,7 +7022,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.DeleteAgentDraftRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+    res, err := s.AgentsPlatform.DeleteAgentDraft(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
     if err != nil {
         log.Fatal(err)
     }

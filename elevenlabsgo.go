@@ -60,21 +60,15 @@ type ElevenlabsGo struct {
 	// Sound Generation
 	// Turn text into sound effects for your videos, voice-overs or video games using the most advanced sound effects models in the world.
 	SoundGeneration *SoundGeneration
-	// Audio Isolation
-	// Removes background noise from audio
-	AudioIsolation *AudioIsolation
+	AudioIsolation  *AudioIsolation
 	// Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
 	Samples *Samples
 	// Convert text into lifelike speech using a voice of your choice.
-	TextToSpeech *TextToSpeech
-	// Text To Dialogue (Multi-Voice)
-	// Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
+	TextToSpeech   *TextToSpeech
 	TextToDialogue *TextToDialogue
 	// Create speech by combining the style and content of an audio file you upload with a voice of your choice.
 	SpeechToSpeech *SpeechToSpeech
-	// Generate A Voice Preview From Description
-	// Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
-	TextToVoice *TextToVoice
+	TextToVoice    *TextToVoice
 	// Access to voices created either by you or ElevenLabs.
 	Voices *Voices
 	Studio *Studio
@@ -177,9 +171,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *ElevenlabsGo {
 	sdk := &ElevenlabsGo{
-		SDKVersion: "0.5.0",
+		SDKVersion: "0.7.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 0.5.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent:  "speakeasy-sdk/go 0.7.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -920,9 +914,9 @@ func (s *ElevenlabsGo) UsageCharacters(ctx context.Context, request operations.U
 
 }
 
-// CreateAgentResponseTestRoute - Create Agent Response Test
+// CreateAgentResponseTest - Create Agent Response Test
 // Creates a new agent response test.
-func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, request operations.CreateAgentResponseTestRouteTestRequest, opts ...operations.Option) (*operations.CreateAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) CreateAgentResponseTest(ctx context.Context, request operations.CreateAgentResponseTestRouteTestRequest, opts ...operations.Option) (*operations.CreateAgentResponseTestRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1157,9 +1151,9 @@ func (s *ElevenlabsGo) CreateAgentResponseTestRoute(ctx context.Context, request
 
 }
 
-// GetAgentResponseTestRoute - Get Agent Response Test By Id
+// GetAgentResponseTest - Get Agent Response Test By Id
 // Gets an agent response test by ID.
-func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID string, opts ...operations.Option) (*operations.GetAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) GetAgentResponseTest(ctx context.Context, testID string, opts ...operations.Option) (*operations.GetAgentResponseTestRouteResponse, error) {
 	request := operations.GetAgentResponseTestRouteRequest{
 		TestID: testID,
 	}
@@ -1391,9 +1385,9 @@ func (s *ElevenlabsGo) GetAgentResponseTestRoute(ctx context.Context, testID str
 
 }
 
-// UpdateAgentResponseTestRoute - Update Agent Response Test
+// UpdateAgentResponseTest - Update Agent Response Test
 // Updates an agent response test by ID.
-func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID string, body operations.UpdateAgentResponseTestRouteTestRequest, opts ...operations.Option) (*operations.UpdateAgentResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) UpdateAgentResponseTest(ctx context.Context, testID string, body operations.UpdateAgentResponseTestRouteTestRequest, opts ...operations.Option) (*operations.UpdateAgentResponseTestRouteResponse, error) {
 	request := operations.UpdateAgentResponseTestRouteRequest{
 		TestID: testID,
 		Body:   body,
@@ -1633,9 +1627,9 @@ func (s *ElevenlabsGo) UpdateAgentResponseTestRoute(ctx context.Context, testID 
 
 }
 
-// DeleteChatResponseTestRoute - Delete Agent Response Test
+// DeleteChatResponseTest - Delete Agent Response Test
 // Deletes an agent response test by ID.
-func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID string, opts ...operations.Option) (*operations.DeleteChatResponseTestRouteResponse, error) {
+func (s *ElevenlabsGo) DeleteChatResponseTest(ctx context.Context, testID string, opts ...operations.Option) (*operations.DeleteChatResponseTestRouteResponse, error) {
 	request := operations.DeleteChatResponseTestRouteRequest{
 		TestID: testID,
 	}
@@ -1867,9 +1861,9 @@ func (s *ElevenlabsGo) DeleteChatResponseTestRoute(ctx context.Context, testID s
 
 }
 
-// GetAgentResponseTestsSummariesRoute - Get Agent Response Test Summaries By Ids
+// GetAgentResponseTestsSummaries - Get Agent Response Test Summaries By Ids
 // Gets multiple agent response tests by their IDs. Returns a dictionary mapping test IDs to test summaries.
-func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, request components.ListTestsByIdsRequestModel, opts ...operations.Option) (*operations.GetAgentResponseTestsSummariesRouteResponse, error) {
+func (s *ElevenlabsGo) GetAgentResponseTestsSummaries(ctx context.Context, request components.ListTestsByIdsRequestModel, opts ...operations.Option) (*operations.GetAgentResponseTestsSummariesRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2104,9 +2098,9 @@ func (s *ElevenlabsGo) GetAgentResponseTestsSummariesRoute(ctx context.Context, 
 
 }
 
-// ListChatResponseTestsRoute - List Agent Response Tests
+// ListChatResponseTests - List Agent Response Tests
 // Lists all agent response tests with pagination support and optional search filtering.
-func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request operations.ListChatResponseTestsRouteRequest, opts ...operations.Option) (*operations.ListChatResponseTestsRouteResponse, error) {
+func (s *ElevenlabsGo) ListChatResponseTests(ctx context.Context, request operations.ListChatResponseTestsRouteRequest, opts ...operations.Option) (*operations.ListChatResponseTestsRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -2338,9 +2332,9 @@ func (s *ElevenlabsGo) ListChatResponseTestsRoute(ctx context.Context, request o
 
 }
 
-// ListTestInvocationsRoute - List Test Invocations
+// ListTestInvocations - List Test Invocations
 // Lists all test invocations with pagination support and optional search filtering.
-func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID string, pageSize *int64, cursor *string, opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
+func (s *ElevenlabsGo) ListTestInvocations(ctx context.Context, agentID string, pageSize *int64, cursor *string, opts ...operations.Option) (*operations.ListTestInvocationsRouteResponse, error) {
 	request := operations.ListTestInvocationsRouteRequest{
 		AgentID:  agentID,
 		PageSize: pageSize,
@@ -2578,9 +2572,9 @@ func (s *ElevenlabsGo) ListTestInvocationsRoute(ctx context.Context, agentID str
 
 }
 
-// RunAgentTestSuiteRoute - Run Tests On The Agent
+// RunAgentTestSuite - Run Tests On The Agent
 // Run selected tests on the agent with provided configuration. If the agent configuration is provided, it will be used to override default agent configuration.
-func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID string, body components.RunAgentTestsRequestModel, opts ...operations.Option) (*operations.RunAgentTestSuiteRouteResponse, error) {
+func (s *ElevenlabsGo) RunAgentTestSuite(ctx context.Context, agentID string, body components.RunAgentTestsRequestModel, opts ...operations.Option) (*operations.RunAgentTestSuiteRouteResponse, error) {
 	request := operations.RunAgentTestSuiteRouteRequest{
 		AgentID: agentID,
 		Body:    body,
@@ -2820,9 +2814,9 @@ func (s *ElevenlabsGo) RunAgentTestSuiteRoute(ctx context.Context, agentID strin
 
 }
 
-// GetTestInvocationRoute - Get Test Invocation
+// GetTestInvocation - Get Test Invocation
 // Gets a test invocation by ID.
-func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocationID string, opts ...operations.Option) (*operations.GetTestInvocationRouteResponse, error) {
+func (s *ElevenlabsGo) GetTestInvocation(ctx context.Context, testInvocationID string, opts ...operations.Option) (*operations.GetTestInvocationRouteResponse, error) {
 	request := operations.GetTestInvocationRouteRequest{
 		TestInvocationID: testInvocationID,
 	}
@@ -3054,9 +3048,9 @@ func (s *ElevenlabsGo) GetTestInvocationRoute(ctx context.Context, testInvocatio
 
 }
 
-// ResubmitTestsRoute - Resubmit Tests
+// ResubmitTests - Resubmit Tests
 // Resubmits specific test runs from a test invocation.
-func (s *ElevenlabsGo) ResubmitTestsRoute(ctx context.Context, testInvocationID string, body components.ResubmitTestsRequestModel, opts ...operations.Option) (*operations.ResubmitTestsRouteResponse, error) {
+func (s *ElevenlabsGo) ResubmitTests(ctx context.Context, testInvocationID string, body components.ResubmitTestsRequestModel, opts ...operations.Option) (*operations.ResubmitTestsRouteResponse, error) {
 	request := operations.ResubmitTestsRouteRequest{
 		TestInvocationID: testInvocationID,
 		Body:             body,

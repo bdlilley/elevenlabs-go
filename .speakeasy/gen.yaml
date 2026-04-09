@@ -34,7 +34,7 @@ generation:
   apiName: elevenlabs-go
   baseServerURL: https://api.elevenlabs.io
 go:
-  version: 0.5.0
+  version: 0.7.0
   additionalDependencies: {}
   baseErrorName: SDKError
   clientServerStatusCodesAsErrors: true

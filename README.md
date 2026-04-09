@@ -141,16 +141,16 @@ func main() {
 * [GetUserSubscriptionInfo](docs/sdks/elevenlabsgo/README.md#getusersubscriptioninfo) - Get User Subscription Info
 * [GetUserInfo](docs/sdks/elevenlabsgo/README.md#getuserinfo) - Get User Info
 * [UsageCharacters](docs/sdks/elevenlabsgo/README.md#usagecharacters) - Get Characters Usage Metrics
-* [CreateAgentResponseTestRoute](docs/sdks/elevenlabsgo/README.md#createagentresponsetestroute) - Create Agent Response Test
-* [GetAgentResponseTestRoute](docs/sdks/elevenlabsgo/README.md#getagentresponsetestroute) - Get Agent Response Test By Id
-* [UpdateAgentResponseTestRoute](docs/sdks/elevenlabsgo/README.md#updateagentresponsetestroute) - Update Agent Response Test
-* [DeleteChatResponseTestRoute](docs/sdks/elevenlabsgo/README.md#deletechatresponsetestroute) - Delete Agent Response Test
-* [GetAgentResponseTestsSummariesRoute](docs/sdks/elevenlabsgo/README.md#getagentresponsetestssummariesroute) - Get Agent Response Test Summaries By Ids
-* [ListChatResponseTestsRoute](docs/sdks/elevenlabsgo/README.md#listchatresponsetestsroute) - List Agent Response Tests
-* [ListTestInvocationsRoute](docs/sdks/elevenlabsgo/README.md#listtestinvocationsroute) - List Test Invocations
-* [RunAgentTestSuiteRoute](docs/sdks/elevenlabsgo/README.md#runagenttestsuiteroute) - Run Tests On The Agent
-* [GetTestInvocationRoute](docs/sdks/elevenlabsgo/README.md#gettestinvocationroute) - Get Test Invocation
-* [ResubmitTestsRoute](docs/sdks/elevenlabsgo/README.md#resubmittestsroute) - Resubmit Tests
+* [CreateAgentResponseTest](docs/sdks/elevenlabsgo/README.md#createagentresponsetest) - Create Agent Response Test
+* [GetAgentResponseTest](docs/sdks/elevenlabsgo/README.md#getagentresponsetest) - Get Agent Response Test By Id
+* [UpdateAgentResponseTest](docs/sdks/elevenlabsgo/README.md#updateagentresponsetest) - Update Agent Response Test
+* [DeleteChatResponseTest](docs/sdks/elevenlabsgo/README.md#deletechatresponsetest) - Delete Agent Response Test
+* [GetAgentResponseTestsSummaries](docs/sdks/elevenlabsgo/README.md#getagentresponsetestssummaries) - Get Agent Response Test Summaries By Ids
+* [ListChatResponseTests](docs/sdks/elevenlabsgo/README.md#listchatresponsetests) - List Agent Response Tests
+* [ListTestInvocations](docs/sdks/elevenlabsgo/README.md#listtestinvocations) - List Test Invocations
+* [RunAgentTestSuite](docs/sdks/elevenlabsgo/README.md#runagenttestsuite) - Run Tests On The Agent
+* [GetTestInvocation](docs/sdks/elevenlabsgo/README.md#gettestinvocation) - Get Test Invocation
+* [ResubmitTests](docs/sdks/elevenlabsgo/README.md#resubmittests) - Resubmit Tests
 * [RedirectToMintlify](docs/sdks/elevenlabsgo/README.md#redirecttomintlify) - Redirect To Mintlify
 
 ### [AgentsPlatform](docs/sdks/agentsplatform/README.md)
@@ -162,78 +162,78 @@ func main() {
 * [RegisterTwilioCall](docs/sdks/agentsplatform/README.md#registertwiliocall) - Register A Twilio Call And Return Twiml
 * [WhatsappOutboundCall](docs/sdks/agentsplatform/README.md#whatsappoutboundcall) - Make An Outbound Call Via Whatsapp
 * [WhatsappOutboundMessage](docs/sdks/agentsplatform/README.md#whatsappoutboundmessage) - Send An Outbound Message Via Whatsapp
-* [CreateAgentRoute](docs/sdks/agentsplatform/README.md#createagentroute) - Create Agent
-* [GetAgentSummariesRoute](docs/sdks/agentsplatform/README.md#getagentsummariesroute) - Get Agent Summaries
-* [GetAgentRoute](docs/sdks/agentsplatform/README.md#getagentroute) - Get Agent
-* [DeleteAgentRoute](docs/sdks/agentsplatform/README.md#deleteagentroute) - Delete Agent
-* [PatchAgentSettingsRoute](docs/sdks/agentsplatform/README.md#patchagentsettingsroute) - Patches An Agent Settings
-* [GetAgentWidgetRoute](docs/sdks/agentsplatform/README.md#getagentwidgetroute) - Get Agent Widget Config
-* [GetAgentLinkRoute](docs/sdks/agentsplatform/README.md#getagentlinkroute) - Get Shareable Agent Link
-* [PostAgentAvatarRoute](docs/sdks/agentsplatform/README.md#postagentavatarroute) - Post Agent Avatar
-* [GetAgentsRoute](docs/sdks/agentsplatform/README.md#getagentsroute) - List Agents
+* [CreateAgent](docs/sdks/agentsplatform/README.md#createagent) - Create Agent
+* [GetAgentSummaries](docs/sdks/agentsplatform/README.md#getagentsummaries) - Get Agent Summaries
+* [GetAgent](docs/sdks/agentsplatform/README.md#getagent) - Get Agent
+* [PatchAgentSettings](docs/sdks/agentsplatform/README.md#patchagentsettings) - Patches An Agent Settings
+* [DeleteAgent](docs/sdks/agentsplatform/README.md#deleteagent) - Delete Agent
+* [GetAgentWidget](docs/sdks/agentsplatform/README.md#getagentwidget) - Get Agent Widget Config
+* [GetAgentLink](docs/sdks/agentsplatform/README.md#getagentlink) - Get Shareable Agent Link
+* [PostAgentAvatar](docs/sdks/agentsplatform/README.md#postagentavatar) - Post Agent Avatar
+* [GetAgents](docs/sdks/agentsplatform/README.md#getagents) - List Agents
 * [GetAgentKnowledgeBaseSize](docs/sdks/agentsplatform/README.md#getagentknowledgebasesize) - Returns The Size Of The Agent'S Knowledge Base
 * [GetAgentLlmExpectedCostCalculation](docs/sdks/agentsplatform/README.md#getagentllmexpectedcostcalculation) - Calculate Expected Llm Usage For An Agent
-* [DuplicateAgentRoute](docs/sdks/agentsplatform/README.md#duplicateagentroute) - Duplicate Agent
-* [RunConversationSimulationRoute](docs/sdks/agentsplatform/README.md#runconversationsimulationroute) - Simulates A Conversation
+* [DuplicateAgent](docs/sdks/agentsplatform/README.md#duplicateagent) - Duplicate Agent
+* [RunConversationSimulation](docs/sdks/agentsplatform/README.md#runconversationsimulation) - Simulates A Conversation
 * [RunConversationSimulationRouteStream](docs/sdks/agentsplatform/README.md#runconversationsimulationroutestream) - Simulates A Conversation (Stream)
-* [CreateAgentTestFolderRoute](docs/sdks/agentsplatform/README.md#createagenttestfolderroute) - Create Agent Test Folder
-* [GetAgentTestFolderRoute](docs/sdks/agentsplatform/README.md#getagenttestfolderroute) - Get Agent Test Folder By Id
-* [DeleteAgentTestFolderRoute](docs/sdks/agentsplatform/README.md#deleteagenttestfolderroute) - Delete Agent Test Folder
-* [UpdateAgentTestFolderRoute](docs/sdks/agentsplatform/README.md#updateagenttestfolderroute) - Update Agent Test Folder
-* [AgentTestingBulkMoveRoute](docs/sdks/agentsplatform/README.md#agenttestingbulkmoveroute) - Bulk Move Tests To Folder
-* [GetConversationHistoriesRoute](docs/sdks/agentsplatform/README.md#getconversationhistoriesroute) - Get Conversations
-* [GetConversationUsersRoute](docs/sdks/agentsplatform/README.md#getconversationusersroute) - Get Conversation Users
-* [GetConversationHistoryRoute](docs/sdks/agentsplatform/README.md#getconversationhistoryroute) - Get Conversation Details
-* [DeleteConversationRoute](docs/sdks/agentsplatform/README.md#deleteconversationroute) - Delete Conversation
-* [GetConversationAudioRoute](docs/sdks/agentsplatform/README.md#getconversationaudioroute) - Get Conversation Audio
-* [PostConversationFeedbackRoute](docs/sdks/agentsplatform/README.md#postconversationfeedbackroute) - Send Conversation Feedback
-* [TextSearchConversationMessagesRoute](docs/sdks/agentsplatform/README.md#textsearchconversationmessagesroute) - Text Search Conversation Messages
-* [SmartSearchConversationMessagesRoute](docs/sdks/agentsplatform/README.md#smartsearchconversationmessagesroute) - Smart Search Conversation Messages
-* [ListPhoneNumbersRoute](docs/sdks/agentsplatform/README.md#listphonenumbersroute) - List Phone Numbers
-* [CreatePhoneNumberRoute](docs/sdks/agentsplatform/README.md#createphonenumberroute) - Import Phone Number
-* [GetPhoneNumberRoute](docs/sdks/agentsplatform/README.md#getphonenumberroute) - Get Phone Number
-* [DeletePhoneNumberRoute](docs/sdks/agentsplatform/README.md#deletephonenumberroute) - Delete Phone Number
-* [UpdatePhoneNumberRoute](docs/sdks/agentsplatform/README.md#updatephonenumberroute) - Update Phone Number
+* [CreateAgentTestFolder](docs/sdks/agentsplatform/README.md#createagenttestfolder) - Create Agent Test Folder
+* [GetAgentTestFolder](docs/sdks/agentsplatform/README.md#getagenttestfolder) - Get Agent Test Folder By Id
+* [UpdateAgentTestFolder](docs/sdks/agentsplatform/README.md#updateagenttestfolder) - Update Agent Test Folder
+* [DeleteAgentTestFolder](docs/sdks/agentsplatform/README.md#deleteagenttestfolder) - Delete Agent Test Folder
+* [AgentTestingBulkMove](docs/sdks/agentsplatform/README.md#agenttestingbulkmove) - Bulk Move Tests To Folder
+* [GetConversationHistories](docs/sdks/agentsplatform/README.md#getconversationhistories) - Get Conversations
+* [GetConversationUsers](docs/sdks/agentsplatform/README.md#getconversationusers) - Get Conversation Users
+* [GetConversationHistory](docs/sdks/agentsplatform/README.md#getconversationhistory) - Get Conversation Details
+* [DeleteConversation](docs/sdks/agentsplatform/README.md#deleteconversation) - Delete Conversation
+* [GetConversationAudio](docs/sdks/agentsplatform/README.md#getconversationaudio) - Get Conversation Audio
+* [PostConversationFeedback](docs/sdks/agentsplatform/README.md#postconversationfeedback) - Send Conversation Feedback
+* [TextSearchConversationMessages](docs/sdks/agentsplatform/README.md#textsearchconversationmessages) - Text Search Conversation Messages
+* [SmartSearchConversationMessages](docs/sdks/agentsplatform/README.md#smartsearchconversationmessages) - Smart Search Conversation Messages
+* [CreatePhoneNumber](docs/sdks/agentsplatform/README.md#createphonenumber) - Import Phone Number
+* [ListPhoneNumbers](docs/sdks/agentsplatform/README.md#listphonenumbers) - List Phone Numbers
+* [GetPhoneNumber](docs/sdks/agentsplatform/README.md#getphonenumber) - Get Phone Number
+* [DeletePhoneNumber](docs/sdks/agentsplatform/README.md#deletephonenumber) - Delete Phone Number
+* [UpdatePhoneNumber](docs/sdks/agentsplatform/README.md#updatephonenumber) - Update Phone Number
 * [GetPublicLlmExpectedCostCalculation](docs/sdks/agentsplatform/README.md#getpublicllmexpectedcostcalculation) - Calculate Expected Llm Usage
 * [ListAvailableLlms](docs/sdks/agentsplatform/README.md#listavailablellms) - List Available Llms
-* [UploadFileRoute](docs/sdks/agentsplatform/README.md#uploadfileroute) - Upload File
-* [CancelFileUploadRoute](docs/sdks/agentsplatform/README.md#cancelfileuploadroute) - Delete File Upload
+* [UploadFile](docs/sdks/agentsplatform/README.md#uploadfile) - Upload File
+* [CancelFileUpload](docs/sdks/agentsplatform/README.md#cancelfileupload) - Delete File Upload
 * [GetLiveCount](docs/sdks/agentsplatform/README.md#getlivecount) - Get Live Count
-* [GetAgentKnowledgeBaseSummariesRoute](docs/sdks/agentsplatform/README.md#getagentknowledgebasesummariesroute) - Get Knowledge Base Summaries By Ids
-* [GetKnowledgeBaseListRoute](docs/sdks/agentsplatform/README.md#getknowledgebaselistroute) - Get Knowledge Base List
+* [GetAgentKnowledgeBaseSummaries](docs/sdks/agentsplatform/README.md#getagentknowledgebasesummaries) - Get Knowledge Base Summaries By Ids
+* [GetKnowledgeBaseList](docs/sdks/agentsplatform/README.md#getknowledgebaselist) - Get Knowledge Base List
 * [~~AddDocumentationToKnowledgeBase~~](docs/sdks/agentsplatform/README.md#adddocumentationtoknowledgebase) - Add To Knowledge Base :warning: **Deprecated**
-* [CreateURLDocumentRoute](docs/sdks/agentsplatform/README.md#createurldocumentroute) - Create Url Document
-* [CreateFileDocumentRoute](docs/sdks/agentsplatform/README.md#createfiledocumentroute) - Create File Document
-* [CreateTextDocumentRoute](docs/sdks/agentsplatform/README.md#createtextdocumentroute) - Create Text Document
+* [CreateURLDocument](docs/sdks/agentsplatform/README.md#createurldocument) - Create Url Document
+* [CreateFileDocument](docs/sdks/agentsplatform/README.md#createfiledocument) - Create File Document
+* [CreateTextDocument](docs/sdks/agentsplatform/README.md#createtextdocument) - Create Text Document
+* [UpdateDocument](docs/sdks/agentsplatform/README.md#updatedocument) - Update Document
 * [GetDocumentationFromKnowledgeBase](docs/sdks/agentsplatform/README.md#getdocumentationfromknowledgebase) - Get Documentation From Knowledge Base
 * [DeleteKnowledgeBaseDocument](docs/sdks/agentsplatform/README.md#deleteknowledgebasedocument) - Delete Knowledge Base Document Or Folder
-* [UpdateDocumentRoute](docs/sdks/agentsplatform/README.md#updatedocumentroute) - Update Document
 * [GetRagIndexOverview](docs/sdks/agentsplatform/README.md#getragindexoverview) - Get Rag Index Overview.
 * [GetOrCreateRagIndexes](docs/sdks/agentsplatform/README.md#getorcreateragindexes) - Compute Rag Indexes In Batch
-* [RefreshURLDocumentRoute](docs/sdks/agentsplatform/README.md#refreshurldocumentroute) - Refresh Url Document Content
+* [RefreshURLDocument](docs/sdks/agentsplatform/README.md#refreshurldocument) - Refresh Url Document Content
 * [GetRagIndexes](docs/sdks/agentsplatform/README.md#getragindexes) - Get Rag Indexes Of The Specified Knowledgebase Document.
 * [RagIndexStatus](docs/sdks/agentsplatform/README.md#ragindexstatus) - Compute Rag Index.
 * [DeleteRagIndex](docs/sdks/agentsplatform/README.md#deleteragindex) - Delete Rag Index.
-* [SearchKnowledgeBaseContentRoute](docs/sdks/agentsplatform/README.md#searchknowledgebasecontentroute) - Search Knowledge Base Content
+* [SearchKnowledgeBaseContent](docs/sdks/agentsplatform/README.md#searchknowledgebasecontent) - Search Knowledge Base Content
 * [GetKnowledgeBaseDependentAgents](docs/sdks/agentsplatform/README.md#getknowledgebasedependentagents) - Get Dependent Agents List
 * [GetKnowledgeBaseContent](docs/sdks/agentsplatform/README.md#getknowledgebasecontent) - Get Document Content
 * [GetKnowledgeBaseSourceFileURL](docs/sdks/agentsplatform/README.md#getknowledgebasesourcefileurl) - Get Document Source File Url
 * [GetDocumentationChunkFromKnowledgeBase](docs/sdks/agentsplatform/README.md#getdocumentationchunkfromknowledgebase) - Get Documentation Chunk From Knowledge Base
-* [GetToolsRoute](docs/sdks/agentsplatform/README.md#gettoolsroute) - Get Tools
-* [AddToolRoute](docs/sdks/agentsplatform/README.md#addtoolroute) - Add Tool
-* [GetToolRoute](docs/sdks/agentsplatform/README.md#gettoolroute) - Get Tool
-* [DeleteToolRoute](docs/sdks/agentsplatform/README.md#deletetoolroute) - Delete Tool
-* [UpdateToolRoute](docs/sdks/agentsplatform/README.md#updatetoolroute) - Update Tool
-* [GetToolDependentAgentsRoute](docs/sdks/agentsplatform/README.md#gettooldependentagentsroute) - Get Dependent Agents List
-* [GetSettingsRoute](docs/sdks/agentsplatform/README.md#getsettingsroute) - Get Convai Settings
-* [UpdateSettingsRoute](docs/sdks/agentsplatform/README.md#updatesettingsroute) - Update Convai Settings
-* [GetDashboardSettingsRoute](docs/sdks/agentsplatform/README.md#getdashboardsettingsroute) - Get Convai Dashboard Settings
-* [UpdateDashboardSettingsRoute](docs/sdks/agentsplatform/README.md#updatedashboardsettingsroute) - Update Convai Dashboard Settings
-* [GetSecretsRoute](docs/sdks/agentsplatform/README.md#getsecretsroute) - Get Convai Workspace Secrets
-* [CreateSecretRoute](docs/sdks/agentsplatform/README.md#createsecretroute) - Create Convai Workspace Secret
-* [DeleteSecretRoute](docs/sdks/agentsplatform/README.md#deletesecretroute) - Delete Convai Workspace Secret
-* [UpdateSecretRoute](docs/sdks/agentsplatform/README.md#updatesecretroute) - Update Convai Workspace Secret
-* [GetSecretDependenciesRoute](docs/sdks/agentsplatform/README.md#getsecretdependenciesroute) - Get Secret Dependencies By Type
+* [AddTool](docs/sdks/agentsplatform/README.md#addtool) - Add Tool
+* [GetTools](docs/sdks/agentsplatform/README.md#gettools) - Get Tools
+* [GetTool](docs/sdks/agentsplatform/README.md#gettool) - Get Tool
+* [UpdateTool](docs/sdks/agentsplatform/README.md#updatetool) - Update Tool
+* [DeleteTool](docs/sdks/agentsplatform/README.md#deletetool) - Delete Tool
+* [GetToolDependentAgents](docs/sdks/agentsplatform/README.md#gettooldependentagents) - Get Dependent Agents List
+* [GetSettings](docs/sdks/agentsplatform/README.md#getsettings) - Get Convai Settings
+* [UpdateSettings](docs/sdks/agentsplatform/README.md#updatesettings) - Update Convai Settings
+* [GetDashboardSettings](docs/sdks/agentsplatform/README.md#getdashboardsettings) - Get Convai Dashboard Settings
+* [UpdateDashboardSettings](docs/sdks/agentsplatform/README.md#updatedashboardsettings) - Update Convai Dashboard Settings
+* [CreateSecret](docs/sdks/agentsplatform/README.md#createsecret) - Create Convai Workspace Secret
+* [GetSecrets](docs/sdks/agentsplatform/README.md#getsecrets) - Get Convai Workspace Secrets
+* [DeleteSecret](docs/sdks/agentsplatform/README.md#deletesecret) - Delete Convai Workspace Secret
+* [UpdateSecret](docs/sdks/agentsplatform/README.md#updatesecret) - Update Convai Workspace Secret
+* [GetSecretDependencies](docs/sdks/agentsplatform/README.md#getsecretdependencies) - Get Secret Dependencies By Type
 * [CreateBatchCall](docs/sdks/agentsplatform/README.md#createbatchcall) - Submit A Batch Call Request.
 * [GetWorkspaceBatchCalls](docs/sdks/agentsplatform/README.md#getworkspacebatchcalls) - Get All Batch Calls For A Workspace.
 * [GetBatchCall](docs/sdks/agentsplatform/README.md#getbatchcall) - Get A Batch Call By Id.
@@ -241,31 +241,31 @@ func main() {
 * [CancelBatchCall](docs/sdks/agentsplatform/README.md#cancelbatchcall) - Cancel A Batch Call.
 * [RetryBatchCall](docs/sdks/agentsplatform/README.md#retrybatchcall) - Retry A Batch Call.
 * [HandleSipTrunkOutboundCall](docs/sdks/agentsplatform/README.md#handlesiptrunkoutboundcall) - Handle An Outbound Call Via Sip Trunk
-* [ListMcpServersRoute](docs/sdks/agentsplatform/README.md#listmcpserversroute) - List Mcp Servers
-* [CreateMcpServerRoute](docs/sdks/agentsplatform/README.md#createmcpserverroute) - Create Mcp Server
-* [GetMcpRoute](docs/sdks/agentsplatform/README.md#getmcproute) - Get Mcp Server
-* [DeleteMcpServerRoute](docs/sdks/agentsplatform/README.md#deletemcpserverroute) - Delete Mcp Server
-* [UpdateMcpServerConfigRoute](docs/sdks/agentsplatform/README.md#updatemcpserverconfigroute) - Update Mcp Server Configuration
-* [ListMcpServerToolsRoute](docs/sdks/agentsplatform/README.md#listmcpservertoolsroute) - List Mcp Server Tools
-* [~~UpdateMcpServerApprovalPolicyRoute~~](docs/sdks/agentsplatform/README.md#updatemcpserverapprovalpolicyroute) - Update Mcp Server Approval Policy :warning: **Deprecated**
-* [AddMcpServerToolApprovalRoute](docs/sdks/agentsplatform/README.md#addmcpservertoolapprovalroute) - Create Mcp Server Tool Approval
-* [RemoveMcpServerToolApprovalRoute](docs/sdks/agentsplatform/README.md#removemcpservertoolapprovalroute) - Delete Mcp Server Tool Approval
-* [AddMcpToolConfigOverrideRoute](docs/sdks/agentsplatform/README.md#addmcptoolconfigoverrideroute) - Create Mcp Tool Configuration Override
-* [GetMcpToolConfigOverrideRoute](docs/sdks/agentsplatform/README.md#getmcptoolconfigoverrideroute) - Get Mcp Tool Configuration Override
-* [RemoveMcpToolConfigOverrideRoute](docs/sdks/agentsplatform/README.md#removemcptoolconfigoverrideroute) - Delete Mcp Tool Configuration Override
-* [UpdateMcpToolConfigOverrideRoute](docs/sdks/agentsplatform/README.md#updatemcptoolconfigoverrideroute) - Update Mcp Tool Configuration Override
+* [CreateMcpServer](docs/sdks/agentsplatform/README.md#createmcpserver) - Create Mcp Server
+* [ListMcpServers](docs/sdks/agentsplatform/README.md#listmcpservers) - List Mcp Servers
+* [GetMcp](docs/sdks/agentsplatform/README.md#getmcp) - Get Mcp Server
+* [DeleteMcpServer](docs/sdks/agentsplatform/README.md#deletemcpserver) - Delete Mcp Server
+* [UpdateMcpServerConfig](docs/sdks/agentsplatform/README.md#updatemcpserverconfig) - Update Mcp Server Configuration
+* [ListMcpServerTools](docs/sdks/agentsplatform/README.md#listmcpservertools) - List Mcp Server Tools
+* [~~UpdateMcpServerApprovalPolicy~~](docs/sdks/agentsplatform/README.md#updatemcpserverapprovalpolicy) - Update Mcp Server Approval Policy :warning: **Deprecated**
+* [AddMcpServerToolApproval](docs/sdks/agentsplatform/README.md#addmcpservertoolapproval) - Create Mcp Server Tool Approval
+* [RemoveMcpServerToolApproval](docs/sdks/agentsplatform/README.md#removemcpservertoolapproval) - Delete Mcp Server Tool Approval
+* [AddMcpToolConfigOverride](docs/sdks/agentsplatform/README.md#addmcptoolconfigoverride) - Create Mcp Tool Configuration Override
+* [GetMcpToolConfigOverride](docs/sdks/agentsplatform/README.md#getmcptoolconfigoverride) - Get Mcp Tool Configuration Override
+* [UpdateMcpToolConfigOverride](docs/sdks/agentsplatform/README.md#updatemcptoolconfigoverride) - Update Mcp Tool Configuration Override
+* [RemoveMcpToolConfigOverride](docs/sdks/agentsplatform/README.md#removemcptoolconfigoverride) - Delete Mcp Tool Configuration Override
 * [GetWhatsappAccount](docs/sdks/agentsplatform/README.md#getwhatsappaccount) - Get Whatsapp Account
 * [DeleteWhatsappAccount](docs/sdks/agentsplatform/README.md#deletewhatsappaccount) - Delete Whatsapp Account
 * [UpdateWhatsappAccount](docs/sdks/agentsplatform/README.md#updatewhatsappaccount) - Update Whatsapp Account
 * [ListWhatsappAccounts](docs/sdks/agentsplatform/README.md#listwhatsappaccounts) - List Whatsapp Accounts
-* [GetBranchesRoute](docs/sdks/agentsplatform/README.md#getbranchesroute) - List Agent Branches
-* [CreateBranchRoute](docs/sdks/agentsplatform/README.md#createbranchroute) - Create A New Branch
-* [GetBranchRoute](docs/sdks/agentsplatform/README.md#getbranchroute) - Get Agent Branch
-* [UpdateBranchRoute](docs/sdks/agentsplatform/README.md#updatebranchroute) - Update Agent Branch
+* [CreateBranch](docs/sdks/agentsplatform/README.md#createbranch) - Create A New Branch
+* [GetBranches](docs/sdks/agentsplatform/README.md#getbranches) - List Agent Branches
+* [GetBranch](docs/sdks/agentsplatform/README.md#getbranch) - Get Agent Branch
+* [UpdateBranch](docs/sdks/agentsplatform/README.md#updatebranch) - Update Agent Branch
 * [MergeBranchIntoTarget](docs/sdks/agentsplatform/README.md#mergebranchintotarget) - Merge A Branch Into A Target Branch
-* [CreateAgentDeploymentRoute](docs/sdks/agentsplatform/README.md#createagentdeploymentroute) - Create Or Update Deployments
-* [CreateAgentDraftRoute](docs/sdks/agentsplatform/README.md#createagentdraftroute) - Create Agent Draft
-* [DeleteAgentDraftRoute](docs/sdks/agentsplatform/README.md#deleteagentdraftroute) - Delete Agent Draft
+* [CreateAgentDeployment](docs/sdks/agentsplatform/README.md#createagentdeployment) - Create Or Update Deployments
+* [CreateAgentDraft](docs/sdks/agentsplatform/README.md#createagentdraft) - Create Agent Draft
+* [DeleteAgentDraft](docs/sdks/agentsplatform/README.md#deleteagentdraft) - Delete Agent Draft
 * [ListEnvironmentVariables](docs/sdks/agentsplatform/README.md#listenvironmentvariables) - List Environment Variables
 * [CreateEnvironmentVariable](docs/sdks/agentsplatform/README.md#createenvironmentvariable) - Create Environment Variable
 * [GetEnvironmentVariable](docs/sdks/agentsplatform/README.md#getenvironmentvariable) - Get Environment Variable
@@ -289,9 +289,9 @@ func main() {
 
 ### [ConversationalAI](docs/sdks/conversationalai/README.md)
 
-* [CreateFolderRoute](docs/sdks/conversationalai/README.md#createfolderroute) - Create Folder
-* [PostKnowledgeBaseMoveRoute](docs/sdks/conversationalai/README.md#postknowledgebasemoveroute) - Move Entity To Folder
-* [PostKnowledgeBaseBulkMoveRoute](docs/sdks/conversationalai/README.md#postknowledgebasebulkmoveroute) - Bulk Move Entities To Folder
+* [CreateFolder](docs/sdks/conversationalai/README.md#createfolder) - Create Folder
+* [PostKnowledgeBaseMove](docs/sdks/conversationalai/README.md#postknowledgebasemove) - Move Entity To Folder
+* [PostKnowledgeBaseBulkMove](docs/sdks/conversationalai/README.md#postknowledgebasebulkmove) - Bulk Move Entities To Folder
 
 ### [Dubbing](docs/sdks/dubbing/README.md)
 
@@ -511,7 +511,7 @@ func main() {
 
 ### [Workspace](docs/sdks/workspace/README.md)
 
-* [GetServiceAccountAPIKeysRoute](docs/sdks/workspace/README.md#getserviceaccountapikeysroute) - Get Service Account Api Keys Route
+* [GetServiceAccountAPIKeys](docs/sdks/workspace/README.md#getserviceaccountapikeys) - Get Service Account Api Keys Route
 * [CreateServiceAccountAPIKey](docs/sdks/workspace/README.md#createserviceaccountapikey) - Create Service Account Api Key
 * [DeleteServiceAccountAPIKey](docs/sdks/workspace/README.md#deleteserviceaccountapikey) - Delete Service Account Api Key
 * [EditServiceAccountAPIKey](docs/sdks/workspace/README.md#editserviceaccountapikey) - Edit Service Account Api Key
@@ -530,10 +530,10 @@ func main() {
 * [GetResourceMetadata](docs/sdks/workspace/README.md#getresourcemetadata) - Get Resource
 * [ShareResourceEndpoint](docs/sdks/workspace/README.md#shareresourceendpoint) - Share Workspace Resource
 * [UnshareResourceEndpoint](docs/sdks/workspace/README.md#unshareresourceendpoint) - Unshare Workspace Resource
-* [GetWorkspaceWebhooksRoute](docs/sdks/workspace/README.md#getworkspacewebhooksroute) - List Workspace Webhooks
-* [CreateWorkspaceWebhookRoute](docs/sdks/workspace/README.md#createworkspacewebhookroute) - Create Workspace Webhook
-* [DeleteWorkspaceWebhookRoute](docs/sdks/workspace/README.md#deleteworkspacewebhookroute) - Delete Workspace Webhook
-* [EditWorkspaceWebhookRoute](docs/sdks/workspace/README.md#editworkspacewebhookroute) - Update Workspace Webhook
+* [GetWorkspaceWebhooks](docs/sdks/workspace/README.md#getworkspacewebhooks) - List Workspace Webhooks
+* [CreateWorkspaceWebhook](docs/sdks/workspace/README.md#createworkspacewebhook) - Create Workspace Webhook
+* [EditWorkspaceWebhook](docs/sdks/workspace/README.md#editworkspacewebhook) - Update Workspace Webhook
+* [DeleteWorkspaceWebhook](docs/sdks/workspace/README.md#deleteworkspacewebhook) - Delete Workspace Webhook
 
 </details>
 <!-- End Available Resources and Operations [operations] -->

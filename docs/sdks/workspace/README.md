@@ -6,7 +6,7 @@ Access to workspace related endpoints.
 
 ### Available Operations
 
-* [GetServiceAccountAPIKeysRoute](#getserviceaccountapikeysroute) - Get Service Account Api Keys Route
+* [GetServiceAccountAPIKeys](#getserviceaccountapikeys) - Get Service Account Api Keys Route
 * [CreateServiceAccountAPIKey](#createserviceaccountapikey) - Create Service Account Api Key
 * [DeleteServiceAccountAPIKey](#deleteserviceaccountapikey) - Delete Service Account Api Key
 * [EditServiceAccountAPIKey](#editserviceaccountapikey) - Edit Service Account Api Key
@@ -25,12 +25,12 @@ Access to workspace related endpoints.
 * [GetResourceMetadata](#getresourcemetadata) - Get Resource
 * [ShareResourceEndpoint](#shareresourceendpoint) - Share Workspace Resource
 * [UnshareResourceEndpoint](#unshareresourceendpoint) - Unshare Workspace Resource
-* [GetWorkspaceWebhooksRoute](#getworkspacewebhooksroute) - List Workspace Webhooks
-* [CreateWorkspaceWebhookRoute](#createworkspacewebhookroute) - Create Workspace Webhook
-* [DeleteWorkspaceWebhookRoute](#deleteworkspacewebhookroute) - Delete Workspace Webhook
-* [EditWorkspaceWebhookRoute](#editworkspacewebhookroute) - Update Workspace Webhook
+* [GetWorkspaceWebhooks](#getworkspacewebhooks) - List Workspace Webhooks
+* [CreateWorkspaceWebhook](#createworkspacewebhook) - Create Workspace Webhook
+* [EditWorkspaceWebhook](#editworkspacewebhook) - Update Workspace Webhook
+* [DeleteWorkspaceWebhook](#deleteworkspacewebhook) - Delete Workspace Webhook
 
-## GetServiceAccountAPIKeysRoute
+## GetServiceAccountAPIKeys
 
 Get all API keys for a service account
 
@@ -53,7 +53,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Workspace.GetServiceAccountAPIKeysRoute(ctx, "<id>")
+    res, err := s.Workspace.GetServiceAccountAPIKeys(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -1104,7 +1104,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetWorkspaceWebhooksRoute
+## GetWorkspaceWebhooks
 
 List all webhooks for a workspace
 
@@ -1127,7 +1127,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Workspace.GetWorkspaceWebhooksRoute(ctx, elevenlabsgo.Pointer(false))
+    res, err := s.Workspace.GetWorkspaceWebhooks(ctx, elevenlabsgo.Pointer(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -1156,7 +1156,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateWorkspaceWebhookRoute
+## CreateWorkspaceWebhook
 
 Create a new webhook for the workspace with the specified authentication type.
 
@@ -1180,7 +1180,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Workspace.CreateWorkspaceWebhookRoute(ctx, components.BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost{
+    res, err := s.Workspace.CreateWorkspaceWebhook(ctx, components.BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost{
         Settings: components.WebhookHMACSettings{
             Name: "<value>",
             WebhookURL: "https://alarmed-median.net/",
@@ -1214,59 +1214,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteWorkspaceWebhookRoute
-
-Delete the specified workspace webhook
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="delete_workspace_webhook_route" method="delete" path="/v1/workspace/webhooks/{webhook_id}" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.Workspace.DeleteWorkspaceWebhookRoute(ctx, "G007vmtq9uWYl7SUW9zGS8GZZa1K")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.DeleteWorkspaceWebhookResponseModel != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `webhookID`                                              | `string`                                                 | :heavy_check_mark:                                       | The unique ID for the webhook                            | G007vmtq9uWYl7SUW9zGS8GZZa1K                             |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
-
-### Response
-
-**[*operations.DeleteWorkspaceWebhookRouteResponse](../../models/operations/deleteworkspacewebhookrouteresponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
-
-## EditWorkspaceWebhookRoute
+## EditWorkspaceWebhook
 
 Update the specified workspace webhook
 
@@ -1290,7 +1238,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Workspace.EditWorkspaceWebhookRoute(ctx, "G007vmtq9uWYl7SUW9zGS8GZZa1K", components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch{
+    res, err := s.Workspace.EditWorkspaceWebhook(ctx, "G007vmtq9uWYl7SUW9zGS8GZZa1K", components.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch{
         IsDisabled: true,
         Name: "My Callback Webhook",
         RetryEnabled: elevenlabsgo.Pointer(true),
@@ -1316,6 +1264,58 @@ func main() {
 ### Response
 
 **[*operations.EditWorkspaceWebhookRouteResponse](../../models/operations/editworkspacewebhookrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## DeleteWorkspaceWebhook
+
+Delete the specified workspace webhook
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="delete_workspace_webhook_route" method="delete" path="/v1/workspace/webhooks/{webhook_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.Workspace.DeleteWorkspaceWebhook(ctx, "G007vmtq9uWYl7SUW9zGS8GZZa1K")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.DeleteWorkspaceWebhookResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `webhookID`                                              | `string`                                                 | :heavy_check_mark:                                       | The unique ID for the webhook                            | G007vmtq9uWYl7SUW9zGS8GZZa1K                             |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.DeleteWorkspaceWebhookRouteResponse](../../models/operations/deleteworkspacewebhookrouteresponse.md), error**
 
 ### Errors
 

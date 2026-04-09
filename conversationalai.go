@@ -31,9 +31,9 @@ func newConversationalAI(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguratio
 	}
 }
 
-// CreateFolderRoute - Create Folder
+// CreateFolder - Create Folder
 // Create a folder used for grouping documents together.
-func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, request components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost, opts ...operations.Option) (*operations.CreateFolderRouteResponse, error) {
+func (s *ConversationalAI) CreateFolder(ctx context.Context, request components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost, opts ...operations.Option) (*operations.CreateFolderRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -268,9 +268,9 @@ func (s *ConversationalAI) CreateFolderRoute(ctx context.Context, request compon
 
 }
 
-// PostKnowledgeBaseMoveRoute - Move Entity To Folder
+// PostKnowledgeBaseMove - Move Entity To Folder
 // Moves the entity from one folder to another.
-func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, documentID string, body *components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost, opts ...operations.Option) (*operations.PostKnowledgeBaseMoveRouteResponse, error) {
+func (s *ConversationalAI) PostKnowledgeBaseMove(ctx context.Context, documentID string, body *components.BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIDMovePost, opts ...operations.Option) (*operations.PostKnowledgeBaseMoveRouteResponse, error) {
 	request := operations.PostKnowledgeBaseMoveRouteRequest{
 		DocumentID: documentID,
 		Body:       body,
@@ -491,9 +491,9 @@ func (s *ConversationalAI) PostKnowledgeBaseMoveRoute(ctx context.Context, docum
 
 }
 
-// PostKnowledgeBaseBulkMoveRoute - Bulk Move Entities To Folder
+// PostKnowledgeBaseBulkMove - Bulk Move Entities To Folder
 // Moves multiple entities from one folder to another.
-func (s *ConversationalAI) PostKnowledgeBaseBulkMoveRoute(ctx context.Context, request components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost, opts ...operations.Option) (*operations.PostKnowledgeBaseBulkMoveRouteResponse, error) {
+func (s *ConversationalAI) PostKnowledgeBaseBulkMove(ctx context.Context, request components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost, opts ...operations.Option) (*operations.PostKnowledgeBaseBulkMoveRouteResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,

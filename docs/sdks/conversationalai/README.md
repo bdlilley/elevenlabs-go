@@ -4,11 +4,11 @@
 
 ### Available Operations
 
-* [CreateFolderRoute](#createfolderroute) - Create Folder
-* [PostKnowledgeBaseMoveRoute](#postknowledgebasemoveroute) - Move Entity To Folder
-* [PostKnowledgeBaseBulkMoveRoute](#postknowledgebasebulkmoveroute) - Bulk Move Entities To Folder
+* [CreateFolder](#createfolder) - Create Folder
+* [PostKnowledgeBaseMove](#postknowledgebasemove) - Move Entity To Folder
+* [PostKnowledgeBaseBulkMove](#postknowledgebasebulkmove) - Bulk Move Entities To Folder
 
-## CreateFolderRoute
+## CreateFolder
 
 Create a folder used for grouping documents together.
 
@@ -32,7 +32,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ConversationalAI.CreateFolderRoute(ctx, components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost{
+    res, err := s.ConversationalAI.CreateFolder(ctx, components.BodyCreateFolderV1ConvaiKnowledgeBaseFolderPost{
         Name: "<value>",
     })
     if err != nil {
@@ -63,7 +63,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## PostKnowledgeBaseMoveRoute
+## PostKnowledgeBaseMove
 
 Moves the entity from one folder to another.
 
@@ -86,7 +86,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ConversationalAI.PostKnowledgeBaseMoveRoute(ctx, "21m00Tcm4TlvDq8ikWAM", nil)
+    res, err := s.ConversationalAI.PostKnowledgeBaseMove(ctx, "21m00Tcm4TlvDq8ikWAM", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -116,7 +116,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## PostKnowledgeBaseBulkMoveRoute
+## PostKnowledgeBaseBulkMove
 
 Moves multiple entities from one folder to another.
 
@@ -140,7 +140,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ConversationalAI.PostKnowledgeBaseBulkMoveRoute(ctx, components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost{
+    res, err := s.ConversationalAI.PostKnowledgeBaseBulkMove(ctx, components.BodyBulkMoveEntitiesToFolderV1ConvaiKnowledgeBaseBulkMovePost{
         DocumentIds: []string{
             "21m00Tcm4TlvDq8ikWAM",
             "31m00Tcm4TlvDq8ikWBM",

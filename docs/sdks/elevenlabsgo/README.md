@@ -9,16 +9,16 @@ ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. 
 * [GetUserSubscriptionInfo](#getusersubscriptioninfo) - Get User Subscription Info
 * [GetUserInfo](#getuserinfo) - Get User Info
 * [UsageCharacters](#usagecharacters) - Get Characters Usage Metrics
-* [CreateAgentResponseTestRoute](#createagentresponsetestroute) - Create Agent Response Test
-* [GetAgentResponseTestRoute](#getagentresponsetestroute) - Get Agent Response Test By Id
-* [UpdateAgentResponseTestRoute](#updateagentresponsetestroute) - Update Agent Response Test
-* [DeleteChatResponseTestRoute](#deletechatresponsetestroute) - Delete Agent Response Test
-* [GetAgentResponseTestsSummariesRoute](#getagentresponsetestssummariesroute) - Get Agent Response Test Summaries By Ids
-* [ListChatResponseTestsRoute](#listchatresponsetestsroute) - List Agent Response Tests
-* [ListTestInvocationsRoute](#listtestinvocationsroute) - List Test Invocations
-* [RunAgentTestSuiteRoute](#runagenttestsuiteroute) - Run Tests On The Agent
-* [GetTestInvocationRoute](#gettestinvocationroute) - Get Test Invocation
-* [ResubmitTestsRoute](#resubmittestsroute) - Resubmit Tests
+* [CreateAgentResponseTest](#createagentresponsetest) - Create Agent Response Test
+* [GetAgentResponseTest](#getagentresponsetest) - Get Agent Response Test By Id
+* [UpdateAgentResponseTest](#updateagentresponsetest) - Update Agent Response Test
+* [DeleteChatResponseTest](#deletechatresponsetest) - Delete Agent Response Test
+* [GetAgentResponseTestsSummaries](#getagentresponsetestssummaries) - Get Agent Response Test Summaries By Ids
+* [ListChatResponseTests](#listchatresponsetests) - List Agent Response Tests
+* [ListTestInvocations](#listtestinvocations) - List Test Invocations
+* [RunAgentTestSuite](#runagenttestsuite) - Run Tests On The Agent
+* [GetTestInvocation](#gettestinvocation) - Get Test Invocation
+* [ResubmitTests](#resubmittests) - Resubmit Tests
 * [RedirectToMintlify](#redirecttomintlify) - Redirect To Mintlify
 
 ## GetUserSubscriptionInfo
@@ -186,7 +186,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateAgentResponseTestRoute
+## CreateAgentResponseTest
 
 Creates a new agent response test.
 
@@ -211,7 +211,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.CreateAgentResponseTestRoute(ctx, operations.CreateCreateAgentResponseTestRouteTestRequestCreateSimulationTestRequest(
+    res, err := s.CreateAgentResponseTest(ctx, operations.CreateCreateAgentResponseTestRouteTestRequestCreateSimulationTestRequest(
         components.CreateSimulationTestRequest{
             Name: "<value>",
         },
@@ -244,7 +244,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentResponseTestRoute
+## GetAgentResponseTest
 
 Gets an agent response test by ID.
 
@@ -268,7 +268,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.GetAgentResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT")
+    res, err := s.GetAgentResponseTest(ctx, "TeaqRRdTcIfIu2i7BYfT")
     if err != nil {
         log.Fatal(err)
     }
@@ -305,7 +305,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateAgentResponseTestRoute
+## UpdateAgentResponseTest
 
 Updates an agent response test by ID.
 
@@ -330,7 +330,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.UpdateAgentResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT", operations.CreateUpdateAgentResponseTestRouteTestRequestUpdateToolCallUnitTestRequest(
+    res, err := s.UpdateAgentResponseTest(ctx, "TeaqRRdTcIfIu2i7BYfT", operations.CreateUpdateAgentResponseTestRouteTestRequestUpdateToolCallUnitTestRequest(
         components.UpdateToolCallUnitTestRequest{
             Name: "<value>",
         },
@@ -372,7 +372,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteChatResponseTestRoute
+## DeleteChatResponseTest
 
 Deletes an agent response test by ID.
 
@@ -395,7 +395,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.DeleteChatResponseTestRoute(ctx, "TeaqRRdTcIfIu2i7BYfT")
+    res, err := s.DeleteChatResponseTest(ctx, "TeaqRRdTcIfIu2i7BYfT")
     if err != nil {
         log.Fatal(err)
     }
@@ -424,7 +424,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetAgentResponseTestsSummariesRoute
+## GetAgentResponseTestsSummaries
 
 Gets multiple agent response tests by their IDs. Returns a dictionary mapping test IDs to test summaries.
 
@@ -448,7 +448,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.GetAgentResponseTestsSummariesRoute(ctx, components.ListTestsByIdsRequestModel{
+    res, err := s.GetAgentResponseTestsSummaries(ctx, components.ListTestsByIdsRequestModel{
         TestIds: []string{
             "test_id_1",
             "test_id_2",
@@ -482,7 +482,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## ListChatResponseTestsRoute
+## ListChatResponseTests
 
 Lists all agent response tests with pagination support and optional search filtering.
 
@@ -506,7 +506,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ListChatResponseTestsRoute(ctx, operations.ListChatResponseTestsRouteRequest{})
+    res, err := s.ListChatResponseTests(ctx, operations.ListChatResponseTestsRouteRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -535,7 +535,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## ListTestInvocationsRoute
+## ListTestInvocations
 
 Lists all test invocations with pagination support and optional search filtering.
 
@@ -558,7 +558,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ListTestInvocationsRoute(ctx, "<id>", elevenlabsgo.Pointer[int64](30), nil)
+    res, err := s.ListTestInvocations(ctx, "<id>", elevenlabsgo.Pointer[int64](30), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -589,7 +589,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## RunAgentTestSuiteRoute
+## RunAgentTestSuite
 
 Run selected tests on the agent with provided configuration. If the agent configuration is provided, it will be used to override default agent configuration.
 
@@ -613,7 +613,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.RunAgentTestSuiteRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.RunAgentTestsRequestModel{
+    res, err := s.RunAgentTestSuite(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", components.RunAgentTestsRequestModel{
         Tests: []components.SingleTestRunRequestModel{},
         AgentConfigOverride: &components.AdhocAgentConfigOverrideForTestRequestModel{
             ConversationConfig: components.ConversationalConfigAPIModelInput{
@@ -870,7 +870,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetTestInvocationRoute
+## GetTestInvocation
 
 Gets a test invocation by ID.
 
@@ -893,7 +893,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.GetTestInvocationRoute(ctx, "<id>")
+    res, err := s.GetTestInvocation(ctx, "<id>")
     if err != nil {
         log.Fatal(err)
     }
@@ -922,7 +922,7 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## ResubmitTestsRoute
+## ResubmitTests
 
 Resubmits specific test runs from a test invocation.
 
@@ -946,7 +946,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ResubmitTestsRoute(ctx, "<id>", components.ResubmitTestsRequestModel{
+    res, err := s.ResubmitTests(ctx, "<id>", components.ResubmitTestsRequestModel{
         TestRunIds: []string{},
         AgentConfigOverride: &components.AdhocAgentConfigOverrideForTestRequestModel{
             ConversationConfig: components.ConversationalConfigAPIModelInput{

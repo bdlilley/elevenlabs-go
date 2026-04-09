@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: b149d9ef-6819-4e45-8229-e78eefe15c7d
 management:
-  docChecksum: 91f97646bbe5da724ca54c5255dfe2f8
+  docChecksum: 55bb921df12b831e3f246977ca70155d
   docVersion: "1.0"
   speakeasyVersion: 1.761.1
   generationVersion: 2.879.6
-  releaseVersion: 0.5.0
-  configChecksum: baa560e62d37a4ecb51987cf3553ae9c
+  releaseVersion: 0.7.0
+  configChecksum: e6403d9abb44728d31f81f5e6f0e9e83
 persistentEdits:
   generation_id: 08b699ca-4f91-44be-9699-039a1da2de08
   pristine_commit_hash: 2434f9d416a99f83372d743d070a3c9baca4d1b2
@@ -29,6 +29,7 @@ features:
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.83.1
     intellisenseMarkdownSupport: 0.1.0
+    nameOverrides: 2.81.4
     nullables: 0.2.1
     responseFormat: 0.1.2
     retries: 2.84.2
@@ -46,7 +47,7 @@ trackedFiles:
     pristine_git_object: cb42d639522424d91d01125aa59a55a0045610eb
   agentsplatform.go:
     id: eec055229aa9
-    last_write_checksum: sha1:fd589c175f5668450bee14c7d4a8c2ea20147f77
+    last_write_checksum: sha1:94c3d3eaddfa15748d5f93c31570aa922e04147e
     pristine_git_object: af8043a3706f2279a199e3f10c8305c04c93f14a
   agentsworkspaceanalytics.go:
     id: 65bb4aaaae0f
@@ -62,7 +63,7 @@ trackedFiles:
     pristine_git_object: adc128412da0db106a4a4ded995d2b02cfe41392
   conversationalai.go:
     id: eff26e02b220
-    last_write_checksum: sha1:5b5b4d44a845bbaecda9ba90872f31e9e8882cab
+    last_write_checksum: sha1:ddf5ddc287b31f50e75d2b25ab18f597d6a90f61
     pristine_git_object: 2205e43085327799f2983e40b84acbe322524274
   docs/models/apierrors/badrequesterror.md:
     id: fdf908c95e30
@@ -7532,7 +7533,7 @@ trackedFiles:
     pristine_git_object: 33a327d630302ded96a80b7e3b2ccaf10f267682
   docs/sdks/agentsplatform/README.md:
     id: df75c747761d
-    last_write_checksum: sha1:9a7f900b1efd188755cbc06f571c4dde9968433b
+    last_write_checksum: sha1:610767c1d9482923bcc2b1b530a79efbc77475f8
     pristine_git_object: 36aa05ad309c19cca93a0d29a599f30f36287a71
   docs/sdks/agentsworkspaceanalytics/README.md:
     id: 60ed117a85b5
@@ -7548,7 +7549,7 @@ trackedFiles:
     pristine_git_object: ea2221f593952ebf4b15b38ce8661c136c14bc0a
   docs/sdks/conversationalai/README.md:
     id: eb1c34baf00a
-    last_write_checksum: sha1:449159bf8fe52aaa821d118dfa2980ac74f54b7b
+    last_write_checksum: sha1:d2bf5a4451dccedd0f3581250fea42af22d9248e
     pristine_git_object: 1a6b9ba235157d0192d18c6e068d96e914e99527
   docs/sdks/dubbing/README.md:
     id: 678282e525d4
@@ -7556,7 +7557,7 @@ trackedFiles:
     pristine_git_object: 76a2d094577eb9f4d91ef3923573cb736cf2c738
   docs/sdks/elevenlabsgo/README.md:
     id: 8681598565de
-    last_write_checksum: sha1:507c6498d41fe665113b9f351760ecef7e36249b
+    last_write_checksum: sha1:ccb62c4839f0be7015f1af5a14e45fd3fe16d4de
     pristine_git_object: 942dd41960c6b9572dfaf6c4bb81693e1270a376
   docs/sdks/enterprise/README.md:
     id: cde72e6efdbb
@@ -7640,7 +7641,7 @@ trackedFiles:
     pristine_git_object: 8af9740039ef8f4758c4b79ff598f39bd9239cb3
   docs/sdks/workspace/README.md:
     id: 654279fffdff
-    last_write_checksum: sha1:2b2188f47024549b138ab03ed2025dfc0ed7adf3
+    last_write_checksum: sha1:53b2966d041c4adb787069a4f6e235a251f6315d
     pristine_git_object: 002c89ae0202de5d5c6b47287580cd710a6c4db2
   dubbing.go:
     id: 3a31bd80bf4f
@@ -7648,7 +7649,7 @@ trackedFiles:
     pristine_git_object: 90bd79a0224946ed3020db2c4af2785724d8b0ba
   elevenlabsgo.go:
     id: b4556aeb4759
-    last_write_checksum: sha1:5a590814372dac31e9cede93d9c1de9432b12902
+    last_write_checksum: sha1:a5ce0677b6a756218db997f38c9599ab0a6dbb61
     pristine_git_object: dc67f6845aa141540b307f4a8caf6a06da9dc341
   enterprise.go:
     id: 4d99e07227a2
@@ -13076,7 +13077,7 @@ trackedFiles:
     pristine_git_object: 4a44370775139f16e7824a50f6ad0497268ab6e2
   workspace.go:
     id: e884b92e3a6b
-    last_write_checksum: sha1:81e85ed1cba4e87ae79feed4e40283ee29a83631
+    last_write_checksum: sha1:a8e0b124f9e5f3e28eaba6027d2e3df79c330d8c
     pristine_git_object: bb8bf6ef7006e729c6b20d482fc285a47372bce1
 examples:
   get_user_subscription_info:

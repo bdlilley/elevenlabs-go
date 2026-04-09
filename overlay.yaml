@@ -20,6 +20,282 @@ actions:
           description: ElevenLabs API
   - target: $.paths[*][*].parameters[?(@.name == 'xi-api-key')]
     remove: true
+  - target: "$.paths[*][*][?(@.operationId == 'get_service_account_api_keys_route')]"
+    update:
+      x-speakeasy-name-override: get_service_account_api_keys
+  - target: "$.paths[*][*][?(@.operationId == 'get_workspace_webhooks_route')]"
+    update:
+      x-speakeasy-name-override: get_workspace_webhooks
+  - target: "$.paths[*][*][?(@.operationId == 'create_workspace_webhook_route')]"
+    update:
+      x-speakeasy-name-override: create_workspace_webhook
+  - target: "$.paths[*][*][?(@.operationId == 'edit_workspace_webhook_route')]"
+    update:
+      x-speakeasy-name-override: edit_workspace_webhook
+  - target: "$.paths[*][*][?(@.operationId == 'delete_workspace_webhook_route')]"
+    update:
+      x-speakeasy-name-override: delete_workspace_webhook
+  - target: "$.paths[*][*][?(@.operationId == 'create_agent_route')]"
+    update:
+      x-speakeasy-name-override: create_agent
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_summaries_route')]"
+    update:
+      x-speakeasy-name-override: get_agent_summaries
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_route')]"
+    update:
+      x-speakeasy-name-override: get_agent
+  - target: "$.paths[*][*][?(@.operationId == 'patch_agent_settings_route')]"
+    update:
+      x-speakeasy-name-override: patch_agent_settings
+  - target: "$.paths[*][*][?(@.operationId == 'delete_agent_route')]"
+    update:
+      x-speakeasy-name-override: delete_agent
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_widget_route')]"
+    update:
+      x-speakeasy-name-override: get_agent_widget
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_link_route')]"
+    update:
+      x-speakeasy-name-override: get_agent_link
+  - target: "$.paths[*][*][?(@.operationId == 'post_agent_avatar_route')]"
+    update:
+      x-speakeasy-name-override: post_agent_avatar
+  - target: "$.paths[*][*][?(@.operationId == 'get_agents_route')]"
+    update:
+      x-speakeasy-name-override: get_agents
+  - target: "$.paths[*][*][?(@.operationId == 'duplicate_agent_route')]"
+    update:
+      x-speakeasy-name-override: duplicate_agent
+  - target: "$.paths[*][*][?(@.operationId == 'run_conversation_simulation_route')]"
+    update:
+      x-speakeasy-name-override: run_conversation_simulation
+  - target: "$.paths[*][*][?(@.operationId == 'create_agent_response_test_route')]"
+    update:
+      x-speakeasy-name-override: create_agent_response_test
+  - target: "$.paths[*][*][?(@.operationId == 'create_agent_test_folder_route')]"
+    update:
+      x-speakeasy-name-override: create_agent_test_folder
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_test_folder_route')]"
+    update:
+      x-speakeasy-name-override: get_agent_test_folder
+  - target: "$.paths[*][*][?(@.operationId == 'update_agent_test_folder_route')]"
+    update:
+      x-speakeasy-name-override: update_agent_test_folder
+  - target: "$.paths[*][*][?(@.operationId == 'delete_agent_test_folder_route')]"
+    update:
+      x-speakeasy-name-override: delete_agent_test_folder
+  - target: "$.paths[*][*][?(@.operationId == 'agent_testing_bulk_move_route')]"
+    update:
+      x-speakeasy-name-override: agent_testing_bulk_move
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_response_test_route')]"
+    update:
+      x-speakeasy-name-override: get_agent_response_test
+  - target: "$.paths[*][*][?(@.operationId == 'update_agent_response_test_route')]"
+    update:
+      x-speakeasy-name-override: update_agent_response_test
+  - target: "$.paths[*][*][?(@.operationId == 'delete_chat_response_test_route')]"
+    update:
+      x-speakeasy-name-override: delete_chat_response_test
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_response_tests_summaries_route')]"
+    update:
+      x-speakeasy-name-override: get_agent_response_tests_summaries
+  - target: "$.paths[*][*][?(@.operationId == 'list_chat_response_tests_route')]"
+    update:
+      x-speakeasy-name-override: list_chat_response_tests
+  - target: "$.paths[*][*][?(@.operationId == 'list_test_invocations_route')]"
+    update:
+      x-speakeasy-name-override: list_test_invocations
+  - target: "$.paths[*][*][?(@.operationId == 'run_agent_test_suite_route')]"
+    update:
+      x-speakeasy-name-override: run_agent_test_suite
+  - target: "$.paths[*][*][?(@.operationId == 'get_test_invocation_route')]"
+    update:
+      x-speakeasy-name-override: get_test_invocation
+  - target: "$.paths[*][*][?(@.operationId == 'resubmit_tests_route')]"
+    update:
+      x-speakeasy-name-override: resubmit_tests
+  - target: "$.paths[*][*][?(@.operationId == 'get_conversation_histories_route')]"
+    update:
+      x-speakeasy-name-override: get_conversation_histories
+  - target: "$.paths[*][*][?(@.operationId == 'get_conversation_users_route')]"
+    update:
+      x-speakeasy-name-override: get_conversation_users
+  - target: "$.paths[*][*][?(@.operationId == 'get_conversation_history_route')]"
+    update:
+      x-speakeasy-name-override: get_conversation_history
+  - target: "$.paths[*][*][?(@.operationId == 'delete_conversation_route')]"
+    update:
+      x-speakeasy-name-override: delete_conversation
+  - target: "$.paths[*][*][?(@.operationId == 'get_conversation_audio_route')]"
+    update:
+      x-speakeasy-name-override: get_conversation_audio
+  - target: "$.paths[*][*][?(@.operationId == 'post_conversation_feedback_route')]"
+    update:
+      x-speakeasy-name-override: post_conversation_feedback
+  - target: "$.paths[*][*][?(@.operationId == 'text_search_conversation_messages_route')]"
+    update:
+      x-speakeasy-name-override: text_search_conversation_messages
+  - target: "$.paths[*][*][?(@.operationId == 'smart_search_conversation_messages_route')]"
+    update:
+      x-speakeasy-name-override: smart_search_conversation_messages
+  - target: "$.paths[*][*][?(@.operationId == 'create_phone_number_route')]"
+    update:
+      x-speakeasy-name-override: create_phone_number
+  - target: "$.paths[*][*][?(@.operationId == 'list_phone_numbers_route')]"
+    update:
+      x-speakeasy-name-override: list_phone_numbers
+  - target: "$.paths[*][*][?(@.operationId == 'get_phone_number_route')]"
+    update:
+      x-speakeasy-name-override: get_phone_number
+  - target: "$.paths[*][*][?(@.operationId == 'delete_phone_number_route')]"
+    update:
+      x-speakeasy-name-override: delete_phone_number
+  - target: "$.paths[*][*][?(@.operationId == 'update_phone_number_route')]"
+    update:
+      x-speakeasy-name-override: update_phone_number
+  - target: "$.paths[*][*][?(@.operationId == 'upload_file_route')]"
+    update:
+      x-speakeasy-name-override: upload_file
+  - target: "$.paths[*][*][?(@.operationId == 'cancel_file_upload_route')]"
+    update:
+      x-speakeasy-name-override: cancel_file_upload
+  - target: "$.paths[*][*][?(@.operationId == 'get_agent_knowledge_base_summaries_route')]"
+    update:
+      x-speakeasy-name-override: get_agent_knowledge_base_summaries
+  - target: "$.paths[*][*][?(@.operationId == 'get_knowledge_base_list_route')]"
+    update:
+      x-speakeasy-name-override: get_knowledge_base_list
+  - target: "$.paths[*][*][?(@.operationId == 'create_url_document_route')]"
+    update:
+      x-speakeasy-name-override: create_url_document
+  - target: "$.paths[*][*][?(@.operationId == 'create_file_document_route')]"
+    update:
+      x-speakeasy-name-override: create_file_document
+  - target: "$.paths[*][*][?(@.operationId == 'create_text_document_route')]"
+    update:
+      x-speakeasy-name-override: create_text_document
+  - target: "$.paths[*][*][?(@.operationId == 'create_folder_route')]"
+    update:
+      x-speakeasy-name-override: create_folder
+  - target: "$.paths[*][*][?(@.operationId == 'update_document_route')]"
+    update:
+      x-speakeasy-name-override: update_document
+  - target: "$.paths[*][*][?(@.operationId == 'refresh_url_document_route')]"
+    update:
+      x-speakeasy-name-override: refresh_url_document
+  - target: "$.paths[*][*][?(@.operationId == 'search_knowledge_base_content_route')]"
+    update:
+      x-speakeasy-name-override: search_knowledge_base_content
+  - target: "$.paths[*][*][?(@.operationId == 'post_knowledge_base_move_route')]"
+    update:
+      x-speakeasy-name-override: post_knowledge_base_move
+  - target: "$.paths[*][*][?(@.operationId == 'post_knowledge_base_bulk_move_route')]"
+    update:
+      x-speakeasy-name-override: post_knowledge_base_bulk_move
+  - target: "$.paths[*][*][?(@.operationId == 'add_tool_route')]"
+    update:
+      x-speakeasy-name-override: add_tool
+  - target: "$.paths[*][*][?(@.operationId == 'get_tools_route')]"
+    update:
+      x-speakeasy-name-override: get_tools
+  - target: "$.paths[*][*][?(@.operationId == 'get_tool_route')]"
+    update:
+      x-speakeasy-name-override: get_tool
+  - target: "$.paths[*][*][?(@.operationId == 'update_tool_route')]"
+    update:
+      x-speakeasy-name-override: update_tool
+  - target: "$.paths[*][*][?(@.operationId == 'delete_tool_route')]"
+    update:
+      x-speakeasy-name-override: delete_tool
+  - target: "$.paths[*][*][?(@.operationId == 'get_tool_dependent_agents_route')]"
+    update:
+      x-speakeasy-name-override: get_tool_dependent_agents
+  - target: "$.paths[*][*][?(@.operationId == 'get_settings_route')]"
+    update:
+      x-speakeasy-name-override: get_settings
+  - target: "$.paths[*][*][?(@.operationId == 'update_settings_route')]"
+    update:
+      x-speakeasy-name-override: update_settings
+  - target: "$.paths[*][*][?(@.operationId == 'get_dashboard_settings_route')]"
+    update:
+      x-speakeasy-name-override: get_dashboard_settings
+  - target: "$.paths[*][*][?(@.operationId == 'update_dashboard_settings_route')]"
+    update:
+      x-speakeasy-name-override: update_dashboard_settings
+  - target: "$.paths[*][*][?(@.operationId == 'create_secret_route')]"
+    update:
+      x-speakeasy-name-override: create_secret
+  - target: "$.paths[*][*][?(@.operationId == 'get_secrets_route')]"
+    update:
+      x-speakeasy-name-override: get_secrets
+  - target: "$.paths[*][*][?(@.operationId == 'delete_secret_route')]"
+    update:
+      x-speakeasy-name-override: delete_secret
+  - target: "$.paths[*][*][?(@.operationId == 'update_secret_route')]"
+    update:
+      x-speakeasy-name-override: update_secret
+  - target: "$.paths[*][*][?(@.operationId == 'get_secret_dependencies_route')]"
+    update:
+      x-speakeasy-name-override: get_secret_dependencies
+  - target: "$.paths[*][*][?(@.operationId == 'create_mcp_server_route')]"
+    update:
+      x-speakeasy-name-override: create_mcp_server
+  - target: "$.paths[*][*][?(@.operationId == 'list_mcp_servers_route')]"
+    update:
+      x-speakeasy-name-override: list_mcp_servers
+  - target: "$.paths[*][*][?(@.operationId == 'get_mcp_route')]"
+    update:
+      x-speakeasy-name-override: get_mcp
+  - target: "$.paths[*][*][?(@.operationId == 'delete_mcp_server_route')]"
+    update:
+      x-speakeasy-name-override: delete_mcp_server
+  - target: "$.paths[*][*][?(@.operationId == 'update_mcp_server_config_route')]"
+    update:
+      x-speakeasy-name-override: update_mcp_server_config
+  - target: "$.paths[*][*][?(@.operationId == 'list_mcp_server_tools_route')]"
+    update:
+      x-speakeasy-name-override: list_mcp_server_tools
+  - target: "$.paths[*][*][?(@.operationId == 'update_mcp_server_approval_policy_route')]"
+    update:
+      x-speakeasy-name-override: update_mcp_server_approval_policy
+  - target: "$.paths[*][*][?(@.operationId == 'add_mcp_server_tool_approval_route')]"
+    update:
+      x-speakeasy-name-override: add_mcp_server_tool_approval
+  - target: "$.paths[*][*][?(@.operationId == 'remove_mcp_server_tool_approval_route')]"
+    update:
+      x-speakeasy-name-override: remove_mcp_server_tool_approval
+  - target: "$.paths[*][*][?(@.operationId == 'add_mcp_tool_config_override_route')]"
+    update:
+      x-speakeasy-name-override: add_mcp_tool_config_override
+  - target: "$.paths[*][*][?(@.operationId == 'get_mcp_tool_config_override_route')]"
+    update:
+      x-speakeasy-name-override: get_mcp_tool_config_override
+  - target: "$.paths[*][*][?(@.operationId == 'update_mcp_tool_config_override_route')]"
+    update:
+      x-speakeasy-name-override: update_mcp_tool_config_override
+  - target: "$.paths[*][*][?(@.operationId == 'remove_mcp_tool_config_override_route')]"
+    update:
+      x-speakeasy-name-override: remove_mcp_tool_config_override
+  - target: "$.paths[*][*][?(@.operationId == 'create_branch_route')]"
+    update:
+      x-speakeasy-name-override: create_branch
+  - target: "$.paths[*][*][?(@.operationId == 'get_branches_route')]"
+    update:
+      x-speakeasy-name-override: get_branches
+  - target: "$.paths[*][*][?(@.operationId == 'get_branch_route')]"
+    update:
+      x-speakeasy-name-override: get_branch
+  - target: "$.paths[*][*][?(@.operationId == 'update_branch_route')]"
+    update:
+      x-speakeasy-name-override: update_branch
+  - target: "$.paths[*][*][?(@.operationId == 'create_agent_deployment_route')]"
+    update:
+      x-speakeasy-name-override: create_agent_deployment
+  - target: "$.paths[*][*][?(@.operationId == 'create_agent_draft_route')]"
+    update:
+      x-speakeasy-name-override: create_agent_draft
+  - target: "$.paths[*][*][?(@.operationId == 'delete_agent_draft_route')]"
+    update:
+      x-speakeasy-name-override: delete_agent_draft
   - target: "$.components.schemas['AgentConfigAPIModel-Input'].properties.dynamic_variables"
     update:
       type: object
