@@ -1,4 +1,4 @@
-# elevenlabs-go 
+# elevenlabs-go **UNOFFICIAL SDK**
 
 Developer-friendly & type-safe Go SDK specifically catered to leverage *Elevenlabs* API.
 
