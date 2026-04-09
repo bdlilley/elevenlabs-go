@@ -11,7 +11,7 @@ Developer-friendly & type-safe Go SDK specifically catered to leverage *Elevenla
 ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. You can use this API to use our service programmatically, this is done by using your API key. You can find your API key in the dashboard at https://elevenlabs.io/app/settings/api-keys.
 <!-- End Summary [summary] -->
 
-<!-- Start Table of Contents [toc] -->4
+<!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [elevenlabs-go](#elevenlabs-go)
