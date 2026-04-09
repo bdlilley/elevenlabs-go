@@ -5,18 +5,13 @@ Developer-friendly & type-safe Go SDK specifically catered to leverage *Elevenla
 [![Built by Speakeasy](https://img.shields.io/badge/Built_by-SPEAKEASY-374151?style=for-the-badge&labelColor=f3f4f6)](https://www.speakeasy.com/?utm_source=elevenlabs-go&utm_campaign=go)
 [![License: MIT](https://img.shields.io/badge/LICENSE_//_MIT-3b5bdb?style=for-the-badge&labelColor=eff6ff)](https://opensource.org/licenses/MIT)
 
-
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/kudos/elevenlabs-go). Delete this section before > publishing to a package manager.
-
 <!-- Start Summary [summary] -->
 ## Summary
 
 ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. You can use this API to use our service programmatically, this is done by using your API key. You can find your API key in the dashboard at https://elevenlabs.io/app/settings/api-keys.
 <!-- End Summary [summary] -->
 
-<!-- Start Table of Contents [toc] -->
+<!-- Start Table of Contents [toc] -->4
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [elevenlabs-go](#elevenlabs-go)
