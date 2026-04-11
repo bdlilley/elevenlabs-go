@@ -23,6 +23,8 @@ type TurnConfigWorkflowOverride struct {
 	SpellingPatience *SpellingPatience `default:"auto" json:"spelling_patience"`
 	// When enabled, starts generating LLM responses during silence before full turn confidence is reached, reducing perceived latency. May increase LLM costs.
 	SpeculativeTurn *bool `json:"speculative_turn,omitzero"`
+	// When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns.
+	RetranscribeOnTurnTimeout *bool `json:"retranscribe_on_turn_timeout,omitzero"`
 }
 
 func (t TurnConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -90,4 +92,11 @@ func (t *TurnConfigWorkflowOverride) GetSpeculativeTurn() *bool {
 		return nil
 	}
 	return t.SpeculativeTurn
+}
+
+func (t *TurnConfigWorkflowOverride) GetRetranscribeOnTurnTimeout() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.RetranscribeOnTurnTimeout
 }

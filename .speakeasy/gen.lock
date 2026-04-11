@@ -1,12 +1,14 @@
 lockVersion: 2.0.0
 id: b149d9ef-6819-4e45-8229-e78eefe15c7d
 management:
-  docChecksum: 55bb921df12b831e3f246977ca70155d
+  docChecksum: 89785f0bb261f9f64293cfd5ea27f907
   docVersion: "1.0"
-  speakeasyVersion: 1.761.1
-  generationVersion: 2.879.6
-  releaseVersion: 0.7.0
-  configChecksum: e6403d9abb44728d31f81f5e6f0e9e83
+  speakeasyVersion: 1.761.3
+  generationVersion: 2.879.11
+  releaseVersion: 0.7.1
+  configChecksum: cbd2aa61fa061fc4e7c8e57fb5565587
+  repoURL: https://github.com/bdlilley/elevenlabs-go.git
+  installationURL: https://github.com/bdlilley/elevenlabs-go
 persistentEdits:
   generation_id: 08b699ca-4f91-44be-9699-039a1da2de08
   pristine_commit_hash: 2434f9d416a99f83372d743d070a3c9baca4d1b2
@@ -787,7 +789,7 @@ trackedFiles:
     pristine_git_object: 102524fd4773411fce9092c9eee103787499f83c
   docs/models/components/bodycomposemusicwithadetailedresponsev1musicdetailedpost.md:
     id: f89fb2391185
-    last_write_checksum: sha1:e2ef91ea0f0ba0ed84c79fcb3fc7e014b3bdf64b
+    last_write_checksum: sha1:8dc2b622ce989cb3253a53fc1c74cd0d7033e5a5
     pristine_git_object: 7c4f518c1181792faad242c70246adaf3e69ae50
   docs/models/components/bodycomposemusicwithadetailedresponsev1musicdetailedpostmodelid.md:
     id: 0b3749689c00
@@ -1115,7 +1117,7 @@ trackedFiles:
     pristine_git_object: bbb11c483b53125c311c6a905c7c578b6ba41f6d
   docs/models/components/bodyspeechtotextv1speechtotextpost.md:
     id: 862c83a60f0e
-    last_write_checksum: sha1:fc95f43e1d8da4f88627a27b315ba32b7b756146
+    last_write_checksum: sha1:e980ea9ae0ba366c748e13861945a335db52a6ef
     pristine_git_object: 3b717c1f9a9275d4fd0174f4d3ff1f9b3483ed77
   docs/models/components/bodyspeechtotextv1speechtotextpostfile.md:
     id: 2c76f24a9831
@@ -1483,7 +1485,7 @@ trackedFiles:
     pristine_git_object: 53da77c2a83ba8acbabd603676d53f909c8dc12b
   docs/models/components/chatsourcemedium.md:
     id: 6b8f108bcb4d
-    last_write_checksum: sha1:0e70f3be155f1f9fb98cb54dcbed4a4955c9a6ce
+    last_write_checksum: sha1:c4025cfc8986ab06799907ce234f067b65db5e03
     pristine_git_object: 0a348b08e0fda4ab54144fdc04865b7a6f4fc98d
   docs/models/components/checkrentalavailabilityparams.md:
     id: 71a89ed3de9c
@@ -1599,19 +1601,19 @@ trackedFiles:
     pristine_git_object: b6b86c49cf2228b7a92a7ffe15ce4a92d0bc6293
   docs/models/components/conversationalconfigapimodelinput.md:
     id: 5657435e7243
-    last_write_checksum: sha1:092eecac2f76bfbec5dd2dd0d06cf9572935a200
+    last_write_checksum: sha1:39e685fdf469391d8f9413f3323ff63a0a757f84
     pristine_git_object: b1cab9935f09972418322d3872c6b801c8adc7bc
   docs/models/components/conversationalconfigapimodeloutput.md:
     id: f730f527beb5
-    last_write_checksum: sha1:d023319f5449c3548deec267df6c344acf0dff2c
+    last_write_checksum: sha1:eb0b32f6e5e5c535655617cd07695066158891f3
     pristine_git_object: 31232060634aa3b945c7e35118f67725cf88e39d
   docs/models/components/conversationalconfigapimodelworkflowoverrideinput.md:
     id: 0a8033b5f16f
-    last_write_checksum: sha1:cff1a606a3e0c30ea4d9f7aabf8ff99e0a631a5d
+    last_write_checksum: sha1:5108bd38e78a9c21924fd1d96e2e1569615bad05
     pristine_git_object: ef5fa95787341c42e84f46550bf1cd0197864038
   docs/models/components/conversationalconfigapimodelworkflowoverrideoutput.md:
     id: 0095ce7fd5fe
-    last_write_checksum: sha1:711d9504e4d5f9445100ec1499975aa0c530770e
+    last_write_checksum: sha1:8164e1ca10a6e22aaf8de61e6c3c09fb08de5478
     pristine_git_object: 89da023e1dbf0bd4abadf730f0dddf057e5f3f60
   docs/models/components/conversationchargingcommonmodel.md:
     id: b58ab8898ca0
@@ -1711,11 +1713,11 @@ trackedFiles:
     pristine_git_object: 77ffc6ca8ddf6fd26b4ad9ea3790a1b02817b988
   docs/models/components/conversationhistorytranscriptapiintegrationwebhooktoolsresultcommonmodelinput.md:
     id: 44975433dfbe
-    last_write_checksum: sha1:58962649eb62b0af1040483f5aef8efb31c593c5
+    last_write_checksum: sha1:c4d8683aab49258e852f1b814f38dc82df0247bf
     pristine_git_object: 8eef83ec414cab170d9c86b2d81b784eba51eab1
   docs/models/components/conversationhistorytranscriptapiintegrationwebhooktoolsresultcommonmodeloutput.md:
     id: be26a3045f7e
-    last_write_checksum: sha1:7e44f001ef69b6c5b025d840eac54a023a7c9111
+    last_write_checksum: sha1:2d8688bc6e01dd5daca9fe5fd36f91cce407b4cb
     pristine_git_object: 9188070a33b949f31b484fd5f11858bd323b6773
   docs/models/components/conversationhistorytranscriptcommonmodelinput.md:
     id: 511b72a3b9d0
@@ -1747,7 +1749,7 @@ trackedFiles:
     pristine_git_object: 8b9901c30af3ebb7b0dd650d96c5a116ec2ecf69
   docs/models/components/conversationhistorytranscriptothertoolsresultcommonmodel.md:
     id: a9cf0db87253
-    last_write_checksum: sha1:e8a755a055224e3257cbce7358d607bdeb1697a0
+    last_write_checksum: sha1:a4cc2dbdb23975bdda363b966e414406f0403e44
     pristine_git_object: 7e4938e5c447adc073d7b21848ded1755562fbed
   docs/models/components/conversationhistorytranscriptothertoolsresultcommonmodeltype.md:
     id: dd682803f15e
@@ -1767,7 +1769,7 @@ trackedFiles:
     pristine_git_object: c2de47f4a666f1a204756b372be3ab77b5d976b1
   docs/models/components/conversationhistorytranscriptsystemtoolresultcommonmodelinput.md:
     id: 5218af913702
-    last_write_checksum: sha1:e48691c3a10ed37b2c62eae2424ac3f30ed7de5f
+    last_write_checksum: sha1:0ca63aff86d7828f9e1211825ba1bb8e2c488000
     pristine_git_object: c0a31551020227648652afc51ea9eeb38ee6e0b9
   docs/models/components/conversationhistorytranscriptsystemtoolresultcommonmodelinputresult.md:
     id: 41a68d647d2e
@@ -1775,7 +1777,7 @@ trackedFiles:
     pristine_git_object: a3443dd5ed29f12b4e65aed938ffcb1634597589
   docs/models/components/conversationhistorytranscriptsystemtoolresultcommonmodeloutput.md:
     id: af14f999b671
-    last_write_checksum: sha1:33dca12b10c54e7d18d745ce112efe40bfb334ee
+    last_write_checksum: sha1:b655e156a5e26e35b2c83bd6f419b0da8fe4f39d
     pristine_git_object: 7cffe46d60b2813404d08c44beddfcb6152f89ed
   docs/models/components/conversationhistorytranscriptsystemtoolresultcommonmodeloutputresult.md:
     id: 68577d25cdb6
@@ -1819,11 +1821,11 @@ trackedFiles:
     pristine_git_object: 8c98634ee41ef02bfbe046595a325d4de0d8ab05
   docs/models/components/conversationhistorytranscriptworkflowtoolsresultcommonmodelinput.md:
     id: ae3da627b52b
-    last_write_checksum: sha1:bc914052d8fa21994fa81e7ef21cc65605c50dbe
+    last_write_checksum: sha1:d5ac5a4aa8923cc7a1187b7a4068c0acf1969bff
     pristine_git_object: 9864fd9d34a363811b92926c342ec82a86395cbe
   docs/models/components/conversationhistorytranscriptworkflowtoolsresultcommonmodeloutput.md:
     id: 8ebf2ecec57b
-    last_write_checksum: sha1:e5368a5f553a0f58e092de034a9fc57fb44f691e
+    last_write_checksum: sha1:58c5663aeda11cc9ec7e06c99b4f0b61241a7177
     pristine_git_object: 89261b99feb5a39abac967a02fec6c0ee631d83c
   docs/models/components/conversationhistorytwiliophonecallmodel.md:
     id: a12f512bd50b
@@ -2409,11 +2411,11 @@ trackedFiles:
     pristine_git_object: 009d044f8cf25a4c919d976fc24282416c2ba6cf
   docs/models/components/entitydetection.md:
     id: e2663cee3f79
-    last_write_checksum: sha1:e2dbd74af752642e1e8466a3fb31bac9addcaa6f
+    last_write_checksum: sha1:76b014cc855876f7684b4dc303a618670e7add11
     pristine_git_object: 54a35e933b2ffeab768d5ff958433074c5d89470
   docs/models/components/entityredaction.md:
     id: 9c82a46b5243
-    last_write_checksum: sha1:485df9f634f1dff34758fc10fde79778089ebb54
+    last_write_checksum: sha1:6451d0ba625f409f5ea324e68246b4c601839aa1
     pristine_git_object: 42bc1d985c1e038c3cf301b004d1535ef1d504f1
   docs/models/components/environmentauthconnectionlocator.md:
     id: 27ab8cba943c
@@ -2541,7 +2543,7 @@ trackedFiles:
     pristine_git_object: c7cd386ec9c9a3b09892b2e12c36f84ff14940eb
   docs/models/components/genre.md:
     id: 962e3e5b9bdd
-    last_write_checksum: sha1:59a9b937f30fded245df78b3ac6661a8c76633b2
+    last_write_checksum: sha1:130d3ff2102e3ca5db262e840c7c7f25c23c2147
     pristine_git_object: 31fd9a258b62d29f178fc75cae769d0b85fe788e
   docs/models/components/getagentembedresponsemodel.md:
     id: c6bf0243b1a5
@@ -2805,6 +2807,8 @@ trackedFiles:
     id: 49bda734a88c
     last_write_checksum: sha1:236679ebd3bd6a12c5c563df9a1545f108f6b553
     pristine_git_object: a9385a46aada1d4c87faeaa5e2ad9c35cc394dd4
+  docs/models/components/grouppvclimit.md:
+    last_write_checksum: sha1:fff215a608a1a339e59d062e17906cb76d46e15c
   docs/models/components/groupusagelimit.md:
     id: b857f04724ca
     last_write_checksum: sha1:3f50b6963e83c68a7c95c8aa6594deb2a041c8af
@@ -3295,16 +3299,18 @@ trackedFiles:
     pristine_git_object: e0405adf04c03f2bbf1417d2aeae93f52e291b28
   docs/models/components/modelratesresponsemodel.md:
     id: 0956a99c5da0
-    last_write_checksum: sha1:a849a22db8217be97f1d54866f3316a37680b914
+    last_write_checksum: sha1:7e27191b06119cd721bc05770011968e8789dfb9
     pristine_git_object: 66e119061ed17a63bf9af9dd5353aa14b16ec38a
   docs/models/components/modelresponsemodel.md:
     id: 518a7a265dfa
-    last_write_checksum: sha1:7907f0683368652089593bf2593ee80cf289f200
+    last_write_checksum: sha1:c87e672052acb8806a52108ce6dc880d1ddaa6e0
     pristine_git_object: ff011d9d06053cb986fba3221f467b09b50d4d1d
   docs/models/components/modelsettingsresponsemodel.md:
     id: 1cd2f1874225
     last_write_checksum: sha1:b6c5fec6097a335e63e8c508d096317a8f1f8aa8
     pristine_git_object: 82b8456726de963589d1a8842d2d3b202636382f
+  docs/models/components/modelstyleprefix.md:
+    last_write_checksum: sha1:ef01cf56abd39ff703fb87066bdc6f900bb39fe8
   docs/models/components/moderationconfig.md:
     id: 979549bd3026
     last_write_checksum: sha1:bf114b748c8dbdd3a05cff4a7f0f7a6980d55fa4
@@ -3467,7 +3473,7 @@ trackedFiles:
     pristine_git_object: 17f4b9c8c66f32bf7068254d85b889da1245941f
   docs/models/components/permissiontype.md:
     id: 43591f09fa0c
-    last_write_checksum: sha1:742f147920847dbd51b70ae61a1fac7629b15484
+    last_write_checksum: sha1:eb964c62cfb237e783ce0994ec5b8984e59f578f
     pristine_git_object: d281ecb0881406b6f04b1fb210b860ee2e181ce8
   docs/models/components/phonecall.md:
     id: 6e9e0dcb763a
@@ -4643,7 +4649,7 @@ trackedFiles:
     pristine_git_object: ecbfae7ffa7bf7220979c68bb57193c30e899dea
   docs/models/components/turnconfig.md:
     id: 4be3fb02d4ac
-    last_write_checksum: sha1:93fbf58ddb9d7b83703fa0cd8042b71dda511eb9
+    last_write_checksum: sha1:5721faaaa734fcc818266ae976ac8c8a5e0470b3
     pristine_git_object: 78aa467ba099fafd5555fc0f22d2bb45aa7f5013
   docs/models/components/turnconfigoverride.md:
     id: 5f0ce1c899f7
@@ -4655,7 +4661,7 @@ trackedFiles:
     pristine_git_object: 745c7b9dabf29a4f8c9d9d0ee82ada6d75dd6cb2
   docs/models/components/turnconfigworkflowoverride.md:
     id: 7c23200ae32e
-    last_write_checksum: sha1:efdbaee3e05c07ea25c7a41db413c487760db5ad
+    last_write_checksum: sha1:875a52f1f3296171e115725a98283d6d506f37fa
     pristine_git_object: 6cdd3e3323b7e220bb150dac2a4e633fcc08fcea
   docs/models/components/turneagerness.md:
     id: cfe15219f8a1
@@ -5215,11 +5221,11 @@ trackedFiles:
     pristine_git_object: fb2896e97d0f1b3f3a083df50f549e983c8c8e70
   docs/models/components/workflowoverrideagentnodemodelinput.md:
     id: d4246e68596c
-    last_write_checksum: sha1:8bea55b006144ca744b6740e893291b12b55f2f6
+    last_write_checksum: sha1:9b1d348332d686c879548983c3501623de475a13
     pristine_git_object: bae2901d0e3fa7b9e578b9120e49ce997be92c6a
   docs/models/components/workflowoverrideagentnodemodeloutput.md:
     id: 7574781b7706
-    last_write_checksum: sha1:6d2ec7388e4765cb0cdbe09ddeb75946186257b1
+    last_write_checksum: sha1:d29936ee2a5b23d9118c47d871aa01b865254c0f
     pristine_git_object: 027b5cd19c63e3f6acd96a695bed496364373817
   docs/models/components/workflowphonenumbernodemodelinput.md:
     id: 29a87e458b63
@@ -5363,11 +5369,11 @@ trackedFiles:
     pristine_git_object: 5b0e2601f07607dde2df1eb9a7494b60417ba2ec
   docs/models/components/workspacegrouppermission.md:
     id: cb9202f3145e
-    last_write_checksum: sha1:499aaf15ec3b2d26ab0a0b469e11bf48171fe6df
+    last_write_checksum: sha1:fd5dab6e4a5b6142f14290af77753b41b8c2cab1
     pristine_git_object: 34232bf47f82767946b1981bc3ca2811c10b7f18
   docs/models/components/workspacegroupresponsemodel.md:
     id: 519999b9a385
-    last_write_checksum: sha1:e6309f49ead4fe2228960017374f55c58fca607c
+    last_write_checksum: sha1:999874e0589edde9ad44b584d87dba1540c4744b
     pristine_git_object: 0d2a82ae06ccaefe95bc5fcc64ce0f45c57ab334
   docs/models/components/workspaceresourcetype.md:
     id: 71aa52eec49c
@@ -6645,7 +6651,7 @@ trackedFiles:
     pristine_git_object: 6c14c014e8150e4cdea9a775c371620db013df73
   docs/models/operations/getuservoicesv2request.md:
     id: 0787e1011fcf
-    last_write_checksum: sha1:55a7a039a210cf04047a8b4e6afa96d95542ca16
+    last_write_checksum: sha1:8b3bbb7de65434cf9d2cda63d4a89521bc7bf0f8
     pristine_git_object: 89eada2989e44766b87bbd5725d1b235b47fdbca
   docs/models/operations/getuservoicesv2response.md:
     id: 45c44b672590
@@ -7573,7 +7579,7 @@ trackedFiles:
     pristine_git_object: 4dfeb09b2b79b10841e34f541d18f1dab1924fd7
   docs/sdks/musicgeneration/README.md:
     id: 0fdad068cecf
-    last_write_checksum: sha1:33c6e8abc67ea425f6af289534d4549e82f74ffb
+    last_write_checksum: sha1:952be5654dd009d58cd5bd7a788977f97ca80215
     pristine_git_object: 5769645a0bec4358b5f3c6350eb241c2d8b07550
   docs/sdks/pronunciationdictionary/README.md:
     id: 6999f42d3158
@@ -7649,7 +7655,7 @@ trackedFiles:
     pristine_git_object: 90bd79a0224946ed3020db2c4af2785724d8b0ba
   elevenlabsgo.go:
     id: b4556aeb4759
-    last_write_checksum: sha1:a5ce0677b6a756218db997f38c9599ab0a6dbb61
+    last_write_checksum: sha1:ddd7a5823156805ead2be53bcbc19a700c80c520
     pristine_git_object: dc67f6845aa141540b307f4a8caf6a06da9dc341
   enterprise.go:
     id: 4d99e07227a2
@@ -8317,7 +8323,7 @@ trackedFiles:
     pristine_git_object: 8290d8495736a2e52bddbcbabfb6e7d856d83839
   models/components/bodycomposemusicwithadetailedresponsev1musicdetailedpost.go:
     id: 507ceedf722f
-    last_write_checksum: sha1:5e6b718c731e5817a005382f2e8cca0347498698
+    last_write_checksum: sha1:f71308ad0f18b482113bd9c1a7660a0f2ccd0438
     pristine_git_object: cf0adce4adaf042214168d9effee29e0eab416d2
   models/components/bodycomputeragindexesinbatchv1convaiknowledgebaseragindexpost.go:
     id: f0058ef31197
@@ -8541,7 +8547,7 @@ trackedFiles:
     pristine_git_object: 94a0aeb02b506b21c8075bbbd13495b4b82b9489
   models/components/bodyspeechtotextv1speechtotextpost.go:
     id: 6221a891a9db
-    last_write_checksum: sha1:1f6348cc925b386f54e3a6921a3042b7e5a9e2c0
+    last_write_checksum: sha1:fe97ab0056db22095843e3b0a08f0c97b08625fd
     pristine_git_object: 77029ba6c7503363756d92f5bacb05f3a8aa863c
   models/components/bodystemseparationv1musicstemseparationpost.go:
     id: 97afda00ded4
@@ -8797,7 +8803,7 @@ trackedFiles:
     pristine_git_object: e151024f7f6522e18c3ce3fa436169949000a50a
   models/components/chatsourcemedium.go:
     id: f3c9139a303e
-    last_write_checksum: sha1:b7373f3c200efc7d81bbde854da3e801ee2bb37c
+    last_write_checksum: sha1:715d71327e49a90d354232084dbae3d43ea0166c
     pristine_git_object: 9d5faaa2f4cca3ac3270d3b7045b9c1b0a8a8e04
   models/components/checkrentalavailabilityparams.go:
     id: 7004c7efd8b3
@@ -8997,11 +9003,11 @@ trackedFiles:
     pristine_git_object: be218fc1f3c2c410f3a92961c37de91cbcb8ed01
   models/components/conversationhistorytranscriptapiintegrationwebhooktoolsresultcommonmodelinput.go:
     id: 5994af65f10c
-    last_write_checksum: sha1:f07f33c21412f1e11b649768e8873b94393f40c4
+    last_write_checksum: sha1:205a13bae22940a83673bdbe226ce1ec6e6d42a9
     pristine_git_object: 9a23c46565282ccf5de0029f7a4c4335871ee54d
   models/components/conversationhistorytranscriptapiintegrationwebhooktoolsresultcommonmodeloutput.go:
     id: 28c05606d20c
-    last_write_checksum: sha1:cb06024c51e5fccd99a4312c2f8a0fc12058e056
+    last_write_checksum: sha1:4ca78137ee02253d1e47a0bfd1adc36e17f1fc6a
     pristine_git_object: e8b87df38ab6039ad90fa8b1e1ca4957a40ba19f
   models/components/conversationhistorytranscriptcommonmodelinput.go:
     id: 9d88e5d9b8cb
@@ -9017,7 +9023,7 @@ trackedFiles:
     pristine_git_object: 99ada54951569d407795031661c6fa612417e69d
   models/components/conversationhistorytranscriptothertoolsresultcommonmodel.go:
     id: c8841ae7e88d
-    last_write_checksum: sha1:74b9da78053678e2495e0f6df29f0e783a0079d8
+    last_write_checksum: sha1:e6d38da75720e060abd5bb543450ba4cc9819a10
     pristine_git_object: c870389b6984eb86d8e27e3c3a7686103a5954f1
   models/components/conversationhistorytranscriptresponsemodel.go:
     id: eaa30e113553
@@ -9025,11 +9031,11 @@ trackedFiles:
     pristine_git_object: 4f9085659a6d915bd365c4d3c5c2ad724cdf6afc
   models/components/conversationhistorytranscriptsystemtoolresultcommonmodelinput.go:
     id: aa15cad62dea
-    last_write_checksum: sha1:f1792998449adc3c9878f2da9f4d47fd23ddd4bb
+    last_write_checksum: sha1:c6409bcf9a354d912631c642631e532ceaf819b6
     pristine_git_object: 17805361ca981b36e1e7041525ef08eb3ea78ef1
   models/components/conversationhistorytranscriptsystemtoolresultcommonmodeloutput.go:
     id: f4beb0fcac4f
-    last_write_checksum: sha1:a979ae4702419bcb933b959097856e22daa96832
+    last_write_checksum: sha1:06cd60ae97d7d5f541d752b3141ba20b9e5edbd6
     pristine_git_object: 0b8ee1bfe2adbe5722b7db81a37c47841348c395
   models/components/conversationhistorytranscripttoolcallapiintegrationwebhookdetailsinput.go:
     id: 506963c84f37
@@ -9061,11 +9067,11 @@ trackedFiles:
     pristine_git_object: 55fcee035e7ca2ca9f88c1ffd443b5d4a9c52e20
   models/components/conversationhistorytranscriptworkflowtoolsresultcommonmodelinput.go:
     id: 218a78212cc4
-    last_write_checksum: sha1:5d2cdefada987a6cc8411fe02975be887fcec66b
+    last_write_checksum: sha1:7e619fcd923b57e93884af35ab8c5a14deb3c96a
     pristine_git_object: ed882b8ec051c57c650157d637357379c92821c1
   models/components/conversationhistorytranscriptworkflowtoolsresultcommonmodeloutput.go:
     id: d768e8760945
-    last_write_checksum: sha1:c6e299278ec63717a8c2cd4860829a5a8c030f14
+    last_write_checksum: sha1:2205dcd1dd014abd2d03afe35acbe14907ec9fc2
     pristine_git_object: a6582a1bda3e7e2db60ce4f3c65642fa3625050f
   models/components/conversationhistorytwiliophonecallmodel.go:
     id: fe0d8c7f00a4
@@ -9453,7 +9459,7 @@ trackedFiles:
     pristine_git_object: 30b1f7128b321105152c37ba845767cfbb7e2cc1
   models/components/directpublishingreadresponsemodel.go:
     id: 341fc79cec64
-    last_write_checksum: sha1:68686580335af42788bb5adea1c872f7a3486c3e
+    last_write_checksum: sha1:8616157818b28b505b8ffab46d4fcde456303bfc
     pristine_git_object: 8b2b1d71925eaab7a8b27fac8e3d914ab368ad86
   models/components/discountresponsemodel.go:
     id: 69d8f60e8ecf
@@ -10267,7 +10273,7 @@ trackedFiles:
     pristine_git_object: e2d015d5f351e42c8118c5cd8155fe5c94d03fa0
   models/components/modelratesresponsemodel.go:
     id: cb230486bcce
-    last_write_checksum: sha1:35ebe53c77b466a76f822a1acf04a6014ad5a7e7
+    last_write_checksum: sha1:aed9188d9a65a3d35f70aeab4ced05073091e730
     pristine_git_object: c8328aead294742620f41886838cdd4c2d319aa3
   models/components/modelresponsemodel.go:
     id: a6a769b19f7e
@@ -10383,7 +10389,7 @@ trackedFiles:
     pristine_git_object: 9cc07f6f128932f4a13cd58c2e2c1fdb6acfe9d7
   models/components/permissiontype.go:
     id: 744c8660f791
-    last_write_checksum: sha1:76dfd751cd87635f9c48cde26017eb9c758de86f
+    last_write_checksum: sha1:100cde430df94513fd46626e58e5b3e1f6930c86
     pristine_git_object: 98b0594f11e2c2b71e1f73d7b432f73b3c7ffefa
   models/components/phonenumberagentinfo.go:
     id: 6548955c0f6c
@@ -11271,7 +11277,7 @@ trackedFiles:
     pristine_git_object: 32c0f40252373dd485b7386d23accded248b33c7
   models/components/turnconfig.go:
     id: d0272644011d
-    last_write_checksum: sha1:b8b50e938af86a91fcc2d472a0c8f7a76371b1f8
+    last_write_checksum: sha1:c2b23311bc3bbf4a2d267a880de4935299b397c5
     pristine_git_object: c9083074a5f4c43ae46c94627e42aa8f06e86890
   models/components/turnconfigoverride.go:
     id: 46c7c3d90edf
@@ -11283,7 +11289,7 @@ trackedFiles:
     pristine_git_object: 7e71c71e5c8222d8de8cd189d8f63e4cfc9f6e83
   models/components/turnconfigworkflowoverride.go:
     id: 5719112c6a4b
-    last_write_checksum: sha1:5a0a5daefac9388f17083e3740a0e68e5cf9fea1
+    last_write_checksum: sha1:b3cdad417d01507fe7bb60e4140f7ac6ccb8db73
     pristine_git_object: ad3f28897f9ef8a9c0eea3c09a70ba0454382a06
   models/components/turneagerness.go:
     id: a210e0f25111
@@ -11843,11 +11849,11 @@ trackedFiles:
     pristine_git_object: 9f4c73f399dd763a7b44fefe4e8d97ea6f2f665e
   models/components/workspacegrouppermission.go:
     id: 415c3602d1c2
-    last_write_checksum: sha1:3407632b2fda2cbc1b67ebf1156a985d6e2cf86c
+    last_write_checksum: sha1:8dcde70730cde57134435a621fbcdfe46646aadc
     pristine_git_object: 5107a73537d3327ea9b37b7b9a97355792a1035d
   models/components/workspacegroupresponsemodel.go:
     id: 926e44906478
-    last_write_checksum: sha1:ae33f5a323fb4dcff4b544877c3b109bfd62af48
+    last_write_checksum: sha1:67e5d32ba64fe02bbb9fe45349c6f9d8d45efe8c
     pristine_git_object: cebb32ecdac7e0ff0900066701e785721213f347
   models/components/workspaceresourcetype.go:
     id: 83e9fa0a43e6
@@ -12561,7 +12567,7 @@ trackedFiles:
     pristine_git_object: 5d7b024b773438963e34c3934f6e84015313cc55
   models/operations/getuservoicesv2.go:
     id: cd2e659bdc0e
-    last_write_checksum: sha1:891b60c8f8c295302478009499ef79066f146017
+    last_write_checksum: sha1:0f547d1b06fbe1f1b5821deea0b1c0f0f762786a
     pristine_git_object: ec149088a99b1de1185baab1ff6a51cd3fa7c4db
   models/operations/getvoicebyid.go:
     id: 9ab6698a761a
@@ -12981,7 +12987,7 @@ trackedFiles:
     pristine_git_object: cf4184000bec8954318ac41e0b87a53a938a3f0d
   musicgeneration.go:
     id: 44ebb937e235
-    last_write_checksum: sha1:4dea93af798f53a8722c3ff14520eb074119883a
+    last_write_checksum: sha1:e7efc928c91befabf41dfc8b6939e7b291b39255
     pristine_git_object: a212c3e61fb60b4431ee0560f8a71e03157982f5
   optionalnullable/optionalnullable.go:
     id: ce60f259ead3
@@ -13184,7 +13190,7 @@ examples:
         path:
           agent_id: "agent_3701k3ttaq12ewp8b7qv5rfyszkz"
       requestBody:
-        application/json: {"tests": [], "agent_config_override": {"conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "platform_settings": {"evaluation": {"criteria": [{"id": "1234567890", "name": "Customer satisfaction check", "type": "prompt", "conversation_goal_prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "use_knowledge_base": false, "scope": "conversation"}]}, "widget": {"variant": "full", "placement": "bottom-right", "expandable": "never", "feedback_mode": "none", "bg_color": "#ffffff", "text_color": "#000000", "btn_color": "#000000", "btn_text_color": "#ffffff", "border_color": "#e1e1e1", "focus_color": "#000000", "shareable_page_show_terms": true, "disable_banner": false, "markdown_link_include_www": true, "markdown_link_allow_http": true, "mic_muting_enabled": false, "transcript_enabled": false, "text_input_enabled": true, "conversation_mode_toggle_enabled": false, "default_expanded": false, "always_expanded": false, "dismissible": false, "show_agent_status": false, "show_conversation_id": true, "strip_audio_tags": true, "language_selector": false, "supports_text_only": true, "custom_avatar_path": "https://example.com/avatar.png"}, "data_collection": {"key": {"type": "string", "description": "A user-provided message", "is_system_provided": false, "dynamic_variable": ""}}, "overrides": {"custom_llm_extra_body": true, "enable_conversation_initiation_client_data_from_webhook": true}, "workspace_overrides": {"conversation_initiation_client_data_webhook": {"url": "https://example.com/webhook", "request_headers": {"Content-Type": "application/json"}}}, "testing": {"attached_tests": [{"test_id": "test_123", "workflow_node_id": "node_abc"}, {"test_id": "test_456"}]}, "archived": false, "auth": {"enable_auth": true, "allowlist": [{"hostname": "https://example.com"}], "require_origin_header": true, "shareable_token": "1234567890"}, "call_limits": {"agent_concurrency_limit": -1, "daily_limit": 100000, "bursting_enabled": true}, "privacy": {"record_voice": true, "retention_days": -1, "delete_transcript_and_pii": false, "delete_audio": false, "apply_to_existing_conversations": false, "zero_retention_mode": false}}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"type": "unconditional"}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"type": "unconditional"}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"type": "unconditional"}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"type": "result", "successful": true}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"type": "result", "successful": true}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"type": "unconditional"}}}, "nodes": {"entry_node": {"type": "override_agent", "label": "<value>"}, "failure_node": {"type": "tool"}, "start_node": {"type": "end"}, "success_conversation": {"type": "tool"}, "success_end": {"type": "start"}, "success_phone": {"type": "tool"}, "success_transfer": {"type": "phone_number", "transfer_destination": {"type": "sip_uri_dynamic_variable", "sip_uri": "https://feline-subexpression.com/"}, "transfer_type": "conference"}, "tool_node_a": {"type": "phone_number", "transfer_destination": {"type": "sip_uri_dynamic_variable", "sip_uri": "https://friendly-futon.com"}, "transfer_type": "conference"}, "tool_node_b": {"type": "override_agent", "label": "<value>"}}, "prevent_subagent_loops": false}}}
+        application/json: {"tests": [], "agent_config_override": {"conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false, "retranscribe_on_turn_timeout": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "platform_settings": {"evaluation": {"criteria": [{"id": "1234567890", "name": "Customer satisfaction check", "type": "prompt", "conversation_goal_prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "use_knowledge_base": false, "scope": "conversation"}]}, "widget": {"variant": "full", "placement": "bottom-right", "expandable": "never", "feedback_mode": "none", "bg_color": "#ffffff", "text_color": "#000000", "btn_color": "#000000", "btn_text_color": "#ffffff", "border_color": "#e1e1e1", "focus_color": "#000000", "shareable_page_show_terms": true, "disable_banner": false, "markdown_link_include_www": true, "markdown_link_allow_http": true, "mic_muting_enabled": false, "transcript_enabled": false, "text_input_enabled": true, "conversation_mode_toggle_enabled": false, "default_expanded": false, "always_expanded": false, "dismissible": false, "show_agent_status": false, "show_conversation_id": true, "strip_audio_tags": true, "language_selector": false, "supports_text_only": true, "custom_avatar_path": "https://example.com/avatar.png"}, "data_collection": {"key": {"type": "string", "description": "A user-provided message", "is_system_provided": false, "dynamic_variable": ""}}, "overrides": {"custom_llm_extra_body": true, "enable_conversation_initiation_client_data_from_webhook": true}, "workspace_overrides": {"conversation_initiation_client_data_webhook": {"url": "https://example.com/webhook", "request_headers": {"Content-Type": "application/json"}}}, "testing": {"attached_tests": [{"test_id": "test_123", "workflow_node_id": "node_abc"}, {"test_id": "test_456"}]}, "archived": false, "auth": {"enable_auth": true, "allowlist": [{"hostname": "https://example.com"}], "require_origin_header": true, "shareable_token": "1234567890"}, "call_limits": {"agent_concurrency_limit": -1, "daily_limit": 100000, "bursting_enabled": true}, "privacy": {"record_voice": true, "retention_days": -1, "delete_transcript_and_pii": false, "delete_audio": false, "apply_to_existing_conversations": false, "zero_retention_mode": false}}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"type": "unconditional"}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"type": "unconditional"}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"type": "unconditional"}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"type": "result", "successful": true}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"type": "result", "successful": true}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"type": "unconditional"}}}, "nodes": {"entry_node": {"type": "override_agent", "label": "<value>"}, "failure_node": {"type": "tool"}, "start_node": {"type": "end"}, "success_conversation": {"type": "tool"}, "success_end": {"type": "start"}, "success_phone": {"type": "tool"}, "success_transfer": {"type": "phone_number", "transfer_destination": {"type": "sip_uri_dynamic_variable", "sip_uri": "https://feline-subexpression.com/"}, "transfer_type": "conference"}, "tool_node_a": {"type": "phone_number", "transfer_destination": {"type": "sip_uri_dynamic_variable", "sip_uri": "https://friendly-futon.com"}, "transfer_type": "conference"}, "tool_node_b": {"type": "override_agent", "label": "<value>"}}, "prevent_subagent_loops": false}}}
       responses:
         "200":
           application/json: {"id": "<id>", "test_runs": []}
@@ -13206,7 +13212,7 @@ examples:
         path:
           test_invocation_id: "<id>"
       requestBody:
-        application/json: {"test_run_ids": [], "agent_config_override": {"conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "platform_settings": {"evaluation": {"criteria": [{"id": "1234567890", "name": "Customer satisfaction check", "type": "prompt", "conversation_goal_prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "use_knowledge_base": false, "scope": "conversation"}]}, "widget": {"variant": "full", "placement": "bottom-right", "expandable": "never", "feedback_mode": "none", "bg_color": "#ffffff", "text_color": "#000000", "btn_color": "#000000", "btn_text_color": "#ffffff", "border_color": "#e1e1e1", "focus_color": "#000000", "shareable_page_show_terms": true, "disable_banner": false, "markdown_link_include_www": true, "markdown_link_allow_http": true, "mic_muting_enabled": false, "transcript_enabled": false, "text_input_enabled": true, "conversation_mode_toggle_enabled": false, "default_expanded": false, "always_expanded": false, "dismissible": false, "show_agent_status": false, "show_conversation_id": true, "strip_audio_tags": true, "language_selector": false, "supports_text_only": true, "custom_avatar_path": "https://example.com/avatar.png"}, "data_collection": {"key": {"type": "string", "description": "A user-provided message", "is_system_provided": false, "dynamic_variable": ""}}, "overrides": {"custom_llm_extra_body": true, "enable_conversation_initiation_client_data_from_webhook": true}, "workspace_overrides": {"conversation_initiation_client_data_webhook": {"url": "https://example.com/webhook", "request_headers": {"Content-Type": "application/json"}}}, "testing": {"attached_tests": [{"test_id": "test_123", "workflow_node_id": "node_abc"}, {"test_id": "test_456"}]}, "archived": false, "auth": {"enable_auth": true, "allowlist": [{"hostname": "https://example.com"}], "require_origin_header": true, "shareable_token": "1234567890"}, "call_limits": {"agent_concurrency_limit": -1, "daily_limit": 100000, "bursting_enabled": true}, "privacy": {"record_voice": true, "retention_days": -1, "delete_transcript_and_pii": false, "delete_audio": false, "apply_to_existing_conversations": false, "zero_retention_mode": false}}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"type": "result", "successful": false}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"type": "result", "successful": false}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"type": "expression", "expression": {"type": "string_literal", "value": "<value>"}}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"type": "unconditional"}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"type": "expression", "expression": {"type": "dynamic_variable", "name": "<value>"}}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"type": "result", "successful": true}}}, "nodes": {"entry_node": {"type": "override_agent", "label": "<value>"}, "failure_node": {"type": "tool"}, "start_node": {"type": "phone_number", "transfer_destination": {"type": "phone_dynamic_variable", "phone_number": "(481) 491-6122 x22475"}, "transfer_type": "conference"}, "success_conversation": {"type": "tool"}, "success_end": {"type": "tool"}, "success_phone": {"type": "override_agent", "label": "<value>"}, "success_transfer": {"type": "tool"}, "tool_node_a": {"type": "override_agent", "label": "<value>"}, "tool_node_b": {"type": "end"}}, "prevent_subagent_loops": false}}, "agent_id": "<id>"}
+        application/json: {"test_run_ids": [], "agent_config_override": {"conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false, "retranscribe_on_turn_timeout": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "platform_settings": {"evaluation": {"criteria": [{"id": "1234567890", "name": "Customer satisfaction check", "type": "prompt", "conversation_goal_prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "use_knowledge_base": false, "scope": "conversation"}]}, "widget": {"variant": "full", "placement": "bottom-right", "expandable": "never", "feedback_mode": "none", "bg_color": "#ffffff", "text_color": "#000000", "btn_color": "#000000", "btn_text_color": "#ffffff", "border_color": "#e1e1e1", "focus_color": "#000000", "shareable_page_show_terms": true, "disable_banner": false, "markdown_link_include_www": true, "markdown_link_allow_http": true, "mic_muting_enabled": false, "transcript_enabled": false, "text_input_enabled": true, "conversation_mode_toggle_enabled": false, "default_expanded": false, "always_expanded": false, "dismissible": false, "show_agent_status": false, "show_conversation_id": true, "strip_audio_tags": true, "language_selector": false, "supports_text_only": true, "custom_avatar_path": "https://example.com/avatar.png"}, "data_collection": {"key": {"type": "string", "description": "A user-provided message", "is_system_provided": false, "dynamic_variable": ""}}, "overrides": {"custom_llm_extra_body": true, "enable_conversation_initiation_client_data_from_webhook": true}, "workspace_overrides": {"conversation_initiation_client_data_webhook": {"url": "https://example.com/webhook", "request_headers": {"Content-Type": "application/json"}}}, "testing": {"attached_tests": [{"test_id": "test_123", "workflow_node_id": "node_abc"}, {"test_id": "test_456"}]}, "archived": false, "auth": {"enable_auth": true, "allowlist": [{"hostname": "https://example.com"}], "require_origin_header": true, "shareable_token": "1234567890"}, "call_limits": {"agent_concurrency_limit": -1, "daily_limit": 100000, "bursting_enabled": true}, "privacy": {"record_voice": true, "retention_days": -1, "delete_transcript_and_pii": false, "delete_audio": false, "apply_to_existing_conversations": false, "zero_retention_mode": false}}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"type": "result", "successful": false}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"type": "result", "successful": false}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"type": "expression", "expression": {"type": "string_literal", "value": "<value>"}}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"type": "unconditional"}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"type": "expression", "expression": {"type": "dynamic_variable", "name": "<value>"}}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"type": "result", "successful": true}}}, "nodes": {"entry_node": {"type": "override_agent", "label": "<value>"}, "failure_node": {"type": "tool"}, "start_node": {"type": "phone_number", "transfer_destination": {"type": "phone_dynamic_variable", "phone_number": "(481) 491-6122 x22475"}, "transfer_type": "conference"}, "success_conversation": {"type": "tool"}, "success_end": {"type": "tool"}, "success_phone": {"type": "override_agent", "label": "<value>"}, "success_transfer": {"type": "tool"}, "tool_node_a": {"type": "override_agent", "label": "<value>"}, "tool_node_b": {"type": "end"}}, "prevent_subagent_loops": false}}, "agent_id": "<id>"}
       responses:
         "200":
           application/json: "<value>"
@@ -14120,7 +14126,7 @@ examples:
     speakeasy-default-get-models:
       responses:
         "200":
-          application/json: [{"model_id": "eleven_multilingual_v2", "name": "Eleven Multilingual v2", "can_be_finetuned": true, "can_do_text_to_speech": true, "can_do_voice_conversion": true, "can_use_style": true, "can_use_speaker_boost": true, "serves_pro_voices": false, "token_cost_factor": 1, "description": "Our state of the art multilingual speech synthesis model, able to generate life-like speech in 29 languages.", "requires_alpha_access": false, "max_characters_request_free_user": 2500, "max_characters_request_subscribed_user": 5000, "maximum_text_length_per_request": 1000000, "languages": [{"language_id": "en", "name": "English"}], "model_rates": {"character_cost_multiplier": 1}, "concurrency_group": "standard_eleven_multilingual_v2"}]
+          application/json: [{"model_id": "eleven_multilingual_v2", "name": "Eleven Multilingual v2", "can_be_finetuned": true, "can_do_text_to_speech": true, "can_do_voice_conversion": true, "can_use_style": true, "can_use_speaker_boost": true, "serves_pro_voices": false, "token_cost_factor": 1, "description": "Our state of the art multilingual speech synthesis model, able to generate life-like speech in 29 languages.", "requires_alpha_access": false, "max_characters_request_free_user": 2500, "max_characters_request_subscribed_user": 5000, "maximum_text_length_per_request": 1000000, "languages": [{"language_id": "en", "name": "English"}], "model_rates": {"character_cost_multiplier": 1, "cost_discount_multiplier": 1}, "concurrency_group": "standard_eleven_multilingual_v2"}]
         "422":
           application/json: {}
   create_audio_native_project:
@@ -14625,7 +14631,7 @@ examples:
         query:
           enable_versioning: false
       requestBody:
-        application/json: {"conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "platform_settings": {"evaluation": {"criteria": [{"id": "1234567890", "name": "Customer satisfaction check", "type": "prompt", "conversation_goal_prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "use_knowledge_base": false, "scope": "conversation"}]}, "widget": {"variant": "full", "placement": "bottom-right", "expandable": "never", "feedback_mode": "none", "bg_color": "#ffffff", "text_color": "#000000", "btn_color": "#000000", "btn_text_color": "#ffffff", "border_color": "#e1e1e1", "focus_color": "#000000", "shareable_page_show_terms": true, "disable_banner": false, "markdown_link_include_www": true, "markdown_link_allow_http": true, "mic_muting_enabled": false, "transcript_enabled": false, "text_input_enabled": true, "conversation_mode_toggle_enabled": false, "default_expanded": false, "always_expanded": false, "dismissible": false, "show_agent_status": false, "show_conversation_id": true, "strip_audio_tags": true, "language_selector": false, "supports_text_only": true, "custom_avatar_path": "https://example.com/avatar.png"}, "data_collection": {"key": {"type": "string", "description": "A user-provided message", "is_system_provided": false, "dynamic_variable": ""}}, "overrides": {"custom_llm_extra_body": true, "enable_conversation_initiation_client_data_from_webhook": true}, "workspace_overrides": {"conversation_initiation_client_data_webhook": {"url": "https://example.com/webhook", "request_headers": {"Content-Type": "application/json"}}}, "testing": {"attached_tests": [{"test_id": "test_123", "workflow_node_id": "node_abc"}, {"test_id": "test_456"}]}, "archived": false, "auth": {"enable_auth": true, "allowlist": [{"hostname": "https://example.com"}], "require_origin_header": true, "shareable_token": "1234567890"}, "call_limits": {"agent_concurrency_limit": -1, "daily_limit": 100000, "bursting_enabled": true}, "privacy": {"record_voice": true, "retention_days": -1, "delete_transcript_and_pii": false, "delete_audio": false, "apply_to_existing_conversations": false, "zero_retention_mode": false}}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"type": "unconditional"}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"type": "unconditional"}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"type": "unconditional"}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"type": "result", "successful": true}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"type": "unconditional"}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"type": "expression", "expression": {"type": "string_literal", "value": "<value>"}}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}}, "nodes": {"entry_node": {"type": "end"}, "failure_node": {"type": "phone_number", "transfer_destination": {"type": "phone_dynamic_variable", "phone_number": "1-277-946-5331 x002"}, "transfer_type": "conference"}, "start_node": {"type": "start"}, "success_conversation": {"type": "standalone_agent", "agent_id": "<id>", "delay_ms": 0, "enable_transferred_agent_first_message": false}, "success_end": {"type": "tool"}, "success_phone": {"type": "end"}, "success_transfer": {"type": "override_agent", "label": "<value>"}, "tool_node_a": {"type": "end"}, "tool_node_b": {"type": "phone_number", "transfer_destination": {"type": "sip_uri", "sip_uri": "https://concerned-cuckoo.com/"}, "transfer_type": "conference"}}, "prevent_subagent_loops": false}, "name": "My agent", "tags": ["Customer Support", "Technical Help", "Eleven"]}
+        application/json: {"conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false, "retranscribe_on_turn_timeout": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "platform_settings": {"evaluation": {"criteria": [{"id": "1234567890", "name": "Customer satisfaction check", "type": "prompt", "conversation_goal_prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "use_knowledge_base": false, "scope": "conversation"}]}, "widget": {"variant": "full", "placement": "bottom-right", "expandable": "never", "feedback_mode": "none", "bg_color": "#ffffff", "text_color": "#000000", "btn_color": "#000000", "btn_text_color": "#ffffff", "border_color": "#e1e1e1", "focus_color": "#000000", "shareable_page_show_terms": true, "disable_banner": false, "markdown_link_include_www": true, "markdown_link_allow_http": true, "mic_muting_enabled": false, "transcript_enabled": false, "text_input_enabled": true, "conversation_mode_toggle_enabled": false, "default_expanded": false, "always_expanded": false, "dismissible": false, "show_agent_status": false, "show_conversation_id": true, "strip_audio_tags": true, "language_selector": false, "supports_text_only": true, "custom_avatar_path": "https://example.com/avatar.png"}, "data_collection": {"key": {"type": "string", "description": "A user-provided message", "is_system_provided": false, "dynamic_variable": ""}}, "overrides": {"custom_llm_extra_body": true, "enable_conversation_initiation_client_data_from_webhook": true}, "workspace_overrides": {"conversation_initiation_client_data_webhook": {"url": "https://example.com/webhook", "request_headers": {"Content-Type": "application/json"}}}, "testing": {"attached_tests": [{"test_id": "test_123", "workflow_node_id": "node_abc"}, {"test_id": "test_456"}]}, "archived": false, "auth": {"enable_auth": true, "allowlist": [{"hostname": "https://example.com"}], "require_origin_header": true, "shareable_token": "1234567890"}, "call_limits": {"agent_concurrency_limit": -1, "daily_limit": 100000, "bursting_enabled": true}, "privacy": {"record_voice": true, "retention_days": -1, "delete_transcript_and_pii": false, "delete_audio": false, "apply_to_existing_conversations": false, "zero_retention_mode": false}}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"type": "unconditional"}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"type": "unconditional"}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"type": "unconditional"}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"type": "result", "successful": true}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"type": "unconditional"}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"type": "expression", "expression": {"type": "string_literal", "value": "<value>"}}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}}, "nodes": {"entry_node": {"type": "end"}, "failure_node": {"type": "phone_number", "transfer_destination": {"type": "phone_dynamic_variable", "phone_number": "1-277-946-5331 x002"}, "transfer_type": "conference"}, "start_node": {"type": "start"}, "success_conversation": {"type": "standalone_agent", "agent_id": "<id>", "delay_ms": 0, "enable_transferred_agent_first_message": false}, "success_end": {"type": "tool"}, "success_phone": {"type": "end"}, "success_transfer": {"type": "override_agent", "label": "<value>"}, "tool_node_a": {"type": "end"}, "tool_node_b": {"type": "phone_number", "transfer_destination": {"type": "sip_uri", "sip_uri": "https://concerned-cuckoo.com/"}, "transfer_type": "conference"}}, "prevent_subagent_loops": false}, "name": "My agent", "tags": ["Customer Support", "Technical Help", "Eleven"]}
       responses:
         "200":
           application/json: {"agent_id": "J3Pbu5gP6NNKBscdCdwB"}
@@ -14651,7 +14657,7 @@ examples:
           branch_id: "agtbranch_0901k4aafjxxfxt93gd841r7tv5t"
       responses:
         "200":
-          application/json: {"agent_id": "agent_7101k5zvyjhmfg983brhmhkd98n6", "name": "My Agent", "conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "metadata": {"created_at_unix_secs": 15533, "updated_at_unix_secs": 495661}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"label": null, "type": "llm", "condition": "Tool A condition"}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "string_literal", "value": "<value>"}}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"label": null, "type": "unconditional"}, "backward_condition": {"label": "<value>", "type": "result", "successful": true}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"label": "<value>", "type": "result", "successful": false}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"label": "<value>", "type": "result", "successful": true}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"label": "<value>", "type": "unconditional"}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "number_literal", "value": 1678.01}}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"label": "<value>", "type": "llm", "condition": "Conversation condition"}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"label": "<value>", "type": "llm", "condition": "End condition"}, "backward_condition": null}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "or_operator", "children": [{"type": "dynamic_variable", "name": "force_phone_transfer"}, {"type": "llm", "value_schema": {"type": "boolean", "description": "Phone condition"}, "prompt": "Phone condition"}, {"type": "eq_operator", "left": {"type": "dynamic_variable", "name": "mode"}, "right": {"type": "string_literal", "value": "dev"}}]}}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "dynamic_variable", "name": "<value>"}}}}, "nodes": {"entry_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": ["entry_to_tool_a"], "label": "Entry"}, "failure_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Failure"}, "start_node": {"type": "start", "position": {"x": 0, "y": 0}, "edge_order": ["start_to_entry"]}, "success_conversation": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Success A"}, "success_end": {"type": "end", "position": {"x": 0, "y": 0}, "edge_order": []}, "success_phone": {"custom_sip_headers": [], "type": "phone_number", "position": {"x": 0, "y": 0}, "edge_order": [], "transfer_destination": {"type": "phone", "phone_number": "+1234567890"}, "transfer_type": "conference", "post_dial_digits": {"type": "dynamic", "value": "<value>"}}, "success_transfer": {"type": "standalone_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "agent_id": "success_transfer_agent", "delay_ms": 0, "transfer_message": "<value>", "enable_transferred_agent_first_message": false}, "tool_node_a": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_a_to_failure", "tool_a_to_tool_b"], "tools": [{"tool_id": "tool_a"}, {"tool_id": "tool_b"}]}, "tool_node_b": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_b_to_conversation", "tool_b_to_end", "tool_b_to_phone", "tool_b_to_agent_transfer"], "tools": [{"tool_id": "tool_a"}]}}, "prevent_subagent_loops": false}}
+          application/json: {"agent_id": "agent_7101k5zvyjhmfg983brhmhkd98n6", "name": "My Agent", "conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false, "retranscribe_on_turn_timeout": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "metadata": {"created_at_unix_secs": 15533, "updated_at_unix_secs": 495661}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"label": null, "type": "llm", "condition": "Tool A condition"}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "string_literal", "value": "<value>"}}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"label": null, "type": "unconditional"}, "backward_condition": {"label": "<value>", "type": "result", "successful": true}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"label": "<value>", "type": "result", "successful": false}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"label": "<value>", "type": "result", "successful": true}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"label": "<value>", "type": "unconditional"}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "number_literal", "value": 1678.01}}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"label": "<value>", "type": "llm", "condition": "Conversation condition"}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"label": "<value>", "type": "llm", "condition": "End condition"}, "backward_condition": null}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "or_operator", "children": [{"type": "dynamic_variable", "name": "force_phone_transfer"}, {"type": "llm", "value_schema": {"type": "boolean", "description": "Phone condition"}, "prompt": "Phone condition"}, {"type": "eq_operator", "left": {"type": "dynamic_variable", "name": "mode"}, "right": {"type": "string_literal", "value": "dev"}}]}}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "dynamic_variable", "name": "<value>"}}}}, "nodes": {"entry_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": ["entry_to_tool_a"], "label": "Entry"}, "failure_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Failure"}, "start_node": {"type": "start", "position": {"x": 0, "y": 0}, "edge_order": ["start_to_entry"]}, "success_conversation": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Success A"}, "success_end": {"type": "end", "position": {"x": 0, "y": 0}, "edge_order": []}, "success_phone": {"custom_sip_headers": [], "type": "phone_number", "position": {"x": 0, "y": 0}, "edge_order": [], "transfer_destination": {"type": "phone", "phone_number": "+1234567890"}, "transfer_type": "conference", "post_dial_digits": {"type": "dynamic", "value": "<value>"}}, "success_transfer": {"type": "standalone_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "agent_id": "success_transfer_agent", "delay_ms": 0, "transfer_message": "<value>", "enable_transferred_agent_first_message": false}, "tool_node_a": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_a_to_failure", "tool_a_to_tool_b"], "tools": [{"tool_id": "tool_a"}, {"tool_id": "tool_b"}]}, "tool_node_b": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_b_to_conversation", "tool_b_to_end", "tool_b_to_phone", "tool_b_to_agent_transfer"], "tools": [{"tool_id": "tool_a"}]}}, "prevent_subagent_loops": false}}
         "422":
           application/json: {}
   delete_agent_route:
@@ -14674,7 +14680,7 @@ examples:
         application/json: {"workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"type": "unconditional"}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"type": "unconditional"}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"type": "result", "successful": false}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"type": "result", "successful": false}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"type": "result", "successful": true}}}, "nodes": {"entry_node": {"type": "end"}, "failure_node": {"type": "tool"}, "start_node": {"type": "end"}, "success_conversation": {"type": "start"}, "success_end": {"type": "standalone_agent", "agent_id": "<id>", "delay_ms": 0, "enable_transferred_agent_first_message": false}, "success_phone": {"type": "tool"}, "success_transfer": {"type": "standalone_agent", "agent_id": "<id>", "delay_ms": 0, "enable_transferred_agent_first_message": false}, "tool_node_a": {"type": "end"}, "tool_node_b": {"type": "tool"}}, "prevent_subagent_loops": false}, "name": "My agent", "tags": ["Customer Support", "Technical Help", "Eleven"]}
       responses:
         "200":
-          application/json: {"agent_id": "agent_7101k5zvyjhmfg983brhmhkd98n6", "name": "My Agent", "conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "metadata": {"created_at_unix_secs": 215535, "updated_at_unix_secs": 888286}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"label": "<value>", "type": "llm", "condition": "Tool A condition"}, "backward_condition": {"label": "<value>", "type": "llm", "condition": "User's last message contains a question about our pricing."}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"label": null, "type": "unconditional"}, "backward_condition": null}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"label": "<value>", "type": "result", "successful": false}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"label": "<value>", "type": "result", "successful": true}, "backward_condition": {"label": "<value>", "type": "result", "successful": true}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"label": "<value>", "type": "unconditional"}, "backward_condition": {"label": null, "type": "expression", "expression": {"type": "number_literal", "value": 5352.89}}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"label": "<value>", "type": "llm", "condition": "Conversation condition"}, "backward_condition": {"label": "<value>", "type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"label": "<value>", "type": "llm", "condition": "End condition"}, "backward_condition": {"label": "<value>", "type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "or_operator", "children": [{"type": "dynamic_variable", "name": "force_phone_transfer"}, {"type": "llm", "value_schema": {"type": "boolean", "description": "Phone condition"}, "prompt": "Phone condition"}, {"type": "eq_operator", "left": {"type": "dynamic_variable", "name": "mode"}, "right": {"type": "string_literal", "value": "dev"}}]}}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "and_operator", "children": []}}}}, "nodes": {"entry_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": ["entry_to_tool_a"], "label": "Entry"}, "failure_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Failure"}, "start_node": {"type": "start", "position": {"x": 0, "y": 0}, "edge_order": ["start_to_entry"]}, "success_conversation": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Success A"}, "success_end": {"type": "end", "position": {"x": 0, "y": 0}, "edge_order": []}, "success_phone": {"custom_sip_headers": [], "type": "phone_number", "position": {"x": 0, "y": 0}, "edge_order": [], "transfer_destination": {"type": "phone", "phone_number": "+1234567890"}, "transfer_type": "conference", "post_dial_digits": {"type": "dynamic", "value": "<value>"}}, "success_transfer": {"type": "standalone_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "agent_id": "success_transfer_agent", "delay_ms": 0, "transfer_message": "<value>", "enable_transferred_agent_first_message": false}, "tool_node_a": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_a_to_failure", "tool_a_to_tool_b"], "tools": [{"tool_id": "tool_a"}, {"tool_id": "tool_b"}]}, "tool_node_b": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_b_to_conversation", "tool_b_to_end", "tool_b_to_phone", "tool_b_to_agent_transfer"], "tools": [{"tool_id": "tool_a"}]}}, "prevent_subagent_loops": false}}
+          application/json: {"agent_id": "agent_7101k5zvyjhmfg983brhmhkd98n6", "name": "My Agent", "conversation_config": {"asr": {"quality": "high", "provider": "elevenlabs", "user_input_audio_format": "pcm_16000", "keywords": ["hello", "world"]}, "turn": {"turn_timeout": 7, "silence_end_call_timeout": -1, "soft_timeout_config": {"timeout_seconds": -1, "message": "Hhmmmm...yeah.", "use_llm_generated_message": false}, "mode": "turn", "turn_eagerness": "normal", "spelling_patience": "auto", "speculative_turn": false, "retranscribe_on_turn_timeout": false}, "tts": {"model_id": "eleven_turbo_v2", "voice_id": "cjVigY5qzO86Huf0OWal", "expressive_mode": true, "agent_output_audio_format": "pcm_16000", "optimize_streaming_latency": 3, "stability": 0.5, "speed": 1, "similarity_boost": 0.8, "text_normalisation_type": "system_prompt", "pronunciation_dictionary_locators": []}, "conversation": {"text_only": false, "max_duration_seconds": 600, "client_events": ["audio", "interruption"], "monitoring_enabled": false}, "language_presets": {"key": {"overrides": {"turn": {"soft_timeout_config": {"message": "Hhmmmm...yeah."}}, "tts": {"voice_id": "cjVigY5qzO86Huf0OWal", "stability": 0.5, "speed": 1, "similarity_boost": 0.8}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "prompt": {"prompt": "You are a helpful assistant that can answer questions about the topic of the conversation.", "llm": "gemini-2.0-flash-001", "tool_ids": [], "knowledge_base": []}}}}}, "vad": {"background_voice_detection": false}, "agent": {"first_message": "Hello, how can I help you today?", "language": "en", "hinglish_mode": false, "disable_first_message_interruptions": false, "max_conversation_duration_message": ""}}, "metadata": {"created_at_unix_secs": 215535, "updated_at_unix_secs": 888286}, "workflow": {"edges": {"entry_to_tool_a": {"source": "entry_node", "target": "tool_node_a", "forward_condition": {"label": "<value>", "type": "llm", "condition": "Tool A condition"}, "backward_condition": {"label": "<value>", "type": "llm", "condition": "User's last message contains a question about our pricing."}}, "start_to_entry": {"source": "start_node", "target": "entry_node", "forward_condition": {"label": null, "type": "unconditional"}, "backward_condition": null}, "tool_a_to_failure": {"source": "tool_node_a", "target": "failure_node", "forward_condition": {"label": "<value>", "type": "result", "successful": false}, "backward_condition": {"label": "<value>", "type": "unconditional"}}, "tool_a_to_tool_b": {"source": "tool_node_a", "target": "tool_node_b", "forward_condition": {"label": "<value>", "type": "result", "successful": true}, "backward_condition": {"label": "<value>", "type": "result", "successful": true}}, "tool_b_to_agent_transfer": {"source": "tool_node_b", "target": "success_transfer", "forward_condition": {"label": "<value>", "type": "unconditional"}, "backward_condition": {"label": null, "type": "expression", "expression": {"type": "number_literal", "value": 5352.89}}}, "tool_b_to_conversation": {"source": "tool_node_b", "target": "success_conversation", "forward_condition": {"label": "<value>", "type": "llm", "condition": "Conversation condition"}, "backward_condition": {"label": "<value>", "type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_end": {"source": "tool_node_b", "target": "success_end", "forward_condition": {"label": "<value>", "type": "llm", "condition": "End condition"}, "backward_condition": {"label": "<value>", "type": "llm", "condition": "User's last message contains a question about our pricing."}}, "tool_b_to_phone": {"source": "tool_node_b", "target": "success_phone", "forward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "or_operator", "children": [{"type": "dynamic_variable", "name": "force_phone_transfer"}, {"type": "llm", "value_schema": {"type": "boolean", "description": "Phone condition"}, "prompt": "Phone condition"}, {"type": "eq_operator", "left": {"type": "dynamic_variable", "name": "mode"}, "right": {"type": "string_literal", "value": "dev"}}]}}, "backward_condition": {"label": "<value>", "type": "expression", "expression": {"type": "and_operator", "children": []}}}}, "nodes": {"entry_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": ["entry_to_tool_a"], "label": "Entry"}, "failure_node": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Failure"}, "start_node": {"type": "start", "position": {"x": 0, "y": 0}, "edge_order": ["start_to_entry"]}, "success_conversation": {"conversation_config": {}, "additional_prompt": "", "additional_knowledge_base": [], "additional_tool_ids": [], "type": "override_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "label": "Success A"}, "success_end": {"type": "end", "position": {"x": 0, "y": 0}, "edge_order": []}, "success_phone": {"custom_sip_headers": [], "type": "phone_number", "position": {"x": 0, "y": 0}, "edge_order": [], "transfer_destination": {"type": "phone", "phone_number": "+1234567890"}, "transfer_type": "conference", "post_dial_digits": {"type": "dynamic", "value": "<value>"}}, "success_transfer": {"type": "standalone_agent", "position": {"x": 0, "y": 0}, "edge_order": [], "agent_id": "success_transfer_agent", "delay_ms": 0, "transfer_message": "<value>", "enable_transferred_agent_first_message": false}, "tool_node_a": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_a_to_failure", "tool_a_to_tool_b"], "tools": [{"tool_id": "tool_a"}, {"tool_id": "tool_b"}]}, "tool_node_b": {"type": "tool", "position": {"x": 0, "y": 0}, "edge_order": ["tool_b_to_conversation", "tool_b_to_end", "tool_b_to_phone", "tool_b_to_agent_transfer"], "tools": [{"tool_id": "tool_a"}]}}, "prevent_subagent_loops": false}}
         "422":
           application/json: {}
   get_agent_widget_route:
@@ -15820,7 +15826,7 @@ examples:
   compose_detailed:
     speakeasy-default-compose-detailed:
       requestBody:
-        application/json: {"composition_plan": {"positive_global_styles": ["pop", "rock", "jazz"], "negative_global_styles": ["metal", "hip-hop", "country"], "sections": [{"section_name": "Verse 1", "positive_local_styles": ["pop", "rock", "jazz"], "negative_local_styles": ["metal", "hip-hop", "country"], "duration_ms": 10000, "lines": ["Verse 1 lyrics"]}]}, "model_id": "music_v1", "force_instrumental": false, "use_phonetic_names": false, "respect_sections_durations": true, "store_for_inpainting": false, "with_timestamps": false, "sign_with_c2pa": false}
+        application/json: {"composition_plan": {"positive_global_styles": ["pop", "rock", "jazz"], "negative_global_styles": ["metal", "hip-hop", "country"], "sections": [{"section_name": "Verse 1", "positive_local_styles": ["pop", "rock", "jazz"], "negative_local_styles": ["metal", "hip-hop", "country"], "duration_ms": 10000, "lines": ["Verse 1 lyrics"]}]}, "model_id": "music_v1", "force_instrumental": false, "use_phonetic_names": false, "respect_sections_durations": true, "store_for_inpainting": false, "with_timestamps": false, "sign_with_c2pa": false, "model_style_prefix": "music"}
       responses:
         "200":
           multipart/mixed: "x-file: example.file"
@@ -16026,3 +16032,4 @@ examples:
         "422":
           application/json: {}
 examplesVersion: 1.0.2
+releaseNotes: "## Go SDK Changes:\n* `ElevenlabsGo.CreateAgentResponseTest()`: \n  *  `request.Request.union(CreateResponseUnitTestRequest).FromConversationMetadata.OriginalAgentReply[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.GetAgentResponseTest()`:  `response.union(llm).FromConversationMetadata.OriginalAgentReply[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.UpdateAgentResponseTest()`: \n  *  `request.Body.union(UpdateResponseUnitTestRequest).FromConversationMetadata.OriginalAgentReply[]` **Changed** (Breaking ⚠️)\n  *  `response.union(llm).FromConversationMetadata.OriginalAgentReply[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.RunAgentTestSuite()`: \n  *  `request.Body.AgentConfigOverride` **Changed**\n  *  `response.TestRuns[].TestInfo.union(tool).FromConversationMetadata.OriginalAgentReply[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.GetTestInvocation()`:  `response.TestRuns[].TestInfo.union(llm).FromConversationMetadata.OriginalAgentReply[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.AgentsWorkspaceAnalytics.RunConversationAnalysis()`:  `response.Transcript[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.Studio.GetProjectById()`:  `response.PublishingRead.Genre[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.AgentsPlatform.GetConversationHistory()`:  `response.Transcript[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.AgentsPlatform.RunConversationSimulationRouteStream()`: \n  *  `request.Body.SimulationSpecification.PartialConversationHistory[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.AgentsPlatform.RunConversationSimulation()`: \n  *  `request.Body.SimulationSpecification.PartialConversationHistory[]` **Changed** (Breaking ⚠️)\n  *  `response.SimulatedConversation[]` **Changed** (Breaking ⚠️)\n* `ElevenlabsGo.Workspace.EditServiceAccountApiKey()`: \n  *  `request.Body.Permissions.union(Array<PermissionType>)[].Enum(copyResourcesCrossWorkspace)` **Added**\n* `ElevenlabsGo.Workspace.GetWorkspaceServiceAccounts()`:  `response.ServiceAccounts[]` **Changed**\n* `ElevenlabsGo.Workspace.GetGroupsEndpoint()`:  `response.Map<WorkspaceGroupResponseModel>` **Changed**\n* `ElevenlabsGo.AgentsPlatform.CreateAgent()`:  `request.Body` **Changed**\n* `ElevenlabsGo.AgentsPlatform.GetAgent()`:  `response` **Changed**\n* `ElevenlabsGo.AgentsPlatform.PatchAgentSettings()`: \n  *  `request.Body.Workflow.Nodes.Map<nodes>.union(override_agent).ConversationConfig.Turn.RetranscribeOnTurnTimeout` **Added**\n  *  `response` **Changed**\n* `ElevenlabsGo.Workspace.CreateServiceAccountApiKey()`: \n  *  `request.Body.Permissions.union(Array<PermissionType>)[].Enum(copyResourcesCrossWorkspace)` **Added**\n* `ElevenlabsGo.Workspace.GetServiceAccountApiKeys()`:  `response.ApiKeys[].Permissions[].Enum(copyResourcesCrossWorkspace)` **Added**\n* `ElevenlabsGo.Models.GetModels()`:  `response.[].ModelRates.CostDiscountMultiplier` **Added**\n* `ElevenlabsGo.AgentsPlatform.CreateBranch()`: \n  *  `request.Body.Workflow.Nodes.Map<nodes>.union(override_agent).ConversationConfig.Turn.RetranscribeOnTurnTimeout` **Added**\n* `ElevenlabsGo.AgentsPlatform.CreateAgentDraft()`: \n  *  `request.Body.Workflow.Nodes.Map<nodes>.union(override_agent).ConversationConfig.Turn.RetranscribeOnTurnTimeout` **Added**\n* `ElevenlabsGo.ResubmitTests()`: \n  *  `request.Body.AgentConfigOverride` **Changed**\n* `ElevenlabsGo.MusicGeneration.ComposeDetailed()`: \n  *  `request.Body.ModelStylePrefix` **Added**\n"

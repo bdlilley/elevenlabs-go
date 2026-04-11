@@ -62,3 +62,4 @@ custom := components.PermissionType("custom_value")
 | `PermissionTypeWorkspaceMembersRemove`         | workspace_members_remove                       |
 | `PermissionTypeTermsOfServiceAccept`           | terms_of_service_accept                        |
 | `PermissionTypeAuditLogRead`                   | audit_log_read                                 |
+| `PermissionTypeCopyResourcesCrossWorkspace`    | copy_resources_cross_workspace                 |

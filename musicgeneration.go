@@ -989,7 +989,7 @@ func (s *MusicGeneration) StreamCompose(ctx context.Context, outputFormat *compo
 }
 
 // UploadSong - Upload Music
-// Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature.
+// Upload a music file to be later used for inpainting. Only available to enterprise clients with access to the inpainting feature. Price for uploading is the same as the one for song generation. All uploaded content gets inspected for copyright infringement. If copyrighted content is detected, half of the request cost is still charged.
 func (s *MusicGeneration) UploadSong(ctx context.Context, request components.BodyUploadMusicV1MusicUploadPost, opts ...operations.Option) (*operations.UploadSongResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

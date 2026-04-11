@@ -35,6 +35,7 @@ const (
 	WorkspaceGroupPermissionWorkspaceMembersRemove       WorkspaceGroupPermission = "workspace_members_remove"
 	WorkspaceGroupPermissionTermsOfServiceAccept         WorkspaceGroupPermission = "terms_of_service_accept"
 	WorkspaceGroupPermissionAuditLogRead                 WorkspaceGroupPermission = "audit_log_read"
+	WorkspaceGroupPermissionCopyResourcesCrossWorkspace  WorkspaceGroupPermission = "copy_resources_cross_workspace"
 )
 
 func (e WorkspaceGroupPermission) ToPointer() *WorkspaceGroupPermission {
@@ -45,7 +46,7 @@ func (e WorkspaceGroupPermission) ToPointer() *WorkspaceGroupPermission {
 func (e *WorkspaceGroupPermission) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "text_to_speech", "speech_to_speech", "speech_to_text", "voice_lab", "sound_effects", "projects", "voiceover_studio", "dubbing", "audio_native", "conversational_ai", "voice_isolator", "ai_speech_classifier", "add_voice_from_voice_library", "create_instant_voice_clone", "create_professional_voice_clone", "create_user_api_key", "publish_studio_project", "music", "image_video_generation", "share_voice_externally", "publish_voice_to_voice_library", "view_fiat_balance", "workspace_analytics_full_read", "service_accounts_manage", "webhooks_manage", "group_members_manage", "workspace_members_invite", "workspace_members_remove", "terms_of_service_accept", "audit_log_read":
+		case "text_to_speech", "speech_to_speech", "speech_to_text", "voice_lab", "sound_effects", "projects", "voiceover_studio", "dubbing", "audio_native", "conversational_ai", "voice_isolator", "ai_speech_classifier", "add_voice_from_voice_library", "create_instant_voice_clone", "create_professional_voice_clone", "create_user_api_key", "publish_studio_project", "music", "image_video_generation", "share_voice_externally", "publish_voice_to_voice_library", "view_fiat_balance", "workspace_analytics_full_read", "service_accounts_manage", "webhooks_manage", "group_members_manage", "workspace_members_invite", "workspace_members_remove", "terms_of_service_accept", "audit_log_read", "copy_resources_cross_workspace":
 			return true
 		}
 	}

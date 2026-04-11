@@ -48,3 +48,4 @@ custom := components.WorkspaceGroupPermission("custom_value")
 | `WorkspaceGroupPermissionWorkspaceMembersRemove`       | workspace_members_remove                               |
 | `WorkspaceGroupPermissionTermsOfServiceAccept`         | terms_of_service_accept                                |
 | `WorkspaceGroupPermissionAuditLogRead`                 | audit_log_read                                         |
+| `WorkspaceGroupPermissionCopyResourcesCrossWorkspace`  | copy_resources_cross_workspace                         |

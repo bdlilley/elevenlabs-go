@@ -18,7 +18,7 @@ type GetUserVoicesV2Request struct {
 	Sort *string `queryParam:"style=form,explode=true,name=sort"`
 	// Which direction to sort the voices in. 'asc' or 'desc'.
 	SortDirection *string `queryParam:"style=form,explode=true,name=sort_direction"`
-	// Type of the voice to filter by. One of 'personal', 'community', 'default', 'workspace', 'non-default', 'saved'. 'non-default' is equal to all but 'default'. 'saved' is equal to non-default, but includes default voices if they have been added to a collection.
+	// Type of the voice to filter by. One of 'personal', 'community', 'default', 'workspace', 'non-default', 'non-community', 'saved'. 'non-default' is equal to all but 'default'. 'non-community' is equal to 'personal' and 'workspace' combined (excludes library copies). 'saved' is equal to non-default, but includes default voices if they have been added to a collection.
 	VoiceType *string `queryParam:"style=form,explode=true,name=voice_type"`
 	// Category of the voice to filter by. One of 'premade', 'cloned', 'generated', 'professional'
 	Category *string `queryParam:"style=form,explode=true,name=category"`

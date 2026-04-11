@@ -333,6 +333,7 @@ type ConversationHistoryTranscriptSystemToolResultCommonModelInput struct {
 	ToolName               string                             `json:"tool_name"`
 	ResultValue            string                             `json:"result_value"`
 	IsError                bool                               `json:"is_error"`
+	IsBlocked              *bool                              `default:"false" json:"is_blocked"`
 	ToolHasBeenCalled      bool                               `json:"tool_has_been_called"`
 	ToolLatencySecs        *float64                           `default:"0" json:"tool_latency_secs"`
 	ErrorType              *string                            `default:"" json:"error_type"`
@@ -380,6 +381,13 @@ func (c *ConversationHistoryTranscriptSystemToolResultCommonModelInput) GetIsErr
 		return false
 	}
 	return c.IsError
+}
+
+func (c *ConversationHistoryTranscriptSystemToolResultCommonModelInput) GetIsBlocked() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.IsBlocked
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelInput) GetToolHasBeenCalled() bool {

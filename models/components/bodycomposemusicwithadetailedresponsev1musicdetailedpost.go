@@ -32,6 +32,32 @@ func (e *BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelID) Unmars
 	}
 }
 
+type ModelStylePrefix string
+
+const (
+	ModelStylePrefixMusic ModelStylePrefix = "music"
+	ModelStylePrefixSfx   ModelStylePrefix = "sfx"
+)
+
+func (e ModelStylePrefix) ToPointer() *ModelStylePrefix {
+	return &e
+}
+func (e *ModelStylePrefix) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "music":
+		fallthrough
+	case "sfx":
+		*e = ModelStylePrefix(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ModelStylePrefix: %v", v)
+	}
+}
+
 type BodyComposeMusicWithADetailedResponseV1MusicDetailedPost struct {
 	// A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`.
 	Prompt *string `json:"prompt,omitzero"`
@@ -60,7 +86,8 @@ type BodyComposeMusicWithADetailedResponseV1MusicDetailedPost struct {
 	// Whether to return the timestamps of the words in the generated song.
 	WithTimestamps *bool `default:"false" json:"with_timestamps"`
 	// Whether to sign the generated song with C2PA. Applicable only for mp3 files.
-	SignWithC2pa *bool `default:"false" json:"sign_with_c2pa"`
+	SignWithC2pa     *bool             `default:"false" json:"sign_with_c2pa"`
+	ModelStylePrefix *ModelStylePrefix `default:"music" json:"model_style_prefix"`
 }
 
 func (b BodyComposeMusicWithADetailedResponseV1MusicDetailedPost) MarshalJSON() ([]byte, error) {
@@ -163,6 +190,13 @@ func (b *BodyComposeMusicWithADetailedResponseV1MusicDetailedPost) GetSignWithC2
 		return nil
 	}
 	return b.SignWithC2pa
+}
+
+func (b *BodyComposeMusicWithADetailedResponseV1MusicDetailedPost) GetModelStylePrefix() *ModelStylePrefix {
+	if b == nil {
+		return nil
+	}
+	return b.ModelStylePrefix
 }
 
 // #region class-body-bodycomposemusicwithadetailedresponsev1musicdetailedpost

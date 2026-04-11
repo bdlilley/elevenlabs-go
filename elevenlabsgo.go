@@ -2,7 +2,7 @@
 
 package elevenlabsgo
 
-// Generated from OpenAPI doc version 1.0 and generator version 2.879.6
+// Generated from OpenAPI doc version 1.0 and generator version 2.879.11
 
 import (
 	"bytes"
@@ -64,16 +64,16 @@ type ElevenlabsGo struct {
 	// Access to your samples. A sample is any audio file you attached to a voice. A voice can have one or more samples.
 	Samples *Samples
 	// Convert text into lifelike speech using a voice of your choice.
-	TextToSpeech   *TextToSpeech
+	TextToSpeech *TextToSpeech
+	// Text To Dialogue (Multi-Voice)
+	// Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
 	TextToDialogue *TextToDialogue
 	// Create speech by combining the style and content of an audio file you upload with a voice of your choice.
 	SpeechToSpeech *SpeechToSpeech
 	TextToVoice    *TextToVoice
 	// Access to voices created either by you or ElevenLabs.
-	Voices *Voices
-	Studio *Studio
-	// Video To Music
-	// Generate background music from one or more video files. Videos are combined in order. Optional description and style tags influence the generated music.
+	Voices       *Voices
+	Studio       *Studio
 	VideoToMusic *VideoToMusic
 	Dubbing      *Dubbing
 	Resource     *Resource
@@ -171,9 +171,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *ElevenlabsGo {
 	sdk := &ElevenlabsGo{
-		SDKVersion: "0.7.0",
+		SDKVersion: "0.7.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 0.7.0 2.879.6 1.0 github.com/bdlilley/elevenlabs-go",
+			UserAgent:  "speakeasy-sdk/go 0.7.1 2.879.11 1.0 github.com/bdlilley/elevenlabs-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),

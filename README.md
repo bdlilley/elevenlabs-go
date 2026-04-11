@@ -14,7 +14,7 @@ ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [elevenlabs-go](#elevenlabs-go)
+* [elevenlabs-go **UNOFFICIAL SDK**](#elevenlabs-go-unofficial-sdk)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
