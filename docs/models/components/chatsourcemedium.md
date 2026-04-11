@@ -19,7 +19,6 @@ custom := components.ChatSourceMedium("custom_value")
 | Name                    | Value                   |
 | ----------------------- | ----------------------- |
 | `ChatSourceMediumAudio` | audio                   |
-| `ChatSourceMediumDtmf`  | dtmf                    |
 | `ChatSourceMediumText`  | text                    |
 | `ChatSourceMediumImage` | image                   |
 | `ChatSourceMediumFile`  | file                    |

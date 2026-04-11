@@ -213,7 +213,7 @@ const (
 	EntityDetectionTypeArrayOfStr EntityDetectionType = "arrayOfStr"
 )
 
-// EntityDetection - Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur additional costs.
+// EntityDetection - Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 type EntityDetection struct {
 	Str        *string  `queryParam:"inline" union:"member"`
 	ArrayOfStr []string `queryParam:"inline" union:"member"`
@@ -303,7 +303,7 @@ const (
 	EntityRedactionTypeArrayOfStr EntityRedactionType = "arrayOfStr"
 )
 
-// EntityRedaction - Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned.
+// EntityRedaction - Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 type EntityRedaction struct {
 	Str        *string  `queryParam:"inline" union:"member"`
 	ArrayOfStr []string `queryParam:"inline" union:"member"`
@@ -420,19 +420,19 @@ type BodySpeechToTextV1SpeechToTextPost struct {
 	Temperature *float64 `multipartForm:"name=temperature"`
 	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be an integer between 0 and 2147483647.
 	Seed *int64 `multipartForm:"name=seed"`
-	// Whether the audio file contains multiple channels where each channel contains a single speaker. When enabled, each channel will be transcribed independently and the results will be combined. Each word in the response will include a 'channel_index' field indicating which channel it was spoken on. A maximum of 5 channels is supported.
+	// Whether the audio file contains multiple channels where each channel contains a single speaker. When enabled, each channel will be transcribed independently and the results will be combined. Each word in the response will include a 'channel_index' field indicating which channel it was spoken on. A maximum of 5 channels is supported. Each channel is billed independently at the full audio duration, so cost scales linearly with the number of channels.
 	UseMultiChannel *bool `default:"false" multipartForm:"name=use_multi_channel"`
 	// Optional metadata to be included in the webhook response. This should be a JSON string representing an object with a maximum depth of 2 levels and maximum size of 16KB. Useful for tracking internal IDs, job references, or other contextual information.
 	WebhookMetadata *WebhookMetadata `multipartForm:"name=webhook_metadata,json"`
-	// Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur additional costs.
+	// Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 	EntityDetection *EntityDetection `multipartForm:"name=entity_detection"`
 	// If true, the transcription will not have any filler words, false starts and non-speech sounds. Only supported with scribe_v2 model.
 	NoVerbatim *bool `default:"false" multipartForm:"name=no_verbatim"`
-	// Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned.
+	// Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 	EntityRedaction *EntityRedaction `multipartForm:"name=entity_redaction"`
 	// How to format redacted entities. 'redacted' replaces with {REDACTED}, 'entity_type' replaces with {ENTITY_TYPE}, 'enumerated_entity_type' replaces with {ENTITY_TYPE_N} where N enumerates each occurrence. Only used when entity_redaction is set.
 	EntityRedactionMode *string `default:"enumerated_entity_type" multipartForm:"name=entity_redaction_mode"`
-	// A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 1000.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur additional costs.           When more than 100 keyterms are provided, a minimum billable duration of 20 seconds applies per request.
+	// A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 1000.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur an additional 20% surcharge on the base transcription cost.           When more than 100 keyterms are provided, a minimum billable duration of 20 seconds applies per request.
 	Keyterms []string `multipartForm:"name=keyterms"`
 }
 

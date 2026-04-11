@@ -6,7 +6,6 @@ type ChatSourceMedium string
 
 const (
 	ChatSourceMediumAudio ChatSourceMedium = "audio"
-	ChatSourceMediumDtmf  ChatSourceMedium = "dtmf"
 	ChatSourceMediumText  ChatSourceMedium = "text"
 	ChatSourceMediumImage ChatSourceMedium = "image"
 	ChatSourceMediumFile  ChatSourceMedium = "file"
@@ -20,7 +19,7 @@ func (e ChatSourceMedium) ToPointer() *ChatSourceMedium {
 func (e *ChatSourceMedium) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "audio", "dtmf", "text", "image", "file":
+		case "audio", "text", "image", "file":
 			return true
 		}
 	}

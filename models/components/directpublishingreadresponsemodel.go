@@ -33,38 +33,38 @@ func (e *DisplayMode) IsExact() bool {
 type Genre string
 
 const (
-	GenreFantasy                 Genre = "Fantasy"
-	GenreRomance                 Genre = "Romance"
-	GenreScienceFiction          Genre = "Science Fiction"
-	GenreMysteryAndThriller      Genre = "Mystery and Thriller"
-	GenreActionAndAdventure      Genre = "Action and Adventure"
-	GenreDystopia                Genre = "Dystopia"
-	GenreBusinessAndEconomics    Genre = "Business and Economics"
-	GenreTechnology              Genre = "Technology"
-	GenreDetectiveAndCrime       Genre = "Detective and Crime"
-	GenreHorror                  Genre = "Horror"
-	GenreBiographyAndMemoir      Genre = "Biography and Memoir"
-	GenreEducationAndLearning    Genre = "Education and Learning"
-	GenreHistory                 Genre = "History"
-	GenreChildrenSLiterature     Genre = "Children's Literature"
-	GenreFairyTalesAndFolklore   Genre = "Fairy Tales and Folklore"
-	GenreFanFiction              Genre = "Fan Fiction"
-	GenreGeneralFiction          Genre = "General Fiction"
-	GenreHealthAndWellness       Genre = "Health and Wellness"
-	GenreHistoricalFiction       Genre = "Historical Fiction"
-	GenreHumor                   Genre = "Humor"
-	GenreLiteraryClassics        Genre = "Literary Classics"
-	GenrePhilosophy              Genre = "Philosophy"
-	GenrePoetry                  Genre = "Poetry"
-	GenrePoliticsAndGovernment   Genre = "Politics and Government"
-	GenrePsychology              Genre = "Psychology"
-	GenreScienceAndNature        Genre = "Science and Nature"
-	GenreSelfHelp                Genre = "Self-Help"
-	GenreSpiritualityAndReligion Genre = "Spirituality and Religion"
-	GenreTravel                  Genre = "Travel"
-	GenreTrueCrime               Genre = "True Crime"
-	GenreOther                   Genre = "Other"
-	GenreAdultRomance            Genre = "Adult Romance"
+	GenreFantasy                   Genre = "Fantasy"
+	GenreRomance                   Genre = "Romance"
+	GenreScienceFiction            Genre = "Science Fiction"
+	GenreMysteryAndThriller        Genre = "Mystery and Thriller"
+	GenreActionAndAdventure        Genre = "Action and Adventure"
+	GenreDystopia                  Genre = "Dystopia"
+	GenreBusinessAndEconomics      Genre = "Business and Economics"
+	GenreTechnology                Genre = "Technology"
+	GenreChristianAndInspirational Genre = "Christian & Inspirational"
+	GenreHorror                    Genre = "Horror"
+	GenreBiographyAndMemoir        Genre = "Biography and Memoir"
+	GenreEducationAndLearning      Genre = "Education and Learning"
+	GenreHistory                   Genre = "History"
+	GenreChildrenSLiterature       Genre = "Children's Literature"
+	GenreYoungAdult                Genre = "Young Adult"
+	GenreFairyTalesAndFolklore     Genre = "Fairy Tales and Folklore"
+	GenreFanFiction                Genre = "Fan Fiction"
+	GenreGeneralFiction            Genre = "General Fiction"
+	GenreHealthAndWellness         Genre = "Health and Wellness"
+	GenreHistoricalFiction         Genre = "Historical Fiction"
+	GenreHumor                     Genre = "Humor"
+	GenreLiteraryClassics          Genre = "Literary Classics"
+	GenrePhilosophy                Genre = "Philosophy"
+	GenrePoetry                    Genre = "Poetry"
+	GenrePoliticsAndGovernment     Genre = "Politics and Government"
+	GenrePsychology                Genre = "Psychology"
+	GenreScienceAndNature          Genre = "Science and Nature"
+	GenreSelfHelp                  Genre = "Self-Help"
+	GenreSpiritualityAndReligion   Genre = "Spirituality and Religion"
+	GenreTravel                    Genre = "Travel"
+	GenreTrueCrime                 Genre = "True Crime"
+	GenreOther                     Genre = "Other"
 )
 
 func (e Genre) ToPointer() *Genre {
@@ -75,7 +75,7 @@ func (e Genre) ToPointer() *Genre {
 func (e *Genre) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "Fantasy", "Romance", "Science Fiction", "Mystery and Thriller", "Action and Adventure", "Dystopia", "Business and Economics", "Technology", "Detective and Crime", "Horror", "Biography and Memoir", "Education and Learning", "History", "Children's Literature", "Fairy Tales and Folklore", "Fan Fiction", "General Fiction", "Health and Wellness", "Historical Fiction", "Humor", "Literary Classics", "Philosophy", "Poetry", "Politics and Government", "Psychology", "Science and Nature", "Self-Help", "Spirituality and Religion", "Travel", "True Crime", "Other", "Adult Romance":
+		case "Fantasy", "Romance", "Science Fiction", "Mystery and Thriller", "Action and Adventure", "Dystopia", "Business and Economics", "Technology", "Christian & Inspirational", "Horror", "Biography and Memoir", "Education and Learning", "History", "Children's Literature", "Young Adult", "Fairy Tales and Folklore", "Fan Fiction", "General Fiction", "Health and Wellness", "Historical Fiction", "Humor", "Literary Classics", "Philosophy", "Poetry", "Politics and Government", "Psychology", "Science and Nature", "Self-Help", "Spirituality and Religion", "Travel", "True Crime", "Other":
 			return true
 		}
 	}
