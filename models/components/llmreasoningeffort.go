@@ -10,6 +10,7 @@ const (
 	LLMReasoningEffortLow     LLMReasoningEffort = "low"
 	LLMReasoningEffortMedium  LLMReasoningEffort = "medium"
 	LLMReasoningEffortHigh    LLMReasoningEffort = "high"
+	LLMReasoningEffortXhigh   LLMReasoningEffort = "xhigh"
 )
 
 func (e LLMReasoningEffort) ToPointer() *LLMReasoningEffort {
@@ -20,7 +21,7 @@ func (e LLMReasoningEffort) ToPointer() *LLMReasoningEffort {
 func (e *LLMReasoningEffort) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "none", "minimal", "low", "medium", "high":
+		case "none", "minimal", "low", "medium", "high", "xhigh":
 			return true
 		}
 	}

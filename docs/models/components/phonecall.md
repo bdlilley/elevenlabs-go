@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### ConversationHistoryExotelPhoneCallModel
+
+```go
+phoneCall := components.CreatePhoneCallExotel(components.ConversationHistoryExotelPhoneCallModel{/* values here */})
+```
+
 ### ConversationHistorySIPTrunkingPhoneCallModel
 
 ```go
@@ -21,6 +27,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch phoneCall.Type {
+	case components.PhoneCallTypeExotel:
+		// phoneCall.ConversationHistoryExotelPhoneCallModel is populated
 	case components.PhoneCallTypeSipTrunking:
 		// phoneCall.ConversationHistorySIPTrunkingPhoneCallModel is populated
 	case components.PhoneCallTypeTwilio:

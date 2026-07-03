@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
 type BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch struct {
 	// Whether to disable or enable the webhook
 	IsDisabled bool `json:"is_disabled"`
@@ -9,6 +13,19 @@ type BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch struct {
 	Name string `json:"name"`
 	// Whether to enable automatic retries for transient failures (5xx, 429, timeout)
 	RetryEnabled *bool `json:"retry_enabled,omitzero"`
+	// A list of request headers to include with the webhook delivery (optional)
+	RequestHeaders map[string]string `json:"request_headers,omitzero"`
+}
+
+func (b BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(b, "", false)
+}
+
+func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) GetIsDisabled() bool {
@@ -30,6 +47,13 @@ func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) GetRetryEn
 		return nil
 	}
 	return b.RetryEnabled
+}
+
+func (b *BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIDPatch) GetRequestHeaders() map[string]string {
+	if b == nil {
+		return nil
+	}
+	return b.RequestHeaders
 }
 
 // #region class-body-bodyupdateworkspacewebhookv1workspacewebhookswebhookidpatch

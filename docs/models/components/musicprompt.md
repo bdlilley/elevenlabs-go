@@ -1,5 +1,7 @@
 # MusicPrompt
 
+Composition plan for the `music_v1` model. Using this field with any other model will result in an error.
+
 
 ## Fields
 

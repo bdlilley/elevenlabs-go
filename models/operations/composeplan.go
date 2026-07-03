@@ -3,25 +3,106 @@
 package operations
 
 import (
+	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 )
 
+type ResponseGenerateCompositionPlanV1MusicPlanPostType string
+
+const (
+	ResponseGenerateCompositionPlanV1MusicPlanPostTypeMusicPrompt     ResponseGenerateCompositionPlanV1MusicPlanPostType = "MusicPrompt"
+	ResponseGenerateCompositionPlanV1MusicPlanPostTypeCompositionPlan ResponseGenerateCompositionPlanV1MusicPlanPostType = "CompositionPlan"
+)
+
+// ResponseGenerateCompositionPlanV1MusicPlanPost - Successful Response
+type ResponseGenerateCompositionPlanV1MusicPlanPost struct {
+	MusicPrompt     *components.MusicPrompt     `queryParam:"inline" union:"member"`
+	CompositionPlan *components.CompositionPlan `queryParam:"inline" union:"member"`
+
+	Type ResponseGenerateCompositionPlanV1MusicPlanPostType
+}
+
+func CreateResponseGenerateCompositionPlanV1MusicPlanPostMusicPrompt(musicPrompt components.MusicPrompt) ResponseGenerateCompositionPlanV1MusicPlanPost {
+	typ := ResponseGenerateCompositionPlanV1MusicPlanPostTypeMusicPrompt
+
+	return ResponseGenerateCompositionPlanV1MusicPlanPost{
+		MusicPrompt: &musicPrompt,
+		Type:        typ,
+	}
+}
+
+func CreateResponseGenerateCompositionPlanV1MusicPlanPostCompositionPlan(compositionPlan components.CompositionPlan) ResponseGenerateCompositionPlanV1MusicPlanPost {
+	typ := ResponseGenerateCompositionPlanV1MusicPlanPostTypeCompositionPlan
+
+	return ResponseGenerateCompositionPlanV1MusicPlanPost{
+		CompositionPlan: &compositionPlan,
+		Type:            typ,
+	}
+}
+
+func (u *ResponseGenerateCompositionPlanV1MusicPlanPost) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var musicPrompt components.MusicPrompt = components.MusicPrompt{}
+	if err := utils.UnmarshalJSON(data, &musicPrompt, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ResponseGenerateCompositionPlanV1MusicPlanPostTypeMusicPrompt,
+			Value: &musicPrompt,
+		})
+	}
+
+	var compositionPlan components.CompositionPlan = components.CompositionPlan{}
+	if err := utils.UnmarshalJSON(data, &compositionPlan, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ResponseGenerateCompositionPlanV1MusicPlanPostTypeCompositionPlan,
+			Value: &compositionPlan,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGenerateCompositionPlanV1MusicPlanPost", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGenerateCompositionPlanV1MusicPlanPost", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ResponseGenerateCompositionPlanV1MusicPlanPostType)
+	switch best.Type {
+	case ResponseGenerateCompositionPlanV1MusicPlanPostTypeMusicPrompt:
+		u.MusicPrompt = best.Value.(*components.MusicPrompt)
+		return nil
+	case ResponseGenerateCompositionPlanV1MusicPlanPostTypeCompositionPlan:
+		u.CompositionPlan = best.Value.(*components.CompositionPlan)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseGenerateCompositionPlanV1MusicPlanPost", string(data))
+}
+
+func (u ResponseGenerateCompositionPlanV1MusicPlanPost) MarshalJSON() ([]byte, error) {
+	if u.MusicPrompt != nil {
+		return utils.MarshalJSON(u.MusicPrompt, "", true)
+	}
+
+	if u.CompositionPlan != nil {
+		return utils.MarshalJSON(u.CompositionPlan, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ResponseGenerateCompositionPlanV1MusicPlanPost: all fields are null")
+}
+
 type ComposePlanResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	MusicPrompt *components.MusicPrompt
-}
-
-func (c ComposePlanResponse) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *ComposePlanResponse) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
-		return err
-	}
-	return nil
+	ResponseGenerateCompositionPlanV1MusicPlanPost *ResponseGenerateCompositionPlanV1MusicPlanPost
 }
 
 func (c *ComposePlanResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -31,9 +112,9 @@ func (c *ComposePlanResponse) GetHTTPMeta() components.HTTPMetadata {
 	return c.HTTPMeta
 }
 
-func (c *ComposePlanResponse) GetMusicPrompt() *components.MusicPrompt {
+func (c *ComposePlanResponse) GetResponseGenerateCompositionPlanV1MusicPlanPost() *ResponseGenerateCompositionPlanV1MusicPlanPost {
 	if c == nil {
 		return nil
 	}
-	return c.MusicPrompt
+	return c.ResponseGenerateCompositionPlanV1MusicPlanPost
 }

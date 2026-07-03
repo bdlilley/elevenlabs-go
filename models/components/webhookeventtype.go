@@ -8,6 +8,8 @@ const (
 	WebhookEventTypeTranscript            WebhookEventType = "transcript"
 	WebhookEventTypeAudio                 WebhookEventType = "audio"
 	WebhookEventTypeCallInitiationFailure WebhookEventType = "call_initiation_failure"
+	WebhookEventTypeUnredactedTranscript  WebhookEventType = "unredacted_transcript"
+	WebhookEventTypeUnredactedAudio       WebhookEventType = "unredacted_audio"
 )
 
 func (e WebhookEventType) ToPointer() *WebhookEventType {
@@ -18,7 +20,7 @@ func (e WebhookEventType) ToPointer() *WebhookEventType {
 func (e *WebhookEventType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "transcript", "audio", "call_initiation_failure":
+		case "transcript", "audio", "call_initiation_failure", "unredacted_transcript", "unredacted_audio":
 			return true
 		}
 	}

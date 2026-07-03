@@ -31,7 +31,7 @@ func (g *GetMcpToolConfigOverrideRouteRequest) GetToolName() string {
 type GetMcpToolConfigOverrideRouteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	MCPToolConfigOverride *components.MCPToolConfigOverride
+	MCPToolConfigOverrideOutput *components.MCPToolConfigOverrideOutput
 }
 
 func (g GetMcpToolConfigOverrideRouteResponse) MarshalJSON() ([]byte, error) {
@@ -52,9 +52,9 @@ func (g *GetMcpToolConfigOverrideRouteResponse) GetHTTPMeta() components.HTTPMet
 	return g.HTTPMeta
 }
 
-func (g *GetMcpToolConfigOverrideRouteResponse) GetMCPToolConfigOverride() *components.MCPToolConfigOverride {
+func (g *GetMcpToolConfigOverrideRouteResponse) GetMCPToolConfigOverrideOutput() *components.MCPToolConfigOverrideOutput {
 	if g == nil {
 		return nil
 	}
-	return g.MCPToolConfigOverride
+	return g.MCPToolConfigOverrideOutput
 }

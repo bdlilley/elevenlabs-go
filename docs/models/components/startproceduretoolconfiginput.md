@@ -1,0 +1,9 @@
+# StartProcedureToolConfigInput
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `SystemToolType`                                                                                    | `*string`                                                                                           | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
+| `Procedures`                                                                                        | map[string][components.ProcedureAtVersionInput](../../models/components/procedureatversioninput.md) | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |

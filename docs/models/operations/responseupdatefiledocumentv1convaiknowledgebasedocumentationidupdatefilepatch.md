@@ -1,0 +1,47 @@
+# ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch
+
+Successful Response
+
+
+## Supported Types
+
+### GetKnowledgeBaseURLResponseModel
+
+```go
+responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch := operations.CreateResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchURLObj(components.GetKnowledgeBaseURLResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseFileResponseModel
+
+```go
+responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch := operations.CreateResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchFile(components.GetKnowledgeBaseFileResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseTextResponseModel
+
+```go
+responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch := operations.CreateResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchText(components.GetKnowledgeBaseTextResponseModel{/* values here */})
+```
+
+### GetKnowledgeBaseFolderResponseModel
+
+```go
+responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch := operations.CreateResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchFolder(components.GetKnowledgeBaseFolderResponseModel{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.Type {
+	case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeURLObj:
+		// responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseURLResponseModel is populated
+	case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeFile:
+		// responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseFileResponseModel is populated
+	case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeText:
+		// responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseTextResponseModel is populated
+	case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeFolder:
+		// responseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseFolderResponseModel is populated
+}
+```

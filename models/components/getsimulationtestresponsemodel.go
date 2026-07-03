@@ -13,10 +13,16 @@ type GetSimulationTestResponseModel struct {
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]any                                   `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelOutput `json:"chat_history,omitzero"`
+	// Simulate the test as if the conversation originated from this channel.
+	ConversationInitiationSource *ConversationInitiationSource `default:"unknown" json:"conversation_initiation_source"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"simulation" json:"type"`
-	// A prompt that evaluates whether the agent's response is successful. Should return True or False.
-	SuccessCondition *string `default:"" json:"success_condition"`
+	// Deprecated legacy single success criterion. Use success_conditions instead. At least one of success_condition or success_conditions is required.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	SuccessCondition *string `json:"success_condition,omitzero"`
+	// List of prompts that evaluate whether the simulation was successful. If provided, all criteria are evaluated and merged into a final result. Capped at the maximum number of evaluation criteria.
+	SuccessConditions []string `json:"success_conditions,omitzero"`
 	// Description of the simulation scenario and user persona for simulation tests.
 	SimulationScenario *string `default:"" json:"simulation_scenario"`
 	// Maximum number of conversation turns for simulation tests.
@@ -25,8 +31,12 @@ type GetSimulationTestResponseModel struct {
 	SimulationEnvironment *string `json:"simulation_environment,omitzero"`
 	// Simulation/preview-side config: tools are identified by IDs, resolved to names at runtime.
 	ToolMockConfig *SimulationToolMockBehaviorConfig `json:"tool_mock_config,omitzero"`
-	ID             string                            `json:"id"`
-	Name           string                            `json:"name"`
+	// LLM model to use for evaluating simulation results. Defaults to Claude Sonnet 4.6.
+	EvaluationModel *Llm `default:"gemini-2.5-flash" json:"evaluation_model"`
+	// LLM model for the simulated user. Defaults to Claude Sonnet 4.6.
+	SimulatedUserModel *Llm   `default:"gemini-2.5-flash" json:"simulated_user_model"`
+	ID                 string `json:"id"`
+	Name               string `json:"name"`
 }
 
 func (g GetSimulationTestResponseModel) MarshalJSON() ([]byte, error) {
@@ -61,6 +71,13 @@ func (g *GetSimulationTestResponseModel) GetChatHistory() []ConversationHistoryT
 	return g.ChatHistory
 }
 
+func (g *GetSimulationTestResponseModel) GetConversationInitiationSource() *ConversationInitiationSource {
+	if g == nil {
+		return nil
+	}
+	return g.ConversationInitiationSource
+}
+
 func (g *GetSimulationTestResponseModel) GetType() *string {
 	return types.Pointer("simulation")
 }
@@ -70,6 +87,13 @@ func (g *GetSimulationTestResponseModel) GetSuccessCondition() *string {
 		return nil
 	}
 	return g.SuccessCondition
+}
+
+func (g *GetSimulationTestResponseModel) GetSuccessConditions() []string {
+	if g == nil {
+		return nil
+	}
+	return g.SuccessConditions
 }
 
 func (g *GetSimulationTestResponseModel) GetSimulationScenario() *string {
@@ -98,6 +122,20 @@ func (g *GetSimulationTestResponseModel) GetToolMockConfig() *SimulationToolMock
 		return nil
 	}
 	return g.ToolMockConfig
+}
+
+func (g *GetSimulationTestResponseModel) GetEvaluationModel() *Llm {
+	if g == nil {
+		return nil
+	}
+	return g.EvaluationModel
+}
+
+func (g *GetSimulationTestResponseModel) GetSimulatedUserModel() *Llm {
+	if g == nil {
+		return nil
+	}
+	return g.SimulatedUserModel
 }
 
 func (g *GetSimulationTestResponseModel) GetID() string {

@@ -87,6 +87,12 @@ astNodeOutput := components.CreateASTNodeOutputMulOperator(components.ASTMultipl
 astNodeOutput := components.CreateASTNodeOutputNeqOperator(components.ASTNotEqualsOperatorNodeOutput1{/* values here */})
 ```
 
+### ASTNullNodeOutput
+
+```go
+astNodeOutput := components.CreateASTNodeOutputNullLiteral(components.ASTNullNodeOutput{/* values here */})
+```
+
 ### ASTNumberNodeOutput
 
 ```go
@@ -145,6 +151,8 @@ switch astNodeOutput.Type {
 		// astNodeOutput.ASTMultiplicationOperatorNodeOutput1 is populated
 	case components.ASTNodeOutputTypeNeqOperator:
 		// astNodeOutput.ASTNotEqualsOperatorNodeOutput1 is populated
+	case components.ASTNodeOutputTypeNullLiteral:
+		// astNodeOutput.ASTNullNodeOutput is populated
 	case components.ASTNodeOutputTypeNumberLiteral:
 		// astNodeOutput.ASTNumberNodeOutput is populated
 	case components.ASTNodeOutputTypeOrOperator:

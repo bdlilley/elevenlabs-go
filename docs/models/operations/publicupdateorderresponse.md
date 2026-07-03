@@ -1,0 +1,9 @@
+# PublicUpdateOrderResponse
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |
+| `UpdateOrderResponse`                                                             | [*components.UpdateOrderResponse](../../models/components/updateorderresponse.md) | :heavy_minus_sign:                                                                | Successful Response                                                               | {<br/>"name": "Spanish Dubs"<br/>}                                                |

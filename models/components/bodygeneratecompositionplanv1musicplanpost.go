@@ -4,15 +4,107 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
+
+type SourceCompositionPlanType string
+
+const (
+	SourceCompositionPlanTypeMusicPrompt     SourceCompositionPlanType = "MusicPrompt"
+	SourceCompositionPlanTypeCompositionPlan SourceCompositionPlanType = "CompositionPlan"
+)
+
+// SourceCompositionPlan - An optional composition plan to use as a source for the new composition plan.
+type SourceCompositionPlan struct {
+	MusicPrompt     *MusicPrompt     `queryParam:"inline" union:"member"`
+	CompositionPlan *CompositionPlan `queryParam:"inline" union:"member"`
+
+	Type SourceCompositionPlanType
+}
+
+func CreateSourceCompositionPlanMusicPrompt(musicPrompt MusicPrompt) SourceCompositionPlan {
+	typ := SourceCompositionPlanTypeMusicPrompt
+
+	return SourceCompositionPlan{
+		MusicPrompt: &musicPrompt,
+		Type:        typ,
+	}
+}
+
+func CreateSourceCompositionPlanCompositionPlan(compositionPlan CompositionPlan) SourceCompositionPlan {
+	typ := SourceCompositionPlanTypeCompositionPlan
+
+	return SourceCompositionPlan{
+		CompositionPlan: &compositionPlan,
+		Type:            typ,
+	}
+}
+
+func (u *SourceCompositionPlan) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var musicPrompt MusicPrompt = MusicPrompt{}
+	if err := utils.UnmarshalJSON(data, &musicPrompt, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  SourceCompositionPlanTypeMusicPrompt,
+			Value: &musicPrompt,
+		})
+	}
+
+	var compositionPlan CompositionPlan = CompositionPlan{}
+	if err := utils.UnmarshalJSON(data, &compositionPlan, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  SourceCompositionPlanTypeCompositionPlan,
+			Value: &compositionPlan,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for SourceCompositionPlan", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for SourceCompositionPlan", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(SourceCompositionPlanType)
+	switch best.Type {
+	case SourceCompositionPlanTypeMusicPrompt:
+		u.MusicPrompt = best.Value.(*MusicPrompt)
+		return nil
+	case SourceCompositionPlanTypeCompositionPlan:
+		u.CompositionPlan = best.Value.(*CompositionPlan)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SourceCompositionPlan", string(data))
+}
+
+func (u SourceCompositionPlan) MarshalJSON() ([]byte, error) {
+	if u.MusicPrompt != nil {
+		return utils.MarshalJSON(u.MusicPrompt, "", true)
+	}
+
+	if u.CompositionPlan != nil {
+		return utils.MarshalJSON(u.CompositionPlan, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type SourceCompositionPlan: all fields are null")
+}
 
 // BodyGenerateCompositionPlanV1MusicPlanPostModelID - The model to use for the generation.
 type BodyGenerateCompositionPlanV1MusicPlanPostModelID string
 
 const (
 	BodyGenerateCompositionPlanV1MusicPlanPostModelIDMusicV1 BodyGenerateCompositionPlanV1MusicPlanPostModelID = "music_v1"
+	BodyGenerateCompositionPlanV1MusicPlanPostModelIDMusicV2 BodyGenerateCompositionPlanV1MusicPlanPostModelID = "music_v2"
 )
 
 func (e BodyGenerateCompositionPlanV1MusicPlanPostModelID) ToPointer() *BodyGenerateCompositionPlanV1MusicPlanPostModelID {
@@ -25,6 +117,8 @@ func (e *BodyGenerateCompositionPlanV1MusicPlanPostModelID) UnmarshalJSON(data [
 	}
 	switch v {
 	case "music_v1":
+		fallthrough
+	case "music_v2":
 		*e = BodyGenerateCompositionPlanV1MusicPlanPostModelID(v)
 		return nil
 	default:
@@ -38,7 +132,7 @@ type BodyGenerateCompositionPlanV1MusicPlanPost struct {
 	// The length of the composition plan to generate in milliseconds. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt.
 	MusicLengthMs *int64 `json:"music_length_ms,omitzero"`
 	// An optional composition plan to use as a source for the new composition plan.
-	SourceCompositionPlan *MusicPrompt `json:"source_composition_plan,omitzero"`
+	SourceCompositionPlan *SourceCompositionPlan `json:"source_composition_plan,omitzero"`
 	// The model to use for the generation.
 	ModelID *BodyGenerateCompositionPlanV1MusicPlanPostModelID `default:"music_v1" json:"model_id"`
 }
@@ -68,7 +162,7 @@ func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetMusicLengthMs() *int64 {
 	return b.MusicLengthMs
 }
 
-func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetSourceCompositionPlan() *MusicPrompt {
+func (b *BodyGenerateCompositionPlanV1MusicPlanPost) GetSourceCompositionPlan() *SourceCompositionPlan {
 	if b == nil {
 		return nil
 	}

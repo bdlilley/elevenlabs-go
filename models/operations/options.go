@@ -30,6 +30,7 @@ const (
 	AcceptHeaderEnumTextPlain       AcceptHeaderEnum = "text/plain"
 	AcceptHeaderEnumTextHtml        AcceptHeaderEnum = "text/html"
 	AcceptHeaderEnumMultipartMixed  AcceptHeaderEnum = "multipart/mixed"
+	AcceptHeaderEnumTextEventStream AcceptHeaderEnum = "text/event-stream"
 )
 
 func (e AcceptHeaderEnum) ToPointer() *AcceptHeaderEnum {

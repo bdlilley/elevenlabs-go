@@ -10,7 +10,7 @@ type GetAgentLinkResponseModel struct {
 	// The ID of the agent
 	AgentID string `json:"agent_id"`
 	// The token data for the agent
-	Token *ConversationTokenDBModel `json:"token,omitzero"`
+	Token *ConversationTokenResponseModel `json:"token,omitzero"`
 }
 
 func (g GetAgentLinkResponseModel) MarshalJSON() ([]byte, error) {
@@ -31,7 +31,7 @@ func (g *GetAgentLinkResponseModel) GetAgentID() string {
 	return g.AgentID
 }
 
-func (g *GetAgentLinkResponseModel) GetToken() *ConversationTokenDBModel {
+func (g *GetAgentLinkResponseModel) GetToken() *ConversationTokenResponseModel {
 	if g == nil {
 		return nil
 	}

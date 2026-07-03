@@ -7,7 +7,7 @@ import (
 )
 
 type DeletePhoneNumberRouteRequest struct {
-	// The id of an agent. This is returned on agent creation.
+	// The phone number ID. This is returned when a phone number is imported.
 	PhoneNumberID string `pathParam:"style=simple,explode=false,name=phone_number_id"`
 }
 

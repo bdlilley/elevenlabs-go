@@ -19,12 +19,14 @@ const (
 	ClientEventMcpConnectionStatus            ClientEvent = "mcp_connection_status"
 	ClientEventAgentToolRequest               ClientEvent = "agent_tool_request"
 	ClientEventAgentToolResponse              ClientEvent = "agent_tool_response"
+	ClientEventAgentToolResponseFullPayload   ClientEvent = "agent_tool_response_full_payload"
 	ClientEventAgentResponseMetadata          ClientEvent = "agent_response_metadata"
 	ClientEventVadScore                       ClientEvent = "vad_score"
 	ClientEventAgentChatResponsePart          ClientEvent = "agent_chat_response_part"
 	ClientEventClientError                    ClientEvent = "client_error"
 	ClientEventGuardrailTriggered             ClientEvent = "guardrail_triggered"
 	ClientEventDtmfRequest                    ClientEvent = "dtmf_request"
+	ClientEventAgentResponseComplete          ClientEvent = "agent_response_complete"
 	ClientEventInternalTurnProbability        ClientEvent = "internal_turn_probability"
 	ClientEventInternalTentativeAgentResponse ClientEvent = "internal_tentative_agent_response"
 )
@@ -37,7 +39,7 @@ func (e ClientEvent) ToPointer() *ClientEvent {
 func (e *ClientEvent) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "conversation_initiation_metadata", "asr_initiation_metadata", "ping", "audio", "interruption", "user_transcript", "tentative_user_transcript", "agent_response", "agent_response_correction", "client_tool_call", "mcp_tool_call", "mcp_connection_status", "agent_tool_request", "agent_tool_response", "agent_response_metadata", "vad_score", "agent_chat_response_part", "client_error", "guardrail_triggered", "dtmf_request", "internal_turn_probability", "internal_tentative_agent_response":
+		case "conversation_initiation_metadata", "asr_initiation_metadata", "ping", "audio", "interruption", "user_transcript", "tentative_user_transcript", "agent_response", "agent_response_correction", "client_tool_call", "mcp_tool_call", "mcp_connection_status", "agent_tool_request", "agent_tool_response", "agent_tool_response_full_payload", "agent_response_metadata", "vad_score", "agent_chat_response_part", "client_error", "guardrail_triggered", "dtmf_request", "agent_response_complete", "internal_turn_probability", "internal_tentative_agent_response":
 			return true
 		}
 	}

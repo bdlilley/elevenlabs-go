@@ -5,9 +5,15 @@ package components
 type CaptionStyleWordAnimationModelEnterType string
 
 const (
-	CaptionStyleWordAnimationModelEnterTypeNone  CaptionStyleWordAnimationModelEnterType = "none"
-	CaptionStyleWordAnimationModelEnterTypeFade  CaptionStyleWordAnimationModelEnterType = "fade"
-	CaptionStyleWordAnimationModelEnterTypeScale CaptionStyleWordAnimationModelEnterType = "scale"
+	CaptionStyleWordAnimationModelEnterTypeNone      CaptionStyleWordAnimationModelEnterType = "none"
+	CaptionStyleWordAnimationModelEnterTypeFade      CaptionStyleWordAnimationModelEnterType = "fade"
+	CaptionStyleWordAnimationModelEnterTypeScale     CaptionStyleWordAnimationModelEnterType = "scale"
+	CaptionStyleWordAnimationModelEnterTypePop       CaptionStyleWordAnimationModelEnterType = "pop"
+	CaptionStyleWordAnimationModelEnterTypeSlideUp   CaptionStyleWordAnimationModelEnterType = "slide_up"
+	CaptionStyleWordAnimationModelEnterTypeSlideDown CaptionStyleWordAnimationModelEnterType = "slide_down"
+	CaptionStyleWordAnimationModelEnterTypeSlam      CaptionStyleWordAnimationModelEnterType = "slam"
+	CaptionStyleWordAnimationModelEnterTypeScaleDown CaptionStyleWordAnimationModelEnterType = "scale_down"
+	CaptionStyleWordAnimationModelEnterTypeSlideIn   CaptionStyleWordAnimationModelEnterType = "slide_in"
 )
 
 func (e CaptionStyleWordAnimationModelEnterType) ToPointer() *CaptionStyleWordAnimationModelEnterType {
@@ -18,7 +24,7 @@ func (e CaptionStyleWordAnimationModelEnterType) ToPointer() *CaptionStyleWordAn
 func (e *CaptionStyleWordAnimationModelEnterType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "none", "fade", "scale":
+		case "none", "fade", "scale", "pop", "slide_up", "slide_down", "slam", "scale_down", "slide_in":
 			return true
 		}
 	}
@@ -28,9 +34,15 @@ func (e *CaptionStyleWordAnimationModelEnterType) IsExact() bool {
 type CaptionStyleWordAnimationModelExitType string
 
 const (
-	CaptionStyleWordAnimationModelExitTypeNone  CaptionStyleWordAnimationModelExitType = "none"
-	CaptionStyleWordAnimationModelExitTypeFade  CaptionStyleWordAnimationModelExitType = "fade"
-	CaptionStyleWordAnimationModelExitTypeScale CaptionStyleWordAnimationModelExitType = "scale"
+	CaptionStyleWordAnimationModelExitTypeNone      CaptionStyleWordAnimationModelExitType = "none"
+	CaptionStyleWordAnimationModelExitTypeFade      CaptionStyleWordAnimationModelExitType = "fade"
+	CaptionStyleWordAnimationModelExitTypeScale     CaptionStyleWordAnimationModelExitType = "scale"
+	CaptionStyleWordAnimationModelExitTypePop       CaptionStyleWordAnimationModelExitType = "pop"
+	CaptionStyleWordAnimationModelExitTypeSlideUp   CaptionStyleWordAnimationModelExitType = "slide_up"
+	CaptionStyleWordAnimationModelExitTypeSlideDown CaptionStyleWordAnimationModelExitType = "slide_down"
+	CaptionStyleWordAnimationModelExitTypeSlam      CaptionStyleWordAnimationModelExitType = "slam"
+	CaptionStyleWordAnimationModelExitTypeScaleDown CaptionStyleWordAnimationModelExitType = "scale_down"
+	CaptionStyleWordAnimationModelExitTypeSlideIn   CaptionStyleWordAnimationModelExitType = "slide_in"
 )
 
 func (e CaptionStyleWordAnimationModelExitType) ToPointer() *CaptionStyleWordAnimationModelExitType {
@@ -41,7 +53,7 @@ func (e CaptionStyleWordAnimationModelExitType) ToPointer() *CaptionStyleWordAni
 func (e *CaptionStyleWordAnimationModelExitType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "none", "fade", "scale":
+		case "none", "fade", "scale", "pop", "slide_up", "slide_down", "slam", "scale_down", "slide_in":
 			return true
 		}
 	}

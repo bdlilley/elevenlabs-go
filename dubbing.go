@@ -17,6 +17,7 @@ import (
 	"net/url"
 )
 
+// Dubbing - Dub audio and video content into other languages while preserving the original speaker's voice.
 type Dubbing struct {
 	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
@@ -33,6 +34,8 @@ func newDubbing(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, hooks 
 
 // GetDubbingResource - Get The Dubbing Resource For An Id.
 // Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) GetDubbingResource(ctx context.Context, dubbingID string, opts ...operations.Option) (*operations.GetDubbingResourceResponse, error) {
 	request := operations.GetDubbingResourceRequest{
 		DubbingID: dubbingID,
@@ -172,7 +175,7 @@ func (s *Dubbing) GetDubbingResource(ctx context.Context, dubbingID string, opts
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -267,6 +270,8 @@ func (s *Dubbing) GetDubbingResource(ctx context.Context, dubbingID string, opts
 
 // AddLanguage - Add A Language To The Resource
 // Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not automatically generate transcripts/translations/audio.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) AddLanguage(ctx context.Context, dubbingID string, body components.BodyAddALanguageToTheResourceV1DubbingResourceDubbingIDLanguagePost, opts ...operations.Option) (*operations.AddLanguageResponse, error) {
 	request := operations.AddLanguageRequest{
 		DubbingID: dubbingID,
@@ -414,7 +419,7 @@ func (s *Dubbing) AddLanguage(ctx context.Context, dubbingID string, body compon
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -509,6 +514,8 @@ func (s *Dubbing) AddLanguage(ctx context.Context, dubbingID string, body compon
 
 // CreateClip - Create A Segment For The Speaker
 // Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) CreateClip(ctx context.Context, dubbingID string, speakerID string, body components.SegmentCreatePayload, opts ...operations.Option) (*operations.CreateClipResponse, error) {
 	request := operations.CreateClipRequest{
 		DubbingID: dubbingID,
@@ -657,7 +664,7 @@ func (s *Dubbing) CreateClip(ctx context.Context, dubbingID string, speakerID st
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -752,6 +759,8 @@ func (s *Dubbing) CreateClip(ctx context.Context, dubbingID string, speakerID st
 
 // UpdateSegmentLanguage - Modify A Single Segment
 // Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) UpdateSegmentLanguage(ctx context.Context, dubbingID string, segmentID string, language string, body components.SegmentUpdatePayload, opts ...operations.Option) (*operations.UpdateSegmentLanguageResponse, error) {
 	request := operations.UpdateSegmentLanguageRequest{
 		DubbingID: dubbingID,
@@ -901,7 +910,7 @@ func (s *Dubbing) UpdateSegmentLanguage(ctx context.Context, dubbingID string, s
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -996,6 +1005,8 @@ func (s *Dubbing) UpdateSegmentLanguage(ctx context.Context, dubbingID string, s
 
 // MigrateSegments - Move Segments Between Speakers
 // Change the attribution of one or more segments to a different speaker.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) MigrateSegments(ctx context.Context, dubbingID string, body components.BodyMoveSegmentsBetweenSpeakersV1DubbingResourceDubbingIDMigrateSegmentsPost, opts ...operations.Option) (*operations.MigrateSegmentsResponse, error) {
 	request := operations.MigrateSegmentsRequest{
 		DubbingID: dubbingID,
@@ -1143,7 +1154,7 @@ func (s *Dubbing) MigrateSegments(ctx context.Context, dubbingID string, body co
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1238,6 +1249,8 @@ func (s *Dubbing) MigrateSegments(ctx context.Context, dubbingID string, body co
 
 // DeleteSegment - Deletes A Single Segment
 // Deletes a single segment from the dubbing.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) DeleteSegment(ctx context.Context, dubbingID string, segmentID string, opts ...operations.Option) (*operations.DeleteSegmentResponse, error) {
 	request := operations.DeleteSegmentRequest{
 		DubbingID: dubbingID,
@@ -1378,7 +1391,7 @@ func (s *Dubbing) DeleteSegment(ctx context.Context, dubbingID string, segmentID
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1473,6 +1486,8 @@ func (s *Dubbing) DeleteSegment(ctx context.Context, dubbingID string, segmentID
 
 // Transcribe - Transcribes Segments
 // Regenerate the transcriptions for the specified segments. Does not automatically regenerate translations or dubs.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) Transcribe(ctx context.Context, dubbingID string, body components.BodyTranscribesSegmentsV1DubbingResourceDubbingIDTranscribePost, opts ...operations.Option) (*operations.TranscribeResponse, error) {
 	request := operations.TranscribeRequest{
 		DubbingID: dubbingID,
@@ -1620,7 +1635,7 @@ func (s *Dubbing) Transcribe(ctx context.Context, dubbingID string, body compone
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1715,6 +1730,8 @@ func (s *Dubbing) Transcribe(ctx context.Context, dubbingID string, body compone
 
 // Translate - Translates All Or Some Segments And Languages
 // Regenerate the translations for either the entire resource or the specified segments/languages. Will automatically transcribe missing transcriptions. Will not automatically regenerate the dubs.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) Translate(ctx context.Context, dubbingID string, body components.BodyTranslatesAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDTranslatePost, opts ...operations.Option) (*operations.TranslateResponse, error) {
 	request := operations.TranslateRequest{
 		DubbingID: dubbingID,
@@ -1862,7 +1879,7 @@ func (s *Dubbing) Translate(ctx context.Context, dubbingID string, body componen
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1957,6 +1974,8 @@ func (s *Dubbing) Translate(ctx context.Context, dubbingID string, body componen
 
 // Dub - Dubs All Or Some Segments And Languages
 // Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) Dub(ctx context.Context, dubbingID string, body components.BodyDubsAllOrSomeSegmentsAndLanguagesV1DubbingResourceDubbingIDDubPost, opts ...operations.Option) (*operations.DubResponse, error) {
 	request := operations.DubRequest{
 		DubbingID: dubbingID,
@@ -2104,7 +2123,7 @@ func (s *Dubbing) Dub(ctx context.Context, dubbingID string, body components.Bod
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2199,6 +2218,8 @@ func (s *Dubbing) Dub(ctx context.Context, dubbingID string, body components.Bod
 
 // UpdateSpeaker - Update Metadata For A Speaker
 // Amend the metadata associated with a speaker, such as their voice. Both voice cloning and using voices from the ElevenLabs library are supported.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) UpdateSpeaker(ctx context.Context, dubbingID string, speakerID string, body *components.BodyUpdateMetadataForASpeakerV1DubbingResourceDubbingIDSpeakerSpeakerIDPatch, opts ...operations.Option) (*operations.UpdateSpeakerResponse, error) {
 	request := operations.UpdateSpeakerRequest{
 		DubbingID: dubbingID,
@@ -2347,7 +2368,7 @@ func (s *Dubbing) UpdateSpeaker(ctx context.Context, dubbingID string, speakerID
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2441,6 +2462,9 @@ func (s *Dubbing) UpdateSpeaker(ctx context.Context, dubbingID string, speakerID
 }
 
 // CreateSpeaker - Create A New Speaker
+// Creates a new speaker in a dubbing resource. The speaker is added to every available language and can optionally be associated with an ElevenLabs voice and voice settings.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) CreateSpeaker(ctx context.Context, dubbingID string, body *components.BodyCreateANewSpeakerV1DubbingResourceDubbingIDSpeakerPost, opts ...operations.Option) (*operations.CreateSpeakerResponse, error) {
 	request := operations.CreateSpeakerRequest{
 		DubbingID: dubbingID,
@@ -2588,7 +2612,7 @@ func (s *Dubbing) CreateSpeaker(ctx context.Context, dubbingID string, body *com
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2683,6 +2707,8 @@ func (s *Dubbing) CreateSpeaker(ctx context.Context, dubbingID string, body *com
 
 // GetSimilarVoicesForSpeaker - Search The Elevenlabs Library For Voices Similar To A Speaker.
 // Fetch the top 10 similar voices to a speaker, including the voice IDs, names, descriptions, and, where possible, a sample audio recording.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID string, speakerID string, opts ...operations.Option) (*operations.GetSimilarVoicesForSpeakerResponse, error) {
 	request := operations.GetSimilarVoicesForSpeakerRequest{
 		DubbingID: dubbingID,
@@ -2823,7 +2849,7 @@ func (s *Dubbing) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID stri
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -2918,6 +2944,8 @@ func (s *Dubbing) GetSimilarVoicesForSpeaker(ctx context.Context, dubbingID stri
 
 // Render Audio Or Video For The Given Language
 // Regenerate the output media for a language using the latest Studio state. Please ensure all segments have been dubbed before rendering, otherwise they will be omitted. Renders are generated asynchronously, and to check the status of all renders please use the 'Get Dubbing Resource' endpoint.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Dubbing) Render(ctx context.Context, dubbingID string, language string, body components.BodyRenderAudioOrVideoForTheGivenLanguageV1DubbingResourceDubbingIDRenderLanguagePost, opts ...operations.Option) (*operations.RenderResponse, error) {
 	request := operations.RenderRequest{
 		DubbingID: dubbingID,
@@ -3066,7 +3094,7 @@ func (s *Dubbing) Render(ctx context.Context, dubbingID string, language string,
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3300,7 +3328,7 @@ func (s *Dubbing) ListDubs(ctx context.Context, request operations.ListDubsReque
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3537,7 +3565,7 @@ func (s *Dubbing) CreateDubbing(ctx context.Context, request *components.BodyDub
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -3771,7 +3799,7 @@ func (s *Dubbing) GetDubbedMetadata(ctx context.Context, dubbingID string, opts 
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4005,7 +4033,7 @@ func (s *Dubbing) DeleteDubbing(ctx context.Context, dubbingID string, opts ...o
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4246,7 +4274,7 @@ func (s *Dubbing) GetDubbedFile(ctx context.Context, dubbingID string, languageC
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"403", "404", "422", "425", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4496,7 +4524,7 @@ func (s *Dubbing) GetDubbedTranscriptFile(ctx context.Context, dubbingID string,
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"403", "404", "422", "425", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -4746,7 +4774,7 @@ func (s *Dubbing) GetDubbingTranscripts(ctx context.Context, dubbingID string, l
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

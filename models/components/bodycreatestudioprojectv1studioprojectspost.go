@@ -31,43 +31,6 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPostFromDocument) GetContent() a
 // #region class-body-bodycreatestudioprojectv1studioprojectspostfromdocument
 // #endregion class-body-bodycreatestudioprojectv1studioprojectspostfromdocument
 
-// BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio - Output quality of the generated audio. Must be one of:
-// 'standard' - standard output format, 128kbps with 44.1kHz sample rate.
-// 'high' - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side.
-// 'ultra' - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side.
-// 'ultra_lossless' - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format.
-type BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio string
-
-const (
-	BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudioStandard      BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio = "standard"
-	BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudioHigh          BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio = "high"
-	BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudioUltra         BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio = "ultra"
-	BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudioUltraLossless BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio = "ultra_lossless"
-)
-
-func (e BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio) ToPointer() *BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio {
-	return &e
-}
-func (e *BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "standard":
-		fallthrough
-	case "high":
-		fallthrough
-	case "ultra":
-		fallthrough
-	case "ultra_lossless":
-		*e = BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio: %v", v)
-	}
-}
-
 type BodyCreateStudioProjectV1StudioProjectsPostTargetAudience string
 
 const (
@@ -214,14 +177,8 @@ type BodyCreateStudioProjectV1StudioProjectsPost struct {
 	//     Example:
 	//     [{"name": "Chapter A", "blocks": [{"sub_type": "p", "nodes": [{"voice_id": "6lCwbsX1yVjD49QmpkT0", "text": "A", "type": "tts_node"}, {"voice_id": "6lCwbsX1yVjD49QmpkT1", "text": "B", "type": "tts_node"}]}, {"sub_type": "h1", "nodes": [{"voice_id": "6lCwbsX1yVjD49QmpkT0", "text": "C", "type": "tts_node"}, {"voice_id": "6lCwbsX1yVjD49QmpkT1", "text": "D", "type": "tts_node"}]}]}, {"name": "Chapter B", "blocks": [{"sub_type": "p", "nodes": [{"voice_id": "6lCwbsX1yVjD49QmpkT0", "text": "E", "type": "tts_node"}, {"voice_id": "6lCwbsX1yVjD49QmpkT1", "text": "F", "type": "tts_node"}]}, {"sub_type": "h2", "nodes": [{"voice_id": "6lCwbsX1yVjD49QmpkT0", "text": "G", "type": "tts_node"}, {"voice_id": "6lCwbsX1yVjD49QmpkT1", "text": "H", "type": "tts_node"}]}]}]
 	//
-	FromContentJSON *string `multipartForm:"name=from_content_json"`
-	// Output quality of the generated audio. Must be one of:
-	// 'standard' - standard output format, 128kbps with 44.1kHz sample rate.
-	// 'high' - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side.
-	// 'ultra' - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side.
-	// 'ultra_lossless' - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format.
-	//
-	QualityPreset *BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio `default:"standard" multipartForm:"name=quality_preset"`
+	FromContentJSON *string            `multipartForm:"name=from_content_json"`
+	QualityPreset   *QualityPresetType `default:"standard" multipartForm:"name=quality_preset"`
 	// An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download.
 	Title *string `multipartForm:"name=title"`
 	// An optional name of the author of the Studio project, this will be added as metadata to the mp3 file on Studio project or chapter download.
@@ -387,7 +344,7 @@ func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetFromContentJSON() *stri
 	return b.FromContentJSON
 }
 
-func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetQualityPreset() *BodyCreateStudioProjectV1StudioProjectsPostQualityOfTheGeneratedAudio {
+func (b *BodyCreateStudioProjectV1StudioProjectsPost) GetQualityPreset() *QualityPresetType {
 	if b == nil {
 		return nil
 	}

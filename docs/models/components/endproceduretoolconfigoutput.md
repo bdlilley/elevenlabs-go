@@ -1,0 +1,9 @@
+# EndProcedureToolConfigOutput
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `SystemToolType`                                                                                      | `*string`                                                                                             | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `Procedures`                                                                                          | map[string][components.ProcedureAtVersionOutput](../../models/components/procedureatversionoutput.md) | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |

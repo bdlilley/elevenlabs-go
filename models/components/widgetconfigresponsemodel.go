@@ -239,7 +239,8 @@ type WidgetConfigResponseModel struct {
 	SupportsTextOnly *bool   `default:"false" json:"supports_text_only"`
 	FirstMessage     *string `json:"first_message,omitzero"`
 	// Whether to use WebRTC for conversation connections
-	UseRtc *bool `json:"use_rtc,omitzero"`
+	UseRtc          *bool            `json:"use_rtc,omitzero"`
+	FileInputConfig *FileInputConfig `json:"file_input_config,omitzero"`
 }
 
 func (w WidgetConfigResponseModel) MarshalJSON() ([]byte, error) {
@@ -608,4 +609,11 @@ func (w *WidgetConfigResponseModel) GetUseRtc() *bool {
 		return nil
 	}
 	return w.UseRtc
+}
+
+func (w *WidgetConfigResponseModel) GetFileInputConfig() *FileInputConfig {
+	if w == nil {
+		return nil
+	}
+	return w.FileInputConfig
 }

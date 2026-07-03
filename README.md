@@ -14,7 +14,7 @@ ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [elevenlabs-go](#elevenlabs-go)
+* [elevenlabs-go **UNOFFICIAL SDK**](#elevenlabs-go-unofficial-sdk)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
@@ -49,7 +49,6 @@ package main
 import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
 
@@ -60,18 +59,12 @@ func main() {
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx)
+	res, err := s.GetUserInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.ExtendedSubscriptionResponseModel != nil {
-		switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
-		case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
-		case components.PendingChangeTypePendingCancellationResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		}
-
+	if res.UserResponseModel != nil {
+		// handle response
 	}
 }
 
@@ -96,7 +89,6 @@ package main
 import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
 
@@ -107,18 +99,12 @@ func main() {
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx)
+	res, err := s.GetUserInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.ExtendedSubscriptionResponseModel != nil {
-		switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
-		case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
-		case components.PendingChangeTypePendingCancellationResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		}
-
+	if res.UserResponseModel != nil {
+		// handle response
 	}
 }
 
@@ -133,9 +119,9 @@ func main() {
 
 ### [ElevenlabsGo SDK](docs/sdks/elevenlabsgo/README.md)
 
-* [GetUserSubscriptionInfo](docs/sdks/elevenlabsgo/README.md#getusersubscriptioninfo) - Get User Subscription Info
 * [GetUserInfo](docs/sdks/elevenlabsgo/README.md#getuserinfo) - Get User Info
-* [UsageCharacters](docs/sdks/elevenlabsgo/README.md#usagecharacters) - Get Characters Usage Metrics
+* [GetUserSubscriptionInfo](docs/sdks/elevenlabsgo/README.md#getusersubscriptioninfo) - Get User Subscription Info
+* [~~UsageCharacters~~](docs/sdks/elevenlabsgo/README.md#usagecharacters) - Get Characters Usage Metrics (Deprecated) :warning: **Deprecated**
 * [CreateAgentResponseTest](docs/sdks/elevenlabsgo/README.md#createagentresponsetest) - Create Agent Response Test
 * [GetAgentResponseTest](docs/sdks/elevenlabsgo/README.md#getagentresponsetest) - Get Agent Response Test By Id
 * [UpdateAgentResponseTest](docs/sdks/elevenlabsgo/README.md#updateagentresponsetest) - Update Agent Response Test
@@ -148,6 +134,15 @@ func main() {
 * [ResubmitTests](docs/sdks/elevenlabsgo/README.md#resubmittests) - Resubmit Tests
 * [RedirectToMintlify](docs/sdks/elevenlabsgo/README.md#redirecttomintlify) - Redirect To Mintlify
 
+### [AccessAll](docs/sdks/accessall/README.md)
+
+* [UsageByProductOverTime](docs/sdks/accessall/README.md#usagebyproductovertime) - Get Workspace Usage
+* [RequestsList](docs/sdks/accessall/README.md#requestslist) - List Api Requests
+
+### [AgentsInsights](docs/sdks/agentsinsights/README.md)
+
+* [GetAgentTopicsRoute](docs/sdks/agentsinsights/README.md#getagenttopicsroute) - Get Agent Conversation Topics
+
 ### [AgentsPlatform](docs/sdks/agentsplatform/README.md)
 
 * [GetConversationSignedLink](docs/sdks/agentsplatform/README.md#getconversationsignedlink) - Get Signed Url
@@ -155,6 +150,7 @@ func main() {
 * [GetLivekitToken](docs/sdks/agentsplatform/README.md#getlivekittoken) - Get Webrtc Token
 * [HandleTwilioOutboundCall](docs/sdks/agentsplatform/README.md#handletwiliooutboundcall) - Handle An Outbound Call Via Twilio
 * [RegisterTwilioCall](docs/sdks/agentsplatform/README.md#registertwiliocall) - Register A Twilio Call And Return Twiml
+* [HandleExotelOutboundCall](docs/sdks/agentsplatform/README.md#handleexoteloutboundcall) - Handle An Outbound Call Via Exotel
 * [WhatsappOutboundCall](docs/sdks/agentsplatform/README.md#whatsappoutboundcall) - Make An Outbound Call Via Whatsapp
 * [WhatsappOutboundMessage](docs/sdks/agentsplatform/README.md#whatsappoutboundmessage) - Send An Outbound Message Via Whatsapp
 * [CreateAgent](docs/sdks/agentsplatform/README.md#createagent) - Create Agent
@@ -169,8 +165,8 @@ func main() {
 * [GetAgentKnowledgeBaseSize](docs/sdks/agentsplatform/README.md#getagentknowledgebasesize) - Returns The Size Of The Agent'S Knowledge Base
 * [GetAgentLlmExpectedCostCalculation](docs/sdks/agentsplatform/README.md#getagentllmexpectedcostcalculation) - Calculate Expected Llm Usage For An Agent
 * [DuplicateAgent](docs/sdks/agentsplatform/README.md#duplicateagent) - Duplicate Agent
-* [RunConversationSimulation](docs/sdks/agentsplatform/README.md#runconversationsimulation) - Simulates A Conversation
-* [RunConversationSimulationRouteStream](docs/sdks/agentsplatform/README.md#runconversationsimulationroutestream) - Simulates A Conversation (Stream)
+* [~~RunConversationSimulation~~](docs/sdks/agentsplatform/README.md#runconversationsimulation) - Simulates A Conversation :warning: **Deprecated**
+* [~~RunConversationSimulationRouteStream~~](docs/sdks/agentsplatform/README.md#runconversationsimulationroutestream) - Simulates A Conversation (Stream) :warning: **Deprecated**
 * [CreateAgentTestFolder](docs/sdks/agentsplatform/README.md#createagenttestfolder) - Create Agent Test Folder
 * [GetAgentTestFolder](docs/sdks/agentsplatform/README.md#getagenttestfolder) - Get Agent Test Folder By Id
 * [UpdateAgentTestFolder](docs/sdks/agentsplatform/README.md#updateagenttestfolder) - Update Agent Test Folder
@@ -180,15 +176,24 @@ func main() {
 * [GetConversationUsers](docs/sdks/agentsplatform/README.md#getconversationusers) - Get Conversation Users
 * [GetConversationHistory](docs/sdks/agentsplatform/README.md#getconversationhistory) - Get Conversation Details
 * [DeleteConversation](docs/sdks/agentsplatform/README.md#deleteconversation) - Delete Conversation
+* [GetConversationSipMessages](docs/sdks/agentsplatform/README.md#getconversationsipmessages) - Get Sip Messages For A Conversation
 * [GetConversationAudio](docs/sdks/agentsplatform/README.md#getconversationaudio) - Get Conversation Audio
 * [PostConversationFeedback](docs/sdks/agentsplatform/README.md#postconversationfeedback) - Send Conversation Feedback
 * [TextSearchConversationMessages](docs/sdks/agentsplatform/README.md#textsearchconversationmessages) - Text Search Conversation Messages
 * [SmartSearchConversationMessages](docs/sdks/agentsplatform/README.md#smartsearchconversationmessages) - Smart Search Conversation Messages
+* [AssignConversationTagsRoute](docs/sdks/agentsplatform/README.md#assignconversationtagsroute) - Assign Conversation Tags
+* [UnassignConversationTagRoute](docs/sdks/agentsplatform/README.md#unassignconversationtagroute) - Unassign Conversation Tag
+* [ListConversationTagsRoute](docs/sdks/agentsplatform/README.md#listconversationtagsroute) - List Conversation Tags
+* [CreateConversationTagRoute](docs/sdks/agentsplatform/README.md#createconversationtagroute) - Create Conversation Tag
+* [GetConversationTagRoute](docs/sdks/agentsplatform/README.md#getconversationtagroute) - Get Conversation Tag
+* [DeleteConversationTagRoute](docs/sdks/agentsplatform/README.md#deleteconversationtagroute) - Delete Conversation Tag
+* [UpdateConversationTagRoute](docs/sdks/agentsplatform/README.md#updateconversationtagroute) - Update Conversation Tag
 * [CreatePhoneNumber](docs/sdks/agentsplatform/README.md#createphonenumber) - Import Phone Number
 * [ListPhoneNumbers](docs/sdks/agentsplatform/README.md#listphonenumbers) - List Phone Numbers
 * [GetPhoneNumber](docs/sdks/agentsplatform/README.md#getphonenumber) - Get Phone Number
 * [DeletePhoneNumber](docs/sdks/agentsplatform/README.md#deletephonenumber) - Delete Phone Number
 * [UpdatePhoneNumber](docs/sdks/agentsplatform/README.md#updatephonenumber) - Update Phone Number
+* [ListSipMessages](docs/sdks/agentsplatform/README.md#listsipmessages) - Get Sip Messages For A Phone Number
 * [GetPublicLlmExpectedCostCalculation](docs/sdks/agentsplatform/README.md#getpublicllmexpectedcostcalculation) - Calculate Expected Llm Usage
 * [ListAvailableLlms](docs/sdks/agentsplatform/README.md#listavailablellms) - List Available Llms
 * [UploadFile](docs/sdks/agentsplatform/README.md#uploadfile) - Upload File
@@ -203,6 +208,7 @@ func main() {
 * [UpdateDocument](docs/sdks/agentsplatform/README.md#updatedocument) - Update Document
 * [GetDocumentationFromKnowledgeBase](docs/sdks/agentsplatform/README.md#getdocumentationfromknowledgebase) - Get Documentation From Knowledge Base
 * [DeleteKnowledgeBaseDocument](docs/sdks/agentsplatform/README.md#deleteknowledgebasedocument) - Delete Knowledge Base Document Or Folder
+* [UpdateFileDocumentRoute](docs/sdks/agentsplatform/README.md#updatefiledocumentroute) - Update File Document
 * [GetRagIndexOverview](docs/sdks/agentsplatform/README.md#getragindexoverview) - Get Rag Index Overview.
 * [GetOrCreateRagIndexes](docs/sdks/agentsplatform/README.md#getorcreateragindexes) - Compute Rag Indexes In Batch
 * [RefreshURLDocument](docs/sdks/agentsplatform/README.md#refreshurldocument) - Refresh Url Document Content
@@ -214,18 +220,22 @@ func main() {
 * [GetKnowledgeBaseContent](docs/sdks/agentsplatform/README.md#getknowledgebasecontent) - Get Document Content
 * [GetKnowledgeBaseSourceFileURL](docs/sdks/agentsplatform/README.md#getknowledgebasesourcefileurl) - Get Document Source File Url
 * [GetDocumentationChunkFromKnowledgeBase](docs/sdks/agentsplatform/README.md#getdocumentationchunkfromknowledgebase) - Get Documentation Chunk From Knowledge Base
+* [GetDocumentationChunksFromKnowledgeBase](docs/sdks/agentsplatform/README.md#getdocumentationchunksfromknowledgebase) - Get All Rag Chunks For A Document
+* [GetAgentTopicsRoute](docs/sdks/agentsplatform/README.md#getagenttopicsroute) - Get Agent Conversation Topics
 * [AddTool](docs/sdks/agentsplatform/README.md#addtool) - Add Tool
 * [GetTools](docs/sdks/agentsplatform/README.md#gettools) - Get Tools
 * [GetTool](docs/sdks/agentsplatform/README.md#gettool) - Get Tool
 * [UpdateTool](docs/sdks/agentsplatform/README.md#updatetool) - Update Tool
 * [DeleteTool](docs/sdks/agentsplatform/README.md#deletetool) - Delete Tool
 * [GetToolDependentAgents](docs/sdks/agentsplatform/README.md#gettooldependentagents) - Get Dependent Agents List
+* [GetToolExecutionsRoute](docs/sdks/agentsplatform/README.md#gettoolexecutionsroute) - Get Tool Executions
 * [GetSettings](docs/sdks/agentsplatform/README.md#getsettings) - Get Convai Settings
 * [UpdateSettings](docs/sdks/agentsplatform/README.md#updatesettings) - Update Convai Settings
 * [GetDashboardSettings](docs/sdks/agentsplatform/README.md#getdashboardsettings) - Get Convai Dashboard Settings
 * [UpdateDashboardSettings](docs/sdks/agentsplatform/README.md#updatedashboardsettings) - Update Convai Dashboard Settings
 * [CreateSecret](docs/sdks/agentsplatform/README.md#createsecret) - Create Convai Workspace Secret
 * [GetSecrets](docs/sdks/agentsplatform/README.md#getsecrets) - Get Convai Workspace Secrets
+* [GetSecretRoute](docs/sdks/agentsplatform/README.md#getsecretroute) - Get Convai Workspace Secret
 * [DeleteSecret](docs/sdks/agentsplatform/README.md#deletesecret) - Delete Convai Workspace Secret
 * [UpdateSecret](docs/sdks/agentsplatform/README.md#updatesecret) - Update Convai Workspace Secret
 * [GetSecretDependencies](docs/sdks/agentsplatform/README.md#getsecretdependencies) - Get Secret Dependencies By Type
@@ -257,7 +267,11 @@ func main() {
 * [GetBranches](docs/sdks/agentsplatform/README.md#getbranches) - List Agent Branches
 * [GetBranch](docs/sdks/agentsplatform/README.md#getbranch) - Get Agent Branch
 * [UpdateBranch](docs/sdks/agentsplatform/README.md#updatebranch) - Update Agent Branch
+* [GetVersionMetadataRoute](docs/sdks/agentsplatform/README.md#getversionmetadataroute) - Get Agent Version Metadata
+* [MergePreviewRoute](docs/sdks/agentsplatform/README.md#mergepreviewroute) - Preview Merged Configuration
 * [MergeBranchIntoTarget](docs/sdks/agentsplatform/README.md#mergebranchintotarget) - Merge A Branch Into A Target Branch
+* [RebasePreviewRoute](docs/sdks/agentsplatform/README.md#rebasepreviewroute) - Preview Rebased Configuration
+* [RebaseBranchOntoMain](docs/sdks/agentsplatform/README.md#rebasebranchontomain) - Rebase A Branch Onto Main
 * [CreateAgentDeployment](docs/sdks/agentsplatform/README.md#createagentdeployment) - Create Or Update Deployments
 * [CreateAgentDraft](docs/sdks/agentsplatform/README.md#createagentdraft) - Create Agent Draft
 * [DeleteAgentDraft](docs/sdks/agentsplatform/README.md#deleteagentdraft) - Delete Agent Draft
@@ -269,10 +283,18 @@ func main() {
 ### [AgentsWorkspaceAnalytics](docs/sdks/agentsworkspaceanalytics/README.md)
 
 * [RunConversationAnalysis](docs/sdks/agentsworkspaceanalytics/README.md#runconversationanalysis) - Run Conversation Analysis
+* [RunConversationEvaluations](docs/sdks/agentsworkspaceanalytics/README.md#runconversationevaluations) - Run Conversation Evaluation
+
+### [ApiKey](docs/sdks/apikey/README.md)
+
+* [Disable](docs/sdks/apikey/README.md#disable) - Disable Api Key
+* [SetThirdPartyDisablingPolicy](docs/sdks/apikey/README.md#setthirdpartydisablingpolicy) - Set Workspace Third-Party Disabling Policy
 
 ### [AudioIsolation](docs/sdks/audioisolation/README.md)
 
 * [AudioIsolation](docs/sdks/audioisolation/README.md#audioisolation) - Audio Isolation
+* [GetAudioIsolationHistory](docs/sdks/audioisolation/README.md#getaudioisolationhistory) - Get Audio Isolation History
+* [DeleteAudioIsolationHistoryItem](docs/sdks/audioisolation/README.md#deleteaudioisolationhistoryitem) - Delete Audio Isolation History Item
 * [AudioIsolationStream](docs/sdks/audioisolation/README.md#audioisolationstream) - Audio Isolation Stream
 
 ### [AudioNative](docs/sdks/audionative/README.md)
@@ -290,19 +312,19 @@ func main() {
 
 ### [Dubbing](docs/sdks/dubbing/README.md)
 
-* [GetDubbingResource](docs/sdks/dubbing/README.md#getdubbingresource) - Get The Dubbing Resource For An Id.
-* [AddLanguage](docs/sdks/dubbing/README.md#addlanguage) - Add A Language To The Resource
-* [CreateClip](docs/sdks/dubbing/README.md#createclip) - Create A Segment For The Speaker
-* [UpdateSegmentLanguage](docs/sdks/dubbing/README.md#updatesegmentlanguage) - Modify A Single Segment
-* [MigrateSegments](docs/sdks/dubbing/README.md#migratesegments) - Move Segments Between Speakers
-* [DeleteSegment](docs/sdks/dubbing/README.md#deletesegment) - Deletes A Single Segment
-* [Transcribe](docs/sdks/dubbing/README.md#transcribe) - Transcribes Segments
-* [Translate](docs/sdks/dubbing/README.md#translate) - Translates All Or Some Segments And Languages
-* [Dub](docs/sdks/dubbing/README.md#dub) - Dubs All Or Some Segments And Languages
-* [UpdateSpeaker](docs/sdks/dubbing/README.md#updatespeaker) - Update Metadata For A Speaker
-* [CreateSpeaker](docs/sdks/dubbing/README.md#createspeaker) - Create A New Speaker
-* [GetSimilarVoicesForSpeaker](docs/sdks/dubbing/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker.
-* [Render](docs/sdks/dubbing/README.md#render) - Render Audio Or Video For The Given Language
+* [~~GetDubbingResource~~](docs/sdks/dubbing/README.md#getdubbingresource) - Get The Dubbing Resource For An Id. :warning: **Deprecated**
+* [~~AddLanguage~~](docs/sdks/dubbing/README.md#addlanguage) - Add A Language To The Resource :warning: **Deprecated**
+* [~~CreateClip~~](docs/sdks/dubbing/README.md#createclip) - Create A Segment For The Speaker :warning: **Deprecated**
+* [~~UpdateSegmentLanguage~~](docs/sdks/dubbing/README.md#updatesegmentlanguage) - Modify A Single Segment :warning: **Deprecated**
+* [~~MigrateSegments~~](docs/sdks/dubbing/README.md#migratesegments) - Move Segments Between Speakers :warning: **Deprecated**
+* [~~DeleteSegment~~](docs/sdks/dubbing/README.md#deletesegment) - Deletes A Single Segment :warning: **Deprecated**
+* [~~Transcribe~~](docs/sdks/dubbing/README.md#transcribe) - Transcribes Segments :warning: **Deprecated**
+* [~~Translate~~](docs/sdks/dubbing/README.md#translate) - Translates All Or Some Segments And Languages :warning: **Deprecated**
+* [~~Dub~~](docs/sdks/dubbing/README.md#dub) - Dubs All Or Some Segments And Languages :warning: **Deprecated**
+* [~~UpdateSpeaker~~](docs/sdks/dubbing/README.md#updatespeaker) - Update Metadata For A Speaker :warning: **Deprecated**
+* [~~CreateSpeaker~~](docs/sdks/dubbing/README.md#createspeaker) - Create A New Speaker :warning: **Deprecated**
+* [~~GetSimilarVoicesForSpeaker~~](docs/sdks/dubbing/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker. :warning: **Deprecated**
+* [~~Render~~](docs/sdks/dubbing/README.md#render) - Render Audio Or Video For The Given Language :warning: **Deprecated**
 * [ListDubs](docs/sdks/dubbing/README.md#listdubs) - List Dubs
 * [CreateDubbing](docs/sdks/dubbing/README.md#createdubbing) - Dub A Video Or An Audio File
 * [GetDubbedMetadata](docs/sdks/dubbing/README.md#getdubbedmetadata) - Get Dubbing
@@ -311,21 +333,21 @@ func main() {
 * [~~GetDubbedTranscriptFile~~](docs/sdks/dubbing/README.md#getdubbedtranscriptfile) - Get Dubbed Transcript :warning: **Deprecated**
 * [GetDubbingTranscripts](docs/sdks/dubbing/README.md#getdubbingtranscripts) - Retrieve A Transcript
 
-### [Enterprise](docs/sdks/enterprise/README.md)
+### [~~Enterprise~~](docs/sdks/enterprise/README.md)
 
-* [GetDubbingResource](docs/sdks/enterprise/README.md#getdubbingresource) - Get The Dubbing Resource For An Id.
-* [AddLanguage](docs/sdks/enterprise/README.md#addlanguage) - Add A Language To The Resource
-* [CreateClip](docs/sdks/enterprise/README.md#createclip) - Create A Segment For The Speaker
-* [UpdateSegmentLanguage](docs/sdks/enterprise/README.md#updatesegmentlanguage) - Modify A Single Segment
-* [MigrateSegments](docs/sdks/enterprise/README.md#migratesegments) - Move Segments Between Speakers
-* [DeleteSegment](docs/sdks/enterprise/README.md#deletesegment) - Deletes A Single Segment
-* [Transcribe](docs/sdks/enterprise/README.md#transcribe) - Transcribes Segments
-* [Translate](docs/sdks/enterprise/README.md#translate) - Translates All Or Some Segments And Languages
-* [Dub](docs/sdks/enterprise/README.md#dub) - Dubs All Or Some Segments And Languages
-* [UpdateSpeaker](docs/sdks/enterprise/README.md#updatespeaker) - Update Metadata For A Speaker
-* [CreateSpeaker](docs/sdks/enterprise/README.md#createspeaker) - Create A New Speaker
-* [GetSimilarVoicesForSpeaker](docs/sdks/enterprise/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker.
-* [Render](docs/sdks/enterprise/README.md#render) - Render Audio Or Video For The Given Language
+* [~~GetDubbingResource~~](docs/sdks/enterprise/README.md#getdubbingresource) - Get The Dubbing Resource For An Id. :warning: **Deprecated**
+* [~~AddLanguage~~](docs/sdks/enterprise/README.md#addlanguage) - Add A Language To The Resource :warning: **Deprecated**
+* [~~CreateClip~~](docs/sdks/enterprise/README.md#createclip) - Create A Segment For The Speaker :warning: **Deprecated**
+* [~~UpdateSegmentLanguage~~](docs/sdks/enterprise/README.md#updatesegmentlanguage) - Modify A Single Segment :warning: **Deprecated**
+* [~~MigrateSegments~~](docs/sdks/enterprise/README.md#migratesegments) - Move Segments Between Speakers :warning: **Deprecated**
+* [~~DeleteSegment~~](docs/sdks/enterprise/README.md#deletesegment) - Deletes A Single Segment :warning: **Deprecated**
+* [~~Transcribe~~](docs/sdks/enterprise/README.md#transcribe) - Transcribes Segments :warning: **Deprecated**
+* [~~Translate~~](docs/sdks/enterprise/README.md#translate) - Translates All Or Some Segments And Languages :warning: **Deprecated**
+* [~~Dub~~](docs/sdks/enterprise/README.md#dub) - Dubs All Or Some Segments And Languages :warning: **Deprecated**
+* [~~UpdateSpeaker~~](docs/sdks/enterprise/README.md#updatespeaker) - Update Metadata For A Speaker :warning: **Deprecated**
+* [~~CreateSpeaker~~](docs/sdks/enterprise/README.md#createspeaker) - Create A New Speaker :warning: **Deprecated**
+* [~~GetSimilarVoicesForSpeaker~~](docs/sdks/enterprise/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker. :warning: **Deprecated**
+* [~~Render~~](docs/sdks/enterprise/README.md#render) - Render Audio Or Video For The Given Language :warning: **Deprecated**
 
 ### [ForcedAlignment](docs/sdks/forcedalignment/README.md)
 
@@ -340,9 +362,24 @@ func main() {
 * [ComposePlan](docs/sdks/musicgeneration/README.md#composeplan) - Generate Composition Plan
 * [Generate](docs/sdks/musicgeneration/README.md#generate) - Compose Music
 * [ComposeDetailed](docs/sdks/musicgeneration/README.md#composedetailed) - Compose Music With A Detailed Response
+* [ComposeDetailedStream](docs/sdks/musicgeneration/README.md#composedetailedstream) - Stream Composed Music With A Detailed Response
 * [StreamCompose](docs/sdks/musicgeneration/README.md#streamcompose) - Stream Composed Music
 * [UploadSong](docs/sdks/musicgeneration/README.md#uploadsong) - Upload Music
 * [SeparateSongStems](docs/sdks/musicgeneration/README.md#separatesongstems) - Stem Separation
+
+### [Productions](docs/sdks/productions/README.md)
+
+* [PublicListOrders](docs/sdks/productions/README.md#publiclistorders) - List Orders
+* [PublicCreateOrder](docs/sdks/productions/README.md#publiccreateorder) - Create Order
+* [PublicGetOrder](docs/sdks/productions/README.md#publicgetorder) - Get Order
+* [PublicUpdateOrder](docs/sdks/productions/README.md#publicupdateorder) - Update Order
+* [PublicRegisterMedia](docs/sdks/productions/README.md#publicregistermedia) - Register Media
+* [PublicGetMediaInfo](docs/sdks/productions/README.md#publicgetmediainfo) - Get Media Info
+* [PublicUpsertOrderItem](docs/sdks/productions/README.md#publicupsertorderitem) - Upsert Order Item
+* [PublicRemoveOrderItem](docs/sdks/productions/README.md#publicremoveorderitem) - Remove Order Item
+* [PublicSubmitOrder](docs/sdks/productions/README.md#publicsubmitorder) - Submit Order
+* [PublicGetOrderDeliverables](docs/sdks/productions/README.md#publicgetorderdeliverables) - Get Order Deliverables
+* [PublicGetAvailableLanguages](docs/sdks/productions/README.md#publicgetavailablelanguages) - Get Available Languages
 
 ### [PronunciationDictionary](docs/sdks/pronunciationdictionary/README.md)
 
@@ -373,42 +410,42 @@ func main() {
 * [RunPvcVoiceTraining](docs/sdks/pvcvoices/README.md#runpvcvoicetraining) - Run Pvc Training
 * [RequestPvcManualVerification](docs/sdks/pvcvoices/README.md#requestpvcmanualverification) - Request Manual Verification
 
-### [Resource](docs/sdks/resource/README.md)
+### [~~Resource~~](docs/sdks/resource/README.md)
 
-* [GetDubbingResource](docs/sdks/resource/README.md#getdubbingresource) - Get The Dubbing Resource For An Id.
-* [AddLanguage](docs/sdks/resource/README.md#addlanguage) - Add A Language To The Resource
-* [CreateClip](docs/sdks/resource/README.md#createclip) - Create A Segment For The Speaker
-* [UpdateSegmentLanguage](docs/sdks/resource/README.md#updatesegmentlanguage) - Modify A Single Segment
-* [MigrateSegments](docs/sdks/resource/README.md#migratesegments) - Move Segments Between Speakers
-* [DeleteSegment](docs/sdks/resource/README.md#deletesegment) - Deletes A Single Segment
-* [Transcribe](docs/sdks/resource/README.md#transcribe) - Transcribes Segments
-* [Translate](docs/sdks/resource/README.md#translate) - Translates All Or Some Segments And Languages
-* [Dub](docs/sdks/resource/README.md#dub) - Dubs All Or Some Segments And Languages
-* [UpdateSpeaker](docs/sdks/resource/README.md#updatespeaker) - Update Metadata For A Speaker
-* [CreateSpeaker](docs/sdks/resource/README.md#createspeaker) - Create A New Speaker
-* [GetSimilarVoicesForSpeaker](docs/sdks/resource/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker.
-* [Render](docs/sdks/resource/README.md#render) - Render Audio Or Video For The Given Language
+* [~~GetDubbingResource~~](docs/sdks/resource/README.md#getdubbingresource) - Get The Dubbing Resource For An Id. :warning: **Deprecated**
+* [~~AddLanguage~~](docs/sdks/resource/README.md#addlanguage) - Add A Language To The Resource :warning: **Deprecated**
+* [~~CreateClip~~](docs/sdks/resource/README.md#createclip) - Create A Segment For The Speaker :warning: **Deprecated**
+* [~~UpdateSegmentLanguage~~](docs/sdks/resource/README.md#updatesegmentlanguage) - Modify A Single Segment :warning: **Deprecated**
+* [~~MigrateSegments~~](docs/sdks/resource/README.md#migratesegments) - Move Segments Between Speakers :warning: **Deprecated**
+* [~~DeleteSegment~~](docs/sdks/resource/README.md#deletesegment) - Deletes A Single Segment :warning: **Deprecated**
+* [~~Transcribe~~](docs/sdks/resource/README.md#transcribe) - Transcribes Segments :warning: **Deprecated**
+* [~~Translate~~](docs/sdks/resource/README.md#translate) - Translates All Or Some Segments And Languages :warning: **Deprecated**
+* [~~Dub~~](docs/sdks/resource/README.md#dub) - Dubs All Or Some Segments And Languages :warning: **Deprecated**
+* [~~UpdateSpeaker~~](docs/sdks/resource/README.md#updatespeaker) - Update Metadata For A Speaker :warning: **Deprecated**
+* [~~CreateSpeaker~~](docs/sdks/resource/README.md#createspeaker) - Create A New Speaker :warning: **Deprecated**
+* [~~GetSimilarVoicesForSpeaker~~](docs/sdks/resource/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker. :warning: **Deprecated**
+* [~~Render~~](docs/sdks/resource/README.md#render) - Render Audio Or Video For The Given Language :warning: **Deprecated**
 
 ### [Samples](docs/sdks/samples/README.md)
 
 * [DeleteSample](docs/sdks/samples/README.md#deletesample) - Delete Sample
 * [GetAudioFromSample](docs/sdks/samples/README.md#getaudiofromsample) - Get Audio From Sample
 
-### [Segment](docs/sdks/segment/README.md)
+### [~~Segment~~](docs/sdks/segment/README.md)
 
-* [GetDubbingResource](docs/sdks/segment/README.md#getdubbingresource) - Get The Dubbing Resource For An Id.
-* [AddLanguage](docs/sdks/segment/README.md#addlanguage) - Add A Language To The Resource
-* [CreateClip](docs/sdks/segment/README.md#createclip) - Create A Segment For The Speaker
-* [UpdateSegmentLanguage](docs/sdks/segment/README.md#updatesegmentlanguage) - Modify A Single Segment
-* [MigrateSegments](docs/sdks/segment/README.md#migratesegments) - Move Segments Between Speakers
-* [DeleteSegment](docs/sdks/segment/README.md#deletesegment) - Deletes A Single Segment
-* [Transcribe](docs/sdks/segment/README.md#transcribe) - Transcribes Segments
-* [Translate](docs/sdks/segment/README.md#translate) - Translates All Or Some Segments And Languages
-* [Dub](docs/sdks/segment/README.md#dub) - Dubs All Or Some Segments And Languages
-* [UpdateSpeaker](docs/sdks/segment/README.md#updatespeaker) - Update Metadata For A Speaker
-* [CreateSpeaker](docs/sdks/segment/README.md#createspeaker) - Create A New Speaker
-* [GetSimilarVoicesForSpeaker](docs/sdks/segment/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker.
-* [Render](docs/sdks/segment/README.md#render) - Render Audio Or Video For The Given Language
+* [~~GetDubbingResource~~](docs/sdks/segment/README.md#getdubbingresource) - Get The Dubbing Resource For An Id. :warning: **Deprecated**
+* [~~AddLanguage~~](docs/sdks/segment/README.md#addlanguage) - Add A Language To The Resource :warning: **Deprecated**
+* [~~CreateClip~~](docs/sdks/segment/README.md#createclip) - Create A Segment For The Speaker :warning: **Deprecated**
+* [~~UpdateSegmentLanguage~~](docs/sdks/segment/README.md#updatesegmentlanguage) - Modify A Single Segment :warning: **Deprecated**
+* [~~MigrateSegments~~](docs/sdks/segment/README.md#migratesegments) - Move Segments Between Speakers :warning: **Deprecated**
+* [~~DeleteSegment~~](docs/sdks/segment/README.md#deletesegment) - Deletes A Single Segment :warning: **Deprecated**
+* [~~Transcribe~~](docs/sdks/segment/README.md#transcribe) - Transcribes Segments :warning: **Deprecated**
+* [~~Translate~~](docs/sdks/segment/README.md#translate) - Translates All Or Some Segments And Languages :warning: **Deprecated**
+* [~~Dub~~](docs/sdks/segment/README.md#dub) - Dubs All Or Some Segments And Languages :warning: **Deprecated**
+* [~~UpdateSpeaker~~](docs/sdks/segment/README.md#updatespeaker) - Update Metadata For A Speaker :warning: **Deprecated**
+* [~~CreateSpeaker~~](docs/sdks/segment/README.md#createspeaker) - Create A New Speaker :warning: **Deprecated**
+* [~~GetSimilarVoicesForSpeaker~~](docs/sdks/segment/README.md#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker. :warning: **Deprecated**
+* [~~Render~~](docs/sdks/segment/README.md#render) - Render Audio Or Video For The Given Language :warning: **Deprecated**
 
 ### [SingleUseToken](docs/sdks/singleusetoken/README.md)
 
@@ -417,6 +454,14 @@ func main() {
 ### [SoundGeneration](docs/sdks/soundgeneration/README.md)
 
 * [SoundGeneration](docs/sdks/soundgeneration/README.md#soundgeneration) - Sound Generation
+
+### [SpeechEngine](docs/sdks/speechengine/README.md)
+
+* [ListSpeechEngines](docs/sdks/speechengine/README.md#listspeechengines) - List Speech Engines
+* [CreateSpeechEngine](docs/sdks/speechengine/README.md#createspeechengine) - Create Speech Engine
+* [GetSpeechEngine](docs/sdks/speechengine/README.md#getspeechengine) - Get Speech Engine
+* [DeleteSpeechEngine](docs/sdks/speechengine/README.md#deletespeechengine) - Delete Speech Engine
+* [UpdateSpeechEngine](docs/sdks/speechengine/README.md#updatespeechengine) - Update Speech Engine
 
 ### [SpeechHistory](docs/sdks/speechhistory/README.md)
 
@@ -479,7 +524,7 @@ func main() {
 
 ### [TextToVoice](docs/sdks/texttovoice/README.md)
 
-* [TextToVoice](docs/sdks/texttovoice/README.md#texttovoice) - Generate A Voice Preview From Description
+* [~~TextToVoice~~](docs/sdks/texttovoice/README.md#texttovoice) - [Deprecated] Generate A Voice Preview From Description :warning: **Deprecated**
 * [CreateVoice](docs/sdks/texttovoice/README.md#createvoice) - Create A New Voice From Voice Preview
 * [TextToVoiceDesign](docs/sdks/texttovoice/README.md#texttovoicedesign) - Design A Voice.
 * [TextToVoiceRemix](docs/sdks/texttovoice/README.md#texttovoiceremix) - Remix A Voice.
@@ -491,13 +536,13 @@ func main() {
 
 ### [Voices](docs/sdks/voices/README.md)
 
-* [GetVoices](docs/sdks/voices/README.md#getvoices) - List Voices
-* [GetUserVoicesV2](docs/sdks/voices/README.md#getuservoicesv2) - Get Voices V2
 * [GetVoiceSettingsDefault](docs/sdks/voices/README.md#getvoicesettingsdefault) - Get Default Voice Settings.
 * [GetVoiceSettings](docs/sdks/voices/README.md#getvoicesettings) - Get Voice Settings
+* [EditVoiceSettings](docs/sdks/voices/README.md#editvoicesettings) - Edit Voice Settings
+* [GetVoices](docs/sdks/voices/README.md#getvoices) - List Voices
 * [GetVoiceByID](docs/sdks/voices/README.md#getvoicebyid) - Get Voice
 * [DeleteVoice](docs/sdks/voices/README.md#deletevoice) - Delete Voice
-* [EditVoiceSettings](docs/sdks/voices/README.md#editvoicesettings) - Edit Voice Settings
+* [GetUserVoicesV2](docs/sdks/voices/README.md#getuservoicesv2) - Get Voices V2
 * [AddVoice](docs/sdks/voices/README.md#addvoice) - Add Voice
 * [EditVoice](docs/sdks/voices/README.md#editvoice) - Edit Voice
 * [AddSharingVoice](docs/sdks/voices/README.md#addsharingvoice) - Add Shared Voice
@@ -506,13 +551,17 @@ func main() {
 
 ### [Workspace](docs/sdks/workspace/README.md)
 
+* [Disable](docs/sdks/workspace/README.md#disable) - Disable Api Key
+* [SetThirdPartyDisablingPolicy](docs/sdks/workspace/README.md#setthirdpartydisablingpolicy) - Set Workspace Third-Party Disabling Policy
 * [GetServiceAccountAPIKeys](docs/sdks/workspace/README.md#getserviceaccountapikeys) - Get Service Account Api Keys Route
 * [CreateServiceAccountAPIKey](docs/sdks/workspace/README.md#createserviceaccountapikey) - Create Service Account Api Key
 * [DeleteServiceAccountAPIKey](docs/sdks/workspace/README.md#deleteserviceaccountapikey) - Delete Service Account Api Key
 * [EditServiceAccountAPIKey](docs/sdks/workspace/README.md#editserviceaccountapikey) - Edit Service Account Api Key
+* [GetWorkspaceAuditLogs](docs/sdks/workspace/README.md#getworkspaceauditlogs) - Get Workspace Audit Logs
 * [ListAuthConnections](docs/sdks/workspace/README.md#listauthconnections) - Get Workspace Auth Connections
 * [CreateAuthConnection](docs/sdks/workspace/README.md#createauthconnection) - Create Workspace Auth Connection
 * [DeleteAuthConnection](docs/sdks/workspace/README.md#deleteauthconnection) - Delete Workspace Auth Connection
+* [UpdateAuthConnection](docs/sdks/workspace/README.md#updateauthconnection) - Update Workspace Auth Connection
 * [GetWorkspaceServiceAccounts](docs/sdks/workspace/README.md#getworkspaceserviceaccounts) - Get Workspace Service Accounts
 * [GetGroupsEndpoint](docs/sdks/workspace/README.md#getgroupsendpoint) - Get All Groups
 * [SearchGroups](docs/sdks/workspace/README.md#searchgroups) - Search User Groups
@@ -545,7 +594,6 @@ package main
 import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"log"
 	"models/operations"
@@ -558,7 +606,7 @@ func main() {
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx, operations.WithRetries(
+	res, err := s.GetUserInfo(ctx, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -572,14 +620,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.ExtendedSubscriptionResponseModel != nil {
-		switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
-		case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
-		case components.PendingChangeTypePendingCancellationResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		}
-
+	if res.UserResponseModel != nil {
+		// handle response
 	}
 }
 
@@ -592,7 +634,6 @@ package main
 import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/models/components"
 	"github.com/bdlilley/elevenlabs-go/retry"
 	"log"
 )
@@ -615,18 +656,12 @@ func main() {
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx)
+	res, err := s.GetUserInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.ExtendedSubscriptionResponseModel != nil {
-		switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
-		case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
-		case components.PendingChangeTypePendingCancellationResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		}
-
+	if res.UserResponseModel != nil {
+		// handle response
 	}
 }
 
@@ -640,7 +675,7 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `apierrors.APIError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `GetUserSubscriptionInfo` function may return the following errors:
+For example, the `GetUserInfo` function may return the following errors:
 
 | Error Type                    | Status Code | Content Type     |
 | ----------------------------- | ----------- | ---------------- |
@@ -667,7 +702,7 @@ func main() {
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx)
+	res, err := s.GetUserInfo(ctx)
 	if err != nil {
 
 		var e *apierrors.HTTPValidationError
@@ -699,7 +734,6 @@ package main
 import (
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"github.com/bdlilley/elevenlabs-go/models/components"
 	"log"
 )
 
@@ -711,18 +745,12 @@ func main() {
 		elevenlabsgo.WithSecurity("YOUR_API_KEY"),
 	)
 
-	res, err := s.GetUserSubscriptionInfo(ctx)
+	res, err := s.GetUserInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.ExtendedSubscriptionResponseModel != nil {
-		switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
-		case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
-		case components.PendingChangeTypePendingCancellationResponseModel:
-			// res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-		}
-
+	if res.UserResponseModel != nil {
+		// handle response
 	}
 }
 

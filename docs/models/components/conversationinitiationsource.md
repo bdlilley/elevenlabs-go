@@ -18,22 +18,28 @@ custom := components.ConversationInitiationSource("custom_value")
 
 ## Values
 
-| Name                                             | Value                                            |
-| ------------------------------------------------ | ------------------------------------------------ |
-| `ConversationInitiationSourceUnknown`            | unknown                                          |
-| `ConversationInitiationSourceAndroidSDK`         | android_sdk                                      |
-| `ConversationInitiationSourceNodeJsSDK`          | node_js_sdk                                      |
-| `ConversationInitiationSourceReactNativeSDK`     | react_native_sdk                                 |
-| `ConversationInitiationSourceReactSDK`           | react_sdk                                        |
-| `ConversationInitiationSourceJsSDK`              | js_sdk                                           |
-| `ConversationInitiationSourcePythonSDK`          | python_sdk                                       |
-| `ConversationInitiationSourceWidget`             | widget                                           |
-| `ConversationInitiationSourceSipTrunk`           | sip_trunk                                        |
-| `ConversationInitiationSourceTwilio`             | twilio                                           |
-| `ConversationInitiationSourceGenesys`            | genesys                                          |
-| `ConversationInitiationSourceSwiftSDK`           | swift_sdk                                        |
-| `ConversationInitiationSourceWhatsapp`           | whatsapp                                         |
-| `ConversationInitiationSourceFlutterSDK`         | flutter_sdk                                      |
-| `ConversationInitiationSourceZendeskIntegration` | zendesk_integration                              |
-| `ConversationInitiationSourceSlackIntegration`   | slack_integration                                |
-| `ConversationInitiationSourceTemplatePreview`    | template_preview                                 |
+| Name                                               | Value                                              |
+| -------------------------------------------------- | -------------------------------------------------- |
+| `ConversationInitiationSourceUnknown`              | unknown                                            |
+| `ConversationInitiationSourceAndroidSDK`           | android_sdk                                        |
+| `ConversationInitiationSourceNodeJsSDK`            | node_js_sdk                                        |
+| `ConversationInitiationSourceReactNativeSDK`       | react_native_sdk                                   |
+| `ConversationInitiationSourceReactSDK`             | react_sdk                                          |
+| `ConversationInitiationSourceJsSDK`                | js_sdk                                             |
+| `ConversationInitiationSourcePythonSDK`            | python_sdk                                         |
+| `ConversationInitiationSourceWidget`               | widget                                             |
+| `ConversationInitiationSourceSipTrunk`             | sip_trunk                                          |
+| `ConversationInitiationSourceTwilio`               | twilio                                             |
+| `ConversationInitiationSourceExotel`               | exotel                                             |
+| `ConversationInitiationSourceGenesys`              | genesys                                            |
+| `ConversationInitiationSourceSwiftSDK`             | swift_sdk                                          |
+| `ConversationInitiationSourceWhatsapp`             | whatsapp                                           |
+| `ConversationInitiationSourceTwilioSms`            | twilio_sms                                         |
+| `ConversationInitiationSourceFlutterSDK`           | flutter_sdk                                        |
+| `ConversationInitiationSourceZendeskIntegration`   | zendesk_integration                                |
+| `ConversationInitiationSourceSlackIntegration`     | slack_integration                                  |
+| `ConversationInitiationSourceTelegramIntegration`  | telegram_integration                               |
+| `ConversationInitiationSourceIntercomIntegration`  | intercom_integration                               |
+| `ConversationInitiationSourceFreshdeskIntegration` | freshdesk_integration                              |
+| `ConversationInitiationSourceTemplatePreview`      | template_preview                                   |
+| `ConversationInitiationSourceGenesysBotConnector`  | genesys_bot_connector                              |

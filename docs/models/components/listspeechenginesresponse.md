@@ -1,0 +1,10 @@
+# ListSpeechEnginesResponse
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `SpeechEngines`                                                                                    | [][components.SpeechEngineSummaryResponse](../../models/components/speechenginesummaryresponse.md) | :heavy_check_mark:                                                                                 | The speech engines matching the query                                                              |
+| `NextCursor`                                                                                       | `*string`                                                                                          | :heavy_minus_sign:                                                                                 | Cursor for fetching the next page                                                                  |
+| `HasMore`                                                                                          | `bool`                                                                                             | :heavy_check_mark:                                                                                 | Whether there are more results                                                                     |

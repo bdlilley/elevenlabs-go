@@ -2,6 +2,8 @@
 
 ## Overview
 
+Embed AI-narrated audio players into your website using Audio Native.
+
 ### Available Operations
 
 * [CreateAudioNativeProject](#createaudionativeproject) - Creates Audio Native Enabled Project.

@@ -9,7 +9,8 @@ import (
 
 type GetClientAppointmentsParams struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	smbToolType *string `const:"get_client_appointments" json:"smb_tool_type"`
+	smbToolType      *string `const:"get_client_appointments" json:"smb_tool_type"`
+	IncludeCancelled *bool   `default:"false" json:"include_cancelled"`
 }
 
 func (g GetClientAppointmentsParams) MarshalJSON() ([]byte, error) {
@@ -25,4 +26,11 @@ func (g *GetClientAppointmentsParams) UnmarshalJSON(data []byte) error {
 
 func (g *GetClientAppointmentsParams) GetSmbToolType() *string {
 	return types.Pointer("get_client_appointments")
+}
+
+func (g *GetClientAppointmentsParams) GetIncludeCancelled() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.IncludeCancelled
 }

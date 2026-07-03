@@ -8,9 +8,11 @@ import (
 
 type ChapterContentBlockTtsNodeResponseModel struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_   string `const:"tts_node" json:"type"`
+	type_             string `const:"tts_node" json:"type"`
+	ProjectVoiceRefID string `json:"project_voice_ref_id"`
+	Text              string `json:"text"`
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	VoiceID string `json:"voice_id"`
-	Text    string `json:"text"`
 }
 
 func (c ChapterContentBlockTtsNodeResponseModel) MarshalJSON() ([]byte, error) {
@@ -28,11 +30,11 @@ func (c *ChapterContentBlockTtsNodeResponseModel) GetType() string {
 	return "tts_node"
 }
 
-func (c *ChapterContentBlockTtsNodeResponseModel) GetVoiceID() string {
+func (c *ChapterContentBlockTtsNodeResponseModel) GetProjectVoiceRefID() string {
 	if c == nil {
 		return ""
 	}
-	return c.VoiceID
+	return c.ProjectVoiceRefID
 }
 
 func (c *ChapterContentBlockTtsNodeResponseModel) GetText() string {
@@ -40,4 +42,11 @@ func (c *ChapterContentBlockTtsNodeResponseModel) GetText() string {
 		return ""
 	}
 	return c.Text
+}
+
+func (c *ChapterContentBlockTtsNodeResponseModel) GetVoiceID() string {
+	if c == nil {
+		return ""
+	}
+	return c.VoiceID
 }

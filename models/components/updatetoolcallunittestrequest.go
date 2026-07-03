@@ -13,6 +13,8 @@ type UpdateToolCallUnitTestRequest struct {
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]any                                  `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelInput `json:"chat_history,omitzero"`
+	// Simulate the test as if the conversation originated from this channel.
+	ConversationInitiationSource *ConversationInitiationSource `default:"unknown" json:"conversation_initiation_source"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"tool" json:"type"`
 	// How to evaluate the agent's tool call (if any). If empty, the tool call is not evaluated.
@@ -54,6 +56,13 @@ func (u *UpdateToolCallUnitTestRequest) GetChatHistory() []ConversationHistoryTr
 		return nil
 	}
 	return u.ChatHistory
+}
+
+func (u *UpdateToolCallUnitTestRequest) GetConversationInitiationSource() *ConversationInitiationSource {
+	if u == nil {
+		return nil
+	}
+	return u.ConversationInitiationSource
 }
 
 func (u *UpdateToolCallUnitTestRequest) GetType() *string {

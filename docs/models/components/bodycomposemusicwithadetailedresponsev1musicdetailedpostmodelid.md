@@ -18,3 +18,4 @@ value := components.BodyComposeMusicWithADetailedResponseV1MusicDetailedPostMode
 | Name                                                                     | Value                                                                    |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelIDMusicV1` | music_v1                                                                 |
+| `BodyComposeMusicWithADetailedResponseV1MusicDetailedPostModelIDMusicV2` | music_v2                                                                 |

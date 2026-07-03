@@ -13,12 +13,14 @@ type PhoneRequestType string
 
 const (
 	PhoneRequestTypeCreateTwilioPhoneNumberRequest     PhoneRequestType = "CreateTwilioPhoneNumberRequest"
+	PhoneRequestTypeCreateExotelPhoneNumberRequest     PhoneRequestType = "CreateExotelPhoneNumberRequest"
 	PhoneRequestTypeCreateSIPTrunkPhoneNumberRequestV2 PhoneRequestType = "CreateSIPTrunkPhoneNumberRequestV2"
 )
 
 // PhoneRequest - Create Phone Request Information
 type PhoneRequest struct {
 	CreateTwilioPhoneNumberRequest     *components.CreateTwilioPhoneNumberRequest     `queryParam:"inline" union:"member"`
+	CreateExotelPhoneNumberRequest     *components.CreateExotelPhoneNumberRequest     `queryParam:"inline" union:"member"`
 	CreateSIPTrunkPhoneNumberRequestV2 *components.CreateSIPTrunkPhoneNumberRequestV2 `queryParam:"inline" union:"member"`
 
 	Type PhoneRequestType
@@ -29,6 +31,15 @@ func CreatePhoneRequestCreateTwilioPhoneNumberRequest(createTwilioPhoneNumberReq
 
 	return PhoneRequest{
 		CreateTwilioPhoneNumberRequest: &createTwilioPhoneNumberRequest,
+		Type:                           typ,
+	}
+}
+
+func CreatePhoneRequestCreateExotelPhoneNumberRequest(createExotelPhoneNumberRequest components.CreateExotelPhoneNumberRequest) PhoneRequest {
+	typ := PhoneRequestTypeCreateExotelPhoneNumberRequest
+
+	return PhoneRequest{
+		CreateExotelPhoneNumberRequest: &createExotelPhoneNumberRequest,
 		Type:                           typ,
 	}
 }
@@ -52,6 +63,14 @@ func (u *PhoneRequest) UnmarshalJSON(data []byte) error {
 		candidates = append(candidates, utils.UnionCandidate{
 			Type:  PhoneRequestTypeCreateTwilioPhoneNumberRequest,
 			Value: &createTwilioPhoneNumberRequest,
+		})
+	}
+
+	var createExotelPhoneNumberRequest components.CreateExotelPhoneNumberRequest = components.CreateExotelPhoneNumberRequest{}
+	if err := utils.UnmarshalJSON(data, &createExotelPhoneNumberRequest, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  PhoneRequestTypeCreateExotelPhoneNumberRequest,
+			Value: &createExotelPhoneNumberRequest,
 		})
 	}
 
@@ -79,6 +98,9 @@ func (u *PhoneRequest) UnmarshalJSON(data []byte) error {
 	case PhoneRequestTypeCreateTwilioPhoneNumberRequest:
 		u.CreateTwilioPhoneNumberRequest = best.Value.(*components.CreateTwilioPhoneNumberRequest)
 		return nil
+	case PhoneRequestTypeCreateExotelPhoneNumberRequest:
+		u.CreateExotelPhoneNumberRequest = best.Value.(*components.CreateExotelPhoneNumberRequest)
+		return nil
 	case PhoneRequestTypeCreateSIPTrunkPhoneNumberRequestV2:
 		u.CreateSIPTrunkPhoneNumberRequestV2 = best.Value.(*components.CreateSIPTrunkPhoneNumberRequestV2)
 		return nil
@@ -90,6 +112,10 @@ func (u *PhoneRequest) UnmarshalJSON(data []byte) error {
 func (u PhoneRequest) MarshalJSON() ([]byte, error) {
 	if u.CreateTwilioPhoneNumberRequest != nil {
 		return utils.MarshalJSON(u.CreateTwilioPhoneNumberRequest, "", true)
+	}
+
+	if u.CreateExotelPhoneNumberRequest != nil {
+		return utils.MarshalJSON(u.CreateExotelPhoneNumberRequest, "", true)
 	}
 
 	if u.CreateSIPTrunkPhoneNumberRequestV2 != nil {

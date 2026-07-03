@@ -1,0 +1,10 @@
+# ListSipMessagesRequest
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `PhoneNumberID`                                                        | `string`                                                               | :heavy_check_mark:                                                     | The phone number ID. This is returned when a phone number is imported. | TeaqRRdTcIfIu2i7BYfT                                                   |
+| `PageSize`                                                             | `*int64`                                                               | :heavy_minus_sign:                                                     | N/A                                                                    |                                                                        |
+| `Cursor`                                                               | `*string`                                                              | :heavy_minus_sign:                                                     | Used for fetching next page. Cursor is returned in the response.       |                                                                        |

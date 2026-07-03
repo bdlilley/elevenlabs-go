@@ -10,7 +10,7 @@ import (
 type GetAgentWidgetRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
-	// An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint
+	// An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get_signed_url endpoint
 	ConversationSignature *string `queryParam:"style=form,explode=true,name=conversation_signature"`
 }
 

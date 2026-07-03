@@ -4,15 +4,106 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
+
+type BodyStreamComposedMusicV1MusicStreamPostCompositionPlanType string
+
+const (
+	BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeMusicPrompt     BodyStreamComposedMusicV1MusicStreamPostCompositionPlanType = "MusicPrompt"
+	BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeCompositionPlan BodyStreamComposedMusicV1MusicStreamPostCompositionPlanType = "CompositionPlan"
+)
+
+type BodyStreamComposedMusicV1MusicStreamPostCompositionPlan struct {
+	MusicPrompt     *MusicPrompt     `queryParam:"inline" union:"member"`
+	CompositionPlan *CompositionPlan `queryParam:"inline" union:"member"`
+
+	Type BodyStreamComposedMusicV1MusicStreamPostCompositionPlanType
+}
+
+func CreateBodyStreamComposedMusicV1MusicStreamPostCompositionPlanMusicPrompt(musicPrompt MusicPrompt) BodyStreamComposedMusicV1MusicStreamPostCompositionPlan {
+	typ := BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeMusicPrompt
+
+	return BodyStreamComposedMusicV1MusicStreamPostCompositionPlan{
+		MusicPrompt: &musicPrompt,
+		Type:        typ,
+	}
+}
+
+func CreateBodyStreamComposedMusicV1MusicStreamPostCompositionPlanCompositionPlan(compositionPlan CompositionPlan) BodyStreamComposedMusicV1MusicStreamPostCompositionPlan {
+	typ := BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeCompositionPlan
+
+	return BodyStreamComposedMusicV1MusicStreamPostCompositionPlan{
+		CompositionPlan: &compositionPlan,
+		Type:            typ,
+	}
+}
+
+func (u *BodyStreamComposedMusicV1MusicStreamPostCompositionPlan) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var musicPrompt MusicPrompt = MusicPrompt{}
+	if err := utils.UnmarshalJSON(data, &musicPrompt, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeMusicPrompt,
+			Value: &musicPrompt,
+		})
+	}
+
+	var compositionPlan CompositionPlan = CompositionPlan{}
+	if err := utils.UnmarshalJSON(data, &compositionPlan, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeCompositionPlan,
+			Value: &compositionPlan,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyStreamComposedMusicV1MusicStreamPostCompositionPlan", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyStreamComposedMusicV1MusicStreamPostCompositionPlan", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(BodyStreamComposedMusicV1MusicStreamPostCompositionPlanType)
+	switch best.Type {
+	case BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeMusicPrompt:
+		u.MusicPrompt = best.Value.(*MusicPrompt)
+		return nil
+	case BodyStreamComposedMusicV1MusicStreamPostCompositionPlanTypeCompositionPlan:
+		u.CompositionPlan = best.Value.(*CompositionPlan)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyStreamComposedMusicV1MusicStreamPostCompositionPlan", string(data))
+}
+
+func (u BodyStreamComposedMusicV1MusicStreamPostCompositionPlan) MarshalJSON() ([]byte, error) {
+	if u.MusicPrompt != nil {
+		return utils.MarshalJSON(u.MusicPrompt, "", true)
+	}
+
+	if u.CompositionPlan != nil {
+		return utils.MarshalJSON(u.CompositionPlan, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type BodyStreamComposedMusicV1MusicStreamPostCompositionPlan: all fields are null")
+}
 
 // BodyStreamComposedMusicV1MusicStreamPostModelID - The model to use for the generation.
 type BodyStreamComposedMusicV1MusicStreamPostModelID string
 
 const (
 	BodyStreamComposedMusicV1MusicStreamPostModelIDMusicV1 BodyStreamComposedMusicV1MusicStreamPostModelID = "music_v1"
+	BodyStreamComposedMusicV1MusicStreamPostModelIDMusicV2 BodyStreamComposedMusicV1MusicStreamPostModelID = "music_v2"
 )
 
 func (e BodyStreamComposedMusicV1MusicStreamPostModelID) ToPointer() *BodyStreamComposedMusicV1MusicStreamPostModelID {
@@ -25,6 +116,8 @@ func (e *BodyStreamComposedMusicV1MusicStreamPostModelID) UnmarshalJSON(data []b
 	}
 	switch v {
 	case "music_v1":
+		fallthrough
+	case "music_v2":
 		*e = BodyStreamComposedMusicV1MusicStreamPostModelID(v)
 		return nil
 	default:
@@ -35,12 +128,16 @@ func (e *BodyStreamComposedMusicV1MusicStreamPostModelID) UnmarshalJSON(data []b
 type BodyStreamComposedMusicV1MusicStreamPost struct {
 	// A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`.
 	Prompt *string `json:"prompt,omitzero"`
+	// Optional generation mode hint for prompt-based music generation. Can only be used with `prompt`.
+	GenerationMode *MusicGenerationMode `json:"generation_mode,omitzero"`
 	// A music prompt. Deprecated. Use `composition_plan` instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	MusicPrompt *MusicPrompt `json:"music_prompt,omitzero"`
+	// The lyrics text to use for the generation.
+	LyricsText *string `json:"lyrics_text,omitzero"`
 	// A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`.
-	CompositionPlan *MusicPrompt `json:"composition_plan,omitzero"`
+	CompositionPlan *BodyStreamComposedMusicV1MusicStreamPostCompositionPlan `json:"composition_plan,omitzero"`
 	// The length of the song to generate in milliseconds. Used only in conjunction with `prompt`. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt.
 	MusicLengthMs *int64 `json:"music_length_ms,omitzero"`
 	// The model to use for the generation.
@@ -51,9 +148,11 @@ type BodyStreamComposedMusicV1MusicStreamPost struct {
 	ForceInstrumental *bool `default:"false" json:"force_instrumental"`
 	// The ID of the finetune to use for the generation
 	FinetuneID *string `json:"finetune_id,omitzero"`
+	// How strongly the finetune influences the generation. Defaults to 1.0 (full strength). Lower values soften the influence of the finetune, leaving more room for prompt-level steering. Only meaningful when `finetune_id` is also provided.
+	FinetuneStrength *float64 `default:"1" json:"finetune_strength"`
 	// If true, proper names in the prompt will be phonetically spelled in the lyrics for better pronunciation by the music model. The original names will be restored in word timestamps.
 	UsePhoneticNames *bool `default:"false" json:"use_phonetic_names"`
-	// Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature.
+	// Whether to store the generated song for inpainting.
 	StoreForInpainting *bool `default:"false" json:"store_for_inpainting"`
 }
 
@@ -75,6 +174,13 @@ func (b *BodyStreamComposedMusicV1MusicStreamPost) GetPrompt() *string {
 	return b.Prompt
 }
 
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetGenerationMode() *MusicGenerationMode {
+	if b == nil {
+		return nil
+	}
+	return b.GenerationMode
+}
+
 func (b *BodyStreamComposedMusicV1MusicStreamPost) GetMusicPrompt() *MusicPrompt {
 	if b == nil {
 		return nil
@@ -82,7 +188,14 @@ func (b *BodyStreamComposedMusicV1MusicStreamPost) GetMusicPrompt() *MusicPrompt
 	return b.MusicPrompt
 }
 
-func (b *BodyStreamComposedMusicV1MusicStreamPost) GetCompositionPlan() *MusicPrompt {
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetLyricsText() *string {
+	if b == nil {
+		return nil
+	}
+	return b.LyricsText
+}
+
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetCompositionPlan() *BodyStreamComposedMusicV1MusicStreamPostCompositionPlan {
 	if b == nil {
 		return nil
 	}
@@ -122,6 +235,13 @@ func (b *BodyStreamComposedMusicV1MusicStreamPost) GetFinetuneID() *string {
 		return nil
 	}
 	return b.FinetuneID
+}
+
+func (b *BodyStreamComposedMusicV1MusicStreamPost) GetFinetuneStrength() *float64 {
+	if b == nil {
+		return nil
+	}
+	return b.FinetuneStrength
 }
 
 func (b *BodyStreamComposedMusicV1MusicStreamPost) GetUsePhoneticNames() *bool {

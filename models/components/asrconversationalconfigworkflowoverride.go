@@ -10,7 +10,7 @@ type ASRConversationalConfigWorkflowOverride struct {
 	// The quality of the transcription
 	Quality *ASRQuality `default:"high" json:"quality"`
 	// The provider of the transcription service
-	Provider *ASRProvider `default:"elevenlabs" json:"provider"`
+	Provider *ASRProvider `default:"scribe_realtime" json:"provider"`
 	// The format of the audio to be transcribed
 	UserInputAudioFormat *ASRInputFormat `default:"pcm_16000" json:"user_input_audio_format"`
 	// Keywords to boost prediction probability for

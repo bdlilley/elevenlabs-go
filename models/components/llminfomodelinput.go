@@ -24,6 +24,8 @@ type LLMInfoModelInput struct {
 	AvailableReasoningEfforts []LLMReasoningEffort `json:"available_reasoning_efforts,omitzero"`
 	// Deprecation information if this model is deprecated or scheduled for deprecation. Null if the model is not affected.
 	DeprecationInfo *LLMDeprecationInfoModel `json:"deprecation_info,omitzero"`
+	// Regional processing surcharge details if this model has additional costs in the current deployment region. Null if no surcharge applies.
+	RegionalProcessingSurcharge *RegionalProcessingSurchargeInfo `json:"regional_processing_surcharge,omitzero"`
 }
 
 func (l LLMInfoModelInput) MarshalJSON() ([]byte, error) {
@@ -98,4 +100,11 @@ func (l *LLMInfoModelInput) GetDeprecationInfo() *LLMDeprecationInfoModel {
 		return nil
 	}
 	return l.DeprecationInfo
+}
+
+func (l *LLMInfoModelInput) GetRegionalProcessingSurcharge() *RegionalProcessingSurchargeInfo {
+	if l == nil {
+		return nil
+	}
+	return l.RegionalProcessingSurcharge
 }

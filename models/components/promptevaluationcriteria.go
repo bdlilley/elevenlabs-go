@@ -20,6 +20,13 @@ type PromptEvaluationCriteria struct {
 	// When evaluating the prompt, should the agent's knowledge base be used.
 	UseKnowledgeBase *bool          `default:"false" json:"use_knowledge_base"`
 	Scope            *AnalysisScope `default:"conversation" json:"scope"`
+	// LLM model to use for this evaluation criteria. If not set, uses agent's analysis_llm default.
+	Llm         *Llm                 `default:"gemini-2.5-flash" json:"llm"`
+	ScoringMode *CriteriaScoringMode `default:"binary" json:"scoring_mode"`
+	// Maximum value of the numeric score scale (minimum is always 0). Only used when scoring_mode is 'numeric_uniform'.
+	MaxScore *int64 `default:"100" json:"max_score"`
+	// Optional free-text instructions describing how to assign values on the numeric scale. Only used when scoring_mode is 'numeric_uniform'.
+	ScoreInstructions *string `json:"score_instructions,omitzero"`
 }
 
 func (p PromptEvaluationCriteria) MarshalJSON() ([]byte, error) {
@@ -70,4 +77,32 @@ func (p *PromptEvaluationCriteria) GetScope() *AnalysisScope {
 		return nil
 	}
 	return p.Scope
+}
+
+func (p *PromptEvaluationCriteria) GetLlm() *Llm {
+	if p == nil {
+		return nil
+	}
+	return p.Llm
+}
+
+func (p *PromptEvaluationCriteria) GetScoringMode() *CriteriaScoringMode {
+	if p == nil {
+		return nil
+	}
+	return p.ScoringMode
+}
+
+func (p *PromptEvaluationCriteria) GetMaxScore() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.MaxScore
+}
+
+func (p *PromptEvaluationCriteria) GetScoreInstructions() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScoreInstructions
 }

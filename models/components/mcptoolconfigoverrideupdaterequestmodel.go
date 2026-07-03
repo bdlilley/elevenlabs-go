@@ -15,12 +15,14 @@ const (
 	MCPToolConfigOverrideUpdateRequestModelInputOverridesTypeConstant        MCPToolConfigOverrideUpdateRequestModelInputOverridesType = "constant"
 	MCPToolConfigOverrideUpdateRequestModelInputOverridesTypeDynamicVariable MCPToolConfigOverrideUpdateRequestModelInputOverridesType = "dynamic_variable"
 	MCPToolConfigOverrideUpdateRequestModelInputOverridesTypeLlm             MCPToolConfigOverrideUpdateRequestModelInputOverridesType = "llm"
+	MCPToolConfigOverrideUpdateRequestModelInputOverridesTypeOmit            MCPToolConfigOverrideUpdateRequestModelInputOverridesType = "omit"
 )
 
 type MCPToolConfigOverrideUpdateRequestModelInputOverrides struct {
 	ConstantSchemaOverride        *ConstantSchemaOverride        `queryParam:"inline" union:"member"`
 	DynamicVariableSchemaOverride *DynamicVariableSchemaOverride `queryParam:"inline" union:"member"`
 	LLMSchemaOverride             *LLMSchemaOverride             `queryParam:"inline" union:"member"`
+	OmitSchemaOverride            *OmitSchemaOverride            `queryParam:"inline" union:"member"`
 
 	Type MCPToolConfigOverrideUpdateRequestModelInputOverridesType
 }
@@ -49,6 +51,15 @@ func CreateMCPToolConfigOverrideUpdateRequestModelInputOverridesLlm(llm LLMSchem
 	return MCPToolConfigOverrideUpdateRequestModelInputOverrides{
 		LLMSchemaOverride: &llm,
 		Type:              typ,
+	}
+}
+
+func CreateMCPToolConfigOverrideUpdateRequestModelInputOverridesOmit(omit OmitSchemaOverride) MCPToolConfigOverrideUpdateRequestModelInputOverrides {
+	typ := MCPToolConfigOverrideUpdateRequestModelInputOverridesTypeOmit
+
+	return MCPToolConfigOverrideUpdateRequestModelInputOverrides{
+		OmitSchemaOverride: &omit,
+		Type:               typ,
 	}
 }
 
@@ -91,6 +102,15 @@ func (u *MCPToolConfigOverrideUpdateRequestModelInputOverrides) UnmarshalJSON(da
 		u.LLMSchemaOverride = llmSchemaOverride
 		u.Type = MCPToolConfigOverrideUpdateRequestModelInputOverridesTypeLlm
 		return nil
+	case "omit":
+		omitSchemaOverride := new(OmitSchemaOverride)
+		if err := utils.UnmarshalJSON(data, &omitSchemaOverride, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Source == omit) type OmitSchemaOverride within MCPToolConfigOverrideUpdateRequestModelInputOverrides: %w", string(data), err)
+		}
+
+		u.OmitSchemaOverride = omitSchemaOverride
+		u.Type = MCPToolConfigOverrideUpdateRequestModelInputOverridesTypeOmit
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPToolConfigOverrideUpdateRequestModelInputOverrides", string(data))
@@ -109,24 +129,40 @@ func (u MCPToolConfigOverrideUpdateRequestModelInputOverrides) MarshalJSON() ([]
 		return utils.MarshalJSON(u.LLMSchemaOverride, "", true)
 	}
 
+	if u.OmitSchemaOverride != nil {
+		return utils.MarshalJSON(u.OmitSchemaOverride, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type MCPToolConfigOverrideUpdateRequestModelInputOverrides: all fields are null")
 }
 
 type MCPToolConfigOverrideUpdateRequestModel struct {
-	// If set, overrides the server's force_pre_tool_speech setting for this tool
+	// DEPRECATED: use `pre_tool_speech` instead. If set, overrides the server's force_pre_tool_speech setting for this tool.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	ForcePreToolSpeech *bool `json:"force_pre_tool_speech,omitzero"`
-	// If set, overrides the server's disable_interruptions setting for this tool
+	// If set, overrides the server's pre_tool_speech setting for this tool.
+	PreToolSpeech *PreToolSpeechMode `default:"auto" json:"pre_tool_speech"`
+	// DEPRECATED: use `interruption_mode` instead. If set, overrides the server's disable_interruptions setting for this tool.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DisableInterruptions *bool `json:"disable_interruptions,omitzero"`
+	// If set, overrides the server's interruption_mode setting for this tool.
+	InterruptionMode *ToolInterruptionMode `default:"allow" json:"interruption_mode"`
 	// If set, overrides the server's tool_call_sound setting for this tool
 	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// If set, overrides the server's tool_call_sound_behavior setting for this tool
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// If set, overrides the server's execution_mode setting for this tool
 	ExecutionMode *ToolExecutionMode `default:"immediate" json:"execution_mode"`
+	// If set, overrides the server's response timeout for this MCP tool.
+	ResponseTimeoutSecs *int64 `json:"response_timeout_secs,omitzero"`
 	// Dynamic variable assignments for this MCP tool
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Mapping of json path to input override configuration
 	InputOverrides map[string]MCPToolConfigOverrideUpdateRequestModelInputOverrides `json:"input_overrides,omitzero"`
+	// Mock responses with optional parameter conditions. Evaluated top-to-bottom; first match wins.
+	ResponseMocks []ToolResponseMockConfigInput `json:"response_mocks,omitzero"`
 }
 
 func (m MCPToolConfigOverrideUpdateRequestModel) MarshalJSON() ([]byte, error) {
@@ -147,11 +183,25 @@ func (m *MCPToolConfigOverrideUpdateRequestModel) GetForcePreToolSpeech() *bool 
 	return m.ForcePreToolSpeech
 }
 
+func (m *MCPToolConfigOverrideUpdateRequestModel) GetPreToolSpeech() *PreToolSpeechMode {
+	if m == nil {
+		return nil
+	}
+	return m.PreToolSpeech
+}
+
 func (m *MCPToolConfigOverrideUpdateRequestModel) GetDisableInterruptions() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.DisableInterruptions
+}
+
+func (m *MCPToolConfigOverrideUpdateRequestModel) GetInterruptionMode() *ToolInterruptionMode {
+	if m == nil {
+		return nil
+	}
+	return m.InterruptionMode
 }
 
 func (m *MCPToolConfigOverrideUpdateRequestModel) GetToolCallSound() *ToolCallSoundType {
@@ -175,6 +225,13 @@ func (m *MCPToolConfigOverrideUpdateRequestModel) GetExecutionMode() *ToolExecut
 	return m.ExecutionMode
 }
 
+func (m *MCPToolConfigOverrideUpdateRequestModel) GetResponseTimeoutSecs() *int64 {
+	if m == nil {
+		return nil
+	}
+	return m.ResponseTimeoutSecs
+}
+
 func (m *MCPToolConfigOverrideUpdateRequestModel) GetAssignments() []DynamicVariableAssignment {
 	if m == nil {
 		return nil
@@ -187,4 +244,11 @@ func (m *MCPToolConfigOverrideUpdateRequestModel) GetInputOverrides() map[string
 		return nil
 	}
 	return m.InputOverrides
+}
+
+func (m *MCPToolConfigOverrideUpdateRequestModel) GetResponseMocks() []ToolResponseMockConfigInput {
+	if m == nil {
+		return nil
+	}
+	return m.ResponseMocks
 }

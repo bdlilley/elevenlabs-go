@@ -103,7 +103,9 @@ type GetKnowledgeBaseSummaryFileResponseModel struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DependentAgents []GetKnowledgeBaseSummaryFileResponseModelDependentAgent `json:"dependent_agents"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_ string `const:"file" json:"type"`
+	type_            string                `const:"file" json:"type"`
+	ExternalSyncInfo *ExternalFileSyncInfo `json:"external_sync_info,omitzero"`
+	IsFrozen         *bool                 `default:"false" json:"is_frozen"`
 }
 
 func (g GetKnowledgeBaseSummaryFileResponseModel) MarshalJSON() ([]byte, error) {
@@ -175,4 +177,18 @@ func (g *GetKnowledgeBaseSummaryFileResponseModel) GetDependentAgents() []GetKno
 
 func (g *GetKnowledgeBaseSummaryFileResponseModel) GetType() string {
 	return "file"
+}
+
+func (g *GetKnowledgeBaseSummaryFileResponseModel) GetExternalSyncInfo() *ExternalFileSyncInfo {
+	if g == nil {
+		return nil
+	}
+	return g.ExternalSyncInfo
+}
+
+func (g *GetKnowledgeBaseSummaryFileResponseModel) GetIsFrozen() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.IsFrozen
 }

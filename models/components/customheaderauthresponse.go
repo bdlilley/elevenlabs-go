@@ -17,6 +17,15 @@ type CustomHeaderAuthResponse struct {
 	HeaderName string                      `json:"header_name"`
 	ID         string                      `json:"id"`
 	UsedBy     *AuthConnectionDependencies `json:"used_by,omitzero"`
+	// Single status field shared by every auth type's stored credential.
+	//
+	// OAuth values (``REFRESH_FAILED``, ``REVOKED``) are written by the OAuth
+	// token-manager refresh path. ``CREDENTIAL_INVALID`` is written by the
+	// tool execution path when an upstream response matches a credential's
+	// ``failure_signatures`` entry (Bearer, Basic auth, etc.).
+	Status          *AuthConnectionStatus `default:"active" json:"status"`
+	StatusDetail    *string               `json:"status_detail,omitzero"`
+	StatusUpdatedAt *string               `json:"status_updated_at,omitzero"`
 }
 
 func (c CustomHeaderAuthResponse) MarshalJSON() ([]byte, error) {
@@ -67,4 +76,25 @@ func (c *CustomHeaderAuthResponse) GetUsedBy() *AuthConnectionDependencies {
 		return nil
 	}
 	return c.UsedBy
+}
+
+func (c *CustomHeaderAuthResponse) GetStatus() *AuthConnectionStatus {
+	if c == nil {
+		return nil
+	}
+	return c.Status
+}
+
+func (c *CustomHeaderAuthResponse) GetStatusDetail() *string {
+	if c == nil {
+		return nil
+	}
+	return c.StatusDetail
+}
+
+func (c *CustomHeaderAuthResponse) GetStatusUpdatedAt() *string {
+	if c == nil {
+		return nil
+	}
+	return c.StatusUpdatedAt
 }

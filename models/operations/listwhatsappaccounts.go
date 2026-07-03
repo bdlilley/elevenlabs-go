@@ -7,6 +7,18 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
 )
 
+type ListWhatsappAccountsRequest struct {
+	// Filter by assigned agent ID
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
+}
+
+func (l *ListWhatsappAccountsRequest) GetAgentID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.AgentID
+}
+
 type ListWhatsappAccountsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response

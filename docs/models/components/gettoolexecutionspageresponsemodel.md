@@ -1,0 +1,10 @@
+# GetToolExecutionsPageResponseModel
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `Executions`                                                                                     | [][components.ToolExecutionResponseModel](../../models/components/toolexecutionresponsemodel.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `NextCursor`                                                                                     | `*string`                                                                                        | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `HasMore`                                                                                        | `bool`                                                                                           | :heavy_check_mark:                                                                               | N/A                                                                                              |

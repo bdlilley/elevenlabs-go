@@ -17,6 +17,7 @@ import (
 	"net/url"
 )
 
+// PronunciationDictionary - Manage pronunciation dictionaries that override how specific words are pronounced.
 type PronunciationDictionary struct {
 	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
@@ -175,7 +176,7 @@ func (s *PronunciationDictionary) AddFromFile(ctx context.Context, request compo
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -412,7 +413,7 @@ func (s *PronunciationDictionary) AddFromRules(ctx context.Context, request comp
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -646,7 +647,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryMetadata(ctx context
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -888,7 +889,7 @@ func (s *PronunciationDictionary) PatchPronunciationDictionary(ctx context.Conte
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1130,7 +1131,7 @@ func (s *PronunciationDictionary) SetRules(ctx context.Context, pronunciationDic
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1372,7 +1373,7 @@ func (s *PronunciationDictionary) AddRules(ctx context.Context, pronunciationDic
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1614,7 +1615,7 @@ func (s *PronunciationDictionary) RemoveRules(ctx context.Context, pronunciation
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1849,7 +1850,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx conte
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1938,7 +1939,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionaryVersionPls(ctx conte
 
 // GetPronunciationDictionariesMetadata - Get Pronunciation Dictionaries
 // Get a list of the pronunciation dictionaries you have access to and their metadata
-func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx context.Context, cursor *string, pageSize *int64, sort *operations.Sort, sortDirection *string, opts ...operations.Option) (*operations.GetPronunciationDictionariesMetadataResponse, error) {
+func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx context.Context, cursor *string, pageSize *int64, sort *operations.GetPronunciationDictionariesMetadataSort, sortDirection *string, opts ...operations.Option) (*operations.GetPronunciationDictionariesMetadataResponse, error) {
 	request := operations.GetPronunciationDictionariesMetadataRequest{
 		Cursor:        cursor,
 		PageSize:      pageSize,
@@ -2084,7 +2085,7 @@ func (s *PronunciationDictionary) GetPronunciationDictionariesMetadata(ctx conte
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

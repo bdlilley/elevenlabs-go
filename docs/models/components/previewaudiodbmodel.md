@@ -5,8 +5,8 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `VoiceID`          | `string`           | :heavy_check_mark: | N/A                |
-| `Text`             | `string`           | :heavy_check_mark: | N/A                |
+| `VoiceID`          | `*string`          | :heavy_minus_sign: | N/A                |
+| `Text`             | `*string`          | :heavy_minus_sign: | N/A                |
 | `AudioURL`         | `string`           | :heavy_check_mark: | N/A                |
 | `HlsManifestURL`   | `*string`          | :heavy_minus_sign: | N/A                |
 | `DashManifestURL`  | `*string`          | :heavy_minus_sign: | N/A                |

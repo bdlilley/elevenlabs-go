@@ -436,17 +436,25 @@ type MCPServerConfigInput struct {
 	AuthConnection *MCPServerConfigInputAuthConnection `json:"auth_connection,omitzero"`
 	Name           string                              `json:"name"`
 	Description    *string                             `default:"" json:"description"`
-	// If true, all tools from this MCP server will require pre-tool execution speech
-	ForcePreToolSpeech *bool `default:"false" json:"force_pre_tool_speech"`
-	// If true, the user will not be able to interrupt the agent while any tool from this MCP server is running.
-	DisableInterruptions *bool `default:"false" json:"disable_interruptions"`
+	// DEPRECATED: use `pre_tool_speech` instead. If true, all tools from this MCP server will require pre-tool execution speech.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	ForcePreToolSpeech *bool              `default:"false" json:"force_pre_tool_speech"`
+	PreToolSpeech      *PreToolSpeechMode `default:"auto" json:"pre_tool_speech"`
+	// DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while any tool from this MCP server is running.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DisableInterruptions *bool                 `default:"false" json:"disable_interruptions"`
+	InterruptionMode     *ToolInterruptionMode `default:"allow" json:"interruption_mode"`
 	// Predefined tool call sound type to play during tool execution for all tools from this MCP server
 	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines how the tool call sound should be played.
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	ExecutionMode         *ToolExecutionMode     `default:"immediate" json:"execution_mode"`
+	// The maximum time in seconds to wait for each MCP tool call to complete. Must be between 5 and 300 seconds (inclusive).
+	ResponseTimeoutSecs *int64 `default:"30" json:"response_timeout_secs"`
 	// List of per-tool configuration overrides that override the server-level defaults for specific tools
-	ToolConfigOverrides []MCPToolConfigOverride `json:"tool_config_overrides,omitzero"`
+	ToolConfigOverrides []MCPToolConfigOverrideInput `json:"tool_config_overrides,omitzero"`
 	// Whether to disable HTTP compression for this MCP server. Enable this if the server does not support compressed responses.
 	DisableCompression *bool `default:"false" json:"disable_compression"`
 }
@@ -532,11 +540,25 @@ func (m *MCPServerConfigInput) GetForcePreToolSpeech() *bool {
 	return m.ForcePreToolSpeech
 }
 
+func (m *MCPServerConfigInput) GetPreToolSpeech() *PreToolSpeechMode {
+	if m == nil {
+		return nil
+	}
+	return m.PreToolSpeech
+}
+
 func (m *MCPServerConfigInput) GetDisableInterruptions() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.DisableInterruptions
+}
+
+func (m *MCPServerConfigInput) GetInterruptionMode() *ToolInterruptionMode {
+	if m == nil {
+		return nil
+	}
+	return m.InterruptionMode
 }
 
 func (m *MCPServerConfigInput) GetToolCallSound() *ToolCallSoundType {
@@ -560,7 +582,14 @@ func (m *MCPServerConfigInput) GetExecutionMode() *ToolExecutionMode {
 	return m.ExecutionMode
 }
 
-func (m *MCPServerConfigInput) GetToolConfigOverrides() []MCPToolConfigOverride {
+func (m *MCPServerConfigInput) GetResponseTimeoutSecs() *int64 {
+	if m == nil {
+		return nil
+	}
+	return m.ResponseTimeoutSecs
+}
+
+func (m *MCPServerConfigInput) GetToolConfigOverrides() []MCPToolConfigOverrideInput {
 	if m == nil {
 		return nil
 	}

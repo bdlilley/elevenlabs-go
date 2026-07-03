@@ -1,0 +1,9 @@
+# SpeechEngineConfig
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `WsURL`                                                                                                               | `string`                                                                                                              | :heavy_check_mark:                                                                                                    | The WebSocket URL for the transcript server                                                                           |
+| `RequestHeaders`                                                                                                      | map[string][components.SpeechEngineConfigRequestHeaders](../../models/components/speechengineconfigrequestheaders.md) | :heavy_minus_sign:                                                                                                    | Headers to include in the WebSocket connection request                                                                |

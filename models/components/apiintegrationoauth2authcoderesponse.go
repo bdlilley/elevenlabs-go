@@ -7,20 +7,20 @@ import (
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
-// ScopeSeparator2 - Separator for scopes
-type ScopeSeparator2 string
+// APIIntegrationOAuth2AuthCodeResponseScopeSeparator2 - Separator for scopes
+type APIIntegrationOAuth2AuthCodeResponseScopeSeparator2 string
 
 const (
-	ScopeSeparator2Unknown ScopeSeparator2 = " "
-	ScopeSeparator2Value   ScopeSeparator2 = ","
+	APIIntegrationOAuth2AuthCodeResponseScopeSeparator2Unknown APIIntegrationOAuth2AuthCodeResponseScopeSeparator2 = " "
+	APIIntegrationOAuth2AuthCodeResponseScopeSeparator2Value   APIIntegrationOAuth2AuthCodeResponseScopeSeparator2 = ","
 )
 
-func (e ScopeSeparator2) ToPointer() *ScopeSeparator2 {
+func (e APIIntegrationOAuth2AuthCodeResponseScopeSeparator2) ToPointer() *APIIntegrationOAuth2AuthCodeResponseScopeSeparator2 {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *ScopeSeparator2) IsExact() bool {
+func (e *APIIntegrationOAuth2AuthCodeResponseScopeSeparator2) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case " ", ",":
@@ -39,18 +39,22 @@ type APIIntegrationOAuth2AuthCodeResponse struct {
 	TokenURL string   `json:"token_url"`
 	Scopes   []string `json:"scopes,omitzero"`
 	// Separator for scopes
-	ScopeSeparator *ScopeSeparator2 `default:" " json:"scope_separator"`
+	ScopeSeparator *APIIntegrationOAuth2AuthCodeResponseScopeSeparator2 `default:" " json:"scope_separator"`
 	// ISO 8601 timestamp of when the access token expires
-	ExpiresAt     string                 `json:"expires_at"`
-	IntegrationID string                 `json:"integration_id"`
-	CredentialID  string                 `json:"credential_id"`
-	Status        *OAuthConnectionStatus `default:"active" json:"status"`
-	// Human-readable detail about the current status, e.g. the error message on refresh failure
-	StatusDetail *string `json:"status_detail,omitzero"`
-	// ISO 8601 timestamp of the last status change
-	StatusUpdatedAt *string                     `json:"status_updated_at,omitzero"`
-	ID              string                      `json:"id"`
-	UsedBy          *AuthConnectionDependencies `json:"used_by,omitzero"`
+	ExpiresAt     string                      `json:"expires_at"`
+	IntegrationID string                      `json:"integration_id"`
+	CredentialID  string                      `json:"credential_id"`
+	ID            string                      `json:"id"`
+	UsedBy        *AuthConnectionDependencies `json:"used_by,omitzero"`
+	// Single status field shared by every auth type's stored credential.
+	//
+	// OAuth values (``REFRESH_FAILED``, ``REVOKED``) are written by the OAuth
+	// token-manager refresh path. ``CREDENTIAL_INVALID`` is written by the
+	// tool execution path when an upstream response matches a credential's
+	// ``failure_signatures`` entry (Bearer, Basic auth, etc.).
+	Status          *AuthConnectionStatus `default:"active" json:"status"`
+	StatusDetail    *string               `json:"status_detail,omitzero"`
+	StatusUpdatedAt *string               `json:"status_updated_at,omitzero"`
 }
 
 func (a APIIntegrationOAuth2AuthCodeResponse) MarshalJSON() ([]byte, error) {
@@ -96,7 +100,7 @@ func (a *APIIntegrationOAuth2AuthCodeResponse) GetScopes() []string {
 	return a.Scopes
 }
 
-func (a *APIIntegrationOAuth2AuthCodeResponse) GetScopeSeparator() *ScopeSeparator2 {
+func (a *APIIntegrationOAuth2AuthCodeResponse) GetScopeSeparator() *APIIntegrationOAuth2AuthCodeResponseScopeSeparator2 {
 	if a == nil {
 		return nil
 	}
@@ -124,7 +128,21 @@ func (a *APIIntegrationOAuth2AuthCodeResponse) GetCredentialID() string {
 	return a.CredentialID
 }
 
-func (a *APIIntegrationOAuth2AuthCodeResponse) GetStatus() *OAuthConnectionStatus {
+func (a *APIIntegrationOAuth2AuthCodeResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *APIIntegrationOAuth2AuthCodeResponse) GetUsedBy() *AuthConnectionDependencies {
+	if a == nil {
+		return nil
+	}
+	return a.UsedBy
+}
+
+func (a *APIIntegrationOAuth2AuthCodeResponse) GetStatus() *AuthConnectionStatus {
 	if a == nil {
 		return nil
 	}
@@ -143,20 +161,6 @@ func (a *APIIntegrationOAuth2AuthCodeResponse) GetStatusUpdatedAt() *string {
 		return nil
 	}
 	return a.StatusUpdatedAt
-}
-
-func (a *APIIntegrationOAuth2AuthCodeResponse) GetID() string {
-	if a == nil {
-		return ""
-	}
-	return a.ID
-}
-
-func (a *APIIntegrationOAuth2AuthCodeResponse) GetUsedBy() *AuthConnectionDependencies {
-	if a == nil {
-		return nil
-	}
-	return a.UsedBy
 }
 
 // #region class-body-apiintegrationoauth2authcoderesponse

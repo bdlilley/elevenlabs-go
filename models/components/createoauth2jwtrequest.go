@@ -48,6 +48,33 @@ func (e *CreateOAuth2JWTRequestAlgorithm) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CreateOAuth2JWTRequestTokenResponseField - Token field to extract from the token endpoint response.
+type CreateOAuth2JWTRequestTokenResponseField string
+
+const (
+	CreateOAuth2JWTRequestTokenResponseFieldAccessToken CreateOAuth2JWTRequestTokenResponseField = "access_token"
+	CreateOAuth2JWTRequestTokenResponseFieldIDToken     CreateOAuth2JWTRequestTokenResponseField = "id_token"
+)
+
+func (e CreateOAuth2JWTRequestTokenResponseField) ToPointer() *CreateOAuth2JWTRequestTokenResponseField {
+	return &e
+}
+func (e *CreateOAuth2JWTRequestTokenResponseField) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "access_token":
+		fallthrough
+	case "id_token":
+		*e = CreateOAuth2JWTRequestTokenResponseField(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateOAuth2JWTRequestTokenResponseField: %v", v)
+	}
+}
+
 // CreateOAuth2JWTRequest - Request model for creating OAuth2 JWT auth connections - inherits common settings and includes sensitive fields
 type CreateOAuth2JWTRequest struct {
 	Name string `json:"name"`
@@ -71,8 +98,10 @@ type CreateOAuth2JWTRequest struct {
 	// Token endpoint URL for exchanging JWT for access token
 	TokenURL string `json:"token_url"`
 	// OAuth2 scopes to request when exchanging JWT for access token
-	Scopes    []string `json:"scopes,omitzero"`
-	SecretKey string   `json:"secret_key"`
+	Scopes []string `json:"scopes,omitzero"`
+	// Token field to extract from the token endpoint response.
+	TokenResponseField *CreateOAuth2JWTRequestTokenResponseField `default:"access_token" json:"token_response_field"`
+	SecretKey          string                                    `json:"secret_key"`
 }
 
 func (c CreateOAuth2JWTRequest) MarshalJSON() ([]byte, error) {
@@ -165,6 +194,13 @@ func (c *CreateOAuth2JWTRequest) GetScopes() []string {
 		return nil
 	}
 	return c.Scopes
+}
+
+func (c *CreateOAuth2JWTRequest) GetTokenResponseField() *CreateOAuth2JWTRequestTokenResponseField {
+	if c == nil {
+		return nil
+	}
+	return c.TokenResponseField
 }
 
 func (c *CreateOAuth2JWTRequest) GetSecretKey() string {

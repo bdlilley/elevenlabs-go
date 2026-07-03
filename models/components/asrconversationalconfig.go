@@ -8,7 +8,7 @@ import (
 
 type ASRConversationalConfig struct {
 	Quality              *ASRQuality     `default:"high" json:"quality"`
-	Provider             *ASRProvider    `default:"elevenlabs" json:"provider"`
+	Provider             *ASRProvider    `default:"scribe_realtime" json:"provider"`
 	UserInputAudioFormat *ASRInputFormat `default:"pcm_16000" json:"user_input_audio_format"`
 	// Keywords to boost prediction probability for
 	Keywords []string `json:"keywords,omitzero"`

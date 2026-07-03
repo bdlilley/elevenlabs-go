@@ -16,6 +16,7 @@ import (
 	"net/url"
 )
 
+// VideoToMusic - Generate music that matches the content and mood of a video.
 type VideoToMusic struct {
 	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
@@ -183,7 +184,7 @@ func (s *VideoToMusic) VideoToMusic(ctx context.Context, body components.BodyVid
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"403", "422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

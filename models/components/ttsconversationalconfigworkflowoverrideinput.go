@@ -31,6 +31,10 @@ type TTSConversationalConfigWorkflowOverrideInput struct {
 	TextNormalisationType *TextNormalisationType `default:"system_prompt" json:"text_normalisation_type"`
 	// The pronunciation dictionary locators
 	PronunciationDictionaryLocators []PydanticPronunciationDictionaryVersionLocator `json:"pronunciation_dictionary_locators,omitzero"`
+	// Opt-in to SSML phoneme tag handling for V3 models. When enabled, phoneme tags (inline and from pronunciation dictionaries) are parsed into inline IPA before being sent to the model.
+	EnablePhonemeTags *bool `json:"enable_phoneme_tags,omitzero"`
+	// An optional filter applied to the audio output.
+	AudioFilter *AudioFilterID `json:"audio_filter,omitzero"`
 }
 
 func (t TTSConversationalConfigWorkflowOverrideInput) MarshalJSON() ([]byte, error) {
@@ -126,4 +130,18 @@ func (t *TTSConversationalConfigWorkflowOverrideInput) GetPronunciationDictionar
 		return nil
 	}
 	return t.PronunciationDictionaryLocators
+}
+
+func (t *TTSConversationalConfigWorkflowOverrideInput) GetEnablePhonemeTags() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.EnablePhonemeTags
+}
+
+func (t *TTSConversationalConfigWorkflowOverrideInput) GetAudioFilter() *AudioFilterID {
+	if t == nil {
+		return nil
+	}
+	return t.AudioFilter
 }

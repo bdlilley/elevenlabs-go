@@ -17,6 +17,7 @@ import (
 	"net/url"
 )
 
+// TextToVoice - Design and generate custom voices from a text prompt.
 type TextToVoice struct {
 	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
@@ -31,8 +32,10 @@ func newTextToVoice(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration, ho
 	}
 }
 
-// TextToVoice - Generate A Voice Preview From Description
-// Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
+// TextToVoice - [Deprecated] Generate A Voice Preview From Description
+// **Deprecated.** Use `POST /v1/text-to-voice/design` instead. Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. To create the voice use `POST /v1/text-to-voice` with the chosen `generated_voice_id`.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePreviewsRequestModel, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToVoiceResponse, error) {
 	request := operations.TextToVoiceRequest{
 		OutputFormat: outputFormat,
@@ -184,7 +187,7 @@ func (s *TextToVoice) TextToVoice(ctx context.Context, body components.VoicePrev
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -421,7 +424,7 @@ func (s *TextToVoice) CreateVoice(ctx context.Context, request components.BodyCr
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -667,7 +670,7 @@ func (s *TextToVoice) TextToVoiceDesign(ctx context.Context, body components.Voi
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -914,7 +917,7 @@ func (s *TextToVoice) TextToVoiceRemix(ctx context.Context, voiceID string, body
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1148,7 +1151,7 @@ func (s *TextToVoice) TextToVoicePreviewStream(ctx context.Context, generatedVoi
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

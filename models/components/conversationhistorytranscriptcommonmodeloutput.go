@@ -186,8 +186,11 @@ type ConversationHistoryTranscriptCommonModelOutput struct {
 	LlmUsage                *LLMUsageOutput                                            `json:"llm_usage,omitzero"`
 	Interrupted             *bool                                                      `default:"false" json:"interrupted"`
 	OriginalMessage         *string                                                    `json:"original_message,omitzero"`
+	Reasoning               []ConversationReasoningModel                               `json:"reasoning,omitzero"`
 	SourceMedium            *ChatSourceMedium                                          `json:"source_medium,omitzero"`
 	SourceEventID           *int64                                                     `json:"source_event_id,omitzero"`
+	UsedStaticKbDocumentIds []string                                                   `json:"used_static_kb_document_ids,omitzero"`
+	UserIdentifier          *string                                                    `json:"user_identifier,omitzero"`
 }
 
 func (c ConversationHistoryTranscriptCommonModelOutput) MarshalJSON() ([]byte, error) {
@@ -299,6 +302,13 @@ func (c *ConversationHistoryTranscriptCommonModelOutput) GetOriginalMessage() *s
 	return c.OriginalMessage
 }
 
+func (c *ConversationHistoryTranscriptCommonModelOutput) GetReasoning() []ConversationReasoningModel {
+	if c == nil {
+		return nil
+	}
+	return c.Reasoning
+}
+
 func (c *ConversationHistoryTranscriptCommonModelOutput) GetSourceMedium() *ChatSourceMedium {
 	if c == nil {
 		return nil
@@ -311,4 +321,18 @@ func (c *ConversationHistoryTranscriptCommonModelOutput) GetSourceEventID() *int
 		return nil
 	}
 	return c.SourceEventID
+}
+
+func (c *ConversationHistoryTranscriptCommonModelOutput) GetUsedStaticKbDocumentIds() []string {
+	if c == nil {
+		return nil
+	}
+	return c.UsedStaticKbDocumentIds
+}
+
+func (c *ConversationHistoryTranscriptCommonModelOutput) GetUserIdentifier() *string {
+	if c == nil {
+		return nil
+	}
+	return c.UserIdentifier
 }

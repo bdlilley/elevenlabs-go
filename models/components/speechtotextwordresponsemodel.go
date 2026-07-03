@@ -46,6 +46,8 @@ type SpeechToTextWordResponseModel struct {
 	Logprob float64 `json:"logprob"`
 	// The characters that make up the word and their timing information.
 	Characters []SpeechToTextCharacterResponseModel `json:"characters,omitzero"`
+	// The channel this word was spoken on (for multichannel audio). Null for single-channel transcriptions.
+	ChannelIndex *int64 `json:"channel_index,omitzero"`
 }
 
 func (s SpeechToTextWordResponseModel) MarshalJSON() ([]byte, error) {
@@ -106,4 +108,11 @@ func (s *SpeechToTextWordResponseModel) GetCharacters() []SpeechToTextCharacterR
 		return nil
 	}
 	return s.Characters
+}
+
+func (s *SpeechToTextWordResponseModel) GetChannelIndex() *int64 {
+	if s == nil {
+		return nil
+	}
+	return s.ChannelIndex
 }

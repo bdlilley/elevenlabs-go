@@ -114,31 +114,33 @@ func (u SourceContext) MarshalJSON() ([]byte, error) {
 }
 
 type ProjectExternalAudioResponseModel struct {
-	ExternalAudioID         string           `json:"external_audio_id"`
-	Filename                string           `json:"filename"`
-	SignedURL               *string          `json:"signed_url"`
-	OffsetMs                int64            `json:"offset_ms"`
-	DurationMs              int64            `json:"duration_ms"`
-	StartTimeMs             int64            `json:"start_time_ms"`
-	EndTimeMs               int64            `json:"end_time_ms"`
-	Order                   string           `json:"order"`
-	TrackID                 string           `json:"track_id"`
-	CreatedAtMs             int64            `json:"created_at_ms"`
-	UpdatedAtMs             int64            `json:"updated_at_ms"`
-	VolumeGainDb            *float64         `default:"0" json:"volume_gain_db"`
-	Muted                   *bool            `default:"false" json:"muted"`
-	FadeInMs                *int64           `default:"0" json:"fade_in_ms"`
-	FadeOutMs               *int64           `default:"0" json:"fade_out_ms"`
-	SourceExternalAudioID   *string          `json:"source_external_audio_id,omitzero"`
-	SourceAssetID           *string          `json:"source_asset_id,omitzero"`
-	PendingBlockIds         []string         `json:"pending_block_ids"`
-	PendingExternalAudioIds []string         `json:"pending_external_audio_ids"`
-	SpeechImported          *bool            `default:"false" json:"speech_imported"`
-	PendingTask             *PendingClipTask `json:"pending_task,omitzero"`
-	Error                   *string          `json:"error,omitzero"`
-	CurrentSnapshotID       *string          `json:"current_snapshot_id,omitzero"`
-	SourceContext           *SourceContext   `json:"source_context,omitzero"`
-	Analysis                *AudioAnalysis   `json:"analysis,omitzero"`
+	ExternalAudioID               string                              `json:"external_audio_id"`
+	Filename                      string                              `json:"filename"`
+	SignedURL                     *string                             `json:"signed_url"`
+	OffsetMs                      int64                               `json:"offset_ms"`
+	DurationMs                    int64                               `json:"duration_ms"`
+	StartTimeMs                   int64                               `json:"start_time_ms"`
+	EndTimeMs                     *int64                              `json:"end_time_ms"`
+	Order                         string                              `json:"order"`
+	TrackID                       string                              `json:"track_id"`
+	CreatedAtMs                   int64                               `json:"created_at_ms"`
+	UpdatedAtMs                   int64                               `json:"updated_at_ms"`
+	VolumeGainDb                  *float64                            `default:"0" json:"volume_gain_db"`
+	Muted                         *bool                               `default:"false" json:"muted"`
+	FadeInMs                      *int64                              `default:"0" json:"fade_in_ms"`
+	FadeOutMs                     *int64                              `default:"0" json:"fade_out_ms"`
+	SourceExternalAudioID         *string                             `json:"source_external_audio_id,omitzero"`
+	SourceAssetID                 *string                             `json:"source_asset_id,omitzero"`
+	SourcePlatformAssetID         *string                             `json:"source_platform_asset_id,omitzero"`
+	PendingBlocksMetadata         *PendingBlocksMetadataModel         `json:"pending_blocks_metadata,omitzero"`
+	PendingExternalAudiosMetadata *PendingExternalAudiosMetadataModel `json:"pending_external_audios_metadata,omitzero"`
+	SpeechImported                *bool                               `default:"false" json:"speech_imported"`
+	PendingTask                   *PendingClipTask                    `json:"pending_task,omitzero"`
+	Error                         *string                             `json:"error,omitzero"`
+	CurrentSnapshotID             *string                             `json:"current_snapshot_id,omitzero"`
+	SourceContext                 *SourceContext                      `json:"source_context,omitzero"`
+	Analysis                      *AudioAnalysis                      `json:"analysis,omitzero"`
+	Transcription                 *AssetTranscription                 `json:"transcription,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_                *string  `const:"audio" json:"type"`
 	ImportSpeechProgress *float64 `json:"import_speech_progress"`
@@ -197,9 +199,9 @@ func (p *ProjectExternalAudioResponseModel) GetStartTimeMs() int64 {
 	return p.StartTimeMs
 }
 
-func (p *ProjectExternalAudioResponseModel) GetEndTimeMs() int64 {
+func (p *ProjectExternalAudioResponseModel) GetEndTimeMs() *int64 {
 	if p == nil {
-		return 0
+		return nil
 	}
 	return p.EndTimeMs
 }
@@ -274,18 +276,25 @@ func (p *ProjectExternalAudioResponseModel) GetSourceAssetID() *string {
 	return p.SourceAssetID
 }
 
-func (p *ProjectExternalAudioResponseModel) GetPendingBlockIds() []string {
+func (p *ProjectExternalAudioResponseModel) GetSourcePlatformAssetID() *string {
 	if p == nil {
-		return []string{}
+		return nil
 	}
-	return p.PendingBlockIds
+	return p.SourcePlatformAssetID
 }
 
-func (p *ProjectExternalAudioResponseModel) GetPendingExternalAudioIds() []string {
+func (p *ProjectExternalAudioResponseModel) GetPendingBlocksMetadata() *PendingBlocksMetadataModel {
 	if p == nil {
-		return []string{}
+		return nil
 	}
-	return p.PendingExternalAudioIds
+	return p.PendingBlocksMetadata
+}
+
+func (p *ProjectExternalAudioResponseModel) GetPendingExternalAudiosMetadata() *PendingExternalAudiosMetadataModel {
+	if p == nil {
+		return nil
+	}
+	return p.PendingExternalAudiosMetadata
 }
 
 func (p *ProjectExternalAudioResponseModel) GetSpeechImported() *bool {
@@ -349,6 +358,13 @@ func (p *ProjectExternalAudioResponseModel) GetAnalysis() *AudioAnalysis {
 		return nil
 	}
 	return p.Analysis
+}
+
+func (p *ProjectExternalAudioResponseModel) GetTranscription() *AssetTranscription {
+	if p == nil {
+		return nil
+	}
+	return p.Transcription
 }
 
 func (p *ProjectExternalAudioResponseModel) GetType() *string {

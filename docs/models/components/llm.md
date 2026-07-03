@@ -29,6 +29,10 @@ custom := components.Llm("custom_value")
 | `LlmGpt51`                            | gpt-5.1                               |
 | `LlmGpt52`                            | gpt-5.2                               |
 | `LlmGpt52ChatLatest`                  | gpt-5.2-chat-latest                   |
+| `LlmGpt54`                            | gpt-5.4                               |
+| `LlmGpt54Mini`                        | gpt-5.4-mini                          |
+| `LlmGpt54Nano`                        | gpt-5.4-nano                          |
+| `LlmGpt55`                            | gpt-5.5                               |
 | `LlmGpt5Mini`                         | gpt-5-mini                            |
 | `LlmGpt5Nano`                         | gpt-5-nano                            |
 | `LlmGpt35Turbo`                       | gpt-3.5-turbo                         |
@@ -42,7 +46,10 @@ custom := components.Llm("custom_value")
 | `LlmGemini3FlashPreview`              | gemini-3-flash-preview                |
 | `LlmGemini31ProPreview`               | gemini-3.1-pro-preview                |
 | `LlmGemini31FlashLitePreview`         | gemini-3.1-flash-lite-preview         |
+| `LlmGemini31FlashLite`                | gemini-3.1-flash-lite                 |
+| `LlmGemini35Flash`                    | gemini-3.5-flash                      |
 | `LlmClaudeSonnet45`                   | claude-sonnet-4-5                     |
+| `LlmClaudeOpus47`                     | claude-opus-4-7                       |
 | `LlmClaudeSonnet46`                   | claude-sonnet-4-6                     |
 | `LlmClaudeSonnet4`                    | claude-sonnet-4                       |
 | `LlmClaudeHaiku45`                    | claude-haiku-4-5                      |
@@ -54,7 +61,7 @@ custom := components.Llm("custom_value")
 | `LlmCustomLlm`                        | custom-llm                            |
 | `LlmQwen34b`                          | qwen3-4b                              |
 | `LlmQwen330bA3b`                      | qwen3-30b-a3b                         |
-| `LlmQwen3535bA3b`                     | qwen35-35b-a3b                        |
+| `LlmQwen3635bA3b`                     | qwen36-35b-a3b                        |
 | `LlmQwen35397bA17b`                   | qwen35-397b-a17b                      |
 | `LlmGptOss20b`                        | gpt-oss-20b                           |
 | `LlmGptOss120b`                       | gpt-oss-120b                          |
@@ -80,6 +87,10 @@ custom := components.Llm("custom_value")
 | `LlmGpt520250807`                     | gpt-5-2025-08-07                      |
 | `LlmGpt5120251113`                    | gpt-5.1-2025-11-13                    |
 | `LlmGpt5220251211`                    | gpt-5.2-2025-12-11                    |
+| `LlmGpt5420260305`                    | gpt-5.4-2026-03-05                    |
+| `LlmGpt54Mini20260317`                | gpt-5.4-mini-2026-03-17               |
+| `LlmGpt54Nano20260317`                | gpt-5.4-nano-2026-03-17               |
+| `LlmGpt5520260423`                    | gpt-5.5-2026-04-23                    |
 | `LlmGpt5Mini20250807`                 | gpt-5-mini-2025-08-07                 |
 | `LlmGpt5Nano20250807`                 | gpt-5-nano-2025-08-07                 |
 | `LlmGpt4120250414`                    | gpt-4.1-2025-04-14                    |

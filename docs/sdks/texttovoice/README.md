@@ -2,17 +2,21 @@
 
 ## Overview
 
+Design and generate custom voices from a text prompt.
+
 ### Available Operations
 
-* [TextToVoice](#texttovoice) - Generate A Voice Preview From Description
+* [~~TextToVoice~~](#texttovoice) - [Deprecated] Generate A Voice Preview From Description :warning: **Deprecated**
 * [CreateVoice](#createvoice) - Create A New Voice From Voice Preview
 * [TextToVoiceDesign](#texttovoicedesign) - Design A Voice.
 * [TextToVoiceRemix](#texttovoiceremix) - Remix A Voice.
 * [TextToVoicePreviewStream](#texttovoicepreviewstream) - Text To Voice Preview Streaming
 
-## TextToVoice
+## ~~TextToVoice~~
 
-Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. If you like the a voice previewand want to create the voice call /v1/text-to-voice/create-voice-from-preview with the generated_voice_id to create the voice.
+**Deprecated.** Use `POST /v1/text-to-voice/design` instead. Generate a custom voice based on voice description. This method returns a list of voice previews. Each preview has a generated_voice_id and a sample of the voice as base64 encoded mp3 audio. To create the voice use `POST /v1/text-to-voice` with the chosen `generated_voice_id`.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

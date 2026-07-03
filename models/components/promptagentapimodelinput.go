@@ -297,8 +297,10 @@ type PromptAgentAPIModelInput struct {
 	ReasoningEffort *LLMReasoningEffort `json:"reasoning_effort,omitzero"`
 	// Max number of tokens used for thinking. Use 0 to turn off if supported by the model.
 	ThinkingBudget *int64 `json:"thinking_budget,omitzero"`
-	// The temperature for the LLM
-	Temperature *float64 `default:"0" json:"temperature"`
+	// Enable model reasoning summaries. When disabled, we do not request summaries from provider if possible for faster TTFB. Not ZRM compatible.
+	EnableReasoningSummary *bool `default:"false" json:"enable_reasoning_summary"`
+	// The temperature for the LLM. Defaults to 0. Set to null to omit the parameter from the LLM request entirely (useful for custom LLMs that reject the temperature field).
+	Temperature *float64 `json:"temperature,omitzero"`
 	// If greater than 0, maximum number of tokens the LLM can predict
 	MaxTokens *int64 `default:"-1" json:"max_tokens"`
 	// A list of IDs of tools used by the agent
@@ -315,7 +317,7 @@ type PromptAgentAPIModelInput struct {
 	// Whether to remove the default personality lines from the system prompt
 	IgnoreDefaultPersonality *bool      `json:"ignore_default_personality,omitzero"`
 	Rag                      *RagConfig `json:"rag,omitzero"`
-	// Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC').
+	// Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC'). Recommended for accurate time-aware responses; without this, the agent has no knowledge of the current date/time unless you provide it via dynamic variables or tools, which can lead to incorrect or hallucinated time references.
 	Timezone *string `json:"timezone,omitzero"`
 	// Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order.
 	BackupLlmConfig *PromptAgentAPIModelInputBackupLlmConfig `json:"backup_llm_config,omitzero"`
@@ -364,6 +366,13 @@ func (p *PromptAgentAPIModelInput) GetThinkingBudget() *int64 {
 		return nil
 	}
 	return p.ThinkingBudget
+}
+
+func (p *PromptAgentAPIModelInput) GetEnableReasoningSummary() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.EnableReasoningSummary
 }
 
 func (p *PromptAgentAPIModelInput) GetTemperature() *float64 {

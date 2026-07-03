@@ -154,32 +154,6 @@ func (e *ProjectExtendedResponseModelAspectRatio) IsExact() bool {
 	return false
 }
 
-// QualityPreset - The quality preset level of the project.
-type QualityPreset string
-
-const (
-	QualityPresetStandard      QualityPreset = "standard"
-	QualityPresetHigh          QualityPreset = "high"
-	QualityPresetHighest       QualityPreset = "highest"
-	QualityPresetUltra         QualityPreset = "ultra"
-	QualityPresetUltraLossless QualityPreset = "ultra_lossless"
-)
-
-func (e QualityPreset) ToPointer() *QualityPreset {
-	return &e
-}
-
-// IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *QualityPreset) IsExact() bool {
-	if e != nil {
-		switch *e {
-		case "standard", "high", "highest", "ultra", "ultra_lossless":
-			return true
-		}
-	}
-	return false
-}
-
 // ProjectExtendedResponseModelApplyTextNormalization - Whether text normalization is applied to the project.
 type ProjectExtendedResponseModelApplyTextNormalization string
 
@@ -329,10 +303,10 @@ type ProjectExtendedResponseModel struct {
 	CreateDateUnix int64 `json:"create_date_unix"`
 	// The user ID who created the project.
 	CreatedByUserID *string `json:"created_by_user_id"`
-	// The default title voice ID.
-	DefaultTitleVoiceID string `json:"default_title_voice_id"`
-	// The default paragraph voice ID.
-	DefaultParagraphVoiceID string `json:"default_paragraph_voice_id"`
+	// The default title project voice reference ID.
+	DefaultTitleVoiceRefID string `json:"default_title_voice_ref_id"`
+	// The default paragraph project voice reference ID.
+	DefaultParagraphVoiceRefID string `json:"default_paragraph_voice_ref_id"`
 	// The default model ID.
 	DefaultModelID string `json:"default_model_id"`
 	// The last conversion date of the project.
@@ -395,8 +369,7 @@ type ProjectExtendedResponseModel struct {
 	AspectRatio *ProjectExtendedResponseModelAspectRatio `json:"aspect_ratio,omitzero"`
 	// Agent-related settings for the project
 	AgentSettings *StudioAgentSettingsModel `json:"agent_settings,omitzero"`
-	// The quality preset level of the project.
-	QualityPreset QualityPreset `json:"quality_preset"`
+	QualityPreset *QualityPresetType        `default:"standard" json:"quality_preset"`
 	// List of chapters of the project and their metadata.
 	Chapters []ChapterResponseModel `json:"chapters"`
 	// List of pronunciation dictionary versions of the project and their metadata.
@@ -415,6 +388,14 @@ type ProjectExtendedResponseModel struct {
 	BaseVoices []VoiceResponseModel `json:"base_voices,omitzero"`
 	// The ElevenReader data if the book was published.
 	PublishingRead *DirectPublishingReadResponseModel `json:"publishing_read,omitzero"`
+	// The default title voice ID.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DefaultTitleVoiceID string `json:"default_title_voice_id"`
+	// The default paragraph voice ID.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DefaultParagraphVoiceID string `json:"default_paragraph_voice_id"`
 }
 
 func (p ProjectExtendedResponseModel) MarshalJSON() ([]byte, error) {
@@ -456,18 +437,18 @@ func (p *ProjectExtendedResponseModel) GetCreatedByUserID() *string {
 	return p.CreatedByUserID
 }
 
-func (p *ProjectExtendedResponseModel) GetDefaultTitleVoiceID() string {
+func (p *ProjectExtendedResponseModel) GetDefaultTitleVoiceRefID() string {
 	if p == nil {
 		return ""
 	}
-	return p.DefaultTitleVoiceID
+	return p.DefaultTitleVoiceRefID
 }
 
-func (p *ProjectExtendedResponseModel) GetDefaultParagraphVoiceID() string {
+func (p *ProjectExtendedResponseModel) GetDefaultParagraphVoiceRefID() string {
 	if p == nil {
 		return ""
 	}
-	return p.DefaultParagraphVoiceID
+	return p.DefaultParagraphVoiceRefID
 }
 
 func (p *ProjectExtendedResponseModel) GetDefaultModelID() string {
@@ -673,9 +654,9 @@ func (p *ProjectExtendedResponseModel) GetAgentSettings() *StudioAgentSettingsMo
 	return p.AgentSettings
 }
 
-func (p *ProjectExtendedResponseModel) GetQualityPreset() QualityPreset {
+func (p *ProjectExtendedResponseModel) GetQualityPreset() *QualityPresetType {
 	if p == nil {
-		return QualityPreset("")
+		return nil
 	}
 	return p.QualityPreset
 }
@@ -741,4 +722,18 @@ func (p *ProjectExtendedResponseModel) GetPublishingRead() *DirectPublishingRead
 		return nil
 	}
 	return p.PublishingRead
+}
+
+func (p *ProjectExtendedResponseModel) GetDefaultTitleVoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.DefaultTitleVoiceID
+}
+
+func (p *ProjectExtendedResponseModel) GetDefaultParagraphVoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.DefaultParagraphVoiceID
 }

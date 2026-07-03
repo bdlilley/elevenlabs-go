@@ -7,22 +7,21 @@ import (
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
-	"github.com/bdlilley/elevenlabs-go/types"
 )
 
-// DubbingStatus - What state the dub is currently in.
-type DubbingStatus string
+// DubbingStatus1 - What state the dub is currently in.
+type DubbingStatus1 string
 
 const (
-	DubbingStatusDubbing DubbingStatus = "dubbing"
-	DubbingStatusDubbed  DubbingStatus = "dubbed"
-	DubbingStatusFailed  DubbingStatus = "failed"
+	DubbingStatus1Dubbing DubbingStatus1 = "dubbing"
+	DubbingStatus1Dubbed  DubbingStatus1 = "dubbed"
+	DubbingStatus1Failed  DubbingStatus1 = "failed"
 )
 
-func (e DubbingStatus) ToPointer() *DubbingStatus {
+func (e DubbingStatus1) ToPointer() *DubbingStatus1 {
 	return &e
 }
-func (e *DubbingStatus) UnmarshalJSON(data []byte) error {
+func (e *DubbingStatus1) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -33,10 +32,100 @@ func (e *DubbingStatus) UnmarshalJSON(data []byte) error {
 	case "dubbed":
 		fallthrough
 	case "failed":
-		*e = DubbingStatus(v)
+		*e = DubbingStatus1(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DubbingStatus: %v", v)
+		return fmt.Errorf("invalid value for DubbingStatus1: %v", v)
+	}
+}
+
+type DubbingStatus2 string
+
+const (
+	DubbingStatus2Queued    DubbingStatus2 = "queued"
+	DubbingStatus2Preparing DubbingStatus2 = "preparing"
+	DubbingStatus2Dubbing   DubbingStatus2 = "dubbing"
+	DubbingStatus2Dubbed    DubbingStatus2 = "dubbed"
+	DubbingStatus2Failed    DubbingStatus2 = "failed"
+)
+
+func (e DubbingStatus2) ToPointer() *DubbingStatus2 {
+	return &e
+}
+func (e *DubbingStatus2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "queued":
+		fallthrough
+	case "preparing":
+		fallthrough
+	case "dubbing":
+		fallthrough
+	case "dubbed":
+		fallthrough
+	case "failed":
+		*e = DubbingStatus2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DubbingStatus2: %v", v)
+	}
+}
+
+type DubbingModel string
+
+const (
+	DubbingModelDubbingV1 DubbingModel = "dubbing_v1"
+	DubbingModelDubbingV2 DubbingModel = "dubbing_v2"
+)
+
+func (e DubbingModel) ToPointer() *DubbingModel {
+	return &e
+}
+func (e *DubbingModel) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "dubbing_v1":
+		fallthrough
+	case "dubbing_v2":
+		*e = DubbingModel(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DubbingModel: %v", v)
+	}
+}
+
+type CreationSource string
+
+const (
+	CreationSourceFlowNode   CreationSource = "flow_node"
+	CreationSourceDubbingUI  CreationSource = "dubbing_ui"
+	CreationSourceDubbingAPI CreationSource = "dubbing_api"
+)
+
+func (e CreationSource) ToPointer() *CreationSource {
+	return &e
+}
+func (e *CreationSource) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "flow_node":
+		fallthrough
+	case "dubbing_ui":
+		fallthrough
+	case "dubbing_api":
+		*e = CreationSource(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreationSource: %v", v)
 	}
 }
 
@@ -67,6 +156,33 @@ func (e *FilterByCreator) UnmarshalJSON(data []byte) error {
 		return nil
 	default:
 		return fmt.Errorf("invalid value for FilterByCreator: %v", v)
+	}
+}
+
+// OrderBy - The field to use for ordering results from this query.
+type OrderBy string
+
+const (
+	OrderByCreatedAt OrderBy = "created_at"
+	OrderByName      OrderBy = "name"
+)
+
+func (e OrderBy) ToPointer() *OrderBy {
+	return &e
+}
+func (e *OrderBy) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "created_at":
+		fallthrough
+	case "name":
+		*e = OrderBy(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OrderBy: %v", v)
 	}
 }
 
@@ -103,12 +219,19 @@ type ListDubsRequest struct {
 	// How many dubs to return at maximum. Can not exceed 200, defaults to 100.
 	PageSize *int64 `default:"100" queryParam:"style=form,explode=true,name=page_size"`
 	// What state the dub is currently in.
-	DubbingStatus *DubbingStatus `queryParam:"style=form,explode=true,name=dubbing_status"`
+	DubbingStatus *DubbingStatus1 `queryParam:"style=form,explode=true,name=dubbing_status"`
+	// Filter by dubbing status.
+	DubbingStatuses []DubbingStatus2 `queryParam:"style=form,explode=true,name=dubbing_statuses"`
+	// Filter by dubbing model generation.
+	DubbingModels []DubbingModel `queryParam:"style=form,explode=true,name=dubbing_models"`
+	// Filter by target language code.
+	TargetLanguageCodes []string `queryParam:"style=form,explode=true,name=target_language_codes"`
+	// Filter by dubbing creation source.
+	CreationSources []CreationSource `queryParam:"style=form,explode=true,name=creation_sources"`
 	// Filters who created the resources being listed, whether it was the user running the request or someone else that shared the resource with them.
 	FilterByCreator *FilterByCreator `default:"all" queryParam:"style=form,explode=true,name=filter_by_creator"`
 	// The field to use for ordering results from this query.
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	orderBy *string `const:"created_at" queryParam:"style=form,explode=true,name=order_by"`
+	OrderBy *OrderBy `default:"created_at" queryParam:"style=form,explode=true,name=order_by"`
 	// The order direction to use for results from this query.
 	OrderDirection *OrderDirection `default:"DESCENDING" queryParam:"style=form,explode=true,name=order_direction"`
 }
@@ -138,11 +261,39 @@ func (l *ListDubsRequest) GetPageSize() *int64 {
 	return l.PageSize
 }
 
-func (l *ListDubsRequest) GetDubbingStatus() *DubbingStatus {
+func (l *ListDubsRequest) GetDubbingStatus() *DubbingStatus1 {
 	if l == nil {
 		return nil
 	}
 	return l.DubbingStatus
+}
+
+func (l *ListDubsRequest) GetDubbingStatuses() []DubbingStatus2 {
+	if l == nil {
+		return nil
+	}
+	return l.DubbingStatuses
+}
+
+func (l *ListDubsRequest) GetDubbingModels() []DubbingModel {
+	if l == nil {
+		return nil
+	}
+	return l.DubbingModels
+}
+
+func (l *ListDubsRequest) GetTargetLanguageCodes() []string {
+	if l == nil {
+		return nil
+	}
+	return l.TargetLanguageCodes
+}
+
+func (l *ListDubsRequest) GetCreationSources() []CreationSource {
+	if l == nil {
+		return nil
+	}
+	return l.CreationSources
 }
 
 func (l *ListDubsRequest) GetFilterByCreator() *FilterByCreator {
@@ -152,8 +303,11 @@ func (l *ListDubsRequest) GetFilterByCreator() *FilterByCreator {
 	return l.FilterByCreator
 }
 
-func (l *ListDubsRequest) GetOrderBy() *string {
-	return types.Pointer("created_at")
+func (l *ListDubsRequest) GetOrderBy() *OrderBy {
+	if l == nil {
+		return nil
+	}
+	return l.OrderBy
 }
 
 func (l *ListDubsRequest) GetOrderDirection() *OrderDirection {

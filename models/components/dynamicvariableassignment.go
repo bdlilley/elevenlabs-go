@@ -18,6 +18,8 @@ type DynamicVariableAssignment struct {
 	ValuePath string `json:"value_path"`
 	// If true, this assignment's value will be removed from the tool response before sending to the LLM and transcript, but still processed for variable assignment.
 	Sanitize *bool `default:"false" json:"sanitize"`
+	// If true, non-scalar values (lists, objects) extracted from the tool response are stored as their native type instead of being stringified to JSON. Enable this to use extracted arrays directly as list dynamic variables.
+	PreserveNativeType *bool `default:"false" json:"preserve_native_type"`
 }
 
 func (d DynamicVariableAssignment) MarshalJSON() ([]byte, error) {
@@ -54,4 +56,11 @@ func (d *DynamicVariableAssignment) GetSanitize() *bool {
 		return nil
 	}
 	return d.Sanitize
+}
+
+func (d *DynamicVariableAssignment) GetPreserveNativeType() *bool {
+	if d == nil {
+		return nil
+	}
+	return d.PreserveNativeType
 }

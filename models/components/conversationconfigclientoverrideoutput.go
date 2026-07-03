@@ -7,6 +7,8 @@ import (
 )
 
 type ConversationConfigClientOverrideOutput struct {
+	// Configuration for conversational transcription
+	Asr *ASRConversationalConfigOverride `json:"asr,omitzero"`
 	// Configuration for turn detection
 	Turn *TurnConfigOverride `json:"turn,omitzero"`
 	// Configuration for conversational text to speech
@@ -26,6 +28,13 @@ func (c *ConversationConfigClientOverrideOutput) UnmarshalJSON(data []byte) erro
 		return err
 	}
 	return nil
+}
+
+func (c *ConversationConfigClientOverrideOutput) GetAsr() *ASRConversationalConfigOverride {
+	if c == nil {
+		return nil
+	}
+	return c.Asr
 }
 
 func (c *ConversationConfigClientOverrideOutput) GetTurn() *TurnConfigOverride {

@@ -4,15 +4,106 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
+
+type BodyComposeMusicV1MusicPostCompositionPlanType string
+
+const (
+	BodyComposeMusicV1MusicPostCompositionPlanTypeMusicPrompt     BodyComposeMusicV1MusicPostCompositionPlanType = "MusicPrompt"
+	BodyComposeMusicV1MusicPostCompositionPlanTypeCompositionPlan BodyComposeMusicV1MusicPostCompositionPlanType = "CompositionPlan"
+)
+
+type BodyComposeMusicV1MusicPostCompositionPlan struct {
+	MusicPrompt     *MusicPrompt     `queryParam:"inline" union:"member"`
+	CompositionPlan *CompositionPlan `queryParam:"inline" union:"member"`
+
+	Type BodyComposeMusicV1MusicPostCompositionPlanType
+}
+
+func CreateBodyComposeMusicV1MusicPostCompositionPlanMusicPrompt(musicPrompt MusicPrompt) BodyComposeMusicV1MusicPostCompositionPlan {
+	typ := BodyComposeMusicV1MusicPostCompositionPlanTypeMusicPrompt
+
+	return BodyComposeMusicV1MusicPostCompositionPlan{
+		MusicPrompt: &musicPrompt,
+		Type:        typ,
+	}
+}
+
+func CreateBodyComposeMusicV1MusicPostCompositionPlanCompositionPlan(compositionPlan CompositionPlan) BodyComposeMusicV1MusicPostCompositionPlan {
+	typ := BodyComposeMusicV1MusicPostCompositionPlanTypeCompositionPlan
+
+	return BodyComposeMusicV1MusicPostCompositionPlan{
+		CompositionPlan: &compositionPlan,
+		Type:            typ,
+	}
+}
+
+func (u *BodyComposeMusicV1MusicPostCompositionPlan) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var musicPrompt MusicPrompt = MusicPrompt{}
+	if err := utils.UnmarshalJSON(data, &musicPrompt, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  BodyComposeMusicV1MusicPostCompositionPlanTypeMusicPrompt,
+			Value: &musicPrompt,
+		})
+	}
+
+	var compositionPlan CompositionPlan = CompositionPlan{}
+	if err := utils.UnmarshalJSON(data, &compositionPlan, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  BodyComposeMusicV1MusicPostCompositionPlanTypeCompositionPlan,
+			Value: &compositionPlan,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyComposeMusicV1MusicPostCompositionPlan", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyComposeMusicV1MusicPostCompositionPlan", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(BodyComposeMusicV1MusicPostCompositionPlanType)
+	switch best.Type {
+	case BodyComposeMusicV1MusicPostCompositionPlanTypeMusicPrompt:
+		u.MusicPrompt = best.Value.(*MusicPrompt)
+		return nil
+	case BodyComposeMusicV1MusicPostCompositionPlanTypeCompositionPlan:
+		u.CompositionPlan = best.Value.(*CompositionPlan)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyComposeMusicV1MusicPostCompositionPlan", string(data))
+}
+
+func (u BodyComposeMusicV1MusicPostCompositionPlan) MarshalJSON() ([]byte, error) {
+	if u.MusicPrompt != nil {
+		return utils.MarshalJSON(u.MusicPrompt, "", true)
+	}
+
+	if u.CompositionPlan != nil {
+		return utils.MarshalJSON(u.CompositionPlan, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type BodyComposeMusicV1MusicPostCompositionPlan: all fields are null")
+}
 
 // BodyComposeMusicV1MusicPostModelID - The model to use for the generation.
 type BodyComposeMusicV1MusicPostModelID string
 
 const (
 	BodyComposeMusicV1MusicPostModelIDMusicV1 BodyComposeMusicV1MusicPostModelID = "music_v1"
+	BodyComposeMusicV1MusicPostModelIDMusicV2 BodyComposeMusicV1MusicPostModelID = "music_v2"
 )
 
 func (e BodyComposeMusicV1MusicPostModelID) ToPointer() *BodyComposeMusicV1MusicPostModelID {
@@ -25,6 +116,8 @@ func (e *BodyComposeMusicV1MusicPostModelID) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "music_v1":
+		fallthrough
+	case "music_v2":
 		*e = BodyComposeMusicV1MusicPostModelID(v)
 		return nil
 	default:
@@ -35,12 +128,16 @@ func (e *BodyComposeMusicV1MusicPostModelID) UnmarshalJSON(data []byte) error {
 type BodyComposeMusicV1MusicPost struct {
 	// A simple text prompt to generate a song from. Cannot be used in conjunction with `composition_plan`.
 	Prompt *string `json:"prompt,omitzero"`
+	// Optional generation mode hint for prompt-based music generation. Can only be used with `prompt`.
+	GenerationMode *MusicGenerationMode `json:"generation_mode,omitzero"`
 	// A music prompt. Deprecated. Use `composition_plan` instead.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	MusicPrompt *MusicPrompt `json:"music_prompt,omitzero"`
+	// The lyrics text to use for the generation.
+	LyricsText *string `json:"lyrics_text,omitzero"`
 	// A detailed composition plan to guide music generation. Cannot be used in conjunction with `prompt`.
-	CompositionPlan *MusicPrompt `json:"composition_plan,omitzero"`
+	CompositionPlan *BodyComposeMusicV1MusicPostCompositionPlan `json:"composition_plan,omitzero"`
 	// The length of the song to generate in milliseconds. Used only in conjunction with `prompt`. Must be between 3000ms and 600000ms. Optional - if not provided, the model will choose a length based on the prompt.
 	MusicLengthMs *int64 `json:"music_length_ms,omitzero"`
 	// The model to use for the generation.
@@ -51,11 +148,13 @@ type BodyComposeMusicV1MusicPost struct {
 	ForceInstrumental *bool `default:"false" json:"force_instrumental"`
 	// The ID of the finetune to use for the generation
 	FinetuneID *string `json:"finetune_id,omitzero"`
+	// How strongly the finetune influences the generation. Defaults to 1.0 (full strength). Lower values soften the influence of the finetune, leaving more room for prompt-level steering. Only meaningful when `finetune_id` is also provided.
+	FinetuneStrength *float64 `default:"1" json:"finetune_strength"`
 	// If true, proper names in the prompt will be phonetically spelled in the lyrics for better pronunciation by the music model. The original names will be restored in word timestamps.
 	UsePhoneticNames *bool `default:"false" json:"use_phonetic_names"`
-	// Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan`. When set to true, the model will precisely respect each section's `duration_ms` from the plan. When set to false, the model may adjust individual section durations which will generally lead to better generation quality and improved latency, while always preserving the total song duration from the plan.
+	// Controls how strictly section durations in the `composition_plan` are enforced. Only used with `composition_plan` and only applies to `music_v1`; for `music_v2` section durations are always enforced and this is ignored. When false for `music_v1`, the model may adjust individual section durations for better quality and latency, while preserving the total song duration from the plan.
 	RespectSectionsDurations *bool `default:"true" json:"respect_sections_durations"`
-	// Whether to store the generated song for inpainting. Only available to enterprise clients with access to the inpainting feature.
+	// Whether to store the generated song for inpainting.
 	StoreForInpainting *bool `default:"false" json:"store_for_inpainting"`
 	// Whether to sign the generated song with C2PA. Applicable only for mp3 files.
 	SignWithC2pa *bool `default:"false" json:"sign_with_c2pa"`
@@ -79,6 +178,13 @@ func (b *BodyComposeMusicV1MusicPost) GetPrompt() *string {
 	return b.Prompt
 }
 
+func (b *BodyComposeMusicV1MusicPost) GetGenerationMode() *MusicGenerationMode {
+	if b == nil {
+		return nil
+	}
+	return b.GenerationMode
+}
+
 func (b *BodyComposeMusicV1MusicPost) GetMusicPrompt() *MusicPrompt {
 	if b == nil {
 		return nil
@@ -86,7 +192,14 @@ func (b *BodyComposeMusicV1MusicPost) GetMusicPrompt() *MusicPrompt {
 	return b.MusicPrompt
 }
 
-func (b *BodyComposeMusicV1MusicPost) GetCompositionPlan() *MusicPrompt {
+func (b *BodyComposeMusicV1MusicPost) GetLyricsText() *string {
+	if b == nil {
+		return nil
+	}
+	return b.LyricsText
+}
+
+func (b *BodyComposeMusicV1MusicPost) GetCompositionPlan() *BodyComposeMusicV1MusicPostCompositionPlan {
 	if b == nil {
 		return nil
 	}
@@ -126,6 +239,13 @@ func (b *BodyComposeMusicV1MusicPost) GetFinetuneID() *string {
 		return nil
 	}
 	return b.FinetuneID
+}
+
+func (b *BodyComposeMusicV1MusicPost) GetFinetuneStrength() *float64 {
+	if b == nil {
+		return nil
+	}
+	return b.FinetuneStrength
 }
 
 func (b *BodyComposeMusicV1MusicPost) GetUsePhoneticNames() *bool {

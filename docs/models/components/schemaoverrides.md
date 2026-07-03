@@ -21,6 +21,12 @@ schemaOverrides := components.CreateSchemaOverridesDynamicVariable(components.Dy
 schemaOverrides := components.CreateSchemaOverridesLlm(components.LLMSchemaOverride{/* values here */})
 ```
 
+### OmitSchemaOverride
+
+```go
+schemaOverrides := components.CreateSchemaOverridesOmit(components.OmitSchemaOverride{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -33,5 +39,7 @@ switch schemaOverrides.Type {
 		// schemaOverrides.DynamicVariableSchemaOverride is populated
 	case components.SchemaOverridesTypeLlm:
 		// schemaOverrides.LLMSchemaOverride is populated
+	case components.SchemaOverridesTypeOmit:
+		// schemaOverrides.OmitSchemaOverride is populated
 }
 ```

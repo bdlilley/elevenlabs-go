@@ -1,0 +1,22 @@
+# SMSConversationInfoDirection
+
+## Example Usage
+
+```go
+import (
+	"github.com/bdlilley/elevenlabs-go/models/components"
+)
+
+value := components.SMSConversationInfoDirectionInbound
+
+// Open enum: custom values can be created with a direct type cast
+custom := components.SMSConversationInfoDirection("custom_value")
+```
+
+
+## Values
+
+| Name                                   | Value                                  |
+| -------------------------------------- | -------------------------------------- |
+| `SMSConversationInfoDirectionInbound`  | inbound                                |
+| `SMSConversationInfoDirectionOutbound` | outbound                               |

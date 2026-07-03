@@ -1,0 +1,31 @@
+# BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion
+
+The permissions of the XI API.
+
+
+## Supported Types
+
+### 
+
+```go
+bodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion := components.CreateBodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionArrayOfPermissionType([]components.PermissionType{/* values here */})
+```
+
+### PermissionsEnum
+
+```go
+bodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion := components.CreateBodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionPermissionsEnum(components.PermissionsEnum{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch bodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion.Type {
+	case components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypeArrayOfPermissionType:
+		// bodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion.ArrayOfPermissionType is populated
+	case components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypePermissionsEnum:
+		// bodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion.PermissionsEnum is populated
+}
+```

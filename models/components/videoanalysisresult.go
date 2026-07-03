@@ -7,14 +7,13 @@ import (
 )
 
 type VideoAnalysisResult struct {
-	Title         string              `json:"title"`
-	Description   string              `json:"description"`
-	ContentType   *string             `json:"content_type,omitzero"`
-	OverallPacing *string             `json:"overall_pacing,omitzero"`
-	Subjects      []VideoSubject      `json:"subjects,omitzero"`
-	Segments      []VideoSegment      `json:"segments,omitzero"`
-	KeyMoments    []VideoKeyMoment    `json:"key_moments,omitzero"`
-	Transcription *AssetTranscription `json:"transcription,omitzero"`
+	Title         string           `json:"title"`
+	Description   string           `json:"description"`
+	ContentType   *string          `json:"content_type,omitzero"`
+	OverallPacing *string          `json:"overall_pacing,omitzero"`
+	Subjects      []VideoSubject   `json:"subjects,omitzero"`
+	Segments      []VideoSegment   `json:"segments,omitzero"`
+	KeyMoments    []VideoKeyMoment `json:"key_moments,omitzero"`
 }
 
 func (v VideoAnalysisResult) MarshalJSON() ([]byte, error) {
@@ -75,11 +74,4 @@ func (v *VideoAnalysisResult) GetKeyMoments() []VideoKeyMoment {
 		return nil
 	}
 	return v.KeyMoments
-}
-
-func (v *VideoAnalysisResult) GetTranscription() *AssetTranscription {
-	if v == nil {
-		return nil
-	}
-	return v.Transcription
 }

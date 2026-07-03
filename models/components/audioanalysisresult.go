@@ -7,13 +7,12 @@ import (
 )
 
 type AudioAnalysisResult struct {
-	Title         string              `json:"title"`
-	Description   string              `json:"description"`
-	ContentType   *string             `json:"content_type,omitzero"`
-	OverallPacing *string             `json:"overall_pacing,omitzero"`
-	Segments      []AudioSegment      `json:"segments,omitzero"`
-	KeyMoments    []AudioKeyMoment    `json:"key_moments,omitzero"`
-	Transcription *AssetTranscription `json:"transcription,omitzero"`
+	Title         string           `json:"title"`
+	Description   string           `json:"description"`
+	ContentType   *string          `json:"content_type,omitzero"`
+	OverallPacing *string          `json:"overall_pacing,omitzero"`
+	Segments      []AudioSegment   `json:"segments,omitzero"`
+	KeyMoments    []AudioKeyMoment `json:"key_moments,omitzero"`
 }
 
 func (a AudioAnalysisResult) MarshalJSON() ([]byte, error) {
@@ -67,11 +66,4 @@ func (a *AudioAnalysisResult) GetKeyMoments() []AudioKeyMoment {
 		return nil
 	}
 	return a.KeyMoments
-}
-
-func (a *AudioAnalysisResult) GetTranscription() *AssetTranscription {
-	if a == nil {
-		return nil
-	}
-	return a.Transcription
 }

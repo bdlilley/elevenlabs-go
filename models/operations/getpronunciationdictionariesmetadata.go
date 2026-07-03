@@ -9,18 +9,18 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
 )
 
-// Sort - Which field to sort by, one of 'created_at_unix' or 'name'.
-type Sort string
+// GetPronunciationDictionariesMetadataSort - Which field to sort by, one of 'created_at_unix' or 'name'.
+type GetPronunciationDictionariesMetadataSort string
 
 const (
-	SortCreationTimeUnix Sort = "creation_time_unix"
-	SortName             Sort = "name"
+	GetPronunciationDictionariesMetadataSortCreationTimeUnix GetPronunciationDictionariesMetadataSort = "creation_time_unix"
+	GetPronunciationDictionariesMetadataSortName             GetPronunciationDictionariesMetadataSort = "name"
 )
 
-func (e Sort) ToPointer() *Sort {
+func (e GetPronunciationDictionariesMetadataSort) ToPointer() *GetPronunciationDictionariesMetadataSort {
 	return &e
 }
-func (e *Sort) UnmarshalJSON(data []byte) error {
+func (e *GetPronunciationDictionariesMetadataSort) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -29,10 +29,10 @@ func (e *Sort) UnmarshalJSON(data []byte) error {
 	case "creation_time_unix":
 		fallthrough
 	case "name":
-		*e = Sort(v)
+		*e = GetPronunciationDictionariesMetadataSort(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Sort: %v", v)
+		return fmt.Errorf("invalid value for GetPronunciationDictionariesMetadataSort: %v", v)
 	}
 }
 
@@ -42,7 +42,7 @@ type GetPronunciationDictionariesMetadataRequest struct {
 	// How many pronunciation dictionaries to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Which field to sort by, one of 'created_at_unix' or 'name'.
-	Sort *Sort `queryParam:"style=form,explode=true,name=sort"`
+	Sort *GetPronunciationDictionariesMetadataSort `queryParam:"style=form,explode=true,name=sort"`
 	// Which direction to sort the voices in. 'ascending' or 'descending'.
 	SortDirection *string `queryParam:"style=form,explode=true,name=sort_direction"`
 }
@@ -72,7 +72,7 @@ func (g *GetPronunciationDictionariesMetadataRequest) GetPageSize() *int64 {
 	return g.PageSize
 }
 
-func (g *GetPronunciationDictionariesMetadataRequest) GetSort() *Sort {
+func (g *GetPronunciationDictionariesMetadataRequest) GetSort() *GetPronunciationDictionariesMetadataSort {
 	if g == nil {
 		return nil
 	}

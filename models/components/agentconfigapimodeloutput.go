@@ -17,8 +17,10 @@ type AgentConfigAPIModelOutput struct {
 	// If true, the user will not be able to interrupt the agent while the first message is being delivered.
 	DisableFirstMessageInterruptions *bool `default:"false" json:"disable_first_message_interruptions"`
 	// If non-empty, the message the agent will send when max conversation duration is reached.
-	MaxConversationDurationMessage *string                    `default:"" json:"max_conversation_duration_message"`
-	Prompt                         *PromptAgentAPIModelOutput `json:"prompt,omitzero"`
+	MaxConversationDurationMessage *string `default:"" json:"max_conversation_duration_message"`
+	// Per-channel response behavior overrides for text conversations. Built-in channel defaults apply when unset.
+	TextBehaviorOverrides map[string]BehaviorOverride `json:"text_behavior_overrides,omitzero"`
+	Prompt                *PromptAgentAPIModelOutput  `json:"prompt,omitzero"`
 }
 
 func (a AgentConfigAPIModelOutput) MarshalJSON() ([]byte, error) {
@@ -72,6 +74,13 @@ func (a *AgentConfigAPIModelOutput) GetMaxConversationDurationMessage() *string 
 		return nil
 	}
 	return a.MaxConversationDurationMessage
+}
+
+func (a *AgentConfigAPIModelOutput) GetTextBehaviorOverrides() map[string]BehaviorOverride {
+	if a == nil {
+		return nil
+	}
+	return a.TextBehaviorOverrides
 }
 
 func (a *AgentConfigAPIModelOutput) GetPrompt() *PromptAgentAPIModelOutput {

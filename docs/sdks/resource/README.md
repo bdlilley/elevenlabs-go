@@ -1,26 +1,33 @@
-# Resource
+# ~~Resource~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
+Manage dubbing resources, including segments, speakers, and language tracks.
+
 ### Available Operations
 
-* [GetDubbingResource](#getdubbingresource) - Get The Dubbing Resource For An Id.
-* [AddLanguage](#addlanguage) - Add A Language To The Resource
-* [CreateClip](#createclip) - Create A Segment For The Speaker
-* [UpdateSegmentLanguage](#updatesegmentlanguage) - Modify A Single Segment
-* [MigrateSegments](#migratesegments) - Move Segments Between Speakers
-* [DeleteSegment](#deletesegment) - Deletes A Single Segment
-* [Transcribe](#transcribe) - Transcribes Segments
-* [Translate](#translate) - Translates All Or Some Segments And Languages
-* [Dub](#dub) - Dubs All Or Some Segments And Languages
-* [UpdateSpeaker](#updatespeaker) - Update Metadata For A Speaker
-* [CreateSpeaker](#createspeaker) - Create A New Speaker
-* [GetSimilarVoicesForSpeaker](#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker.
-* [Render](#render) - Render Audio Or Video For The Given Language
+* [~~GetDubbingResource~~](#getdubbingresource) - Get The Dubbing Resource For An Id. :warning: **Deprecated**
+* [~~AddLanguage~~](#addlanguage) - Add A Language To The Resource :warning: **Deprecated**
+* [~~CreateClip~~](#createclip) - Create A Segment For The Speaker :warning: **Deprecated**
+* [~~UpdateSegmentLanguage~~](#updatesegmentlanguage) - Modify A Single Segment :warning: **Deprecated**
+* [~~MigrateSegments~~](#migratesegments) - Move Segments Between Speakers :warning: **Deprecated**
+* [~~DeleteSegment~~](#deletesegment) - Deletes A Single Segment :warning: **Deprecated**
+* [~~Transcribe~~](#transcribe) - Transcribes Segments :warning: **Deprecated**
+* [~~Translate~~](#translate) - Translates All Or Some Segments And Languages :warning: **Deprecated**
+* [~~Dub~~](#dub) - Dubs All Or Some Segments And Languages :warning: **Deprecated**
+* [~~UpdateSpeaker~~](#updatespeaker) - Update Metadata For A Speaker :warning: **Deprecated**
+* [~~CreateSpeaker~~](#createspeaker) - Create A New Speaker :warning: **Deprecated**
+* [~~GetSimilarVoicesForSpeaker~~](#getsimilarvoicesforspeaker) - Search The Elevenlabs Library For Voices Similar To A Speaker. :warning: **Deprecated**
+* [~~Render~~](#render) - Render Audio Or Video For The Given Language :warning: **Deprecated**
 
-## GetDubbingResource
+## ~~GetDubbingResource~~
 
 Given a dubbing ID generated from the '/v1/dubbing' endpoint with studio enabled, returns the dubbing resource.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -70,9 +77,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## AddLanguage
+## ~~AddLanguage~~
 
 Adds the given ElevenLab Turbo V2/V2.5 language code to the resource. Does not automatically generate transcripts/translations/audio.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -126,9 +135,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateClip
+## ~~CreateClip~~
 
 Creates a new segment in dubbing resource with a start and end time for the speaker in every available language. Does not automatically generate transcripts/translations/audio.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -184,9 +195,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateSegmentLanguage
+## ~~UpdateSegmentLanguage~~
 
 Modifies a single segment with new text and/or start/end times. Will update the values for only a specific language of a segment. Does not automatically regenerate the dub.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -240,9 +253,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## MigrateSegments
+## ~~MigrateSegments~~
 
 Change the attribution of one or more segments to a different speaker.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -301,9 +316,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## DeleteSegment
+## ~~DeleteSegment~~
 
 Deletes a single segment from the dubbing.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -354,9 +371,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## Transcribe
+## ~~Transcribe~~
 
 Regenerate the transcriptions for the specified segments. Does not automatically regenerate translations or dubs.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -412,9 +431,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## Translate
+## ~~Translate~~
 
 Regenerate the translations for either the entire resource or the specified segments/languages. Will automatically transcribe missing transcriptions. Will not automatically regenerate the dubs.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -475,9 +496,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## Dub
+## ~~Dub~~
 
 Regenerate the dubs for either the entire resource or the specified segments/languages. Will automatically transcribe and translate any missing transcriptions and translations.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -535,9 +558,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UpdateSpeaker
+## ~~UpdateSpeaker~~
 
 Amend the metadata associated with a speaker, such as their voice. Both voice cloning and using voices from the ElevenLabs library are supported.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -589,9 +614,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## CreateSpeaker
+## ~~CreateSpeaker~~
 
-Create A New Speaker
+Creates a new speaker in a dubbing resource. The speaker is added to every available language and can optionally be associated with an ElevenLabs voice and voice settings.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -642,9 +669,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## GetSimilarVoicesForSpeaker
+## ~~GetSimilarVoicesForSpeaker~~
 
 Fetch the top 10 similar voices to a speaker, including the voice IDs, names, descriptions, and, where possible, a sample audio recording.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -695,9 +724,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## Render
+## ~~Render~~
 
 Regenerate the output media for a language using the latest Studio state. Please ensure all segments have been dubbed before rendering, otherwise they will be omitted. Renders are generated asynchronously, and to check the status of all renders please use the 'Get Dubbing Resource' endpoint.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

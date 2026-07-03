@@ -43,6 +43,7 @@ type ConversationSummaryResponseModel struct {
 	Status                       ConversationSummaryResponseModelStatus `json:"status"`
 	TerminationReason            *string                                `default:"" json:"termination_reason"`
 	CallSuccessful               EvaluationSuccessResult                `json:"call_successful"`
+	CallSuccessScore             *float64                               `json:"call_success_score,omitzero"`
 	TranscriptSummary            *string                                `json:"transcript_summary,omitzero"`
 	CallSummaryTitle             *string                                `json:"call_summary_title,omitzero"`
 	MainLanguage                 *string                                `json:"main_language,omitzero"`
@@ -50,6 +51,7 @@ type ConversationSummaryResponseModel struct {
 	ToolNames                    []string                               `json:"tool_names,omitzero"`
 	Direction                    *TelephonyDirection                    `default:"inbound" json:"direction"`
 	Rating                       *float64                               `json:"rating,omitzero"`
+	SentimentAnalysis            *ConversationSentimentAnalysis         `json:"sentiment_analysis,omitzero"`
 }
 
 func (c ConversationSummaryResponseModel) MarshalJSON() ([]byte, error) {
@@ -140,6 +142,13 @@ func (c *ConversationSummaryResponseModel) GetCallSuccessful() EvaluationSuccess
 	return c.CallSuccessful
 }
 
+func (c *ConversationSummaryResponseModel) GetCallSuccessScore() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.CallSuccessScore
+}
+
 func (c *ConversationSummaryResponseModel) GetTranscriptSummary() *string {
 	if c == nil {
 		return nil
@@ -187,4 +196,11 @@ func (c *ConversationSummaryResponseModel) GetRating() *float64 {
 		return nil
 	}
 	return c.Rating
+}
+
+func (c *ConversationSummaryResponseModel) GetSentimentAnalysis() *ConversationSentimentAnalysis {
+	if c == nil {
+		return nil
+	}
+	return c.SentimentAnalysis
 }

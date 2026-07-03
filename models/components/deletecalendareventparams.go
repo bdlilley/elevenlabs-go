@@ -7,6 +7,11 @@ import (
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
+// DeleteCalendarEventParams - Permanently remove a previously-cancelled calendar event.
+//
+// This delete tool is the irreversible follow-up to cancel_calendar_event.
+// The backend rejects the call (422) if the event hasn't been
+// cancelled yet, so the only safe path is cancel-then-delete.
 type DeleteCalendarEventParams struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	smbToolType *string `const:"delete_calendar_event" json:"smb_tool_type"`

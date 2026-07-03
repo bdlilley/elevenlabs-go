@@ -8,8 +8,10 @@ import (
 )
 
 type CreateAgentRouteRequest struct {
-	// Enable versioning for the agent
-	EnableVersioning *bool                                              `default:"false" queryParam:"style=form,explode=true,name=enable_versioning"`
+	// Deprecated: all agents are versioned. This parameter is ignored.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	EnableVersioning *bool                                              `default:"true" queryParam:"style=form,explode=true,name=enable_versioning"`
 	Body             components.BodyCreateAgentV1ConvaiAgentsCreatePost `request:"mediaType=application/json"`
 }
 

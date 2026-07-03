@@ -10,6 +10,8 @@ import (
 type GetWorkspaceBatchCallsRequest struct {
 	Limit   *int64  `default:"100" queryParam:"style=form,explode=true,name=limit"`
 	LastDoc *string `queryParam:"style=form,explode=true,name=last_doc"`
+	// Filter batch calls to a single agent.
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 }
 
 func (g GetWorkspaceBatchCallsRequest) MarshalJSON() ([]byte, error) {
@@ -35,6 +37,13 @@ func (g *GetWorkspaceBatchCallsRequest) GetLastDoc() *string {
 		return nil
 	}
 	return g.LastDoc
+}
+
+func (g *GetWorkspaceBatchCallsRequest) GetAgentID() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AgentID
 }
 
 type GetWorkspaceBatchCallsResponse struct {

@@ -8,10 +8,10 @@ import (
 )
 
 type ProjectImageResponseModel struct {
-	ImageID            string `json:"image_id"`
-	Filename           string `json:"filename"`
-	SignedURL          string `json:"signed_url"`
-	ThumbnailSignedURL string `json:"thumbnail_signed_url"`
+	ImageID            string  `json:"image_id"`
+	Filename           string  `json:"filename"`
+	SignedURL          *string `json:"signed_url,omitzero"`
+	ThumbnailSignedURL *string `json:"thumbnail_signed_url,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"image" json:"type"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
@@ -24,13 +24,17 @@ type ProjectImageResponseModel struct {
 	DurationMs    int64   `json:"duration_ms"`
 	Order         string  `json:"order"`
 	// Defines asset positioning and transformation on canvas.
-	CanvasPlacement   CanvasPlacement `json:"canvas_placement"`
-	Animation         *ClipAnimation  `json:"animation,omitzero"`
-	Opacity           *float64        `default:"1" json:"opacity"`
-	CreatedAtMs       int64           `json:"created_at_ms"`
-	UpdatedAtMs       int64           `json:"updated_at_ms"`
-	CurrentSnapshotID *string         `json:"current_snapshot_id,omitzero"`
-	SourceAssetID     *string         `json:"source_asset_id,omitzero"`
+	CanvasPlacement       CanvasPlacement  `json:"canvas_placement"`
+	Animation             *ClipAnimation   `json:"animation,omitzero"`
+	Opacity               *float64         `default:"1" json:"opacity"`
+	CreatedAtMs           int64            `json:"created_at_ms"`
+	UpdatedAtMs           int64            `json:"updated_at_ms"`
+	CurrentSnapshotID     *string          `json:"current_snapshot_id,omitzero"`
+	SourceAssetID         *string          `json:"source_asset_id,omitzero"`
+	SourcePlatformAssetID *string          `json:"source_platform_asset_id,omitzero"`
+	Error                 *string          `json:"error,omitzero"`
+	PendingTask           *PendingClipTask `json:"pending_task,omitzero"`
+	Analysis              *ImageAnalysis   `json:"analysis,omitzero"`
 }
 
 func (p ProjectImageResponseModel) MarshalJSON() ([]byte, error) {
@@ -58,16 +62,16 @@ func (p *ProjectImageResponseModel) GetFilename() string {
 	return p.Filename
 }
 
-func (p *ProjectImageResponseModel) GetSignedURL() string {
+func (p *ProjectImageResponseModel) GetSignedURL() *string {
 	if p == nil {
-		return ""
+		return nil
 	}
 	return p.SignedURL
 }
 
-func (p *ProjectImageResponseModel) GetThumbnailSignedURL() string {
+func (p *ProjectImageResponseModel) GetThumbnailSignedURL() *string {
 	if p == nil {
-		return ""
+		return nil
 	}
 	return p.ThumbnailSignedURL
 }
@@ -176,4 +180,32 @@ func (p *ProjectImageResponseModel) GetSourceAssetID() *string {
 		return nil
 	}
 	return p.SourceAssetID
+}
+
+func (p *ProjectImageResponseModel) GetSourcePlatformAssetID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourcePlatformAssetID
+}
+
+func (p *ProjectImageResponseModel) GetError() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Error
+}
+
+func (p *ProjectImageResponseModel) GetPendingTask() *PendingClipTask {
+	if p == nil {
+		return nil
+	}
+	return p.PendingTask
+}
+
+func (p *ProjectImageResponseModel) GetAnalysis() *ImageAnalysis {
+	if p == nil {
+		return nil
+	}
+	return p.Analysis
 }

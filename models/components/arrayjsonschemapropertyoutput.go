@@ -17,6 +17,7 @@ const (
 	ArrayJSONSchemaPropertyOutputItemsTypeArrayJSONSchemaPropertyOutput  ArrayJSONSchemaPropertyOutputItemsType = "ArrayJsonSchemaProperty-Output"
 )
 
+// ArrayJSONSchemaPropertyOutputItems - Schema for array elements.
 type ArrayJSONSchemaPropertyOutputItems struct {
 	LiteralJSONSchemaProperty      *LiteralJSONSchemaProperty      `queryParam:"inline" union:"member"`
 	ObjectJSONSchemaPropertyOutput *ObjectJSONSchemaPropertyOutput `queryParam:"inline" union:"member"`
@@ -124,11 +125,159 @@ func (u ArrayJSONSchemaPropertyOutputItems) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type ArrayJSONSchemaPropertyOutputItems: all fields are null")
 }
 
+type ArrayJSONSchemaPropertyOutputConstantValueType string
+
+const (
+	ArrayJSONSchemaPropertyOutputConstantValueTypeStr     ArrayJSONSchemaPropertyOutputConstantValueType = "str"
+	ArrayJSONSchemaPropertyOutputConstantValueTypeInteger ArrayJSONSchemaPropertyOutputConstantValueType = "integer"
+	ArrayJSONSchemaPropertyOutputConstantValueTypeNumber  ArrayJSONSchemaPropertyOutputConstantValueType = "number"
+	ArrayJSONSchemaPropertyOutputConstantValueTypeBoolean ArrayJSONSchemaPropertyOutputConstantValueType = "boolean"
+)
+
+type ArrayJSONSchemaPropertyOutputConstantValue struct {
+	Str     *string  `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
+
+	Type ArrayJSONSchemaPropertyOutputConstantValueType
+}
+
+func CreateArrayJSONSchemaPropertyOutputConstantValueStr(str string) ArrayJSONSchemaPropertyOutputConstantValue {
+	typ := ArrayJSONSchemaPropertyOutputConstantValueTypeStr
+
+	return ArrayJSONSchemaPropertyOutputConstantValue{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateArrayJSONSchemaPropertyOutputConstantValueInteger(integer int64) ArrayJSONSchemaPropertyOutputConstantValue {
+	typ := ArrayJSONSchemaPropertyOutputConstantValueTypeInteger
+
+	return ArrayJSONSchemaPropertyOutputConstantValue{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func CreateArrayJSONSchemaPropertyOutputConstantValueNumber(number float64) ArrayJSONSchemaPropertyOutputConstantValue {
+	typ := ArrayJSONSchemaPropertyOutputConstantValueTypeNumber
+
+	return ArrayJSONSchemaPropertyOutputConstantValue{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateArrayJSONSchemaPropertyOutputConstantValueBoolean(boolean bool) ArrayJSONSchemaPropertyOutputConstantValue {
+	typ := ArrayJSONSchemaPropertyOutputConstantValueTypeBoolean
+
+	return ArrayJSONSchemaPropertyOutputConstantValue{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func (u *ArrayJSONSchemaPropertyOutputConstantValue) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyOutputConstantValueTypeStr,
+			Value: &str,
+		})
+	}
+
+	var integer int64 = int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyOutputConstantValueTypeInteger,
+			Value: &integer,
+		})
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyOutputConstantValueTypeNumber,
+			Value: &number,
+		})
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyOutputConstantValueTypeBoolean,
+			Value: &boolean,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyOutputConstantValue", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyOutputConstantValue", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ArrayJSONSchemaPropertyOutputConstantValueType)
+	switch best.Type {
+	case ArrayJSONSchemaPropertyOutputConstantValueTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case ArrayJSONSchemaPropertyOutputConstantValueTypeInteger:
+		u.Integer = best.Value.(*int64)
+		return nil
+	case ArrayJSONSchemaPropertyOutputConstantValueTypeNumber:
+		u.Number = best.Value.(*float64)
+		return nil
+	case ArrayJSONSchemaPropertyOutputConstantValueTypeBoolean:
+		u.Boolean = best.Value.(*bool)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyOutputConstantValue", string(data))
+}
+
+func (u ArrayJSONSchemaPropertyOutputConstantValue) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ArrayJSONSchemaPropertyOutputConstantValue: all fields are null")
+}
+
 type ArrayJSONSchemaPropertyOutput struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_       *string                            `const:"array" json:"type"`
-	Description *string                            `default:"" json:"description"`
-	Items       ArrayJSONSchemaPropertyOutputItems `json:"items"`
+	type_       *string `const:"array" json:"type"`
+	Description *string `default:"" json:"description"`
+	// Schema for array elements.
+	Items *ArrayJSONSchemaPropertyOutputItems `json:"items,omitzero"`
+	// When set, the entire array is populated from this dynamic variable at runtime. Mutually exclusive with description (LLM-provided array), constant_value, and is_omitted.
+	DynamicVariable *string `default:"" json:"dynamic_variable"`
+	// When set, the entire array uses this constant value at runtime. Mutually exclusive with description (LLM-provided array), dynamic_variable, and is_omitted.
+	ConstantValue []ArrayJSONSchemaPropertyOutputConstantValue `json:"constant_value,omitzero"`
+	// If true, this array parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, and constant_value.
+	IsOmitted *bool `default:"false" json:"is_omitted"`
 }
 
 func (a ArrayJSONSchemaPropertyOutput) MarshalJSON() ([]byte, error) {
@@ -153,9 +302,30 @@ func (a *ArrayJSONSchemaPropertyOutput) GetDescription() *string {
 	return a.Description
 }
 
-func (a *ArrayJSONSchemaPropertyOutput) GetItems() ArrayJSONSchemaPropertyOutputItems {
+func (a *ArrayJSONSchemaPropertyOutput) GetItems() *ArrayJSONSchemaPropertyOutputItems {
 	if a == nil {
-		return ArrayJSONSchemaPropertyOutputItems{}
+		return nil
 	}
 	return a.Items
+}
+
+func (a *ArrayJSONSchemaPropertyOutput) GetDynamicVariable() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DynamicVariable
+}
+
+func (a *ArrayJSONSchemaPropertyOutput) GetConstantValue() []ArrayJSONSchemaPropertyOutputConstantValue {
+	if a == nil {
+		return nil
+	}
+	return a.ConstantValue
+}
+
+func (a *ArrayJSONSchemaPropertyOutput) GetIsOmitted() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.IsOmitted
 }

@@ -13,8 +13,10 @@ type Tool struct {
 	Description          *string          `json:"description,omitzero"`
 	InputSchema          map[string]any   `json:"inputSchema"`
 	OutputSchema         map[string]any   `json:"outputSchema,omitzero"`
+	Icons                []Icon           `json:"icons,omitzero"`
 	Annotations          *ToolAnnotations `json:"annotations,omitzero"`
 	Meta                 map[string]any   `json:"_meta,omitzero"`
+	Execution            *ToolExecution   `json:"execution,omitzero"`
 	AdditionalProperties map[string]any   `additionalProperties:"true" json:"-"`
 }
 
@@ -64,6 +66,13 @@ func (t *Tool) GetOutputSchema() map[string]any {
 	return t.OutputSchema
 }
 
+func (t *Tool) GetIcons() []Icon {
+	if t == nil {
+		return nil
+	}
+	return t.Icons
+}
+
 func (t *Tool) GetAnnotations() *ToolAnnotations {
 	if t == nil {
 		return nil
@@ -76,6 +85,13 @@ func (t *Tool) GetMeta() map[string]any {
 		return nil
 	}
 	return t.Meta
+}
+
+func (t *Tool) GetExecution() *ToolExecution {
+	if t == nil {
+		return nil
+	}
+	return t.Execution
 }
 
 func (t *Tool) GetAdditionalProperties() map[string]any {

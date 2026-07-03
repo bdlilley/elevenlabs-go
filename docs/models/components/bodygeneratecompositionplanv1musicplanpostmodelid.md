@@ -18,3 +18,4 @@ value := components.BodyGenerateCompositionPlanV1MusicPlanPostModelIDMusicV1
 | Name                                                       | Value                                                      |
 | ---------------------------------------------------------- | ---------------------------------------------------------- |
 | `BodyGenerateCompositionPlanV1MusicPlanPostModelIDMusicV1` | music_v1                                                   |
+| `BodyGenerateCompositionPlanV1MusicPlanPostModelIDMusicV2` | music_v2                                                   |

@@ -9,7 +9,8 @@ import (
 
 type GetScheduleParams struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	smbToolType *string `const:"get_schedule" json:"smb_tool_type"`
+	smbToolType           *string `const:"get_schedule" json:"smb_tool_type"`
+	IncludeLocationFilter *bool   `default:"false" json:"include_location_filter"`
 }
 
 func (g GetScheduleParams) MarshalJSON() ([]byte, error) {
@@ -25,4 +26,11 @@ func (g *GetScheduleParams) UnmarshalJSON(data []byte) error {
 
 func (g *GetScheduleParams) GetSmbToolType() *string {
 	return types.Pointer("get_schedule")
+}
+
+func (g *GetScheduleParams) GetIncludeLocationFilter() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.IncludeLocationFilter
 }

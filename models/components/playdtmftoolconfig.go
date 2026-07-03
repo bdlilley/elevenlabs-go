@@ -14,7 +14,7 @@ import (
 type PlayDTMFToolConfig struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	systemToolType *string `const:"play_keypad_touch_tone" json:"system_tool_type"`
-	// If true, send DTMF tones out-of-band using RFC 4733 (useful for SIP calls only). If false, send DTMF as in-band audio tones (works for all call types).
+	// Send DTMF tones as out-of-band RTP events (RFC 4733) instead of in-band audio. Only effective for SIP trunk imported numbers.
 	UseOutOfBandDtmf *bool `default:"true" json:"use_out_of_band_dtmf"`
 	// If true, the agent will not generate further speech after playing DTMF tones. This prevents the agent's speech from interfering with IVR systems.
 	SuppressTurnAfterDtmf *bool `default:"false" json:"suppress_turn_after_dtmf"`

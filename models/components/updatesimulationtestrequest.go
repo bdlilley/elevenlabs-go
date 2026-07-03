@@ -13,10 +13,16 @@ type UpdateSimulationTestRequest struct {
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]any                                  `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelInput `json:"chat_history,omitzero"`
+	// Simulate the test as if the conversation originated from this channel.
+	ConversationInitiationSource *ConversationInitiationSource `default:"unknown" json:"conversation_initiation_source"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"simulation" json:"type"`
-	// A prompt that evaluates whether the agent's response is successful. Should return True or False.
-	SuccessCondition *string `default:"" json:"success_condition"`
+	// Deprecated legacy single success criterion. Use success_conditions instead. At least one of success_condition or success_conditions is required.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	SuccessCondition *string `json:"success_condition,omitzero"`
+	// List of prompts that evaluate whether the simulation was successful. If provided, all criteria are evaluated and merged into a final result. Capped at the maximum number of evaluation criteria.
+	SuccessConditions []string `json:"success_conditions,omitzero"`
 	// Description of the simulation scenario and user persona for simulation tests.
 	SimulationScenario *string `default:"" json:"simulation_scenario"`
 	// Maximum number of conversation turns for simulation tests.
@@ -25,7 +31,11 @@ type UpdateSimulationTestRequest struct {
 	SimulationEnvironment *string `json:"simulation_environment,omitzero"`
 	// Simulation/preview-side config: tools are identified by IDs, resolved to names at runtime.
 	ToolMockConfig *SimulationToolMockBehaviorConfig `json:"tool_mock_config,omitzero"`
-	Name           string                            `json:"name"`
+	// LLM model to use for evaluating simulation results. Defaults to Claude Sonnet 4.6.
+	EvaluationModel *Llm `default:"gemini-2.5-flash" json:"evaluation_model"`
+	// LLM model for the simulated user. Defaults to Claude Sonnet 4.6.
+	SimulatedUserModel *Llm   `default:"gemini-2.5-flash" json:"simulated_user_model"`
+	Name               string `json:"name"`
 	// The ID of the parent folder. If not provided, the test will be moved to the root level.
 	ParentFolderID *string `json:"parent_folder_id,omitzero"`
 }
@@ -62,6 +72,13 @@ func (u *UpdateSimulationTestRequest) GetChatHistory() []ConversationHistoryTran
 	return u.ChatHistory
 }
 
+func (u *UpdateSimulationTestRequest) GetConversationInitiationSource() *ConversationInitiationSource {
+	if u == nil {
+		return nil
+	}
+	return u.ConversationInitiationSource
+}
+
 func (u *UpdateSimulationTestRequest) GetType() *string {
 	return types.Pointer("simulation")
 }
@@ -71,6 +88,13 @@ func (u *UpdateSimulationTestRequest) GetSuccessCondition() *string {
 		return nil
 	}
 	return u.SuccessCondition
+}
+
+func (u *UpdateSimulationTestRequest) GetSuccessConditions() []string {
+	if u == nil {
+		return nil
+	}
+	return u.SuccessConditions
 }
 
 func (u *UpdateSimulationTestRequest) GetSimulationScenario() *string {
@@ -99,6 +123,20 @@ func (u *UpdateSimulationTestRequest) GetToolMockConfig() *SimulationToolMockBeh
 		return nil
 	}
 	return u.ToolMockConfig
+}
+
+func (u *UpdateSimulationTestRequest) GetEvaluationModel() *Llm {
+	if u == nil {
+		return nil
+	}
+	return u.EvaluationModel
+}
+
+func (u *UpdateSimulationTestRequest) GetSimulatedUserModel() *Llm {
+	if u == nil {
+		return nil
+	}
+	return u.SimulatedUserModel
 }
 
 func (u *UpdateSimulationTestRequest) GetName() string {

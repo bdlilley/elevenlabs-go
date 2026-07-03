@@ -284,46 +284,6 @@ func (u SourceUnion2) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type SourceUnion2: all fields are null")
 }
 
-// BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio - Output quality of the generated audio. Must be one of:
-// 'standard' - standard output format, 128kbps with 44.1kHz sample rate.
-// 'high' - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side.
-// 'ultra' - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side.
-// 'ultra_lossless' - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format.
-type BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio string
-
-const (
-	BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudioStandard      BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio = "standard"
-	BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudioHigh          BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio = "high"
-	BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudioHighest       BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio = "highest"
-	BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudioUltra         BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio = "ultra"
-	BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudioUltraLossless BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio = "ultra_lossless"
-)
-
-func (e BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio) ToPointer() *BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio {
-	return &e
-}
-func (e *BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "standard":
-		fallthrough
-	case "high":
-		fallthrough
-	case "highest":
-		fallthrough
-	case "ultra":
-		fallthrough
-	case "ultra_lossless":
-		*e = BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio: %v", v)
-	}
-}
-
 // TheDurationOfTheGeneratedPodcastThisVariesDependingOnTheFormatVoiceAndLanguage - Duration of the generated podcast. Must be one of:
 // short - produces podcasts shorter than 3 minutes.
 // default - produces podcasts roughly between 3-7 minutes.
@@ -395,14 +355,8 @@ type BodyCreatePodcastV1StudioPodcastsPost struct {
 	// The type of podcast to generate. Can be 'conversation', an interaction between two voices, or 'bulletin', a monologue.
 	Mode Mode `json:"mode"`
 	// The source content for the Podcast.
-	Source SourceUnion2 `json:"source"`
-	// Output quality of the generated audio. Must be one of:
-	// 'standard' - standard output format, 128kbps with 44.1kHz sample rate.
-	// 'high' - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side.
-	// 'ultra' - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side.
-	// 'ultra_lossless' - ultra quality output format, 705.6kbps with 44.1kHz sample rate and highest improvements on our side in a fully lossless format.
-	//
-	QualityPreset *BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio `default:"standard" json:"quality_preset"`
+	Source        SourceUnion2       `json:"source"`
+	QualityPreset *QualityPresetType `default:"standard" json:"quality_preset"`
 	// Duration of the generated podcast. Must be one of:
 	// short - produces podcasts shorter than 3 minutes.
 	// default - produces podcasts roughly between 3-7 minutes.
@@ -522,7 +476,7 @@ func (b *BodyCreatePodcastV1StudioPodcastsPost) GetSource() SourceUnion2 {
 	return b.Source
 }
 
-func (b *BodyCreatePodcastV1StudioPodcastsPost) GetQualityPreset() *BodyCreatePodcastV1StudioPodcastsPostQualityOfTheGeneratedAudio {
+func (b *BodyCreatePodcastV1StudioPodcastsPost) GetQualityPreset() *QualityPresetType {
 	if b == nil {
 		return nil
 	}

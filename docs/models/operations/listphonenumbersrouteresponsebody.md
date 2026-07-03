@@ -9,6 +9,12 @@
 listPhoneNumbersRouteResponseBody := operations.CreateListPhoneNumbersRouteResponseBodyTwilio(components.GetPhoneNumberTwilioResponseModel{/* values here */})
 ```
 
+### GetPhoneNumberExotelResponseModel
+
+```go
+listPhoneNumbersRouteResponseBody := operations.CreateListPhoneNumbersRouteResponseBodyExotel(components.GetPhoneNumberExotelResponseModel{/* values here */})
+```
+
 ### GetPhoneNumberSIPTrunkResponseModel
 
 ```go
@@ -23,6 +29,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch listPhoneNumbersRouteResponseBody.Type {
 	case operations.ListPhoneNumbersRouteResponseBodyTypeTwilio:
 		// listPhoneNumbersRouteResponseBody.GetPhoneNumberTwilioResponseModel is populated
+	case operations.ListPhoneNumbersRouteResponseBodyTypeExotel:
+		// listPhoneNumbersRouteResponseBody.GetPhoneNumberExotelResponseModel is populated
 	case operations.ListPhoneNumbersRouteResponseBodyTypeSipTrunk:
 		// listPhoneNumbersRouteResponseBody.GetPhoneNumberSIPTrunkResponseModel is populated
 }

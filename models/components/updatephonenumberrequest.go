@@ -12,6 +12,11 @@ type UpdatePhoneNumberRequest struct {
 	InboundTrunkConfig  *InboundSIPTrunkConfigRequestModel  `json:"inbound_trunk_config,omitzero"`
 	OutboundTrunkConfig *OutboundSIPTrunkConfigRequestModel `json:"outbound_trunk_config,omitzero"`
 	LivekitStack        *LivekitStackType                   `default:"standard" json:"livekit_stack"`
+	StoreSipMessages    *bool                               `json:"store_sip_messages,omitzero"`
+	// Environment to use for resolving environment variables on calls to this number.
+	Environment *string `json:"environment,omitzero"`
+	// Agent branch to use for calls to this number.
+	BranchID *string `json:"branch_id,omitzero"`
 }
 
 func (u UpdatePhoneNumberRequest) MarshalJSON() ([]byte, error) {
@@ -58,4 +63,25 @@ func (u *UpdatePhoneNumberRequest) GetLivekitStack() *LivekitStackType {
 		return nil
 	}
 	return u.LivekitStack
+}
+
+func (u *UpdatePhoneNumberRequest) GetStoreSipMessages() *bool {
+	if u == nil {
+		return nil
+	}
+	return u.StoreSipMessages
+}
+
+func (u *UpdatePhoneNumberRequest) GetEnvironment() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Environment
+}
+
+func (u *UpdatePhoneNumberRequest) GetBranchID() *string {
+	if u == nil {
+		return nil
+	}
+	return u.BranchID
 }

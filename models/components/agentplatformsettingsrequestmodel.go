@@ -12,7 +12,7 @@ type AgentPlatformSettingsRequestModel struct {
 	Evaluation *EvaluationSettingsInput `json:"evaluation,omitzero"`
 	Widget     *WidgetConfigInput       `json:"widget,omitzero"`
 	// Data collection settings
-	DataCollection map[string]LiteralJSONSchemaProperty `json:"data_collection,omitzero"`
+	DataCollection map[string]AnalysisProperty `json:"data_collection,omitzero"`
 	// Scope per data collection item ID. Missing keys default to conversation scope.
 	DataCollectionScopes map[string]AnalysisScope                     `json:"data_collection_scopes,omitzero"`
 	Overrides            *ConversationInitiationClientDataConfigInput `json:"overrides,omitzero"`
@@ -27,6 +27,17 @@ type AgentPlatformSettingsRequestModel struct {
 	Auth            *AuthSettings       `json:"auth,omitzero"`
 	CallLimits      *AgentCallLimits    `json:"call_limits,omitzero"`
 	Privacy         *PrivacyConfigInput `json:"privacy,omitzero"`
+	// The trust context in which the agent operates.
+	//
+	// UNKNOWN: not yet classified (existing agents created before this feature).
+	// LOW: serves untrusted external participants (e.g. customer support, sales) —
+	//      outputs should be vetted and tool access scoped.
+	// HIGH: serves the owner (e.g. personal assistant) — full tool access is appropriate.
+	TrustContext *AgentTrustContext `default:"unknown" json:"trust_context"`
+	AnalysisLlm  *Llm               `default:"gemini-2.5-flash" json:"analysis_llm"`
+	// Per-agent topic-discovery configuration. Cadence and analysis window are
+	// managed internally; this only exposes the customer-facing on/off toggle.
+	TopicDiscovery *TopicDiscoverySettings `json:"topic_discovery,omitzero"`
 }
 
 func (a AgentPlatformSettingsRequestModel) MarshalJSON() ([]byte, error) {
@@ -54,7 +65,7 @@ func (a *AgentPlatformSettingsRequestModel) GetWidget() *WidgetConfigInput {
 	return a.Widget
 }
 
-func (a *AgentPlatformSettingsRequestModel) GetDataCollection() map[string]LiteralJSONSchemaProperty {
+func (a *AgentPlatformSettingsRequestModel) GetDataCollection() map[string]AnalysisProperty {
 	if a == nil {
 		return nil
 	}
@@ -129,4 +140,25 @@ func (a *AgentPlatformSettingsRequestModel) GetPrivacy() *PrivacyConfigInput {
 		return nil
 	}
 	return a.Privacy
+}
+
+func (a *AgentPlatformSettingsRequestModel) GetTrustContext() *AgentTrustContext {
+	if a == nil {
+		return nil
+	}
+	return a.TrustContext
+}
+
+func (a *AgentPlatformSettingsRequestModel) GetAnalysisLlm() *Llm {
+	if a == nil {
+		return nil
+	}
+	return a.AnalysisLlm
+}
+
+func (a *AgentPlatformSettingsRequestModel) GetTopicDiscovery() *TopicDiscoverySettings {
+	if a == nil {
+		return nil
+	}
+	return a.TopicDiscovery
 }

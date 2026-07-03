@@ -53,6 +53,8 @@ type ListChatResponseTestsRouteRequest struct {
 	IncludeFolders *bool `queryParam:"style=form,explode=true,name=include_folders"`
 	// Sort mode for listing tests. Use 'folders_first' to place folders before tests.
 	SortMode *SortMode `default:"default" queryParam:"style=form,explode=true,name=sort_mode"`
+	// Filter test visibility. Use `shared_with_me` to return only tests/folders shared with the current user that they did not create.
+	SharingMode *components.TestSharingMode `queryParam:"style=form,explode=true,name=sharing_mode"`
 }
 
 func (l ListChatResponseTestsRouteRequest) MarshalJSON() ([]byte, error) {
@@ -113,6 +115,13 @@ func (l *ListChatResponseTestsRouteRequest) GetSortMode() *SortMode {
 		return nil
 	}
 	return l.SortMode
+}
+
+func (l *ListChatResponseTestsRouteRequest) GetSharingMode() *components.TestSharingMode {
+	if l == nil {
+		return nil
+	}
+	return l.SharingMode
 }
 
 type ListChatResponseTestsRouteResponse struct {

@@ -27,3 +27,5 @@ custom := components.SourceEnum("custom_value")
 | `SourceEnumPlayAPI`         | PlayAPI                     |
 | `SourceEnumConvAi`          | ConvAI                      |
 | `SourceEnumVoiceGeneration` | VoiceGeneration             |
+| `SourceEnumInVpc`           | InVPC                       |
+| `SourceEnumFlows`           | Flows                       |

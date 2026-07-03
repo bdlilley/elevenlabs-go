@@ -23,6 +23,8 @@ type AgentBranchSummary struct {
 	ParentBranchID *string `json:"parent_branch_id,omitzero"`
 	// Whether a draft exists for the branch
 	DraftExists *bool `default:"false" json:"draft_exists"`
+	// Number of calls in the last 7 days
+	Calls7d *int64 `default:"0" json:"calls_7d"`
 }
 
 func (a AgentBranchSummary) MarshalJSON() ([]byte, error) {
@@ -118,4 +120,11 @@ func (a *AgentBranchSummary) GetDraftExists() *bool {
 		return nil
 	}
 	return a.DraftExists
+}
+
+func (a *AgentBranchSummary) GetCalls7d() *int64 {
+	if a == nil {
+		return nil
+	}
+	return a.Calls7d
 }

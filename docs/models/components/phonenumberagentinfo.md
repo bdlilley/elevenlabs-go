@@ -3,7 +3,9 @@
 
 ## Fields
 
-| Field                 | Type                  | Required              | Description           |
-| --------------------- | --------------------- | --------------------- | --------------------- |
-| `AgentID`             | `string`              | :heavy_check_mark:    | The ID of the agent   |
-| `AgentName`           | `string`              | :heavy_check_mark:    | The name of the agent |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `AgentID`                                                                       | `string`                                                                        | :heavy_check_mark:                                                              | The ID of the agent                                                             |
+| `AgentName`                                                                     | `string`                                                                        | :heavy_check_mark:                                                              | The name of the agent                                                           |
+| `Environment`                                                                   | `*string`                                                                       | :heavy_minus_sign:                                                              | Environment to use for resolving environment variables on calls to this number. |
+| `BranchID`                                                                      | `*string`                                                                       | :heavy_minus_sign:                                                              | Agent branch to use for calls to this number.                                   |

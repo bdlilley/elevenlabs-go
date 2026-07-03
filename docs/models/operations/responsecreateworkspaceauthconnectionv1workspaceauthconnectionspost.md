@@ -53,10 +53,28 @@ responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost := operation
 responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost := operations.CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostAPIIntegrationOauth2AuthCode(components.APIIntegrationOAuth2AuthCodeResponse{/* values here */})
 ```
 
+### APIIntegrationOAuth2CustomAppResponse
+
+```go
+responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost := operations.CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostAPIIntegrationOauth2CustomApp(components.APIIntegrationOAuth2CustomAppResponse{/* values here */})
+```
+
 ### WhatsAppAuthResponse
 
 ```go
 responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost := operations.CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostWhatsappAuth(components.WhatsAppAuthResponse{/* values here */})
+```
+
+### SlackBotAuthResponse
+
+```go
+responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost := operations.CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostSlackBotAuth(components.SlackBotAuthResponse{/* values here */})
+```
+
+### URLSecretAuthResponse
+
+```go
+responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost := operations.CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostURLSecret(components.URLSecretAuthResponse{/* values here */})
 ```
 
 ## Union Discrimination
@@ -81,7 +99,13 @@ switch responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.Type 
 		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.CustomHeaderAuthResponse is populated
 	case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2AuthCode:
 		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.APIIntegrationOAuth2AuthCodeResponse is populated
+	case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2CustomApp:
+		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.APIIntegrationOAuth2CustomAppResponse is populated
 	case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth:
 		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.WhatsAppAuthResponse is populated
+	case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeSlackBotAuth:
+		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.SlackBotAuthResponse is populated
+	case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeURLSecret:
+		// responseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.URLSecretAuthResponse is populated
 }
 ```

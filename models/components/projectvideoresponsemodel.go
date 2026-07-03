@@ -8,40 +8,42 @@ import (
 )
 
 type ProjectVideoResponseModel struct {
-	VideoID                  string                                    `json:"video_id"`
-	Filename                 string                                    `json:"filename"`
-	SignedURL                *string                                   `json:"signed_url"`
-	SignedPreviewURL         *string                                   `json:"signed_preview_url"`
-	OffsetMs                 int64                                     `json:"offset_ms"`
-	DurationMs               int64                                     `json:"duration_ms"`
-	VolumeGainDb             float64                                   `json:"volume_gain_db"`
-	Muted                    bool                                      `json:"muted"`
-	FadeInMs                 *int64                                    `default:"0" json:"fade_in_ms"`
-	FadeOutMs                *int64                                    `default:"0" json:"fade_out_ms"`
-	Width                    int64                                     `json:"width"`
-	Height                   int64                                     `json:"height"`
-	Codec                    string                                    `json:"codec"`
-	Order                    string                                    `json:"order"`
-	CreatedAtMs              int64                                     `json:"created_at_ms"`
-	UpdatedAtMs              int64                                     `json:"updated_at_ms"`
-	Error                    *string                                   `json:"error,omitzero"`
-	ThumbnailIntervalSeconds float64                                   `json:"thumbnail_interval_seconds"`
-	ThumbnailSize            []int64                                   `json:"thumbnail_size"`
-	ThumbnailSheets          []ProjectVideoThumbnailSheetResponseModel `json:"thumbnail_sheets"`
-	StartTimeMs              int64                                     `json:"start_time_ms"`
-	EndTimeMs                int64                                     `json:"end_time_ms"`
-	AssetPreviewSignedURL    *string                                   `json:"asset_preview_signed_url,omitzero"`
-	SourceVideoID            *string                                   `json:"source_video_id,omitzero"`
-	SourceAssetID            *string                                   `json:"source_asset_id,omitzero"`
-	PendingBlockIds          []string                                  `json:"pending_block_ids"`
-	PendingExternalAudioIds  []string                                  `json:"pending_external_audio_ids"`
-	SpeechImported           *bool                                     `default:"false" json:"speech_imported"`
-	PendingTask              *PendingClipTask                          `json:"pending_task,omitzero"`
-	AudioTrackReady          *bool                                     `default:"true" json:"audio_track_ready"`
-	ExportFormatReady        *bool                                     `default:"true" json:"export_format_ready"`
-	CurrentSnapshotID        *string                                   `json:"current_snapshot_id,omitzero"`
-	SourceContext            *GenerationSourceContext                  `json:"source_context,omitzero"`
-	Analysis                 *VideoAnalysis                            `json:"analysis,omitzero"`
+	VideoID                       string                                    `json:"video_id"`
+	Filename                      string                                    `json:"filename"`
+	SignedURL                     *string                                   `json:"signed_url"`
+	SignedPreviewURL              *string                                   `json:"signed_preview_url"`
+	OffsetMs                      int64                                     `json:"offset_ms"`
+	DurationMs                    int64                                     `json:"duration_ms"`
+	VolumeGainDb                  float64                                   `json:"volume_gain_db"`
+	Muted                         bool                                      `json:"muted"`
+	FadeInMs                      *int64                                    `default:"0" json:"fade_in_ms"`
+	FadeOutMs                     *int64                                    `default:"0" json:"fade_out_ms"`
+	Width                         int64                                     `json:"width"`
+	Height                        int64                                     `json:"height"`
+	Codec                         string                                    `json:"codec"`
+	Order                         string                                    `json:"order"`
+	CreatedAtMs                   int64                                     `json:"created_at_ms"`
+	UpdatedAtMs                   int64                                     `json:"updated_at_ms"`
+	Error                         *string                                   `json:"error,omitzero"`
+	ThumbnailIntervalSeconds      float64                                   `json:"thumbnail_interval_seconds"`
+	ThumbnailSize                 []int64                                   `json:"thumbnail_size"`
+	ThumbnailSheets               []ProjectVideoThumbnailSheetResponseModel `json:"thumbnail_sheets"`
+	StartTimeMs                   int64                                     `json:"start_time_ms"`
+	EndTimeMs                     *int64                                    `json:"end_time_ms"`
+	AssetPreviewSignedURL         *string                                   `json:"asset_preview_signed_url,omitzero"`
+	SourceVideoID                 *string                                   `json:"source_video_id,omitzero"`
+	SourceAssetID                 *string                                   `json:"source_asset_id,omitzero"`
+	SourcePlatformAssetID         *string                                   `json:"source_platform_asset_id,omitzero"`
+	PendingBlocksMetadata         *PendingBlocksMetadataModel               `json:"pending_blocks_metadata,omitzero"`
+	PendingExternalAudiosMetadata *PendingExternalAudiosMetadataModel       `json:"pending_external_audios_metadata,omitzero"`
+	SpeechImported                *bool                                     `default:"false" json:"speech_imported"`
+	PendingTask                   *PendingClipTask                          `json:"pending_task,omitzero"`
+	AudioTrackReady               *bool                                     `default:"true" json:"audio_track_ready"`
+	ExportFormatReady             *bool                                     `default:"true" json:"export_format_ready"`
+	CurrentSnapshotID             *string                                   `json:"current_snapshot_id,omitzero"`
+	SourceContext                 *GenerationSourceContext                  `json:"source_context,omitzero"`
+	Analysis                      *VideoAnalysis                            `json:"analysis,omitzero"`
+	Transcription                 *AssetTranscription                       `json:"transcription,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"video" json:"type"`
 	// Defines asset positioning and transformation on canvas.
@@ -212,9 +214,9 @@ func (p *ProjectVideoResponseModel) GetStartTimeMs() int64 {
 	return p.StartTimeMs
 }
 
-func (p *ProjectVideoResponseModel) GetEndTimeMs() int64 {
+func (p *ProjectVideoResponseModel) GetEndTimeMs() *int64 {
 	if p == nil {
-		return 0
+		return nil
 	}
 	return p.EndTimeMs
 }
@@ -240,18 +242,25 @@ func (p *ProjectVideoResponseModel) GetSourceAssetID() *string {
 	return p.SourceAssetID
 }
 
-func (p *ProjectVideoResponseModel) GetPendingBlockIds() []string {
+func (p *ProjectVideoResponseModel) GetSourcePlatformAssetID() *string {
 	if p == nil {
-		return []string{}
+		return nil
 	}
-	return p.PendingBlockIds
+	return p.SourcePlatformAssetID
 }
 
-func (p *ProjectVideoResponseModel) GetPendingExternalAudioIds() []string {
+func (p *ProjectVideoResponseModel) GetPendingBlocksMetadata() *PendingBlocksMetadataModel {
 	if p == nil {
-		return []string{}
+		return nil
 	}
-	return p.PendingExternalAudioIds
+	return p.PendingBlocksMetadata
+}
+
+func (p *ProjectVideoResponseModel) GetPendingExternalAudiosMetadata() *PendingExternalAudiosMetadataModel {
+	if p == nil {
+		return nil
+	}
+	return p.PendingExternalAudiosMetadata
 }
 
 func (p *ProjectVideoResponseModel) GetSpeechImported() *bool {
@@ -301,6 +310,13 @@ func (p *ProjectVideoResponseModel) GetAnalysis() *VideoAnalysis {
 		return nil
 	}
 	return p.Analysis
+}
+
+func (p *ProjectVideoResponseModel) GetTranscription() *AssetTranscription {
+	if p == nil {
+		return nil
+	}
+	return p.Transcription
 }
 
 func (p *ProjectVideoResponseModel) GetType() *string {

@@ -97,14 +97,118 @@ func (u GroupUsageLimit) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type GroupUsageLimit: all fields are null")
 }
 
+type GroupPvcLimitType string
+
+const (
+	GroupPvcLimitTypeInteger GroupPvcLimitType = "integer"
+	GroupPvcLimitTypeStr     GroupPvcLimitType = "str"
+)
+
+type GroupPvcLimit struct {
+	Integer *int64  `queryParam:"inline" union:"member"`
+	Str     *string `queryParam:"inline" union:"member"`
+
+	Type GroupPvcLimitType
+}
+
+func CreateGroupPvcLimitInteger(integer int64) GroupPvcLimit {
+	typ := GroupPvcLimitTypeInteger
+
+	return GroupPvcLimit{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func CreateGroupPvcLimitStr(str string) GroupPvcLimit {
+	typ := GroupPvcLimitTypeStr
+
+	return GroupPvcLimit{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func (u *GroupPvcLimit) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var integer int64 = int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  GroupPvcLimitTypeInteger,
+			Value: &integer,
+		})
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  GroupPvcLimitTypeStr,
+			Value: &str,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GroupPvcLimit", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for GroupPvcLimit", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(GroupPvcLimitType)
+	switch best.Type {
+	case GroupPvcLimitTypeInteger:
+		u.Integer = best.Value.(*int64)
+		return nil
+	case GroupPvcLimitTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GroupPvcLimit", string(data))
+}
+
+func (u GroupPvcLimit) MarshalJSON() ([]byte, error) {
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type GroupPvcLimit: all fields are null")
+}
+
 type WorkspaceGroupResponseModel struct {
 	Name            string                     `json:"name"`
 	ID              string                     `json:"id"`
 	Members         []string                   `json:"members"`
 	Permissions     []WorkspaceGroupPermission `json:"permissions"`
 	GroupUsageLimit *GroupUsageLimit           `json:"group_usage_limit,omitzero"`
+	GroupPvcLimit   *GroupPvcLimit             `json:"group_pvc_limit,omitzero"`
 	CharacterCount  *int64                     `json:"character_count,omitzero"`
 	ScimExternalID  *string                    `json:"scim_external_id,omitzero"`
+	IsScimSynced    *bool                      `default:"false" json:"is_scim_synced"`
+	ScimGroup       *ScimGroupResponseModel    `json:"scim_group,omitzero"`
+	ScimFrozen      *bool                      `default:"false" json:"scim_frozen"`
+}
+
+func (w WorkspaceGroupResponseModel) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *WorkspaceGroupResponseModel) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (w *WorkspaceGroupResponseModel) GetName() string {
@@ -142,6 +246,13 @@ func (w *WorkspaceGroupResponseModel) GetGroupUsageLimit() *GroupUsageLimit {
 	return w.GroupUsageLimit
 }
 
+func (w *WorkspaceGroupResponseModel) GetGroupPvcLimit() *GroupPvcLimit {
+	if w == nil {
+		return nil
+	}
+	return w.GroupPvcLimit
+}
+
 func (w *WorkspaceGroupResponseModel) GetCharacterCount() *int64 {
 	if w == nil {
 		return nil
@@ -154,4 +265,25 @@ func (w *WorkspaceGroupResponseModel) GetScimExternalID() *string {
 		return nil
 	}
 	return w.ScimExternalID
+}
+
+func (w *WorkspaceGroupResponseModel) GetIsScimSynced() *bool {
+	if w == nil {
+		return nil
+	}
+	return w.IsScimSynced
+}
+
+func (w *WorkspaceGroupResponseModel) GetScimGroup() *ScimGroupResponseModel {
+	if w == nil {
+		return nil
+	}
+	return w.ScimGroup
+}
+
+func (w *WorkspaceGroupResponseModel) GetScimFrozen() *bool {
+	if w == nil {
+		return nil
+	}
+	return w.ScimFrozen
 }

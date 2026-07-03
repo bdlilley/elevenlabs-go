@@ -13,6 +13,8 @@ type RunAgentTestsRequestModel struct {
 	AgentConfigOverride *AdhocAgentConfigOverrideForTestRequestModel `json:"agent_config_override,omitzero"`
 	// ID of the branch to run the tests on. If not provided, the tests will be run on the agent default configuration.
 	BranchID *string `json:"branch_id,omitzero"`
+	// Number of times to run each test. When greater than 1, results are grouped and summarized.
+	RepeatCount *int64 `default:"1" json:"repeat_count"`
 }
 
 func (r RunAgentTestsRequestModel) MarshalJSON() ([]byte, error) {
@@ -45,4 +47,11 @@ func (r *RunAgentTestsRequestModel) GetBranchID() *string {
 		return nil
 	}
 	return r.BranchID
+}
+
+func (r *RunAgentTestsRequestModel) GetRepeatCount() *int64 {
+	if r == nil {
+		return nil
+	}
+	return r.RepeatCount
 }

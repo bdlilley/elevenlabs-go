@@ -1,0 +1,12 @@
+# PublicListOrdersRequest
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `PageSize`                                                                     | `*int64`                                                                       | :heavy_minus_sign:                                                             | Maximum number of orders to return per page.                                   |
+| `Offset`                                                                       | `*int64`                                                                       | :heavy_minus_sign:                                                             | Number of orders to skip for pagination.                                       |
+| `Status`                                                                       | [][components.OrderRequestState](../../models/components/orderrequeststate.md) | :heavy_minus_sign:                                                             | Filter orders by one or more statuses.                                         |
+| `StartDate`                                                                    | [*time.Time](https://pkg.go.dev/time#Time)                                     | :heavy_minus_sign:                                                             | Filter orders created on or after this date.                                   |
+| `EndDate`                                                                      | [*time.Time](https://pkg.go.dev/time#Time)                                     | :heavy_minus_sign:                                                             | Filter orders created on or before this date.                                  |

@@ -23,3 +23,4 @@ custom := components.LLMReasoningEffort("custom_value")
 | `LLMReasoningEffortLow`     | low                         |
 | `LLMReasoningEffortMedium`  | medium                      |
 | `LLMReasoningEffortHigh`    | high                        |
+| `LLMReasoningEffortXhigh`   | xhigh                       |

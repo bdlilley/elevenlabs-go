@@ -10,7 +10,7 @@ import (
 type SmartSearchConversationMessagesRouteRequest struct {
 	// The search query text for semantic similarity matching
 	TextQuery string `queryParam:"style=form,explode=true,name=text_query"`
-	// The id of the agent you're taking the action on.
+	// Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.
 	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// Number of results per page. Max 50.
 	PageSize *int64 `default:"20" queryParam:"style=form,explode=true,name=page_size"`

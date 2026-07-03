@@ -7,7 +7,7 @@ import (
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
-// CreateServiceParams - Create a new service in the system.
+// CreateServiceParams - Create a new service (classic, rental, or group) in the system.
 type CreateServiceParams struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	smbToolType *string `const:"create_service" json:"smb_tool_type"`

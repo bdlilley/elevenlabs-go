@@ -3,16 +3,34 @@
 
 ## Supported Types
 
-### CheckRentalAvailabilityParams
+### CancelCalendarEventParams
 
 ```go
-smbToolConfigParams := components.CreateSMBToolConfigParamsCheckRentalAvailability(components.CheckRentalAvailabilityParams{/* values here */})
+smbToolConfigParams := components.CreateSMBToolConfigParamsCancelCalendarEvent(components.CancelCalendarEventParams{/* values here */})
+```
+
+### CancelGroupSessionForAllParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsCancelGroupSessionForAll(components.CancelGroupSessionForAllParams{/* values here */})
+```
+
+### CancelGroupSessionRegistrationParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsCancelGroupSessionRegistration(components.CancelGroupSessionRegistrationParams{/* values here */})
 ```
 
 ### CheckServiceAvailabilityParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsCheckServiceAvailability(components.CheckServiceAvailabilityParams{/* values here */})
+```
+
+### CreateAgentProcedureParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsCreateAgentProcedure(components.CreateAgentProcedureParams{/* values here */})
 ```
 
 ### CreateAgentRuleParams
@@ -51,22 +69,16 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsCreateClientInteracti
 smbToolConfigParams := components.CreateSMBToolConfigParamsCreateHoliday(components.CreateHolidayParams{/* values here */})
 ```
 
+### CreateLocationParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsCreateLocation(components.CreateLocationParams{/* values here */})
+```
+
 ### CreateProductParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsCreateProduct(components.CreateProductParams{/* values here */})
-```
-
-### CreateRentalBookingParams
-
-```go
-smbToolConfigParams := components.CreateSMBToolConfigParamsCreateRentalBooking(components.CreateRentalBookingParams{/* values here */})
-```
-
-### CreateRentalServiceParams
-
-```go
-smbToolConfigParams := components.CreateSMBToolConfigParamsCreateRentalService(components.CreateRentalServiceParams{/* values here */})
 ```
 
 ### CreateServiceParams
@@ -79,6 +91,12 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsCreateService(compone
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsCreateStaff(components.CreateStaffParams{/* values here */})
+```
+
+### DeleteAgentProcedureParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteAgentProcedure(components.DeleteAgentProcedureParams{/* values here */})
 ```
 
 ### DeleteAgentRuleParams
@@ -111,22 +129,28 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteClient(componen
 smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteClientInteraction(components.DeleteClientInteractionParams{/* values here */})
 ```
 
+### DeleteGroupSessionParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteGroupSession(components.DeleteGroupSessionParams{/* values here */})
+```
+
 ### DeleteHolidayParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteHoliday(components.DeleteHolidayParams{/* values here */})
 ```
 
+### DeleteLocationParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteLocation(components.DeleteLocationParams{/* values here */})
+```
+
 ### DeleteProductParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteProduct(components.DeleteProductParams{/* values here */})
-```
-
-### DeleteRentalServiceParams
-
-```go
-smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteRentalService(components.DeleteRentalServiceParams{/* values here */})
 ```
 
 ### DeleteServiceParams
@@ -145,6 +169,12 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsDeleteStaff(component
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsGetAnalyticsSummary(components.GetAnalyticsSummaryParams{/* values here */})
+```
+
+### GetAppointmentByConfirmationNumberParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsGetAppointmentByConfirmationNumber(components.GetAppointmentByConfirmationNumberParams{/* values here */})
 ```
 
 ### GetBookingPageSettingsParams
@@ -177,6 +207,24 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsGetClientByPhone(comp
 smbToolConfigParams := components.CreateSMBToolConfigParamsGetSchedule(components.GetScheduleParams{/* values here */})
 ```
 
+### LeaveMessageParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsLeaveMessage(components.LeaveMessageParams{/* values here */})
+```
+
+### ListAgentProceduresParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsListAgentProcedures(components.ListAgentProceduresParams{/* values here */})
+```
+
+### ListAgentReferencesParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsListAgentReferences(components.ListAgentReferencesParams{/* values here */})
+```
+
 ### ListAgentRulesParams
 
 ```go
@@ -207,22 +255,34 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsListClientInteraction
 smbToolConfigParams := components.CreateSMBToolConfigParamsListClients(components.ListClientsParams{/* values here */})
 ```
 
+### ListCustomerFacingAgentsParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsListCustomerFacingAgents(components.ListCustomerFacingAgentsParams{/* values here */})
+```
+
+### ListGroupSessionsParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsListGroupSessions(components.ListGroupSessionsParams{/* values here */})
+```
+
 ### ListHolidaysParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsListHolidays(components.ListHolidaysParams{/* values here */})
 ```
 
+### ListLocationsParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsListLocations(components.ListLocationsParams{/* values here */})
+```
+
 ### ListProductsParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsListProducts(components.ListProductsParams{/* values here */})
-```
-
-### ListRentalServicesParams
-
-```go
-smbToolConfigParams := components.CreateSMBToolConfigParamsListRentalServices(components.ListRentalServicesParams{/* values here */})
 ```
 
 ### ListServicesParams
@@ -237,6 +297,42 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsListServices(componen
 smbToolConfigParams := components.CreateSMBToolConfigParamsListStaff(components.ListStaffParams{/* values here */})
 ```
 
+### OptInSmsReminderParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsOptInSmsReminder(components.OptInSmsReminderParams{/* values here */})
+```
+
+### OptOutSmsReminderParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsOptOutSmsReminder(components.OptOutSmsReminderParams{/* values here */})
+```
+
+### RegisterForGroupSessionParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsRegisterForGroupSession(components.RegisterForGroupSessionParams{/* values here */})
+```
+
+### ReportKnowledgeGapParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsReportKnowledgeGap(components.ReportKnowledgeGapParams{/* values here */})
+```
+
+### RestoreCalendarEventParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsRestoreCalendarEvent(components.RestoreCalendarEventParams{/* values here */})
+```
+
+### ScheduleGroupSessionParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsScheduleGroupSession(components.ScheduleGroupSessionParams{/* values here */})
+```
+
 ### SearchClientsParams
 
 ```go
@@ -249,6 +345,18 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsSearchClients(compone
 smbToolConfigParams := components.CreateSMBToolConfigParamsSetBookingSlug(components.SetBookingSlugParams{/* values here */})
 ```
 
+### SubmitBusinessInfoParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsSubmitBusinessInfo(components.SubmitBusinessInfoParams{/* values here */})
+```
+
+### UpdateAgentProcedureParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateAgentProcedure(components.UpdateAgentProcedureParams{/* values here */})
+```
+
 ### UpdateAgentRuleParams
 
 ```go
@@ -259,6 +367,12 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateAgentRule(compo
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateAsset(components.UpdateAssetParams{/* values here */})
+```
+
+### UpdateBookingPageAppearanceParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateBookingPageAppearance(components.UpdateBookingPageAppearanceParams{/* values here */})
 ```
 
 ### UpdateBookingPageSettingsParams
@@ -291,22 +405,28 @@ smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateClient(componen
 smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateCustomerFacingConfig(components.UpdateCustomerFacingConfigParams{/* values here */})
 ```
 
+### UpdateGroupSessionSeatsParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateGroupSessionSeats(components.UpdateGroupSessionSeatsParams{/* values here */})
+```
+
 ### UpdateHolidayParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateHoliday(components.UpdateHolidayParams{/* values here */})
 ```
 
+### UpdateLocationParams
+
+```go
+smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateLocation(components.UpdateLocationParams{/* values here */})
+```
+
 ### UpdateProductParams
 
 ```go
 smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateProduct(components.UpdateProductParams{/* values here */})
-```
-
-### UpdateRentalServiceParams
-
-```go
-smbToolConfigParams := components.CreateSMBToolConfigParamsUpdateRentalService(components.UpdateRentalServiceParams{/* values here */})
 ```
 
 ### UpdateServiceParams
@@ -327,10 +447,16 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch smbToolConfigParams.Type {
-	case components.SMBToolConfigParamsTypeCheckRentalAvailability:
-		// smbToolConfigParams.CheckRentalAvailabilityParams is populated
+	case components.SMBToolConfigParamsTypeCancelCalendarEvent:
+		// smbToolConfigParams.CancelCalendarEventParams is populated
+	case components.SMBToolConfigParamsTypeCancelGroupSessionForAll:
+		// smbToolConfigParams.CancelGroupSessionForAllParams is populated
+	case components.SMBToolConfigParamsTypeCancelGroupSessionRegistration:
+		// smbToolConfigParams.CancelGroupSessionRegistrationParams is populated
 	case components.SMBToolConfigParamsTypeCheckServiceAvailability:
 		// smbToolConfigParams.CheckServiceAvailabilityParams is populated
+	case components.SMBToolConfigParamsTypeCreateAgentProcedure:
+		// smbToolConfigParams.CreateAgentProcedureParams is populated
 	case components.SMBToolConfigParamsTypeCreateAgentRule:
 		// smbToolConfigParams.CreateAgentRuleParams is populated
 	case components.SMBToolConfigParamsTypeCreateAsset:
@@ -343,16 +469,16 @@ switch smbToolConfigParams.Type {
 		// smbToolConfigParams.CreateClientInteractionParams is populated
 	case components.SMBToolConfigParamsTypeCreateHoliday:
 		// smbToolConfigParams.CreateHolidayParams is populated
+	case components.SMBToolConfigParamsTypeCreateLocation:
+		// smbToolConfigParams.CreateLocationParams is populated
 	case components.SMBToolConfigParamsTypeCreateProduct:
 		// smbToolConfigParams.CreateProductParams is populated
-	case components.SMBToolConfigParamsTypeCreateRentalBooking:
-		// smbToolConfigParams.CreateRentalBookingParams is populated
-	case components.SMBToolConfigParamsTypeCreateRentalService:
-		// smbToolConfigParams.CreateRentalServiceParams is populated
 	case components.SMBToolConfigParamsTypeCreateService:
 		// smbToolConfigParams.CreateServiceParams is populated
 	case components.SMBToolConfigParamsTypeCreateStaff:
 		// smbToolConfigParams.CreateStaffParams is populated
+	case components.SMBToolConfigParamsTypeDeleteAgentProcedure:
+		// smbToolConfigParams.DeleteAgentProcedureParams is populated
 	case components.SMBToolConfigParamsTypeDeleteAgentRule:
 		// smbToolConfigParams.DeleteAgentRuleParams is populated
 	case components.SMBToolConfigParamsTypeDeleteAsset:
@@ -363,18 +489,22 @@ switch smbToolConfigParams.Type {
 		// smbToolConfigParams.DeleteClientParams is populated
 	case components.SMBToolConfigParamsTypeDeleteClientInteraction:
 		// smbToolConfigParams.DeleteClientInteractionParams is populated
+	case components.SMBToolConfigParamsTypeDeleteGroupSession:
+		// smbToolConfigParams.DeleteGroupSessionParams is populated
 	case components.SMBToolConfigParamsTypeDeleteHoliday:
 		// smbToolConfigParams.DeleteHolidayParams is populated
+	case components.SMBToolConfigParamsTypeDeleteLocation:
+		// smbToolConfigParams.DeleteLocationParams is populated
 	case components.SMBToolConfigParamsTypeDeleteProduct:
 		// smbToolConfigParams.DeleteProductParams is populated
-	case components.SMBToolConfigParamsTypeDeleteRentalService:
-		// smbToolConfigParams.DeleteRentalServiceParams is populated
 	case components.SMBToolConfigParamsTypeDeleteService:
 		// smbToolConfigParams.DeleteServiceParams is populated
 	case components.SMBToolConfigParamsTypeDeleteStaff:
 		// smbToolConfigParams.DeleteStaffParams is populated
 	case components.SMBToolConfigParamsTypeGetAnalyticsSummary:
 		// smbToolConfigParams.GetAnalyticsSummaryParams is populated
+	case components.SMBToolConfigParamsTypeGetAppointmentByConfirmationNumber:
+		// smbToolConfigParams.GetAppointmentByConfirmationNumberParams is populated
 	case components.SMBToolConfigParamsTypeGetBookingPageSettings:
 		// smbToolConfigParams.GetBookingPageSettingsParams is populated
 	case components.SMBToolConfigParamsTypeGetBookingSlugStatus:
@@ -385,6 +515,12 @@ switch smbToolConfigParams.Type {
 		// smbToolConfigParams.GetClientByPhoneParams is populated
 	case components.SMBToolConfigParamsTypeGetSchedule:
 		// smbToolConfigParams.GetScheduleParams is populated
+	case components.SMBToolConfigParamsTypeLeaveMessage:
+		// smbToolConfigParams.LeaveMessageParams is populated
+	case components.SMBToolConfigParamsTypeListAgentProcedures:
+		// smbToolConfigParams.ListAgentProceduresParams is populated
+	case components.SMBToolConfigParamsTypeListAgentReferences:
+		// smbToolConfigParams.ListAgentReferencesParams is populated
 	case components.SMBToolConfigParamsTypeListAgentRules:
 		// smbToolConfigParams.ListAgentRulesParams is populated
 	case components.SMBToolConfigParamsTypeListAssets:
@@ -395,24 +531,46 @@ switch smbToolConfigParams.Type {
 		// smbToolConfigParams.ListClientInteractionsParams is populated
 	case components.SMBToolConfigParamsTypeListClients:
 		// smbToolConfigParams.ListClientsParams is populated
+	case components.SMBToolConfigParamsTypeListCustomerFacingAgents:
+		// smbToolConfigParams.ListCustomerFacingAgentsParams is populated
+	case components.SMBToolConfigParamsTypeListGroupSessions:
+		// smbToolConfigParams.ListGroupSessionsParams is populated
 	case components.SMBToolConfigParamsTypeListHolidays:
 		// smbToolConfigParams.ListHolidaysParams is populated
+	case components.SMBToolConfigParamsTypeListLocations:
+		// smbToolConfigParams.ListLocationsParams is populated
 	case components.SMBToolConfigParamsTypeListProducts:
 		// smbToolConfigParams.ListProductsParams is populated
-	case components.SMBToolConfigParamsTypeListRentalServices:
-		// smbToolConfigParams.ListRentalServicesParams is populated
 	case components.SMBToolConfigParamsTypeListServices:
 		// smbToolConfigParams.ListServicesParams is populated
 	case components.SMBToolConfigParamsTypeListStaff:
 		// smbToolConfigParams.ListStaffParams is populated
+	case components.SMBToolConfigParamsTypeOptInSmsReminder:
+		// smbToolConfigParams.OptInSmsReminderParams is populated
+	case components.SMBToolConfigParamsTypeOptOutSmsReminder:
+		// smbToolConfigParams.OptOutSmsReminderParams is populated
+	case components.SMBToolConfigParamsTypeRegisterForGroupSession:
+		// smbToolConfigParams.RegisterForGroupSessionParams is populated
+	case components.SMBToolConfigParamsTypeReportKnowledgeGap:
+		// smbToolConfigParams.ReportKnowledgeGapParams is populated
+	case components.SMBToolConfigParamsTypeRestoreCalendarEvent:
+		// smbToolConfigParams.RestoreCalendarEventParams is populated
+	case components.SMBToolConfigParamsTypeScheduleGroupSession:
+		// smbToolConfigParams.ScheduleGroupSessionParams is populated
 	case components.SMBToolConfigParamsTypeSearchClients:
 		// smbToolConfigParams.SearchClientsParams is populated
 	case components.SMBToolConfigParamsTypeSetBookingSlug:
 		// smbToolConfigParams.SetBookingSlugParams is populated
+	case components.SMBToolConfigParamsTypeSubmitBusinessInfo:
+		// smbToolConfigParams.SubmitBusinessInfoParams is populated
+	case components.SMBToolConfigParamsTypeUpdateAgentProcedure:
+		// smbToolConfigParams.UpdateAgentProcedureParams is populated
 	case components.SMBToolConfigParamsTypeUpdateAgentRule:
 		// smbToolConfigParams.UpdateAgentRuleParams is populated
 	case components.SMBToolConfigParamsTypeUpdateAsset:
 		// smbToolConfigParams.UpdateAssetParams is populated
+	case components.SMBToolConfigParamsTypeUpdateBookingPageAppearance:
+		// smbToolConfigParams.UpdateBookingPageAppearanceParams is populated
 	case components.SMBToolConfigParamsTypeUpdateBookingPageSettings:
 		// smbToolConfigParams.UpdateBookingPageSettingsParams is populated
 	case components.SMBToolConfigParamsTypeUpdateBusinessInfo:
@@ -423,12 +581,14 @@ switch smbToolConfigParams.Type {
 		// smbToolConfigParams.UpdateClientParams is populated
 	case components.SMBToolConfigParamsTypeUpdateCustomerFacingConfig:
 		// smbToolConfigParams.UpdateCustomerFacingConfigParams is populated
+	case components.SMBToolConfigParamsTypeUpdateGroupSessionSeats:
+		// smbToolConfigParams.UpdateGroupSessionSeatsParams is populated
 	case components.SMBToolConfigParamsTypeUpdateHoliday:
 		// smbToolConfigParams.UpdateHolidayParams is populated
+	case components.SMBToolConfigParamsTypeUpdateLocation:
+		// smbToolConfigParams.UpdateLocationParams is populated
 	case components.SMBToolConfigParamsTypeUpdateProduct:
 		// smbToolConfigParams.UpdateProductParams is populated
-	case components.SMBToolConfigParamsTypeUpdateRentalService:
-		// smbToolConfigParams.UpdateRentalServiceParams is populated
 	case components.SMBToolConfigParamsTypeUpdateService:
 		// smbToolConfigParams.UpdateServiceParams is populated
 	case components.SMBToolConfigParamsTypeUpdateStaff:

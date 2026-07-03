@@ -2,9 +2,26 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
 type ModelRatesResponseModel struct {
 	// The cost multiplier for characters.
 	CharacterCostMultiplier float64 `json:"character_cost_multiplier"`
+	// Discount multiplier applied to cost estimates. Defaults to 1.0 (no discount).
+	CostDiscountMultiplier *float64 `default:"1" json:"cost_discount_multiplier"`
+}
+
+func (m ModelRatesResponseModel) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *ModelRatesResponseModel) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (m *ModelRatesResponseModel) GetCharacterCostMultiplier() float64 {
@@ -12,4 +29,11 @@ func (m *ModelRatesResponseModel) GetCharacterCostMultiplier() float64 {
 		return 0.0
 	}
 	return m.CharacterCostMultiplier
+}
+
+func (m *ModelRatesResponseModel) GetCostDiscountMultiplier() *float64 {
+	if m == nil {
+		return nil
+	}
+	return m.CostDiscountMultiplier
 }

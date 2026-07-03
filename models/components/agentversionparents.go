@@ -3,11 +3,12 @@
 package components
 
 type AgentVersionParents struct {
-	InBranchParentID    *string `json:"in_branch_parent_id,omitzero"`
-	OutOfBranchParentID *string `json:"out_of_branch_parent_id,omitzero"`
-	MergedIntoBranchID  *string `json:"merged_into_branch_id,omitzero"`
-	MergedFromBranchID  *string `json:"merged_from_branch_id,omitzero"`
-	MergedFromVersionID *string `json:"merged_from_version_id,omitzero"`
+	InBranchParentID     *string `json:"in_branch_parent_id,omitzero"`
+	OutOfBranchParentID  *string `json:"out_of_branch_parent_id,omitzero"`
+	MergedIntoBranchID   *string `json:"merged_into_branch_id,omitzero"`
+	MergedFromBranchID   *string `json:"merged_from_branch_id,omitzero"`
+	MergedFromVersionID  *string `json:"merged_from_version_id,omitzero"`
+	RebasedFromVersionID *string `json:"rebased_from_version_id,omitzero"`
 }
 
 func (a *AgentVersionParents) GetInBranchParentID() *string {
@@ -43,4 +44,11 @@ func (a *AgentVersionParents) GetMergedFromVersionID() *string {
 		return nil
 	}
 	return a.MergedFromVersionID
+}
+
+func (a *AgentVersionParents) GetRebasedFromVersionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.RebasedFromVersionID
 }

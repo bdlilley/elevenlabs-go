@@ -16,6 +16,10 @@ const (
 	LlmGpt51                          Llm = "gpt-5.1"
 	LlmGpt52                          Llm = "gpt-5.2"
 	LlmGpt52ChatLatest                Llm = "gpt-5.2-chat-latest"
+	LlmGpt54                          Llm = "gpt-5.4"
+	LlmGpt54Mini                      Llm = "gpt-5.4-mini"
+	LlmGpt54Nano                      Llm = "gpt-5.4-nano"
+	LlmGpt55                          Llm = "gpt-5.5"
 	LlmGpt5Mini                       Llm = "gpt-5-mini"
 	LlmGpt5Nano                       Llm = "gpt-5-nano"
 	LlmGpt35Turbo                     Llm = "gpt-3.5-turbo"
@@ -29,7 +33,10 @@ const (
 	LlmGemini3FlashPreview            Llm = "gemini-3-flash-preview"
 	LlmGemini31ProPreview             Llm = "gemini-3.1-pro-preview"
 	LlmGemini31FlashLitePreview       Llm = "gemini-3.1-flash-lite-preview"
+	LlmGemini31FlashLite              Llm = "gemini-3.1-flash-lite"
+	LlmGemini35Flash                  Llm = "gemini-3.5-flash"
 	LlmClaudeSonnet45                 Llm = "claude-sonnet-4-5"
+	LlmClaudeOpus47                   Llm = "claude-opus-4-7"
 	LlmClaudeSonnet46                 Llm = "claude-sonnet-4-6"
 	LlmClaudeSonnet4                  Llm = "claude-sonnet-4"
 	LlmClaudeHaiku45                  Llm = "claude-haiku-4-5"
@@ -41,7 +48,7 @@ const (
 	LlmCustomLlm                      Llm = "custom-llm"
 	LlmQwen34b                        Llm = "qwen3-4b"
 	LlmQwen330bA3b                    Llm = "qwen3-30b-a3b"
-	LlmQwen3535bA3b                   Llm = "qwen35-35b-a3b"
+	LlmQwen3635bA3b                   Llm = "qwen36-35b-a3b"
 	LlmQwen35397bA17b                 Llm = "qwen35-397b-a17b"
 	LlmGptOss20b                      Llm = "gpt-oss-20b"
 	LlmGptOss120b                     Llm = "gpt-oss-120b"
@@ -67,6 +74,10 @@ const (
 	LlmGpt520250807                   Llm = "gpt-5-2025-08-07"
 	LlmGpt5120251113                  Llm = "gpt-5.1-2025-11-13"
 	LlmGpt5220251211                  Llm = "gpt-5.2-2025-12-11"
+	LlmGpt5420260305                  Llm = "gpt-5.4-2026-03-05"
+	LlmGpt54Mini20260317              Llm = "gpt-5.4-mini-2026-03-17"
+	LlmGpt54Nano20260317              Llm = "gpt-5.4-nano-2026-03-17"
+	LlmGpt5520260423                  Llm = "gpt-5.5-2026-04-23"
 	LlmGpt5Mini20250807               Llm = "gpt-5-mini-2025-08-07"
 	LlmGpt5Nano20250807               Llm = "gpt-5-nano-2025-08-07"
 	LlmGpt4120250414                  Llm = "gpt-4.1-2025-04-14"
@@ -93,7 +104,7 @@ func (e Llm) ToPointer() *Llm {
 func (e *Llm) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "gpt-4o-mini", "gpt-4o", "gpt-4", "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "gpt-5", "gpt-5.1", "gpt-5.2", "gpt-5.2-chat-latest", "gpt-5-mini", "gpt-5-nano", "gpt-3.5-turbo", "gemini-1.5-pro", "gemini-1.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-3.1-pro-preview", "gemini-3.1-flash-lite-preview", "claude-sonnet-4-5", "claude-sonnet-4-6", "claude-sonnet-4", "claude-haiku-4-5", "claude-3-7-sonnet", "claude-3-5-sonnet", "claude-3-5-sonnet-v1", "claude-3-haiku", "grok-beta", "custom-llm", "qwen3-4b", "qwen3-30b-a3b", "qwen35-35b-a3b", "qwen35-397b-a17b", "gpt-oss-20b", "gpt-oss-120b", "glm-45-air-fp8", "gemini-2.5-flash-preview-09-2025", "gemini-2.5-flash-lite-preview-09-2025", "gemini-2.5-flash-preview-05-20", "gemini-2.5-flash-preview-04-17", "gemini-2.5-flash-lite-preview-06-17", "gemini-2.0-flash-lite-001", "gemini-2.0-flash-001", "gemini-1.5-flash-002", "gemini-1.5-flash-001", "gemini-1.5-pro-002", "gemini-1.5-pro-001", "claude-sonnet-4@20250514", "claude-sonnet-4-5@20250929", "claude-haiku-4-5@20251001", "claude-3-7-sonnet@20250219", "claude-3-5-sonnet@20240620", "claude-3-5-sonnet-v2@20241022", "claude-3-haiku@20240307", "gpt-5-2025-08-07", "gpt-5.1-2025-11-13", "gpt-5.2-2025-12-11", "gpt-5-mini-2025-08-07", "gpt-5-nano-2025-08-07", "gpt-4.1-2025-04-14", "gpt-4.1-mini-2025-04-14", "gpt-4.1-nano-2025-04-14", "gpt-4o-mini-2024-07-18", "gpt-4o-2024-11-20", "gpt-4o-2024-08-06", "gpt-4o-2024-05-13", "gpt-4-0613", "gpt-4-0314", "gpt-4-turbo-2024-04-09", "gpt-3.5-turbo-0125", "gpt-3.5-turbo-1106", "watt-tool-8b", "watt-tool-70b":
+		case "gpt-4o-mini", "gpt-4o", "gpt-4", "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "gpt-5", "gpt-5.1", "gpt-5.2", "gpt-5.2-chat-latest", "gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5.5", "gpt-5-mini", "gpt-5-nano", "gpt-3.5-turbo", "gemini-1.5-pro", "gemini-1.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-3.1-pro-preview", "gemini-3.1-flash-lite-preview", "gemini-3.1-flash-lite", "gemini-3.5-flash", "claude-sonnet-4-5", "claude-opus-4-7", "claude-sonnet-4-6", "claude-sonnet-4", "claude-haiku-4-5", "claude-3-7-sonnet", "claude-3-5-sonnet", "claude-3-5-sonnet-v1", "claude-3-haiku", "grok-beta", "custom-llm", "qwen3-4b", "qwen3-30b-a3b", "qwen36-35b-a3b", "qwen35-397b-a17b", "gpt-oss-20b", "gpt-oss-120b", "glm-45-air-fp8", "gemini-2.5-flash-preview-09-2025", "gemini-2.5-flash-lite-preview-09-2025", "gemini-2.5-flash-preview-05-20", "gemini-2.5-flash-preview-04-17", "gemini-2.5-flash-lite-preview-06-17", "gemini-2.0-flash-lite-001", "gemini-2.0-flash-001", "gemini-1.5-flash-002", "gemini-1.5-flash-001", "gemini-1.5-pro-002", "gemini-1.5-pro-001", "claude-sonnet-4@20250514", "claude-sonnet-4-5@20250929", "claude-haiku-4-5@20251001", "claude-3-7-sonnet@20250219", "claude-3-5-sonnet@20240620", "claude-3-5-sonnet-v2@20241022", "claude-3-haiku@20240307", "gpt-5-2025-08-07", "gpt-5.1-2025-11-13", "gpt-5.2-2025-12-11", "gpt-5.4-2026-03-05", "gpt-5.4-mini-2026-03-17", "gpt-5.4-nano-2026-03-17", "gpt-5.5-2026-04-23", "gpt-5-mini-2025-08-07", "gpt-5-nano-2025-08-07", "gpt-4.1-2025-04-14", "gpt-4.1-mini-2025-04-14", "gpt-4.1-nano-2025-04-14", "gpt-4o-mini-2024-07-18", "gpt-4o-2024-11-20", "gpt-4o-2024-08-06", "gpt-4o-2024-05-13", "gpt-4-0613", "gpt-4-0314", "gpt-4-turbo-2024-04-09", "gpt-3.5-turbo-0125", "gpt-3.5-turbo-1106", "watt-tool-8b", "watt-tool-70b":
 			return true
 		}
 	}

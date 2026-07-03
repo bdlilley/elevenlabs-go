@@ -8,27 +8,94 @@ import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type ExtendedSubscriptionResponseModelCurrency string
+type ExtendedSubscriptionResponseModelMaxCreditLimitExtensionType string
 
 const (
-	ExtendedSubscriptionResponseModelCurrencyUsd ExtendedSubscriptionResponseModelCurrency = "usd"
-	ExtendedSubscriptionResponseModelCurrencyEur ExtendedSubscriptionResponseModelCurrency = "eur"
-	ExtendedSubscriptionResponseModelCurrencyInr ExtendedSubscriptionResponseModelCurrency = "inr"
+	ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeInteger ExtendedSubscriptionResponseModelMaxCreditLimitExtensionType = "integer"
+	ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeStr     ExtendedSubscriptionResponseModelMaxCreditLimitExtensionType = "str"
 )
 
-func (e ExtendedSubscriptionResponseModelCurrency) ToPointer() *ExtendedSubscriptionResponseModelCurrency {
-	return &e
+// ExtendedSubscriptionResponseModelMaxCreditLimitExtension - Maximum number of credits that the credit limit can be exceeded by. Managed by the workspace admin. `"unlimited"` means no cap, `0` means usage-based billing is disabled.
+type ExtendedSubscriptionResponseModelMaxCreditLimitExtension struct {
+	Integer *int64  `queryParam:"inline" union:"member"`
+	Str     *string `queryParam:"inline" union:"member"`
+
+	Type ExtendedSubscriptionResponseModelMaxCreditLimitExtensionType
 }
 
-// IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *ExtendedSubscriptionResponseModelCurrency) IsExact() bool {
-	if e != nil {
-		switch *e {
-		case "usd", "eur", "inr":
-			return true
-		}
+func CreateExtendedSubscriptionResponseModelMaxCreditLimitExtensionInteger(integer int64) ExtendedSubscriptionResponseModelMaxCreditLimitExtension {
+	typ := ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeInteger
+
+	return ExtendedSubscriptionResponseModelMaxCreditLimitExtension{
+		Integer: &integer,
+		Type:    typ,
 	}
-	return false
+}
+
+func CreateExtendedSubscriptionResponseModelMaxCreditLimitExtensionStr(str string) ExtendedSubscriptionResponseModelMaxCreditLimitExtension {
+	typ := ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeStr
+
+	return ExtendedSubscriptionResponseModelMaxCreditLimitExtension{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func (u *ExtendedSubscriptionResponseModelMaxCreditLimitExtension) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var integer int64 = int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeInteger,
+			Value: &integer,
+		})
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeStr,
+			Value: &str,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ExtendedSubscriptionResponseModelMaxCreditLimitExtension", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ExtendedSubscriptionResponseModelMaxCreditLimitExtension", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ExtendedSubscriptionResponseModelMaxCreditLimitExtensionType)
+	switch best.Type {
+	case ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeInteger:
+		u.Integer = best.Value.(*int64)
+		return nil
+	case ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ExtendedSubscriptionResponseModelMaxCreditLimitExtension", string(data))
+}
+
+func (u ExtendedSubscriptionResponseModelMaxCreditLimitExtension) MarshalJSON() ([]byte, error) {
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ExtendedSubscriptionResponseModelMaxCreditLimitExtension: all fields are null")
 }
 
 type PendingChangeType string
@@ -128,18 +195,22 @@ type ExtendedSubscriptionResponseModel struct {
 	CharacterCount int64 `json:"character_count"`
 	// The maximum number of characters allowed in the current billing period.
 	CharacterLimit int64 `json:"character_limit"`
-	// Maximum number of characters that the character limit can be exceeded by. Managed by the workspace admin.
+	// Deprecated: use `max_credit_limit_extension`. Maximum number of characters that the character limit can be exceeded by. Managed by the workspace admin.
 	MaxCharacterLimitExtension *int64 `json:"max_character_limit_extension"`
+	// Maximum number of credits that the credit limit can be exceeded by. Managed by the workspace admin. `"unlimited"` means no cap, `0` means usage-based billing is disabled.
+	MaxCreditLimitExtension ExtendedSubscriptionResponseModelMaxCreditLimitExtension `json:"max_credit_limit_extension"`
 	// Whether the workspace is entitled to enter overages (usage-based billing).
 	CanExtendCharacterLimit bool `json:"can_extend_character_limit"`
-	// Whether the user is allowed to extend their character limit.
+	// Deprecated: use `max_credit_limit_extension != 0`. Whether the user is allowed to extend their character limit.
 	AllowedToExtendCharacterLimit bool `json:"allowed_to_extend_character_limit"`
 	// The Unix timestamp of the next character count reset.
 	NextCharacterCountResetUnix *int64 `json:"next_character_count_reset_unix,omitzero"`
 	// The number of voice slots used by the user.
 	VoiceSlotsUsed int64 `json:"voice_slots_used"`
-	// The number of professional voice slots used by the workspace/user if single seat.
+	// The number of professional voice slots used. For consolidated billing this is the group-wide count across all workspaces in the group; see professional_voice_slots_used_in_workspace for the current workspace only.
 	ProfessionalVoiceSlotsUsed int64 `json:"professional_voice_slots_used"`
+	// The number of professional voice slots used in the current workspace. For consolidated billing, professional_voice_slots_used counts across all workspaces in the group, while this counts only the current workspace.
+	ProfessionalVoiceSlotsUsedInWorkspace int64 `json:"professional_voice_slots_used_in_workspace"`
 	// The maximum number of voice slots allowed for the user.
 	VoiceLimit int64 `json:"voice_limit"`
 	// The maximum number of voice add/edits allowed for the user.
@@ -155,8 +226,10 @@ type ExtendedSubscriptionResponseModel struct {
 	// Whether the user can use professional voice cloning.
 	CanUseProfessionalVoiceCloning bool `json:"can_use_professional_voice_cloning"`
 	// The currency of the user's subscription.
-	Currency *ExtendedSubscriptionResponseModelCurrency `json:"currency,omitzero"`
-	Status   SubscriptionStatusType                     `json:"status"`
+	Currency *Currency `json:"currency,omitzero"`
+	// Currency/amount pair.
+	CurrentOverage Price                  `json:"current_overage"`
+	Status         SubscriptionStatusType `json:"status"`
 	// The billing period of the user's subscription.
 	BillingPeriod *BillingPeriod `json:"billing_period,omitzero"`
 	// The character refresh period of the user's subscription.
@@ -214,6 +287,13 @@ func (e *ExtendedSubscriptionResponseModel) GetMaxCharacterLimitExtension() *int
 	return e.MaxCharacterLimitExtension
 }
 
+func (e *ExtendedSubscriptionResponseModel) GetMaxCreditLimitExtension() ExtendedSubscriptionResponseModelMaxCreditLimitExtension {
+	if e == nil {
+		return ExtendedSubscriptionResponseModelMaxCreditLimitExtension{}
+	}
+	return e.MaxCreditLimitExtension
+}
+
 func (e *ExtendedSubscriptionResponseModel) GetCanExtendCharacterLimit() bool {
 	if e == nil {
 		return false
@@ -247,6 +327,13 @@ func (e *ExtendedSubscriptionResponseModel) GetProfessionalVoiceSlotsUsed() int6
 		return 0
 	}
 	return e.ProfessionalVoiceSlotsUsed
+}
+
+func (e *ExtendedSubscriptionResponseModel) GetProfessionalVoiceSlotsUsedInWorkspace() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.ProfessionalVoiceSlotsUsedInWorkspace
 }
 
 func (e *ExtendedSubscriptionResponseModel) GetVoiceLimit() int64 {
@@ -298,11 +385,18 @@ func (e *ExtendedSubscriptionResponseModel) GetCanUseProfessionalVoiceCloning() 
 	return e.CanUseProfessionalVoiceCloning
 }
 
-func (e *ExtendedSubscriptionResponseModel) GetCurrency() *ExtendedSubscriptionResponseModelCurrency {
+func (e *ExtendedSubscriptionResponseModel) GetCurrency() *Currency {
 	if e == nil {
 		return nil
 	}
 	return e.Currency
+}
+
+func (e *ExtendedSubscriptionResponseModel) GetCurrentOverage() Price {
+	if e == nil {
+		return Price{}
+	}
+	return e.CurrentOverage
 }
 
 func (e *ExtendedSubscriptionResponseModel) GetStatus() SubscriptionStatusType {

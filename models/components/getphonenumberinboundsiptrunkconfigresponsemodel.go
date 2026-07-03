@@ -18,6 +18,8 @@ type GetPhoneNumberInboundSIPTrunkConfigResponseModel struct {
 	Username *string `json:"username,omitzero"`
 	// Domains of remote SIP servers used to validate TLS certificates.
 	RemoteDomains []string `json:"remote_domains,omitzero"`
+	// Map of dynamic variable name to header name for attributes_to_headers
+	AttributesToHeaders map[string]string `json:"attributes_to_headers,omitzero"`
 }
 
 func (g GetPhoneNumberInboundSIPTrunkConfigResponseModel) MarshalJSON() ([]byte, error) {
@@ -71,4 +73,11 @@ func (g *GetPhoneNumberInboundSIPTrunkConfigResponseModel) GetRemoteDomains() []
 		return nil
 	}
 	return g.RemoteDomains
+}
+
+func (g *GetPhoneNumberInboundSIPTrunkConfigResponseModel) GetAttributesToHeaders() map[string]string {
+	if g == nil {
+		return nil
+	}
+	return g.AttributesToHeaders
 }

@@ -12,8 +12,19 @@ import (
 
 type UpdateDocumentRouteRequest struct {
 	// The id of a document from the knowledge base. This is returned on document addition.
-	DocumentationID string                                                                 `pathParam:"style=simple,explode=false,name=documentation_id"`
-	Body            components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch `request:"mediaType=application/json"`
+	DocumentationID string                                                                  `pathParam:"style=simple,explode=false,name=documentation_id"`
+	Body            *components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch `request:"mediaType=application/json"`
+}
+
+func (u UpdateDocumentRouteRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UpdateDocumentRouteRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (u *UpdateDocumentRouteRequest) GetDocumentationID() string {
@@ -23,9 +34,9 @@ func (u *UpdateDocumentRouteRequest) GetDocumentationID() string {
 	return u.DocumentationID
 }
 
-func (u *UpdateDocumentRouteRequest) GetBody() components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch {
+func (u *UpdateDocumentRouteRequest) GetBody() *components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch {
 	if u == nil {
-		return components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch{}
+		return nil
 	}
 	return u.Body
 }

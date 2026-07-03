@@ -1,0 +1,14 @@
+# ImageAnalysisResult
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `Title`                                                              | `string`                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `Description`                                                        | `string`                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `ContentType`                                                        | `*string`                                                            | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `MoodAndStyle`                                                       | `*string`                                                            | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `CompositionNotes`                                                   | `*string`                                                            | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `VisibleText`                                                        | `*string`                                                            | :heavy_minus_sign:                                                   | Readable text overlaid or shown in the image, if any.                |
+| `Subjects`                                                           | [][components.ImageSubject](../../models/components/imagesubject.md) | :heavy_minus_sign:                                                   | N/A                                                                  |

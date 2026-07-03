@@ -11,6 +11,7 @@ type SongSourceContext struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	sourceType         *string        `const:"song" json:"source_type"`
 	SongID             string         `json:"song_id"`
+	ChatID             *string        `json:"chat_id,omitzero"`
 	Title              *string        `json:"title,omitzero"`
 	Description        *string        `json:"description,omitzero"`
 	Genres             []string       `json:"genres,omitzero"`
@@ -40,6 +41,13 @@ func (s *SongSourceContext) GetSongID() string {
 		return ""
 	}
 	return s.SongID
+}
+
+func (s *SongSourceContext) GetChatID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ChatID
 }
 
 func (s *SongSourceContext) GetTitle() *string {

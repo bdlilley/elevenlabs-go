@@ -12,7 +12,7 @@ type AgentPlatformSettingsResponseModel struct {
 	Evaluation *EvaluationSettingsOutput `json:"evaluation,omitzero"`
 	Widget     *WidgetConfigOutput       `json:"widget,omitzero"`
 	// Data collection settings
-	DataCollection map[string]LiteralJSONSchemaProperty `json:"data_collection,omitzero"`
+	DataCollection map[string]AnalysisProperty `json:"data_collection,omitzero"`
 	// Scope per data collection item ID. Missing keys default to conversation scope.
 	DataCollectionScopes map[string]AnalysisScope                      `json:"data_collection_scopes,omitzero"`
 	Overrides            *ConversationInitiationClientDataConfigOutput `json:"overrides,omitzero"`
@@ -27,7 +27,18 @@ type AgentPlatformSettingsResponseModel struct {
 	Auth            *AuthSettings        `json:"auth,omitzero"`
 	CallLimits      *AgentCallLimits     `json:"call_limits,omitzero"`
 	Privacy         *PrivacyConfigOutput `json:"privacy,omitzero"`
-	Safety          *SafetyResponseModel `json:"safety,omitzero"`
+	// The trust context in which the agent operates.
+	//
+	// UNKNOWN: not yet classified (existing agents created before this feature).
+	// LOW: serves untrusted external participants (e.g. customer support, sales) —
+	//      outputs should be vetted and tool access scoped.
+	// HIGH: serves the owner (e.g. personal assistant) — full tool access is appropriate.
+	TrustContext *AgentTrustContext `default:"unknown" json:"trust_context"`
+	AnalysisLlm  *Llm               `default:"gemini-2.5-flash" json:"analysis_llm"`
+	// Per-agent topic-discovery configuration. Cadence and analysis window are
+	// managed internally; this only exposes the customer-facing on/off toggle.
+	TopicDiscovery *TopicDiscoverySettings `json:"topic_discovery,omitzero"`
+	Safety         *SafetyResponseModel    `json:"safety,omitzero"`
 }
 
 func (a AgentPlatformSettingsResponseModel) MarshalJSON() ([]byte, error) {
@@ -55,7 +66,7 @@ func (a *AgentPlatformSettingsResponseModel) GetWidget() *WidgetConfigOutput {
 	return a.Widget
 }
 
-func (a *AgentPlatformSettingsResponseModel) GetDataCollection() map[string]LiteralJSONSchemaProperty {
+func (a *AgentPlatformSettingsResponseModel) GetDataCollection() map[string]AnalysisProperty {
 	if a == nil {
 		return nil
 	}
@@ -130,6 +141,27 @@ func (a *AgentPlatformSettingsResponseModel) GetPrivacy() *PrivacyConfigOutput {
 		return nil
 	}
 	return a.Privacy
+}
+
+func (a *AgentPlatformSettingsResponseModel) GetTrustContext() *AgentTrustContext {
+	if a == nil {
+		return nil
+	}
+	return a.TrustContext
+}
+
+func (a *AgentPlatformSettingsResponseModel) GetAnalysisLlm() *Llm {
+	if a == nil {
+		return nil
+	}
+	return a.AnalysisLlm
+}
+
+func (a *AgentPlatformSettingsResponseModel) GetTopicDiscovery() *TopicDiscoverySettings {
+	if a == nil {
+		return nil
+	}
+	return a.TopicDiscovery
 }
 
 func (a *AgentPlatformSettingsResponseModel) GetSafety() *SafetyResponseModel {

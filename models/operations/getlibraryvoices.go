@@ -39,6 +39,39 @@ func (e *Category) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetLibraryVoicesSort - Sort criteria. Must be one of: created_date, usage_character_count_1y, trending, cloned_by_count.
+type GetLibraryVoicesSort string
+
+const (
+	GetLibraryVoicesSortCreatedDate           GetLibraryVoicesSort = "created_date"
+	GetLibraryVoicesSortUsageCharacterCount1y GetLibraryVoicesSort = "usage_character_count_1y"
+	GetLibraryVoicesSortTrending              GetLibraryVoicesSort = "trending"
+	GetLibraryVoicesSortClonedByCount         GetLibraryVoicesSort = "cloned_by_count"
+)
+
+func (e GetLibraryVoicesSort) ToPointer() *GetLibraryVoicesSort {
+	return &e
+}
+func (e *GetLibraryVoicesSort) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "created_date":
+		fallthrough
+	case "usage_character_count_1y":
+		fallthrough
+	case "trending":
+		fallthrough
+	case "cloned_by_count":
+		*e = GetLibraryVoicesSort(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GetLibraryVoicesSort: %v", v)
+	}
+}
+
 type GetLibraryVoicesRequest struct {
 	// How many shared voices to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
@@ -72,9 +105,9 @@ type GetLibraryVoicesRequest struct {
 	ReaderAppEnabled *bool `default:"false" queryParam:"style=form,explode=true,name=reader_app_enabled"`
 	// Filter voices by public owner ID
 	OwnerID *string `queryParam:"style=form,explode=true,name=owner_id"`
-	// Sort criteria
-	Sort *string `queryParam:"style=form,explode=true,name=sort"`
-	Page *int64  `default:"0" queryParam:"style=form,explode=true,name=page"`
+	// Sort criteria. Must be one of: created_date, usage_character_count_1y, trending, cloned_by_count.
+	Sort *GetLibraryVoicesSort `default:"created_date" queryParam:"style=form,explode=true,name=sort"`
+	Page *int64                `default:"0" queryParam:"style=form,explode=true,name=page"`
 }
 
 func (g GetLibraryVoicesRequest) MarshalJSON() ([]byte, error) {
@@ -200,7 +233,7 @@ func (g *GetLibraryVoicesRequest) GetOwnerID() *string {
 	return g.OwnerID
 }
 
-func (g *GetLibraryVoicesRequest) GetSort() *string {
+func (g *GetLibraryVoicesRequest) GetSort() *GetLibraryVoicesSort {
 	if g == nil {
 		return nil
 	}

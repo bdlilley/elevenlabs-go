@@ -3,15 +3,109 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
+
+type MusicUploadResponseCompositionPlanType string
+
+const (
+	MusicUploadResponseCompositionPlanTypeMusicPrompt     MusicUploadResponseCompositionPlanType = "MusicPrompt"
+	MusicUploadResponseCompositionPlanTypeCompositionPlan MusicUploadResponseCompositionPlanType = "CompositionPlan"
+)
+
+// MusicUploadResponseCompositionPlan - The composition plan extracted from the uploaded song. Only present if `extract_composition_plan` was provided in the request body.
+type MusicUploadResponseCompositionPlan struct {
+	MusicPrompt     *MusicPrompt     `queryParam:"inline" union:"member"`
+	CompositionPlan *CompositionPlan `queryParam:"inline" union:"member"`
+
+	Type MusicUploadResponseCompositionPlanType
+}
+
+func CreateMusicUploadResponseCompositionPlanMusicPrompt(musicPrompt MusicPrompt) MusicUploadResponseCompositionPlan {
+	typ := MusicUploadResponseCompositionPlanTypeMusicPrompt
+
+	return MusicUploadResponseCompositionPlan{
+		MusicPrompt: &musicPrompt,
+		Type:        typ,
+	}
+}
+
+func CreateMusicUploadResponseCompositionPlanCompositionPlan(compositionPlan CompositionPlan) MusicUploadResponseCompositionPlan {
+	typ := MusicUploadResponseCompositionPlanTypeCompositionPlan
+
+	return MusicUploadResponseCompositionPlan{
+		CompositionPlan: &compositionPlan,
+		Type:            typ,
+	}
+}
+
+func (u *MusicUploadResponseCompositionPlan) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var musicPrompt MusicPrompt = MusicPrompt{}
+	if err := utils.UnmarshalJSON(data, &musicPrompt, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  MusicUploadResponseCompositionPlanTypeMusicPrompt,
+			Value: &musicPrompt,
+		})
+	}
+
+	var compositionPlan CompositionPlan = CompositionPlan{}
+	if err := utils.UnmarshalJSON(data, &compositionPlan, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  MusicUploadResponseCompositionPlanTypeCompositionPlan,
+			Value: &compositionPlan,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MusicUploadResponseCompositionPlan", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for MusicUploadResponseCompositionPlan", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(MusicUploadResponseCompositionPlanType)
+	switch best.Type {
+	case MusicUploadResponseCompositionPlanTypeMusicPrompt:
+		u.MusicPrompt = best.Value.(*MusicPrompt)
+		return nil
+	case MusicUploadResponseCompositionPlanTypeCompositionPlan:
+		u.CompositionPlan = best.Value.(*CompositionPlan)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MusicUploadResponseCompositionPlan", string(data))
+}
+
+func (u MusicUploadResponseCompositionPlan) MarshalJSON() ([]byte, error) {
+	if u.MusicPrompt != nil {
+		return utils.MarshalJSON(u.MusicPrompt, "", true)
+	}
+
+	if u.CompositionPlan != nil {
+		return utils.MarshalJSON(u.CompositionPlan, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type MusicUploadResponseCompositionPlan: all fields are null")
+}
 
 // MusicUploadResponse - Response model for music upload endpoint.
 type MusicUploadResponse struct {
 	// Unique identifier for the uploaded song
 	SongID string `json:"song_id"`
-	// The composition plan extracted from the uploaded song. Only present if `extract_composition_plan` was True in the request body
-	CompositionPlan *MusicPrompt `json:"composition_plan,omitzero"`
+	// The composition plan extracted from the uploaded song. Only present if `extract_composition_plan` was provided in the request body.
+	CompositionPlan *MusicUploadResponseCompositionPlan `json:"composition_plan,omitzero"`
+	// Word-level timestamps transcribed from the uploaded song. Only present if `with_timestamps` was True in the request body
+	WordsTimestamps []WordTimestamp `json:"words_timestamps,omitzero"`
 }
 
 func (m MusicUploadResponse) MarshalJSON() ([]byte, error) {
@@ -32,9 +126,16 @@ func (m *MusicUploadResponse) GetSongID() string {
 	return m.SongID
 }
 
-func (m *MusicUploadResponse) GetCompositionPlan() *MusicPrompt {
+func (m *MusicUploadResponse) GetCompositionPlan() *MusicUploadResponseCompositionPlan {
 	if m == nil {
 		return nil
 	}
 	return m.CompositionPlan
+}
+
+func (m *MusicUploadResponse) GetWordsTimestamps() []WordTimestamp {
+	if m == nil {
+		return nil
+	}
+	return m.WordsTimestamps
 }

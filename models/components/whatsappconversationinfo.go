@@ -6,20 +6,20 @@ import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type Direction string
+type WhatsAppConversationInfoDirection string
 
 const (
-	DirectionInbound  Direction = "inbound"
-	DirectionOutbound Direction = "outbound"
-	DirectionUnknown  Direction = "unknown"
+	WhatsAppConversationInfoDirectionInbound  WhatsAppConversationInfoDirection = "inbound"
+	WhatsAppConversationInfoDirectionOutbound WhatsAppConversationInfoDirection = "outbound"
+	WhatsAppConversationInfoDirectionUnknown  WhatsAppConversationInfoDirection = "unknown"
 )
 
-func (e Direction) ToPointer() *Direction {
+func (e WhatsAppConversationInfoDirection) ToPointer() *WhatsAppConversationInfoDirection {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *Direction) IsExact() bool {
+func (e *WhatsAppConversationInfoDirection) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "inbound", "outbound", "unknown":
@@ -30,10 +30,10 @@ func (e *Direction) IsExact() bool {
 }
 
 type WhatsAppConversationInfo struct {
-	Direction                *Direction `default:"unknown" json:"direction"`
-	WhatsappPhoneNumberID    *string    `json:"whatsapp_phone_number_id,omitzero"`
-	WhatsappUserID           string     `json:"whatsapp_user_id"`
-	AwaitingFirstUserMessage *bool      `json:"awaiting_first_user_message,omitzero"`
+	Direction                *WhatsAppConversationInfoDirection `default:"unknown" json:"direction"`
+	WhatsappPhoneNumberID    *string                            `json:"whatsapp_phone_number_id,omitzero"`
+	WhatsappUserID           string                             `json:"whatsapp_user_id"`
+	AwaitingFirstUserMessage *bool                              `json:"awaiting_first_user_message,omitzero"`
 }
 
 func (w WhatsAppConversationInfo) MarshalJSON() ([]byte, error) {
@@ -47,7 +47,7 @@ func (w *WhatsAppConversationInfo) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WhatsAppConversationInfo) GetDirection() *Direction {
+func (w *WhatsAppConversationInfo) GetDirection() *WhatsAppConversationInfoDirection {
 	if w == nil {
 		return nil
 	}

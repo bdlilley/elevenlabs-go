@@ -15,9 +15,9 @@ type SongSection struct {
 	NegativeLocalStyles []string `json:"negative_local_styles"`
 	// The duration of the section in milliseconds. Must be between 3000ms and 120000ms.
 	DurationMs int64 `json:"duration_ms"`
-	// The lyrics of the section. Max 200 characters per line.
+	// The lyrics of the section. Max 30 lines per section and max 200 characters per line.
 	Lines []string `json:"lines"`
-	// Optional source to extract the section from. Used for inpainting. Only available to enterprise clients with access to the inpainting feature.
+	// Optional source to extract the section from. Used for inpainting.
 	SourceFrom *SectionSource `json:"source_from,omitzero"`
 }
 

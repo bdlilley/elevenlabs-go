@@ -8,21 +8,21 @@ import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type LiteralJSONSchemaPropertyType string
+type LiteralJSONSchemaPropertyTypeEnum string
 
 const (
-	LiteralJSONSchemaPropertyTypeBoolean LiteralJSONSchemaPropertyType = "boolean"
-	LiteralJSONSchemaPropertyTypeString  LiteralJSONSchemaPropertyType = "string"
-	LiteralJSONSchemaPropertyTypeInteger LiteralJSONSchemaPropertyType = "integer"
-	LiteralJSONSchemaPropertyTypeNumber  LiteralJSONSchemaPropertyType = "number"
+	LiteralJSONSchemaPropertyTypeEnumBoolean LiteralJSONSchemaPropertyTypeEnum = "boolean"
+	LiteralJSONSchemaPropertyTypeEnumString  LiteralJSONSchemaPropertyTypeEnum = "string"
+	LiteralJSONSchemaPropertyTypeEnumInteger LiteralJSONSchemaPropertyTypeEnum = "integer"
+	LiteralJSONSchemaPropertyTypeEnumNumber  LiteralJSONSchemaPropertyTypeEnum = "number"
 )
 
-func (e LiteralJSONSchemaPropertyType) ToPointer() *LiteralJSONSchemaPropertyType {
+func (e LiteralJSONSchemaPropertyTypeEnum) ToPointer() *LiteralJSONSchemaPropertyTypeEnum {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *LiteralJSONSchemaPropertyType) IsExact() bool {
+func (e *LiteralJSONSchemaPropertyTypeEnum) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "boolean", "string", "integer", "number":
@@ -30,6 +30,95 @@ func (e *LiteralJSONSchemaPropertyType) IsExact() bool {
 		}
 	}
 	return false
+}
+
+type LiteralJSONSchemaPropertyTypeUnionType string
+
+const (
+	LiteralJSONSchemaPropertyTypeUnionTypeLiteralJSONSchemaPropertyTypeEnum LiteralJSONSchemaPropertyTypeUnionType = "LiteralJsonSchemaProperty_Type_enum"
+	LiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr                        LiteralJSONSchemaPropertyTypeUnionType = "arrayOfStr"
+)
+
+type LiteralJSONSchemaPropertyTypeUnion struct {
+	LiteralJSONSchemaPropertyTypeEnum *LiteralJSONSchemaPropertyTypeEnum `queryParam:"inline" union:"member"`
+	ArrayOfStr                        []string                           `queryParam:"inline" union:"member"`
+
+	Type LiteralJSONSchemaPropertyTypeUnionType
+}
+
+func CreateLiteralJSONSchemaPropertyTypeUnionLiteralJSONSchemaPropertyTypeEnum(literalJSONSchemaPropertyTypeEnum LiteralJSONSchemaPropertyTypeEnum) LiteralJSONSchemaPropertyTypeUnion {
+	typ := LiteralJSONSchemaPropertyTypeUnionTypeLiteralJSONSchemaPropertyTypeEnum
+
+	return LiteralJSONSchemaPropertyTypeUnion{
+		LiteralJSONSchemaPropertyTypeEnum: &literalJSONSchemaPropertyTypeEnum,
+		Type:                              typ,
+	}
+}
+
+func CreateLiteralJSONSchemaPropertyTypeUnionArrayOfStr(arrayOfStr []string) LiteralJSONSchemaPropertyTypeUnion {
+	typ := LiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr
+
+	return LiteralJSONSchemaPropertyTypeUnion{
+		ArrayOfStr: arrayOfStr,
+		Type:       typ,
+	}
+}
+
+func (u *LiteralJSONSchemaPropertyTypeUnion) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var literalJSONSchemaPropertyTypeEnum LiteralJSONSchemaPropertyTypeEnum = LiteralJSONSchemaPropertyTypeEnum("")
+	if err := utils.UnmarshalJSON(data, &literalJSONSchemaPropertyTypeEnum, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  LiteralJSONSchemaPropertyTypeUnionTypeLiteralJSONSchemaPropertyTypeEnum,
+			Value: &literalJSONSchemaPropertyTypeEnum,
+		})
+	}
+
+	var arrayOfStr []string = []string{}
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  LiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr,
+			Value: arrayOfStr,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LiteralJSONSchemaPropertyTypeUnion", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LiteralJSONSchemaPropertyTypeUnion", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(LiteralJSONSchemaPropertyTypeUnionType)
+	switch best.Type {
+	case LiteralJSONSchemaPropertyTypeUnionTypeLiteralJSONSchemaPropertyTypeEnum:
+		u.LiteralJSONSchemaPropertyTypeEnum = best.Value.(*LiteralJSONSchemaPropertyTypeEnum)
+		return nil
+	case LiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr:
+		u.ArrayOfStr = best.Value.([]string)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for LiteralJSONSchemaPropertyTypeUnion", string(data))
+}
+
+func (u LiteralJSONSchemaPropertyTypeUnion) MarshalJSON() ([]byte, error) {
+	if u.LiteralJSONSchemaPropertyTypeEnum != nil {
+		return utils.MarshalJSON(u.LiteralJSONSchemaPropertyTypeEnum, "", true)
+	}
+
+	if u.ArrayOfStr != nil {
+		return utils.MarshalJSON(u.ArrayOfStr, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type LiteralJSONSchemaPropertyTypeUnion: all fields are null")
 }
 
 type LiteralJSONSchemaPropertyConstantValueType string
@@ -41,7 +130,7 @@ const (
 	LiteralJSONSchemaPropertyConstantValueTypeBoolean LiteralJSONSchemaPropertyConstantValueType = "boolean"
 )
 
-// LiteralJSONSchemaPropertyConstantValue - A constant value to use for this property. Mutually exclusive with description, dynamic_variable, and is_system_provided.
+// LiteralJSONSchemaPropertyConstantValue - A constant value to use for this property. Mutually exclusive with description, dynamic_variable, is_system_provided, and is_omitted.
 type LiteralJSONSchemaPropertyConstantValue struct {
 	Str     *string  `queryParam:"inline" union:"member"`
 	Integer *int64   `queryParam:"inline" union:"member"`
@@ -174,19 +263,23 @@ func (u LiteralJSONSchemaPropertyConstantValue) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type LiteralJSONSchemaPropertyConstantValue: all fields are null")
 }
 
-// LiteralJSONSchemaProperty - Schema property for literal JSON types. IMPORTANT: Only ONE of the following fields can be set: description (LLM provides value), dynamic_variable (value from variable), is_system_provided (system provides value), or constant_value (fixed value). These are mutually exclusive.
+// LiteralJSONSchemaProperty - Schema property for literal JSON types. IMPORTANT: Only ONE of the following fields can be set: description (LLM provides value), dynamic_variable (value from variable), is_system_provided (system provides value), constant_value (fixed value), or is_omitted (parameter is omitted). These are mutually exclusive.
 type LiteralJSONSchemaProperty struct {
-	Type LiteralJSONSchemaPropertyType `json:"type"`
-	// The description of the property. When set, the LLM will provide the value based on this description. Mutually exclusive with dynamic_variable, is_system_provided, and constant_value.
+	Type LiteralJSONSchemaPropertyTypeUnion `json:"type"`
+	// The description of the property. When set, the LLM will provide the value based on this description. Mutually exclusive with dynamic_variable, is_system_provided, constant_value, and is_omitted.
 	Description *string `default:"" json:"description"`
 	// List of allowed string values for string type parameters
 	Enum []string `json:"enum,omitzero"`
-	// If true, the value will be populated by the system at runtime. Used by API Integration Webhook tools for templating. Mutually exclusive with description, dynamic_variable, and constant_value.
+	// If true, the value will be populated by the system at runtime. Used by API Integration Webhook tools for templating. Mutually exclusive with description, dynamic_variable, constant_value, and is_omitted.
 	IsSystemProvided *bool `default:"false" json:"is_system_provided"`
-	// The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, and constant_value.
+	// The name of the dynamic variable to use for this property's value. Mutually exclusive with description, is_system_provided, constant_value, and is_omitted.
 	DynamicVariable *string `default:"" json:"dynamic_variable"`
-	// A constant value to use for this property. Mutually exclusive with description, dynamic_variable, and is_system_provided.
+	// When set, the LLM provides the value but the runtime rejects any value not present in the list held by this dynamic variable. Use to let the LLM pick from a server-verified set (e.g. the IDs the current user is allowed to access). Requires description; mutually exclusive with dynamic_variable, is_system_provided, constant_value, and is_omitted.
+	AllowedValuesDynamicVariable *string `default:"" json:"allowed_values_dynamic_variable"`
+	// A constant value to use for this property. Mutually exclusive with description, dynamic_variable, is_system_provided, and is_omitted.
 	ConstantValue *LiteralJSONSchemaPropertyConstantValue `json:"constant_value,omitzero"`
+	// If true, this parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, is_system_provided, and constant_value.
+	IsOmitted *bool `default:"false" json:"is_omitted"`
 }
 
 func (l LiteralJSONSchemaProperty) MarshalJSON() ([]byte, error) {
@@ -200,9 +293,9 @@ func (l *LiteralJSONSchemaProperty) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (l *LiteralJSONSchemaProperty) GetType() LiteralJSONSchemaPropertyType {
+func (l *LiteralJSONSchemaProperty) GetType() LiteralJSONSchemaPropertyTypeUnion {
 	if l == nil {
-		return LiteralJSONSchemaPropertyType("")
+		return LiteralJSONSchemaPropertyTypeUnion{}
 	}
 	return l.Type
 }
@@ -235,9 +328,23 @@ func (l *LiteralJSONSchemaProperty) GetDynamicVariable() *string {
 	return l.DynamicVariable
 }
 
+func (l *LiteralJSONSchemaProperty) GetAllowedValuesDynamicVariable() *string {
+	if l == nil {
+		return nil
+	}
+	return l.AllowedValuesDynamicVariable
+}
+
 func (l *LiteralJSONSchemaProperty) GetConstantValue() *LiteralJSONSchemaPropertyConstantValue {
 	if l == nil {
 		return nil
 	}
 	return l.ConstantValue
+}
+
+func (l *LiteralJSONSchemaProperty) GetIsOmitted() *bool {
+	if l == nil {
+		return nil
+	}
+	return l.IsOmitted
 }

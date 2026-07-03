@@ -2,6 +2,8 @@
 
 ## Overview
 
+Build and manage conversational AI agents (legacy tag — see also Agents Platform).
+
 ### Available Operations
 
 * [CreateFolder](#createfolder) - Create Folder

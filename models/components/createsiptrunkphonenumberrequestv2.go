@@ -21,7 +21,9 @@ type CreateSIPTrunkPhoneNumberRequestV2 struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	SupportsOutbound *bool `default:"true" json:"supports_outbound"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	provider            *string                             `const:"sip_trunk" json:"provider"`
+	provider *string `const:"sip_trunk" json:"provider"`
+	// Agent ID to assign the phone number to
+	AgentID             *string                             `json:"agent_id,omitzero"`
 	InboundTrunkConfig  *InboundSIPTrunkConfigRequestModel  `json:"inbound_trunk_config,omitzero"`
 	OutboundTrunkConfig *OutboundSIPTrunkConfigRequestModel `json:"outbound_trunk_config,omitzero"`
 }
@@ -67,6 +69,13 @@ func (c *CreateSIPTrunkPhoneNumberRequestV2) GetSupportsOutbound() *bool {
 
 func (c *CreateSIPTrunkPhoneNumberRequestV2) GetProvider() *string {
 	return types.Pointer("sip_trunk")
+}
+
+func (c *CreateSIPTrunkPhoneNumberRequestV2) GetAgentID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AgentID
 }
 
 func (c *CreateSIPTrunkPhoneNumberRequestV2) GetInboundTrunkConfig() *InboundSIPTrunkConfigRequestModel {

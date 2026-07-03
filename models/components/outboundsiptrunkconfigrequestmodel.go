@@ -13,8 +13,12 @@ type OutboundSIPTrunkConfigRequestModel struct {
 	MediaEncryption *SIPMediaEncryptionEnum `default:"allowed" json:"media_encryption"`
 	// SIP X-* headers for INVITE request. These headers are sent as-is and may help identify this call.
 	Headers map[string]string `json:"headers,omitzero"`
+	// Map of dynamic variable name to header name for attributes_to_headers
+	AttributesToHeaders map[string]string `json:"attributes_to_headers,omitzero"`
 	// Optional digest authentication credentials (username/password). If not provided, ACL authentication is assumed.
 	Credentials *SIPTrunkCredentialsRequestModel `json:"credentials,omitzero"`
+	// Media codecs that should be offered in the SDP for outbound calls. If empty, all supported codecs are offered.
+	EnabledCodecs []MediaCodec `json:"enabled_codecs,omitzero"`
 }
 
 func (o OutboundSIPTrunkConfigRequestModel) MarshalJSON() ([]byte, error) {
@@ -56,9 +60,23 @@ func (o *OutboundSIPTrunkConfigRequestModel) GetHeaders() map[string]string {
 	return o.Headers
 }
 
+func (o *OutboundSIPTrunkConfigRequestModel) GetAttributesToHeaders() map[string]string {
+	if o == nil {
+		return nil
+	}
+	return o.AttributesToHeaders
+}
+
 func (o *OutboundSIPTrunkConfigRequestModel) GetCredentials() *SIPTrunkCredentialsRequestModel {
 	if o == nil {
 		return nil
 	}
 	return o.Credentials
+}
+
+func (o *OutboundSIPTrunkConfigRequestModel) GetEnabledCodecs() []MediaCodec {
+	if o == nil {
+		return nil
+	}
+	return o.EnabledCodecs
 }

@@ -1,5 +1,7 @@
 # ArrayJSONSchemaPropertyOutputItems
 
+Schema for array elements.
+
 
 ## Supported Types
 

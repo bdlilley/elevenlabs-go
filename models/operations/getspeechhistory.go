@@ -40,8 +40,9 @@ func (e *SortDirection) UnmarshalJSON(data []byte) error {
 type Source string
 
 const (
-	SourceTts Source = "TTS"
-	SourceSts Source = "STS"
+	SourceTts   Source = "TTS"
+	SourceSts   Source = "STS"
+	SourceFlows Source = "Flows"
 )
 
 func (e Source) ToPointer() *Source {
@@ -56,6 +57,8 @@ func (e *Source) UnmarshalJSON(data []byte) error {
 	case "TTS":
 		fallthrough
 	case "STS":
+		fallthrough
+	case "Flows":
 		*e = Source(v)
 		return nil
 	default:

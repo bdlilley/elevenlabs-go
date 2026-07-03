@@ -12,6 +12,8 @@ type ConversationInitiationClientDataConfigInput struct {
 	CustomLlmExtraBody *bool `default:"false" json:"custom_llm_extra_body"`
 	// Whether to enable conversation initiation client data from webhooks
 	EnableConversationInitiationClientDataFromWebhook *bool `default:"false" json:"enable_conversation_initiation_client_data_from_webhook"`
+	// Whether clients may pass starting_workflow_node_id in initiation client data; if false, sending it fails conversation start.
+	EnableStartingWorkflowNodeIDFromClient *bool `default:"false" json:"enable_starting_workflow_node_id_from_client"`
 }
 
 func (c ConversationInitiationClientDataConfigInput) MarshalJSON() ([]byte, error) {
@@ -44,4 +46,11 @@ func (c *ConversationInitiationClientDataConfigInput) GetEnableConversationIniti
 		return nil
 	}
 	return c.EnableConversationInitiationClientDataFromWebhook
+}
+
+func (c *ConversationInitiationClientDataConfigInput) GetEnableStartingWorkflowNodeIDFromClient() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.EnableStartingWorkflowNodeIDFromClient
 }

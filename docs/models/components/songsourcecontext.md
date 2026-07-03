@@ -7,6 +7,7 @@
 | -------------------- | -------------------- | -------------------- | -------------------- |
 | `SourceType`         | `*string`            | :heavy_minus_sign:   | N/A                  |
 | `SongID`             | `string`             | :heavy_check_mark:   | N/A                  |
+| `ChatID`             | `*string`            | :heavy_minus_sign:   | N/A                  |
 | `Title`              | `*string`            | :heavy_minus_sign:   | N/A                  |
 | `Description`        | `*string`            | :heavy_minus_sign:   | N/A                  |
 | `Genres`             | []`string`           | :heavy_minus_sign:   | N/A                  |

@@ -296,14 +296,16 @@ func (u PhoneNumberTransferPostDialDigits) MarshalJSON() ([]byte, error) {
 
 type PhoneNumberTransfer struct {
 	// Custom SIP headers to include when transferring the call. Each header can be either a static value or a dynamic variable reference.
-	CustomSipHeaders    []PhoneNumberTransferCustomSipHeader    `json:"custom_sip_headers,omitzero"`
-	TransferDestination *PhoneNumberTransferTransferDestination `json:"transfer_destination,omitzero"`
-	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	PhoneNumber  *string           `json:"phone_number,omitzero"`
-	Condition    string            `json:"condition"`
-	TransferType *TransferTypeEnum `default:"conference" json:"transfer_type"`
+	CustomSipHeaders    []PhoneNumberTransferCustomSipHeader   `json:"custom_sip_headers,omitzero"`
+	TransferDestination PhoneNumberTransferTransferDestination `json:"transfer_destination"`
+	TransferType        *TransferTypeEnum                      `default:"conference" json:"transfer_type"`
+	// User-to-User Information (RFC 7433) to attach to SIP REFER transfers. Carries call context such as CRM identifiers or escalation reason across the transfer boundary.
+	Uui *UUITransferConfig `json:"uui,omitzero"`
 	// DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause. Only supported for Twilio transfers.
 	PostDialDigits *PhoneNumberTransferPostDialDigits `json:"post_dial_digits,omitzero"`
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	PhoneNumber *string `json:"phone_number,omitzero"`
+	Condition   string  `json:"condition"`
 }
 
 func (p PhoneNumberTransfer) MarshalJSON() ([]byte, error) {
@@ -324,53 +326,27 @@ func (p *PhoneNumberTransfer) GetCustomSipHeaders() []PhoneNumberTransferCustomS
 	return p.CustomSipHeaders
 }
 
-func (p *PhoneNumberTransfer) GetTransferDestination() *PhoneNumberTransferTransferDestination {
+func (p *PhoneNumberTransfer) GetTransferDestination() PhoneNumberTransferTransferDestination {
 	if p == nil {
-		return nil
+		return PhoneNumberTransferTransferDestination{}
 	}
 	return p.TransferDestination
 }
 
 func (p *PhoneNumberTransfer) GetTransferDestinationPhone() *PhoneNumberTransferDestination {
-	if v := p.GetTransferDestination(); v != nil {
-		return v.PhoneNumberTransferDestination
-	}
-	return nil
+	return p.GetTransferDestination().PhoneNumberTransferDestination
 }
 
 func (p *PhoneNumberTransfer) GetTransferDestinationPhoneDynamicVariable() *PhoneNumberDynamicVariableTransferDestination {
-	if v := p.GetTransferDestination(); v != nil {
-		return v.PhoneNumberDynamicVariableTransferDestination
-	}
-	return nil
+	return p.GetTransferDestination().PhoneNumberDynamicVariableTransferDestination
 }
 
 func (p *PhoneNumberTransfer) GetTransferDestinationSipURI() *SIPURITransferDestination {
-	if v := p.GetTransferDestination(); v != nil {
-		return v.SIPURITransferDestination
-	}
-	return nil
+	return p.GetTransferDestination().SIPURITransferDestination
 }
 
 func (p *PhoneNumberTransfer) GetTransferDestinationSipURIDynamicVariable() *SIPURIDynamicVariableTransferDestination {
-	if v := p.GetTransferDestination(); v != nil {
-		return v.SIPURIDynamicVariableTransferDestination
-	}
-	return nil
-}
-
-func (p *PhoneNumberTransfer) GetPhoneNumber() *string {
-	if p == nil {
-		return nil
-	}
-	return p.PhoneNumber
-}
-
-func (p *PhoneNumberTransfer) GetCondition() string {
-	if p == nil {
-		return ""
-	}
-	return p.Condition
+	return p.GetTransferDestination().SIPURIDynamicVariableTransferDestination
 }
 
 func (p *PhoneNumberTransfer) GetTransferType() *TransferTypeEnum {
@@ -378,6 +354,13 @@ func (p *PhoneNumberTransfer) GetTransferType() *TransferTypeEnum {
 		return nil
 	}
 	return p.TransferType
+}
+
+func (p *PhoneNumberTransfer) GetUui() *UUITransferConfig {
+	if p == nil {
+		return nil
+	}
+	return p.Uui
 }
 
 func (p *PhoneNumberTransfer) GetPostDialDigits() *PhoneNumberTransferPostDialDigits {
@@ -399,4 +382,18 @@ func (p *PhoneNumberTransfer) GetPostDialDigitsStatic() *PostDialDigitsStatic {
 		return v.PostDialDigitsStatic
 	}
 	return nil
+}
+
+func (p *PhoneNumberTransfer) GetPhoneNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PhoneNumber
+}
+
+func (p *PhoneNumberTransfer) GetCondition() string {
+	if p == nil {
+		return ""
+	}
+	return p.Condition
 }

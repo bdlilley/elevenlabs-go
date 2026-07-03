@@ -2,6 +2,8 @@
 
 ## Overview
 
+Generate sound effects and non-speech audio from a text prompt.
+
 ### Available Operations
 
 * [SoundGeneration](#soundgeneration) - Sound Generation

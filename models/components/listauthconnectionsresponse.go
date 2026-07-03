@@ -12,28 +12,34 @@ import (
 type ListAuthConnectionsResponseAuthConnectionType string
 
 const (
-	ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2AuthCode ListAuthConnectionsResponseAuthConnectionType = "api_integration_oauth2_auth_code"
-	ListAuthConnectionsResponseAuthConnectionTypeBasicAuth                    ListAuthConnectionsResponseAuthConnectionType = "basic_auth"
-	ListAuthConnectionsResponseAuthConnectionTypeBearerAuth                   ListAuthConnectionsResponseAuthConnectionType = "bearer_auth"
-	ListAuthConnectionsResponseAuthConnectionTypeCustomHeaderAuth             ListAuthConnectionsResponseAuthConnectionType = "custom_header_auth"
-	ListAuthConnectionsResponseAuthConnectionTypeMtls                         ListAuthConnectionsResponseAuthConnectionType = "mtls"
-	ListAuthConnectionsResponseAuthConnectionTypeOauth2ClientCredentials      ListAuthConnectionsResponseAuthConnectionType = "oauth2_client_credentials"
-	ListAuthConnectionsResponseAuthConnectionTypeOauth2Jwt                    ListAuthConnectionsResponseAuthConnectionType = "oauth2_jwt"
-	ListAuthConnectionsResponseAuthConnectionTypePrivateKeyJwt                ListAuthConnectionsResponseAuthConnectionType = "private_key_jwt"
-	ListAuthConnectionsResponseAuthConnectionTypeWhatsappAuth                 ListAuthConnectionsResponseAuthConnectionType = "whatsapp_auth"
+	ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2AuthCode  ListAuthConnectionsResponseAuthConnectionType = "api_integration_oauth2_auth_code"
+	ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2CustomApp ListAuthConnectionsResponseAuthConnectionType = "api_integration_oauth2_custom_app"
+	ListAuthConnectionsResponseAuthConnectionTypeBasicAuth                     ListAuthConnectionsResponseAuthConnectionType = "basic_auth"
+	ListAuthConnectionsResponseAuthConnectionTypeBearerAuth                    ListAuthConnectionsResponseAuthConnectionType = "bearer_auth"
+	ListAuthConnectionsResponseAuthConnectionTypeCustomHeaderAuth              ListAuthConnectionsResponseAuthConnectionType = "custom_header_auth"
+	ListAuthConnectionsResponseAuthConnectionTypeMtls                          ListAuthConnectionsResponseAuthConnectionType = "mtls"
+	ListAuthConnectionsResponseAuthConnectionTypeOauth2ClientCredentials       ListAuthConnectionsResponseAuthConnectionType = "oauth2_client_credentials"
+	ListAuthConnectionsResponseAuthConnectionTypeOauth2Jwt                     ListAuthConnectionsResponseAuthConnectionType = "oauth2_jwt"
+	ListAuthConnectionsResponseAuthConnectionTypePrivateKeyJwt                 ListAuthConnectionsResponseAuthConnectionType = "private_key_jwt"
+	ListAuthConnectionsResponseAuthConnectionTypeSlackBotAuth                  ListAuthConnectionsResponseAuthConnectionType = "slack_bot_auth"
+	ListAuthConnectionsResponseAuthConnectionTypeURLSecret                     ListAuthConnectionsResponseAuthConnectionType = "url_secret"
+	ListAuthConnectionsResponseAuthConnectionTypeWhatsappAuth                  ListAuthConnectionsResponseAuthConnectionType = "whatsapp_auth"
 )
 
 // ListAuthConnectionsResponseAuthConnection - The type of auth connection config
 type ListAuthConnectionsResponseAuthConnection struct {
-	OAuth2ClientCredsResponse            *OAuth2ClientCredsResponse            `queryParam:"inline" union:"member"`
-	BasicAuthResponse                    *BasicAuthResponse                    `queryParam:"inline" union:"member"`
-	BearerAuthResponse                   *BearerAuthResponse                   `queryParam:"inline" union:"member"`
-	OAuth2JWTResponse                    *OAuth2JWTResponse                    `queryParam:"inline" union:"member"`
-	PrivateKeyJWTResponse                *PrivateKeyJWTResponse                `queryParam:"inline" union:"member"`
-	MTLSAuthResponse                     *MTLSAuthResponse                     `queryParam:"inline" union:"member"`
-	CustomHeaderAuthResponse             *CustomHeaderAuthResponse             `queryParam:"inline" union:"member"`
-	APIIntegrationOAuth2AuthCodeResponse *APIIntegrationOAuth2AuthCodeResponse `queryParam:"inline" union:"member"`
-	WhatsAppAuthResponse                 *WhatsAppAuthResponse                 `queryParam:"inline" union:"member"`
+	OAuth2ClientCredsResponse             *OAuth2ClientCredsResponse             `queryParam:"inline" union:"member"`
+	BasicAuthResponse                     *BasicAuthResponse                     `queryParam:"inline" union:"member"`
+	BearerAuthResponse                    *BearerAuthResponse                    `queryParam:"inline" union:"member"`
+	OAuth2JWTResponse                     *OAuth2JWTResponse                     `queryParam:"inline" union:"member"`
+	PrivateKeyJWTResponse                 *PrivateKeyJWTResponse                 `queryParam:"inline" union:"member"`
+	MTLSAuthResponse                      *MTLSAuthResponse                      `queryParam:"inline" union:"member"`
+	CustomHeaderAuthResponse              *CustomHeaderAuthResponse              `queryParam:"inline" union:"member"`
+	APIIntegrationOAuth2AuthCodeResponse  *APIIntegrationOAuth2AuthCodeResponse  `queryParam:"inline" union:"member"`
+	APIIntegrationOAuth2CustomAppResponse *APIIntegrationOAuth2CustomAppResponse `queryParam:"inline" union:"member"`
+	WhatsAppAuthResponse                  *WhatsAppAuthResponse                  `queryParam:"inline" union:"member"`
+	SlackBotAuthResponse                  *SlackBotAuthResponse                  `queryParam:"inline" union:"member"`
+	URLSecretAuthResponse                 *URLSecretAuthResponse                 `queryParam:"inline" union:"member"`
 
 	Type ListAuthConnectionsResponseAuthConnectionType
 }
@@ -44,6 +50,15 @@ func CreateListAuthConnectionsResponseAuthConnectionAPIIntegrationOauth2AuthCode
 	return ListAuthConnectionsResponseAuthConnection{
 		APIIntegrationOAuth2AuthCodeResponse: &apiIntegrationOauth2AuthCode,
 		Type:                                 typ,
+	}
+}
+
+func CreateListAuthConnectionsResponseAuthConnectionAPIIntegrationOauth2CustomApp(apiIntegrationOauth2CustomApp APIIntegrationOAuth2CustomAppResponse) ListAuthConnectionsResponseAuthConnection {
+	typ := ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2CustomApp
+
+	return ListAuthConnectionsResponseAuthConnection{
+		APIIntegrationOAuth2CustomAppResponse: &apiIntegrationOauth2CustomApp,
+		Type:                                  typ,
 	}
 }
 
@@ -110,6 +125,24 @@ func CreateListAuthConnectionsResponseAuthConnectionPrivateKeyJwt(privateKeyJwt 
 	}
 }
 
+func CreateListAuthConnectionsResponseAuthConnectionSlackBotAuth(slackBotAuth SlackBotAuthResponse) ListAuthConnectionsResponseAuthConnection {
+	typ := ListAuthConnectionsResponseAuthConnectionTypeSlackBotAuth
+
+	return ListAuthConnectionsResponseAuthConnection{
+		SlackBotAuthResponse: &slackBotAuth,
+		Type:                 typ,
+	}
+}
+
+func CreateListAuthConnectionsResponseAuthConnectionURLSecret(urlSecret URLSecretAuthResponse) ListAuthConnectionsResponseAuthConnection {
+	typ := ListAuthConnectionsResponseAuthConnectionTypeURLSecret
+
+	return ListAuthConnectionsResponseAuthConnection{
+		URLSecretAuthResponse: &urlSecret,
+		Type:                  typ,
+	}
+}
+
 func CreateListAuthConnectionsResponseAuthConnectionWhatsappAuth(whatsappAuth WhatsAppAuthResponse) ListAuthConnectionsResponseAuthConnection {
 	typ := ListAuthConnectionsResponseAuthConnectionTypeWhatsappAuth
 
@@ -139,6 +172,15 @@ func (u *ListAuthConnectionsResponseAuthConnection) UnmarshalJSON(data []byte) e
 
 		u.APIIntegrationOAuth2AuthCodeResponse = apiIntegrationOAuth2AuthCodeResponse
 		u.Type = ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2AuthCode
+		return nil
+	case "api_integration_oauth2_custom_app":
+		apiIntegrationOAuth2CustomAppResponse := new(APIIntegrationOAuth2CustomAppResponse)
+		if err := utils.UnmarshalJSON(data, &apiIntegrationOAuth2CustomAppResponse, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (AuthType == api_integration_oauth2_custom_app) type APIIntegrationOAuth2CustomAppResponse within ListAuthConnectionsResponseAuthConnection: %w", string(data), err)
+		}
+
+		u.APIIntegrationOAuth2CustomAppResponse = apiIntegrationOAuth2CustomAppResponse
+		u.Type = ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2CustomApp
 		return nil
 	case "basic_auth":
 		basicAuthResponse := new(BasicAuthResponse)
@@ -203,6 +245,24 @@ func (u *ListAuthConnectionsResponseAuthConnection) UnmarshalJSON(data []byte) e
 		u.PrivateKeyJWTResponse = privateKeyJWTResponse
 		u.Type = ListAuthConnectionsResponseAuthConnectionTypePrivateKeyJwt
 		return nil
+	case "slack_bot_auth":
+		slackBotAuthResponse := new(SlackBotAuthResponse)
+		if err := utils.UnmarshalJSON(data, &slackBotAuthResponse, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (AuthType == slack_bot_auth) type SlackBotAuthResponse within ListAuthConnectionsResponseAuthConnection: %w", string(data), err)
+		}
+
+		u.SlackBotAuthResponse = slackBotAuthResponse
+		u.Type = ListAuthConnectionsResponseAuthConnectionTypeSlackBotAuth
+		return nil
+	case "url_secret":
+		urlSecretAuthResponse := new(URLSecretAuthResponse)
+		if err := utils.UnmarshalJSON(data, &urlSecretAuthResponse, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (AuthType == url_secret) type URLSecretAuthResponse within ListAuthConnectionsResponseAuthConnection: %w", string(data), err)
+		}
+
+		u.URLSecretAuthResponse = urlSecretAuthResponse
+		u.Type = ListAuthConnectionsResponseAuthConnectionTypeURLSecret
+		return nil
 	case "whatsapp_auth":
 		whatsAppAuthResponse := new(WhatsAppAuthResponse)
 		if err := utils.UnmarshalJSON(data, &whatsAppAuthResponse, "", true, nil); err != nil {
@@ -250,8 +310,20 @@ func (u ListAuthConnectionsResponseAuthConnection) MarshalJSON() ([]byte, error)
 		return utils.MarshalJSON(u.APIIntegrationOAuth2AuthCodeResponse, "", true)
 	}
 
+	if u.APIIntegrationOAuth2CustomAppResponse != nil {
+		return utils.MarshalJSON(u.APIIntegrationOAuth2CustomAppResponse, "", true)
+	}
+
 	if u.WhatsAppAuthResponse != nil {
 		return utils.MarshalJSON(u.WhatsAppAuthResponse, "", true)
+	}
+
+	if u.SlackBotAuthResponse != nil {
+		return utils.MarshalJSON(u.SlackBotAuthResponse, "", true)
+	}
+
+	if u.URLSecretAuthResponse != nil {
+		return utils.MarshalJSON(u.URLSecretAuthResponse, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ListAuthConnectionsResponseAuthConnection: all fields are null")

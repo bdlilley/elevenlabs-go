@@ -14,9 +14,14 @@ type WorkspaceAPIKeyResponseModel struct {
 	CreatedAtUnix        *int64           `json:"created_at_unix,omitzero"`
 	IsDisabled           *bool            `default:"false" json:"is_disabled"`
 	Permissions          []PermissionType `json:"permissions,omitzero"`
-	CharacterLimit       *int64           `json:"character_limit,omitzero"`
-	CharacterCount       *int64           `json:"character_count,omitzero"`
-	HashedXiAPIKey       string           `json:"hashed_xi_api_key"`
+	DisableReason        *LockReason      `json:"disable_reason,omitzero"`
+	// Maximum number of credits allowed in the current billing period.
+	CharacterLimit *int64 `json:"character_limit,omitzero"`
+	// Credits already used in the current billing period.
+	CharacterCount           *int64   `json:"character_count,omitzero"`
+	HashedXiAPIKey           string   `json:"hashed_xi_api_key"`
+	AllowedIps               []string `json:"allowed_ips,omitzero"`
+	ThirdPartyDisableAllowed *bool    `json:"third_party_disable_allowed,omitzero"`
 }
 
 func (w WorkspaceAPIKeyResponseModel) MarshalJSON() ([]byte, error) {
@@ -79,6 +84,13 @@ func (w *WorkspaceAPIKeyResponseModel) GetPermissions() []PermissionType {
 	return w.Permissions
 }
 
+func (w *WorkspaceAPIKeyResponseModel) GetDisableReason() *LockReason {
+	if w == nil {
+		return nil
+	}
+	return w.DisableReason
+}
+
 func (w *WorkspaceAPIKeyResponseModel) GetCharacterLimit() *int64 {
 	if w == nil {
 		return nil
@@ -98,4 +110,18 @@ func (w *WorkspaceAPIKeyResponseModel) GetHashedXiAPIKey() string {
 		return ""
 	}
 	return w.HashedXiAPIKey
+}
+
+func (w *WorkspaceAPIKeyResponseModel) GetAllowedIps() []string {
+	if w == nil {
+		return nil
+	}
+	return w.AllowedIps
+}
+
+func (w *WorkspaceAPIKeyResponseModel) GetThirdPartyDisableAllowed() *bool {
+	if w == nil {
+		return nil
+	}
+	return w.ThirdPartyDisableAllowed
 }

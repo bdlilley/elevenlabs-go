@@ -96,11 +96,13 @@ type TransferToAgentToolResultSuccessModel struct {
 	status                             *string     `const:"success" json:"status"`
 	FromAgent                          string      `json:"from_agent"`
 	ToAgent                            string      `json:"to_agent"`
+	ToNode                             *string     `json:"to_node,omitzero"`
 	Condition                          string      `json:"condition"`
 	DelayMs                            *int64      `default:"0" json:"delay_ms"`
 	TransferMessage                    *string     `json:"transfer_message,omitzero"`
 	EnableTransferredAgentFirstMessage *bool       `default:"false" json:"enable_transferred_agent_first_message"`
 	BranchInfo                         *BranchInfo `json:"branch_info,omitzero"`
+	PreserveClientTtsOverrides         *bool       `default:"false" json:"preserve_client_tts_overrides"`
 }
 
 func (t TransferToAgentToolResultSuccessModel) MarshalJSON() ([]byte, error) {
@@ -134,6 +136,13 @@ func (t *TransferToAgentToolResultSuccessModel) GetToAgent() string {
 		return ""
 	}
 	return t.ToAgent
+}
+
+func (t *TransferToAgentToolResultSuccessModel) GetToNode() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ToNode
 }
 
 func (t *TransferToAgentToolResultSuccessModel) GetCondition() string {
@@ -183,4 +192,11 @@ func (t *TransferToAgentToolResultSuccessModel) GetBranchInfoTrafficSplit() *Tra
 		return v.TransferBranchInfoTrafficSplit
 	}
 	return nil
+}
+
+func (t *TransferToAgentToolResultSuccessModel) GetPreserveClientTtsOverrides() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.PreserveClientTtsOverrides
 }

@@ -3,6 +3,9 @@
 package components
 
 import (
+	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
@@ -29,11 +32,135 @@ func (b *BodyUploadMusicV1MusicUploadPostFile) GetContent() any {
 // #region class-body-bodyuploadmusicv1musicuploadpostfile
 // #endregion class-body-bodyuploadmusicv1musicuploadpostfile
 
+type ExtractCompositionPlanEnum string
+
+const (
+	ExtractCompositionPlanEnumTrue    ExtractCompositionPlanEnum = "true"
+	ExtractCompositionPlanEnumFalse   ExtractCompositionPlanEnum = "false"
+	ExtractCompositionPlanEnumMusicV1 ExtractCompositionPlanEnum = "music_v1"
+	ExtractCompositionPlanEnumMusicV2 ExtractCompositionPlanEnum = "music_v2"
+)
+
+func (e ExtractCompositionPlanEnum) ToPointer() *ExtractCompositionPlanEnum {
+	return &e
+}
+func (e *ExtractCompositionPlanEnum) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "true":
+		fallthrough
+	case "false":
+		fallthrough
+	case "music_v1":
+		fallthrough
+	case "music_v2":
+		*e = ExtractCompositionPlanEnum(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ExtractCompositionPlanEnum: %v", v)
+	}
+}
+
+type ExtractCompositionPlanType string
+
+const (
+	ExtractCompositionPlanTypeBoolean                    ExtractCompositionPlanType = "boolean"
+	ExtractCompositionPlanTypeExtractCompositionPlanEnum ExtractCompositionPlanType = "Extract Composition Plan_enum"
+)
+
+// ExtractCompositionPlan - Whether to generate and return the composition plan for the uploaded song. Pass a model id (`music_v1` or `music_v2`) to control which composition plan format is returned. Passing `true`/`false` is deprecated; `true` defaults to the `music_v1` plan format. Enabling this will increase the latency.
+type ExtractCompositionPlan struct {
+	Boolean                    *bool                       `queryParam:"inline" union:"member"`
+	ExtractCompositionPlanEnum *ExtractCompositionPlanEnum `queryParam:"inline" union:"member"`
+
+	Type ExtractCompositionPlanType
+}
+
+func CreateExtractCompositionPlanBoolean(boolean bool) ExtractCompositionPlan {
+	typ := ExtractCompositionPlanTypeBoolean
+
+	return ExtractCompositionPlan{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateExtractCompositionPlanExtractCompositionPlanEnum(extractCompositionPlanEnum ExtractCompositionPlanEnum) ExtractCompositionPlan {
+	typ := ExtractCompositionPlanTypeExtractCompositionPlanEnum
+
+	return ExtractCompositionPlan{
+		ExtractCompositionPlanEnum: &extractCompositionPlanEnum,
+		Type:                       typ,
+	}
+}
+
+func (u *ExtractCompositionPlan) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ExtractCompositionPlanTypeBoolean,
+			Value: &boolean,
+		})
+	}
+
+	var extractCompositionPlanEnum ExtractCompositionPlanEnum = ExtractCompositionPlanEnum("")
+	if err := utils.UnmarshalJSON(data, &extractCompositionPlanEnum, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ExtractCompositionPlanTypeExtractCompositionPlanEnum,
+			Value: &extractCompositionPlanEnum,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ExtractCompositionPlan", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ExtractCompositionPlan", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ExtractCompositionPlanType)
+	switch best.Type {
+	case ExtractCompositionPlanTypeBoolean:
+		u.Boolean = best.Value.(*bool)
+		return nil
+	case ExtractCompositionPlanTypeExtractCompositionPlanEnum:
+		u.ExtractCompositionPlanEnum = best.Value.(*ExtractCompositionPlanEnum)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ExtractCompositionPlan", string(data))
+}
+
+func (u ExtractCompositionPlan) MarshalJSON() ([]byte, error) {
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.ExtractCompositionPlanEnum != nil {
+		return utils.MarshalJSON(u.ExtractCompositionPlanEnum, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ExtractCompositionPlan: all fields are null")
+}
+
 type BodyUploadMusicV1MusicUploadPost struct {
 	// The audio file to upload.
 	File BodyUploadMusicV1MusicUploadPostFile `multipartForm:"file,name=file"`
-	// Whether to generate and return the composition plan for the uploaded song. If True, the response will include the composition_plan but will increase the latency.
-	ExtractCompositionPlan *bool `default:"false" multipartForm:"name=extract_composition_plan"`
+	// Whether to generate and return the composition plan for the uploaded song. Pass a model id (`music_v1` or `music_v2`) to control which composition plan format is returned. Passing `true`/`false` is deprecated; `true` defaults to the `music_v1` plan format. Enabling this will increase the latency.
+	ExtractCompositionPlan *ExtractCompositionPlan `multipartForm:"name=extract_composition_plan"`
+	// Whether to transcribe the uploaded song and return word-level timestamps. If True, the response will include words_timestamps but will increase the latency.
+	WithTimestamps *bool `default:"false" multipartForm:"name=with_timestamps"`
 }
 
 func (b BodyUploadMusicV1MusicUploadPost) MarshalJSON() ([]byte, error) {
@@ -54,11 +181,18 @@ func (b *BodyUploadMusicV1MusicUploadPost) GetFile() BodyUploadMusicV1MusicUploa
 	return b.File
 }
 
-func (b *BodyUploadMusicV1MusicUploadPost) GetExtractCompositionPlan() *bool {
+func (b *BodyUploadMusicV1MusicUploadPost) GetExtractCompositionPlan() *ExtractCompositionPlan {
 	if b == nil {
 		return nil
 	}
 	return b.ExtractCompositionPlan
+}
+
+func (b *BodyUploadMusicV1MusicUploadPost) GetWithTimestamps() *bool {
+	if b == nil {
+		return nil
+	}
+	return b.WithTimestamps
 }
 
 // #region class-body-bodyuploadmusicv1musicuploadpost

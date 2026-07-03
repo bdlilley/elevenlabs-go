@@ -1,0 +1,24 @@
+# LLMLiteralJSONSchemaPropertyTypeEnum
+
+## Example Usage
+
+```go
+import (
+	"github.com/bdlilley/elevenlabs-go/models/components"
+)
+
+value := components.LLMLiteralJSONSchemaPropertyTypeEnumBoolean
+
+// Open enum: custom values can be created with a direct type cast
+custom := components.LLMLiteralJSONSchemaPropertyTypeEnum("custom_value")
+```
+
+
+## Values
+
+| Name                                          | Value                                         |
+| --------------------------------------------- | --------------------------------------------- |
+| `LLMLiteralJSONSchemaPropertyTypeEnumBoolean` | boolean                                       |
+| `LLMLiteralJSONSchemaPropertyTypeEnumString`  | string                                        |
+| `LLMLiteralJSONSchemaPropertyTypeEnumInteger` | integer                                       |
+| `LLMLiteralJSONSchemaPropertyTypeEnumNumber`  | number                                        |

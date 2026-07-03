@@ -1,0 +1,9 @@
+# RunConversationEvaluationsRequest
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ConversationID`                                                                                             | `string`                                                                                                     | :heavy_check_mark:                                                                                           | ID of the conversation                                                                                       |
+| `Body`                                                                                                       | [components.RunConversationEvaluationsRequest](../../models/components/runconversationevaluationsrequest.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |

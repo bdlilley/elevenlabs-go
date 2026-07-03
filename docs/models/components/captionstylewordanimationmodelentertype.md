@@ -16,8 +16,14 @@ custom := components.CaptionStyleWordAnimationModelEnterType("custom_value")
 
 ## Values
 
-| Name                                           | Value                                          |
-| ---------------------------------------------- | ---------------------------------------------- |
-| `CaptionStyleWordAnimationModelEnterTypeNone`  | none                                           |
-| `CaptionStyleWordAnimationModelEnterTypeFade`  | fade                                           |
-| `CaptionStyleWordAnimationModelEnterTypeScale` | scale                                          |
+| Name                                               | Value                                              |
+| -------------------------------------------------- | -------------------------------------------------- |
+| `CaptionStyleWordAnimationModelEnterTypeNone`      | none                                               |
+| `CaptionStyleWordAnimationModelEnterTypeFade`      | fade                                               |
+| `CaptionStyleWordAnimationModelEnterTypeScale`     | scale                                              |
+| `CaptionStyleWordAnimationModelEnterTypePop`       | pop                                                |
+| `CaptionStyleWordAnimationModelEnterTypeSlideUp`   | slide_up                                           |
+| `CaptionStyleWordAnimationModelEnterTypeSlideDown` | slide_down                                         |
+| `CaptionStyleWordAnimationModelEnterTypeSlam`      | slam                                               |
+| `CaptionStyleWordAnimationModelEnterTypeScaleDown` | scale_down                                         |
+| `CaptionStyleWordAnimationModelEnterTypeSlideIn`   | slide_in                                           |

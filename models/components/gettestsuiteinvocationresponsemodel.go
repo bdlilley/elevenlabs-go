@@ -2,13 +2,32 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
 type GetTestSuiteInvocationResponseModel struct {
-	ID        string                     `json:"id"`
-	AgentID   *string                    `json:"agent_id,omitzero"`
-	BranchID  *string                    `json:"branch_id,omitzero"`
-	CreatedAt *int64                     `json:"created_at,omitzero"`
-	FolderID  *string                    `json:"folder_id,omitzero"`
-	TestRuns  []UnitTestRunResponseModel `json:"test_runs"`
+	ID          string  `json:"id"`
+	AgentID     *string `json:"agent_id,omitzero"`
+	BranchID    *string `json:"branch_id,omitzero"`
+	CreatedAt   *int64  `json:"created_at,omitzero"`
+	FolderID    *string `json:"folder_id,omitzero"`
+	RepeatCount *int64  `default:"1" json:"repeat_count"`
+	// None when repeat_count==1 (no bucketing). Otherwise tracks bucketing lifecycle.
+	BucketingStatus *BucketingStatus           `json:"bucketing_status,omitzero"`
+	ResultGroups    []TestRunResultSummary     `json:"result_groups,omitzero"`
+	TestRuns        []UnitTestRunResponseModel `json:"test_runs"`
+}
+
+func (g GetTestSuiteInvocationResponseModel) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTestSuiteInvocationResponseModel) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (g *GetTestSuiteInvocationResponseModel) GetID() string {
@@ -44,6 +63,27 @@ func (g *GetTestSuiteInvocationResponseModel) GetFolderID() *string {
 		return nil
 	}
 	return g.FolderID
+}
+
+func (g *GetTestSuiteInvocationResponseModel) GetRepeatCount() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.RepeatCount
+}
+
+func (g *GetTestSuiteInvocationResponseModel) GetBucketingStatus() *BucketingStatus {
+	if g == nil {
+		return nil
+	}
+	return g.BucketingStatus
+}
+
+func (g *GetTestSuiteInvocationResponseModel) GetResultGroups() []TestRunResultSummary {
+	if g == nil {
+		return nil
+	}
+	return g.ResultGroups
 }
 
 func (g *GetTestSuiteInvocationResponseModel) GetTestRuns() []UnitTestRunResponseModel {

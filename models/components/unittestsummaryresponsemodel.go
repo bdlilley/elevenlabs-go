@@ -25,6 +25,8 @@ type UnitTestSummaryResponseModel struct {
 	FolderPath []AgentTestFolderPathSegmentResponseModel `json:"folder_path,omitzero"`
 	// Number of direct children (tests and subfolders) for folders only
 	ChildrenCount *int64 `json:"children_count,omitzero"`
+	// Channel the test simulates the conversation as. Null for folders or default behavior.
+	ConversationInitiationSource *ConversationInitiationSource `default:"unknown" json:"conversation_initiation_source"`
 }
 
 func (u UnitTestSummaryResponseModel) MarshalJSON() ([]byte, error) {
@@ -106,4 +108,11 @@ func (u *UnitTestSummaryResponseModel) GetChildrenCount() *int64 {
 		return nil
 	}
 	return u.ChildrenCount
+}
+
+func (u *UnitTestSummaryResponseModel) GetConversationInitiationSource() *ConversationInitiationSource {
+	if u == nil {
+		return nil
+	}
+	return u.ConversationInitiationSource
 }

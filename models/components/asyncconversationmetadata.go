@@ -36,6 +36,7 @@ type AsyncConversationMetadata struct {
 	DeliveryError                  *string        `json:"delivery_error,omitzero"`
 	ExternalSystem                 string         `json:"external_system"`
 	ExternalID                     string         `json:"external_id"`
+	ExternalLink                   *string        `json:"external_link,omitzero"`
 	RetryCount                     *int64         `default:"0" json:"retry_count"`
 	LastRetryTimestamp             *int64         `json:"last_retry_timestamp,omitzero"`
 	LastProcessedExternalMessageID *string        `json:"last_processed_external_message_id,omitzero"`
@@ -85,6 +86,13 @@ func (a *AsyncConversationMetadata) GetExternalID() string {
 		return ""
 	}
 	return a.ExternalID
+}
+
+func (a *AsyncConversationMetadata) GetExternalLink() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ExternalLink
 }
 
 func (a *AsyncConversationMetadata) GetRetryCount() *int64 {

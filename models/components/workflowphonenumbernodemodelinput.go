@@ -297,16 +297,18 @@ func (u WorkflowPhoneNumberNodeModelInputPostDialDigits) MarshalJSON() ([]byte, 
 
 type WorkflowPhoneNumberNodeModelInput struct {
 	// Custom SIP headers to include when transferring the call. Each header can be either a static value or a dynamic variable reference.
-	CustomSipHeaders []WorkflowPhoneNumberNodeModelInputCustomSipHeader `json:"custom_sip_headers,omitzero"`
+	CustomSipHeaders    []WorkflowPhoneNumberNodeModelInputCustomSipHeader   `json:"custom_sip_headers,omitzero"`
+	TransferDestination WorkflowPhoneNumberNodeModelInputTransferDestination `json:"transfer_destination"`
+	TransferType        *TransferTypeEnum                                    `default:"conference" json:"transfer_type"`
+	// User-to-User Information (RFC 7433) to attach to SIP REFER transfers. Carries call context such as CRM identifiers or escalation reason across the transfer boundary.
+	Uui *UUITransferConfig `json:"uui,omitzero"`
+	// DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause. Only supported for Twilio transfers.
+	PostDialDigits *WorkflowPhoneNumberNodeModelInputPostDialDigits `json:"post_dial_digits,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_    *string        `const:"phone_number" json:"type"`
 	Position *PositionInput `json:"position,omitzero"`
 	// The ids of outgoing edges in the order they should be evaluated.
-	EdgeOrder           []string                                             `json:"edge_order,omitzero"`
-	TransferDestination WorkflowPhoneNumberNodeModelInputTransferDestination `json:"transfer_destination"`
-	TransferType        *TransferTypeEnum                                    `default:"conference" json:"transfer_type"`
-	// DTMF digits to send after call connects (e.g., 'ww1234' for extension). Can be either a static value or a dynamic variable reference. Use 'w' for 0.5s pause.
-	PostDialDigits *WorkflowPhoneNumberNodeModelInputPostDialDigits `json:"post_dial_digits,omitzero"`
+	EdgeOrder []string `json:"edge_order,omitzero"`
 }
 
 func (w WorkflowPhoneNumberNodeModelInput) MarshalJSON() ([]byte, error) {
@@ -325,24 +327,6 @@ func (w *WorkflowPhoneNumberNodeModelInput) GetCustomSipHeaders() []WorkflowPhon
 		return nil
 	}
 	return w.CustomSipHeaders
-}
-
-func (w *WorkflowPhoneNumberNodeModelInput) GetType() *string {
-	return types.Pointer("phone_number")
-}
-
-func (w *WorkflowPhoneNumberNodeModelInput) GetPosition() *PositionInput {
-	if w == nil {
-		return nil
-	}
-	return w.Position
-}
-
-func (w *WorkflowPhoneNumberNodeModelInput) GetEdgeOrder() []string {
-	if w == nil {
-		return nil
-	}
-	return w.EdgeOrder
 }
 
 func (w *WorkflowPhoneNumberNodeModelInput) GetTransferDestination() WorkflowPhoneNumberNodeModelInputTransferDestination {
@@ -375,6 +359,13 @@ func (w *WorkflowPhoneNumberNodeModelInput) GetTransferType() *TransferTypeEnum 
 	return w.TransferType
 }
 
+func (w *WorkflowPhoneNumberNodeModelInput) GetUui() *UUITransferConfig {
+	if w == nil {
+		return nil
+	}
+	return w.Uui
+}
+
 func (w *WorkflowPhoneNumberNodeModelInput) GetPostDialDigits() *WorkflowPhoneNumberNodeModelInputPostDialDigits {
 	if w == nil {
 		return nil
@@ -394,4 +385,22 @@ func (w *WorkflowPhoneNumberNodeModelInput) GetPostDialDigitsStatic() *PostDialD
 		return v.PostDialDigitsStatic
 	}
 	return nil
+}
+
+func (w *WorkflowPhoneNumberNodeModelInput) GetType() *string {
+	return types.Pointer("phone_number")
+}
+
+func (w *WorkflowPhoneNumberNodeModelInput) GetPosition() *PositionInput {
+	if w == nil {
+		return nil
+	}
+	return w.Position
+}
+
+func (w *WorkflowPhoneNumberNodeModelInput) GetEdgeOrder() []string {
+	if w == nil {
+		return nil
+	}
+	return w.EdgeOrder
 }

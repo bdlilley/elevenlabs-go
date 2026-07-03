@@ -13,8 +13,6 @@ type TurnConfigWorkflowOverride struct {
 	InitialWaitTime *float64 `json:"initial_wait_time,omitzero"`
 	// Maximum wait time since the user last spoke before terminating the call
 	SilenceEndCallTimeout *float64 `json:"silence_end_call_timeout,omitzero"`
-	// Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses.
-	SoftTimeoutConfig *SoftTimeoutConfigWorkflowOverride `json:"soft_timeout_config,omitzero"`
 	// The mode of turn detection
 	Mode *TurnMode `default:"turn" json:"mode"`
 	// Controls how eager the agent is to respond. Low = less eager (waits longer), Standard = default eagerness, High = more eager (responds sooner)
@@ -23,6 +21,16 @@ type TurnConfigWorkflowOverride struct {
 	SpellingPatience *SpellingPatience `default:"auto" json:"spelling_patience"`
 	// When enabled, starts generating LLM responses during silence before full turn confidence is reached, reducing perceived latency. May increase LLM costs.
 	SpeculativeTurn *bool `json:"speculative_turn,omitzero"`
+	// When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns.
+	RetranscribeOnTurnTimeout *bool `json:"retranscribe_on_turn_timeout,omitzero"`
+	// Version of the turn detection model to use.
+	TurnModel *TurnModel `default:"turn_v3" json:"turn_model"`
+	// List of terms that should not trigger an interruption when spoken by the user (e.g. 'gotcha', 'understood'). Uses case-insensitive exact matching.
+	InterruptionIgnoreTerms []string `json:"interruption_ignore_terms,omitzero"`
+	// When interruptions are disabled, still transcribe what the user says so it can carry into the next turn. When off, user speech during a non-interruptible turn is ignored and won't trigger a turn.
+	TranscribeOnDisabledInterruptions *bool `json:"transcribe_on_disabled_interruptions,omitzero"`
+	// Configuration for soft timeout functionality. Provides immediate feedback during longer LLM responses.
+	SoftTimeoutConfig *SoftTimeoutConfigWorkflowOverride `json:"soft_timeout_config,omitzero"`
 }
 
 func (t TurnConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -57,13 +65,6 @@ func (t *TurnConfigWorkflowOverride) GetSilenceEndCallTimeout() *float64 {
 	return t.SilenceEndCallTimeout
 }
 
-func (t *TurnConfigWorkflowOverride) GetSoftTimeoutConfig() *SoftTimeoutConfigWorkflowOverride {
-	if t == nil {
-		return nil
-	}
-	return t.SoftTimeoutConfig
-}
-
 func (t *TurnConfigWorkflowOverride) GetMode() *TurnMode {
 	if t == nil {
 		return nil
@@ -90,4 +91,39 @@ func (t *TurnConfigWorkflowOverride) GetSpeculativeTurn() *bool {
 		return nil
 	}
 	return t.SpeculativeTurn
+}
+
+func (t *TurnConfigWorkflowOverride) GetRetranscribeOnTurnTimeout() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.RetranscribeOnTurnTimeout
+}
+
+func (t *TurnConfigWorkflowOverride) GetTurnModel() *TurnModel {
+	if t == nil {
+		return nil
+	}
+	return t.TurnModel
+}
+
+func (t *TurnConfigWorkflowOverride) GetInterruptionIgnoreTerms() []string {
+	if t == nil {
+		return nil
+	}
+	return t.InterruptionIgnoreTerms
+}
+
+func (t *TurnConfigWorkflowOverride) GetTranscribeOnDisabledInterruptions() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.TranscribeOnDisabledInterruptions
+}
+
+func (t *TurnConfigWorkflowOverride) GetSoftTimeoutConfig() *SoftTimeoutConfigWorkflowOverride {
+	if t == nil {
+		return nil
+	}
+	return t.SoftTimeoutConfig
 }

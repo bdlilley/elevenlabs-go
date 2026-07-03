@@ -9,7 +9,7 @@ import (
 
 type ListTestInvocationsRouteRequest struct {
 	// Filter by agent ID
-	AgentID string `queryParam:"style=form,explode=true,name=agent_id"`
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// How many Tests to return at maximum. Can not exceed 100, defaults to 30.
 	PageSize *int64 `default:"30" queryParam:"style=form,explode=true,name=page_size"`
 	// Used for fetching next page. Cursor is returned in the response.
@@ -27,9 +27,9 @@ func (l *ListTestInvocationsRouteRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (l *ListTestInvocationsRouteRequest) GetAgentID() string {
+func (l *ListTestInvocationsRouteRequest) GetAgentID() *string {
 	if l == nil {
-		return ""
+		return nil
 	}
 	return l.AgentID
 }

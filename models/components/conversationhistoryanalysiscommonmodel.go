@@ -12,6 +12,7 @@ type ConversationHistoryAnalysisCommonModel struct {
 	EvaluationCriteriaResultsList []ConversationHistoryEvaluationCriteriaResultCommonModel          `json:"evaluation_criteria_results_list,omitzero"`
 	DataCollectionResultsList     []DataCollectionResultCommonModel                                 `json:"data_collection_results_list,omitzero"`
 	CallSuccessful                EvaluationSuccessResult                                           `json:"call_successful"`
+	CallSuccessScore              *float64                                                          `json:"call_success_score,omitzero"`
 	TranscriptSummary             string                                                            `json:"transcript_summary"`
 	CallSummaryTitle              *string                                                           `json:"call_summary_title,omitzero"`
 	Scoped                        []ScopedAnalysisResult                                            `json:"scoped,omitzero"`
@@ -61,6 +62,13 @@ func (c *ConversationHistoryAnalysisCommonModel) GetCallSuccessful() EvaluationS
 		return EvaluationSuccessResult("")
 	}
 	return c.CallSuccessful
+}
+
+func (c *ConversationHistoryAnalysisCommonModel) GetCallSuccessScore() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.CallSuccessScore
 }
 
 func (c *ConversationHistoryAnalysisCommonModel) GetTranscriptSummary() string {

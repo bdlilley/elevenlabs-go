@@ -26,6 +26,7 @@ const (
 	ASTNodeInputTypeLteOperator         ASTNodeInputType = "lte_operator"
 	ASTNodeInputTypeMulOperator         ASTNodeInputType = "mul_operator"
 	ASTNodeInputTypeNeqOperator         ASTNodeInputType = "neq_operator"
+	ASTNodeInputTypeNullLiteral         ASTNodeInputType = "null_literal"
 	ASTNodeInputTypeNumberLiteral       ASTNodeInputType = "number_literal"
 	ASTNodeInputTypeOrOperator          ASTNodeInputType = "or_operator"
 	ASTNodeInputTypeStringLiteral       ASTNodeInputType = "string_literal"
@@ -36,6 +37,7 @@ type ASTNodeInput struct {
 	ASTStringNodeInput                       *ASTStringNodeInput                       `queryParam:"inline" union:"member"`
 	ASTNumberNodeInput                       *ASTNumberNodeInput                       `queryParam:"inline" union:"member"`
 	ASTBooleanNodeInput                      *ASTBooleanNodeInput                      `queryParam:"inline" union:"member"`
+	ASTNullNodeInput                         *ASTNullNodeInput                         `queryParam:"inline" union:"member"`
 	ASTLLMNodeInput                          *ASTLLMNodeInput                          `queryParam:"inline" union:"member"`
 	ASTDynamicVariableNodeInput              *ASTDynamicVariableNodeInput              `queryParam:"inline" union:"member"`
 	ASTOrOperatorNodeInput1                  *ASTOrOperatorNodeInput1                  `queryParam:"inline" union:"member"`
@@ -178,6 +180,15 @@ func CreateASTNodeInputNeqOperator(neqOperator ASTNotEqualsOperatorNodeInput1) A
 	return ASTNodeInput{
 		ASTNotEqualsOperatorNodeInput1: &neqOperator,
 		Type:                           typ,
+	}
+}
+
+func CreateASTNodeInputNullLiteral(nullLiteral ASTNullNodeInput) ASTNodeInput {
+	typ := ASTNodeInputTypeNullLiteral
+
+	return ASTNodeInput{
+		ASTNullNodeInput: &nullLiteral,
+		Type:             typ,
 	}
 }
 
@@ -355,6 +366,15 @@ func (u *ASTNodeInput) UnmarshalJSON(data []byte) error {
 		u.ASTNotEqualsOperatorNodeInput1 = astNotEqualsOperatorNodeInput1
 		u.Type = ASTNodeInputTypeNeqOperator
 		return nil
+	case "null_literal":
+		astNullNodeInput := new(ASTNullNodeInput)
+		if err := utils.UnmarshalJSON(data, &astNullNodeInput, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == null_literal) type ASTNullNodeInput within ASTNodeInput: %w", string(data), err)
+		}
+
+		u.ASTNullNodeInput = astNullNodeInput
+		u.Type = ASTNodeInputTypeNullLiteral
+		return nil
 	case "number_literal":
 		astNumberNodeInput := new(ASTNumberNodeInput)
 		if err := utils.UnmarshalJSON(data, &astNumberNodeInput, "", true, nil); err != nil {
@@ -407,6 +427,10 @@ func (u ASTNodeInput) MarshalJSON() ([]byte, error) {
 
 	if u.ASTBooleanNodeInput != nil {
 		return utils.MarshalJSON(u.ASTBooleanNodeInput, "", true)
+	}
+
+	if u.ASTNullNodeInput != nil {
+		return utils.MarshalJSON(u.ASTNullNodeInput, "", true)
 	}
 
 	if u.ASTLLMNodeInput != nil {

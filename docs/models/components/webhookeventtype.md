@@ -21,3 +21,5 @@ custom := components.WebhookEventType("custom_value")
 | `WebhookEventTypeTranscript`            | transcript                              |
 | `WebhookEventTypeAudio`                 | audio                                   |
 | `WebhookEventTypeCallInitiationFailure` | call_initiation_failure                 |
+| `WebhookEventTypeUnredactedTranscript`  | unredacted_transcript                   |
+| `WebhookEventTypeUnredactedAudio`       | unredacted_audio                        |

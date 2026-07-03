@@ -1,6 +1,6 @@
 # CreateServiceParams
 
-Create a new service in the system.
+Create a new service (classic, rental, or group) in the system.
 
 
 ## Fields

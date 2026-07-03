@@ -1,0 +1,9 @@
+# PublicCreateOrderResponse
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |
+| `CreateOrderResponse`                                                             | [*components.CreateOrderResponse](../../models/components/createorderresponse.md) | :heavy_minus_sign:                                                                | Successful Response                                                               | {<br/>"order_id": "prodorder_01jgatk6h0fwxrtbjade61yqhx",<br/>"sandbox": false<br/>} |

@@ -1,0 +1,10 @@
+# GetAudioIsolationHistoryRequest
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `PageSize`                                                                      | `*int64`                                                                        | :heavy_minus_sign:                                                              | How many history items to return at maximum. Defaults to 100.                   |                                                                                 |
+| `Page`                                                                          | `*int64`                                                                        | :heavy_minus_sign:                                                              | Page number for search pagination (1-based). Only used when search is provided. |                                                                                 |
+| `Search`                                                                        | `*string`                                                                       | :heavy_minus_sign:                                                              | Optional search term used for filtering audio isolation history (title/text).   | **Example 1:** podcast<br/>**Example 2:** lecture                               |

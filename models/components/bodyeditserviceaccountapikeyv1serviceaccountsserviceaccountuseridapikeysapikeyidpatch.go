@@ -3,45 +3,162 @@
 package components
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsType string
+type IsEnabledType string
 
 const (
-	BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeArrayOfPermissionType BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsType = "arrayOfPermissionType"
-	BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeStr                   BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsType = "str"
+	IsEnabledTypeBoolean IsEnabledType = "boolean"
+	IsEnabledTypeStr     IsEnabledType = "str"
 )
 
-// BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions - The permissions of the XI API.
-type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions struct {
-	ArrayOfPermissionType []PermissionType `queryParam:"inline" union:"member"`
-	Str                   *string          `queryParam:"inline" union:"member"`
+// IsEnabled - Whether to enable or disable the API key.
+type IsEnabled struct {
+	Boolean *bool   `queryParam:"inline" union:"member"`
+	Str     *string `queryParam:"inline" union:"member"`
 
-	Type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsType
+	Type IsEnabledType
 }
 
-func CreateBodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsArrayOfPermissionType(arrayOfPermissionType []PermissionType) BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions {
-	typ := BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeArrayOfPermissionType
+func CreateIsEnabledBoolean(boolean bool) IsEnabled {
+	typ := IsEnabledTypeBoolean
 
-	return BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions{
-		ArrayOfPermissionType: arrayOfPermissionType,
-		Type:                  typ,
+	return IsEnabled{
+		Boolean: &boolean,
+		Type:    typ,
 	}
 }
 
-func CreateBodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsStr(str string) BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions {
-	typ := BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeStr
+func CreateIsEnabledStr(str string) IsEnabled {
+	typ := IsEnabledTypeStr
 
-	return BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions{
+	return IsEnabled{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func (u *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions) UnmarshalJSON(data []byte) error {
+func (u *IsEnabled) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  IsEnabledTypeBoolean,
+			Value: &boolean,
+		})
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  IsEnabledTypeStr,
+			Value: &str,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for IsEnabled", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for IsEnabled", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(IsEnabledType)
+	switch best.Type {
+	case IsEnabledTypeBoolean:
+		u.Boolean = best.Value.(*bool)
+		return nil
+	case IsEnabledTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for IsEnabled", string(data))
+}
+
+func (u IsEnabled) MarshalJSON() ([]byte, error) {
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type IsEnabled: all fields are null")
+}
+
+type PermissionsEnum string
+
+const (
+	PermissionsEnumAll      PermissionsEnum = "all"
+	PermissionsEnumNoUpdate PermissionsEnum = "no_update"
+)
+
+func (e PermissionsEnum) ToPointer() *PermissionsEnum {
+	return &e
+}
+func (e *PermissionsEnum) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "all":
+		fallthrough
+	case "no_update":
+		*e = PermissionsEnum(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for PermissionsEnum: %v", v)
+	}
+}
+
+type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionType string
+
+const (
+	BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypeArrayOfPermissionType BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionType = "arrayOfPermissionType"
+	BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypePermissionsEnum       BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionType = "Permissions_enum"
+)
+
+// BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion - The permissions of the XI API.
+type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion struct {
+	ArrayOfPermissionType []PermissionType `queryParam:"inline" union:"member"`
+	PermissionsEnum       *PermissionsEnum `queryParam:"inline" union:"member"`
+
+	Type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionType
+}
+
+func CreateBodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionArrayOfPermissionType(arrayOfPermissionType []PermissionType) BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion {
+	typ := BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypeArrayOfPermissionType
+
+	return BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion{
+		ArrayOfPermissionType: arrayOfPermissionType,
+		Type:                  typ,
+	}
+}
+
+func CreateBodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionPermissionsEnum(permissionsEnum PermissionsEnum) BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion {
+	typ := BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypePermissionsEnum
+
+	return BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion{
+		PermissionsEnum: &permissionsEnum,
+		Type:            typ,
+	}
+}
+
+func (u *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
 
@@ -49,92 +166,432 @@ func (u *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKey
 	var arrayOfPermissionType []PermissionType = []PermissionType{}
 	if err := utils.UnmarshalJSON(data, &arrayOfPermissionType, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeArrayOfPermissionType,
+			Type:  BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypeArrayOfPermissionType,
 			Value: arrayOfPermissionType,
+		})
+	}
+
+	var permissionsEnum PermissionsEnum = PermissionsEnum("")
+	if err := utils.UnmarshalJSON(data, &permissionsEnum, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypePermissionsEnum,
+			Value: &permissionsEnum,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionType)
+	switch best.Type {
+	case BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypeArrayOfPermissionType:
+		u.ArrayOfPermissionType = best.Value.([]PermissionType)
+		return nil
+	case BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnionTypePermissionsEnum:
+		u.PermissionsEnum = best.Value.(*PermissionsEnum)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion", string(data))
+}
+
+func (u BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion) MarshalJSON() ([]byte, error) {
+	if u.ArrayOfPermissionType != nil {
+		return utils.MarshalJSON(u.ArrayOfPermissionType, "", true)
+	}
+
+	if u.PermissionsEnum != nil {
+		return utils.MarshalJSON(u.PermissionsEnum, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion: all fields are null")
+}
+
+type CharacterLimitType string
+
+const (
+	CharacterLimitTypeInteger CharacterLimitType = "integer"
+	CharacterLimitTypeStr     CharacterLimitType = "str"
+)
+
+// CharacterLimit - The character limit of the XI API key. If provided this will limit the usage of this api key to n characters per month where n is the chosen value. Requests that incur charges will fail after reaching this monthly limit.
+type CharacterLimit struct {
+	Integer *int64  `queryParam:"inline" union:"member"`
+	Str     *string `queryParam:"inline" union:"member"`
+
+	Type CharacterLimitType
+}
+
+func CreateCharacterLimitInteger(integer int64) CharacterLimit {
+	typ := CharacterLimitTypeInteger
+
+	return CharacterLimit{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func CreateCharacterLimitStr(str string) CharacterLimit {
+	typ := CharacterLimitTypeStr
+
+	return CharacterLimit{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func (u *CharacterLimit) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var integer int64 = int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  CharacterLimitTypeInteger,
+			Value: &integer,
 		})
 	}
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeStr,
+			Type:  CharacterLimitTypeStr,
 			Value: &str,
 		})
 	}
 
 	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions", string(data))
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CharacterLimit", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions", string(data))
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CharacterLimit", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsType)
+	u.Type = best.Type.(CharacterLimitType)
 	switch best.Type {
-	case BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeArrayOfPermissionType:
-		u.ArrayOfPermissionType = best.Value.([]PermissionType)
+	case CharacterLimitTypeInteger:
+		u.Integer = best.Value.(*int64)
 		return nil
-	case BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsTypeStr:
+	case CharacterLimitTypeStr:
 		u.Str = best.Value.(*string)
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CharacterLimit", string(data))
 }
 
-func (u BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions) MarshalJSON() ([]byte, error) {
-	if u.ArrayOfPermissionType != nil {
-		return utils.MarshalJSON(u.ArrayOfPermissionType, "", true)
+func (u CharacterLimit) MarshalJSON() ([]byte, error) {
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
 	}
 
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions: all fields are null")
+	return nil, errors.New("could not marshal union type CharacterLimit: all fields are null")
+}
+
+type AllowedIpsEnum string
+
+const (
+	AllowedIpsEnumClear    AllowedIpsEnum = "clear"
+	AllowedIpsEnumNoUpdate AllowedIpsEnum = "no_update"
+)
+
+func (e AllowedIpsEnum) ToPointer() *AllowedIpsEnum {
+	return &e
+}
+func (e *AllowedIpsEnum) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "clear":
+		fallthrough
+	case "no_update":
+		*e = AllowedIpsEnum(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AllowedIpsEnum: %v", v)
+	}
+}
+
+type AllowedIpsType string
+
+const (
+	AllowedIpsTypeArrayOfStr     AllowedIpsType = "arrayOfStr"
+	AllowedIpsTypeAllowedIpsEnum AllowedIpsType = "Allowed Ips_enum"
+)
+
+// AllowedIps - List of IP addresses or CIDR ranges allowed to use this API key. Each entry may be a CIDR range (e.g. '10.0.0.0/24') or a bare IP address (normalized to /32 or /128). On create, omit or pass null to allow all IPs. On update, omit to leave the allowlist unchanged, or pass "clear" to remove it.
+type AllowedIps struct {
+	ArrayOfStr     []string        `queryParam:"inline" union:"member"`
+	AllowedIpsEnum *AllowedIpsEnum `queryParam:"inline" union:"member"`
+
+	Type AllowedIpsType
+}
+
+func CreateAllowedIpsArrayOfStr(arrayOfStr []string) AllowedIps {
+	typ := AllowedIpsTypeArrayOfStr
+
+	return AllowedIps{
+		ArrayOfStr: arrayOfStr,
+		Type:       typ,
+	}
+}
+
+func CreateAllowedIpsAllowedIpsEnum(allowedIpsEnum AllowedIpsEnum) AllowedIps {
+	typ := AllowedIpsTypeAllowedIpsEnum
+
+	return AllowedIps{
+		AllowedIpsEnum: &allowedIpsEnum,
+		Type:           typ,
+	}
+}
+
+func (u *AllowedIps) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var arrayOfStr []string = []string{}
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AllowedIpsTypeArrayOfStr,
+			Value: arrayOfStr,
+		})
+	}
+
+	var allowedIpsEnum AllowedIpsEnum = AllowedIpsEnum("")
+	if err := utils.UnmarshalJSON(data, &allowedIpsEnum, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AllowedIpsTypeAllowedIpsEnum,
+			Value: &allowedIpsEnum,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AllowedIps", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AllowedIps", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(AllowedIpsType)
+	switch best.Type {
+	case AllowedIpsTypeArrayOfStr:
+		u.ArrayOfStr = best.Value.([]string)
+		return nil
+	case AllowedIpsTypeAllowedIpsEnum:
+		u.AllowedIpsEnum = best.Value.(*AllowedIpsEnum)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AllowedIps", string(data))
+}
+
+func (u AllowedIps) MarshalJSON() ([]byte, error) {
+	if u.ArrayOfStr != nil {
+		return utils.MarshalJSON(u.ArrayOfStr, "", true)
+	}
+
+	if u.AllowedIpsEnum != nil {
+		return utils.MarshalJSON(u.AllowedIpsEnum, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type AllowedIps: all fields are null")
+}
+
+type ThirdPartyDisableAllowedEnum string
+
+const (
+	ThirdPartyDisableAllowedEnumClear    ThirdPartyDisableAllowedEnum = "clear"
+	ThirdPartyDisableAllowedEnumNoUpdate ThirdPartyDisableAllowedEnum = "no_update"
+)
+
+func (e ThirdPartyDisableAllowedEnum) ToPointer() *ThirdPartyDisableAllowedEnum {
+	return &e
+}
+func (e *ThirdPartyDisableAllowedEnum) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "clear":
+		fallthrough
+	case "no_update":
+		*e = ThirdPartyDisableAllowedEnum(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ThirdPartyDisableAllowedEnum: %v", v)
+	}
+}
+
+type ThirdPartyDisableAllowedType string
+
+const (
+	ThirdPartyDisableAllowedTypeBoolean                      ThirdPartyDisableAllowedType = "boolean"
+	ThirdPartyDisableAllowedTypeThirdPartyDisableAllowedEnum ThirdPartyDisableAllowedType = "Third Party Disable Allowed_enum"
+)
+
+// ThirdPartyDisableAllowed - Whether the holder of this key may disable it via the self-disable endpoint. On create, omit or pass null to use the workspace's default (enabled for non-Enterprise plans, disabled for Enterprise plans). On update, omit to leave it unchanged, or pass "clear" to reset it to the workspace default. Only honored for workspaces with self-disable access enabled.
+type ThirdPartyDisableAllowed struct {
+	Boolean                      *bool                         `queryParam:"inline" union:"member"`
+	ThirdPartyDisableAllowedEnum *ThirdPartyDisableAllowedEnum `queryParam:"inline" union:"member"`
+
+	Type ThirdPartyDisableAllowedType
+}
+
+func CreateThirdPartyDisableAllowedBoolean(boolean bool) ThirdPartyDisableAllowed {
+	typ := ThirdPartyDisableAllowedTypeBoolean
+
+	return ThirdPartyDisableAllowed{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateThirdPartyDisableAllowedThirdPartyDisableAllowedEnum(thirdPartyDisableAllowedEnum ThirdPartyDisableAllowedEnum) ThirdPartyDisableAllowed {
+	typ := ThirdPartyDisableAllowedTypeThirdPartyDisableAllowedEnum
+
+	return ThirdPartyDisableAllowed{
+		ThirdPartyDisableAllowedEnum: &thirdPartyDisableAllowedEnum,
+		Type:                         typ,
+	}
+}
+
+func (u *ThirdPartyDisableAllowed) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ThirdPartyDisableAllowedTypeBoolean,
+			Value: &boolean,
+		})
+	}
+
+	var thirdPartyDisableAllowedEnum ThirdPartyDisableAllowedEnum = ThirdPartyDisableAllowedEnum("")
+	if err := utils.UnmarshalJSON(data, &thirdPartyDisableAllowedEnum, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ThirdPartyDisableAllowedTypeThirdPartyDisableAllowedEnum,
+			Value: &thirdPartyDisableAllowedEnum,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ThirdPartyDisableAllowed", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ThirdPartyDisableAllowed", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ThirdPartyDisableAllowedType)
+	switch best.Type {
+	case ThirdPartyDisableAllowedTypeBoolean:
+		u.Boolean = best.Value.(*bool)
+		return nil
+	case ThirdPartyDisableAllowedTypeThirdPartyDisableAllowedEnum:
+		u.ThirdPartyDisableAllowedEnum = best.Value.(*ThirdPartyDisableAllowedEnum)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ThirdPartyDisableAllowed", string(data))
+}
+
+func (u ThirdPartyDisableAllowed) MarshalJSON() ([]byte, error) {
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.ThirdPartyDisableAllowedEnum != nil {
+		return utils.MarshalJSON(u.ThirdPartyDisableAllowedEnum, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ThirdPartyDisableAllowed: all fields are null")
 }
 
 type BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch struct {
 	// Whether to enable or disable the API key.
-	IsEnabled bool `json:"is_enabled"`
+	IsEnabled *IsEnabled `json:"is_enabled,omitzero"`
 	// The name of the XI API key to use (used for identification purposes only).
-	Name string `json:"name"`
+	Name *string `json:"name,omitzero"`
 	// The permissions of the XI API.
-	Permissions BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions `json:"permissions"`
+	Permissions *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion `json:"permissions,omitzero"`
 	// The character limit of the XI API key. If provided this will limit the usage of this api key to n characters per month where n is the chosen value. Requests that incur charges will fail after reaching this monthly limit.
-	CharacterLimit *int64 `json:"character_limit,omitzero"`
+	CharacterLimit *CharacterLimit `json:"character_limit,omitzero"`
+	// List of IP addresses or CIDR ranges allowed to use this API key. Each entry may be a CIDR range (e.g. '10.0.0.0/24') or a bare IP address (normalized to /32 or /128). On create, omit or pass null to allow all IPs. On update, omit to leave the allowlist unchanged, or pass "clear" to remove it.
+	AllowedIps *AllowedIps `json:"allowed_ips,omitzero"`
+	// Whether the holder of this key may disable it via the self-disable endpoint. On create, omit or pass null to use the workspace's default (enabled for non-Enterprise plans, disabled for Enterprise plans). On update, omit to leave it unchanged, or pass "clear" to reset it to the workspace default. Only honored for workspaces with self-disable access enabled.
+	ThirdPartyDisableAllowed *ThirdPartyDisableAllowed `json:"third_party_disable_allowed,omitzero"`
 }
 
-func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetIsEnabled() bool {
+func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetIsEnabled() *IsEnabled {
 	if b == nil {
-		return false
+		return nil
 	}
 	return b.IsEnabled
 }
 
-func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetName() string {
+func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetName() *string {
 	if b == nil {
-		return ""
+		return nil
 	}
 	return b.Name
 }
 
-func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetPermissions() BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions {
+func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetPermissions() *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsUnion {
 	if b == nil {
-		return BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissions{}
+		return nil
 	}
 	return b.Permissions
 }
 
-func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetCharacterLimit() *int64 {
+func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetCharacterLimit() *CharacterLimit {
 	if b == nil {
 		return nil
 	}
 	return b.CharacterLimit
+}
+
+func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetAllowedIps() *AllowedIps {
+	if b == nil {
+		return nil
+	}
+	return b.AllowedIps
+}
+
+func (b *BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch) GetThirdPartyDisableAllowed() *ThirdPartyDisableAllowed {
+	if b == nil {
+		return nil
+	}
+	return b.ThirdPartyDisableAllowed
 }
 
 // #region class-body-bodyeditserviceaccountapikeyv1serviceaccountsserviceaccountuseridapikeysapikeyidpatch

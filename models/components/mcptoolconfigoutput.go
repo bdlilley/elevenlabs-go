@@ -16,12 +16,14 @@ const (
 	MCPToolConfigOutputInputOverridesTypeConstant        MCPToolConfigOutputInputOverridesType = "constant"
 	MCPToolConfigOutputInputOverridesTypeDynamicVariable MCPToolConfigOutputInputOverridesType = "dynamic_variable"
 	MCPToolConfigOutputInputOverridesTypeLlm             MCPToolConfigOutputInputOverridesType = "llm"
+	MCPToolConfigOutputInputOverridesTypeOmit            MCPToolConfigOutputInputOverridesType = "omit"
 )
 
 type MCPToolConfigOutputInputOverrides struct {
 	ConstantSchemaOverride        *ConstantSchemaOverride        `queryParam:"inline" union:"member"`
 	DynamicVariableSchemaOverride *DynamicVariableSchemaOverride `queryParam:"inline" union:"member"`
 	LLMSchemaOverride             *LLMSchemaOverride             `queryParam:"inline" union:"member"`
+	OmitSchemaOverride            *OmitSchemaOverride            `queryParam:"inline" union:"member"`
 
 	Type MCPToolConfigOutputInputOverridesType
 }
@@ -50,6 +52,15 @@ func CreateMCPToolConfigOutputInputOverridesLlm(llm LLMSchemaOverride) MCPToolCo
 	return MCPToolConfigOutputInputOverrides{
 		LLMSchemaOverride: &llm,
 		Type:              typ,
+	}
+}
+
+func CreateMCPToolConfigOutputInputOverridesOmit(omit OmitSchemaOverride) MCPToolConfigOutputInputOverrides {
+	typ := MCPToolConfigOutputInputOverridesTypeOmit
+
+	return MCPToolConfigOutputInputOverrides{
+		OmitSchemaOverride: &omit,
+		Type:               typ,
 	}
 }
 
@@ -92,6 +103,15 @@ func (u *MCPToolConfigOutputInputOverrides) UnmarshalJSON(data []byte) error {
 		u.LLMSchemaOverride = llmSchemaOverride
 		u.Type = MCPToolConfigOutputInputOverridesTypeLlm
 		return nil
+	case "omit":
+		omitSchemaOverride := new(OmitSchemaOverride)
+		if err := utils.UnmarshalJSON(data, &omitSchemaOverride, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Source == omit) type OmitSchemaOverride within MCPToolConfigOutputInputOverrides: %w", string(data), err)
+		}
+
+		u.OmitSchemaOverride = omitSchemaOverride
+		u.Type = MCPToolConfigOutputInputOverridesTypeOmit
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MCPToolConfigOutputInputOverrides", string(data))
@@ -110,6 +130,10 @@ func (u MCPToolConfigOutputInputOverrides) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.LLMSchemaOverride, "", true)
 	}
 
+	if u.OmitSchemaOverride != nil {
+		return utils.MarshalJSON(u.OmitSchemaOverride, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type MCPToolConfigOutputInputOverrides: all fields are null")
 }
 
@@ -120,12 +144,18 @@ type MCPToolConfigOutput struct {
 	Name  string  `json:"name"`
 	// Description of when the tool should be used and what it does.
 	Description string `json:"description"`
-	// The maximum time in seconds to wait for the tool call to complete.
-	ResponseTimeoutSecs *int64 `default:"20" json:"response_timeout_secs"`
-	// If true, the user will not be able to interrupt the agent while this tool is running.
-	DisableInterruptions *bool `default:"false" json:"disable_interruptions"`
-	// If true, the agent will speak before the tool call.
-	ForcePreToolSpeech *bool `default:"false" json:"force_pre_tool_speech"`
+	// The maximum time in seconds to wait for the MCP tool call to complete. Must be between 5 and 300 seconds (inclusive).
+	ResponseTimeoutSecs *int64 `default:"30" json:"response_timeout_secs"`
+	// DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DisableInterruptions *bool                 `default:"false" json:"disable_interruptions"`
+	InterruptionMode     *ToolInterruptionMode `default:"allow" json:"interruption_mode"`
+	// DEPRECATED: use `pre_tool_speech` instead. If true, the agent will speak before the tool call.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	ForcePreToolSpeech *bool              `default:"false" json:"force_pre_tool_speech"`
+	PreToolSpeech      *PreToolSpeechMode `default:"auto" json:"pre_tool_speech"`
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
@@ -197,11 +227,25 @@ func (m *MCPToolConfigOutput) GetDisableInterruptions() *bool {
 	return m.DisableInterruptions
 }
 
+func (m *MCPToolConfigOutput) GetInterruptionMode() *ToolInterruptionMode {
+	if m == nil {
+		return nil
+	}
+	return m.InterruptionMode
+}
+
 func (m *MCPToolConfigOutput) GetForcePreToolSpeech() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.ForcePreToolSpeech
+}
+
+func (m *MCPToolConfigOutput) GetPreToolSpeech() *PreToolSpeechMode {
+	if m == nil {
+		return nil
+	}
+	return m.PreToolSpeech
 }
 
 func (m *MCPToolConfigOutput) GetAssignments() []DynamicVariableAssignment {

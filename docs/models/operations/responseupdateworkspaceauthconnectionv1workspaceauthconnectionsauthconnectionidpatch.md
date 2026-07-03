@@ -1,0 +1,111 @@
+# ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch
+
+The type of auth connection config
+
+
+## Supported Types
+
+### OAuth2ClientCredsResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchOauth2ClientCredentials(components.OAuth2ClientCredsResponse{/* values here */})
+```
+
+### BasicAuthResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchBasicAuth(components.BasicAuthResponse{/* values here */})
+```
+
+### BearerAuthResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchBearerAuth(components.BearerAuthResponse{/* values here */})
+```
+
+### OAuth2JWTResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchOauth2Jwt(components.OAuth2JWTResponse{/* values here */})
+```
+
+### PrivateKeyJWTResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchPrivateKeyJwt(components.PrivateKeyJWTResponse{/* values here */})
+```
+
+### MTLSAuthResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchMtls(components.MTLSAuthResponse{/* values here */})
+```
+
+### CustomHeaderAuthResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchCustomHeaderAuth(components.CustomHeaderAuthResponse{/* values here */})
+```
+
+### APIIntegrationOAuth2AuthCodeResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchAPIIntegrationOauth2AuthCode(components.APIIntegrationOAuth2AuthCodeResponse{/* values here */})
+```
+
+### APIIntegrationOAuth2CustomAppResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchAPIIntegrationOauth2CustomApp(components.APIIntegrationOAuth2CustomAppResponse{/* values here */})
+```
+
+### WhatsAppAuthResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchWhatsappAuth(components.WhatsAppAuthResponse{/* values here */})
+```
+
+### SlackBotAuthResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchSlackBotAuth(components.SlackBotAuthResponse{/* values here */})
+```
+
+### URLSecretAuthResponse
+
+```go
+responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch := operations.CreateResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchURLSecret(components.URLSecretAuthResponse{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.Type {
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeOauth2ClientCredentials:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.OAuth2ClientCredsResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeBasicAuth:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.BasicAuthResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeBearerAuth:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.BearerAuthResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeOauth2Jwt:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.OAuth2JWTResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypePrivateKeyJwt:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.PrivateKeyJWTResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeMtls:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.MTLSAuthResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeCustomHeaderAuth:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.CustomHeaderAuthResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeAPIIntegrationOauth2AuthCode:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.APIIntegrationOAuth2AuthCodeResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeAPIIntegrationOauth2CustomApp:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.APIIntegrationOAuth2CustomAppResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeWhatsappAuth:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.WhatsAppAuthResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeSlackBotAuth:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.SlackBotAuthResponse is populated
+	case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeURLSecret:
+		// responseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.URLSecretAuthResponse is populated
+}
+```

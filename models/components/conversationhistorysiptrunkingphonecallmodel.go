@@ -13,6 +13,7 @@ type ConversationHistorySIPTrunkingPhoneCallModel struct {
 	ExternalNumber string              `json:"external_number"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_                     string            `const:"sip_trunking" json:"type"`
+	CallID                    *string           `json:"call_id,omitzero"`
 	CallSid                   string            `json:"call_sid"`
 	SipHeaderDynamicVariables map[string]string `json:"sip_header_dynamic_variables,omitzero"`
 }
@@ -58,6 +59,13 @@ func (c *ConversationHistorySIPTrunkingPhoneCallModel) GetExternalNumber() strin
 
 func (c *ConversationHistorySIPTrunkingPhoneCallModel) GetType() string {
 	return "sip_trunking"
+}
+
+func (c *ConversationHistorySIPTrunkingPhoneCallModel) GetCallID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.CallID
 }
 
 func (c *ConversationHistorySIPTrunkingPhoneCallModel) GetCallSid() string {

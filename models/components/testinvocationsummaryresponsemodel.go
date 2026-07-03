@@ -27,6 +27,8 @@ type TestInvocationSummaryResponseModel struct {
 	Title string `json:"title"`
 	// The access information of the test invocation
 	AccessInfo *ResourceAccessInfo `json:"access_info,omitzero"`
+	// Number of times each test was repeated in this invocation
+	RepeatCount *int64 `default:"1" json:"repeat_count"`
 }
 
 func (t TestInvocationSummaryResponseModel) MarshalJSON() ([]byte, error) {
@@ -108,4 +110,11 @@ func (t *TestInvocationSummaryResponseModel) GetAccessInfo() *ResourceAccessInfo
 		return nil
 	}
 	return t.AccessInfo
+}
+
+func (t *TestInvocationSummaryResponseModel) GetRepeatCount() *int64 {
+	if t == nil {
+		return nil
+	}
+	return t.RepeatCount
 }

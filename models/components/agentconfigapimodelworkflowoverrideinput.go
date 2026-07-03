@@ -3,156 +3,13 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersType string
-
-const (
-	AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeStr     AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersType = "str"
-	AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeNumber  AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersType = "number"
-	AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeInteger AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersType = "integer"
-	AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeBoolean AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersType = "boolean"
-)
-
-type AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersType
-}
-
-func CreateAgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersStr(str string) AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders {
-	typ := AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeStr
-
-	return AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateAgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersNumber(number float64) AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders {
-	typ := AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeNumber
-
-	return AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateAgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersInteger(integer int64) AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders {
-	typ := AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeInteger
-
-	return AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateAgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersBoolean(boolean bool) AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders {
-	typ := AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeBoolean
-
-	return AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersType)
-	switch best.Type {
-	case AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholdersTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders", string(data))
-}
-
-func (u AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders: all fields are null")
-}
-
 type AgentConfigAPIModelWorkflowOverrideInputDynamicVariablesConfigWorkflowOverride struct {
 	// A dictionary of dynamic variable placeholders and their values
-	DynamicVariablePlaceholders map[string]AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders `json:"dynamic_variable_placeholders,omitzero"`
-	AdditionalProperties        map[string]any                                                                 `additionalProperties:"true" json:"-"`
+	DynamicVariablePlaceholders map[string]any `json:"dynamic_variable_placeholders,omitzero"`
+	AdditionalProperties        map[string]any `additionalProperties:"true" json:"-"`
 }
 
 func (a AgentConfigAPIModelWorkflowOverrideInputDynamicVariablesConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -166,7 +23,7 @@ func (a *AgentConfigAPIModelWorkflowOverrideInputDynamicVariablesConfigWorkflowO
 	return nil
 }
 
-func (a *AgentConfigAPIModelWorkflowOverrideInputDynamicVariablesConfigWorkflowOverride) GetDynamicVariablePlaceholders() map[string]AgentConfigAPIModelWorkflowOverrideInputDynamicVariablePlaceholders {
+func (a *AgentConfigAPIModelWorkflowOverrideInputDynamicVariablesConfigWorkflowOverride) GetDynamicVariablePlaceholders() map[string]any {
 	if a == nil {
 		return nil
 	}
@@ -193,6 +50,8 @@ type AgentConfigAPIModelWorkflowOverrideInput struct {
 	DisableFirstMessageInterruptions *bool `json:"disable_first_message_interruptions,omitzero"`
 	// If non-empty, the message the agent will send when max conversation duration is reached.
 	MaxConversationDurationMessage *string `json:"max_conversation_duration_message,omitzero"`
+	// Per-channel response behavior overrides for text conversations. Built-in channel defaults apply when unset.
+	TextBehaviorOverrides map[string]BehaviorOverride `json:"text_behavior_overrides,omitzero"`
 	// The prompt for the agent
 	Prompt *PromptAgentAPIModelWorkflowOverrideInput `json:"prompt,omitzero"`
 }
@@ -248,6 +107,13 @@ func (a *AgentConfigAPIModelWorkflowOverrideInput) GetMaxConversationDurationMes
 		return nil
 	}
 	return a.MaxConversationDurationMessage
+}
+
+func (a *AgentConfigAPIModelWorkflowOverrideInput) GetTextBehaviorOverrides() map[string]BehaviorOverride {
+	if a == nil {
+		return nil
+	}
+	return a.TextBehaviorOverrides
 }
 
 func (a *AgentConfigAPIModelWorkflowOverrideInput) GetPrompt() *PromptAgentAPIModelWorkflowOverrideInput {

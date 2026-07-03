@@ -12,16 +12,24 @@ type TurnConfig struct {
 	// How long the agent will wait for the user to start the conversation if the first message is empty. If not set, uses the regular turn_timeout.
 	InitialWaitTime *float64 `json:"initial_wait_time,omitzero"`
 	// Maximum wait time since the user last spoke before terminating the call
-	SilenceEndCallTimeout *float64 `default:"-1" json:"silence_end_call_timeout"`
-	// Configuration for soft timeout functionality during LLM response generation.
-	SoftTimeoutConfig *SoftTimeoutConfig `json:"soft_timeout_config,omitzero"`
-	Mode              *TurnMode          `default:"turn" json:"mode"`
+	SilenceEndCallTimeout *float64  `default:"-1" json:"silence_end_call_timeout"`
+	Mode                  *TurnMode `default:"turn" json:"mode"`
 	// Agent's eagerness to respond. Higher values make agent wait for higher turn probability.
 	TurnEagerness *TurnEagerness `default:"normal" json:"turn_eagerness"`
 	// Controls if the agent should be more patient when user is spelling numbers and named entities.
 	SpellingPatience *SpellingPatience `default:"auto" json:"spelling_patience"`
 	// When enabled, starts generating LLM responses during silence before full turn confidence is reached, reducing perceived latency. May increase LLM costs.
 	SpeculativeTurn *bool `default:"false" json:"speculative_turn"`
+	// When enabled, if VAD detects no speech, attempts to re-transcribe accumulated audio at turn timeout. Disables silence discount billing for affected turns.
+	RetranscribeOnTurnTimeout *bool `default:"false" json:"retranscribe_on_turn_timeout"`
+	// Version of the turn detection model to use.
+	TurnModel *TurnModel `default:"turn_v3" json:"turn_model"`
+	// List of terms that should not trigger an interruption when spoken by the user (e.g. 'gotcha', 'understood'). Uses case-insensitive exact matching.
+	InterruptionIgnoreTerms []string `json:"interruption_ignore_terms,omitzero"`
+	// When interruptions are disabled, still transcribe what the user says so it can carry into the next turn. When off, user speech during a non-interruptible turn is ignored and won't trigger a turn.
+	TranscribeOnDisabledInterruptions *bool `default:"false" json:"transcribe_on_disabled_interruptions"`
+	// Configuration for soft timeout functionality during LLM response generation.
+	SoftTimeoutConfig *SoftTimeoutConfig `json:"soft_timeout_config,omitzero"`
 }
 
 func (t TurnConfig) MarshalJSON() ([]byte, error) {
@@ -56,13 +64,6 @@ func (t *TurnConfig) GetSilenceEndCallTimeout() *float64 {
 	return t.SilenceEndCallTimeout
 }
 
-func (t *TurnConfig) GetSoftTimeoutConfig() *SoftTimeoutConfig {
-	if t == nil {
-		return nil
-	}
-	return t.SoftTimeoutConfig
-}
-
 func (t *TurnConfig) GetMode() *TurnMode {
 	if t == nil {
 		return nil
@@ -89,4 +90,39 @@ func (t *TurnConfig) GetSpeculativeTurn() *bool {
 		return nil
 	}
 	return t.SpeculativeTurn
+}
+
+func (t *TurnConfig) GetRetranscribeOnTurnTimeout() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.RetranscribeOnTurnTimeout
+}
+
+func (t *TurnConfig) GetTurnModel() *TurnModel {
+	if t == nil {
+		return nil
+	}
+	return t.TurnModel
+}
+
+func (t *TurnConfig) GetInterruptionIgnoreTerms() []string {
+	if t == nil {
+		return nil
+	}
+	return t.InterruptionIgnoreTerms
+}
+
+func (t *TurnConfig) GetTranscribeOnDisabledInterruptions() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.TranscribeOnDisabledInterruptions
+}
+
+func (t *TurnConfig) GetSoftTimeoutConfig() *SoftTimeoutConfig {
+	if t == nil {
+		return nil
+	}
+	return t.SoftTimeoutConfig
 }

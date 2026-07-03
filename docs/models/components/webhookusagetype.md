@@ -22,3 +22,4 @@ custom := components.WebhookUsageType("custom_value")
 | `WebhookUsageTypeConvAiSettings`             | ConvAI Settings                              |
 | `WebhookUsageTypeVoiceLibraryRemovalNotices` | Voice Library Removal Notices                |
 | `WebhookUsageTypeSpeechToText`               | Speech to Text                               |
+| `WebhookUsageTypeAgentQaEvaluations`         | Agent QA Evaluations                         |

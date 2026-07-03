@@ -3,15 +3,116 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"io"
 )
 
+// GenerateOutputFormatOfTheGeneratedAudio - Output format of the generated audio. Formatted as codec_sample_rate_bitrate. Use "auto" (the default) to let the API pick the best format for the selected model: mp3_44100_128 for v1 models and mp3_48000_192 for v2 models.
+type GenerateOutputFormatOfTheGeneratedAudio string
+
+const (
+	GenerateOutputFormatOfTheGeneratedAudioAuto         GenerateOutputFormatOfTheGeneratedAudio = "auto"
+	GenerateOutputFormatOfTheGeneratedAudioMp348000128  GenerateOutputFormatOfTheGeneratedAudio = "mp3_48000_128"
+	GenerateOutputFormatOfTheGeneratedAudioMp348000192  GenerateOutputFormatOfTheGeneratedAudio = "mp3_48000_192"
+	GenerateOutputFormatOfTheGeneratedAudioMp348000240  GenerateOutputFormatOfTheGeneratedAudio = "mp3_48000_240"
+	GenerateOutputFormatOfTheGeneratedAudioMp348000320  GenerateOutputFormatOfTheGeneratedAudio = "mp3_48000_320"
+	GenerateOutputFormatOfTheGeneratedAudioMp32205032   GenerateOutputFormatOfTheGeneratedAudio = "mp3_22050_32"
+	GenerateOutputFormatOfTheGeneratedAudioMp32400048   GenerateOutputFormatOfTheGeneratedAudio = "mp3_24000_48"
+	GenerateOutputFormatOfTheGeneratedAudioMp34410032   GenerateOutputFormatOfTheGeneratedAudio = "mp3_44100_32"
+	GenerateOutputFormatOfTheGeneratedAudioMp34410064   GenerateOutputFormatOfTheGeneratedAudio = "mp3_44100_64"
+	GenerateOutputFormatOfTheGeneratedAudioMp34410096   GenerateOutputFormatOfTheGeneratedAudio = "mp3_44100_96"
+	GenerateOutputFormatOfTheGeneratedAudioMp344100128  GenerateOutputFormatOfTheGeneratedAudio = "mp3_44100_128"
+	GenerateOutputFormatOfTheGeneratedAudioMp344100192  GenerateOutputFormatOfTheGeneratedAudio = "mp3_44100_192"
+	GenerateOutputFormatOfTheGeneratedAudioPcm8000      GenerateOutputFormatOfTheGeneratedAudio = "pcm_8000"
+	GenerateOutputFormatOfTheGeneratedAudioPcm16000     GenerateOutputFormatOfTheGeneratedAudio = "pcm_16000"
+	GenerateOutputFormatOfTheGeneratedAudioPcm22050     GenerateOutputFormatOfTheGeneratedAudio = "pcm_22050"
+	GenerateOutputFormatOfTheGeneratedAudioPcm24000     GenerateOutputFormatOfTheGeneratedAudio = "pcm_24000"
+	GenerateOutputFormatOfTheGeneratedAudioPcm32000     GenerateOutputFormatOfTheGeneratedAudio = "pcm_32000"
+	GenerateOutputFormatOfTheGeneratedAudioPcm44100     GenerateOutputFormatOfTheGeneratedAudio = "pcm_44100"
+	GenerateOutputFormatOfTheGeneratedAudioPcm48000     GenerateOutputFormatOfTheGeneratedAudio = "pcm_48000"
+	GenerateOutputFormatOfTheGeneratedAudioUlaw8000     GenerateOutputFormatOfTheGeneratedAudio = "ulaw_8000"
+	GenerateOutputFormatOfTheGeneratedAudioAlaw8000     GenerateOutputFormatOfTheGeneratedAudio = "alaw_8000"
+	GenerateOutputFormatOfTheGeneratedAudioOpus4800032  GenerateOutputFormatOfTheGeneratedAudio = "opus_48000_32"
+	GenerateOutputFormatOfTheGeneratedAudioOpus4800064  GenerateOutputFormatOfTheGeneratedAudio = "opus_48000_64"
+	GenerateOutputFormatOfTheGeneratedAudioOpus4800096  GenerateOutputFormatOfTheGeneratedAudio = "opus_48000_96"
+	GenerateOutputFormatOfTheGeneratedAudioOpus48000128 GenerateOutputFormatOfTheGeneratedAudio = "opus_48000_128"
+	GenerateOutputFormatOfTheGeneratedAudioOpus48000192 GenerateOutputFormatOfTheGeneratedAudio = "opus_48000_192"
+)
+
+func (e GenerateOutputFormatOfTheGeneratedAudio) ToPointer() *GenerateOutputFormatOfTheGeneratedAudio {
+	return &e
+}
+func (e *GenerateOutputFormatOfTheGeneratedAudio) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		fallthrough
+	case "mp3_48000_128":
+		fallthrough
+	case "mp3_48000_192":
+		fallthrough
+	case "mp3_48000_240":
+		fallthrough
+	case "mp3_48000_320":
+		fallthrough
+	case "mp3_22050_32":
+		fallthrough
+	case "mp3_24000_48":
+		fallthrough
+	case "mp3_44100_32":
+		fallthrough
+	case "mp3_44100_64":
+		fallthrough
+	case "mp3_44100_96":
+		fallthrough
+	case "mp3_44100_128":
+		fallthrough
+	case "mp3_44100_192":
+		fallthrough
+	case "pcm_8000":
+		fallthrough
+	case "pcm_16000":
+		fallthrough
+	case "pcm_22050":
+		fallthrough
+	case "pcm_24000":
+		fallthrough
+	case "pcm_32000":
+		fallthrough
+	case "pcm_44100":
+		fallthrough
+	case "pcm_48000":
+		fallthrough
+	case "ulaw_8000":
+		fallthrough
+	case "alaw_8000":
+		fallthrough
+	case "opus_48000_32":
+		fallthrough
+	case "opus_48000_64":
+		fallthrough
+	case "opus_48000_96":
+		fallthrough
+	case "opus_48000_128":
+		fallthrough
+	case "opus_48000_192":
+		*e = GenerateOutputFormatOfTheGeneratedAudio(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GenerateOutputFormatOfTheGeneratedAudio: %v", v)
+	}
+}
+
 type GenerateRequest struct {
-	// Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
-	OutputFormat *components.AllowedOutputFormats        `queryParam:"style=form,explode=true,name=output_format"`
-	Body         *components.BodyComposeMusicV1MusicPost `request:"mediaType=application/json"`
+	// Output format of the generated audio. Formatted as codec_sample_rate_bitrate. Use "auto" (the default) to let the API pick the best format for the selected model: mp3_44100_128 for v1 models and mp3_48000_192 for v2 models.
+	OutputFormat *GenerateOutputFormatOfTheGeneratedAudio `default:"auto" queryParam:"style=form,explode=true,name=output_format"`
+	Body         *components.BodyComposeMusicV1MusicPost  `request:"mediaType=application/json"`
 }
 
 func (g GenerateRequest) MarshalJSON() ([]byte, error) {
@@ -25,7 +126,7 @@ func (g *GenerateRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (g *GenerateRequest) GetOutputFormat() *components.AllowedOutputFormats {
+func (g *GenerateRequest) GetOutputFormat() *GenerateOutputFormatOfTheGeneratedAudio {
 	if g == nil {
 		return nil
 	}

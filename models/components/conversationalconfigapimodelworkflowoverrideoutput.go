@@ -14,7 +14,7 @@ type ConversationalConfigAPIModelWorkflowOverrideOutput struct {
 	// Configuration for conversational text to speech
 	Tts *TTSConversationalConfigWorkflowOverrideOutput `json:"tts,omitzero"`
 	// Configuration for conversational events
-	Conversation *ConversationConfigWorkflowOverride `json:"conversation,omitzero"`
+	Conversation *ConversationConfigWorkflowOverrideOutput `json:"conversation,omitzero"`
 	// Language presets for conversations
 	LanguagePresets map[string]LanguagePresetOutput `json:"language_presets,omitzero"`
 	// Configuration for voice activity detection
@@ -55,7 +55,7 @@ func (c *ConversationalConfigAPIModelWorkflowOverrideOutput) GetTts() *TTSConver
 	return c.Tts
 }
 
-func (c *ConversationalConfigAPIModelWorkflowOverrideOutput) GetConversation() *ConversationConfigWorkflowOverride {
+func (c *ConversationalConfigAPIModelWorkflowOverrideOutput) GetConversation() *ConversationConfigWorkflowOverrideOutput {
 	if c == nil {
 		return nil
 	}

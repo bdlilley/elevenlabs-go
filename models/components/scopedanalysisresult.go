@@ -14,6 +14,7 @@ type ScopedAnalysisResult struct {
 	EvaluationCriteriaResults map[string]ConversationHistoryEvaluationCriteriaResultCommonModel `json:"evaluation_criteria_results,omitzero"`
 	DataCollectionResults     map[string]DataCollectionResultCommonModel                        `json:"data_collection_results,omitzero"`
 	Successful                EvaluationSuccessResult                                           `json:"successful"`
+	SuccessScore              *float64                                                          `json:"success_score,omitzero"`
 }
 
 func (s ScopedAnalysisResult) MarshalJSON() ([]byte, error) {
@@ -67,4 +68,11 @@ func (s *ScopedAnalysisResult) GetSuccessful() EvaluationSuccessResult {
 		return EvaluationSuccessResult("")
 	}
 	return s.Successful
+}
+
+func (s *ScopedAnalysisResult) GetSuccessScore() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.SuccessScore
 }

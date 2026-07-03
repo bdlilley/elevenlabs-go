@@ -98,6 +98,96 @@ func (u APIKey) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type APIKey: all fields are null")
 }
 
+type CustomLLMAuthConnectionType string
+
+const (
+	CustomLLMAuthConnectionTypeAuthConnectionLocator            CustomLLMAuthConnectionType = "AuthConnectionLocator"
+	CustomLLMAuthConnectionTypeEnvironmentAuthConnectionLocator CustomLLMAuthConnectionType = "EnvironmentAuthConnectionLocator"
+)
+
+// CustomLLMAuthConnection - Optional workspace auth connection for authentication. Only auth connections that produce an Authorization Bearer token are supported; Basic auth, mTLS, custom header, and URL secret auth connections are not supported.
+type CustomLLMAuthConnection struct {
+	AuthConnectionLocator            *AuthConnectionLocator            `queryParam:"inline" union:"member"`
+	EnvironmentAuthConnectionLocator *EnvironmentAuthConnectionLocator `queryParam:"inline" union:"member"`
+
+	Type CustomLLMAuthConnectionType
+}
+
+func CreateCustomLLMAuthConnectionAuthConnectionLocator(authConnectionLocator AuthConnectionLocator) CustomLLMAuthConnection {
+	typ := CustomLLMAuthConnectionTypeAuthConnectionLocator
+
+	return CustomLLMAuthConnection{
+		AuthConnectionLocator: &authConnectionLocator,
+		Type:                  typ,
+	}
+}
+
+func CreateCustomLLMAuthConnectionEnvironmentAuthConnectionLocator(environmentAuthConnectionLocator EnvironmentAuthConnectionLocator) CustomLLMAuthConnection {
+	typ := CustomLLMAuthConnectionTypeEnvironmentAuthConnectionLocator
+
+	return CustomLLMAuthConnection{
+		EnvironmentAuthConnectionLocator: &environmentAuthConnectionLocator,
+		Type:                             typ,
+	}
+}
+
+func (u *CustomLLMAuthConnection) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var authConnectionLocator AuthConnectionLocator = AuthConnectionLocator{}
+	if err := utils.UnmarshalJSON(data, &authConnectionLocator, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  CustomLLMAuthConnectionTypeAuthConnectionLocator,
+			Value: &authConnectionLocator,
+		})
+	}
+
+	var environmentAuthConnectionLocator EnvironmentAuthConnectionLocator = EnvironmentAuthConnectionLocator{}
+	if err := utils.UnmarshalJSON(data, &environmentAuthConnectionLocator, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  CustomLLMAuthConnectionTypeEnvironmentAuthConnectionLocator,
+			Value: &environmentAuthConnectionLocator,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomLLMAuthConnection", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomLLMAuthConnection", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(CustomLLMAuthConnectionType)
+	switch best.Type {
+	case CustomLLMAuthConnectionTypeAuthConnectionLocator:
+		u.AuthConnectionLocator = best.Value.(*AuthConnectionLocator)
+		return nil
+	case CustomLLMAuthConnectionTypeEnvironmentAuthConnectionLocator:
+		u.EnvironmentAuthConnectionLocator = best.Value.(*EnvironmentAuthConnectionLocator)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomLLMAuthConnection", string(data))
+}
+
+func (u CustomLLMAuthConnection) MarshalJSON() ([]byte, error) {
+	if u.AuthConnectionLocator != nil {
+		return utils.MarshalJSON(u.AuthConnectionLocator, "", true)
+	}
+
+	if u.EnvironmentAuthConnectionLocator != nil {
+		return utils.MarshalJSON(u.EnvironmentAuthConnectionLocator, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type CustomLLMAuthConnection: all fields are null")
+}
+
 type CustomLLMRequestHeadersType string
 
 const (
@@ -246,6 +336,8 @@ type CustomLLM struct {
 	ModelID *string `json:"model_id,omitzero"`
 	// The API key for authentication. Either a workspace secret reference {'secret_id': '...'} or an environment variable reference {'env_var_label': '...'}.
 	APIKey *APIKey `json:"api_key,omitzero"`
+	// Optional workspace auth connection for authentication. Only auth connections that produce an Authorization Bearer token are supported; Basic auth, mTLS, custom header, and URL secret auth connections are not supported.
+	AuthConnection *CustomLLMAuthConnection `json:"auth_connection,omitzero"`
 	// Headers that should be included in the request
 	RequestHeaders map[string]CustomLLMRequestHeaders `json:"request_headers,omitzero"`
 	// The API version to use for the request
@@ -283,6 +375,13 @@ func (c *CustomLLM) GetAPIKey() *APIKey {
 		return nil
 	}
 	return c.APIKey
+}
+
+func (c *CustomLLM) GetAuthConnection() *CustomLLMAuthConnection {
+	if c == nil {
+		return nil
+	}
+	return c.AuthConnection
 }
 
 func (c *CustomLLM) GetRequestHeaders() map[string]CustomLLMRequestHeaders {

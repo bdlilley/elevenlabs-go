@@ -10,15 +10,47 @@ import (
 	"github.com/bdlilley/elevenlabs-go/models/components"
 )
 
+type ListPhoneNumbersRouteRequest struct {
+	// Filter by telephony provider
+	Provider *components.TelephonyProvider `queryParam:"style=form,explode=true,name=provider"`
+	// Filter by assigned agent ID
+	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
+	// Filter by assigned branch ID
+	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
+}
+
+func (l *ListPhoneNumbersRouteRequest) GetProvider() *components.TelephonyProvider {
+	if l == nil {
+		return nil
+	}
+	return l.Provider
+}
+
+func (l *ListPhoneNumbersRouteRequest) GetAgentID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.AgentID
+}
+
+func (l *ListPhoneNumbersRouteRequest) GetBranchID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.BranchID
+}
+
 type ListPhoneNumbersRouteResponseBodyType string
 
 const (
 	ListPhoneNumbersRouteResponseBodyTypeTwilio   ListPhoneNumbersRouteResponseBodyType = "twilio"
+	ListPhoneNumbersRouteResponseBodyTypeExotel   ListPhoneNumbersRouteResponseBodyType = "exotel"
 	ListPhoneNumbersRouteResponseBodyTypeSipTrunk ListPhoneNumbersRouteResponseBodyType = "sip_trunk"
 )
 
 type ListPhoneNumbersRouteResponseBody struct {
 	GetPhoneNumberTwilioResponseModel   *components.GetPhoneNumberTwilioResponseModel   `queryParam:"inline" union:"member"`
+	GetPhoneNumberExotelResponseModel   *components.GetPhoneNumberExotelResponseModel   `queryParam:"inline" union:"member"`
 	GetPhoneNumberSIPTrunkResponseModel *components.GetPhoneNumberSIPTrunkResponseModel `queryParam:"inline" union:"member"`
 
 	Type ListPhoneNumbersRouteResponseBodyType
@@ -29,6 +61,15 @@ func CreateListPhoneNumbersRouteResponseBodyTwilio(twilio components.GetPhoneNum
 
 	return ListPhoneNumbersRouteResponseBody{
 		GetPhoneNumberTwilioResponseModel: &twilio,
+		Type:                              typ,
+	}
+}
+
+func CreateListPhoneNumbersRouteResponseBodyExotel(exotel components.GetPhoneNumberExotelResponseModel) ListPhoneNumbersRouteResponseBody {
+	typ := ListPhoneNumbersRouteResponseBodyTypeExotel
+
+	return ListPhoneNumbersRouteResponseBody{
+		GetPhoneNumberExotelResponseModel: &exotel,
 		Type:                              typ,
 	}
 }
@@ -63,6 +104,15 @@ func (u *ListPhoneNumbersRouteResponseBody) UnmarshalJSON(data []byte) error {
 		u.GetPhoneNumberTwilioResponseModel = getPhoneNumberTwilioResponseModel
 		u.Type = ListPhoneNumbersRouteResponseBodyTypeTwilio
 		return nil
+	case "exotel":
+		getPhoneNumberExotelResponseModel := new(components.GetPhoneNumberExotelResponseModel)
+		if err := utils.UnmarshalJSON(data, &getPhoneNumberExotelResponseModel, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == exotel) type components.GetPhoneNumberExotelResponseModel within ListPhoneNumbersRouteResponseBody: %w", string(data), err)
+		}
+
+		u.GetPhoneNumberExotelResponseModel = getPhoneNumberExotelResponseModel
+		u.Type = ListPhoneNumbersRouteResponseBodyTypeExotel
+		return nil
 	case "sip_trunk":
 		getPhoneNumberSIPTrunkResponseModel := new(components.GetPhoneNumberSIPTrunkResponseModel)
 		if err := utils.UnmarshalJSON(data, &getPhoneNumberSIPTrunkResponseModel, "", true, nil); err != nil {
@@ -80,6 +130,10 @@ func (u *ListPhoneNumbersRouteResponseBody) UnmarshalJSON(data []byte) error {
 func (u ListPhoneNumbersRouteResponseBody) MarshalJSON() ([]byte, error) {
 	if u.GetPhoneNumberTwilioResponseModel != nil {
 		return utils.MarshalJSON(u.GetPhoneNumberTwilioResponseModel, "", true)
+	}
+
+	if u.GetPhoneNumberExotelResponseModel != nil {
+		return utils.MarshalJSON(u.GetPhoneNumberExotelResponseModel, "", true)
 	}
 
 	if u.GetPhoneNumberSIPTrunkResponseModel != nil {

@@ -25,3 +25,4 @@ custom := components.RenderType("custom_value")
 | `RenderTypeAaf`       | aaf                   |
 | `RenderTypeTracksZip` | tracks_zip            |
 | `RenderTypeClipsZip`  | clips_zip             |
+| `RenderTypeZip`       | zip                   |

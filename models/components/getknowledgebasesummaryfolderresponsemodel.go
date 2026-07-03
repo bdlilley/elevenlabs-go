@@ -103,9 +103,11 @@ type GetKnowledgeBaseSummaryFolderResponseModel struct {
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DependentAgents []GetKnowledgeBaseSummaryFolderResponseModelDependentAgent `json:"dependent_agents"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_         string        `const:"folder" json:"type"`
-	ChildrenCount int64         `json:"children_count"`
-	AutoSyncInfo  *AutoSyncInfo `json:"auto_sync_info,omitzero"`
+	type_            string                  `const:"folder" json:"type"`
+	ChildrenCount    int64                   `json:"children_count"`
+	AutoSyncInfo     *AutoSyncInfo           `json:"auto_sync_info,omitzero"`
+	ExternalSyncInfo *ExternalFolderSyncInfo `json:"external_sync_info,omitzero"`
+	IsFrozen         *bool                   `default:"false" json:"is_frozen"`
 }
 
 func (g GetKnowledgeBaseSummaryFolderResponseModel) MarshalJSON() ([]byte, error) {
@@ -191,4 +193,18 @@ func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetAutoSyncInfo() *AutoSync
 		return nil
 	}
 	return g.AutoSyncInfo
+}
+
+func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetExternalSyncInfo() *ExternalFolderSyncInfo {
+	if g == nil {
+		return nil
+	}
+	return g.ExternalSyncInfo
+}
+
+func (g *GetKnowledgeBaseSummaryFolderResponseModel) GetIsFrozen() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.IsFrozen
 }

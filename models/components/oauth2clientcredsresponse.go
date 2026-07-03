@@ -21,6 +21,17 @@ type OAuth2ClientCredsResponse struct {
 	BasicAuthInHeader *bool                       `default:"false" json:"basic_auth_in_header"`
 	ID                string                      `json:"id"`
 	UsedBy            *AuthConnectionDependencies `json:"used_by,omitzero"`
+	// Single status field shared by every auth type's stored credential.
+	//
+	// OAuth values (``REFRESH_FAILED``, ``REVOKED``) are written by the OAuth
+	// token-manager refresh path. ``CREDENTIAL_INVALID`` is written by the
+	// tool execution path when an upstream response matches a credential's
+	// ``failure_signatures`` entry (Bearer, Basic auth, etc.).
+	Status          *AuthConnectionStatus `default:"active" json:"status"`
+	StatusDetail    *string               `json:"status_detail,omitzero"`
+	StatusUpdatedAt *string               `json:"status_updated_at,omitzero"`
+	// Custom headers configured for OAuth2 token requests
+	CustomHeaders map[string]string `json:"custom_headers,omitzero"`
 }
 
 func (o OAuth2ClientCredsResponse) MarshalJSON() ([]byte, error) {
@@ -99,6 +110,34 @@ func (o *OAuth2ClientCredsResponse) GetUsedBy() *AuthConnectionDependencies {
 		return nil
 	}
 	return o.UsedBy
+}
+
+func (o *OAuth2ClientCredsResponse) GetStatus() *AuthConnectionStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *OAuth2ClientCredsResponse) GetStatusDetail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StatusDetail
+}
+
+func (o *OAuth2ClientCredsResponse) GetStatusUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StatusUpdatedAt
+}
+
+func (o *OAuth2ClientCredsResponse) GetCustomHeaders() map[string]string {
+	if o == nil {
+		return nil
+	}
+	return o.CustomHeaders
 }
 
 // #region class-body-oauth2clientcredsresponse

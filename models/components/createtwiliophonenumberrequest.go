@@ -22,6 +22,8 @@ type CreateTwilioPhoneNumberRequest struct {
 	SupportsOutbound *bool `default:"true" json:"supports_outbound"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	provider *string `const:"twilio" json:"provider"`
+	// Agent ID to assign the phone number to
+	AgentID *string `json:"agent_id,omitzero"`
 	// Twilio Account SID
 	Sid string `json:"sid"`
 	// Twilio Auth Token
@@ -71,6 +73,13 @@ func (c *CreateTwilioPhoneNumberRequest) GetSupportsOutbound() *bool {
 
 func (c *CreateTwilioPhoneNumberRequest) GetProvider() *string {
 	return types.Pointer("twilio")
+}
+
+func (c *CreateTwilioPhoneNumberRequest) GetAgentID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AgentID
 }
 
 func (c *CreateTwilioPhoneNumberRequest) GetSid() string {

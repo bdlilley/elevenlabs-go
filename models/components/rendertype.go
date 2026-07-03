@@ -12,6 +12,7 @@ const (
 	RenderTypeAaf       RenderType = "aaf"
 	RenderTypeTracksZip RenderType = "tracks_zip"
 	RenderTypeClipsZip  RenderType = "clips_zip"
+	RenderTypeZip       RenderType = "zip"
 )
 
 func (e RenderType) ToPointer() *RenderType {
@@ -22,7 +23,7 @@ func (e RenderType) ToPointer() *RenderType {
 func (e *RenderType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "mp4", "aac", "mp3", "wav", "aaf", "tracks_zip", "clips_zip":
+		case "mp4", "aac", "mp3", "wav", "aaf", "tracks_zip", "clips_zip", "zip":
 			return true
 		}
 	}

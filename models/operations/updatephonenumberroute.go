@@ -11,7 +11,7 @@ import (
 )
 
 type UpdatePhoneNumberRouteRequest struct {
-	// The id of an agent. This is returned on agent creation.
+	// The phone number ID. This is returned when a phone number is imported.
 	PhoneNumberID string                              `pathParam:"style=simple,explode=false,name=phone_number_id"`
 	Body          components.UpdatePhoneNumberRequest `request:"mediaType=application/json"`
 }
@@ -34,12 +34,14 @@ type ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchType string
 
 const (
 	ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeTwilio   ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchType = "twilio"
+	ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeExotel   ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchType = "exotel"
 	ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeSipTrunk ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchType = "sip_trunk"
 )
 
 // ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch - Successful Response
 type ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch struct {
 	GetPhoneNumberTwilioResponseModel   *components.GetPhoneNumberTwilioResponseModel   `queryParam:"inline" union:"member"`
+	GetPhoneNumberExotelResponseModel   *components.GetPhoneNumberExotelResponseModel   `queryParam:"inline" union:"member"`
 	GetPhoneNumberSIPTrunkResponseModel *components.GetPhoneNumberSIPTrunkResponseModel `queryParam:"inline" union:"member"`
 
 	Type ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchType
@@ -50,6 +52,15 @@ func CreateResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTwilio
 
 	return ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch{
 		GetPhoneNumberTwilioResponseModel: &twilio,
+		Type:                              typ,
+	}
+}
+
+func CreateResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchExotel(exotel components.GetPhoneNumberExotelResponseModel) ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch {
+	typ := ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeExotel
+
+	return ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch{
+		GetPhoneNumberExotelResponseModel: &exotel,
 		Type:                              typ,
 	}
 }
@@ -84,6 +95,15 @@ func (u *ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch) Unmars
 		u.GetPhoneNumberTwilioResponseModel = getPhoneNumberTwilioResponseModel
 		u.Type = ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeTwilio
 		return nil
+	case "exotel":
+		getPhoneNumberExotelResponseModel := new(components.GetPhoneNumberExotelResponseModel)
+		if err := utils.UnmarshalJSON(data, &getPhoneNumberExotelResponseModel, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == exotel) type components.GetPhoneNumberExotelResponseModel within ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch: %w", string(data), err)
+		}
+
+		u.GetPhoneNumberExotelResponseModel = getPhoneNumberExotelResponseModel
+		u.Type = ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeExotel
+		return nil
 	case "sip_trunk":
 		getPhoneNumberSIPTrunkResponseModel := new(components.GetPhoneNumberSIPTrunkResponseModel)
 		if err := utils.UnmarshalJSON(data, &getPhoneNumberSIPTrunkResponseModel, "", true, nil); err != nil {
@@ -101,6 +121,10 @@ func (u *ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch) Unmars
 func (u ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch) MarshalJSON() ([]byte, error) {
 	if u.GetPhoneNumberTwilioResponseModel != nil {
 		return utils.MarshalJSON(u.GetPhoneNumberTwilioResponseModel, "", true)
+	}
+
+	if u.GetPhoneNumberExotelResponseModel != nil {
+		return utils.MarshalJSON(u.GetPhoneNumberExotelResponseModel, "", true)
 	}
 
 	if u.GetPhoneNumberSIPTrunkResponseModel != nil {
@@ -133,6 +157,13 @@ func (u *UpdatePhoneNumberRouteResponse) GetResponseUpdatePhoneNumberV1ConvaiPho
 func (u *UpdatePhoneNumberRouteResponse) GetResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTwilio() *components.GetPhoneNumberTwilioResponseModel {
 	if v := u.GetResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch(); v != nil {
 		return v.GetPhoneNumberTwilioResponseModel
+	}
+	return nil
+}
+
+func (u *UpdatePhoneNumberRouteResponse) GetResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchExotel() *components.GetPhoneNumberExotelResponseModel {
+	if v := u.GetResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch(); v != nil {
+		return v.GetPhoneNumberExotelResponseModel
 	}
 	return nil
 }

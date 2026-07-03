@@ -11,6 +11,12 @@ Successful Response
 responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch := operations.CreateResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTwilio(components.GetPhoneNumberTwilioResponseModel{/* values here */})
 ```
 
+### GetPhoneNumberExotelResponseModel
+
+```go
+responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch := operations.CreateResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchExotel(components.GetPhoneNumberExotelResponseModel{/* values here */})
+```
+
 ### GetPhoneNumberSIPTrunkResponseModel
 
 ```go
@@ -25,6 +31,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.Type {
 	case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeTwilio:
 		// responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberTwilioResponseModel is populated
+	case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeExotel:
+		// responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberExotelResponseModel is populated
 	case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeSipTrunk:
 		// responseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberSIPTrunkResponseModel is populated
 }

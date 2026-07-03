@@ -2,17 +2,37 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
 // MessagesSearchResult - transcript_index: index of the message in the conversation transcript
 // chunk_text: text of the transcript; transcript messages if very long could have several chunks.
+// chunk_highlights: chunk_text split into matched/unmatched segments for highlighting.
+//
+//	Only populated for keyword/text search, not semantic search.
+//
 // score: similarity score of the message to the search query
 type MessagesSearchResult struct {
-	ConversationID                string  `json:"conversation_id"`
-	AgentID                       string  `json:"agent_id"`
-	AgentName                     *string `json:"agent_name,omitzero"`
-	TranscriptIndex               int64   `json:"transcript_index"`
-	ChunkText                     string  `json:"chunk_text"`
-	Score                         float64 `json:"score"`
-	ConversationStartTimeUnixSecs int64   `json:"conversation_start_time_unix_secs"`
+	ConversationID                string                   `json:"conversation_id"`
+	AgentID                       string                   `json:"agent_id"`
+	AgentName                     *string                  `json:"agent_name,omitzero"`
+	TranscriptIndex               int64                    `json:"transcript_index"`
+	ChunkText                     string                   `json:"chunk_text"`
+	ChunkHighlights               []SearchHighlightSegment `json:"chunk_highlights,omitzero"`
+	Score                         float64                  `json:"score"`
+	ConversationStartTimeUnixSecs int64                    `json:"conversation_start_time_unix_secs"`
+}
+
+func (m MessagesSearchResult) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *MessagesSearchResult) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (m *MessagesSearchResult) GetConversationID() string {
@@ -48,6 +68,13 @@ func (m *MessagesSearchResult) GetChunkText() string {
 		return ""
 	}
 	return m.ChunkText
+}
+
+func (m *MessagesSearchResult) GetChunkHighlights() []SearchHighlightSegment {
+	if m == nil {
+		return nil
+	}
+	return m.ChunkHighlights
 }
 
 func (m *MessagesSearchResult) GetScore() float64 {

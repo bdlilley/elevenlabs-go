@@ -26,3 +26,4 @@ custom := components.ReferencedToolCommonModelType("custom_value")
 | `ReferencedToolCommonModelTypeWorkflow`              | workflow                                             |
 | `ReferencedToolCommonModelTypeAPIIntegrationWebhook` | api_integration_webhook                              |
 | `ReferencedToolCommonModelTypeMcp`                   | mcp                                                  |
+| `ReferencedToolCommonModelTypeCode`                  | code                                                 |

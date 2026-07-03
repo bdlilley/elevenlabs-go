@@ -7,15 +7,21 @@ import (
 )
 
 type ConversationChargingCommonModel struct {
-	DevDiscount            *bool             `default:"false" json:"dev_discount"`
-	IsBurst                *bool             `default:"false" json:"is_burst"`
-	Tier                   *string           `json:"tier,omitzero"`
-	LlmUsage               *LLMCategoryUsage `json:"llm_usage,omitzero"`
-	LlmPrice               *float64          `json:"llm_price,omitzero"`
-	LlmCharge              *int64            `json:"llm_charge,omitzero"`
-	CallCharge             *int64            `json:"call_charge,omitzero"`
-	FreeMinutesConsumed    *float64          `default:"0" json:"free_minutes_consumed"`
-	FreeLlmDollarsConsumed *float64          `default:"0" json:"free_llm_dollars_consumed"`
+	DevDiscount    *bool             `default:"false" json:"dev_discount"`
+	IsBurst        *bool             `default:"false" json:"is_burst"`
+	Tier           *string           `json:"tier,omitzero"`
+	LlmUsage       *LLMCategoryUsage `json:"llm_usage,omitzero"`
+	LlmPrice       *float64          `json:"llm_price,omitzero"`
+	LlmCharge      *int64            `json:"llm_charge,omitzero"`
+	CallCharge     *int64            `json:"call_charge,omitzero"`
+	PlatformCharge *int64            `json:"platform_charge,omitzero"`
+	// Per-category breakdown of ``platform_charge`` (the analogue of ``llm_usage``).
+	PlatformUsage          *PlatformUsage             `json:"platform_usage,omitzero"`
+	PlatformPrice          *float64                   `json:"platform_price,omitzero"`
+	FreeMinutesConsumed    *float64                   `default:"0" json:"free_minutes_consumed"`
+	FreeLlmDollarsConsumed *float64                   `default:"0" json:"free_llm_dollars_consumed"`
+	TtsUsage               *ConversationTTSUsageModel `json:"tts_usage,omitzero"`
+	AsrUsage               *ConversationASRUsageModel `json:"asr_usage,omitzero"`
 }
 
 func (c ConversationChargingCommonModel) MarshalJSON() ([]byte, error) {
@@ -78,6 +84,27 @@ func (c *ConversationChargingCommonModel) GetCallCharge() *int64 {
 	return c.CallCharge
 }
 
+func (c *ConversationChargingCommonModel) GetPlatformCharge() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.PlatformCharge
+}
+
+func (c *ConversationChargingCommonModel) GetPlatformUsage() *PlatformUsage {
+	if c == nil {
+		return nil
+	}
+	return c.PlatformUsage
+}
+
+func (c *ConversationChargingCommonModel) GetPlatformPrice() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.PlatformPrice
+}
+
 func (c *ConversationChargingCommonModel) GetFreeMinutesConsumed() *float64 {
 	if c == nil {
 		return nil
@@ -90,4 +117,18 @@ func (c *ConversationChargingCommonModel) GetFreeLlmDollarsConsumed() *float64 {
 		return nil
 	}
 	return c.FreeLlmDollarsConsumed
+}
+
+func (c *ConversationChargingCommonModel) GetTtsUsage() *ConversationTTSUsageModel {
+	if c == nil {
+		return nil
+	}
+	return c.TtsUsage
+}
+
+func (c *ConversationChargingCommonModel) GetAsrUsage() *ConversationASRUsageModel {
+	if c == nil {
+		return nil
+	}
+	return c.AsrUsage
 }

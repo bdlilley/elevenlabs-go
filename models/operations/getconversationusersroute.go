@@ -8,7 +8,7 @@ import (
 )
 
 type GetConversationUsersRouteRequest struct {
-	// The id of the agent you're taking the action on.
+	// Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.
 	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// Filter conversations by branch ID.
 	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`

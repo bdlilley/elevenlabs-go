@@ -21,6 +21,12 @@ mcpToolConfigOutputInputOverrides := components.CreateMCPToolConfigOutputInputOv
 mcpToolConfigOutputInputOverrides := components.CreateMCPToolConfigOutputInputOverridesLlm(components.LLMSchemaOverride{/* values here */})
 ```
 
+### OmitSchemaOverride
+
+```go
+mcpToolConfigOutputInputOverrides := components.CreateMCPToolConfigOutputInputOverridesOmit(components.OmitSchemaOverride{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -33,5 +39,7 @@ switch mcpToolConfigOutputInputOverrides.Type {
 		// mcpToolConfigOutputInputOverrides.DynamicVariableSchemaOverride is populated
 	case components.MCPToolConfigOutputInputOverridesTypeLlm:
 		// mcpToolConfigOutputInputOverrides.LLMSchemaOverride is populated
+	case components.MCPToolConfigOutputInputOverridesTypeOmit:
+		// mcpToolConfigOutputInputOverrides.OmitSchemaOverride is populated
 }
 ```

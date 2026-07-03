@@ -13,125 +13,183 @@ import (
 type SMBToolConfigParamsType string
 
 const (
-	SMBToolConfigParamsTypeCheckRentalAvailability    SMBToolConfigParamsType = "check_rental_availability"
-	SMBToolConfigParamsTypeCheckServiceAvailability   SMBToolConfigParamsType = "check_service_availability"
-	SMBToolConfigParamsTypeCreateAgentRule            SMBToolConfigParamsType = "create_agent_rule"
-	SMBToolConfigParamsTypeCreateAsset                SMBToolConfigParamsType = "create_asset"
-	SMBToolConfigParamsTypeCreateClient               SMBToolConfigParamsType = "create_client"
-	SMBToolConfigParamsTypeCreateClientAppointment    SMBToolConfigParamsType = "create_client_appointment"
-	SMBToolConfigParamsTypeCreateClientInteraction    SMBToolConfigParamsType = "create_client_interaction"
-	SMBToolConfigParamsTypeCreateHoliday              SMBToolConfigParamsType = "create_holiday"
-	SMBToolConfigParamsTypeCreateProduct              SMBToolConfigParamsType = "create_product"
-	SMBToolConfigParamsTypeCreateRentalBooking        SMBToolConfigParamsType = "create_rental_booking"
-	SMBToolConfigParamsTypeCreateRentalService        SMBToolConfigParamsType = "create_rental_service"
-	SMBToolConfigParamsTypeCreateService              SMBToolConfigParamsType = "create_service"
-	SMBToolConfigParamsTypeCreateStaff                SMBToolConfigParamsType = "create_staff"
-	SMBToolConfigParamsTypeDeleteAgentRule            SMBToolConfigParamsType = "delete_agent_rule"
-	SMBToolConfigParamsTypeDeleteAsset                SMBToolConfigParamsType = "delete_asset"
-	SMBToolConfigParamsTypeDeleteCalendarEvent        SMBToolConfigParamsType = "delete_calendar_event"
-	SMBToolConfigParamsTypeDeleteClient               SMBToolConfigParamsType = "delete_client"
-	SMBToolConfigParamsTypeDeleteClientInteraction    SMBToolConfigParamsType = "delete_client_interaction"
-	SMBToolConfigParamsTypeDeleteHoliday              SMBToolConfigParamsType = "delete_holiday"
-	SMBToolConfigParamsTypeDeleteProduct              SMBToolConfigParamsType = "delete_product"
-	SMBToolConfigParamsTypeDeleteRentalService        SMBToolConfigParamsType = "delete_rental_service"
-	SMBToolConfigParamsTypeDeleteService              SMBToolConfigParamsType = "delete_service"
-	SMBToolConfigParamsTypeDeleteStaff                SMBToolConfigParamsType = "delete_staff"
-	SMBToolConfigParamsTypeGetAnalyticsSummary        SMBToolConfigParamsType = "get_analytics_summary"
-	SMBToolConfigParamsTypeGetBookingPageSettings     SMBToolConfigParamsType = "get_booking_page_settings"
-	SMBToolConfigParamsTypeGetBookingSlugStatus       SMBToolConfigParamsType = "get_booking_slug_status"
-	SMBToolConfigParamsTypeGetClientAppointments      SMBToolConfigParamsType = "get_client_appointments"
-	SMBToolConfigParamsTypeGetClientByPhone           SMBToolConfigParamsType = "get_client_by_phone"
-	SMBToolConfigParamsTypeGetSchedule                SMBToolConfigParamsType = "get_schedule"
-	SMBToolConfigParamsTypeListAgentRules             SMBToolConfigParamsType = "list_agent_rules"
-	SMBToolConfigParamsTypeListAssets                 SMBToolConfigParamsType = "list_assets"
-	SMBToolConfigParamsTypeListCalendarEvents         SMBToolConfigParamsType = "list_calendar_events"
-	SMBToolConfigParamsTypeListClientInteractions     SMBToolConfigParamsType = "list_client_interactions"
-	SMBToolConfigParamsTypeListClients                SMBToolConfigParamsType = "list_clients"
-	SMBToolConfigParamsTypeListHolidays               SMBToolConfigParamsType = "list_holidays"
-	SMBToolConfigParamsTypeListProducts               SMBToolConfigParamsType = "list_products"
-	SMBToolConfigParamsTypeListRentalServices         SMBToolConfigParamsType = "list_rental_services"
-	SMBToolConfigParamsTypeListServices               SMBToolConfigParamsType = "list_services"
-	SMBToolConfigParamsTypeListStaff                  SMBToolConfigParamsType = "list_staff"
-	SMBToolConfigParamsTypeSearchClients              SMBToolConfigParamsType = "search_clients"
-	SMBToolConfigParamsTypeSetBookingSlug             SMBToolConfigParamsType = "set_booking_slug"
-	SMBToolConfigParamsTypeUpdateAgentRule            SMBToolConfigParamsType = "update_agent_rule"
-	SMBToolConfigParamsTypeUpdateAsset                SMBToolConfigParamsType = "update_asset"
-	SMBToolConfigParamsTypeUpdateBookingPageSettings  SMBToolConfigParamsType = "update_booking_page_settings"
-	SMBToolConfigParamsTypeUpdateBusinessInfo         SMBToolConfigParamsType = "update_business_info"
-	SMBToolConfigParamsTypeUpdateCalendarEvent        SMBToolConfigParamsType = "update_calendar_event"
-	SMBToolConfigParamsTypeUpdateClient               SMBToolConfigParamsType = "update_client"
-	SMBToolConfigParamsTypeUpdateCustomerFacingConfig SMBToolConfigParamsType = "update_customer_facing_config"
-	SMBToolConfigParamsTypeUpdateHoliday              SMBToolConfigParamsType = "update_holiday"
-	SMBToolConfigParamsTypeUpdateProduct              SMBToolConfigParamsType = "update_product"
-	SMBToolConfigParamsTypeUpdateRentalService        SMBToolConfigParamsType = "update_rental_service"
-	SMBToolConfigParamsTypeUpdateService              SMBToolConfigParamsType = "update_service"
-	SMBToolConfigParamsTypeUpdateStaff                SMBToolConfigParamsType = "update_staff"
+	SMBToolConfigParamsTypeCancelCalendarEvent                SMBToolConfigParamsType = "cancel_calendar_event"
+	SMBToolConfigParamsTypeCancelGroupSessionForAll           SMBToolConfigParamsType = "cancel_group_session_for_all"
+	SMBToolConfigParamsTypeCancelGroupSessionRegistration     SMBToolConfigParamsType = "cancel_group_session_registration"
+	SMBToolConfigParamsTypeCheckServiceAvailability           SMBToolConfigParamsType = "check_service_availability"
+	SMBToolConfigParamsTypeCreateAgentProcedure               SMBToolConfigParamsType = "create_agent_procedure"
+	SMBToolConfigParamsTypeCreateAgentRule                    SMBToolConfigParamsType = "create_agent_rule"
+	SMBToolConfigParamsTypeCreateAsset                        SMBToolConfigParamsType = "create_asset"
+	SMBToolConfigParamsTypeCreateClient                       SMBToolConfigParamsType = "create_client"
+	SMBToolConfigParamsTypeCreateClientAppointment            SMBToolConfigParamsType = "create_client_appointment"
+	SMBToolConfigParamsTypeCreateClientInteraction            SMBToolConfigParamsType = "create_client_interaction"
+	SMBToolConfigParamsTypeCreateHoliday                      SMBToolConfigParamsType = "create_holiday"
+	SMBToolConfigParamsTypeCreateLocation                     SMBToolConfigParamsType = "create_location"
+	SMBToolConfigParamsTypeCreateProduct                      SMBToolConfigParamsType = "create_product"
+	SMBToolConfigParamsTypeCreateService                      SMBToolConfigParamsType = "create_service"
+	SMBToolConfigParamsTypeCreateStaff                        SMBToolConfigParamsType = "create_staff"
+	SMBToolConfigParamsTypeDeleteAgentProcedure               SMBToolConfigParamsType = "delete_agent_procedure"
+	SMBToolConfigParamsTypeDeleteAgentRule                    SMBToolConfigParamsType = "delete_agent_rule"
+	SMBToolConfigParamsTypeDeleteAsset                        SMBToolConfigParamsType = "delete_asset"
+	SMBToolConfigParamsTypeDeleteCalendarEvent                SMBToolConfigParamsType = "delete_calendar_event"
+	SMBToolConfigParamsTypeDeleteClient                       SMBToolConfigParamsType = "delete_client"
+	SMBToolConfigParamsTypeDeleteClientInteraction            SMBToolConfigParamsType = "delete_client_interaction"
+	SMBToolConfigParamsTypeDeleteGroupSession                 SMBToolConfigParamsType = "delete_group_session"
+	SMBToolConfigParamsTypeDeleteHoliday                      SMBToolConfigParamsType = "delete_holiday"
+	SMBToolConfigParamsTypeDeleteLocation                     SMBToolConfigParamsType = "delete_location"
+	SMBToolConfigParamsTypeDeleteProduct                      SMBToolConfigParamsType = "delete_product"
+	SMBToolConfigParamsTypeDeleteService                      SMBToolConfigParamsType = "delete_service"
+	SMBToolConfigParamsTypeDeleteStaff                        SMBToolConfigParamsType = "delete_staff"
+	SMBToolConfigParamsTypeGetAnalyticsSummary                SMBToolConfigParamsType = "get_analytics_summary"
+	SMBToolConfigParamsTypeGetAppointmentByConfirmationNumber SMBToolConfigParamsType = "get_appointment_by_confirmation_number"
+	SMBToolConfigParamsTypeGetBookingPageSettings             SMBToolConfigParamsType = "get_booking_page_settings"
+	SMBToolConfigParamsTypeGetBookingSlugStatus               SMBToolConfigParamsType = "get_booking_slug_status"
+	SMBToolConfigParamsTypeGetClientAppointments              SMBToolConfigParamsType = "get_client_appointments"
+	SMBToolConfigParamsTypeGetClientByPhone                   SMBToolConfigParamsType = "get_client_by_phone"
+	SMBToolConfigParamsTypeGetSchedule                        SMBToolConfigParamsType = "get_schedule"
+	SMBToolConfigParamsTypeLeaveMessage                       SMBToolConfigParamsType = "leave_message"
+	SMBToolConfigParamsTypeListAgentProcedures                SMBToolConfigParamsType = "list_agent_procedures"
+	SMBToolConfigParamsTypeListAgentReferences                SMBToolConfigParamsType = "list_agent_references"
+	SMBToolConfigParamsTypeListAgentRules                     SMBToolConfigParamsType = "list_agent_rules"
+	SMBToolConfigParamsTypeListAssets                         SMBToolConfigParamsType = "list_assets"
+	SMBToolConfigParamsTypeListCalendarEvents                 SMBToolConfigParamsType = "list_calendar_events"
+	SMBToolConfigParamsTypeListClientInteractions             SMBToolConfigParamsType = "list_client_interactions"
+	SMBToolConfigParamsTypeListClients                        SMBToolConfigParamsType = "list_clients"
+	SMBToolConfigParamsTypeListCustomerFacingAgents           SMBToolConfigParamsType = "list_customer_facing_agents"
+	SMBToolConfigParamsTypeListGroupSessions                  SMBToolConfigParamsType = "list_group_sessions"
+	SMBToolConfigParamsTypeListHolidays                       SMBToolConfigParamsType = "list_holidays"
+	SMBToolConfigParamsTypeListLocations                      SMBToolConfigParamsType = "list_locations"
+	SMBToolConfigParamsTypeListProducts                       SMBToolConfigParamsType = "list_products"
+	SMBToolConfigParamsTypeListServices                       SMBToolConfigParamsType = "list_services"
+	SMBToolConfigParamsTypeListStaff                          SMBToolConfigParamsType = "list_staff"
+	SMBToolConfigParamsTypeOptInSmsReminder                   SMBToolConfigParamsType = "opt_in_sms_reminder"
+	SMBToolConfigParamsTypeOptOutSmsReminder                  SMBToolConfigParamsType = "opt_out_sms_reminder"
+	SMBToolConfigParamsTypeRegisterForGroupSession            SMBToolConfigParamsType = "register_for_group_session"
+	SMBToolConfigParamsTypeReportKnowledgeGap                 SMBToolConfigParamsType = "report_knowledge_gap"
+	SMBToolConfigParamsTypeRestoreCalendarEvent               SMBToolConfigParamsType = "restore_calendar_event"
+	SMBToolConfigParamsTypeScheduleGroupSession               SMBToolConfigParamsType = "schedule_group_session"
+	SMBToolConfigParamsTypeSearchClients                      SMBToolConfigParamsType = "search_clients"
+	SMBToolConfigParamsTypeSetBookingSlug                     SMBToolConfigParamsType = "set_booking_slug"
+	SMBToolConfigParamsTypeSubmitBusinessInfo                 SMBToolConfigParamsType = "submit_business_info"
+	SMBToolConfigParamsTypeUpdateAgentProcedure               SMBToolConfigParamsType = "update_agent_procedure"
+	SMBToolConfigParamsTypeUpdateAgentRule                    SMBToolConfigParamsType = "update_agent_rule"
+	SMBToolConfigParamsTypeUpdateAsset                        SMBToolConfigParamsType = "update_asset"
+	SMBToolConfigParamsTypeUpdateBookingPageAppearance        SMBToolConfigParamsType = "update_booking_page_appearance"
+	SMBToolConfigParamsTypeUpdateBookingPageSettings          SMBToolConfigParamsType = "update_booking_page_settings"
+	SMBToolConfigParamsTypeUpdateBusinessInfo                 SMBToolConfigParamsType = "update_business_info"
+	SMBToolConfigParamsTypeUpdateCalendarEvent                SMBToolConfigParamsType = "update_calendar_event"
+	SMBToolConfigParamsTypeUpdateClient                       SMBToolConfigParamsType = "update_client"
+	SMBToolConfigParamsTypeUpdateCustomerFacingConfig         SMBToolConfigParamsType = "update_customer_facing_config"
+	SMBToolConfigParamsTypeUpdateGroupSessionSeats            SMBToolConfigParamsType = "update_group_session_seats"
+	SMBToolConfigParamsTypeUpdateHoliday                      SMBToolConfigParamsType = "update_holiday"
+	SMBToolConfigParamsTypeUpdateLocation                     SMBToolConfigParamsType = "update_location"
+	SMBToolConfigParamsTypeUpdateProduct                      SMBToolConfigParamsType = "update_product"
+	SMBToolConfigParamsTypeUpdateService                      SMBToolConfigParamsType = "update_service"
+	SMBToolConfigParamsTypeUpdateStaff                        SMBToolConfigParamsType = "update_staff"
 )
 
 type SMBToolConfigParams struct {
-	SearchClientsParams              *SearchClientsParams              `queryParam:"inline" union:"member"`
-	ListClientsParams                *ListClientsParams                `queryParam:"inline" union:"member"`
-	GetClientByPhoneParams           *GetClientByPhoneParams           `queryParam:"inline" union:"member"`
-	CreateClientParams               *CreateClientParams               `queryParam:"inline" union:"member"`
-	UpdateClientParams               *UpdateClientParams               `queryParam:"inline" union:"member"`
-	DeleteClientParams               *DeleteClientParams               `queryParam:"inline" union:"member"`
-	ListStaffParams                  *ListStaffParams                  `queryParam:"inline" union:"member"`
-	CreateStaffParams                *CreateStaffParams                `queryParam:"inline" union:"member"`
-	UpdateStaffParams                *UpdateStaffParams                `queryParam:"inline" union:"member"`
-	DeleteStaffParams                *DeleteStaffParams                `queryParam:"inline" union:"member"`
-	ListAssetsParams                 *ListAssetsParams                 `queryParam:"inline" union:"member"`
-	CreateAssetParams                *CreateAssetParams                `queryParam:"inline" union:"member"`
-	UpdateAssetParams                *UpdateAssetParams                `queryParam:"inline" union:"member"`
-	DeleteAssetParams                *DeleteAssetParams                `queryParam:"inline" union:"member"`
-	ListServicesParams               *ListServicesParams               `queryParam:"inline" union:"member"`
-	CreateServiceParams              *CreateServiceParams              `queryParam:"inline" union:"member"`
-	UpdateServiceParams              *UpdateServiceParams              `queryParam:"inline" union:"member"`
-	DeleteServiceParams              *DeleteServiceParams              `queryParam:"inline" union:"member"`
-	ListProductsParams               *ListProductsParams               `queryParam:"inline" union:"member"`
-	CreateProductParams              *CreateProductParams              `queryParam:"inline" union:"member"`
-	UpdateProductParams              *UpdateProductParams              `queryParam:"inline" union:"member"`
-	DeleteProductParams              *DeleteProductParams              `queryParam:"inline" union:"member"`
-	CheckServiceAvailabilityParams   *CheckServiceAvailabilityParams   `queryParam:"inline" union:"member"`
-	CreateClientAppointmentParams    *CreateClientAppointmentParams    `queryParam:"inline" union:"member"`
-	GetClientAppointmentsParams      *GetClientAppointmentsParams      `queryParam:"inline" union:"member"`
-	ListCalendarEventsParams         *ListCalendarEventsParams         `queryParam:"inline" union:"member"`
-	UpdateCalendarEventParams        *UpdateCalendarEventParams        `queryParam:"inline" union:"member"`
-	DeleteCalendarEventParams        *DeleteCalendarEventParams        `queryParam:"inline" union:"member"`
-	ListRentalServicesParams         *ListRentalServicesParams         `queryParam:"inline" union:"member"`
-	CreateRentalServiceParams        *CreateRentalServiceParams        `queryParam:"inline" union:"member"`
-	UpdateRentalServiceParams        *UpdateRentalServiceParams        `queryParam:"inline" union:"member"`
-	DeleteRentalServiceParams        *DeleteRentalServiceParams        `queryParam:"inline" union:"member"`
-	CheckRentalAvailabilityParams    *CheckRentalAvailabilityParams    `queryParam:"inline" union:"member"`
-	CreateRentalBookingParams        *CreateRentalBookingParams        `queryParam:"inline" union:"member"`
-	ListAgentRulesParams             *ListAgentRulesParams             `queryParam:"inline" union:"member"`
-	CreateAgentRuleParams            *CreateAgentRuleParams            `queryParam:"inline" union:"member"`
-	UpdateAgentRuleParams            *UpdateAgentRuleParams            `queryParam:"inline" union:"member"`
-	DeleteAgentRuleParams            *DeleteAgentRuleParams            `queryParam:"inline" union:"member"`
-	ListHolidaysParams               *ListHolidaysParams               `queryParam:"inline" union:"member"`
-	CreateHolidayParams              *CreateHolidayParams              `queryParam:"inline" union:"member"`
-	UpdateHolidayParams              *UpdateHolidayParams              `queryParam:"inline" union:"member"`
-	DeleteHolidayParams              *DeleteHolidayParams              `queryParam:"inline" union:"member"`
-	GetScheduleParams                *GetScheduleParams                `queryParam:"inline" union:"member"`
-	UpdateBusinessInfoParams         *UpdateBusinessInfoParams         `queryParam:"inline" union:"member"`
-	UpdateCustomerFacingConfigParams *UpdateCustomerFacingConfigParams `queryParam:"inline" union:"member"`
-	GetAnalyticsSummaryParams        *GetAnalyticsSummaryParams        `queryParam:"inline" union:"member"`
-	GetBookingPageSettingsParams     *GetBookingPageSettingsParams     `queryParam:"inline" union:"member"`
-	UpdateBookingPageSettingsParams  *UpdateBookingPageSettingsParams  `queryParam:"inline" union:"member"`
-	GetBookingSlugStatusParams       *GetBookingSlugStatusParams       `queryParam:"inline" union:"member"`
-	SetBookingSlugParams             *SetBookingSlugParams             `queryParam:"inline" union:"member"`
-	ListClientInteractionsParams     *ListClientInteractionsParams     `queryParam:"inline" union:"member"`
-	CreateClientInteractionParams    *CreateClientInteractionParams    `queryParam:"inline" union:"member"`
-	DeleteClientInteractionParams    *DeleteClientInteractionParams    `queryParam:"inline" union:"member"`
+	SearchClientsParams                      *SearchClientsParams                      `queryParam:"inline" union:"member"`
+	ListClientsParams                        *ListClientsParams                        `queryParam:"inline" union:"member"`
+	GetClientByPhoneParams                   *GetClientByPhoneParams                   `queryParam:"inline" union:"member"`
+	CreateClientParams                       *CreateClientParams                       `queryParam:"inline" union:"member"`
+	UpdateClientParams                       *UpdateClientParams                       `queryParam:"inline" union:"member"`
+	DeleteClientParams                       *DeleteClientParams                       `queryParam:"inline" union:"member"`
+	ListStaffParams                          *ListStaffParams                          `queryParam:"inline" union:"member"`
+	CreateStaffParams                        *CreateStaffParams                        `queryParam:"inline" union:"member"`
+	UpdateStaffParams                        *UpdateStaffParams                        `queryParam:"inline" union:"member"`
+	DeleteStaffParams                        *DeleteStaffParams                        `queryParam:"inline" union:"member"`
+	ListAssetsParams                         *ListAssetsParams                         `queryParam:"inline" union:"member"`
+	CreateAssetParams                        *CreateAssetParams                        `queryParam:"inline" union:"member"`
+	UpdateAssetParams                        *UpdateAssetParams                        `queryParam:"inline" union:"member"`
+	DeleteAssetParams                        *DeleteAssetParams                        `queryParam:"inline" union:"member"`
+	ListServicesParams                       *ListServicesParams                       `queryParam:"inline" union:"member"`
+	CreateServiceParams                      *CreateServiceParams                      `queryParam:"inline" union:"member"`
+	UpdateServiceParams                      *UpdateServiceParams                      `queryParam:"inline" union:"member"`
+	DeleteServiceParams                      *DeleteServiceParams                      `queryParam:"inline" union:"member"`
+	ListProductsParams                       *ListProductsParams                       `queryParam:"inline" union:"member"`
+	CreateProductParams                      *CreateProductParams                      `queryParam:"inline" union:"member"`
+	UpdateProductParams                      *UpdateProductParams                      `queryParam:"inline" union:"member"`
+	DeleteProductParams                      *DeleteProductParams                      `queryParam:"inline" union:"member"`
+	CheckServiceAvailabilityParams           *CheckServiceAvailabilityParams           `queryParam:"inline" union:"member"`
+	CreateClientAppointmentParams            *CreateClientAppointmentParams            `queryParam:"inline" union:"member"`
+	GetClientAppointmentsParams              *GetClientAppointmentsParams              `queryParam:"inline" union:"member"`
+	GetAppointmentByConfirmationNumberParams *GetAppointmentByConfirmationNumberParams `queryParam:"inline" union:"member"`
+	ListGroupSessionsParams                  *ListGroupSessionsParams                  `queryParam:"inline" union:"member"`
+	ScheduleGroupSessionParams               *ScheduleGroupSessionParams               `queryParam:"inline" union:"member"`
+	RegisterForGroupSessionParams            *RegisterForGroupSessionParams            `queryParam:"inline" union:"member"`
+	CancelGroupSessionRegistrationParams     *CancelGroupSessionRegistrationParams     `queryParam:"inline" union:"member"`
+	UpdateGroupSessionSeatsParams            *UpdateGroupSessionSeatsParams            `queryParam:"inline" union:"member"`
+	CancelGroupSessionForAllParams           *CancelGroupSessionForAllParams           `queryParam:"inline" union:"member"`
+	DeleteGroupSessionParams                 *DeleteGroupSessionParams                 `queryParam:"inline" union:"member"`
+	ListCalendarEventsParams                 *ListCalendarEventsParams                 `queryParam:"inline" union:"member"`
+	UpdateCalendarEventParams                *UpdateCalendarEventParams                `queryParam:"inline" union:"member"`
+	CancelCalendarEventParams                *CancelCalendarEventParams                `queryParam:"inline" union:"member"`
+	RestoreCalendarEventParams               *RestoreCalendarEventParams               `queryParam:"inline" union:"member"`
+	DeleteCalendarEventParams                *DeleteCalendarEventParams                `queryParam:"inline" union:"member"`
+	ListCustomerFacingAgentsParams           *ListCustomerFacingAgentsParams           `queryParam:"inline" union:"member"`
+	ListAgentRulesParams                     *ListAgentRulesParams                     `queryParam:"inline" union:"member"`
+	CreateAgentRuleParams                    *CreateAgentRuleParams                    `queryParam:"inline" union:"member"`
+	UpdateAgentRuleParams                    *UpdateAgentRuleParams                    `queryParam:"inline" union:"member"`
+	DeleteAgentRuleParams                    *DeleteAgentRuleParams                    `queryParam:"inline" union:"member"`
+	ListAgentProceduresParams                *ListAgentProceduresParams                `queryParam:"inline" union:"member"`
+	ListAgentReferencesParams                *ListAgentReferencesParams                `queryParam:"inline" union:"member"`
+	CreateAgentProcedureParams               *CreateAgentProcedureParams               `queryParam:"inline" union:"member"`
+	UpdateAgentProcedureParams               *UpdateAgentProcedureParams               `queryParam:"inline" union:"member"`
+	DeleteAgentProcedureParams               *DeleteAgentProcedureParams               `queryParam:"inline" union:"member"`
+	ListHolidaysParams                       *ListHolidaysParams                       `queryParam:"inline" union:"member"`
+	CreateHolidayParams                      *CreateHolidayParams                      `queryParam:"inline" union:"member"`
+	UpdateHolidayParams                      *UpdateHolidayParams                      `queryParam:"inline" union:"member"`
+	DeleteHolidayParams                      *DeleteHolidayParams                      `queryParam:"inline" union:"member"`
+	GetScheduleParams                        *GetScheduleParams                        `queryParam:"inline" union:"member"`
+	SubmitBusinessInfoParams                 *SubmitBusinessInfoParams                 `queryParam:"inline" union:"member"`
+	UpdateBusinessInfoParams                 *UpdateBusinessInfoParams                 `queryParam:"inline" union:"member"`
+	UpdateCustomerFacingConfigParams         *UpdateCustomerFacingConfigParams         `queryParam:"inline" union:"member"`
+	GetAnalyticsSummaryParams                *GetAnalyticsSummaryParams                `queryParam:"inline" union:"member"`
+	GetBookingPageSettingsParams             *GetBookingPageSettingsParams             `queryParam:"inline" union:"member"`
+	UpdateBookingPageSettingsParams          *UpdateBookingPageSettingsParams          `queryParam:"inline" union:"member"`
+	UpdateBookingPageAppearanceParams        *UpdateBookingPageAppearanceParams        `queryParam:"inline" union:"member"`
+	GetBookingSlugStatusParams               *GetBookingSlugStatusParams               `queryParam:"inline" union:"member"`
+	SetBookingSlugParams                     *SetBookingSlugParams                     `queryParam:"inline" union:"member"`
+	ListClientInteractionsParams             *ListClientInteractionsParams             `queryParam:"inline" union:"member"`
+	CreateClientInteractionParams            *CreateClientInteractionParams            `queryParam:"inline" union:"member"`
+	DeleteClientInteractionParams            *DeleteClientInteractionParams            `queryParam:"inline" union:"member"`
+	ListLocationsParams                      *ListLocationsParams                      `queryParam:"inline" union:"member"`
+	CreateLocationParams                     *CreateLocationParams                     `queryParam:"inline" union:"member"`
+	UpdateLocationParams                     *UpdateLocationParams                     `queryParam:"inline" union:"member"`
+	DeleteLocationParams                     *DeleteLocationParams                     `queryParam:"inline" union:"member"`
+	LeaveMessageParams                       *LeaveMessageParams                       `queryParam:"inline" union:"member"`
+	ReportKnowledgeGapParams                 *ReportKnowledgeGapParams                 `queryParam:"inline" union:"member"`
+	OptInSmsReminderParams                   *OptInSmsReminderParams                   `queryParam:"inline" union:"member"`
+	OptOutSmsReminderParams                  *OptOutSmsReminderParams                  `queryParam:"inline" union:"member"`
 
 	Type SMBToolConfigParamsType
 }
 
-func CreateSMBToolConfigParamsCheckRentalAvailability(checkRentalAvailability CheckRentalAvailabilityParams) SMBToolConfigParams {
-	typ := SMBToolConfigParamsTypeCheckRentalAvailability
+func CreateSMBToolConfigParamsCancelCalendarEvent(cancelCalendarEvent CancelCalendarEventParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeCancelCalendarEvent
 
 	return SMBToolConfigParams{
-		CheckRentalAvailabilityParams: &checkRentalAvailability,
-		Type:                          typ,
+		CancelCalendarEventParams: &cancelCalendarEvent,
+		Type:                      typ,
+	}
+}
+
+func CreateSMBToolConfigParamsCancelGroupSessionForAll(cancelGroupSessionForAll CancelGroupSessionForAllParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeCancelGroupSessionForAll
+
+	return SMBToolConfigParams{
+		CancelGroupSessionForAllParams: &cancelGroupSessionForAll,
+		Type:                           typ,
+	}
+}
+
+func CreateSMBToolConfigParamsCancelGroupSessionRegistration(cancelGroupSessionRegistration CancelGroupSessionRegistrationParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeCancelGroupSessionRegistration
+
+	return SMBToolConfigParams{
+		CancelGroupSessionRegistrationParams: &cancelGroupSessionRegistration,
+		Type:                                 typ,
 	}
 }
 
@@ -141,6 +199,15 @@ func CreateSMBToolConfigParamsCheckServiceAvailability(checkServiceAvailability 
 	return SMBToolConfigParams{
 		CheckServiceAvailabilityParams: &checkServiceAvailability,
 		Type:                           typ,
+	}
+}
+
+func CreateSMBToolConfigParamsCreateAgentProcedure(createAgentProcedure CreateAgentProcedureParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeCreateAgentProcedure
+
+	return SMBToolConfigParams{
+		CreateAgentProcedureParams: &createAgentProcedure,
+		Type:                       typ,
 	}
 }
 
@@ -198,30 +265,21 @@ func CreateSMBToolConfigParamsCreateHoliday(createHoliday CreateHolidayParams) S
 	}
 }
 
+func CreateSMBToolConfigParamsCreateLocation(createLocation CreateLocationParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeCreateLocation
+
+	return SMBToolConfigParams{
+		CreateLocationParams: &createLocation,
+		Type:                 typ,
+	}
+}
+
 func CreateSMBToolConfigParamsCreateProduct(createProduct CreateProductParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeCreateProduct
 
 	return SMBToolConfigParams{
 		CreateProductParams: &createProduct,
 		Type:                typ,
-	}
-}
-
-func CreateSMBToolConfigParamsCreateRentalBooking(createRentalBooking CreateRentalBookingParams) SMBToolConfigParams {
-	typ := SMBToolConfigParamsTypeCreateRentalBooking
-
-	return SMBToolConfigParams{
-		CreateRentalBookingParams: &createRentalBooking,
-		Type:                      typ,
-	}
-}
-
-func CreateSMBToolConfigParamsCreateRentalService(createRentalService CreateRentalServiceParams) SMBToolConfigParams {
-	typ := SMBToolConfigParamsTypeCreateRentalService
-
-	return SMBToolConfigParams{
-		CreateRentalServiceParams: &createRentalService,
-		Type:                      typ,
 	}
 }
 
@@ -240,6 +298,15 @@ func CreateSMBToolConfigParamsCreateStaff(createStaff CreateStaffParams) SMBTool
 	return SMBToolConfigParams{
 		CreateStaffParams: &createStaff,
 		Type:              typ,
+	}
+}
+
+func CreateSMBToolConfigParamsDeleteAgentProcedure(deleteAgentProcedure DeleteAgentProcedureParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeDeleteAgentProcedure
+
+	return SMBToolConfigParams{
+		DeleteAgentProcedureParams: &deleteAgentProcedure,
+		Type:                       typ,
 	}
 }
 
@@ -288,6 +355,15 @@ func CreateSMBToolConfigParamsDeleteClientInteraction(deleteClientInteraction De
 	}
 }
 
+func CreateSMBToolConfigParamsDeleteGroupSession(deleteGroupSession DeleteGroupSessionParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeDeleteGroupSession
+
+	return SMBToolConfigParams{
+		DeleteGroupSessionParams: &deleteGroupSession,
+		Type:                     typ,
+	}
+}
+
 func CreateSMBToolConfigParamsDeleteHoliday(deleteHoliday DeleteHolidayParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeDeleteHoliday
 
@@ -297,21 +373,21 @@ func CreateSMBToolConfigParamsDeleteHoliday(deleteHoliday DeleteHolidayParams) S
 	}
 }
 
+func CreateSMBToolConfigParamsDeleteLocation(deleteLocation DeleteLocationParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeDeleteLocation
+
+	return SMBToolConfigParams{
+		DeleteLocationParams: &deleteLocation,
+		Type:                 typ,
+	}
+}
+
 func CreateSMBToolConfigParamsDeleteProduct(deleteProduct DeleteProductParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeDeleteProduct
 
 	return SMBToolConfigParams{
 		DeleteProductParams: &deleteProduct,
 		Type:                typ,
-	}
-}
-
-func CreateSMBToolConfigParamsDeleteRentalService(deleteRentalService DeleteRentalServiceParams) SMBToolConfigParams {
-	typ := SMBToolConfigParamsTypeDeleteRentalService
-
-	return SMBToolConfigParams{
-		DeleteRentalServiceParams: &deleteRentalService,
-		Type:                      typ,
 	}
 }
 
@@ -339,6 +415,15 @@ func CreateSMBToolConfigParamsGetAnalyticsSummary(getAnalyticsSummary GetAnalyti
 	return SMBToolConfigParams{
 		GetAnalyticsSummaryParams: &getAnalyticsSummary,
 		Type:                      typ,
+	}
+}
+
+func CreateSMBToolConfigParamsGetAppointmentByConfirmationNumber(getAppointmentByConfirmationNumber GetAppointmentByConfirmationNumberParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeGetAppointmentByConfirmationNumber
+
+	return SMBToolConfigParams{
+		GetAppointmentByConfirmationNumberParams: &getAppointmentByConfirmationNumber,
+		Type:                                     typ,
 	}
 }
 
@@ -387,6 +472,33 @@ func CreateSMBToolConfigParamsGetSchedule(getSchedule GetScheduleParams) SMBTool
 	}
 }
 
+func CreateSMBToolConfigParamsLeaveMessage(leaveMessage LeaveMessageParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeLeaveMessage
+
+	return SMBToolConfigParams{
+		LeaveMessageParams: &leaveMessage,
+		Type:               typ,
+	}
+}
+
+func CreateSMBToolConfigParamsListAgentProcedures(listAgentProcedures ListAgentProceduresParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeListAgentProcedures
+
+	return SMBToolConfigParams{
+		ListAgentProceduresParams: &listAgentProcedures,
+		Type:                      typ,
+	}
+}
+
+func CreateSMBToolConfigParamsListAgentReferences(listAgentReferences ListAgentReferencesParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeListAgentReferences
+
+	return SMBToolConfigParams{
+		ListAgentReferencesParams: &listAgentReferences,
+		Type:                      typ,
+	}
+}
+
 func CreateSMBToolConfigParamsListAgentRules(listAgentRules ListAgentRulesParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeListAgentRules
 
@@ -432,6 +544,24 @@ func CreateSMBToolConfigParamsListClients(listClients ListClientsParams) SMBTool
 	}
 }
 
+func CreateSMBToolConfigParamsListCustomerFacingAgents(listCustomerFacingAgents ListCustomerFacingAgentsParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeListCustomerFacingAgents
+
+	return SMBToolConfigParams{
+		ListCustomerFacingAgentsParams: &listCustomerFacingAgents,
+		Type:                           typ,
+	}
+}
+
+func CreateSMBToolConfigParamsListGroupSessions(listGroupSessions ListGroupSessionsParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeListGroupSessions
+
+	return SMBToolConfigParams{
+		ListGroupSessionsParams: &listGroupSessions,
+		Type:                    typ,
+	}
+}
+
 func CreateSMBToolConfigParamsListHolidays(listHolidays ListHolidaysParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeListHolidays
 
@@ -441,21 +571,21 @@ func CreateSMBToolConfigParamsListHolidays(listHolidays ListHolidaysParams) SMBT
 	}
 }
 
+func CreateSMBToolConfigParamsListLocations(listLocations ListLocationsParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeListLocations
+
+	return SMBToolConfigParams{
+		ListLocationsParams: &listLocations,
+		Type:                typ,
+	}
+}
+
 func CreateSMBToolConfigParamsListProducts(listProducts ListProductsParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeListProducts
 
 	return SMBToolConfigParams{
 		ListProductsParams: &listProducts,
 		Type:               typ,
-	}
-}
-
-func CreateSMBToolConfigParamsListRentalServices(listRentalServices ListRentalServicesParams) SMBToolConfigParams {
-	typ := SMBToolConfigParamsTypeListRentalServices
-
-	return SMBToolConfigParams{
-		ListRentalServicesParams: &listRentalServices,
-		Type:                     typ,
 	}
 }
 
@@ -477,6 +607,60 @@ func CreateSMBToolConfigParamsListStaff(listStaff ListStaffParams) SMBToolConfig
 	}
 }
 
+func CreateSMBToolConfigParamsOptInSmsReminder(optInSmsReminder OptInSmsReminderParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeOptInSmsReminder
+
+	return SMBToolConfigParams{
+		OptInSmsReminderParams: &optInSmsReminder,
+		Type:                   typ,
+	}
+}
+
+func CreateSMBToolConfigParamsOptOutSmsReminder(optOutSmsReminder OptOutSmsReminderParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeOptOutSmsReminder
+
+	return SMBToolConfigParams{
+		OptOutSmsReminderParams: &optOutSmsReminder,
+		Type:                    typ,
+	}
+}
+
+func CreateSMBToolConfigParamsRegisterForGroupSession(registerForGroupSession RegisterForGroupSessionParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeRegisterForGroupSession
+
+	return SMBToolConfigParams{
+		RegisterForGroupSessionParams: &registerForGroupSession,
+		Type:                          typ,
+	}
+}
+
+func CreateSMBToolConfigParamsReportKnowledgeGap(reportKnowledgeGap ReportKnowledgeGapParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeReportKnowledgeGap
+
+	return SMBToolConfigParams{
+		ReportKnowledgeGapParams: &reportKnowledgeGap,
+		Type:                     typ,
+	}
+}
+
+func CreateSMBToolConfigParamsRestoreCalendarEvent(restoreCalendarEvent RestoreCalendarEventParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeRestoreCalendarEvent
+
+	return SMBToolConfigParams{
+		RestoreCalendarEventParams: &restoreCalendarEvent,
+		Type:                       typ,
+	}
+}
+
+func CreateSMBToolConfigParamsScheduleGroupSession(scheduleGroupSession ScheduleGroupSessionParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeScheduleGroupSession
+
+	return SMBToolConfigParams{
+		ScheduleGroupSessionParams: &scheduleGroupSession,
+		Type:                       typ,
+	}
+}
+
 func CreateSMBToolConfigParamsSearchClients(searchClients SearchClientsParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeSearchClients
 
@@ -495,6 +679,24 @@ func CreateSMBToolConfigParamsSetBookingSlug(setBookingSlug SetBookingSlugParams
 	}
 }
 
+func CreateSMBToolConfigParamsSubmitBusinessInfo(submitBusinessInfo SubmitBusinessInfoParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeSubmitBusinessInfo
+
+	return SMBToolConfigParams{
+		SubmitBusinessInfoParams: &submitBusinessInfo,
+		Type:                     typ,
+	}
+}
+
+func CreateSMBToolConfigParamsUpdateAgentProcedure(updateAgentProcedure UpdateAgentProcedureParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeUpdateAgentProcedure
+
+	return SMBToolConfigParams{
+		UpdateAgentProcedureParams: &updateAgentProcedure,
+		Type:                       typ,
+	}
+}
+
 func CreateSMBToolConfigParamsUpdateAgentRule(updateAgentRule UpdateAgentRuleParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeUpdateAgentRule
 
@@ -510,6 +712,15 @@ func CreateSMBToolConfigParamsUpdateAsset(updateAsset UpdateAssetParams) SMBTool
 	return SMBToolConfigParams{
 		UpdateAssetParams: &updateAsset,
 		Type:              typ,
+	}
+}
+
+func CreateSMBToolConfigParamsUpdateBookingPageAppearance(updateBookingPageAppearance UpdateBookingPageAppearanceParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeUpdateBookingPageAppearance
+
+	return SMBToolConfigParams{
+		UpdateBookingPageAppearanceParams: &updateBookingPageAppearance,
+		Type:                              typ,
 	}
 }
 
@@ -558,6 +769,15 @@ func CreateSMBToolConfigParamsUpdateCustomerFacingConfig(updateCustomerFacingCon
 	}
 }
 
+func CreateSMBToolConfigParamsUpdateGroupSessionSeats(updateGroupSessionSeats UpdateGroupSessionSeatsParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeUpdateGroupSessionSeats
+
+	return SMBToolConfigParams{
+		UpdateGroupSessionSeatsParams: &updateGroupSessionSeats,
+		Type:                          typ,
+	}
+}
+
 func CreateSMBToolConfigParamsUpdateHoliday(updateHoliday UpdateHolidayParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeUpdateHoliday
 
@@ -567,21 +787,21 @@ func CreateSMBToolConfigParamsUpdateHoliday(updateHoliday UpdateHolidayParams) S
 	}
 }
 
+func CreateSMBToolConfigParamsUpdateLocation(updateLocation UpdateLocationParams) SMBToolConfigParams {
+	typ := SMBToolConfigParamsTypeUpdateLocation
+
+	return SMBToolConfigParams{
+		UpdateLocationParams: &updateLocation,
+		Type:                 typ,
+	}
+}
+
 func CreateSMBToolConfigParamsUpdateProduct(updateProduct UpdateProductParams) SMBToolConfigParams {
 	typ := SMBToolConfigParamsTypeUpdateProduct
 
 	return SMBToolConfigParams{
 		UpdateProductParams: &updateProduct,
 		Type:                typ,
-	}
-}
-
-func CreateSMBToolConfigParamsUpdateRentalService(updateRentalService UpdateRentalServiceParams) SMBToolConfigParams {
-	typ := SMBToolConfigParamsTypeUpdateRentalService
-
-	return SMBToolConfigParams{
-		UpdateRentalServiceParams: &updateRentalService,
-		Type:                      typ,
 	}
 }
 
@@ -615,14 +835,32 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 	}
 
 	switch dis.SmbToolType {
-	case "check_rental_availability":
-		checkRentalAvailabilityParams := new(CheckRentalAvailabilityParams)
-		if err := utils.UnmarshalJSON(data, &checkRentalAvailabilityParams, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == check_rental_availability) type CheckRentalAvailabilityParams within SMBToolConfigParams: %w", string(data), err)
+	case "cancel_calendar_event":
+		cancelCalendarEventParams := new(CancelCalendarEventParams)
+		if err := utils.UnmarshalJSON(data, &cancelCalendarEventParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == cancel_calendar_event) type CancelCalendarEventParams within SMBToolConfigParams: %w", string(data), err)
 		}
 
-		u.CheckRentalAvailabilityParams = checkRentalAvailabilityParams
-		u.Type = SMBToolConfigParamsTypeCheckRentalAvailability
+		u.CancelCalendarEventParams = cancelCalendarEventParams
+		u.Type = SMBToolConfigParamsTypeCancelCalendarEvent
+		return nil
+	case "cancel_group_session_for_all":
+		cancelGroupSessionForAllParams := new(CancelGroupSessionForAllParams)
+		if err := utils.UnmarshalJSON(data, &cancelGroupSessionForAllParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == cancel_group_session_for_all) type CancelGroupSessionForAllParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.CancelGroupSessionForAllParams = cancelGroupSessionForAllParams
+		u.Type = SMBToolConfigParamsTypeCancelGroupSessionForAll
+		return nil
+	case "cancel_group_session_registration":
+		cancelGroupSessionRegistrationParams := new(CancelGroupSessionRegistrationParams)
+		if err := utils.UnmarshalJSON(data, &cancelGroupSessionRegistrationParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == cancel_group_session_registration) type CancelGroupSessionRegistrationParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.CancelGroupSessionRegistrationParams = cancelGroupSessionRegistrationParams
+		u.Type = SMBToolConfigParamsTypeCancelGroupSessionRegistration
 		return nil
 	case "check_service_availability":
 		checkServiceAvailabilityParams := new(CheckServiceAvailabilityParams)
@@ -632,6 +870,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.CheckServiceAvailabilityParams = checkServiceAvailabilityParams
 		u.Type = SMBToolConfigParamsTypeCheckServiceAvailability
+		return nil
+	case "create_agent_procedure":
+		createAgentProcedureParams := new(CreateAgentProcedureParams)
+		if err := utils.UnmarshalJSON(data, &createAgentProcedureParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == create_agent_procedure) type CreateAgentProcedureParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.CreateAgentProcedureParams = createAgentProcedureParams
+		u.Type = SMBToolConfigParamsTypeCreateAgentProcedure
 		return nil
 	case "create_agent_rule":
 		createAgentRuleParams := new(CreateAgentRuleParams)
@@ -687,6 +934,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.CreateHolidayParams = createHolidayParams
 		u.Type = SMBToolConfigParamsTypeCreateHoliday
 		return nil
+	case "create_location":
+		createLocationParams := new(CreateLocationParams)
+		if err := utils.UnmarshalJSON(data, &createLocationParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == create_location) type CreateLocationParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.CreateLocationParams = createLocationParams
+		u.Type = SMBToolConfigParamsTypeCreateLocation
+		return nil
 	case "create_product":
 		createProductParams := new(CreateProductParams)
 		if err := utils.UnmarshalJSON(data, &createProductParams, "", true, nil); err != nil {
@@ -695,24 +951,6 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.CreateProductParams = createProductParams
 		u.Type = SMBToolConfigParamsTypeCreateProduct
-		return nil
-	case "create_rental_booking":
-		createRentalBookingParams := new(CreateRentalBookingParams)
-		if err := utils.UnmarshalJSON(data, &createRentalBookingParams, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == create_rental_booking) type CreateRentalBookingParams within SMBToolConfigParams: %w", string(data), err)
-		}
-
-		u.CreateRentalBookingParams = createRentalBookingParams
-		u.Type = SMBToolConfigParamsTypeCreateRentalBooking
-		return nil
-	case "create_rental_service":
-		createRentalServiceParams := new(CreateRentalServiceParams)
-		if err := utils.UnmarshalJSON(data, &createRentalServiceParams, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == create_rental_service) type CreateRentalServiceParams within SMBToolConfigParams: %w", string(data), err)
-		}
-
-		u.CreateRentalServiceParams = createRentalServiceParams
-		u.Type = SMBToolConfigParamsTypeCreateRentalService
 		return nil
 	case "create_service":
 		createServiceParams := new(CreateServiceParams)
@@ -731,6 +969,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.CreateStaffParams = createStaffParams
 		u.Type = SMBToolConfigParamsTypeCreateStaff
+		return nil
+	case "delete_agent_procedure":
+		deleteAgentProcedureParams := new(DeleteAgentProcedureParams)
+		if err := utils.UnmarshalJSON(data, &deleteAgentProcedureParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == delete_agent_procedure) type DeleteAgentProcedureParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.DeleteAgentProcedureParams = deleteAgentProcedureParams
+		u.Type = SMBToolConfigParamsTypeDeleteAgentProcedure
 		return nil
 	case "delete_agent_rule":
 		deleteAgentRuleParams := new(DeleteAgentRuleParams)
@@ -777,6 +1024,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.DeleteClientInteractionParams = deleteClientInteractionParams
 		u.Type = SMBToolConfigParamsTypeDeleteClientInteraction
 		return nil
+	case "delete_group_session":
+		deleteGroupSessionParams := new(DeleteGroupSessionParams)
+		if err := utils.UnmarshalJSON(data, &deleteGroupSessionParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == delete_group_session) type DeleteGroupSessionParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.DeleteGroupSessionParams = deleteGroupSessionParams
+		u.Type = SMBToolConfigParamsTypeDeleteGroupSession
+		return nil
 	case "delete_holiday":
 		deleteHolidayParams := new(DeleteHolidayParams)
 		if err := utils.UnmarshalJSON(data, &deleteHolidayParams, "", true, nil); err != nil {
@@ -786,6 +1042,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.DeleteHolidayParams = deleteHolidayParams
 		u.Type = SMBToolConfigParamsTypeDeleteHoliday
 		return nil
+	case "delete_location":
+		deleteLocationParams := new(DeleteLocationParams)
+		if err := utils.UnmarshalJSON(data, &deleteLocationParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == delete_location) type DeleteLocationParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.DeleteLocationParams = deleteLocationParams
+		u.Type = SMBToolConfigParamsTypeDeleteLocation
+		return nil
 	case "delete_product":
 		deleteProductParams := new(DeleteProductParams)
 		if err := utils.UnmarshalJSON(data, &deleteProductParams, "", true, nil); err != nil {
@@ -794,15 +1059,6 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.DeleteProductParams = deleteProductParams
 		u.Type = SMBToolConfigParamsTypeDeleteProduct
-		return nil
-	case "delete_rental_service":
-		deleteRentalServiceParams := new(DeleteRentalServiceParams)
-		if err := utils.UnmarshalJSON(data, &deleteRentalServiceParams, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == delete_rental_service) type DeleteRentalServiceParams within SMBToolConfigParams: %w", string(data), err)
-		}
-
-		u.DeleteRentalServiceParams = deleteRentalServiceParams
-		u.Type = SMBToolConfigParamsTypeDeleteRentalService
 		return nil
 	case "delete_service":
 		deleteServiceParams := new(DeleteServiceParams)
@@ -830,6 +1086,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.GetAnalyticsSummaryParams = getAnalyticsSummaryParams
 		u.Type = SMBToolConfigParamsTypeGetAnalyticsSummary
+		return nil
+	case "get_appointment_by_confirmation_number":
+		getAppointmentByConfirmationNumberParams := new(GetAppointmentByConfirmationNumberParams)
+		if err := utils.UnmarshalJSON(data, &getAppointmentByConfirmationNumberParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == get_appointment_by_confirmation_number) type GetAppointmentByConfirmationNumberParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.GetAppointmentByConfirmationNumberParams = getAppointmentByConfirmationNumberParams
+		u.Type = SMBToolConfigParamsTypeGetAppointmentByConfirmationNumber
 		return nil
 	case "get_booking_page_settings":
 		getBookingPageSettingsParams := new(GetBookingPageSettingsParams)
@@ -876,6 +1141,33 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.GetScheduleParams = getScheduleParams
 		u.Type = SMBToolConfigParamsTypeGetSchedule
 		return nil
+	case "leave_message":
+		leaveMessageParams := new(LeaveMessageParams)
+		if err := utils.UnmarshalJSON(data, &leaveMessageParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == leave_message) type LeaveMessageParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.LeaveMessageParams = leaveMessageParams
+		u.Type = SMBToolConfigParamsTypeLeaveMessage
+		return nil
+	case "list_agent_procedures":
+		listAgentProceduresParams := new(ListAgentProceduresParams)
+		if err := utils.UnmarshalJSON(data, &listAgentProceduresParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == list_agent_procedures) type ListAgentProceduresParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.ListAgentProceduresParams = listAgentProceduresParams
+		u.Type = SMBToolConfigParamsTypeListAgentProcedures
+		return nil
+	case "list_agent_references":
+		listAgentReferencesParams := new(ListAgentReferencesParams)
+		if err := utils.UnmarshalJSON(data, &listAgentReferencesParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == list_agent_references) type ListAgentReferencesParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.ListAgentReferencesParams = listAgentReferencesParams
+		u.Type = SMBToolConfigParamsTypeListAgentReferences
+		return nil
 	case "list_agent_rules":
 		listAgentRulesParams := new(ListAgentRulesParams)
 		if err := utils.UnmarshalJSON(data, &listAgentRulesParams, "", true, nil); err != nil {
@@ -921,6 +1213,24 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.ListClientsParams = listClientsParams
 		u.Type = SMBToolConfigParamsTypeListClients
 		return nil
+	case "list_customer_facing_agents":
+		listCustomerFacingAgentsParams := new(ListCustomerFacingAgentsParams)
+		if err := utils.UnmarshalJSON(data, &listCustomerFacingAgentsParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == list_customer_facing_agents) type ListCustomerFacingAgentsParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.ListCustomerFacingAgentsParams = listCustomerFacingAgentsParams
+		u.Type = SMBToolConfigParamsTypeListCustomerFacingAgents
+		return nil
+	case "list_group_sessions":
+		listGroupSessionsParams := new(ListGroupSessionsParams)
+		if err := utils.UnmarshalJSON(data, &listGroupSessionsParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == list_group_sessions) type ListGroupSessionsParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.ListGroupSessionsParams = listGroupSessionsParams
+		u.Type = SMBToolConfigParamsTypeListGroupSessions
+		return nil
 	case "list_holidays":
 		listHolidaysParams := new(ListHolidaysParams)
 		if err := utils.UnmarshalJSON(data, &listHolidaysParams, "", true, nil); err != nil {
@@ -930,6 +1240,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.ListHolidaysParams = listHolidaysParams
 		u.Type = SMBToolConfigParamsTypeListHolidays
 		return nil
+	case "list_locations":
+		listLocationsParams := new(ListLocationsParams)
+		if err := utils.UnmarshalJSON(data, &listLocationsParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == list_locations) type ListLocationsParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.ListLocationsParams = listLocationsParams
+		u.Type = SMBToolConfigParamsTypeListLocations
+		return nil
 	case "list_products":
 		listProductsParams := new(ListProductsParams)
 		if err := utils.UnmarshalJSON(data, &listProductsParams, "", true, nil); err != nil {
@@ -938,15 +1257,6 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.ListProductsParams = listProductsParams
 		u.Type = SMBToolConfigParamsTypeListProducts
-		return nil
-	case "list_rental_services":
-		listRentalServicesParams := new(ListRentalServicesParams)
-		if err := utils.UnmarshalJSON(data, &listRentalServicesParams, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == list_rental_services) type ListRentalServicesParams within SMBToolConfigParams: %w", string(data), err)
-		}
-
-		u.ListRentalServicesParams = listRentalServicesParams
-		u.Type = SMBToolConfigParamsTypeListRentalServices
 		return nil
 	case "list_services":
 		listServicesParams := new(ListServicesParams)
@@ -966,6 +1276,60 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.ListStaffParams = listStaffParams
 		u.Type = SMBToolConfigParamsTypeListStaff
 		return nil
+	case "opt_in_sms_reminder":
+		optInSmsReminderParams := new(OptInSmsReminderParams)
+		if err := utils.UnmarshalJSON(data, &optInSmsReminderParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == opt_in_sms_reminder) type OptInSmsReminderParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.OptInSmsReminderParams = optInSmsReminderParams
+		u.Type = SMBToolConfigParamsTypeOptInSmsReminder
+		return nil
+	case "opt_out_sms_reminder":
+		optOutSmsReminderParams := new(OptOutSmsReminderParams)
+		if err := utils.UnmarshalJSON(data, &optOutSmsReminderParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == opt_out_sms_reminder) type OptOutSmsReminderParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.OptOutSmsReminderParams = optOutSmsReminderParams
+		u.Type = SMBToolConfigParamsTypeOptOutSmsReminder
+		return nil
+	case "register_for_group_session":
+		registerForGroupSessionParams := new(RegisterForGroupSessionParams)
+		if err := utils.UnmarshalJSON(data, &registerForGroupSessionParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == register_for_group_session) type RegisterForGroupSessionParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.RegisterForGroupSessionParams = registerForGroupSessionParams
+		u.Type = SMBToolConfigParamsTypeRegisterForGroupSession
+		return nil
+	case "report_knowledge_gap":
+		reportKnowledgeGapParams := new(ReportKnowledgeGapParams)
+		if err := utils.UnmarshalJSON(data, &reportKnowledgeGapParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == report_knowledge_gap) type ReportKnowledgeGapParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.ReportKnowledgeGapParams = reportKnowledgeGapParams
+		u.Type = SMBToolConfigParamsTypeReportKnowledgeGap
+		return nil
+	case "restore_calendar_event":
+		restoreCalendarEventParams := new(RestoreCalendarEventParams)
+		if err := utils.UnmarshalJSON(data, &restoreCalendarEventParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == restore_calendar_event) type RestoreCalendarEventParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.RestoreCalendarEventParams = restoreCalendarEventParams
+		u.Type = SMBToolConfigParamsTypeRestoreCalendarEvent
+		return nil
+	case "schedule_group_session":
+		scheduleGroupSessionParams := new(ScheduleGroupSessionParams)
+		if err := utils.UnmarshalJSON(data, &scheduleGroupSessionParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == schedule_group_session) type ScheduleGroupSessionParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.ScheduleGroupSessionParams = scheduleGroupSessionParams
+		u.Type = SMBToolConfigParamsTypeScheduleGroupSession
+		return nil
 	case "search_clients":
 		searchClientsParams := new(SearchClientsParams)
 		if err := utils.UnmarshalJSON(data, &searchClientsParams, "", true, nil); err != nil {
@@ -984,6 +1348,24 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.SetBookingSlugParams = setBookingSlugParams
 		u.Type = SMBToolConfigParamsTypeSetBookingSlug
 		return nil
+	case "submit_business_info":
+		submitBusinessInfoParams := new(SubmitBusinessInfoParams)
+		if err := utils.UnmarshalJSON(data, &submitBusinessInfoParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == submit_business_info) type SubmitBusinessInfoParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.SubmitBusinessInfoParams = submitBusinessInfoParams
+		u.Type = SMBToolConfigParamsTypeSubmitBusinessInfo
+		return nil
+	case "update_agent_procedure":
+		updateAgentProcedureParams := new(UpdateAgentProcedureParams)
+		if err := utils.UnmarshalJSON(data, &updateAgentProcedureParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == update_agent_procedure) type UpdateAgentProcedureParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.UpdateAgentProcedureParams = updateAgentProcedureParams
+		u.Type = SMBToolConfigParamsTypeUpdateAgentProcedure
+		return nil
 	case "update_agent_rule":
 		updateAgentRuleParams := new(UpdateAgentRuleParams)
 		if err := utils.UnmarshalJSON(data, &updateAgentRuleParams, "", true, nil); err != nil {
@@ -1001,6 +1383,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.UpdateAssetParams = updateAssetParams
 		u.Type = SMBToolConfigParamsTypeUpdateAsset
+		return nil
+	case "update_booking_page_appearance":
+		updateBookingPageAppearanceParams := new(UpdateBookingPageAppearanceParams)
+		if err := utils.UnmarshalJSON(data, &updateBookingPageAppearanceParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == update_booking_page_appearance) type UpdateBookingPageAppearanceParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.UpdateBookingPageAppearanceParams = updateBookingPageAppearanceParams
+		u.Type = SMBToolConfigParamsTypeUpdateBookingPageAppearance
 		return nil
 	case "update_booking_page_settings":
 		updateBookingPageSettingsParams := new(UpdateBookingPageSettingsParams)
@@ -1047,6 +1438,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.UpdateCustomerFacingConfigParams = updateCustomerFacingConfigParams
 		u.Type = SMBToolConfigParamsTypeUpdateCustomerFacingConfig
 		return nil
+	case "update_group_session_seats":
+		updateGroupSessionSeatsParams := new(UpdateGroupSessionSeatsParams)
+		if err := utils.UnmarshalJSON(data, &updateGroupSessionSeatsParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == update_group_session_seats) type UpdateGroupSessionSeatsParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.UpdateGroupSessionSeatsParams = updateGroupSessionSeatsParams
+		u.Type = SMBToolConfigParamsTypeUpdateGroupSessionSeats
+		return nil
 	case "update_holiday":
 		updateHolidayParams := new(UpdateHolidayParams)
 		if err := utils.UnmarshalJSON(data, &updateHolidayParams, "", true, nil); err != nil {
@@ -1056,6 +1456,15 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 		u.UpdateHolidayParams = updateHolidayParams
 		u.Type = SMBToolConfigParamsTypeUpdateHoliday
 		return nil
+	case "update_location":
+		updateLocationParams := new(UpdateLocationParams)
+		if err := utils.UnmarshalJSON(data, &updateLocationParams, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == update_location) type UpdateLocationParams within SMBToolConfigParams: %w", string(data), err)
+		}
+
+		u.UpdateLocationParams = updateLocationParams
+		u.Type = SMBToolConfigParamsTypeUpdateLocation
+		return nil
 	case "update_product":
 		updateProductParams := new(UpdateProductParams)
 		if err := utils.UnmarshalJSON(data, &updateProductParams, "", true, nil); err != nil {
@@ -1064,15 +1473,6 @@ func (u *SMBToolConfigParams) UnmarshalJSON(data []byte) error {
 
 		u.UpdateProductParams = updateProductParams
 		u.Type = SMBToolConfigParamsTypeUpdateProduct
-		return nil
-	case "update_rental_service":
-		updateRentalServiceParams := new(UpdateRentalServiceParams)
-		if err := utils.UnmarshalJSON(data, &updateRentalServiceParams, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (SmbToolType == update_rental_service) type UpdateRentalServiceParams within SMBToolConfigParams: %w", string(data), err)
-		}
-
-		u.UpdateRentalServiceParams = updateRentalServiceParams
-		u.Type = SMBToolConfigParamsTypeUpdateRentalService
 		return nil
 	case "update_service":
 		updateServiceParams := new(UpdateServiceParams)
@@ -1198,6 +1598,38 @@ func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.GetClientAppointmentsParams, "", true)
 	}
 
+	if u.GetAppointmentByConfirmationNumberParams != nil {
+		return utils.MarshalJSON(u.GetAppointmentByConfirmationNumberParams, "", true)
+	}
+
+	if u.ListGroupSessionsParams != nil {
+		return utils.MarshalJSON(u.ListGroupSessionsParams, "", true)
+	}
+
+	if u.ScheduleGroupSessionParams != nil {
+		return utils.MarshalJSON(u.ScheduleGroupSessionParams, "", true)
+	}
+
+	if u.RegisterForGroupSessionParams != nil {
+		return utils.MarshalJSON(u.RegisterForGroupSessionParams, "", true)
+	}
+
+	if u.CancelGroupSessionRegistrationParams != nil {
+		return utils.MarshalJSON(u.CancelGroupSessionRegistrationParams, "", true)
+	}
+
+	if u.UpdateGroupSessionSeatsParams != nil {
+		return utils.MarshalJSON(u.UpdateGroupSessionSeatsParams, "", true)
+	}
+
+	if u.CancelGroupSessionForAllParams != nil {
+		return utils.MarshalJSON(u.CancelGroupSessionForAllParams, "", true)
+	}
+
+	if u.DeleteGroupSessionParams != nil {
+		return utils.MarshalJSON(u.DeleteGroupSessionParams, "", true)
+	}
+
 	if u.ListCalendarEventsParams != nil {
 		return utils.MarshalJSON(u.ListCalendarEventsParams, "", true)
 	}
@@ -1206,32 +1638,20 @@ func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.UpdateCalendarEventParams, "", true)
 	}
 
+	if u.CancelCalendarEventParams != nil {
+		return utils.MarshalJSON(u.CancelCalendarEventParams, "", true)
+	}
+
+	if u.RestoreCalendarEventParams != nil {
+		return utils.MarshalJSON(u.RestoreCalendarEventParams, "", true)
+	}
+
 	if u.DeleteCalendarEventParams != nil {
 		return utils.MarshalJSON(u.DeleteCalendarEventParams, "", true)
 	}
 
-	if u.ListRentalServicesParams != nil {
-		return utils.MarshalJSON(u.ListRentalServicesParams, "", true)
-	}
-
-	if u.CreateRentalServiceParams != nil {
-		return utils.MarshalJSON(u.CreateRentalServiceParams, "", true)
-	}
-
-	if u.UpdateRentalServiceParams != nil {
-		return utils.MarshalJSON(u.UpdateRentalServiceParams, "", true)
-	}
-
-	if u.DeleteRentalServiceParams != nil {
-		return utils.MarshalJSON(u.DeleteRentalServiceParams, "", true)
-	}
-
-	if u.CheckRentalAvailabilityParams != nil {
-		return utils.MarshalJSON(u.CheckRentalAvailabilityParams, "", true)
-	}
-
-	if u.CreateRentalBookingParams != nil {
-		return utils.MarshalJSON(u.CreateRentalBookingParams, "", true)
+	if u.ListCustomerFacingAgentsParams != nil {
+		return utils.MarshalJSON(u.ListCustomerFacingAgentsParams, "", true)
 	}
 
 	if u.ListAgentRulesParams != nil {
@@ -1248,6 +1668,26 @@ func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
 
 	if u.DeleteAgentRuleParams != nil {
 		return utils.MarshalJSON(u.DeleteAgentRuleParams, "", true)
+	}
+
+	if u.ListAgentProceduresParams != nil {
+		return utils.MarshalJSON(u.ListAgentProceduresParams, "", true)
+	}
+
+	if u.ListAgentReferencesParams != nil {
+		return utils.MarshalJSON(u.ListAgentReferencesParams, "", true)
+	}
+
+	if u.CreateAgentProcedureParams != nil {
+		return utils.MarshalJSON(u.CreateAgentProcedureParams, "", true)
+	}
+
+	if u.UpdateAgentProcedureParams != nil {
+		return utils.MarshalJSON(u.UpdateAgentProcedureParams, "", true)
+	}
+
+	if u.DeleteAgentProcedureParams != nil {
+		return utils.MarshalJSON(u.DeleteAgentProcedureParams, "", true)
 	}
 
 	if u.ListHolidaysParams != nil {
@@ -1270,6 +1710,10 @@ func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.GetScheduleParams, "", true)
 	}
 
+	if u.SubmitBusinessInfoParams != nil {
+		return utils.MarshalJSON(u.SubmitBusinessInfoParams, "", true)
+	}
+
 	if u.UpdateBusinessInfoParams != nil {
 		return utils.MarshalJSON(u.UpdateBusinessInfoParams, "", true)
 	}
@@ -1288,6 +1732,10 @@ func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
 
 	if u.UpdateBookingPageSettingsParams != nil {
 		return utils.MarshalJSON(u.UpdateBookingPageSettingsParams, "", true)
+	}
+
+	if u.UpdateBookingPageAppearanceParams != nil {
+		return utils.MarshalJSON(u.UpdateBookingPageAppearanceParams, "", true)
 	}
 
 	if u.GetBookingSlugStatusParams != nil {
@@ -1310,6 +1758,38 @@ func (u SMBToolConfigParams) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DeleteClientInteractionParams, "", true)
 	}
 
+	if u.ListLocationsParams != nil {
+		return utils.MarshalJSON(u.ListLocationsParams, "", true)
+	}
+
+	if u.CreateLocationParams != nil {
+		return utils.MarshalJSON(u.CreateLocationParams, "", true)
+	}
+
+	if u.UpdateLocationParams != nil {
+		return utils.MarshalJSON(u.UpdateLocationParams, "", true)
+	}
+
+	if u.DeleteLocationParams != nil {
+		return utils.MarshalJSON(u.DeleteLocationParams, "", true)
+	}
+
+	if u.LeaveMessageParams != nil {
+		return utils.MarshalJSON(u.LeaveMessageParams, "", true)
+	}
+
+	if u.ReportKnowledgeGapParams != nil {
+		return utils.MarshalJSON(u.ReportKnowledgeGapParams, "", true)
+	}
+
+	if u.OptInSmsReminderParams != nil {
+		return utils.MarshalJSON(u.OptInSmsReminderParams, "", true)
+	}
+
+	if u.OptOutSmsReminderParams != nil {
+		return utils.MarshalJSON(u.OptOutSmsReminderParams, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type SMBToolConfigParams: all fields are null")
 }
 
@@ -1323,10 +1803,16 @@ type SMBToolConfig struct {
 	Description *string `default:"" json:"description"`
 	// The maximum time in seconds to wait for the tool call to complete.
 	ResponseTimeoutSecs *int64 `default:"20" json:"response_timeout_secs"`
-	// If true, the user will not be able to interrupt the agent while this tool is running.
-	DisableInterruptions *bool `default:"false" json:"disable_interruptions"`
-	// If true, the agent will speak before the tool call.
-	ForcePreToolSpeech *bool `default:"false" json:"force_pre_tool_speech"`
+	// DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DisableInterruptions *bool                 `default:"false" json:"disable_interruptions"`
+	InterruptionMode     *ToolInterruptionMode `default:"allow" json:"interruption_mode"`
+	// DEPRECATED: use `pre_tool_speech` instead. If true, the agent will speak before the tool call.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	ForcePreToolSpeech *bool              `default:"false" json:"force_pre_tool_speech"`
+	PreToolSpeech      *PreToolSpeechMode `default:"auto" json:"pre_tool_speech"`
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
@@ -1383,11 +1869,25 @@ func (s *SMBToolConfig) GetDisableInterruptions() *bool {
 	return s.DisableInterruptions
 }
 
+func (s *SMBToolConfig) GetInterruptionMode() *ToolInterruptionMode {
+	if s == nil {
+		return nil
+	}
+	return s.InterruptionMode
+}
+
 func (s *SMBToolConfig) GetForcePreToolSpeech() *bool {
 	if s == nil {
 		return nil
 	}
 	return s.ForcePreToolSpeech
+}
+
+func (s *SMBToolConfig) GetPreToolSpeech() *PreToolSpeechMode {
+	if s == nil {
+		return nil
+	}
+	return s.PreToolSpeech
 }
 
 func (s *SMBToolConfig) GetAssignments() []DynamicVariableAssignment {
@@ -1432,12 +1932,24 @@ func (s *SMBToolConfig) GetParams() SMBToolConfigParams {
 	return s.Params
 }
 
-func (s *SMBToolConfig) GetParamsCheckRentalAvailability() *CheckRentalAvailabilityParams {
-	return s.GetParams().CheckRentalAvailabilityParams
+func (s *SMBToolConfig) GetParamsCancelCalendarEvent() *CancelCalendarEventParams {
+	return s.GetParams().CancelCalendarEventParams
+}
+
+func (s *SMBToolConfig) GetParamsCancelGroupSessionForAll() *CancelGroupSessionForAllParams {
+	return s.GetParams().CancelGroupSessionForAllParams
+}
+
+func (s *SMBToolConfig) GetParamsCancelGroupSessionRegistration() *CancelGroupSessionRegistrationParams {
+	return s.GetParams().CancelGroupSessionRegistrationParams
 }
 
 func (s *SMBToolConfig) GetParamsCheckServiceAvailability() *CheckServiceAvailabilityParams {
 	return s.GetParams().CheckServiceAvailabilityParams
+}
+
+func (s *SMBToolConfig) GetParamsCreateAgentProcedure() *CreateAgentProcedureParams {
+	return s.GetParams().CreateAgentProcedureParams
 }
 
 func (s *SMBToolConfig) GetParamsCreateAgentRule() *CreateAgentRuleParams {
@@ -1464,16 +1976,12 @@ func (s *SMBToolConfig) GetParamsCreateHoliday() *CreateHolidayParams {
 	return s.GetParams().CreateHolidayParams
 }
 
+func (s *SMBToolConfig) GetParamsCreateLocation() *CreateLocationParams {
+	return s.GetParams().CreateLocationParams
+}
+
 func (s *SMBToolConfig) GetParamsCreateProduct() *CreateProductParams {
 	return s.GetParams().CreateProductParams
-}
-
-func (s *SMBToolConfig) GetParamsCreateRentalBooking() *CreateRentalBookingParams {
-	return s.GetParams().CreateRentalBookingParams
-}
-
-func (s *SMBToolConfig) GetParamsCreateRentalService() *CreateRentalServiceParams {
-	return s.GetParams().CreateRentalServiceParams
 }
 
 func (s *SMBToolConfig) GetParamsCreateService() *CreateServiceParams {
@@ -1482,6 +1990,10 @@ func (s *SMBToolConfig) GetParamsCreateService() *CreateServiceParams {
 
 func (s *SMBToolConfig) GetParamsCreateStaff() *CreateStaffParams {
 	return s.GetParams().CreateStaffParams
+}
+
+func (s *SMBToolConfig) GetParamsDeleteAgentProcedure() *DeleteAgentProcedureParams {
+	return s.GetParams().DeleteAgentProcedureParams
 }
 
 func (s *SMBToolConfig) GetParamsDeleteAgentRule() *DeleteAgentRuleParams {
@@ -1504,16 +2016,20 @@ func (s *SMBToolConfig) GetParamsDeleteClientInteraction() *DeleteClientInteract
 	return s.GetParams().DeleteClientInteractionParams
 }
 
+func (s *SMBToolConfig) GetParamsDeleteGroupSession() *DeleteGroupSessionParams {
+	return s.GetParams().DeleteGroupSessionParams
+}
+
 func (s *SMBToolConfig) GetParamsDeleteHoliday() *DeleteHolidayParams {
 	return s.GetParams().DeleteHolidayParams
 }
 
-func (s *SMBToolConfig) GetParamsDeleteProduct() *DeleteProductParams {
-	return s.GetParams().DeleteProductParams
+func (s *SMBToolConfig) GetParamsDeleteLocation() *DeleteLocationParams {
+	return s.GetParams().DeleteLocationParams
 }
 
-func (s *SMBToolConfig) GetParamsDeleteRentalService() *DeleteRentalServiceParams {
-	return s.GetParams().DeleteRentalServiceParams
+func (s *SMBToolConfig) GetParamsDeleteProduct() *DeleteProductParams {
+	return s.GetParams().DeleteProductParams
 }
 
 func (s *SMBToolConfig) GetParamsDeleteService() *DeleteServiceParams {
@@ -1526,6 +2042,10 @@ func (s *SMBToolConfig) GetParamsDeleteStaff() *DeleteStaffParams {
 
 func (s *SMBToolConfig) GetParamsGetAnalyticsSummary() *GetAnalyticsSummaryParams {
 	return s.GetParams().GetAnalyticsSummaryParams
+}
+
+func (s *SMBToolConfig) GetParamsGetAppointmentByConfirmationNumber() *GetAppointmentByConfirmationNumberParams {
+	return s.GetParams().GetAppointmentByConfirmationNumberParams
 }
 
 func (s *SMBToolConfig) GetParamsGetBookingPageSettings() *GetBookingPageSettingsParams {
@@ -1548,6 +2068,18 @@ func (s *SMBToolConfig) GetParamsGetSchedule() *GetScheduleParams {
 	return s.GetParams().GetScheduleParams
 }
 
+func (s *SMBToolConfig) GetParamsLeaveMessage() *LeaveMessageParams {
+	return s.GetParams().LeaveMessageParams
+}
+
+func (s *SMBToolConfig) GetParamsListAgentProcedures() *ListAgentProceduresParams {
+	return s.GetParams().ListAgentProceduresParams
+}
+
+func (s *SMBToolConfig) GetParamsListAgentReferences() *ListAgentReferencesParams {
+	return s.GetParams().ListAgentReferencesParams
+}
+
 func (s *SMBToolConfig) GetParamsListAgentRules() *ListAgentRulesParams {
 	return s.GetParams().ListAgentRulesParams
 }
@@ -1568,16 +2100,24 @@ func (s *SMBToolConfig) GetParamsListClients() *ListClientsParams {
 	return s.GetParams().ListClientsParams
 }
 
+func (s *SMBToolConfig) GetParamsListCustomerFacingAgents() *ListCustomerFacingAgentsParams {
+	return s.GetParams().ListCustomerFacingAgentsParams
+}
+
+func (s *SMBToolConfig) GetParamsListGroupSessions() *ListGroupSessionsParams {
+	return s.GetParams().ListGroupSessionsParams
+}
+
 func (s *SMBToolConfig) GetParamsListHolidays() *ListHolidaysParams {
 	return s.GetParams().ListHolidaysParams
 }
 
-func (s *SMBToolConfig) GetParamsListProducts() *ListProductsParams {
-	return s.GetParams().ListProductsParams
+func (s *SMBToolConfig) GetParamsListLocations() *ListLocationsParams {
+	return s.GetParams().ListLocationsParams
 }
 
-func (s *SMBToolConfig) GetParamsListRentalServices() *ListRentalServicesParams {
-	return s.GetParams().ListRentalServicesParams
+func (s *SMBToolConfig) GetParamsListProducts() *ListProductsParams {
+	return s.GetParams().ListProductsParams
 }
 
 func (s *SMBToolConfig) GetParamsListServices() *ListServicesParams {
@@ -1588,6 +2128,30 @@ func (s *SMBToolConfig) GetParamsListStaff() *ListStaffParams {
 	return s.GetParams().ListStaffParams
 }
 
+func (s *SMBToolConfig) GetParamsOptInSmsReminder() *OptInSmsReminderParams {
+	return s.GetParams().OptInSmsReminderParams
+}
+
+func (s *SMBToolConfig) GetParamsOptOutSmsReminder() *OptOutSmsReminderParams {
+	return s.GetParams().OptOutSmsReminderParams
+}
+
+func (s *SMBToolConfig) GetParamsRegisterForGroupSession() *RegisterForGroupSessionParams {
+	return s.GetParams().RegisterForGroupSessionParams
+}
+
+func (s *SMBToolConfig) GetParamsReportKnowledgeGap() *ReportKnowledgeGapParams {
+	return s.GetParams().ReportKnowledgeGapParams
+}
+
+func (s *SMBToolConfig) GetParamsRestoreCalendarEvent() *RestoreCalendarEventParams {
+	return s.GetParams().RestoreCalendarEventParams
+}
+
+func (s *SMBToolConfig) GetParamsScheduleGroupSession() *ScheduleGroupSessionParams {
+	return s.GetParams().ScheduleGroupSessionParams
+}
+
 func (s *SMBToolConfig) GetParamsSearchClients() *SearchClientsParams {
 	return s.GetParams().SearchClientsParams
 }
@@ -1596,12 +2160,24 @@ func (s *SMBToolConfig) GetParamsSetBookingSlug() *SetBookingSlugParams {
 	return s.GetParams().SetBookingSlugParams
 }
 
+func (s *SMBToolConfig) GetParamsSubmitBusinessInfo() *SubmitBusinessInfoParams {
+	return s.GetParams().SubmitBusinessInfoParams
+}
+
+func (s *SMBToolConfig) GetParamsUpdateAgentProcedure() *UpdateAgentProcedureParams {
+	return s.GetParams().UpdateAgentProcedureParams
+}
+
 func (s *SMBToolConfig) GetParamsUpdateAgentRule() *UpdateAgentRuleParams {
 	return s.GetParams().UpdateAgentRuleParams
 }
 
 func (s *SMBToolConfig) GetParamsUpdateAsset() *UpdateAssetParams {
 	return s.GetParams().UpdateAssetParams
+}
+
+func (s *SMBToolConfig) GetParamsUpdateBookingPageAppearance() *UpdateBookingPageAppearanceParams {
+	return s.GetParams().UpdateBookingPageAppearanceParams
 }
 
 func (s *SMBToolConfig) GetParamsUpdateBookingPageSettings() *UpdateBookingPageSettingsParams {
@@ -1624,16 +2200,20 @@ func (s *SMBToolConfig) GetParamsUpdateCustomerFacingConfig() *UpdateCustomerFac
 	return s.GetParams().UpdateCustomerFacingConfigParams
 }
 
+func (s *SMBToolConfig) GetParamsUpdateGroupSessionSeats() *UpdateGroupSessionSeatsParams {
+	return s.GetParams().UpdateGroupSessionSeatsParams
+}
+
 func (s *SMBToolConfig) GetParamsUpdateHoliday() *UpdateHolidayParams {
 	return s.GetParams().UpdateHolidayParams
 }
 
-func (s *SMBToolConfig) GetParamsUpdateProduct() *UpdateProductParams {
-	return s.GetParams().UpdateProductParams
+func (s *SMBToolConfig) GetParamsUpdateLocation() *UpdateLocationParams {
+	return s.GetParams().UpdateLocationParams
 }
 
-func (s *SMBToolConfig) GetParamsUpdateRentalService() *UpdateRentalServiceParams {
-	return s.GetParams().UpdateRentalServiceParams
+func (s *SMBToolConfig) GetParamsUpdateProduct() *UpdateProductParams {
+	return s.GetParams().UpdateProductParams
 }
 
 func (s *SMBToolConfig) GetParamsUpdateService() *UpdateServiceParams {

@@ -1,6 +1,6 @@
 # LiteralJSONSchemaPropertyConstantValue
 
-A constant value to use for this property. Mutually exclusive with description, dynamic_variable, and is_system_provided.
+A constant value to use for this property. Mutually exclusive with description, dynamic_variable, is_system_provided, and is_omitted.
 
 
 ## Supported Types

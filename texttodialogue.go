@@ -17,6 +17,7 @@ import (
 	"net/url"
 )
 
+// TextToDialogue - Generate multi-speaker dialogue from a script using different voices.
 type TextToDialogue struct {
 	rootSDK          *ElevenlabsGo
 	sdkConfiguration config.SDKConfiguration
@@ -33,10 +34,11 @@ func newTextToDialogue(rootSDK *ElevenlabsGo, sdkConfig config.SDKConfiguration,
 
 // TextToDialogue - Text To Dialogue (Multi-Voice)
 // Converts a list of text and voice ID pairs into speech (dialogue) and returns audio.
-func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.BodyTextToDialogueMultiVoiceV1TextToDialoguePost, outputFormat *operations.TextToDialogueOutputFormatOfTheGeneratedAudio, opts ...operations.Option) (*operations.TextToDialogueResponse, error) {
+func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.BodyTextToDialogueMultiVoiceV1TextToDialoguePost, outputFormat *operations.TextToDialogueOutputFormatOfTheGeneratedAudio, enableLogging *bool, opts ...operations.Option) (*operations.TextToDialogueResponse, error) {
 	request := operations.TextToDialogueRequest{
-		OutputFormat: outputFormat,
-		Body:         body,
+		OutputFormat:  outputFormat,
+		EnableLogging: enableLogging,
+		Body:          body,
 	}
 
 	o := operations.Options{}
@@ -184,7 +186,7 @@ func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.Bod
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -271,10 +273,11 @@ func (s *TextToDialogue) TextToDialogue(ctx context.Context, body components.Bod
 
 // TextToDialogueStream - Text To Dialogue (Multi-Voice) Streaming
 // Converts a list of text and voice ID pairs into speech (dialogue) and returns an audio stream.
-func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body components.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToDialogueStreamResponse, error) {
+func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body components.BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost, outputFormat *components.AllowedOutputFormats, enableLogging *bool, opts ...operations.Option) (*operations.TextToDialogueStreamResponse, error) {
 	request := operations.TextToDialogueStreamRequest{
-		OutputFormat: outputFormat,
-		Body:         body,
+		OutputFormat:  outputFormat,
+		EnableLogging: enableLogging,
+		Body:          body,
 	}
 
 	o := operations.Options{}
@@ -422,7 +425,7 @@ func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body componen
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -509,10 +512,11 @@ func (s *TextToDialogue) TextToDialogueStream(ctx context.Context, body componen
 
 // TextToDialogueStreamWithTimestamps - Text To Dialogue Streaming With Timestamps
 // Converts a list of text and voice ID pairs into speech (dialogue) and returns a stream of JSON blobs containing audio as a base64 encoded string and timestamps
-func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context, body components.BodyTextToDialogueStreamWithTimestamps, outputFormat *components.AllowedOutputFormats, opts ...operations.Option) (*operations.TextToDialogueStreamWithTimestampsResponse, error) {
+func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context, body components.BodyTextToDialogueStreamWithTimestamps, outputFormat *components.AllowedOutputFormats, enableLogging *bool, opts ...operations.Option) (*operations.TextToDialogueStreamWithTimestampsResponse, error) {
 	request := operations.TextToDialogueStreamWithTimestampsRequest{
-		OutputFormat: outputFormat,
-		Body:         body,
+		OutputFormat:  outputFormat,
+		EnableLogging: enableLogging,
+		Body:          body,
 	}
 
 	o := operations.Options{}
@@ -660,7 +664,7 @@ func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context,
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -755,10 +759,11 @@ func (s *TextToDialogue) TextToDialogueStreamWithTimestamps(ctx context.Context,
 
 // TextToDialogueFullWithTimestamps - Text To Dialogue With Timestamps
 // Generate dialogue from text with precise character-level timing information for audio-text synchronization.
-func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, body components.BodyTextToDialogueFullWithTimestamps, outputFormat *operations.TextToDialogueFullWithTimestampsOutputFormatOfTheGeneratedAudio, opts ...operations.Option) (*operations.TextToDialogueFullWithTimestampsResponse, error) {
+func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, body components.BodyTextToDialogueFullWithTimestamps, outputFormat *operations.TextToDialogueFullWithTimestampsOutputFormatOfTheGeneratedAudio, enableLogging *bool, opts ...operations.Option) (*operations.TextToDialogueFullWithTimestampsResponse, error) {
 	request := operations.TextToDialogueFullWithTimestampsRequest{
-		OutputFormat: outputFormat,
-		Body:         body,
+		OutputFormat:  outputFormat,
+		EnableLogging: enableLogging,
+		Body:          body,
 	}
 
 	o := operations.Options{}
@@ -906,7 +911,7 @@ func (s *TextToDialogue) TextToDialogueFullWithTimestamps(ctx context.Context, b
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"422", "4XX", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

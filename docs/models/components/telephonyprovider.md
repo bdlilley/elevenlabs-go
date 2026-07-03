@@ -20,3 +20,4 @@ custom := components.TelephonyProvider("custom_value")
 | --------------------------- | --------------------------- |
 | `TelephonyProviderTwilio`   | twilio                      |
 | `TelephonyProviderSipTrunk` | sip_trunk                   |
+| `TelephonyProviderExotel`   | exotel                      |

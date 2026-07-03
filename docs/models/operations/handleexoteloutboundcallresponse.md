@@ -1,0 +1,9 @@
+# HandleExotelOutboundCallResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `ExotelOutboundCallResponse`                                                                    | [*components.ExotelOutboundCallResponse](../../models/components/exoteloutboundcallresponse.md) | :heavy_minus_sign:                                                                              | Successful Response                                                                             |

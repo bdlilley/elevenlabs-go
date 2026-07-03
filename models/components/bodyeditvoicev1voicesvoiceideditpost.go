@@ -132,6 +132,8 @@ type BodyEditVoiceV1VoicesVoiceIDEditPost struct {
 	Description *string `multipartForm:"name=description"`
 	// Labels for the voice. Keys can be language, accent, gender, or age.
 	Labels *BodyEditVoiceV1VoicesVoiceIDEditPostLabels `multipartForm:"name=labels,json"`
+	// Run synchronous LLM moderation over the voice name and description when they change. Has no effect unless the voice_library_metadata_moderation feature flag is enabled for the user.
+	ModerateMetadata *bool `default:"false" multipartForm:"name=moderate_metadata"`
 }
 
 func (b BodyEditVoiceV1VoicesVoiceIDEditPost) MarshalJSON() ([]byte, error) {
@@ -178,6 +180,13 @@ func (b *BodyEditVoiceV1VoicesVoiceIDEditPost) GetLabels() *BodyEditVoiceV1Voice
 		return nil
 	}
 	return b.Labels
+}
+
+func (b *BodyEditVoiceV1VoicesVoiceIDEditPost) GetModerateMetadata() *bool {
+	if b == nil {
+		return nil
+	}
+	return b.ModerateMetadata
 }
 
 // #region class-body-bodyeditvoicev1voicesvoiceideditpost

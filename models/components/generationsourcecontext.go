@@ -9,17 +9,15 @@ import (
 
 type GenerationSourceContext struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	sourceType          *string `const:"generation" json:"source_type"`
-	GenerationID        string  `json:"generation_id"`
-	Prompt              *string `json:"prompt,omitzero"`
-	ModelID             string  `json:"model_id"`
-	ModelProvider       *string `json:"model_provider,omitzero"`
-	GenerationSessionID *string `json:"generation_session_id,omitzero"`
-	SessionIterationID  *string `json:"session_iteration_id,omitzero"`
-	// Modified/enhanced prompt if different from original
-	AlteredPrompt   *string         `json:"altered_prompt,omitzero"`
-	ModelParameters map[string]any  `json:"model_parameters,omitzero"`
-	ExtendVideo     *ReferenceVideo `json:"extend_video,omitzero"`
+	sourceType          *string         `const:"generation" json:"source_type"`
+	GenerationID        string          `json:"generation_id"`
+	Prompt              *string         `json:"prompt,omitzero"`
+	ModelID             string          `json:"model_id"`
+	ModelProvider       *string         `json:"model_provider,omitzero"`
+	GenerationSessionID *string         `json:"generation_session_id,omitzero"`
+	SessionIterationID  *string         `json:"session_iteration_id,omitzero"`
+	ModelParameters     map[string]any  `json:"model_parameters,omitzero"`
+	ExtendVideo         *ReferenceVideo `json:"extend_video,omitzero"`
 }
 
 func (g GenerationSourceContext) MarshalJSON() ([]byte, error) {
@@ -77,13 +75,6 @@ func (g *GenerationSourceContext) GetSessionIterationID() *string {
 		return nil
 	}
 	return g.SessionIterationID
-}
-
-func (g *GenerationSourceContext) GetAlteredPrompt() *string {
-	if g == nil {
-		return nil
-	}
-	return g.AlteredPrompt
 }
 
 func (g *GenerationSourceContext) GetModelParameters() map[string]any {

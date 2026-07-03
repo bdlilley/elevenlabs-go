@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
+// MusicPrompt - Composition plan for the `music_v1` model. Using this field with any other model will result in an error.
 type MusicPrompt struct {
 	// The styles and musical directions that should be present in the entire song. Use English language for best result.
 	PositiveGlobalStyles []string `json:"positive_global_styles"`
@@ -9,6 +14,17 @@ type MusicPrompt struct {
 	NegativeGlobalStyles []string `json:"negative_global_styles"`
 	// The sections of the song.
 	Sections []SongSection `json:"sections"`
+}
+
+func (m MusicPrompt) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *MusicPrompt) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (m *MusicPrompt) GetPositiveGlobalStyles() []string {

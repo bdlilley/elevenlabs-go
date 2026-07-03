@@ -15,6 +15,8 @@ type ChapterStatisticsResponseModel struct {
 	ParagraphsConverted int64 `json:"paragraphs_converted"`
 	// The number of unconverted paragraphs.
 	ParagraphsUnconverted int64 `json:"paragraphs_unconverted"`
+	// The number of credits needed to convert the remaining paragraphs.
+	CreditsNeededToConvert *int64 `json:"credits_needed_to_convert,omitzero"`
 	// Per-voice breakdown of character counts.
 	VoiceStatistics []VoiceStatisticsResponseModel `json:"voice_statistics,omitzero"`
 }
@@ -56,6 +58,13 @@ func (c *ChapterStatisticsResponseModel) GetParagraphsUnconverted() int64 {
 		return 0
 	}
 	return c.ParagraphsUnconverted
+}
+
+func (c *ChapterStatisticsResponseModel) GetCreditsNeededToConvert() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.CreditsNeededToConvert
 }
 
 func (c *ChapterStatisticsResponseModel) GetVoiceStatistics() []VoiceStatisticsResponseModel {

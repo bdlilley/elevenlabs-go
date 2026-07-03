@@ -16,6 +16,8 @@ type InboundSIPTrunkConfigRequestModel struct {
 	Credentials *SIPTrunkCredentialsRequestModel `json:"credentials,omitzero"`
 	// Domains of remote SIP servers used to validate TLS certificates.
 	RemoteDomains []string `json:"remote_domains,omitzero"`
+	// Map of dynamic variable name to header name for attributes_to_headers
+	AttributesToHeaders map[string]string `json:"attributes_to_headers,omitzero"`
 }
 
 func (i InboundSIPTrunkConfigRequestModel) MarshalJSON() ([]byte, error) {
@@ -62,4 +64,11 @@ func (i *InboundSIPTrunkConfigRequestModel) GetRemoteDomains() []string {
 		return nil
 	}
 	return i.RemoteDomains
+}
+
+func (i *InboundSIPTrunkConfigRequestModel) GetAttributesToHeaders() map[string]string {
+	if i == nil {
+		return nil
+	}
+	return i.AttributesToHeaders
 }

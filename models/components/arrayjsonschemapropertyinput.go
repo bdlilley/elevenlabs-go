@@ -17,6 +17,7 @@ const (
 	ArrayJSONSchemaPropertyInputItemsTypeArrayJSONSchemaPropertyInput  ArrayJSONSchemaPropertyInputItemsType = "ArrayJsonSchemaProperty-Input"
 )
 
+// ArrayJSONSchemaPropertyInputItems - Schema for array elements.
 type ArrayJSONSchemaPropertyInputItems struct {
 	LiteralJSONSchemaProperty     *LiteralJSONSchemaProperty     `queryParam:"inline" union:"member"`
 	ObjectJSONSchemaPropertyInput *ObjectJSONSchemaPropertyInput `queryParam:"inline" union:"member"`
@@ -124,11 +125,159 @@ func (u ArrayJSONSchemaPropertyInputItems) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type ArrayJSONSchemaPropertyInputItems: all fields are null")
 }
 
+type ArrayJSONSchemaPropertyInputConstantValueType string
+
+const (
+	ArrayJSONSchemaPropertyInputConstantValueTypeStr     ArrayJSONSchemaPropertyInputConstantValueType = "str"
+	ArrayJSONSchemaPropertyInputConstantValueTypeInteger ArrayJSONSchemaPropertyInputConstantValueType = "integer"
+	ArrayJSONSchemaPropertyInputConstantValueTypeNumber  ArrayJSONSchemaPropertyInputConstantValueType = "number"
+	ArrayJSONSchemaPropertyInputConstantValueTypeBoolean ArrayJSONSchemaPropertyInputConstantValueType = "boolean"
+)
+
+type ArrayJSONSchemaPropertyInputConstantValue struct {
+	Str     *string  `queryParam:"inline" union:"member"`
+	Integer *int64   `queryParam:"inline" union:"member"`
+	Number  *float64 `queryParam:"inline" union:"member"`
+	Boolean *bool    `queryParam:"inline" union:"member"`
+
+	Type ArrayJSONSchemaPropertyInputConstantValueType
+}
+
+func CreateArrayJSONSchemaPropertyInputConstantValueStr(str string) ArrayJSONSchemaPropertyInputConstantValue {
+	typ := ArrayJSONSchemaPropertyInputConstantValueTypeStr
+
+	return ArrayJSONSchemaPropertyInputConstantValue{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateArrayJSONSchemaPropertyInputConstantValueInteger(integer int64) ArrayJSONSchemaPropertyInputConstantValue {
+	typ := ArrayJSONSchemaPropertyInputConstantValueTypeInteger
+
+	return ArrayJSONSchemaPropertyInputConstantValue{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func CreateArrayJSONSchemaPropertyInputConstantValueNumber(number float64) ArrayJSONSchemaPropertyInputConstantValue {
+	typ := ArrayJSONSchemaPropertyInputConstantValueTypeNumber
+
+	return ArrayJSONSchemaPropertyInputConstantValue{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateArrayJSONSchemaPropertyInputConstantValueBoolean(boolean bool) ArrayJSONSchemaPropertyInputConstantValue {
+	typ := ArrayJSONSchemaPropertyInputConstantValueTypeBoolean
+
+	return ArrayJSONSchemaPropertyInputConstantValue{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func (u *ArrayJSONSchemaPropertyInputConstantValue) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyInputConstantValueTypeStr,
+			Value: &str,
+		})
+	}
+
+	var integer int64 = int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyInputConstantValueTypeInteger,
+			Value: &integer,
+		})
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyInputConstantValueTypeNumber,
+			Value: &number,
+		})
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ArrayJSONSchemaPropertyInputConstantValueTypeBoolean,
+			Value: &boolean,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyInputConstantValue", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyInputConstantValue", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ArrayJSONSchemaPropertyInputConstantValueType)
+	switch best.Type {
+	case ArrayJSONSchemaPropertyInputConstantValueTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case ArrayJSONSchemaPropertyInputConstantValueTypeInteger:
+		u.Integer = best.Value.(*int64)
+		return nil
+	case ArrayJSONSchemaPropertyInputConstantValueTypeNumber:
+		u.Number = best.Value.(*float64)
+		return nil
+	case ArrayJSONSchemaPropertyInputConstantValueTypeBoolean:
+		u.Boolean = best.Value.(*bool)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ArrayJSONSchemaPropertyInputConstantValue", string(data))
+}
+
+func (u ArrayJSONSchemaPropertyInputConstantValue) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ArrayJSONSchemaPropertyInputConstantValue: all fields are null")
+}
+
 type ArrayJSONSchemaPropertyInput struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_       *string                           `const:"array" json:"type"`
-	Description *string                           `default:"" json:"description"`
-	Items       ArrayJSONSchemaPropertyInputItems `json:"items"`
+	type_       *string `const:"array" json:"type"`
+	Description *string `default:"" json:"description"`
+	// Schema for array elements.
+	Items *ArrayJSONSchemaPropertyInputItems `json:"items,omitzero"`
+	// When set, the entire array is populated from this dynamic variable at runtime. Mutually exclusive with description (LLM-provided array), constant_value, and is_omitted.
+	DynamicVariable *string `default:"" json:"dynamic_variable"`
+	// When set, the entire array uses this constant value at runtime. Mutually exclusive with description (LLM-provided array), dynamic_variable, and is_omitted.
+	ConstantValue []ArrayJSONSchemaPropertyInputConstantValue `json:"constant_value,omitzero"`
+	// If true, this array parameter will be completely omitted from the request. Only valid for optional parameters. Mutually exclusive with description, dynamic_variable, and constant_value.
+	IsOmitted *bool `default:"false" json:"is_omitted"`
 }
 
 func (a ArrayJSONSchemaPropertyInput) MarshalJSON() ([]byte, error) {
@@ -153,9 +302,30 @@ func (a *ArrayJSONSchemaPropertyInput) GetDescription() *string {
 	return a.Description
 }
 
-func (a *ArrayJSONSchemaPropertyInput) GetItems() ArrayJSONSchemaPropertyInputItems {
+func (a *ArrayJSONSchemaPropertyInput) GetItems() *ArrayJSONSchemaPropertyInputItems {
 	if a == nil {
-		return ArrayJSONSchemaPropertyInputItems{}
+		return nil
 	}
 	return a.Items
+}
+
+func (a *ArrayJSONSchemaPropertyInput) GetDynamicVariable() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DynamicVariable
+}
+
+func (a *ArrayJSONSchemaPropertyInput) GetConstantValue() []ArrayJSONSchemaPropertyInputConstantValue {
+	if a == nil {
+		return nil
+	}
+	return a.ConstantValue
+}
+
+func (a *ArrayJSONSchemaPropertyInput) GetIsOmitted() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.IsOmitted
 }

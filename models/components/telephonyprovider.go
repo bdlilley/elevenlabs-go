@@ -7,6 +7,7 @@ type TelephonyProvider string
 const (
 	TelephonyProviderTwilio   TelephonyProvider = "twilio"
 	TelephonyProviderSipTrunk TelephonyProvider = "sip_trunk"
+	TelephonyProviderExotel   TelephonyProvider = "exotel"
 )
 
 func (e TelephonyProvider) ToPointer() *TelephonyProvider {
@@ -17,7 +18,7 @@ func (e TelephonyProvider) ToPointer() *TelephonyProvider {
 func (e *TelephonyProvider) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "twilio", "sip_trunk":
+		case "twilio", "sip_trunk", "exotel":
 			return true
 		}
 	}

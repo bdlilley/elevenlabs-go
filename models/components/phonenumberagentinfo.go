@@ -11,6 +11,10 @@ type PhoneNumberAgentInfo struct {
 	AgentID string `json:"agent_id"`
 	// The name of the agent
 	AgentName string `json:"agent_name"`
+	// Environment to use for resolving environment variables on calls to this number.
+	Environment *string `json:"environment,omitzero"`
+	// Agent branch to use for calls to this number.
+	BranchID *string `json:"branch_id,omitzero"`
 }
 
 func (p PhoneNumberAgentInfo) MarshalJSON() ([]byte, error) {
@@ -36,4 +40,18 @@ func (p *PhoneNumberAgentInfo) GetAgentName() string {
 		return ""
 	}
 	return p.AgentName
+}
+
+func (p *PhoneNumberAgentInfo) GetEnvironment() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Environment
+}
+
+func (p *PhoneNumberAgentInfo) GetBranchID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BranchID
 }

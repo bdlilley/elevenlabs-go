@@ -2,21 +2,21 @@
 
 package components
 
-type AnonymousAccessLevelOverride string
+type ResourceMetadataResponseModelAnonymousAccessLevelOverride string
 
 const (
-	AnonymousAccessLevelOverrideAdmin     AnonymousAccessLevelOverride = "admin"
-	AnonymousAccessLevelOverrideEditor    AnonymousAccessLevelOverride = "editor"
-	AnonymousAccessLevelOverrideCommenter AnonymousAccessLevelOverride = "commenter"
-	AnonymousAccessLevelOverrideViewer    AnonymousAccessLevelOverride = "viewer"
+	ResourceMetadataResponseModelAnonymousAccessLevelOverrideAdmin     ResourceMetadataResponseModelAnonymousAccessLevelOverride = "admin"
+	ResourceMetadataResponseModelAnonymousAccessLevelOverrideEditor    ResourceMetadataResponseModelAnonymousAccessLevelOverride = "editor"
+	ResourceMetadataResponseModelAnonymousAccessLevelOverrideCommenter ResourceMetadataResponseModelAnonymousAccessLevelOverride = "commenter"
+	ResourceMetadataResponseModelAnonymousAccessLevelOverrideViewer    ResourceMetadataResponseModelAnonymousAccessLevelOverride = "viewer"
 )
 
-func (e AnonymousAccessLevelOverride) ToPointer() *AnonymousAccessLevelOverride {
+func (e ResourceMetadataResponseModelAnonymousAccessLevelOverride) ToPointer() *ResourceMetadataResponseModelAnonymousAccessLevelOverride {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *AnonymousAccessLevelOverride) IsExact() bool {
+func (e *ResourceMetadataResponseModelAnonymousAccessLevelOverride) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "admin", "editor", "commenter", "viewer":
@@ -36,7 +36,7 @@ type ResourceMetadataResponseModel struct {
 	// The ID of the user who created the resource.
 	CreatorUserID *string `json:"creator_user_id"`
 	// The access level for anonymous users. If None, the resource is not shared publicly.
-	AnonymousAccessLevelOverride *AnonymousAccessLevelOverride `json:"anonymous_access_level_override"`
+	AnonymousAccessLevelOverride *ResourceMetadataResponseModelAnonymousAccessLevelOverride `json:"anonymous_access_level_override"`
 	// A mapping of roles to group IDs. When the resource is shared with a user, the group id is the user's id.
 	RoleToGroupIds map[string][]string `json:"role_to_group_ids"`
 	// List of options for sharing the resource further in the workspace. These are users who don't have access to the resource yet.
@@ -71,7 +71,7 @@ func (r *ResourceMetadataResponseModel) GetCreatorUserID() *string {
 	return r.CreatorUserID
 }
 
-func (r *ResourceMetadataResponseModel) GetAnonymousAccessLevelOverride() *AnonymousAccessLevelOverride {
+func (r *ResourceMetadataResponseModel) GetAnonymousAccessLevelOverride() *ResourceMetadataResponseModelAnonymousAccessLevelOverride {
 	if r == nil {
 		return nil
 	}

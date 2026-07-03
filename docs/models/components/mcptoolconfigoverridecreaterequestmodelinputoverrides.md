@@ -21,6 +21,12 @@ mcpToolConfigOverrideCreateRequestModelInputOverrides := components.CreateMCPToo
 mcpToolConfigOverrideCreateRequestModelInputOverrides := components.CreateMCPToolConfigOverrideCreateRequestModelInputOverridesLlm(components.LLMSchemaOverride{/* values here */})
 ```
 
+### OmitSchemaOverride
+
+```go
+mcpToolConfigOverrideCreateRequestModelInputOverrides := components.CreateMCPToolConfigOverrideCreateRequestModelInputOverridesOmit(components.OmitSchemaOverride{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -33,5 +39,7 @@ switch mcpToolConfigOverrideCreateRequestModelInputOverrides.Type {
 		// mcpToolConfigOverrideCreateRequestModelInputOverrides.DynamicVariableSchemaOverride is populated
 	case components.MCPToolConfigOverrideCreateRequestModelInputOverridesTypeLlm:
 		// mcpToolConfigOverrideCreateRequestModelInputOverrides.LLMSchemaOverride is populated
+	case components.MCPToolConfigOverrideCreateRequestModelInputOverridesTypeOmit:
+		// mcpToolConfigOverrideCreateRequestModelInputOverrides.OmitSchemaOverride is populated
 }
 ```

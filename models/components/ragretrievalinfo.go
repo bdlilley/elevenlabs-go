@@ -11,6 +11,7 @@ type RagRetrievalInfo struct {
 	EmbeddingModel *EmbeddingModelEnum `default:"e5_mistral_7b_instruct" json:"embedding_model"`
 	RetrievalQuery string              `json:"retrieval_query"`
 	RagLatencySecs float64             `json:"rag_latency_secs"`
+	UsedChunkIds   []string            `json:"used_chunk_ids,omitzero"`
 }
 
 func (r RagRetrievalInfo) MarshalJSON() ([]byte, error) {
@@ -50,4 +51,11 @@ func (r *RagRetrievalInfo) GetRagLatencySecs() float64 {
 		return 0.0
 	}
 	return r.RagLatencySecs
+}
+
+func (r *RagRetrievalInfo) GetUsedChunkIds() []string {
+	if r == nil {
+		return nil
+	}
+	return r.UsedChunkIds
 }

@@ -23,6 +23,12 @@ createAuthConnectionRequestBody := operations.CreateCreateAuthConnectionRequestB
 createAuthConnectionRequestBody := operations.CreateCreateAuthConnectionRequestBodyCreateBasicAuthRequest(components.CreateBasicAuthRequest{/* values here */})
 ```
 
+### CreateBearerAuthRequest
+
+```go
+createAuthConnectionRequestBody := operations.CreateCreateAuthConnectionRequestBodyCreateBearerAuthRequest(components.CreateBearerAuthRequest{/* values here */})
+```
+
 ### CreateOAuth2JWTRequest
 
 ```go
@@ -53,6 +59,8 @@ switch createAuthConnectionRequestBody.Type {
 		// createAuthConnectionRequestBody.CreateCustomHeaderAuthRequest is populated
 	case operations.CreateAuthConnectionRequestBodyTypeCreateBasicAuthRequest:
 		// createAuthConnectionRequestBody.CreateBasicAuthRequest is populated
+	case operations.CreateAuthConnectionRequestBodyTypeCreateBearerAuthRequest:
+		// createAuthConnectionRequestBody.CreateBearerAuthRequest is populated
 	case operations.CreateAuthConnectionRequestBodyTypeCreateOAuth2JWTRequest:
 		// createAuthConnectionRequestBody.CreateOAuth2JWTRequest is populated
 	case operations.CreateAuthConnectionRequestBodyTypeCreatePrivateKeyJWTRequest:

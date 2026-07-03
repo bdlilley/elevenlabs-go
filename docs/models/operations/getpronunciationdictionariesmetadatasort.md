@@ -1,0 +1,21 @@
+# GetPronunciationDictionariesMetadataSort
+
+Which field to sort by, one of 'created_at_unix' or 'name'.
+
+## Example Usage
+
+```go
+import (
+	"github.com/bdlilley/elevenlabs-go/models/operations"
+)
+
+value := operations.GetPronunciationDictionariesMetadataSortCreationTimeUnix
+```
+
+
+## Values
+
+| Name                                                       | Value                                                      |
+| ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `GetPronunciationDictionariesMetadataSortCreationTimeUnix` | creation_time_unix                                         |
+| `GetPronunciationDictionariesMetadataSortName`             | name                                                       |

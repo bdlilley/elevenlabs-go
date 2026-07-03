@@ -14,9 +14,12 @@ type SystemToolConfigOutputParamsType string
 
 const (
 	SystemToolConfigOutputParamsTypeEndCall             SystemToolConfigOutputParamsType = "end_call"
+	SystemToolConfigOutputParamsTypeEndProcedure        SystemToolConfigOutputParamsType = "end_procedure"
+	SystemToolConfigOutputParamsTypeKnowledgeBaseRag    SystemToolConfigOutputParamsType = "knowledge_base_rag"
 	SystemToolConfigOutputParamsTypeLanguageDetection   SystemToolConfigOutputParamsType = "language_detection"
 	SystemToolConfigOutputParamsTypePlayKeypadTouchTone SystemToolConfigOutputParamsType = "play_keypad_touch_tone"
 	SystemToolConfigOutputParamsTypeSkipTurn            SystemToolConfigOutputParamsType = "skip_turn"
+	SystemToolConfigOutputParamsTypeStartProcedure      SystemToolConfigOutputParamsType = "start_procedure"
 	SystemToolConfigOutputParamsTypeTransferToAgent     SystemToolConfigOutputParamsType = "transfer_to_agent"
 	SystemToolConfigOutputParamsTypeTransferToNumber    SystemToolConfigOutputParamsType = "transfer_to_number"
 	SystemToolConfigOutputParamsTypeVoicemailDetection  SystemToolConfigOutputParamsType = "voicemail_detection"
@@ -30,6 +33,9 @@ type SystemToolConfigOutputParams struct {
 	SkipTurnToolConfig               *SkipTurnToolConfig               `queryParam:"inline" union:"member"`
 	PlayDTMFToolConfig               *PlayDTMFToolConfig               `queryParam:"inline" union:"member"`
 	VoicemailDetectionToolConfig     *VoicemailDetectionToolConfig     `queryParam:"inline" union:"member"`
+	KnowledgeBaseRagToolConfig       *KnowledgeBaseRagToolConfig       `queryParam:"inline" union:"member"`
+	StartProcedureToolConfigOutput   *StartProcedureToolConfigOutput   `queryParam:"inline" union:"member"`
+	EndProcedureToolConfigOutput     *EndProcedureToolConfigOutput     `queryParam:"inline" union:"member"`
 
 	Type SystemToolConfigOutputParamsType
 }
@@ -40,6 +46,24 @@ func CreateSystemToolConfigOutputParamsEndCall(endCall EndCallToolConfig) System
 	return SystemToolConfigOutputParams{
 		EndCallToolConfig: &endCall,
 		Type:              typ,
+	}
+}
+
+func CreateSystemToolConfigOutputParamsEndProcedure(endProcedure EndProcedureToolConfigOutput) SystemToolConfigOutputParams {
+	typ := SystemToolConfigOutputParamsTypeEndProcedure
+
+	return SystemToolConfigOutputParams{
+		EndProcedureToolConfigOutput: &endProcedure,
+		Type:                         typ,
+	}
+}
+
+func CreateSystemToolConfigOutputParamsKnowledgeBaseRag(knowledgeBaseRag KnowledgeBaseRagToolConfig) SystemToolConfigOutputParams {
+	typ := SystemToolConfigOutputParamsTypeKnowledgeBaseRag
+
+	return SystemToolConfigOutputParams{
+		KnowledgeBaseRagToolConfig: &knowledgeBaseRag,
+		Type:                       typ,
 	}
 }
 
@@ -67,6 +91,15 @@ func CreateSystemToolConfigOutputParamsSkipTurn(skipTurn SkipTurnToolConfig) Sys
 	return SystemToolConfigOutputParams{
 		SkipTurnToolConfig: &skipTurn,
 		Type:               typ,
+	}
+}
+
+func CreateSystemToolConfigOutputParamsStartProcedure(startProcedure StartProcedureToolConfigOutput) SystemToolConfigOutputParams {
+	typ := SystemToolConfigOutputParamsTypeStartProcedure
+
+	return SystemToolConfigOutputParams{
+		StartProcedureToolConfigOutput: &startProcedure,
+		Type:                           typ,
 	}
 }
 
@@ -118,6 +151,24 @@ func (u *SystemToolConfigOutputParams) UnmarshalJSON(data []byte) error {
 		u.EndCallToolConfig = endCallToolConfig
 		u.Type = SystemToolConfigOutputParamsTypeEndCall
 		return nil
+	case "end_procedure":
+		endProcedureToolConfigOutput := new(EndProcedureToolConfigOutput)
+		if err := utils.UnmarshalJSON(data, &endProcedureToolConfigOutput, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SystemToolType == end_procedure) type EndProcedureToolConfigOutput within SystemToolConfigOutputParams: %w", string(data), err)
+		}
+
+		u.EndProcedureToolConfigOutput = endProcedureToolConfigOutput
+		u.Type = SystemToolConfigOutputParamsTypeEndProcedure
+		return nil
+	case "knowledge_base_rag":
+		knowledgeBaseRagToolConfig := new(KnowledgeBaseRagToolConfig)
+		if err := utils.UnmarshalJSON(data, &knowledgeBaseRagToolConfig, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SystemToolType == knowledge_base_rag) type KnowledgeBaseRagToolConfig within SystemToolConfigOutputParams: %w", string(data), err)
+		}
+
+		u.KnowledgeBaseRagToolConfig = knowledgeBaseRagToolConfig
+		u.Type = SystemToolConfigOutputParamsTypeKnowledgeBaseRag
+		return nil
 	case "language_detection":
 		languageDetectionToolConfig := new(LanguageDetectionToolConfig)
 		if err := utils.UnmarshalJSON(data, &languageDetectionToolConfig, "", true, nil); err != nil {
@@ -144,6 +195,15 @@ func (u *SystemToolConfigOutputParams) UnmarshalJSON(data []byte) error {
 
 		u.SkipTurnToolConfig = skipTurnToolConfig
 		u.Type = SystemToolConfigOutputParamsTypeSkipTurn
+		return nil
+	case "start_procedure":
+		startProcedureToolConfigOutput := new(StartProcedureToolConfigOutput)
+		if err := utils.UnmarshalJSON(data, &startProcedureToolConfigOutput, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (SystemToolType == start_procedure) type StartProcedureToolConfigOutput within SystemToolConfigOutputParams: %w", string(data), err)
+		}
+
+		u.StartProcedureToolConfigOutput = startProcedureToolConfigOutput
+		u.Type = SystemToolConfigOutputParamsTypeStartProcedure
 		return nil
 	case "transfer_to_agent":
 		transferToAgentToolConfig := new(TransferToAgentToolConfig)
@@ -206,6 +266,18 @@ func (u SystemToolConfigOutputParams) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.VoicemailDetectionToolConfig, "", true)
 	}
 
+	if u.KnowledgeBaseRagToolConfig != nil {
+		return utils.MarshalJSON(u.KnowledgeBaseRagToolConfig, "", true)
+	}
+
+	if u.StartProcedureToolConfigOutput != nil {
+		return utils.MarshalJSON(u.StartProcedureToolConfigOutput, "", true)
+	}
+
+	if u.EndProcedureToolConfigOutput != nil {
+		return utils.MarshalJSON(u.EndProcedureToolConfigOutput, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type SystemToolConfigOutputParams: all fields are null")
 }
 
@@ -219,10 +291,16 @@ type SystemToolConfigOutput struct {
 	Description *string `default:"" json:"description"`
 	// The maximum time in seconds to wait for the tool call to complete.
 	ResponseTimeoutSecs *int64 `default:"20" json:"response_timeout_secs"`
-	// If true, the user will not be able to interrupt the agent while this tool is running.
-	DisableInterruptions *bool `default:"false" json:"disable_interruptions"`
-	// If true, the agent will speak before the tool call.
-	ForcePreToolSpeech *bool `default:"false" json:"force_pre_tool_speech"`
+	// DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DisableInterruptions *bool                 `default:"false" json:"disable_interruptions"`
+	InterruptionMode     *ToolInterruptionMode `default:"allow" json:"interruption_mode"`
+	// DEPRECATED: use `pre_tool_speech` instead. If true, the agent will speak before the tool call.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	ForcePreToolSpeech *bool              `default:"false" json:"force_pre_tool_speech"`
+	PreToolSpeech      *PreToolSpeechMode `default:"auto" json:"pre_tool_speech"`
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
@@ -277,11 +355,25 @@ func (s *SystemToolConfigOutput) GetDisableInterruptions() *bool {
 	return s.DisableInterruptions
 }
 
+func (s *SystemToolConfigOutput) GetInterruptionMode() *ToolInterruptionMode {
+	if s == nil {
+		return nil
+	}
+	return s.InterruptionMode
+}
+
 func (s *SystemToolConfigOutput) GetForcePreToolSpeech() *bool {
 	if s == nil {
 		return nil
 	}
 	return s.ForcePreToolSpeech
+}
+
+func (s *SystemToolConfigOutput) GetPreToolSpeech() *PreToolSpeechMode {
+	if s == nil {
+		return nil
+	}
+	return s.PreToolSpeech
 }
 
 func (s *SystemToolConfigOutput) GetAssignments() []DynamicVariableAssignment {
@@ -323,6 +415,14 @@ func (s *SystemToolConfigOutput) GetParamsEndCall() *EndCallToolConfig {
 	return s.GetParams().EndCallToolConfig
 }
 
+func (s *SystemToolConfigOutput) GetParamsEndProcedure() *EndProcedureToolConfigOutput {
+	return s.GetParams().EndProcedureToolConfigOutput
+}
+
+func (s *SystemToolConfigOutput) GetParamsKnowledgeBaseRag() *KnowledgeBaseRagToolConfig {
+	return s.GetParams().KnowledgeBaseRagToolConfig
+}
+
 func (s *SystemToolConfigOutput) GetParamsLanguageDetection() *LanguageDetectionToolConfig {
 	return s.GetParams().LanguageDetectionToolConfig
 }
@@ -333,6 +433,10 @@ func (s *SystemToolConfigOutput) GetParamsPlayKeypadTouchTone() *PlayDTMFToolCon
 
 func (s *SystemToolConfigOutput) GetParamsSkipTurn() *SkipTurnToolConfig {
 	return s.GetParams().SkipTurnToolConfig
+}
+
+func (s *SystemToolConfigOutput) GetParamsStartProcedure() *StartProcedureToolConfigOutput {
+	return s.GetParams().StartProcedureToolConfigOutput
 }
 
 func (s *SystemToolConfigOutput) GetParamsTransferToAgent() *TransferToAgentToolConfig {

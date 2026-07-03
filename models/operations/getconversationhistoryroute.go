@@ -3,13 +3,55 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 )
 
+// Format - Response format. Defaults to 'json'. Set to 'opentelemetry' for an OTLP-compatible trace payload using the same structure as the post-call webhook.
+type Format string
+
+const (
+	FormatJSON          Format = "json"
+	FormatOpentelemetry Format = "opentelemetry"
+)
+
+func (e Format) ToPointer() *Format {
+	return &e
+}
+func (e *Format) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "json":
+		fallthrough
+	case "opentelemetry":
+		*e = Format(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Format: %v", v)
+	}
+}
+
 type GetConversationHistoryRouteRequest struct {
 	// The id of the conversation you're taking the action on.
 	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
+	// Response format. Defaults to 'json'. Set to 'opentelemetry' for an OTLP-compatible trace payload using the same structure as the post-call webhook.
+	Format *Format `default:"json" queryParam:"style=form,explode=true,name=format"`
+}
+
+func (g GetConversationHistoryRouteRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetConversationHistoryRouteRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (g *GetConversationHistoryRouteRequest) GetConversationID() string {
@@ -17,6 +59,13 @@ func (g *GetConversationHistoryRouteRequest) GetConversationID() string {
 		return ""
 	}
 	return g.ConversationID
+}
+
+func (g *GetConversationHistoryRouteRequest) GetFormat() *Format {
+	if g == nil {
+		return nil
+	}
+	return g.Format
 }
 
 type GetConversationHistoryRouteResponse struct {

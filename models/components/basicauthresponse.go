@@ -16,6 +16,15 @@ type BasicAuthResponse struct {
 	Username string                      `json:"username"`
 	ID       string                      `json:"id"`
 	UsedBy   *AuthConnectionDependencies `json:"used_by,omitzero"`
+	// Single status field shared by every auth type's stored credential.
+	//
+	// OAuth values (``REFRESH_FAILED``, ``REVOKED``) are written by the OAuth
+	// token-manager refresh path. ``CREDENTIAL_INVALID`` is written by the
+	// tool execution path when an upstream response matches a credential's
+	// ``failure_signatures`` entry (Bearer, Basic auth, etc.).
+	Status          *AuthConnectionStatus `default:"active" json:"status"`
+	StatusDetail    *string               `json:"status_detail,omitzero"`
+	StatusUpdatedAt *string               `json:"status_updated_at,omitzero"`
 }
 
 func (b BasicAuthResponse) MarshalJSON() ([]byte, error) {
@@ -66,4 +75,25 @@ func (b *BasicAuthResponse) GetUsedBy() *AuthConnectionDependencies {
 		return nil
 	}
 	return b.UsedBy
+}
+
+func (b *BasicAuthResponse) GetStatus() *AuthConnectionStatus {
+	if b == nil {
+		return nil
+	}
+	return b.Status
+}
+
+func (b *BasicAuthResponse) GetStatusDetail() *string {
+	if b == nil {
+		return nil
+	}
+	return b.StatusDetail
+}
+
+func (b *BasicAuthResponse) GetStatusUpdatedAt() *string {
+	if b == nil {
+		return nil
+	}
+	return b.StatusUpdatedAt
 }

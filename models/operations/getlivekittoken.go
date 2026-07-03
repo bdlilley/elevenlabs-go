@@ -8,7 +8,7 @@ import (
 )
 
 type GetLivekitTokenRequest struct {
-	// The id of the agent you're taking the action on.
+	// Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.
 	AgentID string `queryParam:"style=form,explode=true,name=agent_id"`
 	// Optional custom participant name. If not provided, user ID will be used
 	ParticipantName *string `queryParam:"style=form,explode=true,name=participant_name"`

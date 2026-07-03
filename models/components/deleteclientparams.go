@@ -7,7 +7,7 @@ import (
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
-// DeleteClientParams - Delete an existing client from the system.
+// DeleteClientParams - Delete a client, cascading deletion of all their appointments first.
 type DeleteClientParams struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	smbToolType *string `const:"delete_client" json:"smb_tool_type"`

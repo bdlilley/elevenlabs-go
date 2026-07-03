@@ -9,10 +9,18 @@ import (
 type SoftTimeoutConfigWorkflowOverride struct {
 	// Time in seconds before showing the predefined message while waiting for LLM response. Set to -1 to disable.
 	TimeoutSeconds *float64 `json:"timeout_seconds,omitzero"`
-	// Message to show when soft timeout is reached while waiting for LLM response
+	// Message to show when the first soft timeout is reached while waiting for LLM response. Supports dynamic variables (e.g., {{system__time}}, {{custom_variable}}).
 	Message *string `json:"message,omitzero"`
+	// Extra static filler messages for subsequent soft timeouts in the same LLM generation. The first timeout uses `message`. If fewer messages are configured than `max_soft_timeouts_per_generation`, the last configured message is repeated; otherwise a built-in filler is used.
+	AdditionalSoftTimeoutMessages []string `json:"additional_soft_timeout_messages,omitzero"`
 	// If enabled, the soft timeout message will be generated dynamically instead of using the static message.
 	UseLlmGeneratedMessage *bool `json:"use_llm_generated_message,omitzero"`
+	// If enabled, shuffle the order of static soft timeout messages once at the start of each turn. Only applies when use_llm_generated_message is false.
+	RandomizeFillers *bool `json:"randomize_fillers,omitzero"`
+	// Maximum filler messages while waiting for a single LLM response. Fires every timeout_seconds until the LLM streams content or this limit is reached.
+	MaxSoftTimeoutsPerGeneration *int64 `json:"max_soft_timeouts_per_generation,omitzero"`
+	// Custom prompt for generating the soft timeout filler message when use_llm_generated_message is enabled. Recent conversation context is provided as a separate user message. If not set, the default prompt will be used. Supports dynamic variables (e.g., {{system__time}}, {{custom_variable}}).
+	LlmGeneratedMessagePromptOverride *string `json:"llm_generated_message_prompt_override,omitzero"`
 }
 
 func (s SoftTimeoutConfigWorkflowOverride) MarshalJSON() ([]byte, error) {
@@ -40,9 +48,37 @@ func (s *SoftTimeoutConfigWorkflowOverride) GetMessage() *string {
 	return s.Message
 }
 
+func (s *SoftTimeoutConfigWorkflowOverride) GetAdditionalSoftTimeoutMessages() []string {
+	if s == nil {
+		return nil
+	}
+	return s.AdditionalSoftTimeoutMessages
+}
+
 func (s *SoftTimeoutConfigWorkflowOverride) GetUseLlmGeneratedMessage() *bool {
 	if s == nil {
 		return nil
 	}
 	return s.UseLlmGeneratedMessage
+}
+
+func (s *SoftTimeoutConfigWorkflowOverride) GetRandomizeFillers() *bool {
+	if s == nil {
+		return nil
+	}
+	return s.RandomizeFillers
+}
+
+func (s *SoftTimeoutConfigWorkflowOverride) GetMaxSoftTimeoutsPerGeneration() *int64 {
+	if s == nil {
+		return nil
+	}
+	return s.MaxSoftTimeoutsPerGeneration
+}
+
+func (s *SoftTimeoutConfigWorkflowOverride) GetLlmGeneratedMessagePromptOverride() *string {
+	if s == nil {
+		return nil
+	}
+	return s.LlmGeneratedMessagePromptOverride
 }

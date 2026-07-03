@@ -46,6 +46,7 @@ custom := components.WorkspaceResourceType("custom_value")
 | `WorkspaceResourceTypeConvaiAgentVersionsDeployments`         | convai_agent_versions_deployments                             |
 | `WorkspaceResourceTypeConvaiMemoryEntries`                    | convai_memory_entries                                         |
 | `WorkspaceResourceTypeConvaiCoachingProposals`                | convai_coaching_proposals                                     |
+| `WorkspaceResourceTypeConvaiTemplates`                        | convai_templates                                              |
 | `WorkspaceResourceTypeDashboard`                              | dashboard                                                     |
 | `WorkspaceResourceTypeDashboardConfiguration`                 | dashboard_configuration                                       |
 | `WorkspaceResourceTypeConvaiAgentDrafts`                      | convai_agent_drafts                                           |
@@ -54,5 +55,8 @@ custom := components.WorkspaceResourceType("custom_value")
 | `WorkspaceResourceTypeContentGenerations`                     | content_generations                                           |
 | `WorkspaceResourceTypeContentTemplates`                       | content_templates                                             |
 | `WorkspaceResourceTypeSongs`                                  | songs                                                         |
+| `WorkspaceResourceTypeTranscriptionTasks`                     | transcription_tasks                                           |
 | `WorkspaceResourceTypeAvatars`                                | avatars                                                       |
 | `WorkspaceResourceTypeAvatarVideoGenerations`                 | avatar_video_generations                                      |
+| `WorkspaceResourceTypeResourceCollection`                     | resource_collection                                           |
+| `WorkspaceResourceTypeStudioProjects`                         | studio_projects                                               |

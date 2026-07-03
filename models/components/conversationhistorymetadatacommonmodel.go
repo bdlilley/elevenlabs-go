@@ -12,15 +12,26 @@ import (
 type PhoneCallType string
 
 const (
+	PhoneCallTypeExotel      PhoneCallType = "exotel"
 	PhoneCallTypeSipTrunking PhoneCallType = "sip_trunking"
 	PhoneCallTypeTwilio      PhoneCallType = "twilio"
 )
 
 type PhoneCall struct {
 	ConversationHistoryTwilioPhoneCallModel      *ConversationHistoryTwilioPhoneCallModel      `queryParam:"inline" union:"member"`
+	ConversationHistoryExotelPhoneCallModel      *ConversationHistoryExotelPhoneCallModel      `queryParam:"inline" union:"member"`
 	ConversationHistorySIPTrunkingPhoneCallModel *ConversationHistorySIPTrunkingPhoneCallModel `queryParam:"inline" union:"member"`
 
 	Type PhoneCallType
+}
+
+func CreatePhoneCallExotel(exotel ConversationHistoryExotelPhoneCallModel) PhoneCall {
+	typ := PhoneCallTypeExotel
+
+	return PhoneCall{
+		ConversationHistoryExotelPhoneCallModel: &exotel,
+		Type:                                    typ,
+	}
 }
 
 func CreatePhoneCallSipTrunking(sipTrunking ConversationHistorySIPTrunkingPhoneCallModel) PhoneCall {
@@ -53,6 +64,15 @@ func (u *PhoneCall) UnmarshalJSON(data []byte) error {
 	}
 
 	switch dis.Type {
+	case "exotel":
+		conversationHistoryExotelPhoneCallModel := new(ConversationHistoryExotelPhoneCallModel)
+		if err := utils.UnmarshalJSON(data, &conversationHistoryExotelPhoneCallModel, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == exotel) type ConversationHistoryExotelPhoneCallModel within PhoneCall: %w", string(data), err)
+		}
+
+		u.ConversationHistoryExotelPhoneCallModel = conversationHistoryExotelPhoneCallModel
+		u.Type = PhoneCallTypeExotel
+		return nil
 	case "sip_trunking":
 		conversationHistorySIPTrunkingPhoneCallModel := new(ConversationHistorySIPTrunkingPhoneCallModel)
 		if err := utils.UnmarshalJSON(data, &conversationHistorySIPTrunkingPhoneCallModel, "", true, nil); err != nil {
@@ -79,6 +99,10 @@ func (u *PhoneCall) UnmarshalJSON(data []byte) error {
 func (u PhoneCall) MarshalJSON() ([]byte, error) {
 	if u.ConversationHistoryTwilioPhoneCallModel != nil {
 		return utils.MarshalJSON(u.ConversationHistoryTwilioPhoneCallModel, "", true)
+	}
+
+	if u.ConversationHistoryExotelPhoneCallModel != nil {
+		return utils.MarshalJSON(u.ConversationHistoryExotelPhoneCallModel, "", true)
 	}
 
 	if u.ConversationHistorySIPTrunkingPhoneCallModel != nil {
@@ -109,13 +133,17 @@ type ConversationHistoryMetadataCommonModel struct {
 	ElevenAssistant      *ConversationHistoryElevenAssistantCommonModel `json:"eleven_assistant,omitzero"`
 	InitiatorID          *string                                        `json:"initiator_id,omitzero"`
 	// Enum representing the possible sources for conversation initiation.
-	ConversationInitiationSource        *ConversationInitiationSource `default:"unknown" json:"conversation_initiation_source"`
-	ConversationInitiationSourceVersion *string                       `json:"conversation_initiation_source_version,omitzero"`
-	Timezone                            *string                       `json:"timezone,omitzero"`
-	AsyncMetadata                       *AsyncConversationMetadata    `json:"async_metadata,omitzero"`
-	Whatsapp                            *WhatsAppConversationInfo     `json:"whatsapp,omitzero"`
-	AgentCreatedFrom                    *AgentDefinitionSource        `default:"unknown" json:"agent_created_from"`
-	AgentLastUpdatedFrom                *AgentDefinitionSource        `default:"unknown" json:"agent_last_updated_from"`
+	ConversationInitiationSource        *ConversationInitiationSource  `default:"unknown" json:"conversation_initiation_source"`
+	ConversationInitiationSourceVersion *string                        `json:"conversation_initiation_source_version,omitzero"`
+	Timezone                            *string                        `json:"timezone,omitzero"`
+	AsyncMetadata                       *AsyncConversationMetadata     `json:"async_metadata,omitzero"`
+	Whatsapp                            *WhatsAppConversationInfo      `json:"whatsapp,omitzero"`
+	Sms                                 *SMSConversationInfo           `json:"sms,omitzero"`
+	AgentCreatedFrom                    *AgentDefinitionSource         `default:"unknown" json:"agent_created_from"`
+	AgentLastUpdatedFrom                *AgentDefinitionSource         `default:"unknown" json:"agent_last_updated_from"`
+	VoiceRewards                        []ConversationVoiceRewardModel `json:"voice_rewards,omitzero"`
+	// Total fiat cost of the conversation in USD, i.e. the sum of the LLM price and the non-LLM platform price (the fiat analogue of ``cost``). ``None`` when neither is set (e.g. conversations that predate fiat cost tracking).
+	CostFiat *float64 `json:"cost_fiat"`
 }
 
 func (c ConversationHistoryMetadataCommonModel) MarshalJSON() ([]byte, error) {
@@ -190,6 +218,13 @@ func (c *ConversationHistoryMetadataCommonModel) GetPhoneCall() *PhoneCall {
 		return nil
 	}
 	return c.PhoneCall
+}
+
+func (c *ConversationHistoryMetadataCommonModel) GetPhoneCallExotel() *ConversationHistoryExotelPhoneCallModel {
+	if v := c.GetPhoneCall(); v != nil {
+		return v.ConversationHistoryExotelPhoneCallModel
+	}
+	return nil
 }
 
 func (c *ConversationHistoryMetadataCommonModel) GetPhoneCallSipTrunking() *ConversationHistorySIPTrunkingPhoneCallModel {
@@ -311,6 +346,13 @@ func (c *ConversationHistoryMetadataCommonModel) GetWhatsapp() *WhatsAppConversa
 	return c.Whatsapp
 }
 
+func (c *ConversationHistoryMetadataCommonModel) GetSms() *SMSConversationInfo {
+	if c == nil {
+		return nil
+	}
+	return c.Sms
+}
+
 func (c *ConversationHistoryMetadataCommonModel) GetAgentCreatedFrom() *AgentDefinitionSource {
 	if c == nil {
 		return nil
@@ -323,4 +365,18 @@ func (c *ConversationHistoryMetadataCommonModel) GetAgentLastUpdatedFrom() *Agen
 		return nil
 	}
 	return c.AgentLastUpdatedFrom
+}
+
+func (c *ConversationHistoryMetadataCommonModel) GetVoiceRewards() []ConversationVoiceRewardModel {
+	if c == nil {
+		return nil
+	}
+	return c.VoiceRewards
+}
+
+func (c *ConversationHistoryMetadataCommonModel) GetCostFiat() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.CostFiat
 }

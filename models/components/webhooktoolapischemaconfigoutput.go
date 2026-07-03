@@ -301,8 +301,14 @@ type WebhookToolAPISchemaConfigOutput struct {
 	QueryParamsSchema *QueryParamsJSONSchema `json:"query_params_schema,omitzero"`
 	// Schema for the body parameters, if any. Used for POST/PATCH/PUT requests. The schema should be an object which will be sent as the json body
 	RequestBodySchema *ObjectJSONSchemaPropertyOutput `json:"request_body_schema,omitzero"`
+	// Schema describing the expected response body structure. For documentation only; not surfaced to the LLM.
+	ResponseBodySchema *ObjectJSONSchemaPropertyOutput `json:"response_body_schema,omitzero"`
+	// Optional allow-list filter applied to the response before the LLM sees it, so large responses don't pollute the context. Defaults to the full response.
+	ResponseFilter *ResponseFilter `json:"response_filter,omitzero"`
 	// Content type for the request body. Only applies to POST/PUT/PATCH requests.
 	ContentType *WebhookToolAPISchemaConfigOutputContentType `default:"application/json" json:"content_type"`
+	// URL placeholders resolved from the auth connection (e.g. secrets injected via UrlSecretAuthConnection) rather than from path_params_schema.
+	AuthResolvedParams []string `json:"auth_resolved_params,omitzero"`
 	// Optional auth connection to use for authentication with this webhook
 	AuthConnection *WebhookToolAPISchemaConfigOutputAuthConnection `json:"auth_connection,omitzero"`
 }
@@ -360,11 +366,32 @@ func (w *WebhookToolAPISchemaConfigOutput) GetRequestBodySchema() *ObjectJSONSch
 	return w.RequestBodySchema
 }
 
+func (w *WebhookToolAPISchemaConfigOutput) GetResponseBodySchema() *ObjectJSONSchemaPropertyOutput {
+	if w == nil {
+		return nil
+	}
+	return w.ResponseBodySchema
+}
+
+func (w *WebhookToolAPISchemaConfigOutput) GetResponseFilter() *ResponseFilter {
+	if w == nil {
+		return nil
+	}
+	return w.ResponseFilter
+}
+
 func (w *WebhookToolAPISchemaConfigOutput) GetContentType() *WebhookToolAPISchemaConfigOutputContentType {
 	if w == nil {
 		return nil
 	}
 	return w.ContentType
+}
+
+func (w *WebhookToolAPISchemaConfigOutput) GetAuthResolvedParams() []string {
+	if w == nil {
+		return nil
+	}
+	return w.AuthResolvedParams
 }
 
 func (w *WebhookToolAPISchemaConfigOutput) GetAuthConnection() *WebhookToolAPISchemaConfigOutputAuthConnection {

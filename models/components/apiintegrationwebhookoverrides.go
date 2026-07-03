@@ -15,12 +15,14 @@ const (
 	SchemaOverridesTypeConstant        SchemaOverridesType = "constant"
 	SchemaOverridesTypeDynamicVariable SchemaOverridesType = "dynamic_variable"
 	SchemaOverridesTypeLlm             SchemaOverridesType = "llm"
+	SchemaOverridesTypeOmit            SchemaOverridesType = "omit"
 )
 
 type SchemaOverrides struct {
 	ConstantSchemaOverride        *ConstantSchemaOverride        `queryParam:"inline" union:"member"`
 	DynamicVariableSchemaOverride *DynamicVariableSchemaOverride `queryParam:"inline" union:"member"`
 	LLMSchemaOverride             *LLMSchemaOverride             `queryParam:"inline" union:"member"`
+	OmitSchemaOverride            *OmitSchemaOverride            `queryParam:"inline" union:"member"`
 
 	Type SchemaOverridesType
 }
@@ -49,6 +51,15 @@ func CreateSchemaOverridesLlm(llm LLMSchemaOverride) SchemaOverrides {
 	return SchemaOverrides{
 		LLMSchemaOverride: &llm,
 		Type:              typ,
+	}
+}
+
+func CreateSchemaOverridesOmit(omit OmitSchemaOverride) SchemaOverrides {
+	typ := SchemaOverridesTypeOmit
+
+	return SchemaOverrides{
+		OmitSchemaOverride: &omit,
+		Type:               typ,
 	}
 }
 
@@ -91,6 +102,15 @@ func (u *SchemaOverrides) UnmarshalJSON(data []byte) error {
 		u.LLMSchemaOverride = llmSchemaOverride
 		u.Type = SchemaOverridesTypeLlm
 		return nil
+	case "omit":
+		omitSchemaOverride := new(OmitSchemaOverride)
+		if err := utils.UnmarshalJSON(data, &omitSchemaOverride, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Source == omit) type OmitSchemaOverride within SchemaOverrides: %w", string(data), err)
+		}
+
+		u.OmitSchemaOverride = omitSchemaOverride
+		u.Type = SchemaOverridesTypeOmit
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SchemaOverrides", string(data))
@@ -107,6 +127,10 @@ func (u SchemaOverrides) MarshalJSON() ([]byte, error) {
 
 	if u.LLMSchemaOverride != nil {
 		return utils.MarshalJSON(u.LLMSchemaOverride, "", true)
+	}
+
+	if u.OmitSchemaOverride != nil {
+		return utils.MarshalJSON(u.OmitSchemaOverride, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type SchemaOverrides: all fields are null")

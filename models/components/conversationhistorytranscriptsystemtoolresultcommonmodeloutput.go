@@ -13,6 +13,7 @@ type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType st
 
 const (
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeEndCallSuccess                ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "end_call_success"
+	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeKnowledgeBaseRagSuccess       ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "knowledge_base_rag_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeLanguageDetectionSuccess      ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "language_detection_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypePlayDtmfError                 ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "play_dtmf_error"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypePlayDtmfSuccess               ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "play_dtmf_success"
@@ -21,6 +22,7 @@ const (
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToAgentError          ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_agent_error"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToAgentSuccess        ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_agent_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberError         ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_number_error"
+	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberExotelSuccess ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_number_exotel_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberSipSuccess    ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_number_sip_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberTwilioSuccess ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "transfer_to_number_twilio_success"
 	ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeVoicemailDetectionSuccess     ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType = "voicemail_detection_success"
@@ -33,12 +35,14 @@ type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult struct
 	TransferToAgentToolResultErrorModel      *TransferToAgentToolResultErrorModel      `queryParam:"inline" union:"member"`
 	TransferToNumberResultTwilioSuccessModel *TransferToNumberResultTwilioSuccessModel `queryParam:"inline" union:"member"`
 	TransferToNumberResultSipSuccessModel    *TransferToNumberResultSipSuccessModel    `queryParam:"inline" union:"member"`
+	TransferToNumberResultExotelSuccessModel *TransferToNumberResultExotelSuccessModel `queryParam:"inline" union:"member"`
 	TransferToNumberResultErrorModel         *TransferToNumberResultErrorModel         `queryParam:"inline" union:"member"`
 	SkipTurnToolResponseModel                *SkipTurnToolResponseModel                `queryParam:"inline" union:"member"`
 	PlayDTMFResultSuccessModel               *PlayDTMFResultSuccessModel               `queryParam:"inline" union:"member"`
 	PlayDTMFResultErrorModel                 *PlayDTMFResultErrorModel                 `queryParam:"inline" union:"member"`
 	VoiceMailDetectionResultSuccessModel     *VoiceMailDetectionResultSuccessModel     `queryParam:"inline" union:"member"`
 	TestToolResultModel                      *TestToolResultModel                      `queryParam:"inline" union:"member"`
+	KnowledgeBaseRagToolResultModel          *KnowledgeBaseRagToolResultModel          `queryParam:"inline" union:"member"`
 
 	Type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultType
 }
@@ -49,6 +53,15 @@ func CreateConversationHistoryTranscriptSystemToolResultCommonModelOutputResultE
 	return ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult{
 		EndCallToolResultModel: &endCallSuccess,
 		Type:                   typ,
+	}
+}
+
+func CreateConversationHistoryTranscriptSystemToolResultCommonModelOutputResultKnowledgeBaseRagSuccess(knowledgeBaseRagSuccess KnowledgeBaseRagToolResultModel) ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult {
+	typ := ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeKnowledgeBaseRagSuccess
+
+	return ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult{
+		KnowledgeBaseRagToolResultModel: &knowledgeBaseRagSuccess,
+		Type:                            typ,
 	}
 }
 
@@ -124,6 +137,15 @@ func CreateConversationHistoryTranscriptSystemToolResultCommonModelOutputResultT
 	}
 }
 
+func CreateConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTransferToNumberExotelSuccess(transferToNumberExotelSuccess TransferToNumberResultExotelSuccessModel) ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult {
+	typ := ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberExotelSuccess
+
+	return ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult{
+		TransferToNumberResultExotelSuccessModel: &transferToNumberExotelSuccess,
+		Type:                                     typ,
+	}
+}
+
 func CreateConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTransferToNumberSipSuccess(transferToNumberSipSuccess TransferToNumberResultSipSuccessModel) ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult {
 	typ := ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberSipSuccess
 
@@ -171,6 +193,15 @@ func (u *ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) U
 
 		u.EndCallToolResultModel = endCallToolResultModel
 		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeEndCallSuccess
+		return nil
+	case "knowledge_base_rag_success":
+		knowledgeBaseRagToolResultModel := new(KnowledgeBaseRagToolResultModel)
+		if err := utils.UnmarshalJSON(data, &knowledgeBaseRagToolResultModel, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (ResultType == knowledge_base_rag_success) type KnowledgeBaseRagToolResultModel within ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult: %w", string(data), err)
+		}
+
+		u.KnowledgeBaseRagToolResultModel = knowledgeBaseRagToolResultModel
+		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeKnowledgeBaseRagSuccess
 		return nil
 	case "language_detection_success":
 		languageDetectionToolResultModel := new(LanguageDetectionToolResultModel)
@@ -244,6 +275,15 @@ func (u *ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) U
 		u.TransferToNumberResultErrorModel = transferToNumberResultErrorModel
 		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberError
 		return nil
+	case "transfer_to_number_exotel_success":
+		transferToNumberResultExotelSuccessModel := new(TransferToNumberResultExotelSuccessModel)
+		if err := utils.UnmarshalJSON(data, &transferToNumberResultExotelSuccessModel, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (ResultType == transfer_to_number_exotel_success) type TransferToNumberResultExotelSuccessModel within ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult: %w", string(data), err)
+		}
+
+		u.TransferToNumberResultExotelSuccessModel = transferToNumberResultExotelSuccessModel
+		u.Type = ConversationHistoryTranscriptSystemToolResultCommonModelOutputResultTypeTransferToNumberExotelSuccess
+		return nil
 	case "transfer_to_number_sip_success":
 		transferToNumberResultSipSuccessModel := new(TransferToNumberResultSipSuccessModel)
 		if err := utils.UnmarshalJSON(data, &transferToNumberResultSipSuccessModel, "", true, nil); err != nil {
@@ -301,6 +341,10 @@ func (u ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) Ma
 		return utils.MarshalJSON(u.TransferToNumberResultSipSuccessModel, "", true)
 	}
 
+	if u.TransferToNumberResultExotelSuccessModel != nil {
+		return utils.MarshalJSON(u.TransferToNumberResultExotelSuccessModel, "", true)
+	}
+
 	if u.TransferToNumberResultErrorModel != nil {
 		return utils.MarshalJSON(u.TransferToNumberResultErrorModel, "", true)
 	}
@@ -325,6 +369,10 @@ func (u ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult) Ma
 		return utils.MarshalJSON(u.TestToolResultModel, "", true)
 	}
 
+	if u.KnowledgeBaseRagToolResultModel != nil {
+		return utils.MarshalJSON(u.KnowledgeBaseRagToolResultModel, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type ConversationHistoryTranscriptSystemToolResultCommonModelOutputResult: all fields are null")
 }
 
@@ -333,6 +381,7 @@ type ConversationHistoryTranscriptSystemToolResultCommonModelOutput struct {
 	ToolName               string                             `json:"tool_name"`
 	ResultValue            string                             `json:"result_value"`
 	IsError                bool                               `json:"is_error"`
+	IsBlocked              *bool                              `default:"false" json:"is_blocked"`
 	ToolHasBeenCalled      bool                               `json:"tool_has_been_called"`
 	ToolLatencySecs        *float64                           `default:"0" json:"tool_latency_secs"`
 	ErrorType              *string                            `default:"" json:"error_type"`
@@ -380,6 +429,13 @@ func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetIsEr
 		return false
 	}
 	return c.IsError
+}
+
+func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetIsBlocked() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.IsBlocked
 }
 
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetToolHasBeenCalled() bool {
@@ -431,6 +487,13 @@ func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResu
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultEndCallSuccess() *EndCallToolResultModel {
 	if v := c.GetResult(); v != nil {
 		return v.EndCallToolResultModel
+	}
+	return nil
+}
+
+func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultKnowledgeBaseRagSuccess() *KnowledgeBaseRagToolResultModel {
+	if v := c.GetResult(); v != nil {
+		return v.KnowledgeBaseRagToolResultModel
 	}
 	return nil
 }
@@ -487,6 +550,13 @@ func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResu
 func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTransferToNumberError() *TransferToNumberResultErrorModel {
 	if v := c.GetResult(); v != nil {
 		return v.TransferToNumberResultErrorModel
+	}
+	return nil
+}
+
+func (c *ConversationHistoryTranscriptSystemToolResultCommonModelOutput) GetResultTransferToNumberExotelSuccess() *TransferToNumberResultExotelSuccessModel {
+	if v := c.GetResult(); v != nil {
+		return v.TransferToNumberResultExotelSuccessModel
 	}
 	return nil
 }

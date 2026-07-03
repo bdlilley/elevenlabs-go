@@ -1,0 +1,11 @@
+# ExotelOutboundCallResponse
+
+
+## Fields
+
+| Field                                  | Type                                   | Required                               | Description                            |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `Success`                              | `bool`                                 | :heavy_check_mark:                     | N/A                                    |
+| `Message`                              | `string`                               | :heavy_check_mark:                     | N/A                                    |
+| `ConversationID`                       | `*string`                              | :heavy_check_mark:                     | N/A                                    |
+| `CallSid`                              | `*string`                              | :heavy_check_mark:                     | Exotel CallSid for the originated call |

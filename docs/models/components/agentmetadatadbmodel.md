@@ -1,0 +1,11 @@
+# AgentMetadataDBModel
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `CreatedAtUnixSecs`                                                                   | `int64`                                                                               | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `UpdatedAtUnixSecs`                                                                   | `int64`                                                                               | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `CreatedFrom`                                                                         | [*components.AgentDefinitionSource](../../models/components/agentdefinitionsource.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `LastUpdatedFrom`                                                                     | [*components.AgentDefinitionSource](../../models/components/agentdefinitionsource.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |

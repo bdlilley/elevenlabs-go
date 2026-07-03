@@ -1,0 +1,9 @@
+# PublicRemoveOrderItemResponse
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                        | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
+| `RemoveOrderItemResponse`                                                                 | [*components.RemoveOrderItemResponse](../../models/components/removeorderitemresponse.md) | :heavy_minus_sign:                                                                        | Successful Response                                                                       | {<br/>"success": true<br/>}                                                               |

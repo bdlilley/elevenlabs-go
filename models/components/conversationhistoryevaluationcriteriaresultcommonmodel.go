@@ -2,10 +2,28 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
 type ConversationHistoryEvaluationCriteriaResultCommonModel struct {
-	CriteriaID string                  `json:"criteria_id"`
-	Result     EvaluationSuccessResult `json:"result"`
-	Rationale  string                  `json:"rationale"`
+	CriteriaID  string                  `json:"criteria_id"`
+	Result      EvaluationSuccessResult `json:"result"`
+	Rationale   string                  `json:"rationale"`
+	ScoringMode *CriteriaScoringMode    `default:"binary" json:"scoring_mode"`
+	Score       *int64                  `json:"score,omitzero"`
+	MaxScore    *int64                  `json:"max_score,omitzero"`
+}
+
+func (c ConversationHistoryEvaluationCriteriaResultCommonModel) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ConversationHistoryEvaluationCriteriaResultCommonModel) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (c *ConversationHistoryEvaluationCriteriaResultCommonModel) GetCriteriaID() string {
@@ -27,4 +45,25 @@ func (c *ConversationHistoryEvaluationCriteriaResultCommonModel) GetRationale() 
 		return ""
 	}
 	return c.Rationale
+}
+
+func (c *ConversationHistoryEvaluationCriteriaResultCommonModel) GetScoringMode() *CriteriaScoringMode {
+	if c == nil {
+		return nil
+	}
+	return c.ScoringMode
+}
+
+func (c *ConversationHistoryEvaluationCriteriaResultCommonModel) GetScore() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.Score
+}
+
+func (c *ConversationHistoryEvaluationCriteriaResultCommonModel) GetMaxScore() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.MaxScore
 }

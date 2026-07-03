@@ -7,12 +7,15 @@ import (
 )
 
 type AgentTransfer struct {
-	AgentID                            string  `json:"agent_id"`
+	AgentID                            *string `json:"agent_id,omitzero"`
+	NodeID                             *string `json:"node_id,omitzero"`
 	Condition                          string  `json:"condition"`
 	DelayMs                            *int64  `default:"0" json:"delay_ms"`
 	TransferMessage                    *string `json:"transfer_message,omitzero"`
 	EnableTransferredAgentFirstMessage *bool   `default:"false" json:"enable_transferred_agent_first_message"`
 	IsWorkflowNodeTransfer             *bool   `default:"false" json:"is_workflow_node_transfer"`
+	// Defines whether TTS client overrides should be carried over to the transferred agent.
+	PreserveClientTtsOverrides *bool `default:"false" json:"preserve_client_tts_overrides"`
 }
 
 func (a AgentTransfer) MarshalJSON() ([]byte, error) {
@@ -26,11 +29,18 @@ func (a *AgentTransfer) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *AgentTransfer) GetAgentID() string {
+func (a *AgentTransfer) GetAgentID() *string {
 	if a == nil {
-		return ""
+		return nil
 	}
 	return a.AgentID
+}
+
+func (a *AgentTransfer) GetNodeID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.NodeID
 }
 
 func (a *AgentTransfer) GetCondition() string {
@@ -66,4 +76,11 @@ func (a *AgentTransfer) GetIsWorkflowNodeTransfer() *bool {
 		return nil
 	}
 	return a.IsWorkflowNodeTransfer
+}
+
+func (a *AgentTransfer) GetPreserveClientTtsOverrides() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.PreserveClientTtsOverrides
 }

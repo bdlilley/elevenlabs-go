@@ -1,0 +1,12 @@
+# ListSpeechEnginesRequest
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `PageSize`                                                                        | `*int64`                                                                          | :heavy_minus_sign:                                                                | How many Speech Engines to return at maximum. Can not exceed 100, defaults to 30. |
+| `Search`                                                                          | `*string`                                                                         | :heavy_minus_sign:                                                                | Search term to filter Speech Engines by name                                      |
+| `SortDirection`                                                                   | [*components.SortDirection](../../models/components/sortdirection.md)             | :heavy_minus_sign:                                                                | The direction to sort the results                                                 |
+| `SortBy`                                                                          | [*components.AgentSortBy](../../models/components/agentsortby.md)                 | :heavy_minus_sign:                                                                | The field to sort the results by                                                  |
+| `Cursor`                                                                          | `*string`                                                                         | :heavy_minus_sign:                                                                | Used for fetching next page. Cursor is returned in the response.                  |

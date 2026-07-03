@@ -16,8 +16,14 @@ custom := components.CaptionStyleSectionAnimationModelEnterType("custom_value")
 
 ## Values
 
-| Name                                              | Value                                             |
-| ------------------------------------------------- | ------------------------------------------------- |
-| `CaptionStyleSectionAnimationModelEnterTypeNone`  | none                                              |
-| `CaptionStyleSectionAnimationModelEnterTypeFade`  | fade                                              |
-| `CaptionStyleSectionAnimationModelEnterTypeScale` | scale                                             |
+| Name                                                  | Value                                                 |
+| ----------------------------------------------------- | ----------------------------------------------------- |
+| `CaptionStyleSectionAnimationModelEnterTypeNone`      | none                                                  |
+| `CaptionStyleSectionAnimationModelEnterTypeFade`      | fade                                                  |
+| `CaptionStyleSectionAnimationModelEnterTypeScale`     | scale                                                 |
+| `CaptionStyleSectionAnimationModelEnterTypePop`       | pop                                                   |
+| `CaptionStyleSectionAnimationModelEnterTypeSlideUp`   | slide_up                                              |
+| `CaptionStyleSectionAnimationModelEnterTypeSlideDown` | slide_down                                            |
+| `CaptionStyleSectionAnimationModelEnterTypeSlam`      | slam                                                  |
+| `CaptionStyleSectionAnimationModelEnterTypeScaleDown` | scale_down                                            |
+| `CaptionStyleSectionAnimationModelEnterTypeSlideIn`   | slide_in                                              |

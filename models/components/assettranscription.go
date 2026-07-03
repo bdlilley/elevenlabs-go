@@ -6,10 +6,33 @@ import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
+type AssetTranscriptionStatus string
+
+const (
+	AssetTranscriptionStatusProcessing AssetTranscriptionStatus = "processing"
+	AssetTranscriptionStatusCompleted  AssetTranscriptionStatus = "completed"
+	AssetTranscriptionStatusFailed     AssetTranscriptionStatus = "failed"
+)
+
+func (e AssetTranscriptionStatus) ToPointer() *AssetTranscriptionStatus {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AssetTranscriptionStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "processing", "completed", "failed":
+			return true
+		}
+	}
+	return false
+}
+
 type AssetTranscription struct {
-	LanguageCode string                   `json:"language_code"`
-	Text         string                   `json:"text"`
-	Words        []AssetTranscriptionWord `json:"words"`
+	Status      AssetTranscriptionStatus `json:"status"`
+	Data        *AssetTranscriptionData  `json:"data"`
+	UpdatedAtMs *int64                   `json:"updated_at_ms,omitzero"`
 }
 
 func (a AssetTranscription) MarshalJSON() ([]byte, error) {
@@ -23,23 +46,23 @@ func (a *AssetTranscription) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *AssetTranscription) GetLanguageCode() string {
+func (a *AssetTranscription) GetStatus() AssetTranscriptionStatus {
 	if a == nil {
-		return ""
+		return AssetTranscriptionStatus("")
 	}
-	return a.LanguageCode
+	return a.Status
 }
 
-func (a *AssetTranscription) GetText() string {
+func (a *AssetTranscription) GetData() *AssetTranscriptionData {
 	if a == nil {
-		return ""
+		return nil
 	}
-	return a.Text
+	return a.Data
 }
 
-func (a *AssetTranscription) GetWords() []AssetTranscriptionWord {
+func (a *AssetTranscription) GetUpdatedAtMs() *int64 {
 	if a == nil {
-		return []AssetTranscriptionWord{}
+		return nil
 	}
-	return a.Words
+	return a.UpdatedAtMs
 }

@@ -1,0 +1,13 @@
+# ConversationTTSUsageModel
+
+Aggregated TTS usage for a conversation (analytics-only, not billing).
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `PrimaryTtsModel`                                                                                  | `*string`                                                                                          | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `TotalAudioOutputSeconds`                                                                          | `*float64`                                                                                         | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `TotalCharacters`                                                                                  | `*int64`                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `PerVoiceUsage`                                                                                    | [][components.ConversationVoiceUsageModel](../../models/components/conversationvoiceusagemodel.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

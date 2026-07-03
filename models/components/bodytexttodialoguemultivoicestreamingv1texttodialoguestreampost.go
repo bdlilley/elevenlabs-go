@@ -39,11 +39,11 @@ func (e *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTex
 }
 
 type BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost struct {
-	// A list of dialogue inputs, each containing text and a voice ID which will be converted into speech. The maximum number of unique voice IDs is 10.
+	// A list of dialogue inputs, each containing text and a voice ID which will be converted into speech. The maximum number of unique voice IDs is 10. For reliable generation, keep the total character count across all `inputs[].text` values at or below 2,000 characters per request. Longer requests can terminate early in streaming responses or return a validation error.
 	Inputs []DialogueInput `json:"inputs"`
 	// Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property.
 	ModelID *string `default:"eleven_v3" json:"model_id"`
-	// Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support provided language code, an error will be returned.
+	// Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support the provided language code, it will be ignored. This parameter is not supported for multilingual_v2 models.
 	LanguageCode *string `json:"language_code,omitzero"`
 	// Settings controlling the dialogue generation.
 	Settings *ModelSettingsResponseModel `json:"settings,omitzero"`
@@ -53,8 +53,6 @@ type BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost struct {
 	Seed *int64 `json:"seed,omitzero"`
 	// This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped.
 	ApplyTextNormalization *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPostApplyTextNormalization `default:"auto" json:"apply_text_normalization"`
-	// Avatar context when this generation is made from the Avatars video editor.
-	AvatarContext *AvatarContextRequestModel `json:"avatar_context,omitzero"`
 }
 
 func (b BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) MarshalJSON() ([]byte, error) {
@@ -115,13 +113,6 @@ func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetApp
 		return nil
 	}
 	return b.ApplyTextNormalization
-}
-
-func (b *BodyTextToDialogueMultiVoiceStreamingV1TextToDialogueStreamPost) GetAvatarContext() *AvatarContextRequestModel {
-	if b == nil {
-		return nil
-	}
-	return b.AvatarContext
 }
 
 // #region class-body-bodytexttodialoguemultivoicestreamingv1texttodialoguestreampost

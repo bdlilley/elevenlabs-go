@@ -56,6 +56,15 @@ type PrivateKeyJWTResponse struct {
 	ExtraParams map[string]string           `json:"extra_params,omitzero"`
 	ID          string                      `json:"id"`
 	UsedBy      *AuthConnectionDependencies `json:"used_by,omitzero"`
+	// Single status field shared by every auth type's stored credential.
+	//
+	// OAuth values (``REFRESH_FAILED``, ``REVOKED``) are written by the OAuth
+	// token-manager refresh path. ``CREDENTIAL_INVALID`` is written by the
+	// tool execution path when an upstream response matches a credential's
+	// ``failure_signatures`` entry (Bearer, Basic auth, etc.).
+	Status          *AuthConnectionStatus `default:"active" json:"status"`
+	StatusDetail    *string               `json:"status_detail,omitzero"`
+	StatusUpdatedAt *string               `json:"status_updated_at,omitzero"`
 }
 
 func (p PrivateKeyJWTResponse) MarshalJSON() ([]byte, error) {
@@ -148,4 +157,25 @@ func (p *PrivateKeyJWTResponse) GetUsedBy() *AuthConnectionDependencies {
 		return nil
 	}
 	return p.UsedBy
+}
+
+func (p *PrivateKeyJWTResponse) GetStatus() *AuthConnectionStatus {
+	if p == nil {
+		return nil
+	}
+	return p.Status
+}
+
+func (p *PrivateKeyJWTResponse) GetStatusDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StatusDetail
+}
+
+func (p *PrivateKeyJWTResponse) GetStatusUpdatedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StatusUpdatedAt
 }

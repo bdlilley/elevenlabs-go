@@ -36,10 +36,45 @@ func (e *GetConversationHistoriesRouteSummaryMode) UnmarshalJSON(data []byte) er
 	}
 }
 
+type ExcludeStatus string
+
+const (
+	ExcludeStatusInitiated  ExcludeStatus = "initiated"
+	ExcludeStatusInProgress ExcludeStatus = "in-progress"
+	ExcludeStatusProcessing ExcludeStatus = "processing"
+	ExcludeStatusDone       ExcludeStatus = "done"
+	ExcludeStatusFailed     ExcludeStatus = "failed"
+)
+
+func (e ExcludeStatus) ToPointer() *ExcludeStatus {
+	return &e
+}
+func (e *ExcludeStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "initiated":
+		fallthrough
+	case "in-progress":
+		fallthrough
+	case "processing":
+		fallthrough
+	case "done":
+		fallthrough
+	case "failed":
+		*e = ExcludeStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ExcludeStatus: %v", v)
+	}
+}
+
 type GetConversationHistoriesRouteRequest struct {
 	// Used for fetching next page. Cursor is returned in the response.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
-	// The id of the agent you're taking the action on.
+	// Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.
 	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// The result of the success evaluation
 	CallSuccessful *components.EvaluationSuccessResult `queryParam:"style=form,explode=true,name=call_successful"`
@@ -81,8 +116,21 @@ type GetConversationHistoriesRouteRequest struct {
 	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Enum representing the possible sources for conversation initiation.
 	ConversationInitiationSource *components.ConversationInitiationSource `default:"unknown" queryParam:"style=form,explode=true,name=conversation_initiation_source"`
+	TextOnly                     *bool                                    `queryParam:"style=form,explode=true,name=text_only"`
+	// Restrict results to a single conversation product surface.
+	ConversationProductType *components.ConversationProduct `queryParam:"style=form,explode=true,name=conversation_product_type"`
 	// Filter conversations by branch ID.
 	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
+	// Filter conversations by topic IDs assigned during topic discovery.
+	TopicIds []string `queryParam:"style=form,explode=true,name=topic_ids"`
+	// Exclude conversations with the given statuses. Useful for hiding in-progress / processing conversations from list views.
+	ExcludeStatuses []ExcludeStatus `queryParam:"style=form,explode=true,name=exclude_statuses"`
+	// Filter conversations by conversation tag IDs assigned via the conversation-tags endpoints.
+	TagIds []string `queryParam:"style=form,explode=true,name=tag_ids"`
+	// Filter conversations to only those that entered the given node.
+	WorkflowNodeEnteredID *string `queryParam:"style=form,explode=true,name=workflow_node_entered_id"`
+	// Filter conversations by their stored termination_reason (metadata.termination_reason). Repeat param to match any of several.
+	TerminationReasons []string `queryParam:"style=form,explode=true,name=termination_reasons"`
 }
 
 func (g GetConversationHistoriesRouteRequest) MarshalJSON() ([]byte, error) {
@@ -243,11 +291,60 @@ func (g *GetConversationHistoriesRouteRequest) GetConversationInitiationSource()
 	return g.ConversationInitiationSource
 }
 
+func (g *GetConversationHistoriesRouteRequest) GetTextOnly() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.TextOnly
+}
+
+func (g *GetConversationHistoriesRouteRequest) GetConversationProductType() *components.ConversationProduct {
+	if g == nil {
+		return nil
+	}
+	return g.ConversationProductType
+}
+
 func (g *GetConversationHistoriesRouteRequest) GetBranchID() *string {
 	if g == nil {
 		return nil
 	}
 	return g.BranchID
+}
+
+func (g *GetConversationHistoriesRouteRequest) GetTopicIds() []string {
+	if g == nil {
+		return nil
+	}
+	return g.TopicIds
+}
+
+func (g *GetConversationHistoriesRouteRequest) GetExcludeStatuses() []ExcludeStatus {
+	if g == nil {
+		return nil
+	}
+	return g.ExcludeStatuses
+}
+
+func (g *GetConversationHistoriesRouteRequest) GetTagIds() []string {
+	if g == nil {
+		return nil
+	}
+	return g.TagIds
+}
+
+func (g *GetConversationHistoriesRouteRequest) GetWorkflowNodeEnteredID() *string {
+	if g == nil {
+		return nil
+	}
+	return g.WorkflowNodeEnteredID
+}
+
+func (g *GetConversationHistoriesRouteRequest) GetTerminationReasons() []string {
+	if g == nil {
+		return nil
+	}
+	return g.TerminationReasons
 }
 
 type GetConversationHistoriesRouteResponse struct {

@@ -32,11 +32,12 @@ func (e *GetConversationResponseModelStatus) IsExact() bool {
 }
 
 type GetConversationResponseModel struct {
-	AgentID   string                             `json:"agent_id"`
-	AgentName *string                            `json:"agent_name,omitzero"`
-	Status    GetConversationResponseModelStatus `json:"status"`
-	UserID    *string                            `json:"user_id,omitzero"`
-	BranchID  *string                            `json:"branch_id,omitzero"`
+	AgentID             string                             `json:"agent_id"`
+	AgentName           *string                            `json:"agent_name,omitzero"`
+	ConversationProduct *string                            `default:"agent" json:"conversation_product"`
+	Status              GetConversationResponseModelStatus `json:"status"`
+	UserID              *string                            `json:"user_id,omitzero"`
+	BranchID            *string                            `json:"branch_id,omitzero"`
 	// The ID of the agent version used for this conversation
 	VersionID                        *string                                        `json:"version_id,omitzero"`
 	Metadata                         ConversationHistoryMetadataCommonModel         `json:"metadata"`
@@ -49,6 +50,10 @@ type GetConversationResponseModel struct {
 	HasUserAudio                     bool                                           `json:"has_user_audio"`
 	HasResponseAudio                 bool                                           `json:"has_response_audio"`
 	Transcript                       []ConversationHistoryTranscriptResponseModel   `json:"transcript"`
+	// Conversation tag ids assigned to this conversation.
+	TagIds []string `json:"tag_ids,omitzero"`
+	// OpenTelemetry trace payload when the request uses format=opentelemetry; otherwise omitted.
+	OtlpTraces map[string]any `json:"otlp_traces,omitzero"`
 }
 
 func (g GetConversationResponseModel) MarshalJSON() ([]byte, error) {
@@ -74,6 +79,13 @@ func (g *GetConversationResponseModel) GetAgentName() *string {
 		return nil
 	}
 	return g.AgentName
+}
+
+func (g *GetConversationResponseModel) GetConversationProduct() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ConversationProduct
 }
 
 func (g *GetConversationResponseModel) GetStatus() GetConversationResponseModelStatus {
@@ -172,4 +184,18 @@ func (g *GetConversationResponseModel) GetTranscript() []ConversationHistoryTran
 		return []ConversationHistoryTranscriptResponseModel{}
 	}
 	return g.Transcript
+}
+
+func (g *GetConversationResponseModel) GetTagIds() []string {
+	if g == nil {
+		return nil
+	}
+	return g.TagIds
+}
+
+func (g *GetConversationResponseModel) GetOtlpTraces() map[string]any {
+	if g == nil {
+		return nil
+	}
+	return g.OtlpTraces
 }

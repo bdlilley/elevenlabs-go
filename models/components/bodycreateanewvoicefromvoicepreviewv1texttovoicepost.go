@@ -11,7 +11,7 @@ type BodyCreateANewVoiceFromVoicePreviewV1TextToVoicePost struct {
 	VoiceName string `json:"voice_name"`
 	// Description to use for the created voice.
 	VoiceDescription string `json:"voice_description"`
-	// The generated_voice_id to create, call POST /v1/text-to-voice/create-previews and fetch the generated_voice_id from the response header if don't have one yet.
+	// The generated_voice_id to create; obtain it from POST /v1/text-to-voice/design, POST /v1/text-to-voice/:voice_id/remix, or the response headers when generating previews.
 	GeneratedVoiceID string `json:"generated_voice_id"`
 	// Optional, metadata to add to the created voice. Defaults to None.
 	Labels map[string]string `json:"labels,omitzero"`

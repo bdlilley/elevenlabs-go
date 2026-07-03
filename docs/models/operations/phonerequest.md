@@ -11,6 +11,12 @@ Create Phone Request Information
 phoneRequest := operations.CreatePhoneRequestCreateTwilioPhoneNumberRequest(components.CreateTwilioPhoneNumberRequest{/* values here */})
 ```
 
+### CreateExotelPhoneNumberRequest
+
+```go
+phoneRequest := operations.CreatePhoneRequestCreateExotelPhoneNumberRequest(components.CreateExotelPhoneNumberRequest{/* values here */})
+```
+
 ### CreateSIPTrunkPhoneNumberRequestV2
 
 ```go
@@ -25,6 +31,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch phoneRequest.Type {
 	case operations.PhoneRequestTypeCreateTwilioPhoneNumberRequest:
 		// phoneRequest.CreateTwilioPhoneNumberRequest is populated
+	case operations.PhoneRequestTypeCreateExotelPhoneNumberRequest:
+		// phoneRequest.CreateExotelPhoneNumberRequest is populated
 	case operations.PhoneRequestTypeCreateSIPTrunkPhoneNumberRequestV2:
 		// phoneRequest.CreateSIPTrunkPhoneNumberRequestV2 is populated
 }

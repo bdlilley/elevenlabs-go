@@ -14,12 +14,16 @@ type GetPhoneNumberOutboundSIPTrunkConfigResponseModel struct {
 	MediaEncryption *SIPMediaEncryptionEnum `default:"allowed" json:"media_encryption"`
 	// SIP headers for INVITE request
 	Headers map[string]string `json:"headers,omitzero"`
+	// Map of dynamic variable name to header name for attributes_to_headers
+	AttributesToHeaders map[string]string `json:"attributes_to_headers,omitzero"`
 	// Whether authentication credentials are configured
 	HasAuthCredentials bool `json:"has_auth_credentials"`
 	// SIP trunk username (if available)
 	Username *string `json:"username,omitzero"`
 	// Whether a LiveKit SIP outbound trunk is configured
 	HasOutboundTrunk *bool `default:"false" json:"has_outbound_trunk"`
+	// Media codecs that are offered in the SDP for outbound calls. If empty, all supported codecs are offered.
+	EnabledCodecs []MediaCodec `json:"enabled_codecs,omitzero"`
 }
 
 func (g GetPhoneNumberOutboundSIPTrunkConfigResponseModel) MarshalJSON() ([]byte, error) {
@@ -61,6 +65,13 @@ func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetHeaders() map[str
 	return g.Headers
 }
 
+func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetAttributesToHeaders() map[string]string {
+	if g == nil {
+		return nil
+	}
+	return g.AttributesToHeaders
+}
+
 func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetHasAuthCredentials() bool {
 	if g == nil {
 		return false
@@ -80,4 +91,11 @@ func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetHasOutboundTrunk(
 		return nil
 	}
 	return g.HasOutboundTrunk
+}
+
+func (g *GetPhoneNumberOutboundSIPTrunkConfigResponseModel) GetEnabledCodecs() []MediaCodec {
+	if g == nil {
+		return nil
+	}
+	return g.EnabledCodecs
 }

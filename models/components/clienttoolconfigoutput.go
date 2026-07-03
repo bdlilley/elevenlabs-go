@@ -17,10 +17,16 @@ type ClientToolConfigOutput struct {
 	Description string `json:"description"`
 	// The maximum time in seconds to wait for the tool call to complete. Must be between 1 and 120 seconds (inclusive).
 	ResponseTimeoutSecs *int64 `default:"20" json:"response_timeout_secs"`
-	// If true, the user will not be able to interrupt the agent while this tool is running.
-	DisableInterruptions *bool `default:"false" json:"disable_interruptions"`
-	// If true, the agent will speak before the tool call.
-	ForcePreToolSpeech *bool `default:"false" json:"force_pre_tool_speech"`
+	// DEPRECATED: use `interruption_mode` instead. If true, the user will not be able to interrupt the agent while this tool is running.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DisableInterruptions *bool                 `default:"false" json:"disable_interruptions"`
+	InterruptionMode     *ToolInterruptionMode `default:"allow" json:"interruption_mode"`
+	// DEPRECATED: use `pre_tool_speech` instead. If true, the agent will speak before the tool call.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	ForcePreToolSpeech *bool              `default:"false" json:"force_pre_tool_speech"`
+	PreToolSpeech      *PreToolSpeechMode `default:"auto" json:"pre_tool_speech"`
 	// Configuration for extracting values from tool responses and assigning them to dynamic variables
 	Assignments []DynamicVariableAssignment `json:"assignments,omitzero"`
 	// Predefined tool call sound type to play during tool execution. If not specified, no tool call sound will be played.
@@ -80,11 +86,25 @@ func (c *ClientToolConfigOutput) GetDisableInterruptions() *bool {
 	return c.DisableInterruptions
 }
 
+func (c *ClientToolConfigOutput) GetInterruptionMode() *ToolInterruptionMode {
+	if c == nil {
+		return nil
+	}
+	return c.InterruptionMode
+}
+
 func (c *ClientToolConfigOutput) GetForcePreToolSpeech() *bool {
 	if c == nil {
 		return nil
 	}
 	return c.ForcePreToolSpeech
+}
+
+func (c *ClientToolConfigOutput) GetPreToolSpeech() *PreToolSpeechMode {
+	if c == nil {
+		return nil
+	}
+	return c.PreToolSpeech
 }
 
 func (c *ClientToolConfigOutput) GetAssignments() []DynamicVariableAssignment {

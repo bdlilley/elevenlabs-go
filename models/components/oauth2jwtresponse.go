@@ -34,6 +34,29 @@ func (e *OAuth2JWTResponseAlgorithm) IsExact() bool {
 	return false
 }
 
+// OAuth2JWTResponseTokenResponseField - Token field to extract from the token endpoint response.
+type OAuth2JWTResponseTokenResponseField string
+
+const (
+	OAuth2JWTResponseTokenResponseFieldAccessToken OAuth2JWTResponseTokenResponseField = "access_token"
+	OAuth2JWTResponseTokenResponseFieldIDToken     OAuth2JWTResponseTokenResponseField = "id_token"
+)
+
+func (e OAuth2JWTResponseTokenResponseField) ToPointer() *OAuth2JWTResponseTokenResponseField {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *OAuth2JWTResponseTokenResponseField) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "access_token", "id_token":
+			return true
+		}
+	}
+	return false
+}
+
 // OAuth2JWTResponse - Response model for OAuth2 JWT auth connections
 type OAuth2JWTResponse struct {
 	Name string `json:"name"`
@@ -57,9 +80,20 @@ type OAuth2JWTResponse struct {
 	// Token endpoint URL for exchanging JWT for access token
 	TokenURL string `json:"token_url"`
 	// OAuth2 scopes to request when exchanging JWT for access token
-	Scopes []string                    `json:"scopes,omitzero"`
-	ID     string                      `json:"id"`
-	UsedBy *AuthConnectionDependencies `json:"used_by,omitzero"`
+	Scopes []string `json:"scopes,omitzero"`
+	// Token field to extract from the token endpoint response.
+	TokenResponseField *OAuth2JWTResponseTokenResponseField `default:"access_token" json:"token_response_field"`
+	ID                 string                               `json:"id"`
+	UsedBy             *AuthConnectionDependencies          `json:"used_by,omitzero"`
+	// Single status field shared by every auth type's stored credential.
+	//
+	// OAuth values (``REFRESH_FAILED``, ``REVOKED``) are written by the OAuth
+	// token-manager refresh path. ``CREDENTIAL_INVALID`` is written by the
+	// tool execution path when an upstream response matches a credential's
+	// ``failure_signatures`` entry (Bearer, Basic auth, etc.).
+	Status          *AuthConnectionStatus `default:"active" json:"status"`
+	StatusDetail    *string               `json:"status_detail,omitzero"`
+	StatusUpdatedAt *string               `json:"status_updated_at,omitzero"`
 }
 
 func (o OAuth2JWTResponse) MarshalJSON() ([]byte, error) {
@@ -154,6 +188,13 @@ func (o *OAuth2JWTResponse) GetScopes() []string {
 	return o.Scopes
 }
 
+func (o *OAuth2JWTResponse) GetTokenResponseField() *OAuth2JWTResponseTokenResponseField {
+	if o == nil {
+		return nil
+	}
+	return o.TokenResponseField
+}
+
 func (o *OAuth2JWTResponse) GetID() string {
 	if o == nil {
 		return ""
@@ -166,6 +207,27 @@ func (o *OAuth2JWTResponse) GetUsedBy() *AuthConnectionDependencies {
 		return nil
 	}
 	return o.UsedBy
+}
+
+func (o *OAuth2JWTResponse) GetStatus() *AuthConnectionStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *OAuth2JWTResponse) GetStatusDetail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StatusDetail
+}
+
+func (o *OAuth2JWTResponse) GetStatusUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StatusUpdatedAt
 }
 
 // #region class-body-oauth2jwtresponse

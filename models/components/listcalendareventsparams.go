@@ -9,7 +9,8 @@ import (
 
 type ListCalendarEventsParams struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	smbToolType *string `const:"list_calendar_events" json:"smb_tool_type"`
+	smbToolType      *string `const:"list_calendar_events" json:"smb_tool_type"`
+	IncludeCancelled *bool   `default:"false" json:"include_cancelled"`
 }
 
 func (l ListCalendarEventsParams) MarshalJSON() ([]byte, error) {
@@ -25,4 +26,11 @@ func (l *ListCalendarEventsParams) UnmarshalJSON(data []byte) error {
 
 func (l *ListCalendarEventsParams) GetSmbToolType() *string {
 	return types.Pointer("list_calendar_events")
+}
+
+func (l *ListCalendarEventsParams) GetIncludeCancelled() *bool {
+	if l == nil {
+		return nil
+	}
+	return l.IncludeCancelled
 }

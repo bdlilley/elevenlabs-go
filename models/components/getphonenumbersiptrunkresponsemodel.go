@@ -34,6 +34,8 @@ type GetPhoneNumberSIPTrunkResponseModel struct {
 	// Configuration of the Inbound SIP trunk - if configured.
 	InboundTrunk *GetPhoneNumberInboundSIPTrunkConfigResponseModel `json:"inbound_trunk,omitzero"`
 	LivekitStack *LivekitStackType                                 `default:"standard" json:"livekit_stack"`
+	// Whether to store SIP messages for this phone number.
+	StoreSipMessages *bool `default:"true" json:"store_sip_messages"`
 }
 
 func (g GetPhoneNumberSIPTrunkResponseModel) MarshalJSON() ([]byte, error) {
@@ -119,4 +121,11 @@ func (g *GetPhoneNumberSIPTrunkResponseModel) GetLivekitStack() *LivekitStackTyp
 		return nil
 	}
 	return g.LivekitStack
+}
+
+func (g *GetPhoneNumberSIPTrunkResponseModel) GetStoreSipMessages() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.StoreSipMessages
 }

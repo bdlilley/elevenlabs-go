@@ -93,6 +93,10 @@ func (a *ASTConditionalOperatorNodeInput1) GetConditionNeqOperator() *ASTNotEqua
 	return a.GetCondition().ASTNotEqualsOperatorNodeInput1
 }
 
+func (a *ASTConditionalOperatorNodeInput1) GetConditionNullLiteral() *ASTNullNodeInput {
+	return a.GetCondition().ASTNullNodeInput
+}
+
 func (a *ASTConditionalOperatorNodeInput1) GetConditionNumberLiteral() *ASTNumberNodeInput {
 	return a.GetCondition().ASTNumberNodeInput
 }
@@ -172,6 +176,10 @@ func (a *ASTConditionalOperatorNodeInput1) GetTrueExpressionNeqOperator() *ASTNo
 	return a.GetTrueExpression().ASTNotEqualsOperatorNodeInput1
 }
 
+func (a *ASTConditionalOperatorNodeInput1) GetTrueExpressionNullLiteral() *ASTNullNodeInput {
+	return a.GetTrueExpression().ASTNullNodeInput
+}
+
 func (a *ASTConditionalOperatorNodeInput1) GetTrueExpressionNumberLiteral() *ASTNumberNodeInput {
 	return a.GetTrueExpression().ASTNumberNodeInput
 }
@@ -249,6 +257,10 @@ func (a *ASTConditionalOperatorNodeInput1) GetFalseExpressionMulOperator() *ASTM
 
 func (a *ASTConditionalOperatorNodeInput1) GetFalseExpressionNeqOperator() *ASTNotEqualsOperatorNodeInput1 {
 	return a.GetFalseExpression().ASTNotEqualsOperatorNodeInput1
+}
+
+func (a *ASTConditionalOperatorNodeInput1) GetFalseExpressionNullLiteral() *ASTNullNodeInput {
+	return a.GetFalseExpression().ASTNullNodeInput
 }
 
 func (a *ASTConditionalOperatorNodeInput1) GetFalseExpressionNumberLiteral() *ASTNumberNodeInput {

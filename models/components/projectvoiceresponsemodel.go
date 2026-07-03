@@ -3,15 +3,23 @@
 package components
 
 type ProjectVoiceResponseModel struct {
-	VoiceID         string  `json:"voice_id"`
-	Alias           string  `json:"alias"`
-	Stability       float64 `json:"stability"`
-	SimilarityBoost float64 `json:"similarity_boost"`
-	Style           float64 `json:"style"`
-	IsPinned        bool    `json:"is_pinned"`
-	UseSpeakerBoost bool    `json:"use_speaker_boost"`
-	VolumeGain      float64 `json:"volume_gain"`
-	Speed           float64 `json:"speed"`
+	ProjectVoiceRefID string  `json:"project_voice_ref_id"`
+	VoiceID           string  `json:"voice_id"`
+	Alias             string  `json:"alias"`
+	Stability         float64 `json:"stability"`
+	SimilarityBoost   float64 `json:"similarity_boost"`
+	Style             float64 `json:"style"`
+	IsPinned          bool    `json:"is_pinned"`
+	UseSpeakerBoost   bool    `json:"use_speaker_boost"`
+	VolumeGain        float64 `json:"volume_gain"`
+	Speed             float64 `json:"speed"`
+}
+
+func (p *ProjectVoiceResponseModel) GetProjectVoiceRefID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ProjectVoiceRefID
 }
 
 func (p *ProjectVoiceResponseModel) GetVoiceID() string {

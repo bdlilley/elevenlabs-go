@@ -134,10 +134,14 @@ type CaptionStyleModel struct {
 	BackgroundEnabled             *bool                                 `json:"background_enabled,omitzero"`
 	BackgroundColor               *string                               `json:"background_color,omitzero"`
 	BackgroundOpacity             *float64                              `json:"background_opacity,omitzero"`
+	BackgroundBlur                *float64                              `json:"background_blur,omitzero"`
+	BackgroundBorderRadius        *float64                              `json:"background_border_radius,omitzero"`
 	WordHighlightsEnabled         *bool                                 `json:"word_highlights_enabled,omitzero"`
 	WordHighlightsColor           *string                               `json:"word_highlights_color,omitzero"`
 	WordHighlightsBackgroundColor *string                               `json:"word_highlights_background_color,omitzero"`
 	WordHighlightsOpacity         *float64                              `json:"word_highlights_opacity,omitzero"`
+	WordHighlightsBorderRadius    *float64                              `json:"word_highlights_border_radius,omitzero"`
+	WordHighlightsBlur            *float64                              `json:"word_highlights_blur,omitzero"`
 	SectionAnimation              *CaptionStyleSectionAnimationModel    `json:"section_animation,omitzero"`
 	WordAnimation                 *CaptionStyleWordAnimationModel       `json:"word_animation,omitzero"`
 	CharacterAnimation            *CaptionStyleCharacterAnimationModel  `json:"character_animation,omitzero"`
@@ -258,6 +262,20 @@ func (c *CaptionStyleModel) GetBackgroundOpacity() *float64 {
 	return c.BackgroundOpacity
 }
 
+func (c *CaptionStyleModel) GetBackgroundBlur() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.BackgroundBlur
+}
+
+func (c *CaptionStyleModel) GetBackgroundBorderRadius() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.BackgroundBorderRadius
+}
+
 func (c *CaptionStyleModel) GetWordHighlightsEnabled() *bool {
 	if c == nil {
 		return nil
@@ -284,6 +302,20 @@ func (c *CaptionStyleModel) GetWordHighlightsOpacity() *float64 {
 		return nil
 	}
 	return c.WordHighlightsOpacity
+}
+
+func (c *CaptionStyleModel) GetWordHighlightsBorderRadius() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.WordHighlightsBorderRadius
+}
+
+func (c *CaptionStyleModel) GetWordHighlightsBlur() *float64 {
+	if c == nil {
+		return nil
+	}
+	return c.WordHighlightsBlur
 }
 
 func (c *CaptionStyleModel) GetSectionAnimation() *CaptionStyleSectionAnimationModel {

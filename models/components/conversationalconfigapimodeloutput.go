@@ -10,7 +10,7 @@ type ConversationalConfigAPIModelOutput struct {
 	Asr          *ASRConversationalConfig       `json:"asr,omitzero"`
 	Turn         *TurnConfig                    `json:"turn,omitzero"`
 	Tts          *TTSConversationalConfigOutput `json:"tts,omitzero"`
-	Conversation *ConversationConfig            `json:"conversation,omitzero"`
+	Conversation *ConversationConfigOutput      `json:"conversation,omitzero"`
 	// Language presets for conversations
 	LanguagePresets map[string]LanguagePresetOutput `json:"language_presets,omitzero"`
 	Vad             *VADConfig                      `json:"vad,omitzero"`
@@ -49,7 +49,7 @@ func (c *ConversationalConfigAPIModelOutput) GetTts() *TTSConversationalConfigOu
 	return c.Tts
 }
 
-func (c *ConversationalConfigAPIModelOutput) GetConversation() *ConversationConfig {
+func (c *ConversationalConfigAPIModelOutput) GetConversation() *ConversationConfigOutput {
 	if c == nil {
 		return nil
 	}

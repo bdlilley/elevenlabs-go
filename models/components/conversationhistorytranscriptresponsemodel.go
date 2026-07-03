@@ -186,9 +186,14 @@ type ConversationHistoryTranscriptResponseModel struct {
 	LlmUsage                *LLMUsageOutput                                          `json:"llm_usage,omitzero"`
 	Interrupted             *bool                                                    `default:"false" json:"interrupted"`
 	OriginalMessage         *string                                                  `json:"original_message,omitzero"`
+	Reasoning               []ConversationReasoningModel                             `json:"reasoning,omitzero"`
 	SourceMedium            *ChatSourceMedium                                        `json:"source_medium,omitzero"`
 	SourceEventID           *int64                                                   `json:"source_event_id,omitzero"`
+	UsedStaticKbDocumentIds []string                                                 `json:"used_static_kb_document_ids,omitzero"`
+	UserIdentifier          *string                                                  `json:"user_identifier,omitzero"`
 	FileInput               *ConversationHistoryTranscriptFileInputResponseModel     `json:"file_input,omitzero"`
+	ContextualUpdateInfo    *ContextualUpdateInfo                                    `json:"contextual_update_info,omitzero"`
+	Reasoned                *bool                                                    `default:"false" json:"reasoned"`
 }
 
 func (c ConversationHistoryTranscriptResponseModel) MarshalJSON() ([]byte, error) {
@@ -300,6 +305,13 @@ func (c *ConversationHistoryTranscriptResponseModel) GetOriginalMessage() *strin
 	return c.OriginalMessage
 }
 
+func (c *ConversationHistoryTranscriptResponseModel) GetReasoning() []ConversationReasoningModel {
+	if c == nil {
+		return nil
+	}
+	return c.Reasoning
+}
+
 func (c *ConversationHistoryTranscriptResponseModel) GetSourceMedium() *ChatSourceMedium {
 	if c == nil {
 		return nil
@@ -314,9 +326,37 @@ func (c *ConversationHistoryTranscriptResponseModel) GetSourceEventID() *int64 {
 	return c.SourceEventID
 }
 
+func (c *ConversationHistoryTranscriptResponseModel) GetUsedStaticKbDocumentIds() []string {
+	if c == nil {
+		return nil
+	}
+	return c.UsedStaticKbDocumentIds
+}
+
+func (c *ConversationHistoryTranscriptResponseModel) GetUserIdentifier() *string {
+	if c == nil {
+		return nil
+	}
+	return c.UserIdentifier
+}
+
 func (c *ConversationHistoryTranscriptResponseModel) GetFileInput() *ConversationHistoryTranscriptFileInputResponseModel {
 	if c == nil {
 		return nil
 	}
 	return c.FileInput
+}
+
+func (c *ConversationHistoryTranscriptResponseModel) GetContextualUpdateInfo() *ContextualUpdateInfo {
+	if c == nil {
+		return nil
+	}
+	return c.ContextualUpdateInfo
+}
+
+func (c *ConversationHistoryTranscriptResponseModel) GetReasoned() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.Reasoned
 }

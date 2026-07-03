@@ -39,7 +39,7 @@ func (e *TextSearchConversationMessagesRouteSummaryMode) UnmarshalJSON(data []by
 type TextSearchConversationMessagesRouteRequest struct {
 	// The search query text for full-text and fuzzy matching
 	TextQuery string `queryParam:"style=form,explode=true,name=text_query"`
-	// The id of the agent you're taking the action on.
+	// Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.
 	AgentID *string `queryParam:"style=form,explode=true,name=agent_id"`
 	// The result of the success evaluation
 	CallSuccessful *components.EvaluationSuccessResult `queryParam:"style=form,explode=true,name=call_successful"`
@@ -77,8 +77,13 @@ type TextSearchConversationMessagesRouteRequest struct {
 	SummaryMode *TextSearchConversationMessagesRouteSummaryMode `default:"exclude" queryParam:"style=form,explode=true,name=summary_mode"`
 	// Enum representing the possible sources for conversation initiation.
 	ConversationInitiationSource *components.ConversationInitiationSource `default:"unknown" queryParam:"style=form,explode=true,name=conversation_initiation_source"`
+	TextOnly                     *bool                                    `queryParam:"style=form,explode=true,name=text_only"`
+	// Restrict results to a single conversation product surface.
+	ConversationProductType *components.ConversationProduct `queryParam:"style=form,explode=true,name=conversation_product_type"`
 	// Filter conversations by branch ID.
 	BranchID *string `queryParam:"style=form,explode=true,name=branch_id"`
+	// Filter conversations by topic IDs assigned during topic discovery.
+	TopicIds []string `queryParam:"style=form,explode=true,name=topic_ids"`
 	// Sort order for search results. 'search_score' sorts by search score, 'created_at' sorts by conversation start time.
 	SortBy *components.MessageSearchSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// Used for fetching next page. Cursor is returned in the response.
@@ -236,11 +241,32 @@ func (t *TextSearchConversationMessagesRouteRequest) GetConversationInitiationSo
 	return t.ConversationInitiationSource
 }
 
+func (t *TextSearchConversationMessagesRouteRequest) GetTextOnly() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.TextOnly
+}
+
+func (t *TextSearchConversationMessagesRouteRequest) GetConversationProductType() *components.ConversationProduct {
+	if t == nil {
+		return nil
+	}
+	return t.ConversationProductType
+}
+
 func (t *TextSearchConversationMessagesRouteRequest) GetBranchID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.BranchID
+}
+
+func (t *TextSearchConversationMessagesRouteRequest) GetTopicIds() []string {
+	if t == nil {
+		return nil
+	}
+	return t.TopicIds
 }
 
 func (t *TextSearchConversationMessagesRouteRequest) GetSortBy() *components.MessageSearchSortBy {

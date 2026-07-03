@@ -8,6 +8,11 @@ import (
 )
 
 type WorkflowOverrideAgentNodeModelOutput struct {
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
+	type_    *string        `const:"override_agent" json:"type"`
+	Position PositionOutput `json:"position"`
+	// The ids of outgoing edges in the order they should be evaluated.
+	EdgeOrder          []string                                           `json:"edge_order"`
 	ConversationConfig ConversationalConfigAPIModelWorkflowOverrideOutput `json:"conversation_config"`
 	// Specific goal for this subagent. It will be added to the system prompt and can be used to further refine the agent's behavior in this specific context.
 	AdditionalPrompt string `json:"additional_prompt"`
@@ -15,13 +20,9 @@ type WorkflowOverrideAgentNodeModelOutput struct {
 	AdditionalKnowledgeBase []KnowledgeBaseLocator `json:"additional_knowledge_base"`
 	// IDs of additional tools that the subagent has access to. These will be used in addition to the main agent's tools.
 	AdditionalToolIds []string `json:"additional_tool_ids"`
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_    *string        `const:"override_agent" json:"type"`
-	Position PositionOutput `json:"position"`
-	// The ids of outgoing edges in the order they should be evaluated.
-	EdgeOrder []string `json:"edge_order"`
 	// Human-readable label for the node used throughout the UI.
-	Label string `json:"label"`
+	Label         string         `json:"label"`
+	EntryBehavior *EntryBehavior `default:"auto" json:"entry_behavior"`
 }
 
 func (w WorkflowOverrideAgentNodeModelOutput) MarshalJSON() ([]byte, error) {
@@ -33,6 +34,24 @@ func (w *WorkflowOverrideAgentNodeModelOutput) UnmarshalJSON(data []byte) error 
 		return err
 	}
 	return nil
+}
+
+func (w *WorkflowOverrideAgentNodeModelOutput) GetType() *string {
+	return types.Pointer("override_agent")
+}
+
+func (w *WorkflowOverrideAgentNodeModelOutput) GetPosition() PositionOutput {
+	if w == nil {
+		return PositionOutput{}
+	}
+	return w.Position
+}
+
+func (w *WorkflowOverrideAgentNodeModelOutput) GetEdgeOrder() []string {
+	if w == nil {
+		return []string{}
+	}
+	return w.EdgeOrder
 }
 
 func (w *WorkflowOverrideAgentNodeModelOutput) GetConversationConfig() ConversationalConfigAPIModelWorkflowOverrideOutput {
@@ -63,27 +82,16 @@ func (w *WorkflowOverrideAgentNodeModelOutput) GetAdditionalToolIds() []string {
 	return w.AdditionalToolIds
 }
 
-func (w *WorkflowOverrideAgentNodeModelOutput) GetType() *string {
-	return types.Pointer("override_agent")
-}
-
-func (w *WorkflowOverrideAgentNodeModelOutput) GetPosition() PositionOutput {
-	if w == nil {
-		return PositionOutput{}
-	}
-	return w.Position
-}
-
-func (w *WorkflowOverrideAgentNodeModelOutput) GetEdgeOrder() []string {
-	if w == nil {
-		return []string{}
-	}
-	return w.EdgeOrder
-}
-
 func (w *WorkflowOverrideAgentNodeModelOutput) GetLabel() string {
 	if w == nil {
 		return ""
 	}
 	return w.Label
+}
+
+func (w *WorkflowOverrideAgentNodeModelOutput) GetEntryBehavior() *EntryBehavior {
+	if w == nil {
+		return nil
+	}
+	return w.EntryBehavior
 }

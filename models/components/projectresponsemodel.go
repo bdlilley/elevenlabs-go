@@ -161,10 +161,10 @@ type ProjectResponseModel struct {
 	CreateDateUnix int64 `json:"create_date_unix"`
 	// The user ID who created the project.
 	CreatedByUserID *string `json:"created_by_user_id"`
-	// The default title voice ID.
-	DefaultTitleVoiceID string `json:"default_title_voice_id"`
-	// The default paragraph voice ID.
-	DefaultParagraphVoiceID string `json:"default_paragraph_voice_id"`
+	// The default title project voice reference ID.
+	DefaultTitleVoiceRefID string `json:"default_title_voice_ref_id"`
+	// The default paragraph project voice reference ID.
+	DefaultParagraphVoiceRefID string `json:"default_paragraph_voice_ref_id"`
 	// The default model ID.
 	DefaultModelID string `json:"default_model_id"`
 	// The last conversion date of the project.
@@ -227,6 +227,14 @@ type ProjectResponseModel struct {
 	AspectRatio *ProjectResponseModelAspectRatio `json:"aspect_ratio,omitzero"`
 	// Agent-related settings for the project
 	AgentSettings *StudioAgentSettingsModel `json:"agent_settings,omitzero"`
+	// The default title voice ID.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DefaultTitleVoiceID string `json:"default_title_voice_id"`
+	// The default paragraph voice ID.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	DefaultParagraphVoiceID string `json:"default_paragraph_voice_id"`
 }
 
 func (p ProjectResponseModel) MarshalJSON() ([]byte, error) {
@@ -268,18 +276,18 @@ func (p *ProjectResponseModel) GetCreatedByUserID() *string {
 	return p.CreatedByUserID
 }
 
-func (p *ProjectResponseModel) GetDefaultTitleVoiceID() string {
+func (p *ProjectResponseModel) GetDefaultTitleVoiceRefID() string {
 	if p == nil {
 		return ""
 	}
-	return p.DefaultTitleVoiceID
+	return p.DefaultTitleVoiceRefID
 }
 
-func (p *ProjectResponseModel) GetDefaultParagraphVoiceID() string {
+func (p *ProjectResponseModel) GetDefaultParagraphVoiceRefID() string {
 	if p == nil {
 		return ""
 	}
-	return p.DefaultParagraphVoiceID
+	return p.DefaultParagraphVoiceRefID
 }
 
 func (p *ProjectResponseModel) GetDefaultModelID() string {
@@ -483,4 +491,18 @@ func (p *ProjectResponseModel) GetAgentSettings() *StudioAgentSettingsModel {
 		return nil
 	}
 	return p.AgentSettings
+}
+
+func (p *ProjectResponseModel) GetDefaultTitleVoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.DefaultTitleVoiceID
+}
+
+func (p *ProjectResponseModel) GetDefaultParagraphVoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.DefaultParagraphVoiceID
 }

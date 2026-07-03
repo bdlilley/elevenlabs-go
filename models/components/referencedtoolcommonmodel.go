@@ -16,6 +16,7 @@ const (
 	ReferencedToolCommonModelTypeWorkflow              ReferencedToolCommonModelType = "workflow"
 	ReferencedToolCommonModelTypeAPIIntegrationWebhook ReferencedToolCommonModelType = "api_integration_webhook"
 	ReferencedToolCommonModelTypeMcp                   ReferencedToolCommonModelType = "mcp"
+	ReferencedToolCommonModelTypeCode                  ReferencedToolCommonModelType = "code"
 )
 
 func (e ReferencedToolCommonModelType) ToPointer() *ReferencedToolCommonModelType {
@@ -26,7 +27,7 @@ func (e ReferencedToolCommonModelType) ToPointer() *ReferencedToolCommonModelTyp
 func (e *ReferencedToolCommonModelType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "system", "webhook", "client", "workflow", "api_integration_webhook", "mcp":
+		case "system", "webhook", "client", "workflow", "api_integration_webhook", "mcp", "code":
 			return true
 		}
 	}

@@ -13,6 +13,8 @@ type CreateResponseUnitTestRequest struct {
 	// Dynamic variables to replace in the agent config during testing
 	DynamicVariables map[string]any                                  `json:"dynamic_variables,omitzero"`
 	ChatHistory      []ConversationHistoryTranscriptCommonModelInput `json:"chat_history,omitzero"`
+	// Simulate the test as if the conversation originated from this channel.
+	ConversationInitiationSource *ConversationInitiationSource `default:"unknown" json:"conversation_initiation_source"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"llm" json:"type"`
 	// A prompt that evaluates whether the agent's response is successful. Should return True or False.
@@ -56,6 +58,13 @@ func (c *CreateResponseUnitTestRequest) GetChatHistory() []ConversationHistoryTr
 		return nil
 	}
 	return c.ChatHistory
+}
+
+func (c *CreateResponseUnitTestRequest) GetConversationInitiationSource() *ConversationInitiationSource {
+	if c == nil {
+		return nil
+	}
+	return c.ConversationInitiationSource
 }
 
 func (c *CreateResponseUnitTestRequest) GetType() *string {

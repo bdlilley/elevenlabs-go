@@ -6,9 +6,9 @@ ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. 
 
 ### Available Operations
 
-* [GetUserSubscriptionInfo](#getusersubscriptioninfo) - Get User Subscription Info
 * [GetUserInfo](#getuserinfo) - Get User Info
-* [UsageCharacters](#usagecharacters) - Get Characters Usage Metrics
+* [GetUserSubscriptionInfo](#getusersubscriptioninfo) - Get User Subscription Info
+* [~~UsageCharacters~~](#usagecharacters) - Get Characters Usage Metrics (Deprecated) :warning: **Deprecated**
 * [CreateAgentResponseTest](#createagentresponsetest) - Create Agent Response Test
 * [GetAgentResponseTest](#getagentresponsetest) - Get Agent Response Test By Id
 * [UpdateAgentResponseTest](#updateagentresponsetest) - Update Agent Response Test
@@ -20,64 +20,6 @@ ElevenLabs API Documentation: This is the documentation for the ElevenLabs API. 
 * [GetTestInvocation](#gettestinvocation) - Get Test Invocation
 * [ResubmitTests](#resubmittests) - Resubmit Tests
 * [RedirectToMintlify](#redirecttomintlify) - Redirect To Mintlify
-
-## GetUserSubscriptionInfo
-
-Gets extended information about the users subscription
-
-### Example Usage
-
-<!-- UsageSnippet language="go" operationID="get_user_subscription_info" method="get" path="/v1/user/subscription" -->
-```go
-package main
-
-import(
-	"context"
-	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
-	"log"
-	"github.com/bdlilley/elevenlabs-go/models/components"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := elevenlabsgo.New(
-        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
-    )
-
-    res, err := s.GetUserSubscriptionInfo(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ExtendedSubscriptionResponseModel != nil {
-        switch res.ExtendedSubscriptionResponseModel.PendingChange.Type {
-            case components.PendingChangeTypePendingSubscriptionSwitchResponseModel:
-                // res.ExtendedSubscriptionResponseModel.PendingChange.PendingSubscriptionSwitchResponseModel is populated
-            case components.PendingChangeTypePendingCancellationResponseModel:
-                // res.ExtendedSubscriptionResponseModel.PendingChange.PendingCancellationResponseModel is populated
-        }
-
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.GetUserSubscriptionInfoResponse](../../models/operations/getusersubscriptioninforesponse.md), error**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| apierrors.HTTPValidationError | 422                           | application/json              |
-| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
 ## GetUserInfo
 
@@ -130,9 +72,69 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## UsageCharacters
+## GetUserSubscriptionInfo
 
-Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
+Gets extended information about the users subscription
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_user_subscription_info" method="get" path="/v1/user/subscription" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.GetUserSubscriptionInfo(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ExtendedSubscriptionResponseModel != nil {
+        switch res.ExtendedSubscriptionResponseModel.MaxCreditLimitExtension.Type {
+            case components.ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeInteger:
+                // res.ExtendedSubscriptionResponseModel.MaxCreditLimitExtension.Integer is populated
+            case components.ExtendedSubscriptionResponseModelMaxCreditLimitExtensionTypeStr:
+                // res.ExtendedSubscriptionResponseModel.MaxCreditLimitExtension.Str is populated
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.GetUserSubscriptionInfoResponse](../../models/operations/getusersubscriptioninforesponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## ~~UsageCharacters~~
+
+(Deprecated) This endpoint is deprecated. Use /v1/workspace/analytics/query/usage-by-product-over-time instead, which exposes the bucket size as `interval_seconds` (an integer in seconds) rather than `aggregation_interval`. Returns the usage metrics for the current user or the entire workspace they are part of. The response provides a time axis based on the specified aggregation interval (default: day), with usage values for each interval along that axis. Usage is broken down by the selected breakdown type. For example, breakdown type "voice" will return the usage of each voice for each interval along the time axis.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -213,6 +215,7 @@ func main() {
 
     res, err := s.CreateAgentResponseTest(ctx, operations.CreateCreateAgentResponseTestRouteTestRequestCreateSimulationTestRequest(
         components.CreateSimulationTestRequest{
+            SuccessCondition: elevenlabsgo.Pointer(""),
             Name: "<value>",
         },
     ))
@@ -558,7 +561,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.ListTestInvocations(ctx, "<id>", elevenlabsgo.Pointer[int64](30), nil)
+    res, err := s.ListTestInvocations(ctx, elevenlabsgo.Pointer("<id>"), elevenlabsgo.Pointer[int64](30), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -573,7 +576,7 @@ func main() {
 | Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `agentID`                                                                | `string`                                                                 | :heavy_check_mark:                                                       | Filter by agent ID                                                       |
+| `agentID`                                                                | `*string`                                                                | :heavy_minus_sign:                                                       | Filter by agent ID                                                       |
 | `pageSize`                                                               | `*int64`                                                                 | :heavy_minus_sign:                                                       | How many Tests to return at maximum. Can not exceed 100, defaults to 30. |
 | `cursor`                                                                 | `*string`                                                                | :heavy_minus_sign:                                                       | Used for fetching next page. Cursor is returned in the response.         |
 | `opts`                                                                   | [][operations.Option](../../models/operations/option.md)                 | :heavy_minus_sign:                                                       | The options for this request.                                            |
@@ -624,6 +627,7 @@ func main() {
                     },
                 },
                 Turn: &components.TurnConfig{
+                    InterruptionIgnoreTerms: []string{},
                     SoftTimeoutConfig: &components.SoftTimeoutConfig{},
                 },
                 Tts: &components.TTSConversationalConfigInput{
@@ -631,7 +635,7 @@ func main() {
                     OptimizeStreamingLatency: components.TTSOptimizeStreamingLatencyThree.ToPointer(),
                     PronunciationDictionaryLocators: []components.PydanticPronunciationDictionaryVersionLocator{},
                 },
-                Conversation: &components.ConversationConfig{
+                Conversation: &components.ConversationConfigInput{
                     ClientEvents: []components.ClientEvent{
                         components.ClientEventAudio,
                         components.ClientEventInterruption,
@@ -682,15 +686,16 @@ func main() {
                 Widget: &components.WidgetConfigInput{
                     CustomAvatarPath: elevenlabsgo.Pointer("https://example.com/avatar.png"),
                 },
-                DataCollection: map[string]components.LiteralJSONSchemaProperty{
-                    "key": components.LiteralJSONSchemaProperty{
-                        Type: components.LiteralJSONSchemaPropertyTypeString,
+                DataCollection: map[string]components.AnalysisProperty{
+                    "key": components.AnalysisProperty{
+                        Type: components.AnalysisPropertyTypeString,
                         Description: elevenlabsgo.Pointer("A user-provided message"),
                     },
                 },
                 Overrides: &components.ConversationInitiationClientDataConfigInput{
                     CustomLlmExtraBody: elevenlabsgo.Pointer(true),
                     EnableConversationInitiationClientDataFromWebhook: elevenlabsgo.Pointer(true),
+                    EnableStartingWorkflowNodeIDFromClient: elevenlabsgo.Pointer(true),
                 },
                 WorkspaceOverrides: &components.AgentWorkspaceOverridesInput{
                     ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{
@@ -957,6 +962,7 @@ func main() {
                     },
                 },
                 Turn: &components.TurnConfig{
+                    InterruptionIgnoreTerms: []string{},
                     SoftTimeoutConfig: &components.SoftTimeoutConfig{},
                 },
                 Tts: &components.TTSConversationalConfigInput{
@@ -964,7 +970,7 @@ func main() {
                     OptimizeStreamingLatency: components.TTSOptimizeStreamingLatencyThree.ToPointer(),
                     PronunciationDictionaryLocators: []components.PydanticPronunciationDictionaryVersionLocator{},
                 },
-                Conversation: &components.ConversationConfig{
+                Conversation: &components.ConversationConfigInput{
                     ClientEvents: []components.ClientEvent{
                         components.ClientEventAudio,
                         components.ClientEventInterruption,
@@ -1015,15 +1021,16 @@ func main() {
                 Widget: &components.WidgetConfigInput{
                     CustomAvatarPath: elevenlabsgo.Pointer("https://example.com/avatar.png"),
                 },
-                DataCollection: map[string]components.LiteralJSONSchemaProperty{
-                    "key": components.LiteralJSONSchemaProperty{
-                        Type: components.LiteralJSONSchemaPropertyTypeString,
+                DataCollection: map[string]components.AnalysisProperty{
+                    "key": components.AnalysisProperty{
+                        Type: components.AnalysisPropertyTypeString,
                         Description: elevenlabsgo.Pointer("A user-provided message"),
                     },
                 },
                 Overrides: &components.ConversationInitiationClientDataConfigInput{
                     CustomLlmExtraBody: elevenlabsgo.Pointer(true),
                     EnableConversationInitiationClientDataFromWebhook: elevenlabsgo.Pointer(true),
+                    EnableStartingWorkflowNodeIDFromClient: elevenlabsgo.Pointer(true),
                 },
                 WorkspaceOverrides: &components.AgentWorkspaceOverridesInput{
                     ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{

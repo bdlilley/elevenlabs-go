@@ -6,13 +6,17 @@ Access to workspace related endpoints.
 
 ### Available Operations
 
+* [Disable](#disable) - Disable Api Key
+* [SetThirdPartyDisablingPolicy](#setthirdpartydisablingpolicy) - Set Workspace Third-Party Disabling Policy
 * [GetServiceAccountAPIKeys](#getserviceaccountapikeys) - Get Service Account Api Keys Route
 * [CreateServiceAccountAPIKey](#createserviceaccountapikey) - Create Service Account Api Key
 * [DeleteServiceAccountAPIKey](#deleteserviceaccountapikey) - Delete Service Account Api Key
 * [EditServiceAccountAPIKey](#editserviceaccountapikey) - Edit Service Account Api Key
+* [GetWorkspaceAuditLogs](#getworkspaceauditlogs) - Get Workspace Audit Logs
 * [ListAuthConnections](#listauthconnections) - Get Workspace Auth Connections
 * [CreateAuthConnection](#createauthconnection) - Create Workspace Auth Connection
 * [DeleteAuthConnection](#deleteauthconnection) - Delete Workspace Auth Connection
+* [UpdateAuthConnection](#updateauthconnection) - Update Workspace Auth Connection
 * [GetWorkspaceServiceAccounts](#getworkspaceserviceaccounts) - Get Workspace Service Accounts
 * [GetGroupsEndpoint](#getgroupsendpoint) - Get All Groups
 * [SearchGroups](#searchgroups) - Search User Groups
@@ -29,6 +33,110 @@ Access to workspace related endpoints.
 * [CreateWorkspaceWebhook](#createworkspacewebhook) - Create Workspace Webhook
 * [EditWorkspaceWebhook](#editworkspacewebhook) - Update Workspace Webhook
 * [DeleteWorkspaceWebhook](#deleteworkspacewebhook) - Delete Workspace Webhook
+
+## Disable
+
+Disable the API key used to authenticate this request. Requires the query parameter `api_key_name=self` as an explicit confirmation.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="disable" method="post" path="/v1/workspaces/api-keys/disable" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.Workspace.Disable(ctx, "<value>")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Any != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                           | Type                                                                                                                                                                | Required                                                                                                                                                            | Description                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                               | [context.Context](https://pkg.go.dev/context#Context)                                                                                                               | :heavy_check_mark:                                                                                                                                                  | The context to use for the request.                                                                                                                                 |
+| `apiKeyName`                                                                                                                                                        | `string`                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                  | Must be set to `self` to disable the API key used to authenticate this request. Required as an explicit confirmation to avoid accidentally disabling the wrong key. |
+| `opts`                                                                                                                                                              | [][operations.Option](../../models/operations/option.md)                                                                                                            | :heavy_minus_sign:                                                                                                                                                  | The options for this request.                                                                                                                                       |
+
+### Response
+
+**[*operations.DisableResponse](../../models/operations/disableresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## SetThirdPartyDisablingPolicy
+
+Set the workspace-wide Third-Party Disabling policy. When set, it forces, for every API key in the workspace, whether the holder of a key (potentially a third party who found it) may disable it via the self-disable endpoint or when it leaks publicly — overriding each key's own setting. Pass `true` to allow it for all keys, `false` to forbid it for all keys, or `null` to clear the override so per-key values and the plan default apply again. Workspace admins only.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="set_third_party_disabling_policy" method="post" path="/v1/workspaces/api-keys/third-party-disabling" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.Workspace.SetThirdPartyDisablingPolicy(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Any != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                        | Type                                                                                                                                                                                                             | Required                                                                                                                                                                                                         | Description                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                               | The context to use for the request.                                                                                                                                                                              |
+| `request`                                                                                                                                                                                                        | [components.BodySetWorkspaceThirdPartyDisablingPolicyV1WorkspacesAPIKeysThirdPartyDisablingPost](../../models/components/bodysetworkspacethirdpartydisablingpolicyv1workspacesapikeysthirdpartydisablingpost.md) | :heavy_check_mark:                                                                                                                                                                                               | The request object to use for the request.                                                                                                                                                                       |
+| `opts`                                                                                                                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                               | The options for this request.                                                                                                                                                                                    |
+
+### Response
+
+**[*operations.SetThirdPartyDisablingPolicyResponse](../../models/operations/setthirdpartydisablingpolicyresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
 ## GetServiceAccountAPIKeys
 
@@ -218,12 +326,8 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.Workspace.EditServiceAccountAPIKey(ctx, "<id>", "<id>", components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch{
-        IsEnabled: false,
-        Name: "Sneaky Fox",
-        Permissions: components.CreateBodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatchPermissionsArrayOfPermissionType(
-            []components.PermissionType{},
-        ),
+    res, err := s.Workspace.EditServiceAccountAPIKey(ctx, "<id>", "<id>", &components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch{
+        Name: elevenlabsgo.Pointer("Sneaky Fox"),
     })
     if err != nil {
         log.Fatal(err)
@@ -236,17 +340,70 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                            | Type                                                                                                                                                                                                                 | Required                                                                                                                                                                                                             | Description                                                                                                                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                   | The context to use for the request.                                                                                                                                                                                  |
-| `serviceAccountUserID`                                                                                                                                                                                               | `string`                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
-| `apiKeyID`                                                                                                                                                                                                           | `string`                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
-| `body`                                                                                                                                                                                                               | [components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch](../../models/components/bodyeditserviceaccountapikeyv1serviceaccountsserviceaccountuseridapikeysapikeyidpatch.md) | :heavy_check_mark:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
-| `opts`                                                                                                                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                   | The options for this request.                                                                                                                                                                                        |
+| Parameter                                                                                                                                                                                                             | Type                                                                                                                                                                                                                  | Required                                                                                                                                                                                                              | Description                                                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                    | The context to use for the request.                                                                                                                                                                                   |
+| `serviceAccountUserID`                                                                                                                                                                                                | `string`                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                    | N/A                                                                                                                                                                                                                   |
+| `apiKeyID`                                                                                                                                                                                                            | `string`                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                    | N/A                                                                                                                                                                                                                   |
+| `body`                                                                                                                                                                                                                | [*components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch](../../models/components/bodyeditserviceaccountapikeyv1serviceaccountsserviceaccountuseridapikeysapikeyidpatch.md) | :heavy_minus_sign:                                                                                                                                                                                                    | N/A                                                                                                                                                                                                                   |
+| `opts`                                                                                                                                                                                                                | [][operations.Option](../../models/operations/option.md)                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                    | The options for this request.                                                                                                                                                                                         |
 
 ### Response
 
 **[*operations.EditServiceAccountAPIKeyResponse](../../models/operations/editserviceaccountapikeyresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetWorkspaceAuditLogs
+
+Returns the audit log for the workspace. Requires enterprise tier and the audit_log_read permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_workspace_audit_logs" method="get" path="/v1/workspace/audit-logs" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.Workspace.GetWorkspaceAuditLogs(ctx, operations.GetWorkspaceAuditLogsRequest{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.WorkspaceAuditLogsPageResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.GetWorkspaceAuditLogsRequest](../../models/operations/getworkspaceauditlogsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.GetWorkspaceAuditLogsResponse](../../models/operations/getworkspaceauditlogsresponse.md), error**
 
 ### Errors
 
@@ -362,8 +519,14 @@ func main() {
                 // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.CustomHeaderAuthResponse is populated
             case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2AuthCode:
                 // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.APIIntegrationOAuth2AuthCodeResponse is populated
+            case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2CustomApp:
+                // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.APIIntegrationOAuth2CustomAppResponse is populated
             case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth:
                 // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.WhatsAppAuthResponse is populated
+            case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeSlackBotAuth:
+                // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.SlackBotAuthResponse is populated
+            case operations.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeURLSecret:
+                // res.ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost.URLSecretAuthResponse is populated
         }
 
     }
@@ -433,6 +596,89 @@ func main() {
 ### Response
 
 **[*operations.DeleteAuthConnectionResponse](../../models/operations/deleteauthconnectionresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## UpdateAuthConnection
+
+Update an auth connection
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="update_auth_connection" method="patch" path="/v1/workspace/auth-connections/{auth_connection_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"github.com/bdlilley/elevenlabs-go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.Workspace.UpdateAuthConnection(ctx, "<id>", operations.CreateUpdateAuthConnectionRequestBodyUpdateBearerAuthRequest(
+        components.UpdateBearerAuthRequest{},
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch != nil {
+        switch res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.Type {
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeOauth2ClientCredentials:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.OAuth2ClientCredsResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeBasicAuth:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.BasicAuthResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeBearerAuth:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.BearerAuthResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeOauth2Jwt:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.OAuth2JWTResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypePrivateKeyJwt:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.PrivateKeyJWTResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeMtls:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.MTLSAuthResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeCustomHeaderAuth:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.CustomHeaderAuthResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeAPIIntegrationOauth2AuthCode:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.APIIntegrationOAuth2AuthCodeResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeAPIIntegrationOauth2CustomApp:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.APIIntegrationOAuth2CustomAppResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeWhatsappAuth:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.WhatsAppAuthResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeSlackBotAuth:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.SlackBotAuthResponse is populated
+            case operations.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatchTypeURLSecret:
+                // res.ResponseUpdateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsAuthConnectionIDPatch.URLSecretAuthResponse is populated
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `authConnectionID`                                                                                       | `string`                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `body`                                                                                                   | [operations.UpdateAuthConnectionRequestBody](../../models/operations/updateauthconnectionrequestbody.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
+
+### Response
+
+**[*operations.UpdateAuthConnectionResponse](../../models/operations/updateauthconnectionresponse.md), error**
 
 ### Errors
 
@@ -993,7 +1239,7 @@ func main() {
 
 ## ShareResourceEndpoint
 
-Grants a role on a workspace resource to a user or a group. It overrides any existing role this user/service account/group/workspace api key has on the resource. To target a user or service account, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. The resource will be shared with the service account associated with the api key. You must have admin access to the resource to share it.
+Grants a role (one of 'admin', 'editor', 'commenter', or 'viewer') on a workspace resource to a user, group, or workspace (service account) API key. This overrides any existing role the target has on the resource. To target a user or service account, pass only the user email; the user must be in your workspace. To target a group, pass only the group id. To target a workspace (service account) API key, pass the api key id; the resource will be shared with the service account associated with that key. You must have admin access to the resource to share it.
 
 ### Example Usage
 
@@ -1050,7 +1296,7 @@ func main() {
 
 ## UnshareResourceEndpoint
 
-Removes any existing role on a workspace resource from a user, service account, group or workspace api key. To target a user or service account, pass only the user email. The user must be in your workspace. To target a group, pass only the group id. To target a workspace api key, pass the api key id. The resource will be unshared from the service account associated with the api key. You must have admin access to the resource to unshare it. You cannot remove permissions from the user who created the resource.
+Removes any existing role on a workspace resource from a user, group, or workspace (service account) API key. To target a user or service account, pass only the user email; the user must be in your workspace. To target a group, pass only the group id. To target a workspace (service account) API key, pass the api key id; the resource will be unshared from the service account associated with that key. You must have admin access to the resource to unshare it. You cannot remove permissions from the user who created the resource.
 
 ### Example Usage
 

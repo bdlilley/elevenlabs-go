@@ -1,8 +1,6 @@
 # SeatType
 
 Seat types for workspace members.
-Lite Member is equivalent to Basic Seat in the web application.
-Member is equivalent to Full Seat in the web application.
 
 ## Example Usage
 

@@ -9,6 +9,12 @@
 conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultEndCallSuccess(components.EndCallToolResultModel{/* values here */})
 ```
 
+### KnowledgeBaseRagToolResultModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultKnowledgeBaseRagSuccess(components.KnowledgeBaseRagToolResultModel{/* values here */})
+```
+
 ### LanguageDetectionToolResultModel
 
 ```go
@@ -57,6 +63,12 @@ conversationHistoryTranscriptSystemToolResultCommonModelInputResult := component
 conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTransferToNumberError(components.TransferToNumberResultErrorModel{/* values here */})
 ```
 
+### TransferToNumberResultExotelSuccessModel
+
+```go
+conversationHistoryTranscriptSystemToolResultCommonModelInputResult := components.CreateConversationHistoryTranscriptSystemToolResultCommonModelInputResultTransferToNumberExotelSuccess(components.TransferToNumberResultExotelSuccessModel{/* values here */})
+```
+
 ### TransferToNumberResultSipSuccessModel
 
 ```go
@@ -83,6 +95,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch conversationHistoryTranscriptSystemToolResultCommonModelInputResult.Type {
 	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeEndCallSuccess:
 		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.EndCallToolResultModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeKnowledgeBaseRagSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.KnowledgeBaseRagToolResultModel is populated
 	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeLanguageDetectionSuccess:
 		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.LanguageDetectionToolResultModel is populated
 	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypePlayDtmfError:
@@ -99,6 +113,8 @@ switch conversationHistoryTranscriptSystemToolResultCommonModelInputResult.Type 
 		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToAgentToolResultSuccessModel is populated
 	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToNumberError:
 		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberResultErrorModel is populated
+	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToNumberExotelSuccess:
+		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberResultExotelSuccessModel is populated
 	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToNumberSipSuccess:
 		// conversationHistoryTranscriptSystemToolResultCommonModelInputResult.TransferToNumberResultSipSuccessModel is populated
 	case components.ConversationHistoryTranscriptSystemToolResultCommonModelInputResultTypeTransferToNumberTwilioSuccess:

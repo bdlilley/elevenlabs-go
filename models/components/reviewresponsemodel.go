@@ -74,6 +74,7 @@ type ReviewResponseModel struct {
 	RejectReasons   []RejectReason                  `json:"reject_reasons,omitzero"`
 	ScoresBreakdown map[string]int64                `json:"scores_breakdown,omitzero"`
 	RejectedDetails *string                         `json:"rejected_details,omitzero"`
+	Explanation     *string                         `json:"explanation,omitzero"`
 }
 
 func (r ReviewResponseModel) MarshalJSON() ([]byte, error) {
@@ -127,4 +128,11 @@ func (r *ReviewResponseModel) GetRejectedDetails() *string {
 		return nil
 	}
 	return r.RejectedDetails
+}
+
+func (r *ReviewResponseModel) GetExplanation() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Explanation
 }

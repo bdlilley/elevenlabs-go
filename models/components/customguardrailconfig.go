@@ -9,6 +9,35 @@ import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
+// Model - LLM model to use for custom guardrail evaluation
+type Model string
+
+const (
+	ModelGemini25FlashLite Model = "gemini-2.5-flash-lite"
+	ModelGemini25Flash     Model = "gemini-2.5-flash"
+	ModelGemini31FlashLite Model = "gemini-3.1-flash-lite"
+	ModelGemini35Flash     Model = "gemini-3.5-flash"
+	ModelClaudeHaiku45     Model = "claude-haiku-4-5"
+	ModelClaudeSonnet46    Model = "claude-sonnet-4-6"
+	ModelGpt54Nano         Model = "gpt-5.4-nano"
+	ModelGpt54Mini         Model = "gpt-5.4-mini"
+)
+
+func (e Model) ToPointer() *Model {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Model) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-3.1-flash-lite", "gemini-3.5-flash", "claude-haiku-4-5", "claude-sonnet-4-6", "gpt-5.4-nano", "gpt-5.4-mini":
+			return true
+		}
+	}
+	return false
+}
+
 type CustomGuardrailConfigTriggerActionType string
 
 const (
@@ -94,9 +123,15 @@ type CustomGuardrailConfig struct {
 	// User-facing name for this guardrail
 	Name string `json:"name"`
 	// Instruction describing what to block, e.g. 'don't talk about politics'
-	Prompt        string                              `json:"prompt"`
-	ExecutionMode *GuardrailExecutionMode             `default:"streaming" json:"execution_mode"`
-	TriggerAction *CustomGuardrailConfigTriggerAction `json:"trigger_action,omitzero"`
+	Prompt        string                  `json:"prompt"`
+	ExecutionMode *GuardrailExecutionMode `default:"streaming" json:"execution_mode"`
+	// LLM model to use for custom guardrail evaluation
+	Model *Model `default:"gemini-2.5-flash-lite" json:"model"`
+	// How many recent customer messages to include in the guardrail's history, plus the agent replies that follow them (and tool calls and results when history_include_tool_calls is enabled). Only customer messages count toward the limit. 0 (default) shows none; 1 shows the customer's latest message onward. When > 0, the guardrail prompt can refer to this history as <conversation_history>; the reply under evaluation appears as <agent_message> and may repeat at the end of the history.
+	HistoryMessageCount *int64 `default:"0" json:"history_message_count"`
+	// When history is on (history_message_count > 0), also render interleaved tool calls and results in the window. Off by default: history shows only customer and agent text. Tool payloads can be large, so enabling this increases evaluation token cost.
+	HistoryIncludeToolCalls *bool                               `default:"false" json:"history_include_tool_calls"`
+	TriggerAction           *CustomGuardrailConfigTriggerAction `json:"trigger_action,omitzero"`
 }
 
 func (c CustomGuardrailConfig) MarshalJSON() ([]byte, error) {
@@ -136,6 +171,27 @@ func (c *CustomGuardrailConfig) GetExecutionMode() *GuardrailExecutionMode {
 		return nil
 	}
 	return c.ExecutionMode
+}
+
+func (c *CustomGuardrailConfig) GetModel() *Model {
+	if c == nil {
+		return nil
+	}
+	return c.Model
+}
+
+func (c *CustomGuardrailConfig) GetHistoryMessageCount() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.HistoryMessageCount
+}
+
+func (c *CustomGuardrailConfig) GetHistoryIncludeToolCalls() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.HistoryIncludeToolCalls
 }
 
 func (c *CustomGuardrailConfig) GetTriggerAction() *CustomGuardrailConfigTriggerAction {

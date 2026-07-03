@@ -17,9 +17,11 @@ type GetKnowledgeBaseFileResponseModel struct {
 	// The folder path segments leading to this entity, from root to parent folder.
 	FolderPath []KnowledgeBaseFolderPathSegmentResponseModel `json:"folder_path,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_              string `const:"file" json:"type"`
-	ExtractedInnerHTML string `json:"extracted_inner_html"`
-	Filename           string `json:"filename"`
+	type_              string                `const:"file" json:"type"`
+	ExtractedInnerHTML string                `json:"extracted_inner_html"`
+	Filename           string                `json:"filename"`
+	ExternalSyncInfo   *ExternalFileSyncInfo `json:"external_sync_info,omitzero"`
+	IsFrozen           *bool                 `default:"false" json:"is_frozen"`
 }
 
 func (g GetKnowledgeBaseFileResponseModel) MarshalJSON() ([]byte, error) {
@@ -98,4 +100,18 @@ func (g *GetKnowledgeBaseFileResponseModel) GetFilename() string {
 		return ""
 	}
 	return g.Filename
+}
+
+func (g *GetKnowledgeBaseFileResponseModel) GetExternalSyncInfo() *ExternalFileSyncInfo {
+	if g == nil {
+		return nil
+	}
+	return g.ExternalSyncInfo
+}
+
+func (g *GetKnowledgeBaseFileResponseModel) GetIsFrozen() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.IsFrozen
 }

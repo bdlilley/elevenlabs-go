@@ -2,6 +2,8 @@
 
 ## Overview
 
+Mint short-lived, single-use tokens for client-side use of Conversational AI agents.
+
 ### Available Operations
 
 * [GetSingleUseToken](#getsingleusetoken) - Create Single Use Token

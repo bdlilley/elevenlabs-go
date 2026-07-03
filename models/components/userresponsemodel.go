@@ -39,8 +39,6 @@ type UserResponseModel struct {
 	// The unix timestamp of the user's creation. 0 if the user was created before the unix timestamp was added.
 	CreatedAt int64 `json:"created_at"`
 	// Seat types for workspace members.
-	// Lite Member is equivalent to Basic Seat in the web application.
-	// Member is equivalent to Full Seat in the web application.
 	SeatType SeatType `json:"seat_type"`
 }
 

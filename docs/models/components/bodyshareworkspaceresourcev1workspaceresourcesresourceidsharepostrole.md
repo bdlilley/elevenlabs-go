@@ -1,6 +1,6 @@
 # BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePostRole
 
-Role to update the target principal with.
+Role to grant to the target: one of 'admin', 'editor', 'commenter', or 'viewer'.
 
 ## Example Usage
 

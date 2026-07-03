@@ -3,155 +3,12 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type DynamicVariablesConfigDynamicVariablePlaceholdersType string
-
-const (
-	DynamicVariablesConfigDynamicVariablePlaceholdersTypeStr     DynamicVariablesConfigDynamicVariablePlaceholdersType = "str"
-	DynamicVariablesConfigDynamicVariablePlaceholdersTypeNumber  DynamicVariablesConfigDynamicVariablePlaceholdersType = "number"
-	DynamicVariablesConfigDynamicVariablePlaceholdersTypeInteger DynamicVariablesConfigDynamicVariablePlaceholdersType = "integer"
-	DynamicVariablesConfigDynamicVariablePlaceholdersTypeBoolean DynamicVariablesConfigDynamicVariablePlaceholdersType = "boolean"
-)
-
-type DynamicVariablesConfigDynamicVariablePlaceholders struct {
-	Str     *string  `queryParam:"inline" union:"member"`
-	Number  *float64 `queryParam:"inline" union:"member"`
-	Integer *int64   `queryParam:"inline" union:"member"`
-	Boolean *bool    `queryParam:"inline" union:"member"`
-
-	Type DynamicVariablesConfigDynamicVariablePlaceholdersType
-}
-
-func CreateDynamicVariablesConfigDynamicVariablePlaceholdersStr(str string) DynamicVariablesConfigDynamicVariablePlaceholders {
-	typ := DynamicVariablesConfigDynamicVariablePlaceholdersTypeStr
-
-	return DynamicVariablesConfigDynamicVariablePlaceholders{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateDynamicVariablesConfigDynamicVariablePlaceholdersNumber(number float64) DynamicVariablesConfigDynamicVariablePlaceholders {
-	typ := DynamicVariablesConfigDynamicVariablePlaceholdersTypeNumber
-
-	return DynamicVariablesConfigDynamicVariablePlaceholders{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func CreateDynamicVariablesConfigDynamicVariablePlaceholdersInteger(integer int64) DynamicVariablesConfigDynamicVariablePlaceholders {
-	typ := DynamicVariablesConfigDynamicVariablePlaceholdersTypeInteger
-
-	return DynamicVariablesConfigDynamicVariablePlaceholders{
-		Integer: &integer,
-		Type:    typ,
-	}
-}
-
-func CreateDynamicVariablesConfigDynamicVariablePlaceholdersBoolean(boolean bool) DynamicVariablesConfigDynamicVariablePlaceholders {
-	typ := DynamicVariablesConfigDynamicVariablePlaceholdersTypeBoolean
-
-	return DynamicVariablesConfigDynamicVariablePlaceholders{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func (u *DynamicVariablesConfigDynamicVariablePlaceholders) UnmarshalJSON(data []byte) error {
-
-	var candidates []utils.UnionCandidate
-
-	// Collect all valid candidates
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  DynamicVariablesConfigDynamicVariablePlaceholdersTypeStr,
-			Value: &str,
-		})
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  DynamicVariablesConfigDynamicVariablePlaceholdersTypeNumber,
-			Value: &number,
-		})
-	}
-
-	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  DynamicVariablesConfigDynamicVariablePlaceholdersTypeInteger,
-			Value: &integer,
-		})
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		candidates = append(candidates, utils.UnionCandidate{
-			Type:  DynamicVariablesConfigDynamicVariablePlaceholdersTypeBoolean,
-			Value: &boolean,
-		})
-	}
-
-	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for DynamicVariablesConfigDynamicVariablePlaceholders", string(data))
-	}
-
-	// Pick the best candidate using multi-stage filtering
-	best := utils.PickBestUnionCandidate(candidates, data)
-	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for DynamicVariablesConfigDynamicVariablePlaceholders", string(data))
-	}
-
-	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(DynamicVariablesConfigDynamicVariablePlaceholdersType)
-	switch best.Type {
-	case DynamicVariablesConfigDynamicVariablePlaceholdersTypeStr:
-		u.Str = best.Value.(*string)
-		return nil
-	case DynamicVariablesConfigDynamicVariablePlaceholdersTypeNumber:
-		u.Number = best.Value.(*float64)
-		return nil
-	case DynamicVariablesConfigDynamicVariablePlaceholdersTypeInteger:
-		u.Integer = best.Value.(*int64)
-		return nil
-	case DynamicVariablesConfigDynamicVariablePlaceholdersTypeBoolean:
-		u.Boolean = best.Value.(*bool)
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for DynamicVariablesConfigDynamicVariablePlaceholders", string(data))
-}
-
-func (u DynamicVariablesConfigDynamicVariablePlaceholders) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	if u.Integer != nil {
-		return utils.MarshalJSON(u.Integer, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type DynamicVariablesConfigDynamicVariablePlaceholders: all fields are null")
-}
-
 type DynamicVariablesConfig struct {
 	// A dictionary of dynamic variable placeholders and their values
-	DynamicVariablePlaceholders map[string]DynamicVariablesConfigDynamicVariablePlaceholders `json:"dynamic_variable_placeholders,omitzero"`
+	DynamicVariablePlaceholders map[string]any `json:"dynamic_variable_placeholders,omitzero"`
 }
 
 func (d DynamicVariablesConfig) MarshalJSON() ([]byte, error) {
@@ -165,7 +22,7 @@ func (d *DynamicVariablesConfig) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (d *DynamicVariablesConfig) GetDynamicVariablePlaceholders() map[string]DynamicVariablesConfigDynamicVariablePlaceholders {
+func (d *DynamicVariablesConfig) GetDynamicVariablePlaceholders() map[string]any {
 	if d == nil {
 		return nil
 	}

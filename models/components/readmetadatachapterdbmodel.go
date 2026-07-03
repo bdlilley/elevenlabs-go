@@ -15,6 +15,7 @@ type ReadMetadataChapterDBModel struct {
 	HasSummary         *bool    `default:"false" json:"has_summary"`
 	DurationSeconds    *float64 `json:"duration_seconds,omitzero"`
 	FileNumber         *string  `json:"file_number,omitzero"`
+	IsFallbackName     *bool    `default:"false" json:"is_fallback_name"`
 }
 
 func (r ReadMetadataChapterDBModel) MarshalJSON() ([]byte, error) {
@@ -82,4 +83,11 @@ func (r *ReadMetadataChapterDBModel) GetFileNumber() *string {
 		return nil
 	}
 	return r.FileNumber
+}
+
+func (r *ReadMetadataChapterDBModel) GetIsFallbackName() *bool {
+	if r == nil {
+		return nil
+	}
+	return r.IsFallbackName
 }

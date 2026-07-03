@@ -92,6 +92,10 @@ func (a *ASTMultiplicationOperatorNodeOutput1) GetLeftNeqOperator() *ASTNotEqual
 	return a.GetLeft().ASTNotEqualsOperatorNodeOutput1
 }
 
+func (a *ASTMultiplicationOperatorNodeOutput1) GetLeftNullLiteral() *ASTNullNodeOutput {
+	return a.GetLeft().ASTNullNodeOutput
+}
+
 func (a *ASTMultiplicationOperatorNodeOutput1) GetLeftNumberLiteral() *ASTNumberNodeOutput {
 	return a.GetLeft().ASTNumberNodeOutput
 }
@@ -169,6 +173,10 @@ func (a *ASTMultiplicationOperatorNodeOutput1) GetRightMulOperator() *ASTMultipl
 
 func (a *ASTMultiplicationOperatorNodeOutput1) GetRightNeqOperator() *ASTNotEqualsOperatorNodeOutput1 {
 	return a.GetRight().ASTNotEqualsOperatorNodeOutput1
+}
+
+func (a *ASTMultiplicationOperatorNodeOutput1) GetRightNullLiteral() *ASTNullNodeOutput {
+	return a.GetRight().ASTNullNodeOutput
 }
 
 func (a *ASTMultiplicationOperatorNodeOutput1) GetRightNumberLiteral() *ASTNumberNodeOutput {

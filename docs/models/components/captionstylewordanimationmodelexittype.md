@@ -16,8 +16,14 @@ custom := components.CaptionStyleWordAnimationModelExitType("custom_value")
 
 ## Values
 
-| Name                                          | Value                                         |
-| --------------------------------------------- | --------------------------------------------- |
-| `CaptionStyleWordAnimationModelExitTypeNone`  | none                                          |
-| `CaptionStyleWordAnimationModelExitTypeFade`  | fade                                          |
-| `CaptionStyleWordAnimationModelExitTypeScale` | scale                                         |
+| Name                                              | Value                                             |
+| ------------------------------------------------- | ------------------------------------------------- |
+| `CaptionStyleWordAnimationModelExitTypeNone`      | none                                              |
+| `CaptionStyleWordAnimationModelExitTypeFade`      | fade                                              |
+| `CaptionStyleWordAnimationModelExitTypeScale`     | scale                                             |
+| `CaptionStyleWordAnimationModelExitTypePop`       | pop                                               |
+| `CaptionStyleWordAnimationModelExitTypeSlideUp`   | slide_up                                          |
+| `CaptionStyleWordAnimationModelExitTypeSlideDown` | slide_down                                        |
+| `CaptionStyleWordAnimationModelExitTypeSlam`      | slam                                              |
+| `CaptionStyleWordAnimationModelExitTypeScaleDown` | scale_down                                        |
+| `CaptionStyleWordAnimationModelExitTypeSlideIn`   | slide_in                                          |

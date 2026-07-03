@@ -31,6 +31,54 @@ func (e *ResourceAccessInfoRole) IsExact() bool {
 	return false
 }
 
+type ResourceAccessInfoAnonymousAccessLevelOverride string
+
+const (
+	ResourceAccessInfoAnonymousAccessLevelOverrideAdmin     ResourceAccessInfoAnonymousAccessLevelOverride = "admin"
+	ResourceAccessInfoAnonymousAccessLevelOverrideEditor    ResourceAccessInfoAnonymousAccessLevelOverride = "editor"
+	ResourceAccessInfoAnonymousAccessLevelOverrideCommenter ResourceAccessInfoAnonymousAccessLevelOverride = "commenter"
+	ResourceAccessInfoAnonymousAccessLevelOverrideViewer    ResourceAccessInfoAnonymousAccessLevelOverride = "viewer"
+)
+
+func (e ResourceAccessInfoAnonymousAccessLevelOverride) ToPointer() *ResourceAccessInfoAnonymousAccessLevelOverride {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ResourceAccessInfoAnonymousAccessLevelOverride) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "admin", "editor", "commenter", "viewer":
+			return true
+		}
+	}
+	return false
+}
+
+type AccessSource string
+
+const (
+	AccessSourceCreator          AccessSource = "creator"
+	AccessSourceExplicit         AccessSource = "explicit"
+	AccessSourceWorkspaceAdmin   AccessSource = "workspace_admin"
+	AccessSourceWorkspaceDefault AccessSource = "workspace_default"
+)
+
+func (e AccessSource) ToPointer() *AccessSource {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AccessSource) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "creator", "explicit", "workspace_admin", "workspace_default":
+			return true
+		}
+	}
+	return false
+}
+
 type ResourceAccessInfo struct {
 	// Whether the user making the request is the creator of the agent
 	IsCreator bool `json:"is_creator"`
@@ -40,6 +88,10 @@ type ResourceAccessInfo struct {
 	CreatorEmail string `json:"creator_email"`
 	// The role of the user making the request
 	Role ResourceAccessInfoRole `json:"role"`
+	// The access level for anonymous users. If None, the resource is not shared publicly.
+	AnonymousAccessLevelOverride *ResourceAccessInfoAnonymousAccessLevelOverride `json:"anonymous_access_level_override,omitzero"`
+	// Why the requesting user has access to this resource. 'creator' = caller is the owner. 'explicit' = caller (or one of their workspace groups) is listed in role_to_group_ids beyond the workspace-wide everyone group. 'workspace_default' = the workspace-wide everyone group is listed in role_to_group_ids (every non-anon workspace member, including admins, sees this resource). 'workspace_admin' = caller is a workspace admin and the admin seat is the *only* path to access; reserved for docs nobody else can see. Lets the UI disclose why an admin-bypass viewer sees a doc that wasn't explicitly shared with them.
+	AccessSource *AccessSource `json:"access_source,omitzero"`
 }
 
 func (r ResourceAccessInfo) MarshalJSON() ([]byte, error) {
@@ -79,4 +131,18 @@ func (r *ResourceAccessInfo) GetRole() ResourceAccessInfoRole {
 		return ResourceAccessInfoRole("")
 	}
 	return r.Role
+}
+
+func (r *ResourceAccessInfo) GetAnonymousAccessLevelOverride() *ResourceAccessInfoAnonymousAccessLevelOverride {
+	if r == nil {
+		return nil
+	}
+	return r.AnonymousAccessLevelOverride
+}
+
+func (r *ResourceAccessInfo) GetAccessSource() *AccessSource {
+	if r == nil {
+		return nil
+	}
+	return r.AccessSource
 }

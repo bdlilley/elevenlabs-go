@@ -18,3 +18,4 @@ value := components.BodyStreamComposedMusicV1MusicStreamPostModelIDMusicV1
 | Name                                                     | Value                                                    |
 | -------------------------------------------------------- | -------------------------------------------------------- |
 | `BodyStreamComposedMusicV1MusicStreamPostModelIDMusicV1` | music_v1                                                 |
+| `BodyStreamComposedMusicV1MusicStreamPostModelIDMusicV2` | music_v2                                                 |

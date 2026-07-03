@@ -27,3 +27,4 @@ custom := components.AuthorizationMethod("custom_value")
 | `AuthorizationMethodLivekitTokenWebsite` | livekit_token_website                    |
 | `AuthorizationMethodGenesysAPIKey`       | genesys_api_key                          |
 | `AuthorizationMethodWhatsapp`            | whatsapp                                 |
+| `AuthorizationMethodSms`                 | sms                                      |

@@ -3,13 +3,25 @@
 package operations
 
 import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 )
 
 type EditServiceAccountAPIKeyRequest struct {
-	ServiceAccountUserID string                                                                                           `pathParam:"style=simple,explode=false,name=service_account_user_id"`
-	APIKeyID             string                                                                                           `pathParam:"style=simple,explode=false,name=api_key_id"`
-	Body                 components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch `request:"mediaType=application/json"`
+	ServiceAccountUserID string                                                                                            `pathParam:"style=simple,explode=false,name=service_account_user_id"`
+	APIKeyID             string                                                                                            `pathParam:"style=simple,explode=false,name=api_key_id"`
+	Body                 *components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch `request:"mediaType=application/json"`
+}
+
+func (e EditServiceAccountAPIKeyRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EditServiceAccountAPIKeyRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (e *EditServiceAccountAPIKeyRequest) GetServiceAccountUserID() string {
@@ -26,9 +38,9 @@ func (e *EditServiceAccountAPIKeyRequest) GetAPIKeyID() string {
 	return e.APIKeyID
 }
 
-func (e *EditServiceAccountAPIKeyRequest) GetBody() components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch {
+func (e *EditServiceAccountAPIKeyRequest) GetBody() *components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch {
 	if e == nil {
-		return components.BodyEditServiceAccountAPIKeyV1ServiceAccountsServiceAccountUserIDAPIKeysAPIKeyIDPatch{}
+		return nil
 	}
 	return e.Body
 }

@@ -17,9 +17,11 @@ type GetKnowledgeBaseFolderResponseModel struct {
 	// The folder path segments leading to this entity, from root to parent folder.
 	FolderPath []KnowledgeBaseFolderPathSegmentResponseModel `json:"folder_path,omitzero"`
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_         string        `const:"folder" json:"type"`
-	ChildrenCount int64         `json:"children_count"`
-	AutoSyncInfo  *AutoSyncInfo `json:"auto_sync_info,omitzero"`
+	type_            string                  `const:"folder" json:"type"`
+	ChildrenCount    int64                   `json:"children_count"`
+	AutoSyncInfo     *AutoSyncInfo           `json:"auto_sync_info,omitzero"`
+	ExternalSyncInfo *ExternalFolderSyncInfo `json:"external_sync_info,omitzero"`
+	IsFrozen         *bool                   `default:"false" json:"is_frozen"`
 }
 
 func (g GetKnowledgeBaseFolderResponseModel) MarshalJSON() ([]byte, error) {
@@ -98,4 +100,18 @@ func (g *GetKnowledgeBaseFolderResponseModel) GetAutoSyncInfo() *AutoSyncInfo {
 		return nil
 	}
 	return g.AutoSyncInfo
+}
+
+func (g *GetKnowledgeBaseFolderResponseModel) GetExternalSyncInfo() *ExternalFolderSyncInfo {
+	if g == nil {
+		return nil
+	}
+	return g.ExternalSyncInfo
+}
+
+func (g *GetKnowledgeBaseFolderResponseModel) GetIsFrozen() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.IsFrozen
 }

@@ -9,62 +9,61 @@ import (
 	"github.com/bdlilley/elevenlabs-go/types"
 )
 
-type ConstantSchemaOverrideConstantValueType string
+type ConstantSchemaOverrideConstantValue1Type string
 
 const (
-	ConstantSchemaOverrideConstantValueTypeStr     ConstantSchemaOverrideConstantValueType = "str"
-	ConstantSchemaOverrideConstantValueTypeInteger ConstantSchemaOverrideConstantValueType = "integer"
-	ConstantSchemaOverrideConstantValueTypeNumber  ConstantSchemaOverrideConstantValueType = "number"
-	ConstantSchemaOverrideConstantValueTypeBoolean ConstantSchemaOverrideConstantValueType = "boolean"
+	ConstantSchemaOverrideConstantValue1TypeStr     ConstantSchemaOverrideConstantValue1Type = "str"
+	ConstantSchemaOverrideConstantValue1TypeInteger ConstantSchemaOverrideConstantValue1Type = "integer"
+	ConstantSchemaOverrideConstantValue1TypeNumber  ConstantSchemaOverrideConstantValue1Type = "number"
+	ConstantSchemaOverrideConstantValue1TypeBoolean ConstantSchemaOverrideConstantValue1Type = "boolean"
 )
 
-// ConstantSchemaOverrideConstantValue - The constant value to use
-type ConstantSchemaOverrideConstantValue struct {
+type ConstantSchemaOverrideConstantValue1 struct {
 	Str     *string  `queryParam:"inline" union:"member"`
 	Integer *int64   `queryParam:"inline" union:"member"`
 	Number  *float64 `queryParam:"inline" union:"member"`
 	Boolean *bool    `queryParam:"inline" union:"member"`
 
-	Type ConstantSchemaOverrideConstantValueType
+	Type ConstantSchemaOverrideConstantValue1Type
 }
 
-func CreateConstantSchemaOverrideConstantValueStr(str string) ConstantSchemaOverrideConstantValue {
-	typ := ConstantSchemaOverrideConstantValueTypeStr
+func CreateConstantSchemaOverrideConstantValue1Str(str string) ConstantSchemaOverrideConstantValue1 {
+	typ := ConstantSchemaOverrideConstantValue1TypeStr
 
-	return ConstantSchemaOverrideConstantValue{
+	return ConstantSchemaOverrideConstantValue1{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateConstantSchemaOverrideConstantValueInteger(integer int64) ConstantSchemaOverrideConstantValue {
-	typ := ConstantSchemaOverrideConstantValueTypeInteger
+func CreateConstantSchemaOverrideConstantValue1Integer(integer int64) ConstantSchemaOverrideConstantValue1 {
+	typ := ConstantSchemaOverrideConstantValue1TypeInteger
 
-	return ConstantSchemaOverrideConstantValue{
+	return ConstantSchemaOverrideConstantValue1{
 		Integer: &integer,
 		Type:    typ,
 	}
 }
 
-func CreateConstantSchemaOverrideConstantValueNumber(number float64) ConstantSchemaOverrideConstantValue {
-	typ := ConstantSchemaOverrideConstantValueTypeNumber
+func CreateConstantSchemaOverrideConstantValue1Number(number float64) ConstantSchemaOverrideConstantValue1 {
+	typ := ConstantSchemaOverrideConstantValue1TypeNumber
 
-	return ConstantSchemaOverrideConstantValue{
+	return ConstantSchemaOverrideConstantValue1{
 		Number: &number,
 		Type:   typ,
 	}
 }
 
-func CreateConstantSchemaOverrideConstantValueBoolean(boolean bool) ConstantSchemaOverrideConstantValue {
-	typ := ConstantSchemaOverrideConstantValueTypeBoolean
+func CreateConstantSchemaOverrideConstantValue1Boolean(boolean bool) ConstantSchemaOverrideConstantValue1 {
+	typ := ConstantSchemaOverrideConstantValue1TypeBoolean
 
-	return ConstantSchemaOverrideConstantValue{
+	return ConstantSchemaOverrideConstantValue1{
 		Boolean: &boolean,
 		Type:    typ,
 	}
 }
 
-func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
+func (u *ConstantSchemaOverrideConstantValue1) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
 
@@ -72,7 +71,7 @@ func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConstantSchemaOverrideConstantValueTypeStr,
+			Type:  ConstantSchemaOverrideConstantValue1TypeStr,
 			Value: &str,
 		})
 	}
@@ -80,7 +79,7 @@ func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
 	var integer int64 = int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConstantSchemaOverrideConstantValueTypeInteger,
+			Type:  ConstantSchemaOverrideConstantValue1TypeInteger,
 			Value: &integer,
 		})
 	}
@@ -88,7 +87,7 @@ func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
 	var number float64 = float64(0)
 	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConstantSchemaOverrideConstantValueTypeNumber,
+			Type:  ConstantSchemaOverrideConstantValue1TypeNumber,
 			Value: &number,
 		})
 	}
@@ -96,42 +95,42 @@ func (u *ConstantSchemaOverrideConstantValue) UnmarshalJSON(data []byte) error {
 	var boolean bool = false
 	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  ConstantSchemaOverrideConstantValueTypeBoolean,
+			Type:  ConstantSchemaOverrideConstantValue1TypeBoolean,
 			Value: &boolean,
 		})
 	}
 
 	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue", string(data))
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue1", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue", string(data))
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue1", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(ConstantSchemaOverrideConstantValueType)
+	u.Type = best.Type.(ConstantSchemaOverrideConstantValue1Type)
 	switch best.Type {
-	case ConstantSchemaOverrideConstantValueTypeStr:
+	case ConstantSchemaOverrideConstantValue1TypeStr:
 		u.Str = best.Value.(*string)
 		return nil
-	case ConstantSchemaOverrideConstantValueTypeInteger:
+	case ConstantSchemaOverrideConstantValue1TypeInteger:
 		u.Integer = best.Value.(*int64)
 		return nil
-	case ConstantSchemaOverrideConstantValueTypeNumber:
+	case ConstantSchemaOverrideConstantValue1TypeNumber:
 		u.Number = best.Value.(*float64)
 		return nil
-	case ConstantSchemaOverrideConstantValueTypeBoolean:
+	case ConstantSchemaOverrideConstantValue1TypeBoolean:
 		u.Boolean = best.Value.(*bool)
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue1", string(data))
 }
 
-func (u ConstantSchemaOverrideConstantValue) MarshalJSON() ([]byte, error) {
+func (u ConstantSchemaOverrideConstantValue1) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -148,14 +147,182 @@ func (u ConstantSchemaOverrideConstantValue) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Boolean, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type ConstantSchemaOverrideConstantValue: all fields are null")
+	return nil, errors.New("could not marshal union type ConstantSchemaOverrideConstantValue1: all fields are null")
+}
+
+type ConstantSchemaOverrideConstantValue2Type string
+
+const (
+	ConstantSchemaOverrideConstantValue2TypeStr                                         ConstantSchemaOverrideConstantValue2Type = "str"
+	ConstantSchemaOverrideConstantValue2TypeInteger                                     ConstantSchemaOverrideConstantValue2Type = "integer"
+	ConstantSchemaOverrideConstantValue2TypeNumber                                      ConstantSchemaOverrideConstantValue2Type = "number"
+	ConstantSchemaOverrideConstantValue2TypeBoolean                                     ConstantSchemaOverrideConstantValue2Type = "boolean"
+	ConstantSchemaOverrideConstantValue2TypeArrayOfConstantSchemaOverrideConstantValue1 ConstantSchemaOverrideConstantValue2Type = "arrayOfConstantSchemaOverrideConstantValue1"
+)
+
+// ConstantSchemaOverrideConstantValue2 - The constant value to use
+type ConstantSchemaOverrideConstantValue2 struct {
+	Str                                         *string                                `queryParam:"inline" union:"member"`
+	Integer                                     *int64                                 `queryParam:"inline" union:"member"`
+	Number                                      *float64                               `queryParam:"inline" union:"member"`
+	Boolean                                     *bool                                  `queryParam:"inline" union:"member"`
+	ArrayOfConstantSchemaOverrideConstantValue1 []ConstantSchemaOverrideConstantValue1 `queryParam:"inline" union:"member"`
+
+	Type ConstantSchemaOverrideConstantValue2Type
+}
+
+func CreateConstantSchemaOverrideConstantValue2Str(str string) ConstantSchemaOverrideConstantValue2 {
+	typ := ConstantSchemaOverrideConstantValue2TypeStr
+
+	return ConstantSchemaOverrideConstantValue2{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateConstantSchemaOverrideConstantValue2Integer(integer int64) ConstantSchemaOverrideConstantValue2 {
+	typ := ConstantSchemaOverrideConstantValue2TypeInteger
+
+	return ConstantSchemaOverrideConstantValue2{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func CreateConstantSchemaOverrideConstantValue2Number(number float64) ConstantSchemaOverrideConstantValue2 {
+	typ := ConstantSchemaOverrideConstantValue2TypeNumber
+
+	return ConstantSchemaOverrideConstantValue2{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateConstantSchemaOverrideConstantValue2Boolean(boolean bool) ConstantSchemaOverrideConstantValue2 {
+	typ := ConstantSchemaOverrideConstantValue2TypeBoolean
+
+	return ConstantSchemaOverrideConstantValue2{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateConstantSchemaOverrideConstantValue2ArrayOfConstantSchemaOverrideConstantValue1(arrayOfConstantSchemaOverrideConstantValue1 []ConstantSchemaOverrideConstantValue1) ConstantSchemaOverrideConstantValue2 {
+	typ := ConstantSchemaOverrideConstantValue2TypeArrayOfConstantSchemaOverrideConstantValue1
+
+	return ConstantSchemaOverrideConstantValue2{
+		ArrayOfConstantSchemaOverrideConstantValue1: arrayOfConstantSchemaOverrideConstantValue1,
+		Type: typ,
+	}
+}
+
+func (u *ConstantSchemaOverrideConstantValue2) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ConstantSchemaOverrideConstantValue2TypeStr,
+			Value: &str,
+		})
+	}
+
+	var integer int64 = int64(0)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ConstantSchemaOverrideConstantValue2TypeInteger,
+			Value: &integer,
+		})
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ConstantSchemaOverrideConstantValue2TypeNumber,
+			Value: &number,
+		})
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ConstantSchemaOverrideConstantValue2TypeBoolean,
+			Value: &boolean,
+		})
+	}
+
+	var arrayOfConstantSchemaOverrideConstantValue1 []ConstantSchemaOverrideConstantValue1 = []ConstantSchemaOverrideConstantValue1{}
+	if err := utils.UnmarshalJSON(data, &arrayOfConstantSchemaOverrideConstantValue1, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ConstantSchemaOverrideConstantValue2TypeArrayOfConstantSchemaOverrideConstantValue1,
+			Value: arrayOfConstantSchemaOverrideConstantValue1,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue2", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue2", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ConstantSchemaOverrideConstantValue2Type)
+	switch best.Type {
+	case ConstantSchemaOverrideConstantValue2TypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case ConstantSchemaOverrideConstantValue2TypeInteger:
+		u.Integer = best.Value.(*int64)
+		return nil
+	case ConstantSchemaOverrideConstantValue2TypeNumber:
+		u.Number = best.Value.(*float64)
+		return nil
+	case ConstantSchemaOverrideConstantValue2TypeBoolean:
+		u.Boolean = best.Value.(*bool)
+		return nil
+	case ConstantSchemaOverrideConstantValue2TypeArrayOfConstantSchemaOverrideConstantValue1:
+		u.ArrayOfConstantSchemaOverrideConstantValue1 = best.Value.([]ConstantSchemaOverrideConstantValue1)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ConstantSchemaOverrideConstantValue2", string(data))
+}
+
+func (u ConstantSchemaOverrideConstantValue2) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.ArrayOfConstantSchemaOverrideConstantValue1 != nil {
+		return utils.MarshalJSON(u.ArrayOfConstantSchemaOverrideConstantValue1, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ConstantSchemaOverrideConstantValue2: all fields are null")
 }
 
 type ConstantSchemaOverride struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	source *string `const:"constant" json:"source"`
 	// The constant value to use
-	ConstantValue ConstantSchemaOverrideConstantValue `json:"constant_value"`
+	ConstantValue ConstantSchemaOverrideConstantValue2 `json:"constant_value"`
 }
 
 func (c ConstantSchemaOverride) MarshalJSON() ([]byte, error) {
@@ -173,9 +340,9 @@ func (c *ConstantSchemaOverride) GetSource() *string {
 	return types.Pointer("constant")
 }
 
-func (c *ConstantSchemaOverride) GetConstantValue() ConstantSchemaOverrideConstantValue {
+func (c *ConstantSchemaOverride) GetConstantValue() ConstantSchemaOverrideConstantValue2 {
 	if c == nil {
-		return ConstantSchemaOverrideConstantValue{}
+		return ConstantSchemaOverrideConstantValue2{}
 	}
 	return c.ConstantValue
 }

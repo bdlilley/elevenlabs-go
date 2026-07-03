@@ -3,14 +3,115 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 	"github.com/bdlilley/elevenlabs-go/models/components"
 	"io"
 )
 
+// StreamComposeOutputFormatOfTheGeneratedAudio - Output format of the generated audio. Formatted as codec_sample_rate_bitrate. Use "auto" (the default) to let the API pick the best format for the selected model: mp3_44100_128 for v1 models and mp3_48000_192 for v2 models.
+type StreamComposeOutputFormatOfTheGeneratedAudio string
+
+const (
+	StreamComposeOutputFormatOfTheGeneratedAudioAuto         StreamComposeOutputFormatOfTheGeneratedAudio = "auto"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp348000128  StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_48000_128"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp348000192  StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_48000_192"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp348000240  StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_48000_240"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp348000320  StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_48000_320"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp32205032   StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_22050_32"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp32400048   StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_24000_48"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp34410032   StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_44100_32"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp34410064   StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_44100_64"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp34410096   StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_44100_96"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp344100128  StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_44100_128"
+	StreamComposeOutputFormatOfTheGeneratedAudioMp344100192  StreamComposeOutputFormatOfTheGeneratedAudio = "mp3_44100_192"
+	StreamComposeOutputFormatOfTheGeneratedAudioPcm8000      StreamComposeOutputFormatOfTheGeneratedAudio = "pcm_8000"
+	StreamComposeOutputFormatOfTheGeneratedAudioPcm16000     StreamComposeOutputFormatOfTheGeneratedAudio = "pcm_16000"
+	StreamComposeOutputFormatOfTheGeneratedAudioPcm22050     StreamComposeOutputFormatOfTheGeneratedAudio = "pcm_22050"
+	StreamComposeOutputFormatOfTheGeneratedAudioPcm24000     StreamComposeOutputFormatOfTheGeneratedAudio = "pcm_24000"
+	StreamComposeOutputFormatOfTheGeneratedAudioPcm32000     StreamComposeOutputFormatOfTheGeneratedAudio = "pcm_32000"
+	StreamComposeOutputFormatOfTheGeneratedAudioPcm44100     StreamComposeOutputFormatOfTheGeneratedAudio = "pcm_44100"
+	StreamComposeOutputFormatOfTheGeneratedAudioPcm48000     StreamComposeOutputFormatOfTheGeneratedAudio = "pcm_48000"
+	StreamComposeOutputFormatOfTheGeneratedAudioUlaw8000     StreamComposeOutputFormatOfTheGeneratedAudio = "ulaw_8000"
+	StreamComposeOutputFormatOfTheGeneratedAudioAlaw8000     StreamComposeOutputFormatOfTheGeneratedAudio = "alaw_8000"
+	StreamComposeOutputFormatOfTheGeneratedAudioOpus4800032  StreamComposeOutputFormatOfTheGeneratedAudio = "opus_48000_32"
+	StreamComposeOutputFormatOfTheGeneratedAudioOpus4800064  StreamComposeOutputFormatOfTheGeneratedAudio = "opus_48000_64"
+	StreamComposeOutputFormatOfTheGeneratedAudioOpus4800096  StreamComposeOutputFormatOfTheGeneratedAudio = "opus_48000_96"
+	StreamComposeOutputFormatOfTheGeneratedAudioOpus48000128 StreamComposeOutputFormatOfTheGeneratedAudio = "opus_48000_128"
+	StreamComposeOutputFormatOfTheGeneratedAudioOpus48000192 StreamComposeOutputFormatOfTheGeneratedAudio = "opus_48000_192"
+)
+
+func (e StreamComposeOutputFormatOfTheGeneratedAudio) ToPointer() *StreamComposeOutputFormatOfTheGeneratedAudio {
+	return &e
+}
+func (e *StreamComposeOutputFormatOfTheGeneratedAudio) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "auto":
+		fallthrough
+	case "mp3_48000_128":
+		fallthrough
+	case "mp3_48000_192":
+		fallthrough
+	case "mp3_48000_240":
+		fallthrough
+	case "mp3_48000_320":
+		fallthrough
+	case "mp3_22050_32":
+		fallthrough
+	case "mp3_24000_48":
+		fallthrough
+	case "mp3_44100_32":
+		fallthrough
+	case "mp3_44100_64":
+		fallthrough
+	case "mp3_44100_96":
+		fallthrough
+	case "mp3_44100_128":
+		fallthrough
+	case "mp3_44100_192":
+		fallthrough
+	case "pcm_8000":
+		fallthrough
+	case "pcm_16000":
+		fallthrough
+	case "pcm_22050":
+		fallthrough
+	case "pcm_24000":
+		fallthrough
+	case "pcm_32000":
+		fallthrough
+	case "pcm_44100":
+		fallthrough
+	case "pcm_48000":
+		fallthrough
+	case "ulaw_8000":
+		fallthrough
+	case "alaw_8000":
+		fallthrough
+	case "opus_48000_32":
+		fallthrough
+	case "opus_48000_64":
+		fallthrough
+	case "opus_48000_96":
+		fallthrough
+	case "opus_48000_128":
+		fallthrough
+	case "opus_48000_192":
+		*e = StreamComposeOutputFormatOfTheGeneratedAudio(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for StreamComposeOutputFormatOfTheGeneratedAudio: %v", v)
+	}
+}
+
 type StreamComposeRequest struct {
-	// Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
-	OutputFormat *components.AllowedOutputFormats                     `queryParam:"style=form,explode=true,name=output_format"`
+	// Output format of the generated audio. Formatted as codec_sample_rate_bitrate. Use "auto" (the default) to let the API pick the best format for the selected model: mp3_44100_128 for v1 models and mp3_48000_192 for v2 models.
+	OutputFormat *StreamComposeOutputFormatOfTheGeneratedAudio        `default:"auto" queryParam:"style=form,explode=true,name=output_format"`
 	Body         *components.BodyStreamComposedMusicV1MusicStreamPost `request:"mediaType=application/json"`
 }
 
@@ -25,7 +126,7 @@ func (s *StreamComposeRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *StreamComposeRequest) GetOutputFormat() *components.AllowedOutputFormats {
+func (s *StreamComposeRequest) GetOutputFormat() *StreamComposeOutputFormatOfTheGeneratedAudio {
 	if s == nil {
 		return nil
 	}

@@ -15,6 +15,8 @@ type WebhookHMACSettings struct {
 	Name string `json:"name"`
 	// The HTTPS callback URL that will be called when this webhook is triggered
 	WebhookURL string `json:"webhook_url"`
+	// Optional custom request headers to include with each webhook delivery
+	RequestHeaders map[string]string `json:"request_headers,omitzero"`
 }
 
 func (w WebhookHMACSettings) MarshalJSON() ([]byte, error) {
@@ -44,4 +46,11 @@ func (w *WebhookHMACSettings) GetWebhookURL() string {
 		return ""
 	}
 	return w.WebhookURL
+}
+
+func (w *WebhookHMACSettings) GetRequestHeaders() map[string]string {
+	if w == nil {
+		return nil
+	}
+	return w.RequestHeaders
 }

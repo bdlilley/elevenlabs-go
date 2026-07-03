@@ -21,3 +21,4 @@ custom := components.ConversationHistoryTranscriptOtherToolsResultCommonModelTyp
 | `ConversationHistoryTranscriptOtherToolsResultCommonModelTypeClient`  | client                                                                |
 | `ConversationHistoryTranscriptOtherToolsResultCommonModelTypeWebhook` | webhook                                                               |
 | `ConversationHistoryTranscriptOtherToolsResultCommonModelTypeMcp`     | mcp                                                                   |
+| `ConversationHistoryTranscriptOtherToolsResultCommonModelTypeCode`    | code                                                                  |

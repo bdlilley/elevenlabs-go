@@ -7,9 +7,9 @@ type BodyUnshareWorkspaceResourceV1WorkspaceResourcesResourceIDUnsharePost struc
 	ResourceType WorkspaceResourceType `json:"resource_type"`
 	// The email of the user or service account.
 	UserEmail *string `json:"user_email,omitzero"`
-	// The ID of the target group. To target the permissions principals have by default on this resource, use the value 'default'.
+	// The ID of the target group. Use 'default' to set the resource's baseline role — every workspace member receives this role unless they hold a higher one through a direct user grant, group membership, or workspace (service account) API key.
 	GroupID *string `json:"group_id,omitzero"`
-	// The ID of the target workspace API key. This isn't the same as the key itself that would you pass in the header for authentication. Workspace admins can find this in the workspace settings UI.
+	// The ID of the target workspace (service account) API key. This is not the API key string itself that you pass in the header for authentication — it is the key's ID, which workspace admins can find under Developers → Service Accounts.
 	WorkspaceAPIKeyID *string `json:"workspace_api_key_id,omitzero"`
 }
 

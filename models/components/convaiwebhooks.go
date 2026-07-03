@@ -8,8 +8,9 @@ import (
 
 type ConvAIWebhooks struct {
 	PostCallWebhookID *string `json:"post_call_webhook_id,omitzero"`
-	// List of event types to send via webhook. Options: transcript, audio, call_initiation_failure.
-	Events []WebhookEventType `json:"events,omitzero"`
+	// List of event types to send via webhook. Options: transcript, audio, call_initiation_failure, unredacted_transcript, unredacted_audio.
+	Events           []WebhookEventType       `json:"events,omitzero"`
+	TranscriptFormat *WebhookTranscriptFormat `default:"json" json:"transcript_format"`
 	// DEPRECATED: Use 'events' field instead. Whether to send audio data with post-call webhooks for ConvAI conversations
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -39,6 +40,13 @@ func (c *ConvAIWebhooks) GetEvents() []WebhookEventType {
 		return nil
 	}
 	return c.Events
+}
+
+func (c *ConvAIWebhooks) GetTranscriptFormat() *WebhookTranscriptFormat {
+	if c == nil {
+		return nil
+	}
+	return c.TranscriptFormat
 }
 
 func (c *ConvAIWebhooks) GetSendAudio() *bool {

@@ -2,17 +2,20 @@
 
 transcript_index: index of the message in the conversation transcript
 chunk_text: text of the transcript; transcript messages if very long could have several chunks.
+chunk_highlights: chunk_text split into matched/unmatched segments for highlighting.
+    Only populated for keyword/text search, not semantic search.
 score: similarity score of the message to the search query
 
 
 ## Fields
 
-| Field                           | Type                            | Required                        | Description                     |
-| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
-| `ConversationID`                | `string`                        | :heavy_check_mark:              | N/A                             |
-| `AgentID`                       | `string`                        | :heavy_check_mark:              | N/A                             |
-| `AgentName`                     | `*string`                       | :heavy_minus_sign:              | N/A                             |
-| `TranscriptIndex`               | `int64`                         | :heavy_check_mark:              | N/A                             |
-| `ChunkText`                     | `string`                        | :heavy_check_mark:              | N/A                             |
-| `Score`                         | `float64`                       | :heavy_check_mark:              | N/A                             |
-| `ConversationStartTimeUnixSecs` | `int64`                         | :heavy_check_mark:              | N/A                             |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ConversationID`                                                                         | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `AgentID`                                                                                | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `AgentName`                                                                              | `*string`                                                                                | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `TranscriptIndex`                                                                        | `int64`                                                                                  | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `ChunkText`                                                                              | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `ChunkHighlights`                                                                        | [][components.SearchHighlightSegment](../../models/components/searchhighlightsegment.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `Score`                                                                                  | `float64`                                                                                | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `ConversationStartTimeUnixSecs`                                                          | `int64`                                                                                  | :heavy_check_mark:                                                                       | N/A                                                                                      |

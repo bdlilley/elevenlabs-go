@@ -8,7 +8,7 @@ import (
 )
 
 type GetConversationSignedLinkRequest struct {
-	// The id of the agent you're taking the action on.
+	// Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.
 	AgentID string `queryParam:"style=form,explode=true,name=agent_id"`
 	// Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again.
 	IncludeConversationID *bool `default:"false" queryParam:"style=form,explode=true,name=include_conversation_id"`

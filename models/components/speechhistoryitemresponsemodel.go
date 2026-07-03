@@ -66,6 +66,8 @@ const (
 	SourceEnumPlayAPI         SourceEnum = "PlayAPI"
 	SourceEnumConvAi          SourceEnum = "ConvAI"
 	SourceEnumVoiceGeneration SourceEnum = "VoiceGeneration"
+	SourceEnumInVpc           SourceEnum = "InVPC"
+	SourceEnumFlows           SourceEnum = "Flows"
 )
 
 func (e SourceEnum) ToPointer() *SourceEnum {
@@ -76,7 +78,7 @@ func (e SourceEnum) ToPointer() *SourceEnum {
 func (e *SourceEnum) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "TTS", "STS", "Projects", "PD", "AN", "Dubbing", "PlayAPI", "ConvAI", "VoiceGeneration":
+		case "TTS", "STS", "Projects", "PD", "AN", "Dubbing", "PlayAPI", "ConvAI", "VoiceGeneration", "InVPC", "Flows":
 			return true
 		}
 	}
@@ -122,8 +124,6 @@ type SpeechHistoryItemResponseModel struct {
 	Dialogue []DialogueInputResponseModel `json:"dialogue,omitzero"`
 	// The output format the audio was originally generated in.
 	OutputFormat *string `json:"output_format,omitzero"`
-	// Avatar context if this generation was created from the Avatars video editor.
-	AvatarContext *AvatarContextResponseModel `json:"avatar_context,omitzero"`
 }
 
 func (s SpeechHistoryItemResponseModel) MarshalJSON() ([]byte, error) {
@@ -268,11 +268,4 @@ func (s *SpeechHistoryItemResponseModel) GetOutputFormat() *string {
 		return nil
 	}
 	return s.OutputFormat
-}
-
-func (s *SpeechHistoryItemResponseModel) GetAvatarContext() *AvatarContextResponseModel {
-	if s == nil {
-		return nil
-	}
-	return s.AvatarContext
 }

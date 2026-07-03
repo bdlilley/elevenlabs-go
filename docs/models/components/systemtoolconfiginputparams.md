@@ -9,6 +9,18 @@
 systemToolConfigInputParams := components.CreateSystemToolConfigInputParamsEndCall(components.EndCallToolConfig{/* values here */})
 ```
 
+### EndProcedureToolConfigInput
+
+```go
+systemToolConfigInputParams := components.CreateSystemToolConfigInputParamsEndProcedure(components.EndProcedureToolConfigInput{/* values here */})
+```
+
+### KnowledgeBaseRagToolConfig
+
+```go
+systemToolConfigInputParams := components.CreateSystemToolConfigInputParamsKnowledgeBaseRag(components.KnowledgeBaseRagToolConfig{/* values here */})
+```
+
 ### LanguageDetectionToolConfig
 
 ```go
@@ -25,6 +37,12 @@ systemToolConfigInputParams := components.CreateSystemToolConfigInputParamsPlayK
 
 ```go
 systemToolConfigInputParams := components.CreateSystemToolConfigInputParamsSkipTurn(components.SkipTurnToolConfig{/* values here */})
+```
+
+### StartProcedureToolConfigInput
+
+```go
+systemToolConfigInputParams := components.CreateSystemToolConfigInputParamsStartProcedure(components.StartProcedureToolConfigInput{/* values here */})
 ```
 
 ### TransferToAgentToolConfig
@@ -53,12 +71,18 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch systemToolConfigInputParams.Type {
 	case components.SystemToolConfigInputParamsTypeEndCall:
 		// systemToolConfigInputParams.EndCallToolConfig is populated
+	case components.SystemToolConfigInputParamsTypeEndProcedure:
+		// systemToolConfigInputParams.EndProcedureToolConfigInput is populated
+	case components.SystemToolConfigInputParamsTypeKnowledgeBaseRag:
+		// systemToolConfigInputParams.KnowledgeBaseRagToolConfig is populated
 	case components.SystemToolConfigInputParamsTypeLanguageDetection:
 		// systemToolConfigInputParams.LanguageDetectionToolConfig is populated
 	case components.SystemToolConfigInputParamsTypePlayKeypadTouchTone:
 		// systemToolConfigInputParams.PlayDTMFToolConfig is populated
 	case components.SystemToolConfigInputParamsTypeSkipTurn:
 		// systemToolConfigInputParams.SkipTurnToolConfig is populated
+	case components.SystemToolConfigInputParamsTypeStartProcedure:
+		// systemToolConfigInputParams.StartProcedureToolConfigInput is populated
 	case components.SystemToolConfigInputParamsTypeTransferToAgent:
 		// systemToolConfigInputParams.TransferToAgentToolConfig is populated
 	case components.SystemToolConfigInputParamsTypeTransferToNumber:

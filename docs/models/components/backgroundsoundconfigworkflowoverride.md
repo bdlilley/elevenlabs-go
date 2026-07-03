@@ -1,0 +1,11 @@
+# BackgroundSoundConfigWorkflowOverride
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `SourceType`                                                                                  | [*components.BackgroundSoundSourceType](../../models/components/backgroundsoundsourcetype.md) | :heavy_minus_sign:                                                                            | The type of background sound source.                                                          |
+| `SourceID`                                                                                    | [*components.BackgroundSoundPresetID](../../models/components/backgroundsoundpresetid.md)     | :heavy_minus_sign:                                                                            | Identifier for the sound source.                                                              |
+| `Volume`                                                                                      | `*float64`                                                                                    | :heavy_minus_sign:                                                                            | Volume level for background sound (0.01 to 1.0).                                              |
+| `CrossfadeLoop`                                                                               | `*bool`                                                                                       | :heavy_minus_sign:                                                                            | Apply a crossfade at the loop boundary to avoid audible pops when the sound loops.            |

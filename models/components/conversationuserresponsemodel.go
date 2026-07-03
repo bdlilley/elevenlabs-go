@@ -2,14 +2,31 @@
 
 package components
 
+import (
+	"github.com/bdlilley/elevenlabs-go/internal/utils"
+)
+
 type ConversationUserResponseModel struct {
-	UserID                    string  `json:"user_id"`
-	LastContactUnixSecs       int64   `json:"last_contact_unix_secs"`
-	FirstContactUnixSecs      int64   `json:"first_contact_unix_secs"`
-	ConversationCount         int64   `json:"conversation_count"`
-	LastContactAgentID        *string `json:"last_contact_agent_id,omitzero"`
-	LastContactConversationID string  `json:"last_contact_conversation_id"`
-	LastContactAgentName      *string `json:"last_contact_agent_name,omitzero"`
+	UserID                      string                      `json:"user_id"`
+	LastContactUnixSecs         int64                       `json:"last_contact_unix_secs"`
+	FirstContactUnixSecs        int64                       `json:"first_contact_unix_secs"`
+	ConversationCount           int64                       `json:"conversation_count"`
+	LastContactAgentID          *string                     `json:"last_contact_agent_id,omitzero"`
+	LastContactConversationID   string                      `json:"last_contact_conversation_id"`
+	LastContactAgentName        *string                     `json:"last_contact_agent_name,omitzero"`
+	Sentiment                   SentimentAggregate          `json:"sentiment"`
+	MostFrustratedConversations []FrustratedConversationRef `json:"most_frustrated_conversations,omitzero"`
+}
+
+func (c ConversationUserResponseModel) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ConversationUserResponseModel) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (c *ConversationUserResponseModel) GetUserID() string {
@@ -59,4 +76,18 @@ func (c *ConversationUserResponseModel) GetLastContactAgentName() *string {
 		return nil
 	}
 	return c.LastContactAgentName
+}
+
+func (c *ConversationUserResponseModel) GetSentiment() SentimentAggregate {
+	if c == nil {
+		return SentimentAggregate{}
+	}
+	return c.Sentiment
+}
+
+func (c *ConversationUserResponseModel) GetMostFrustratedConversations() []FrustratedConversationRef {
+	if c == nil {
+		return nil
+	}
+	return c.MostFrustratedConversations
 }

@@ -28,8 +28,10 @@ custom := components.WorkspaceGroupPermission("custom_value")
 | `WorkspaceGroupPermissionDubbing`                      | dubbing                                                |
 | `WorkspaceGroupPermissionAudioNative`                  | audio_native                                           |
 | `WorkspaceGroupPermissionConversationalAi`             | conversational_ai                                      |
+| `WorkspaceGroupPermissionConversationalAiRead`         | conversational_ai_read                                 |
 | `WorkspaceGroupPermissionVoiceIsolator`                | voice_isolator                                         |
 | `WorkspaceGroupPermissionAiSpeechClassifier`           | ai_speech_classifier                                   |
+| `WorkspaceGroupPermissionSynthidDetector`              | synthid_detector                                       |
 | `WorkspaceGroupPermissionAddVoiceFromVoiceLibrary`     | add_voice_from_voice_library                           |
 | `WorkspaceGroupPermissionCreateInstantVoiceClone`      | create_instant_voice_clone                             |
 | `WorkspaceGroupPermissionCreateProfessionalVoiceClone` | create_professional_voice_clone                        |
@@ -48,3 +50,6 @@ custom := components.WorkspaceGroupPermission("custom_value")
 | `WorkspaceGroupPermissionWorkspaceMembersRemove`       | workspace_members_remove                               |
 | `WorkspaceGroupPermissionTermsOfServiceAccept`         | terms_of_service_accept                                |
 | `WorkspaceGroupPermissionAuditLogRead`                 | audit_log_read                                         |
+| `WorkspaceGroupPermissionConversationPrivacyManage`    | conversation_privacy_manage                            |
+| `WorkspaceGroupPermissionCopyResourcesCrossWorkspace`  | copy_resources_cross_workspace                         |
+| `WorkspaceGroupPermissionVoiceDesign`                  | voice_design                                           |

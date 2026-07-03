@@ -43,7 +43,7 @@ type BodyTextToSpeechFull struct {
 	Text string `json:"text"`
 	// Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property.
 	ModelID *string `default:"eleven_multilingual_v2" json:"model_id"`
-	// Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support provided language code, an error will be returned.
+	// Language code (ISO 639-1) used to enforce a language for the model and text normalization. If the model does not support the provided language code, it will be ignored. This parameter is not supported for multilingual_v2 models.
 	LanguageCode *string `json:"language_code,omitzero"`
 	// Voice settings overriding stored settings for the given voice. They are applied only on the given request.
 	VoiceSettings *VoiceSettingsResponseModel `json:"voice_settings,omitzero"`
@@ -67,8 +67,6 @@ type BodyTextToSpeechFull struct {
 	ApplyTextNormalization *BodyTextToSpeechFullApplyTextNormalization `default:"auto" json:"apply_text_normalization"`
 	// This parameter controls language text normalization. This helps with proper pronunciation of text in some supported languages. WARNING: This parameter can heavily increase the latency of the request. Currently only supported for Japanese.
 	ApplyLanguageTextNormalization *bool `default:"false" json:"apply_language_text_normalization"`
-	// Avatar context when this generation is made from the Avatars video editor.
-	AvatarContext *AvatarContextRequestModel `json:"avatar_context,omitzero"`
 }
 
 func (b BodyTextToSpeechFull) MarshalJSON() ([]byte, error) {
@@ -171,11 +169,4 @@ func (b *BodyTextToSpeechFull) GetApplyLanguageTextNormalization() *bool {
 		return nil
 	}
 	return b.ApplyLanguageTextNormalization
-}
-
-func (b *BodyTextToSpeechFull) GetAvatarContext() *AvatarContextRequestModel {
-	if b == nil {
-		return nil
-	}
-	return b.AvatarContext
 }

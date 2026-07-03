@@ -4,14 +4,23 @@ package components
 
 type BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch struct {
 	// A custom, human-readable name for the document.
-	Name string `json:"name"`
+	Name *string `json:"name,omitzero"`
+	// Updated content for the document. Only supported for text documents, URL documents with auto-sync disabled, and file documents.
+	Content *string `json:"content,omitzero"`
 }
 
-func (b *BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) GetName() string {
+func (b *BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) GetName() *string {
 	if b == nil {
-		return ""
+		return nil
 	}
 	return b.Name
+}
+
+func (b *BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch) GetContent() *string {
+	if b == nil {
+		return nil
+	}
+	return b.Content
 }
 
 // #region class-body-bodyupdatedocumentv1convaiknowledgebasedocumentationidpatch

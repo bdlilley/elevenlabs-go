@@ -310,7 +310,9 @@ type PromptAgentAPIModelWorkflowOverrideOutput struct {
 	ReasoningEffort *LLMReasoningEffort `json:"reasoning_effort,omitzero"`
 	// Max number of tokens used for thinking. Use 0 to turn off if supported by the model.
 	ThinkingBudget *int64 `json:"thinking_budget,omitzero"`
-	// The temperature for the LLM
+	// Enable model reasoning summaries. When disabled, we do not request summaries from provider if possible for faster TTFB. Not ZRM compatible.
+	EnableReasoningSummary *bool `json:"enable_reasoning_summary,omitzero"`
+	// The temperature for the LLM. Defaults to 0. Set to null to omit the parameter from the LLM request entirely (useful for custom LLMs that reject the temperature field).
 	Temperature *float64 `json:"temperature,omitzero"`
 	// If greater than 0, maximum number of tokens the LLM can predict
 	MaxTokens *int64 `json:"max_tokens,omitzero"`
@@ -330,7 +332,7 @@ type PromptAgentAPIModelWorkflowOverrideOutput struct {
 	IgnoreDefaultPersonality *bool `json:"ignore_default_personality,omitzero"`
 	// Configuration for RAG
 	Rag *RagConfigWorkflowOverride `json:"rag,omitzero"`
-	// Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC').
+	// Timezone for displaying current time in system prompt. If set, the current time will be included in the system prompt using this timezone. Must be a valid timezone name (e.g., 'America/New_York', 'Europe/London', 'UTC'). Recommended for accurate time-aware responses; without this, the agent has no knowledge of the current date/time unless you provide it via dynamic variables or tools, which can lead to incorrect or hallucinated time references.
 	Timezone *string `json:"timezone,omitzero"`
 	// Configuration for backup LLM cascading. Can be disabled, use system defaults, or specify custom order.
 	BackupLlmConfig *PromptAgentAPIModelWorkflowOverrideOutputBackupLlmConfig `json:"backup_llm_config,omitzero"`
@@ -377,6 +379,13 @@ func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetThinkingBudget() *int64 {
 		return nil
 	}
 	return p.ThinkingBudget
+}
+
+func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetEnableReasoningSummary() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.EnableReasoningSummary
 }
 
 func (p *PromptAgentAPIModelWorkflowOverrideOutput) GetTemperature() *float64 {

@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePostRole - Role to update the target principal with.
+// BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePostRole - Role to grant to the target: one of 'admin', 'editor', 'commenter', or 'viewer'.
 type BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePostRole string
 
 const (
@@ -41,15 +41,15 @@ func (e *BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePostRole) 
 }
 
 type BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePost struct {
-	// Role to update the target principal with.
+	// Role to grant to the target: one of 'admin', 'editor', 'commenter', or 'viewer'.
 	Role BodyShareWorkspaceResourceV1WorkspaceResourcesResourceIDSharePostRole `json:"role"`
 	// Resource types that can be shared in the workspace. The name always need to match the collection names
 	ResourceType WorkspaceResourceType `json:"resource_type"`
 	// The email of the user or service account.
 	UserEmail *string `json:"user_email,omitzero"`
-	// The ID of the target group. To target the permissions principals have by default on this resource, use the value 'default'.
+	// The ID of the target group. Use 'default' to set the resource's baseline role — every workspace member receives this role unless they hold a higher one through a direct user grant, group membership, or workspace (service account) API key.
 	GroupID *string `json:"group_id,omitzero"`
-	// The ID of the target workspace API key. This isn't the same as the key itself that would you pass in the header for authentication. Workspace admins can find this in the workspace settings UI.
+	// The ID of the target workspace (service account) API key. This is not the API key string itself that you pass in the header for authentication — it is the key's ID, which workspace admins can find under Developers → Service Accounts.
 	WorkspaceAPIKeyID *string `json:"workspace_api_key_id,omitzero"`
 }
 

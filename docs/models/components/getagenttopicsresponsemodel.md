@@ -1,0 +1,10 @@
+# GetAgentTopicsResponseModel
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `Topics`                                                                                   | [][components.AgentTopicResponseModel](../../models/components/agenttopicresponsemodel.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `WindowStartUnixSecs`                                                                      | `int64`                                                                                    | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `WindowEndUnixSecs`                                                                        | `int64`                                                                                    | :heavy_check_mark:                                                                         | N/A                                                                                        |

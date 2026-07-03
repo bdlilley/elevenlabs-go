@@ -1,0 +1,9 @@
+# PublicUpsertOrderItemResponse
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                        | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
+| `UpsertOrderItemResponse`                                                                 | [*components.UpsertOrderItemResponse](../../models/components/upsertorderitemresponse.md) | :heavy_minus_sign:                                                                        | Successful Response                                                                       | {<br/>"item_id": "proditem_01jgd3qhejfs7rm6swknz2ytjb",<br/>"quote": {<br/>"amount_usd": 11<br/>}<br/>} |

@@ -2,6 +2,8 @@
 
 ## Overview
 
+Generate music that matches the content and mood of a video.
+
 ### Available Operations
 
 * [VideoToMusic](#videotomusic) - Video To Music

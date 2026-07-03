@@ -3,8 +3,8 @@
 package components
 
 type PreviewAudioDBModel struct {
-	VoiceID         string  `json:"voice_id"`
-	Text            string  `json:"text"`
+	VoiceID         *string `json:"voice_id,omitzero"`
+	Text            *string `json:"text,omitzero"`
 	AudioURL        string  `json:"audio_url"`
 	HlsManifestURL  *string `json:"hls_manifest_url,omitzero"`
 	DashManifestURL *string `json:"dash_manifest_url,omitzero"`
@@ -12,16 +12,16 @@ type PreviewAudioDBModel struct {
 	GeneratedAtUnix *int64  `json:"generated_at_unix,omitzero"`
 }
 
-func (p *PreviewAudioDBModel) GetVoiceID() string {
+func (p *PreviewAudioDBModel) GetVoiceID() *string {
 	if p == nil {
-		return ""
+		return nil
 	}
 	return p.VoiceID
 }
 
-func (p *PreviewAudioDBModel) GetText() string {
+func (p *PreviewAudioDBModel) GetText() *string {
 	if p == nil {
-		return ""
+		return nil
 	}
 	return p.Text
 }

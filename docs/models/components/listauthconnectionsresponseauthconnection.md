@@ -11,6 +11,12 @@ The type of auth connection config
 listAuthConnectionsResponseAuthConnection := components.CreateListAuthConnectionsResponseAuthConnectionAPIIntegrationOauth2AuthCode(components.APIIntegrationOAuth2AuthCodeResponse{/* values here */})
 ```
 
+### APIIntegrationOAuth2CustomAppResponse
+
+```go
+listAuthConnectionsResponseAuthConnection := components.CreateListAuthConnectionsResponseAuthConnectionAPIIntegrationOauth2CustomApp(components.APIIntegrationOAuth2CustomAppResponse{/* values here */})
+```
+
 ### BasicAuthResponse
 
 ```go
@@ -53,6 +59,18 @@ listAuthConnectionsResponseAuthConnection := components.CreateListAuthConnection
 listAuthConnectionsResponseAuthConnection := components.CreateListAuthConnectionsResponseAuthConnectionPrivateKeyJwt(components.PrivateKeyJWTResponse{/* values here */})
 ```
 
+### SlackBotAuthResponse
+
+```go
+listAuthConnectionsResponseAuthConnection := components.CreateListAuthConnectionsResponseAuthConnectionSlackBotAuth(components.SlackBotAuthResponse{/* values here */})
+```
+
+### URLSecretAuthResponse
+
+```go
+listAuthConnectionsResponseAuthConnection := components.CreateListAuthConnectionsResponseAuthConnectionURLSecret(components.URLSecretAuthResponse{/* values here */})
+```
+
 ### WhatsAppAuthResponse
 
 ```go
@@ -67,6 +85,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch listAuthConnectionsResponseAuthConnection.Type {
 	case components.ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2AuthCode:
 		// listAuthConnectionsResponseAuthConnection.APIIntegrationOAuth2AuthCodeResponse is populated
+	case components.ListAuthConnectionsResponseAuthConnectionTypeAPIIntegrationOauth2CustomApp:
+		// listAuthConnectionsResponseAuthConnection.APIIntegrationOAuth2CustomAppResponse is populated
 	case components.ListAuthConnectionsResponseAuthConnectionTypeBasicAuth:
 		// listAuthConnectionsResponseAuthConnection.BasicAuthResponse is populated
 	case components.ListAuthConnectionsResponseAuthConnectionTypeBearerAuth:
@@ -81,6 +101,10 @@ switch listAuthConnectionsResponseAuthConnection.Type {
 		// listAuthConnectionsResponseAuthConnection.OAuth2JWTResponse is populated
 	case components.ListAuthConnectionsResponseAuthConnectionTypePrivateKeyJwt:
 		// listAuthConnectionsResponseAuthConnection.PrivateKeyJWTResponse is populated
+	case components.ListAuthConnectionsResponseAuthConnectionTypeSlackBotAuth:
+		// listAuthConnectionsResponseAuthConnection.SlackBotAuthResponse is populated
+	case components.ListAuthConnectionsResponseAuthConnectionTypeURLSecret:
+		// listAuthConnectionsResponseAuthConnection.URLSecretAuthResponse is populated
 	case components.ListAuthConnectionsResponseAuthConnectionTypeWhatsappAuth:
 		// listAuthConnectionsResponseAuthConnection.WhatsAppAuthResponse is populated
 }

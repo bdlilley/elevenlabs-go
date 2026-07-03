@@ -3,24 +3,26 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type LLMLiteralJSONSchemaPropertyType string
+type LLMLiteralJSONSchemaPropertyTypeEnum string
 
 const (
-	LLMLiteralJSONSchemaPropertyTypeBoolean LLMLiteralJSONSchemaPropertyType = "boolean"
-	LLMLiteralJSONSchemaPropertyTypeString  LLMLiteralJSONSchemaPropertyType = "string"
-	LLMLiteralJSONSchemaPropertyTypeInteger LLMLiteralJSONSchemaPropertyType = "integer"
-	LLMLiteralJSONSchemaPropertyTypeNumber  LLMLiteralJSONSchemaPropertyType = "number"
+	LLMLiteralJSONSchemaPropertyTypeEnumBoolean LLMLiteralJSONSchemaPropertyTypeEnum = "boolean"
+	LLMLiteralJSONSchemaPropertyTypeEnumString  LLMLiteralJSONSchemaPropertyTypeEnum = "string"
+	LLMLiteralJSONSchemaPropertyTypeEnumInteger LLMLiteralJSONSchemaPropertyTypeEnum = "integer"
+	LLMLiteralJSONSchemaPropertyTypeEnumNumber  LLMLiteralJSONSchemaPropertyTypeEnum = "number"
 )
 
-func (e LLMLiteralJSONSchemaPropertyType) ToPointer() *LLMLiteralJSONSchemaPropertyType {
+func (e LLMLiteralJSONSchemaPropertyTypeEnum) ToPointer() *LLMLiteralJSONSchemaPropertyTypeEnum {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *LLMLiteralJSONSchemaPropertyType) IsExact() bool {
+func (e *LLMLiteralJSONSchemaPropertyTypeEnum) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "boolean", "string", "integer", "number":
@@ -30,9 +32,98 @@ func (e *LLMLiteralJSONSchemaPropertyType) IsExact() bool {
 	return false
 }
 
+type LLMLiteralJSONSchemaPropertyTypeUnionType string
+
+const (
+	LLMLiteralJSONSchemaPropertyTypeUnionTypeLLMLiteralJSONSchemaPropertyTypeEnum LLMLiteralJSONSchemaPropertyTypeUnionType = "LLMLiteralJsonSchemaProperty_Type_enum"
+	LLMLiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr                           LLMLiteralJSONSchemaPropertyTypeUnionType = "arrayOfStr"
+)
+
+type LLMLiteralJSONSchemaPropertyTypeUnion struct {
+	LLMLiteralJSONSchemaPropertyTypeEnum *LLMLiteralJSONSchemaPropertyTypeEnum `queryParam:"inline" union:"member"`
+	ArrayOfStr                           []string                              `queryParam:"inline" union:"member"`
+
+	Type LLMLiteralJSONSchemaPropertyTypeUnionType
+}
+
+func CreateLLMLiteralJSONSchemaPropertyTypeUnionLLMLiteralJSONSchemaPropertyTypeEnum(llmLiteralJSONSchemaPropertyTypeEnum LLMLiteralJSONSchemaPropertyTypeEnum) LLMLiteralJSONSchemaPropertyTypeUnion {
+	typ := LLMLiteralJSONSchemaPropertyTypeUnionTypeLLMLiteralJSONSchemaPropertyTypeEnum
+
+	return LLMLiteralJSONSchemaPropertyTypeUnion{
+		LLMLiteralJSONSchemaPropertyTypeEnum: &llmLiteralJSONSchemaPropertyTypeEnum,
+		Type:                                 typ,
+	}
+}
+
+func CreateLLMLiteralJSONSchemaPropertyTypeUnionArrayOfStr(arrayOfStr []string) LLMLiteralJSONSchemaPropertyTypeUnion {
+	typ := LLMLiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr
+
+	return LLMLiteralJSONSchemaPropertyTypeUnion{
+		ArrayOfStr: arrayOfStr,
+		Type:       typ,
+	}
+}
+
+func (u *LLMLiteralJSONSchemaPropertyTypeUnion) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var llmLiteralJSONSchemaPropertyTypeEnum LLMLiteralJSONSchemaPropertyTypeEnum = LLMLiteralJSONSchemaPropertyTypeEnum("")
+	if err := utils.UnmarshalJSON(data, &llmLiteralJSONSchemaPropertyTypeEnum, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  LLMLiteralJSONSchemaPropertyTypeUnionTypeLLMLiteralJSONSchemaPropertyTypeEnum,
+			Value: &llmLiteralJSONSchemaPropertyTypeEnum,
+		})
+	}
+
+	var arrayOfStr []string = []string{}
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  LLMLiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr,
+			Value: arrayOfStr,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LLMLiteralJSONSchemaPropertyTypeUnion", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for LLMLiteralJSONSchemaPropertyTypeUnion", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(LLMLiteralJSONSchemaPropertyTypeUnionType)
+	switch best.Type {
+	case LLMLiteralJSONSchemaPropertyTypeUnionTypeLLMLiteralJSONSchemaPropertyTypeEnum:
+		u.LLMLiteralJSONSchemaPropertyTypeEnum = best.Value.(*LLMLiteralJSONSchemaPropertyTypeEnum)
+		return nil
+	case LLMLiteralJSONSchemaPropertyTypeUnionTypeArrayOfStr:
+		u.ArrayOfStr = best.Value.([]string)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for LLMLiteralJSONSchemaPropertyTypeUnion", string(data))
+}
+
+func (u LLMLiteralJSONSchemaPropertyTypeUnion) MarshalJSON() ([]byte, error) {
+	if u.LLMLiteralJSONSchemaPropertyTypeEnum != nil {
+		return utils.MarshalJSON(u.LLMLiteralJSONSchemaPropertyTypeEnum, "", true)
+	}
+
+	if u.ArrayOfStr != nil {
+		return utils.MarshalJSON(u.ArrayOfStr, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type LLMLiteralJSONSchemaPropertyTypeUnion: all fields are null")
+}
+
 type LLMLiteralJSONSchemaProperty struct {
-	Type        LLMLiteralJSONSchemaPropertyType `json:"type"`
-	Description string                           `json:"description"`
+	Type        LLMLiteralJSONSchemaPropertyTypeUnion `json:"type"`
+	Description string                                `json:"description"`
 	// List of allowed string values for string type parameters
 	Enum []string `json:"enum,omitzero"`
 }
@@ -48,9 +139,9 @@ func (l *LLMLiteralJSONSchemaProperty) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (l *LLMLiteralJSONSchemaProperty) GetType() LLMLiteralJSONSchemaPropertyType {
+func (l *LLMLiteralJSONSchemaProperty) GetType() LLMLiteralJSONSchemaPropertyTypeUnion {
 	if l == nil {
-		return LLMLiteralJSONSchemaPropertyType("")
+		return LLMLiteralJSONSchemaPropertyTypeUnion{}
 	}
 	return l.Type
 }

@@ -100,6 +100,10 @@ func (w *WorkflowExpressionConditionModelInput) GetExpressionNeqOperator() *ASTN
 	return w.GetExpression().ASTNotEqualsOperatorNodeInput1
 }
 
+func (w *WorkflowExpressionConditionModelInput) GetExpressionNullLiteral() *ASTNullNodeInput {
+	return w.GetExpression().ASTNullNodeInput
+}
+
 func (w *WorkflowExpressionConditionModelInput) GetExpressionNumberLiteral() *ASTNumberNodeInput {
 	return w.GetExpression().ASTNumberNodeInput
 }

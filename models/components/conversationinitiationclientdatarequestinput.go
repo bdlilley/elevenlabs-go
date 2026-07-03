@@ -16,8 +16,10 @@ type ConversationInitiationClientDataRequestInput struct {
 	// ID of the agent branch to use for this conversation
 	BranchID *string `json:"branch_id,omitzero"`
 	// Environment to use for resolving environment variables
-	Environment      *string        `json:"environment,omitzero"`
-	DynamicVariables map[string]any `json:"dynamic_variables,omitzero"`
+	Environment *string `json:"environment,omitzero"`
+	// If set, start the workflow at this node id instead of the default entry
+	StartingWorkflowNodeID *string        `json:"starting_workflow_node_id,omitzero"`
+	DynamicVariables       map[string]any `json:"dynamic_variables,omitzero"`
 }
 
 func (c ConversationInitiationClientDataRequestInput) MarshalJSON() ([]byte, error) {
@@ -71,6 +73,13 @@ func (c *ConversationInitiationClientDataRequestInput) GetEnvironment() *string 
 		return nil
 	}
 	return c.Environment
+}
+
+func (c *ConversationInitiationClientDataRequestInput) GetStartingWorkflowNodeID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.StartingWorkflowNodeID
 }
 
 func (c *ConversationInitiationClientDataRequestInput) GetDynamicVariables() map[string]any {

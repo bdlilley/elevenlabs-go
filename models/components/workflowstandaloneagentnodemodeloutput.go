@@ -13,14 +13,18 @@ type WorkflowStandaloneAgentNodeModelOutput struct {
 	Position PositionOutput `json:"position"`
 	// The ids of outgoing edges in the order they should be evaluated.
 	EdgeOrder []string `json:"edge_order"`
-	// The ID of the agent to transfer the conversation to.
-	AgentID string `json:"agent_id"`
+	// The ID of the agent to transfer the conversation to. None means transfer within the current agent.
+	AgentID *string `json:"agent_id"`
+	// Optional target node ID in the destination agent's workflow. When set, the transfer starts at this node instead of the default entry node.
+	NodeID *string `json:"node_id"`
 	// Artificial delay in milliseconds applied before transferring the conversation.
 	DelayMs *int64 `default:"0" json:"delay_ms"`
 	// Optional message sent to the user before the transfer is initiated.
 	TransferMessage *string `json:"transfer_message"`
 	// Whether to enable the transferred agent to send its configured first message after the transfer.
 	EnableTransferredAgentFirstMessage *bool `default:"false" json:"enable_transferred_agent_first_message"`
+	// Defines whether TTS client overrides should be carried over to the transferred agent.
+	PreserveClientTtsOverrides *bool `default:"false" json:"preserve_client_tts_overrides"`
 }
 
 func (w WorkflowStandaloneAgentNodeModelOutput) MarshalJSON() ([]byte, error) {
@@ -52,11 +56,18 @@ func (w *WorkflowStandaloneAgentNodeModelOutput) GetEdgeOrder() []string {
 	return w.EdgeOrder
 }
 
-func (w *WorkflowStandaloneAgentNodeModelOutput) GetAgentID() string {
+func (w *WorkflowStandaloneAgentNodeModelOutput) GetAgentID() *string {
 	if w == nil {
-		return ""
+		return nil
 	}
 	return w.AgentID
+}
+
+func (w *WorkflowStandaloneAgentNodeModelOutput) GetNodeID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.NodeID
 }
 
 func (w *WorkflowStandaloneAgentNodeModelOutput) GetDelayMs() *int64 {
@@ -78,4 +89,11 @@ func (w *WorkflowStandaloneAgentNodeModelOutput) GetEnableTransferredAgentFirstM
 		return nil
 	}
 	return w.EnableTransferredAgentFirstMessage
+}
+
+func (w *WorkflowStandaloneAgentNodeModelOutput) GetPreserveClientTtsOverrides() *bool {
+	if w == nil {
+		return nil
+	}
+	return w.PreserveClientTtsOverrides
 }

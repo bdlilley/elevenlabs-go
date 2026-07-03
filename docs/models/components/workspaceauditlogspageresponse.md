@@ -1,0 +1,12 @@
+# WorkspaceAuditLogsPageResponse
+
+Paginated workspace audit log response.
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `Entries`                                                                                                | [][components.WorkspaceAuditLogEntryResponse](../../models/components/workspaceauditlogentryresponse.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `HasMore`                                                                                                | `bool`                                                                                                   | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `NextCursor`                                                                                             | `*string`                                                                                                | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

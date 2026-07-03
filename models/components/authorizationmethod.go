@@ -14,6 +14,7 @@ const (
 	AuthorizationMethodLivekitTokenWebsite AuthorizationMethod = "livekit_token_website"
 	AuthorizationMethodGenesysAPIKey       AuthorizationMethod = "genesys_api_key"
 	AuthorizationMethodWhatsapp            AuthorizationMethod = "whatsapp"
+	AuthorizationMethodSms                 AuthorizationMethod = "sms"
 )
 
 func (e AuthorizationMethod) ToPointer() *AuthorizationMethod {
@@ -24,7 +25,7 @@ func (e AuthorizationMethod) ToPointer() *AuthorizationMethod {
 func (e *AuthorizationMethod) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "invalid", "public", "authorization_header", "signed_url", "shareable_link", "livekit_token", "livekit_token_website", "genesys_api_key", "whatsapp":
+		case "invalid", "public", "authorization_header", "signed_url", "shareable_link", "livekit_token", "livekit_token_website", "genesys_api_key", "whatsapp", "sms":
 			return true
 		}
 	}

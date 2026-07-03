@@ -18,3 +18,4 @@ value := components.BodyComposeMusicV1MusicPostModelIDMusicV1
 | Name                                        | Value                                       |
 | ------------------------------------------- | ------------------------------------------- |
 | `BodyComposeMusicV1MusicPostModelIDMusicV1` | music_v1                                    |
+| `BodyComposeMusicV1MusicPostModelIDMusicV2` | music_v2                                    |

@@ -9,6 +9,18 @@
 systemToolConfigOutputParams := components.CreateSystemToolConfigOutputParamsEndCall(components.EndCallToolConfig{/* values here */})
 ```
 
+### EndProcedureToolConfigOutput
+
+```go
+systemToolConfigOutputParams := components.CreateSystemToolConfigOutputParamsEndProcedure(components.EndProcedureToolConfigOutput{/* values here */})
+```
+
+### KnowledgeBaseRagToolConfig
+
+```go
+systemToolConfigOutputParams := components.CreateSystemToolConfigOutputParamsKnowledgeBaseRag(components.KnowledgeBaseRagToolConfig{/* values here */})
+```
+
 ### LanguageDetectionToolConfig
 
 ```go
@@ -25,6 +37,12 @@ systemToolConfigOutputParams := components.CreateSystemToolConfigOutputParamsPla
 
 ```go
 systemToolConfigOutputParams := components.CreateSystemToolConfigOutputParamsSkipTurn(components.SkipTurnToolConfig{/* values here */})
+```
+
+### StartProcedureToolConfigOutput
+
+```go
+systemToolConfigOutputParams := components.CreateSystemToolConfigOutputParamsStartProcedure(components.StartProcedureToolConfigOutput{/* values here */})
 ```
 
 ### TransferToAgentToolConfig
@@ -53,12 +71,18 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch systemToolConfigOutputParams.Type {
 	case components.SystemToolConfigOutputParamsTypeEndCall:
 		// systemToolConfigOutputParams.EndCallToolConfig is populated
+	case components.SystemToolConfigOutputParamsTypeEndProcedure:
+		// systemToolConfigOutputParams.EndProcedureToolConfigOutput is populated
+	case components.SystemToolConfigOutputParamsTypeKnowledgeBaseRag:
+		// systemToolConfigOutputParams.KnowledgeBaseRagToolConfig is populated
 	case components.SystemToolConfigOutputParamsTypeLanguageDetection:
 		// systemToolConfigOutputParams.LanguageDetectionToolConfig is populated
 	case components.SystemToolConfigOutputParamsTypePlayKeypadTouchTone:
 		// systemToolConfigOutputParams.PlayDTMFToolConfig is populated
 	case components.SystemToolConfigOutputParamsTypeSkipTurn:
 		// systemToolConfigOutputParams.SkipTurnToolConfig is populated
+	case components.SystemToolConfigOutputParamsTypeStartProcedure:
+		// systemToolConfigOutputParams.StartProcedureToolConfigOutput is populated
 	case components.SystemToolConfigOutputParamsTypeTransferToAgent:
 		// systemToolConfigOutputParams.TransferToAgentToolConfig is populated
 	case components.SystemToolConfigOutputParamsTypeTransferToNumber:

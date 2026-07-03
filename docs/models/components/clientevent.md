@@ -32,11 +32,13 @@ custom := components.ClientEvent("custom_value")
 | `ClientEventMcpConnectionStatus`            | mcp_connection_status                       |
 | `ClientEventAgentToolRequest`               | agent_tool_request                          |
 | `ClientEventAgentToolResponse`              | agent_tool_response                         |
+| `ClientEventAgentToolResponseFullPayload`   | agent_tool_response_full_payload            |
 | `ClientEventAgentResponseMetadata`          | agent_response_metadata                     |
 | `ClientEventVadScore`                       | vad_score                                   |
 | `ClientEventAgentChatResponsePart`          | agent_chat_response_part                    |
 | `ClientEventClientError`                    | client_error                                |
 | `ClientEventGuardrailTriggered`             | guardrail_triggered                         |
 | `ClientEventDtmfRequest`                    | dtmf_request                                |
+| `ClientEventAgentResponseComplete`          | agent_response_complete                     |
 | `ClientEventInternalTurnProbability`        | internal_turn_probability                   |
 | `ClientEventInternalTentativeAgentResponse` | internal_tentative_agent_response           |

@@ -9,6 +9,7 @@ const (
 	WebhookUsageTypeConvAiSettings             WebhookUsageType = "ConvAI Settings"
 	WebhookUsageTypeVoiceLibraryRemovalNotices WebhookUsageType = "Voice Library Removal Notices"
 	WebhookUsageTypeSpeechToText               WebhookUsageType = "Speech to Text"
+	WebhookUsageTypeAgentQaEvaluations         WebhookUsageType = "Agent QA Evaluations"
 )
 
 func (e WebhookUsageType) ToPointer() *WebhookUsageType {
@@ -19,7 +20,7 @@ func (e WebhookUsageType) ToPointer() *WebhookUsageType {
 func (e *WebhookUsageType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "ConvAI Agent Settings", "ConvAI Settings", "Voice Library Removal Notices", "Speech to Text":
+		case "ConvAI Agent Settings", "ConvAI Settings", "Voice Library Removal Notices", "Speech to Text", "Agent QA Evaluations":
 			return true
 		}
 	}

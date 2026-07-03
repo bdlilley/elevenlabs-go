@@ -9,39 +9,50 @@ import (
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
-type PhoneNumberType string
+type GetAgentResponseModelPhoneNumberType string
 
 const (
-	PhoneNumberTypeSipTrunk PhoneNumberType = "sip_trunk"
-	PhoneNumberTypeTwilio   PhoneNumberType = "twilio"
+	GetAgentResponseModelPhoneNumberTypeExotel   GetAgentResponseModelPhoneNumberType = "exotel"
+	GetAgentResponseModelPhoneNumberTypeSipTrunk GetAgentResponseModelPhoneNumberType = "sip_trunk"
+	GetAgentResponseModelPhoneNumberTypeTwilio   GetAgentResponseModelPhoneNumberType = "twilio"
 )
 
-type PhoneNumber struct {
+type GetAgentResponseModelPhoneNumber struct {
 	GetPhoneNumberTwilioResponseModel   *GetPhoneNumberTwilioResponseModel   `queryParam:"inline" union:"member"`
+	GetPhoneNumberExotelResponseModel   *GetPhoneNumberExotelResponseModel   `queryParam:"inline" union:"member"`
 	GetPhoneNumberSIPTrunkResponseModel *GetPhoneNumberSIPTrunkResponseModel `queryParam:"inline" union:"member"`
 
-	Type PhoneNumberType
+	Type GetAgentResponseModelPhoneNumberType
 }
 
-func CreatePhoneNumberSipTrunk(sipTrunk GetPhoneNumberSIPTrunkResponseModel) PhoneNumber {
-	typ := PhoneNumberTypeSipTrunk
+func CreateGetAgentResponseModelPhoneNumberExotel(exotel GetPhoneNumberExotelResponseModel) GetAgentResponseModelPhoneNumber {
+	typ := GetAgentResponseModelPhoneNumberTypeExotel
 
-	return PhoneNumber{
+	return GetAgentResponseModelPhoneNumber{
+		GetPhoneNumberExotelResponseModel: &exotel,
+		Type:                              typ,
+	}
+}
+
+func CreateGetAgentResponseModelPhoneNumberSipTrunk(sipTrunk GetPhoneNumberSIPTrunkResponseModel) GetAgentResponseModelPhoneNumber {
+	typ := GetAgentResponseModelPhoneNumberTypeSipTrunk
+
+	return GetAgentResponseModelPhoneNumber{
 		GetPhoneNumberSIPTrunkResponseModel: &sipTrunk,
 		Type:                                typ,
 	}
 }
 
-func CreatePhoneNumberTwilio(twilio GetPhoneNumberTwilioResponseModel) PhoneNumber {
-	typ := PhoneNumberTypeTwilio
+func CreateGetAgentResponseModelPhoneNumberTwilio(twilio GetPhoneNumberTwilioResponseModel) GetAgentResponseModelPhoneNumber {
+	typ := GetAgentResponseModelPhoneNumberTypeTwilio
 
-	return PhoneNumber{
+	return GetAgentResponseModelPhoneNumber{
 		GetPhoneNumberTwilioResponseModel: &twilio,
 		Type:                              typ,
 	}
 }
 
-func (u *PhoneNumber) UnmarshalJSON(data []byte) error {
+func (u *GetAgentResponseModelPhoneNumber) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
 		Provider string `json:"provider"`
@@ -53,39 +64,52 @@ func (u *PhoneNumber) UnmarshalJSON(data []byte) error {
 	}
 
 	switch dis.Provider {
+	case "exotel":
+		getPhoneNumberExotelResponseModel := new(GetPhoneNumberExotelResponseModel)
+		if err := utils.UnmarshalJSON(data, &getPhoneNumberExotelResponseModel, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == exotel) type GetPhoneNumberExotelResponseModel within GetAgentResponseModelPhoneNumber: %w", string(data), err)
+		}
+
+		u.GetPhoneNumberExotelResponseModel = getPhoneNumberExotelResponseModel
+		u.Type = GetAgentResponseModelPhoneNumberTypeExotel
+		return nil
 	case "sip_trunk":
 		getPhoneNumberSIPTrunkResponseModel := new(GetPhoneNumberSIPTrunkResponseModel)
 		if err := utils.UnmarshalJSON(data, &getPhoneNumberSIPTrunkResponseModel, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == sip_trunk) type GetPhoneNumberSIPTrunkResponseModel within PhoneNumber: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == sip_trunk) type GetPhoneNumberSIPTrunkResponseModel within GetAgentResponseModelPhoneNumber: %w", string(data), err)
 		}
 
 		u.GetPhoneNumberSIPTrunkResponseModel = getPhoneNumberSIPTrunkResponseModel
-		u.Type = PhoneNumberTypeSipTrunk
+		u.Type = GetAgentResponseModelPhoneNumberTypeSipTrunk
 		return nil
 	case "twilio":
 		getPhoneNumberTwilioResponseModel := new(GetPhoneNumberTwilioResponseModel)
 		if err := utils.UnmarshalJSON(data, &getPhoneNumberTwilioResponseModel, "", true, nil); err != nil {
-			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == twilio) type GetPhoneNumberTwilioResponseModel within PhoneNumber: %w", string(data), err)
+			return fmt.Errorf("could not unmarshal `%s` into expected (Provider == twilio) type GetPhoneNumberTwilioResponseModel within GetAgentResponseModelPhoneNumber: %w", string(data), err)
 		}
 
 		u.GetPhoneNumberTwilioResponseModel = getPhoneNumberTwilioResponseModel
-		u.Type = PhoneNumberTypeTwilio
+		u.Type = GetAgentResponseModelPhoneNumberTypeTwilio
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PhoneNumber", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GetAgentResponseModelPhoneNumber", string(data))
 }
 
-func (u PhoneNumber) MarshalJSON() ([]byte, error) {
+func (u GetAgentResponseModelPhoneNumber) MarshalJSON() ([]byte, error) {
 	if u.GetPhoneNumberTwilioResponseModel != nil {
 		return utils.MarshalJSON(u.GetPhoneNumberTwilioResponseModel, "", true)
+	}
+
+	if u.GetPhoneNumberExotelResponseModel != nil {
+		return utils.MarshalJSON(u.GetPhoneNumberExotelResponseModel, "", true)
 	}
 
 	if u.GetPhoneNumberSIPTrunkResponseModel != nil {
 		return utils.MarshalJSON(u.GetPhoneNumberSIPTrunkResponseModel, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type PhoneNumber: all fields are null")
+	return nil, errors.New("could not marshal union type GetAgentResponseModelPhoneNumber: all fields are null")
 }
 
 type GetAgentResponseModel struct {
@@ -97,7 +121,7 @@ type GetAgentResponseModel struct {
 	Metadata           AgentMetadataResponseModel          `json:"metadata"`
 	PlatformSettings   *AgentPlatformSettingsResponseModel `json:"platform_settings,omitzero"`
 	// The phone numbers of the agent
-	PhoneNumbers []PhoneNumber `json:"phone_numbers,omitzero"`
+	PhoneNumbers []GetAgentResponseModelPhoneNumber `json:"phone_numbers,omitzero"`
 	// WhatsApp accounts assigned to the agent
 	WhatsappAccounts []GetWhatsAppAccountResponse `json:"whatsapp_accounts,omitzero"`
 	Workflow         *AgentWorkflowResponseModel  `json:"workflow,omitzero"`
@@ -159,7 +183,7 @@ func (g *GetAgentResponseModel) GetPlatformSettings() *AgentPlatformSettingsResp
 	return g.PlatformSettings
 }
 
-func (g *GetAgentResponseModel) GetPhoneNumbers() []PhoneNumber {
+func (g *GetAgentResponseModel) GetPhoneNumbers() []GetAgentResponseModelPhoneNumber {
 	if g == nil {
 		return nil
 	}

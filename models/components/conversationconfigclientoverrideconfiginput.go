@@ -7,6 +7,7 @@ import (
 )
 
 type ConversationConfigClientOverrideConfigInput struct {
+	Asr          *ASRConversationalConfigOverrideConfig `json:"asr,omitzero"`
 	Turn         *TurnConfigOverrideConfig              `json:"turn,omitzero"`
 	Tts          *TTSConversationalConfigOverrideConfig `json:"tts,omitzero"`
 	Conversation *ConversationConfigOverrideConfig      `json:"conversation,omitzero"`
@@ -22,6 +23,13 @@ func (c *ConversationConfigClientOverrideConfigInput) UnmarshalJSON(data []byte)
 		return err
 	}
 	return nil
+}
+
+func (c *ConversationConfigClientOverrideConfigInput) GetAsr() *ASRConversationalConfigOverrideConfig {
+	if c == nil {
+		return nil
+	}
+	return c.Asr
 }
 
 func (c *ConversationConfigClientOverrideConfigInput) GetTurn() *TurnConfigOverrideConfig {

@@ -3,19 +3,25 @@
 package components
 
 type VoiceStatisticsResponseModel struct {
-	// The voice ID.
-	VoiceID string `json:"voice_id"`
+	// The project voice reference ID.
+	ProjectVoiceRefID string `json:"project_voice_ref_id"`
 	// The number of unconverted characters for this voice.
 	CharactersUnconverted int64 `json:"characters_unconverted"`
 	// The number of converted characters for this voice.
 	CharactersConverted int64 `json:"characters_converted"`
+	// The number of credits needed to convert the remaining audio for this voice.
+	CreditsNeededToConvert *int64 `json:"credits_needed_to_convert,omitzero"`
+	// The voice ID.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	VoiceID string `json:"voice_id"`
 }
 
-func (v *VoiceStatisticsResponseModel) GetVoiceID() string {
+func (v *VoiceStatisticsResponseModel) GetProjectVoiceRefID() string {
 	if v == nil {
 		return ""
 	}
-	return v.VoiceID
+	return v.ProjectVoiceRefID
 }
 
 func (v *VoiceStatisticsResponseModel) GetCharactersUnconverted() int64 {
@@ -30,4 +36,18 @@ func (v *VoiceStatisticsResponseModel) GetCharactersConverted() int64 {
 		return 0
 	}
 	return v.CharactersConverted
+}
+
+func (v *VoiceStatisticsResponseModel) GetCreditsNeededToConvert() *int64 {
+	if v == nil {
+		return nil
+	}
+	return v.CreditsNeededToConvert
+}
+
+func (v *VoiceStatisticsResponseModel) GetVoiceID() string {
+	if v == nil {
+		return ""
+	}
+	return v.VoiceID
 }

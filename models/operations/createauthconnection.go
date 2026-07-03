@@ -16,6 +16,7 @@ const (
 	CreateAuthConnectionRequestBodyTypeCreateOAuth2ClientCredsRequest CreateAuthConnectionRequestBodyType = "CreateOAuth2ClientCredsRequest"
 	CreateAuthConnectionRequestBodyTypeCreateCustomHeaderAuthRequest  CreateAuthConnectionRequestBodyType = "CreateCustomHeaderAuthRequest"
 	CreateAuthConnectionRequestBodyTypeCreateBasicAuthRequest         CreateAuthConnectionRequestBodyType = "CreateBasicAuthRequest"
+	CreateAuthConnectionRequestBodyTypeCreateBearerAuthRequest        CreateAuthConnectionRequestBodyType = "CreateBearerAuthRequest"
 	CreateAuthConnectionRequestBodyTypeCreateOAuth2JWTRequest         CreateAuthConnectionRequestBodyType = "CreateOAuth2JWTRequest"
 	CreateAuthConnectionRequestBodyTypeCreatePrivateKeyJWTRequest     CreateAuthConnectionRequestBodyType = "CreatePrivateKeyJWTRequest"
 	CreateAuthConnectionRequestBodyTypeCreateMTLSAuthRequest          CreateAuthConnectionRequestBodyType = "CreateMTLSAuthRequest"
@@ -26,6 +27,7 @@ type CreateAuthConnectionRequestBody struct {
 	CreateOAuth2ClientCredsRequest *components.CreateOAuth2ClientCredsRequest `queryParam:"inline" union:"member"`
 	CreateCustomHeaderAuthRequest  *components.CreateCustomHeaderAuthRequest  `queryParam:"inline" union:"member"`
 	CreateBasicAuthRequest         *components.CreateBasicAuthRequest         `queryParam:"inline" union:"member"`
+	CreateBearerAuthRequest        *components.CreateBearerAuthRequest        `queryParam:"inline" union:"member"`
 	CreateOAuth2JWTRequest         *components.CreateOAuth2JWTRequest         `queryParam:"inline" union:"member"`
 	CreatePrivateKeyJWTRequest     *components.CreatePrivateKeyJWTRequest     `queryParam:"inline" union:"member"`
 	CreateMTLSAuthRequest          *components.CreateMTLSAuthRequest          `queryParam:"inline" union:"member"`
@@ -57,6 +59,15 @@ func CreateCreateAuthConnectionRequestBodyCreateBasicAuthRequest(createBasicAuth
 	return CreateAuthConnectionRequestBody{
 		CreateBasicAuthRequest: &createBasicAuthRequest,
 		Type:                   typ,
+	}
+}
+
+func CreateCreateAuthConnectionRequestBodyCreateBearerAuthRequest(createBearerAuthRequest components.CreateBearerAuthRequest) CreateAuthConnectionRequestBody {
+	typ := CreateAuthConnectionRequestBodyTypeCreateBearerAuthRequest
+
+	return CreateAuthConnectionRequestBody{
+		CreateBearerAuthRequest: &createBearerAuthRequest,
+		Type:                    typ,
 	}
 }
 
@@ -116,6 +127,14 @@ func (u *CreateAuthConnectionRequestBody) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var createBearerAuthRequest components.CreateBearerAuthRequest = components.CreateBearerAuthRequest{}
+	if err := utils.UnmarshalJSON(data, &createBearerAuthRequest, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  CreateAuthConnectionRequestBodyTypeCreateBearerAuthRequest,
+			Value: &createBearerAuthRequest,
+		})
+	}
+
 	var createOAuth2JWTRequest components.CreateOAuth2JWTRequest = components.CreateOAuth2JWTRequest{}
 	if err := utils.UnmarshalJSON(data, &createOAuth2JWTRequest, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -162,6 +181,9 @@ func (u *CreateAuthConnectionRequestBody) UnmarshalJSON(data []byte) error {
 	case CreateAuthConnectionRequestBodyTypeCreateBasicAuthRequest:
 		u.CreateBasicAuthRequest = best.Value.(*components.CreateBasicAuthRequest)
 		return nil
+	case CreateAuthConnectionRequestBodyTypeCreateBearerAuthRequest:
+		u.CreateBearerAuthRequest = best.Value.(*components.CreateBearerAuthRequest)
+		return nil
 	case CreateAuthConnectionRequestBodyTypeCreateOAuth2JWTRequest:
 		u.CreateOAuth2JWTRequest = best.Value.(*components.CreateOAuth2JWTRequest)
 		return nil
@@ -189,6 +211,10 @@ func (u CreateAuthConnectionRequestBody) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.CreateBasicAuthRequest, "", true)
 	}
 
+	if u.CreateBearerAuthRequest != nil {
+		return utils.MarshalJSON(u.CreateBearerAuthRequest, "", true)
+	}
+
 	if u.CreateOAuth2JWTRequest != nil {
 		return utils.MarshalJSON(u.CreateOAuth2JWTRequest, "", true)
 	}
@@ -207,28 +233,34 @@ func (u CreateAuthConnectionRequestBody) MarshalJSON() ([]byte, error) {
 type ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType string
 
 const (
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeOauth2ClientCredentials      ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "oauth2_client_credentials"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeBasicAuth                    ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "basic_auth"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeBearerAuth                   ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "bearer_auth"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeOauth2Jwt                    ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "oauth2_jwt"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypePrivateKeyJwt                ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "private_key_jwt"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeMtls                         ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "mtls"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeCustomHeaderAuth             ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "custom_header_auth"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2AuthCode ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "api_integration_oauth2_auth_code"
-	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth                 ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "whatsapp_auth"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeOauth2ClientCredentials       ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "oauth2_client_credentials"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeBasicAuth                     ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "basic_auth"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeBearerAuth                    ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "bearer_auth"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeOauth2Jwt                     ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "oauth2_jwt"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypePrivateKeyJwt                 ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "private_key_jwt"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeMtls                          ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "mtls"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeCustomHeaderAuth              ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "custom_header_auth"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2AuthCode  ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "api_integration_oauth2_auth_code"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2CustomApp ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "api_integration_oauth2_custom_app"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth                  ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "whatsapp_auth"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeSlackBotAuth                  ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "slack_bot_auth"
+	ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeURLSecret                     ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType = "url_secret"
 )
 
 // ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost - The type of auth connection config
 type ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost struct {
-	OAuth2ClientCredsResponse            *components.OAuth2ClientCredsResponse            `queryParam:"inline" union:"member"`
-	BasicAuthResponse                    *components.BasicAuthResponse                    `queryParam:"inline" union:"member"`
-	BearerAuthResponse                   *components.BearerAuthResponse                   `queryParam:"inline" union:"member"`
-	OAuth2JWTResponse                    *components.OAuth2JWTResponse                    `queryParam:"inline" union:"member"`
-	PrivateKeyJWTResponse                *components.PrivateKeyJWTResponse                `queryParam:"inline" union:"member"`
-	MTLSAuthResponse                     *components.MTLSAuthResponse                     `queryParam:"inline" union:"member"`
-	CustomHeaderAuthResponse             *components.CustomHeaderAuthResponse             `queryParam:"inline" union:"member"`
-	APIIntegrationOAuth2AuthCodeResponse *components.APIIntegrationOAuth2AuthCodeResponse `queryParam:"inline" union:"member"`
-	WhatsAppAuthResponse                 *components.WhatsAppAuthResponse                 `queryParam:"inline" union:"member"`
+	OAuth2ClientCredsResponse             *components.OAuth2ClientCredsResponse             `queryParam:"inline" union:"member"`
+	BasicAuthResponse                     *components.BasicAuthResponse                     `queryParam:"inline" union:"member"`
+	BearerAuthResponse                    *components.BearerAuthResponse                    `queryParam:"inline" union:"member"`
+	OAuth2JWTResponse                     *components.OAuth2JWTResponse                     `queryParam:"inline" union:"member"`
+	PrivateKeyJWTResponse                 *components.PrivateKeyJWTResponse                 `queryParam:"inline" union:"member"`
+	MTLSAuthResponse                      *components.MTLSAuthResponse                      `queryParam:"inline" union:"member"`
+	CustomHeaderAuthResponse              *components.CustomHeaderAuthResponse              `queryParam:"inline" union:"member"`
+	APIIntegrationOAuth2AuthCodeResponse  *components.APIIntegrationOAuth2AuthCodeResponse  `queryParam:"inline" union:"member"`
+	APIIntegrationOAuth2CustomAppResponse *components.APIIntegrationOAuth2CustomAppResponse `queryParam:"inline" union:"member"`
+	WhatsAppAuthResponse                  *components.WhatsAppAuthResponse                  `queryParam:"inline" union:"member"`
+	SlackBotAuthResponse                  *components.SlackBotAuthResponse                  `queryParam:"inline" union:"member"`
+	URLSecretAuthResponse                 *components.URLSecretAuthResponse                 `queryParam:"inline" union:"member"`
 
 	Type ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostType
 }
@@ -305,12 +337,39 @@ func CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostAP
 	}
 }
 
+func CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostAPIIntegrationOauth2CustomApp(apiIntegrationOauth2CustomApp components.APIIntegrationOAuth2CustomAppResponse) ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost {
+	typ := ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2CustomApp
+
+	return ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost{
+		APIIntegrationOAuth2CustomAppResponse: &apiIntegrationOauth2CustomApp,
+		Type:                                  typ,
+	}
+}
+
 func CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostWhatsappAuth(whatsappAuth components.WhatsAppAuthResponse) ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost {
 	typ := ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth
 
 	return ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost{
 		WhatsAppAuthResponse: &whatsappAuth,
 		Type:                 typ,
+	}
+}
+
+func CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostSlackBotAuth(slackBotAuth components.SlackBotAuthResponse) ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost {
+	typ := ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeSlackBotAuth
+
+	return ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost{
+		SlackBotAuthResponse: &slackBotAuth,
+		Type:                 typ,
+	}
+}
+
+func CreateResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostURLSecret(urlSecret components.URLSecretAuthResponse) ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost {
+	typ := ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeURLSecret
+
+	return ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost{
+		URLSecretAuthResponse: &urlSecret,
+		Type:                  typ,
 	}
 }
 
@@ -398,6 +457,15 @@ func (u *ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) Un
 		u.APIIntegrationOAuth2AuthCodeResponse = apiIntegrationOAuth2AuthCodeResponse
 		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2AuthCode
 		return nil
+	case "api_integration_oauth2_custom_app":
+		apiIntegrationOAuth2CustomAppResponse := new(components.APIIntegrationOAuth2CustomAppResponse)
+		if err := utils.UnmarshalJSON(data, &apiIntegrationOAuth2CustomAppResponse, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (AuthType == api_integration_oauth2_custom_app) type components.APIIntegrationOAuth2CustomAppResponse within ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost: %w", string(data), err)
+		}
+
+		u.APIIntegrationOAuth2CustomAppResponse = apiIntegrationOAuth2CustomAppResponse
+		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeAPIIntegrationOauth2CustomApp
+		return nil
 	case "whatsapp_auth":
 		whatsAppAuthResponse := new(components.WhatsAppAuthResponse)
 		if err := utils.UnmarshalJSON(data, &whatsAppAuthResponse, "", true, nil); err != nil {
@@ -406,6 +474,24 @@ func (u *ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) Un
 
 		u.WhatsAppAuthResponse = whatsAppAuthResponse
 		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeWhatsappAuth
+		return nil
+	case "slack_bot_auth":
+		slackBotAuthResponse := new(components.SlackBotAuthResponse)
+		if err := utils.UnmarshalJSON(data, &slackBotAuthResponse, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (AuthType == slack_bot_auth) type components.SlackBotAuthResponse within ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost: %w", string(data), err)
+		}
+
+		u.SlackBotAuthResponse = slackBotAuthResponse
+		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeSlackBotAuth
+		return nil
+	case "url_secret":
+		urlSecretAuthResponse := new(components.URLSecretAuthResponse)
+		if err := utils.UnmarshalJSON(data, &urlSecretAuthResponse, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (AuthType == url_secret) type components.URLSecretAuthResponse within ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost: %w", string(data), err)
+		}
+
+		u.URLSecretAuthResponse = urlSecretAuthResponse
+		u.Type = ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostTypeURLSecret
 		return nil
 	}
 
@@ -445,8 +531,20 @@ func (u ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost) Mar
 		return utils.MarshalJSON(u.APIIntegrationOAuth2AuthCodeResponse, "", true)
 	}
 
+	if u.APIIntegrationOAuth2CustomAppResponse != nil {
+		return utils.MarshalJSON(u.APIIntegrationOAuth2CustomAppResponse, "", true)
+	}
+
 	if u.WhatsAppAuthResponse != nil {
 		return utils.MarshalJSON(u.WhatsAppAuthResponse, "", true)
+	}
+
+	if u.SlackBotAuthResponse != nil {
+		return utils.MarshalJSON(u.SlackBotAuthResponse, "", true)
+	}
+
+	if u.URLSecretAuthResponse != nil {
+		return utils.MarshalJSON(u.URLSecretAuthResponse, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost: all fields are null")
@@ -528,9 +626,30 @@ func (c *CreateAuthConnectionResponse) GetResponseCreateWorkspaceAuthConnectionV
 	return nil
 }
 
+func (c *CreateAuthConnectionResponse) GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostAPIIntegrationOauth2CustomApp() *components.APIIntegrationOAuth2CustomAppResponse {
+	if v := c.GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost(); v != nil {
+		return v.APIIntegrationOAuth2CustomAppResponse
+	}
+	return nil
+}
+
 func (c *CreateAuthConnectionResponse) GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostWhatsappAuth() *components.WhatsAppAuthResponse {
 	if v := c.GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost(); v != nil {
 		return v.WhatsAppAuthResponse
+	}
+	return nil
+}
+
+func (c *CreateAuthConnectionResponse) GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostSlackBotAuth() *components.SlackBotAuthResponse {
+	if v := c.GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost(); v != nil {
+		return v.SlackBotAuthResponse
+	}
+	return nil
+}
+
+func (c *CreateAuthConnectionResponse) GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPostURLSecret() *components.URLSecretAuthResponse {
+	if v := c.GetResponseCreateWorkspaceAuthConnectionV1WorkspaceAuthConnectionsPost(); v != nil {
+		return v.URLSecretAuthResponse
 	}
 	return nil
 }

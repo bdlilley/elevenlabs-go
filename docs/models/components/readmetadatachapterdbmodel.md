@@ -13,3 +13,4 @@
 | `HasSummary`         | `*bool`              | :heavy_minus_sign:   | N/A                  |
 | `DurationSeconds`    | `*float64`           | :heavy_minus_sign:   | N/A                  |
 | `FileNumber`         | `*string`            | :heavy_minus_sign:   | N/A                  |
+| `IsFallbackName`     | `*bool`              | :heavy_minus_sign:   | N/A                  |

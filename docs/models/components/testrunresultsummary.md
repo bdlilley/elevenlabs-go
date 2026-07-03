@@ -1,0 +1,11 @@
+# TestRunResultSummary
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `TestID`                                                                           | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `TestName`                                                                         | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `WorkflowNodeID`                                                                   | `*string`                                                                          | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `Buckets`                                                                          | [][components.TestRunResultBucket](../../models/components/testrunresultbucket.md) | :heavy_check_mark:                                                                 | N/A                                                                                |

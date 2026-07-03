@@ -6,23 +6,29 @@ package components
 type ConversationInitiationSource string
 
 const (
-	ConversationInitiationSourceUnknown            ConversationInitiationSource = "unknown"
-	ConversationInitiationSourceAndroidSDK         ConversationInitiationSource = "android_sdk"
-	ConversationInitiationSourceNodeJsSDK          ConversationInitiationSource = "node_js_sdk"
-	ConversationInitiationSourceReactNativeSDK     ConversationInitiationSource = "react_native_sdk"
-	ConversationInitiationSourceReactSDK           ConversationInitiationSource = "react_sdk"
-	ConversationInitiationSourceJsSDK              ConversationInitiationSource = "js_sdk"
-	ConversationInitiationSourcePythonSDK          ConversationInitiationSource = "python_sdk"
-	ConversationInitiationSourceWidget             ConversationInitiationSource = "widget"
-	ConversationInitiationSourceSipTrunk           ConversationInitiationSource = "sip_trunk"
-	ConversationInitiationSourceTwilio             ConversationInitiationSource = "twilio"
-	ConversationInitiationSourceGenesys            ConversationInitiationSource = "genesys"
-	ConversationInitiationSourceSwiftSDK           ConversationInitiationSource = "swift_sdk"
-	ConversationInitiationSourceWhatsapp           ConversationInitiationSource = "whatsapp"
-	ConversationInitiationSourceFlutterSDK         ConversationInitiationSource = "flutter_sdk"
-	ConversationInitiationSourceZendeskIntegration ConversationInitiationSource = "zendesk_integration"
-	ConversationInitiationSourceSlackIntegration   ConversationInitiationSource = "slack_integration"
-	ConversationInitiationSourceTemplatePreview    ConversationInitiationSource = "template_preview"
+	ConversationInitiationSourceUnknown              ConversationInitiationSource = "unknown"
+	ConversationInitiationSourceAndroidSDK           ConversationInitiationSource = "android_sdk"
+	ConversationInitiationSourceNodeJsSDK            ConversationInitiationSource = "node_js_sdk"
+	ConversationInitiationSourceReactNativeSDK       ConversationInitiationSource = "react_native_sdk"
+	ConversationInitiationSourceReactSDK             ConversationInitiationSource = "react_sdk"
+	ConversationInitiationSourceJsSDK                ConversationInitiationSource = "js_sdk"
+	ConversationInitiationSourcePythonSDK            ConversationInitiationSource = "python_sdk"
+	ConversationInitiationSourceWidget               ConversationInitiationSource = "widget"
+	ConversationInitiationSourceSipTrunk             ConversationInitiationSource = "sip_trunk"
+	ConversationInitiationSourceTwilio               ConversationInitiationSource = "twilio"
+	ConversationInitiationSourceExotel               ConversationInitiationSource = "exotel"
+	ConversationInitiationSourceGenesys              ConversationInitiationSource = "genesys"
+	ConversationInitiationSourceSwiftSDK             ConversationInitiationSource = "swift_sdk"
+	ConversationInitiationSourceWhatsapp             ConversationInitiationSource = "whatsapp"
+	ConversationInitiationSourceTwilioSms            ConversationInitiationSource = "twilio_sms"
+	ConversationInitiationSourceFlutterSDK           ConversationInitiationSource = "flutter_sdk"
+	ConversationInitiationSourceZendeskIntegration   ConversationInitiationSource = "zendesk_integration"
+	ConversationInitiationSourceSlackIntegration     ConversationInitiationSource = "slack_integration"
+	ConversationInitiationSourceTelegramIntegration  ConversationInitiationSource = "telegram_integration"
+	ConversationInitiationSourceIntercomIntegration  ConversationInitiationSource = "intercom_integration"
+	ConversationInitiationSourceFreshdeskIntegration ConversationInitiationSource = "freshdesk_integration"
+	ConversationInitiationSourceTemplatePreview      ConversationInitiationSource = "template_preview"
+	ConversationInitiationSourceGenesysBotConnector  ConversationInitiationSource = "genesys_bot_connector"
 )
 
 func (e ConversationInitiationSource) ToPointer() *ConversationInitiationSource {
@@ -33,7 +39,7 @@ func (e ConversationInitiationSource) ToPointer() *ConversationInitiationSource 
 func (e *ConversationInitiationSource) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "unknown", "android_sdk", "node_js_sdk", "react_native_sdk", "react_sdk", "js_sdk", "python_sdk", "widget", "sip_trunk", "twilio", "genesys", "swift_sdk", "whatsapp", "flutter_sdk", "zendesk_integration", "slack_integration", "template_preview":
+		case "unknown", "android_sdk", "node_js_sdk", "react_native_sdk", "react_sdk", "js_sdk", "python_sdk", "widget", "sip_trunk", "twilio", "exotel", "genesys", "swift_sdk", "whatsapp", "twilio_sms", "flutter_sdk", "zendesk_integration", "slack_integration", "telegram_integration", "intercom_integration", "freshdesk_integration", "template_preview", "genesys_bot_connector":
 			return true
 		}
 	}

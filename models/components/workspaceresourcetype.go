@@ -32,6 +32,7 @@ const (
 	WorkspaceResourceTypeConvaiAgentVersionsDeployments         WorkspaceResourceType = "convai_agent_versions_deployments"
 	WorkspaceResourceTypeConvaiMemoryEntries                    WorkspaceResourceType = "convai_memory_entries"
 	WorkspaceResourceTypeConvaiCoachingProposals                WorkspaceResourceType = "convai_coaching_proposals"
+	WorkspaceResourceTypeConvaiTemplates                        WorkspaceResourceType = "convai_templates"
 	WorkspaceResourceTypeDashboard                              WorkspaceResourceType = "dashboard"
 	WorkspaceResourceTypeDashboardConfiguration                 WorkspaceResourceType = "dashboard_configuration"
 	WorkspaceResourceTypeConvaiAgentDrafts                      WorkspaceResourceType = "convai_agent_drafts"
@@ -40,8 +41,11 @@ const (
 	WorkspaceResourceTypeContentGenerations                     WorkspaceResourceType = "content_generations"
 	WorkspaceResourceTypeContentTemplates                       WorkspaceResourceType = "content_templates"
 	WorkspaceResourceTypeSongs                                  WorkspaceResourceType = "songs"
+	WorkspaceResourceTypeTranscriptionTasks                     WorkspaceResourceType = "transcription_tasks"
 	WorkspaceResourceTypeAvatars                                WorkspaceResourceType = "avatars"
 	WorkspaceResourceTypeAvatarVideoGenerations                 WorkspaceResourceType = "avatar_video_generations"
+	WorkspaceResourceTypeResourceCollection                     WorkspaceResourceType = "resource_collection"
+	WorkspaceResourceTypeStudioProjects                         WorkspaceResourceType = "studio_projects"
 )
 
 func (e WorkspaceResourceType) ToPointer() *WorkspaceResourceType {
@@ -52,7 +56,7 @@ func (e WorkspaceResourceType) ToPointer() *WorkspaceResourceType {
 func (e *WorkspaceResourceType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "voice", "voice_collection", "pronunciation_dictionary", "dubbing", "project", "convai_agents", "convai_knowledge_base_documents", "convai_tools", "convai_settings", "convai_secrets", "workspace_auth_connections", "convai_phone_numbers", "convai_mcp_servers", "convai_api_integration_connections", "convai_api_integration_trigger_connections", "convai_batch_calls", "convai_agent_response_tests", "convai_test_suite_invocations", "convai_crawl_jobs", "convai_crawl_tasks", "convai_whatsapp_accounts", "convai_agent_versions", "convai_agent_branches", "convai_agent_versions_deployments", "convai_memory_entries", "convai_coaching_proposals", "dashboard", "dashboard_configuration", "convai_agent_drafts", "resource_locators", "assets", "content_generations", "content_templates", "songs", "avatars", "avatar_video_generations":
+		case "voice", "voice_collection", "pronunciation_dictionary", "dubbing", "project", "convai_agents", "convai_knowledge_base_documents", "convai_tools", "convai_settings", "convai_secrets", "workspace_auth_connections", "convai_phone_numbers", "convai_mcp_servers", "convai_api_integration_connections", "convai_api_integration_trigger_connections", "convai_batch_calls", "convai_agent_response_tests", "convai_test_suite_invocations", "convai_crawl_jobs", "convai_crawl_tasks", "convai_whatsapp_accounts", "convai_agent_versions", "convai_agent_branches", "convai_agent_versions_deployments", "convai_memory_entries", "convai_coaching_proposals", "convai_templates", "dashboard", "dashboard_configuration", "convai_agent_drafts", "resource_locators", "assets", "content_generations", "content_templates", "songs", "transcription_tasks", "avatars", "avatar_video_generations", "resource_collection", "studio_projects":
 			return true
 		}
 	}

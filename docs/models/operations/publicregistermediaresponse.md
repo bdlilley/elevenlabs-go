@@ -1,0 +1,9 @@
+# PublicRegisterMediaResponse
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                    | :heavy_check_mark:                                                                    | N/A                                                                                   |                                                                                       |
+| `RegisterMediaResponse`                                                               | [*components.RegisterMediaResponse](../../models/components/registermediaresponse.md) | :heavy_minus_sign:                                                                    | Successful Response                                                                   | {<br/>"media_id": "prodmedia_01jgb2zd68f8f9tfvbb968wb8z"<br/>}                        |

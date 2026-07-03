@@ -26,6 +26,7 @@ const (
 	ASTNodeOutputTypeLteOperator         ASTNodeOutputType = "lte_operator"
 	ASTNodeOutputTypeMulOperator         ASTNodeOutputType = "mul_operator"
 	ASTNodeOutputTypeNeqOperator         ASTNodeOutputType = "neq_operator"
+	ASTNodeOutputTypeNullLiteral         ASTNodeOutputType = "null_literal"
 	ASTNodeOutputTypeNumberLiteral       ASTNodeOutputType = "number_literal"
 	ASTNodeOutputTypeOrOperator          ASTNodeOutputType = "or_operator"
 	ASTNodeOutputTypeStringLiteral       ASTNodeOutputType = "string_literal"
@@ -36,6 +37,7 @@ type ASTNodeOutput struct {
 	ASTStringNodeOutput                       *ASTStringNodeOutput                       `queryParam:"inline" union:"member"`
 	ASTNumberNodeOutput                       *ASTNumberNodeOutput                       `queryParam:"inline" union:"member"`
 	ASTBooleanNodeOutput                      *ASTBooleanNodeOutput                      `queryParam:"inline" union:"member"`
+	ASTNullNodeOutput                         *ASTNullNodeOutput                         `queryParam:"inline" union:"member"`
 	ASTLLMNodeOutput                          *ASTLLMNodeOutput                          `queryParam:"inline" union:"member"`
 	ASTDynamicVariableNodeOutput              *ASTDynamicVariableNodeOutput              `queryParam:"inline" union:"member"`
 	ASTOrOperatorNodeOutput1                  *ASTOrOperatorNodeOutput1                  `queryParam:"inline" union:"member"`
@@ -178,6 +180,15 @@ func CreateASTNodeOutputNeqOperator(neqOperator ASTNotEqualsOperatorNodeOutput1)
 	return ASTNodeOutput{
 		ASTNotEqualsOperatorNodeOutput1: &neqOperator,
 		Type:                            typ,
+	}
+}
+
+func CreateASTNodeOutputNullLiteral(nullLiteral ASTNullNodeOutput) ASTNodeOutput {
+	typ := ASTNodeOutputTypeNullLiteral
+
+	return ASTNodeOutput{
+		ASTNullNodeOutput: &nullLiteral,
+		Type:              typ,
 	}
 }
 
@@ -355,6 +366,15 @@ func (u *ASTNodeOutput) UnmarshalJSON(data []byte) error {
 		u.ASTNotEqualsOperatorNodeOutput1 = astNotEqualsOperatorNodeOutput1
 		u.Type = ASTNodeOutputTypeNeqOperator
 		return nil
+	case "null_literal":
+		astNullNodeOutput := new(ASTNullNodeOutput)
+		if err := utils.UnmarshalJSON(data, &astNullNodeOutput, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == null_literal) type ASTNullNodeOutput within ASTNodeOutput: %w", string(data), err)
+		}
+
+		u.ASTNullNodeOutput = astNullNodeOutput
+		u.Type = ASTNodeOutputTypeNullLiteral
+		return nil
 	case "number_literal":
 		astNumberNodeOutput := new(ASTNumberNodeOutput)
 		if err := utils.UnmarshalJSON(data, &astNumberNodeOutput, "", true, nil); err != nil {
@@ -407,6 +427,10 @@ func (u ASTNodeOutput) MarshalJSON() ([]byte, error) {
 
 	if u.ASTBooleanNodeOutput != nil {
 		return utils.MarshalJSON(u.ASTBooleanNodeOutput, "", true)
+	}
+
+	if u.ASTNullNodeOutput != nil {
+		return utils.MarshalJSON(u.ASTNullNodeOutput, "", true)
 	}
 
 	if u.ASTLLMNodeOutput != nil {

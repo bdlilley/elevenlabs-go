@@ -10,8 +10,10 @@ import (
 type PatchAgentSettingsRouteRequest struct {
 	// The id of an agent. This is returned on agent creation.
 	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
-	// Enable versioning for the agent, if not already enabled
-	EnableVersioningIfNotEnabled *bool `default:"false" queryParam:"style=form,explode=true,name=enable_versioning_if_not_enabled"`
+	// Deprecated: all agents are versioned. This parameter is ignored.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	EnableVersioningIfNotEnabled *bool `default:"true" queryParam:"style=form,explode=true,name=enable_versioning_if_not_enabled"`
 	// The ID of the branch to use
 	BranchID *string                                                          `queryParam:"style=form,explode=true,name=branch_id"`
 	Body     *components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch `request:"mediaType=application/json"`

@@ -12,6 +12,8 @@ type GetSecretsRouteRequest struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 	// Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100.
 	DependencyLimit *int64 `queryParam:"style=form,explode=true,name=dependency_limit"`
+	// If specified, returns only secrets whose names start with this string.
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Used for fetching next page. Cursor is returned in the response.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
@@ -28,6 +30,13 @@ func (g *GetSecretsRouteRequest) GetDependencyLimit() *int64 {
 		return nil
 	}
 	return g.DependencyLimit
+}
+
+func (g *GetSecretsRouteRequest) GetSearch() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Search
 }
 
 func (g *GetSecretsRouteRequest) GetCursor() *string {

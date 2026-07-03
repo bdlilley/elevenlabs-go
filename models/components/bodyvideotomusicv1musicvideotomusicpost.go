@@ -3,6 +3,8 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/bdlilley/elevenlabs-go/internal/utils"
 )
 
@@ -26,6 +28,33 @@ func (v *Video) GetContent() any {
 	return v.Content
 }
 
+// BodyVideoToMusicV1MusicVideoToMusicPostModelID - The model to use for the generation.
+type BodyVideoToMusicV1MusicVideoToMusicPostModelID string
+
+const (
+	BodyVideoToMusicV1MusicVideoToMusicPostModelIDMusicV1 BodyVideoToMusicV1MusicVideoToMusicPostModelID = "music_v1"
+	BodyVideoToMusicV1MusicVideoToMusicPostModelIDMusicV2 BodyVideoToMusicV1MusicVideoToMusicPostModelID = "music_v2"
+)
+
+func (e BodyVideoToMusicV1MusicVideoToMusicPostModelID) ToPointer() *BodyVideoToMusicV1MusicVideoToMusicPostModelID {
+	return &e
+}
+func (e *BodyVideoToMusicV1MusicVideoToMusicPostModelID) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "music_v1":
+		fallthrough
+	case "music_v2":
+		*e = BodyVideoToMusicV1MusicVideoToMusicPostModelID(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for BodyVideoToMusicV1MusicVideoToMusicPostModelID: %v", v)
+	}
+}
+
 type BodyVideoToMusicV1MusicVideoToMusicPost struct {
 	//             One or more video files sent via FormData array (multipart/form-data). They will be combined into one codec in order.
 	//             A maximum of 10 videos is allowed, where the total size of the combined video is limited to 200MB.
@@ -36,6 +65,8 @@ type BodyVideoToMusicV1MusicVideoToMusicPost struct {
 	Description *string `multipartForm:"name=description"`
 	// Optional list of style tags (e.g. ['upbeat', 'cinematic']). A maximum of 10 tags is allowed.
 	Tags []string `multipartForm:"name=tags"`
+	// The model to use for the generation.
+	ModelID *BodyVideoToMusicV1MusicVideoToMusicPostModelID `default:"music_v1" multipartForm:"name=model_id"`
 	// Whether to sign the generated song with C2PA. Applicable only for mp3 files.
 	SignWithC2pa *bool `default:"false" multipartForm:"name=sign_with_c2pa"`
 }
@@ -70,6 +101,13 @@ func (b *BodyVideoToMusicV1MusicVideoToMusicPost) GetTags() []string {
 		return nil
 	}
 	return b.Tags
+}
+
+func (b *BodyVideoToMusicV1MusicVideoToMusicPost) GetModelID() *BodyVideoToMusicV1MusicVideoToMusicPostModelID {
+	if b == nil {
+		return nil
+	}
+	return b.ModelID
 }
 
 func (b *BodyVideoToMusicV1MusicVideoToMusicPost) GetSignWithC2pa() *bool {

@@ -243,16 +243,26 @@ func (u MCPServerConfigUpdateRequestModelAuthConnection) MarshalJSON() ([]byte, 
 type MCPServerConfigUpdateRequestModel struct {
 	// The approval mode to set for the MCP server
 	ApprovalPolicy *MCPApprovalPolicy `default:"require_approval_all" json:"approval_policy"`
-	// If set, overrides the server's force_pre_tool_speech setting for this tool
+	// DEPRECATED: use `pre_tool_speech` instead. If set, overrides the server's force_pre_tool_speech setting for this tool.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	ForcePreToolSpeech *bool `json:"force_pre_tool_speech,omitzero"`
-	// If set, overrides the server's disable_interruptions setting for this tool
+	// If set, overrides the server's pre_tool_speech setting for this tool.
+	PreToolSpeech *PreToolSpeechMode `default:"auto" json:"pre_tool_speech"`
+	// DEPRECATED: use `interruption_mode` instead. If set, overrides the server's disable_interruptions setting for this tool.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DisableInterruptions *bool `json:"disable_interruptions,omitzero"`
+	// If set, overrides the server's interruption_mode setting for this tool.
+	InterruptionMode *ToolInterruptionMode `default:"allow" json:"interruption_mode"`
 	// Predefined tool call sound type to play during tool execution for all tools from this MCP server
 	ToolCallSound *ToolCallSoundType `json:"tool_call_sound,omitzero"`
 	// Determines when the tool call sound should play for all tools from this MCP server
 	ToolCallSoundBehavior *ToolCallSoundBehavior `default:"auto" json:"tool_call_sound_behavior"`
 	// If set, overrides the server's execution_mode setting for this tool
 	ExecutionMode *ToolExecutionMode `default:"immediate" json:"execution_mode"`
+	// The maximum time in seconds to wait for each MCP tool call to complete.
+	ResponseTimeoutSecs *int64 `json:"response_timeout_secs,omitzero"`
 	// The headers to include in requests to the MCP server
 	RequestHeaders map[string]MCPServerConfigUpdateRequestModelRequestHeaders `json:"request_headers,omitzero"`
 	// Whether to disable HTTP compression for this MCP server
@@ -288,11 +298,25 @@ func (m *MCPServerConfigUpdateRequestModel) GetForcePreToolSpeech() *bool {
 	return m.ForcePreToolSpeech
 }
 
+func (m *MCPServerConfigUpdateRequestModel) GetPreToolSpeech() *PreToolSpeechMode {
+	if m == nil {
+		return nil
+	}
+	return m.PreToolSpeech
+}
+
 func (m *MCPServerConfigUpdateRequestModel) GetDisableInterruptions() *bool {
 	if m == nil {
 		return nil
 	}
 	return m.DisableInterruptions
+}
+
+func (m *MCPServerConfigUpdateRequestModel) GetInterruptionMode() *ToolInterruptionMode {
+	if m == nil {
+		return nil
+	}
+	return m.InterruptionMode
 }
 
 func (m *MCPServerConfigUpdateRequestModel) GetToolCallSound() *ToolCallSoundType {
@@ -314,6 +338,13 @@ func (m *MCPServerConfigUpdateRequestModel) GetExecutionMode() *ToolExecutionMod
 		return nil
 	}
 	return m.ExecutionMode
+}
+
+func (m *MCPServerConfigUpdateRequestModel) GetResponseTimeoutSecs() *int64 {
+	if m == nil {
+		return nil
+	}
+	return m.ResponseTimeoutSecs
 }
 
 func (m *MCPServerConfigUpdateRequestModel) GetRequestHeaders() map[string]MCPServerConfigUpdateRequestModelRequestHeaders {

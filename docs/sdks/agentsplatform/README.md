@@ -2,6 +2,8 @@
 
 ## Overview
 
+Build, configure and manage Conversational AI agents, knowledge bases, tools, and conversations.
+
 ### Available Operations
 
 * [GetConversationSignedLink](#getconversationsignedlink) - Get Signed Url
@@ -9,6 +11,7 @@
 * [GetLivekitToken](#getlivekittoken) - Get Webrtc Token
 * [HandleTwilioOutboundCall](#handletwiliooutboundcall) - Handle An Outbound Call Via Twilio
 * [RegisterTwilioCall](#registertwiliocall) - Register A Twilio Call And Return Twiml
+* [HandleExotelOutboundCall](#handleexoteloutboundcall) - Handle An Outbound Call Via Exotel
 * [WhatsappOutboundCall](#whatsappoutboundcall) - Make An Outbound Call Via Whatsapp
 * [WhatsappOutboundMessage](#whatsappoutboundmessage) - Send An Outbound Message Via Whatsapp
 * [CreateAgent](#createagent) - Create Agent
@@ -23,8 +26,8 @@
 * [GetAgentKnowledgeBaseSize](#getagentknowledgebasesize) - Returns The Size Of The Agent'S Knowledge Base
 * [GetAgentLlmExpectedCostCalculation](#getagentllmexpectedcostcalculation) - Calculate Expected Llm Usage For An Agent
 * [DuplicateAgent](#duplicateagent) - Duplicate Agent
-* [RunConversationSimulation](#runconversationsimulation) - Simulates A Conversation
-* [RunConversationSimulationRouteStream](#runconversationsimulationroutestream) - Simulates A Conversation (Stream)
+* [~~RunConversationSimulation~~](#runconversationsimulation) - Simulates A Conversation :warning: **Deprecated**
+* [~~RunConversationSimulationRouteStream~~](#runconversationsimulationroutestream) - Simulates A Conversation (Stream) :warning: **Deprecated**
 * [CreateAgentTestFolder](#createagenttestfolder) - Create Agent Test Folder
 * [GetAgentTestFolder](#getagenttestfolder) - Get Agent Test Folder By Id
 * [UpdateAgentTestFolder](#updateagenttestfolder) - Update Agent Test Folder
@@ -34,15 +37,24 @@
 * [GetConversationUsers](#getconversationusers) - Get Conversation Users
 * [GetConversationHistory](#getconversationhistory) - Get Conversation Details
 * [DeleteConversation](#deleteconversation) - Delete Conversation
+* [GetConversationSipMessages](#getconversationsipmessages) - Get Sip Messages For A Conversation
 * [GetConversationAudio](#getconversationaudio) - Get Conversation Audio
 * [PostConversationFeedback](#postconversationfeedback) - Send Conversation Feedback
 * [TextSearchConversationMessages](#textsearchconversationmessages) - Text Search Conversation Messages
 * [SmartSearchConversationMessages](#smartsearchconversationmessages) - Smart Search Conversation Messages
+* [AssignConversationTagsRoute](#assignconversationtagsroute) - Assign Conversation Tags
+* [UnassignConversationTagRoute](#unassignconversationtagroute) - Unassign Conversation Tag
+* [ListConversationTagsRoute](#listconversationtagsroute) - List Conversation Tags
+* [CreateConversationTagRoute](#createconversationtagroute) - Create Conversation Tag
+* [GetConversationTagRoute](#getconversationtagroute) - Get Conversation Tag
+* [DeleteConversationTagRoute](#deleteconversationtagroute) - Delete Conversation Tag
+* [UpdateConversationTagRoute](#updateconversationtagroute) - Update Conversation Tag
 * [CreatePhoneNumber](#createphonenumber) - Import Phone Number
 * [ListPhoneNumbers](#listphonenumbers) - List Phone Numbers
 * [GetPhoneNumber](#getphonenumber) - Get Phone Number
 * [DeletePhoneNumber](#deletephonenumber) - Delete Phone Number
 * [UpdatePhoneNumber](#updatephonenumber) - Update Phone Number
+* [ListSipMessages](#listsipmessages) - Get Sip Messages For A Phone Number
 * [GetPublicLlmExpectedCostCalculation](#getpublicllmexpectedcostcalculation) - Calculate Expected Llm Usage
 * [ListAvailableLlms](#listavailablellms) - List Available Llms
 * [UploadFile](#uploadfile) - Upload File
@@ -57,6 +69,7 @@
 * [UpdateDocument](#updatedocument) - Update Document
 * [GetDocumentationFromKnowledgeBase](#getdocumentationfromknowledgebase) - Get Documentation From Knowledge Base
 * [DeleteKnowledgeBaseDocument](#deleteknowledgebasedocument) - Delete Knowledge Base Document Or Folder
+* [UpdateFileDocumentRoute](#updatefiledocumentroute) - Update File Document
 * [GetRagIndexOverview](#getragindexoverview) - Get Rag Index Overview.
 * [GetOrCreateRagIndexes](#getorcreateragindexes) - Compute Rag Indexes In Batch
 * [RefreshURLDocument](#refreshurldocument) - Refresh Url Document Content
@@ -68,18 +81,22 @@
 * [GetKnowledgeBaseContent](#getknowledgebasecontent) - Get Document Content
 * [GetKnowledgeBaseSourceFileURL](#getknowledgebasesourcefileurl) - Get Document Source File Url
 * [GetDocumentationChunkFromKnowledgeBase](#getdocumentationchunkfromknowledgebase) - Get Documentation Chunk From Knowledge Base
+* [GetDocumentationChunksFromKnowledgeBase](#getdocumentationchunksfromknowledgebase) - Get All Rag Chunks For A Document
+* [GetAgentTopicsRoute](#getagenttopicsroute) - Get Agent Conversation Topics
 * [AddTool](#addtool) - Add Tool
 * [GetTools](#gettools) - Get Tools
 * [GetTool](#gettool) - Get Tool
 * [UpdateTool](#updatetool) - Update Tool
 * [DeleteTool](#deletetool) - Delete Tool
 * [GetToolDependentAgents](#gettooldependentagents) - Get Dependent Agents List
+* [GetToolExecutionsRoute](#gettoolexecutionsroute) - Get Tool Executions
 * [GetSettings](#getsettings) - Get Convai Settings
 * [UpdateSettings](#updatesettings) - Update Convai Settings
 * [GetDashboardSettings](#getdashboardsettings) - Get Convai Dashboard Settings
 * [UpdateDashboardSettings](#updatedashboardsettings) - Update Convai Dashboard Settings
 * [CreateSecret](#createsecret) - Create Convai Workspace Secret
 * [GetSecrets](#getsecrets) - Get Convai Workspace Secrets
+* [GetSecretRoute](#getsecretroute) - Get Convai Workspace Secret
 * [DeleteSecret](#deletesecret) - Delete Convai Workspace Secret
 * [UpdateSecret](#updatesecret) - Update Convai Workspace Secret
 * [GetSecretDependencies](#getsecretdependencies) - Get Secret Dependencies By Type
@@ -111,7 +128,11 @@
 * [GetBranches](#getbranches) - List Agent Branches
 * [GetBranch](#getbranch) - Get Agent Branch
 * [UpdateBranch](#updatebranch) - Update Agent Branch
+* [GetVersionMetadataRoute](#getversionmetadataroute) - Get Agent Version Metadata
+* [MergePreviewRoute](#mergepreviewroute) - Preview Merged Configuration
 * [MergeBranchIntoTarget](#mergebranchintotarget) - Merge A Branch Into A Target Branch
+* [RebasePreviewRoute](#rebasepreviewroute) - Preview Rebased Configuration
+* [RebaseBranchOntoMain](#rebasebranchontomain) - Rebase A Branch Onto Main
 * [CreateAgentDeployment](#createagentdeployment) - Create Or Update Deployments
 * [CreateAgentDraft](#createagentdraft) - Create Agent Draft
 * [DeleteAgentDraft](#deleteagentdraft) - Delete Agent Draft
@@ -158,7 +179,7 @@ func main() {
 | Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           | Example                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                                 | :heavy_check_mark:                                                                                                    | The context to use for the request.                                                                                   |                                                                                                                       |
-| `agentID`                                                                                                             | `string`                                                                                                              | :heavy_check_mark:                                                                                                    | The id of the agent you're taking the action on.                                                                      | 21m00Tcm4TlvDq8ikWAM                                                                                                  |
+| `agentID`                                                                                                             | `string`                                                                                                              | :heavy_check_mark:                                                                                                    | Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.                    | **Example 1:** agent_3701k3ttaq12ewp8b7qv5rfyszkz<br/>**Example 2:** seng_3701k3ttaq12ewp8b7qv5rfyszkz                |
 | `includeConversationID`                                                                                               | `*bool`                                                                                                               | :heavy_minus_sign:                                                                                                    | Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again. |                                                                                                                       |
 | `branchID`                                                                                                            | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The ID of the branch to use                                                                                           |                                                                                                                       |
 | `environment`                                                                                                         | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.  |                                                                                                                       |
@@ -215,7 +236,7 @@ func main() {
 | Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           | Example                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                                 | :heavy_check_mark:                                                                                                    | The context to use for the request.                                                                                   |                                                                                                                       |
-| `agentID`                                                                                                             | `string`                                                                                                              | :heavy_check_mark:                                                                                                    | The id of the agent you're taking the action on.                                                                      | 21m00Tcm4TlvDq8ikWAM                                                                                                  |
+| `agentID`                                                                                                             | `string`                                                                                                              | :heavy_check_mark:                                                                                                    | Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.                    | **Example 1:** agent_3701k3ttaq12ewp8b7qv5rfyszkz<br/>**Example 2:** seng_3701k3ttaq12ewp8b7qv5rfyszkz                |
 | `includeConversationID`                                                                                               | `*bool`                                                                                                               | :heavy_minus_sign:                                                                                                    | Whether to include a conversation_id with the response. If included, the conversation_signature cannot be used again. |                                                                                                                       |
 | `branchID`                                                                                                            | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The ID of the branch to use                                                                                           |                                                                                                                       |
 | `environment`                                                                                                         | `*string`                                                                                                             | :heavy_minus_sign:                                                                                                    | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'.  |                                                                                                                       |
@@ -270,7 +291,7 @@ func main() {
 | Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          | Example                                                                                                              |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |                                                                                                                      |
-| `agentID`                                                                                                            | `string`                                                                                                             | :heavy_check_mark:                                                                                                   | The id of the agent you're taking the action on.                                                                     | 21m00Tcm4TlvDq8ikWAM                                                                                                 |
+| `agentID`                                                                                                            | `string`                                                                                                             | :heavy_check_mark:                                                                                                   | Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.                   | **Example 1:** agent_3701k3ttaq12ewp8b7qv5rfyszkz<br/>**Example 2:** seng_3701k3ttaq12ewp8b7qv5rfyszkz               |
 | `participantName`                                                                                                    | `*string`                                                                                                            | :heavy_minus_sign:                                                                                                   | Optional custom participant name. If not provided, user ID will be used                                              |                                                                                                                      |
 | `branchID`                                                                                                           | `*string`                                                                                                            | :heavy_minus_sign:                                                                                                   | The ID of the branch to use                                                                                          |                                                                                                                      |
 | `environment`                                                                                                        | `*string`                                                                                                            | :heavy_minus_sign:                                                                                                   | The environment to use for resolving environment variables (e.g. 'production', 'staging'). Defaults to 'production'. |                                                                                                                      |
@@ -317,6 +338,12 @@ func main() {
         ToNumber: "<value>",
         ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
+                Asr: &components.ASRConversationalConfigOverride{
+                    Keywords: []string{
+                        "hello",
+                        "world",
+                    },
+                },
                 Turn: &components.TurnConfigOverride{
                     SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
                         Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
@@ -399,6 +426,12 @@ func main() {
         ToNumber: "<value>",
         ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
+                Asr: &components.ASRConversationalConfigOverride{
+                    Keywords: []string{
+                        "hello",
+                        "world",
+                    },
+                },
                 Turn: &components.TurnConfigOverride{
                     SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
                         Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
@@ -451,6 +484,94 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
+## HandleExotelOutboundCall
+
+Handle an outbound call via Exotel Connect API
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="handle_exotel_outbound_call" method="post" path="/v1/convai/exotel/outbound-call" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.HandleExotelOutboundCall(ctx, components.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost{
+        AgentID: "<id>",
+        AgentPhoneNumberID: "<id>",
+        ToNumber: "<value>",
+        ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
+            ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
+                Asr: &components.ASRConversationalConfigOverride{
+                    Keywords: []string{
+                        "hello",
+                        "world",
+                    },
+                },
+                Turn: &components.TurnConfigOverride{
+                    SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
+                        Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
+                    },
+                },
+                Tts: &components.TTSConversationalConfigOverride{
+                    VoiceID: elevenlabsgo.Pointer("cjVigY5qzO86Huf0OWal"),
+                    Stability: elevenlabsgo.Pointer[float64](0.5),
+                    Speed: elevenlabsgo.Pointer[float64](1.0),
+                    SimilarityBoost: elevenlabsgo.Pointer[float64](0.8),
+                },
+                Agent: &components.AgentConfigOverrideInput{
+                    FirstMessage: elevenlabsgo.Pointer("Hello, how can I help you today?"),
+                    Language: elevenlabsgo.Pointer("en"),
+                    Prompt: &components.PromptAgentAPIModelOverrideInput{
+                        Prompt: elevenlabsgo.Pointer("You are a helpful assistant that can answer questions about the topic of the conversation."),
+                        Llm: components.LlmGemini20Flash001.ToPointer(),
+                        ToolIds: []string{},
+                        KnowledgeBase: []components.KnowledgeBaseLocator{},
+                    },
+                },
+            },
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ExotelOutboundCallResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                    | :heavy_check_mark:                                                                                                                                                       | The context to use for the request.                                                                                                                                      |
+| `request`                                                                                                                                                                | [components.BodyHandleAnOutboundCallViaExotelV1ConvaiExotelOutboundCallPost](../../models/components/bodyhandleanoutboundcallviaexotelv1convaiexoteloutboundcallpost.md) | :heavy_check_mark:                                                                                                                                                       | The request object to use for the request.                                                                                                                               |
+| `opts`                                                                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                                                                 | :heavy_minus_sign:                                                                                                                                                       | The options for this request.                                                                                                                                            |
+
+### Response
+
+**[*operations.HandleExotelOutboundCallResponse](../../models/operations/handleexoteloutboundcallresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
 ## WhatsappOutboundCall
 
 Make an outbound call via WhatsApp
@@ -483,6 +604,12 @@ func main() {
         AgentID: "<id>",
         ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
+                Asr: &components.ASRConversationalConfigOverride{
+                    Keywords: []string{
+                        "hello",
+                        "world",
+                    },
+                },
                 Turn: &components.TurnConfigOverride{
                     SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
                         Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
@@ -568,6 +695,12 @@ func main() {
         AgentID: "<id>",
         ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
+                Asr: &components.ASRConversationalConfigOverride{
+                    Keywords: []string{
+                        "hello",
+                        "world",
+                    },
+                },
                 Turn: &components.TurnConfigOverride{
                     SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
                         Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
@@ -653,6 +786,7 @@ func main() {
                 },
             },
             Turn: &components.TurnConfig{
+                InterruptionIgnoreTerms: []string{},
                 SoftTimeoutConfig: &components.SoftTimeoutConfig{},
             },
             Tts: &components.TTSConversationalConfigInput{
@@ -660,7 +794,7 @@ func main() {
                 OptimizeStreamingLatency: components.TTSOptimizeStreamingLatencyThree.ToPointer(),
                 PronunciationDictionaryLocators: []components.PydanticPronunciationDictionaryVersionLocator{},
             },
-            Conversation: &components.ConversationConfig{
+            Conversation: &components.ConversationConfigInput{
                 ClientEvents: []components.ClientEvent{
                     components.ClientEventAudio,
                     components.ClientEventInterruption,
@@ -711,15 +845,16 @@ func main() {
             Widget: &components.WidgetConfigInput{
                 CustomAvatarPath: elevenlabsgo.Pointer("https://example.com/avatar.png"),
             },
-            DataCollection: map[string]components.LiteralJSONSchemaProperty{
-                "key": components.LiteralJSONSchemaProperty{
-                    Type: components.LiteralJSONSchemaPropertyTypeString,
+            DataCollection: map[string]components.AnalysisProperty{
+                "key": components.AnalysisProperty{
+                    Type: components.AnalysisPropertyTypeString,
                     Description: elevenlabsgo.Pointer("A user-provided message"),
                 },
             },
             Overrides: &components.ConversationInitiationClientDataConfigInput{
                 CustomLlmExtraBody: elevenlabsgo.Pointer(true),
                 EnableConversationInitiationClientDataFromWebhook: elevenlabsgo.Pointer(true),
+                EnableStartingWorkflowNodeIDFromClient: elevenlabsgo.Pointer(true),
             },
             WorkspaceOverrides: &components.AgentWorkspaceOverridesInput{
                 ConversationInitiationClientDataWebhook: &components.ConversationInitiationClientDataWebhook{
@@ -844,7 +979,7 @@ func main() {
                 ),
                 "success_conversation": components.CreateAgentWorkflowRequestModelNodesStandaloneAgent(
                     components.WorkflowStandaloneAgentNodeModelInput{
-                        AgentID: "<id>",
+                        AgentID: elevenlabsgo.Pointer("<id>"),
                     },
                 ),
                 "success_end": components.CreateAgentWorkflowRequestModelNodesTool(
@@ -878,7 +1013,7 @@ func main() {
             "Technical Help",
             "Eleven",
         },
-    }, elevenlabsgo.Pointer(false))
+    }, elevenlabsgo.Pointer(true))
     if err != nil {
         log.Fatal(err)
     }
@@ -890,12 +1025,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |
-| `body`                                                                                                                   | [components.BodyCreateAgentV1ConvaiAgentsCreatePost](../../models/components/bodycreateagentv1convaiagentscreatepost.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
-| `enableVersioning`                                                                                                       | `*bool`                                                                                                                  | :heavy_minus_sign:                                                                                                       | Enable versioning for the agent                                                                                          |
-| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |
+| Parameter                                                                                                                                                                                 | Type                                                                                                                                                                                      | Required                                                                                                                                                                                  | Description                                                                                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                        | The context to use for the request.                                                                                                                                                       |
+| `body`                                                                                                                                                                                    | [components.BodyCreateAgentV1ConvaiAgentsCreatePost](../../models/components/bodycreateagentv1convaiagentscreatepost.md)                                                                  | :heavy_check_mark:                                                                                                                                                                        | N/A                                                                                                                                                                                       |
+| `enableVersioning`                                                                                                                                                                        | `*bool`                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                        | : warning: ** DEPRECATED **: This will be removed in a future release, please migrate away from it as soon as possible.<br/><br/>Deprecated: all agents are versioned. This parameter is ignored. |
+| `opts`                                                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                        | The options for this request.                                                                                                                                                             |
 
 ### Response
 
@@ -1040,7 +1175,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.PatchAgentSettings(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(false), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"), &components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch{
+    res, err := s.AgentsPlatform.PatchAgentSettings(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", elevenlabsgo.Pointer(true), elevenlabsgo.Pointer("agtbranch_0901k4aafjxxfxt93gd841r7tv5t"), &components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch{
         Workflow: &components.AgentWorkflowRequestModel{
             Edges: map[string]components.WorkflowEdgeModelInput{
                 "entry_to_tool_a": components.WorkflowEdgeModelInput{
@@ -1127,7 +1262,7 @@ func main() {
                 ),
                 "success_end": components.CreateAgentWorkflowRequestModelNodesStandaloneAgent(
                     components.WorkflowStandaloneAgentNodeModelInput{
-                        AgentID: "<id>",
+                        AgentID: elevenlabsgo.Pointer("<id>"),
                     },
                 ),
                 "success_phone": components.CreateAgentWorkflowRequestModelNodesTool(
@@ -1135,7 +1270,7 @@ func main() {
                 ),
                 "success_transfer": components.CreateAgentWorkflowRequestModelNodesStandaloneAgent(
                     components.WorkflowStandaloneAgentNodeModelInput{
-                        AgentID: "<id>",
+                        AgentID: elevenlabsgo.Pointer("<id>"),
                     },
                 ),
                 "tool_node_a": components.CreateAgentWorkflowRequestModelNodesEnd(
@@ -1164,14 +1299,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                           | Type                                                                                                                                                | Required                                                                                                                                            | Description                                                                                                                                         | Example                                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                               | [context.Context](https://pkg.go.dev/context#Context)                                                                                               | :heavy_check_mark:                                                                                                                                  | The context to use for the request.                                                                                                                 |                                                                                                                                                     |
-| `agentID`                                                                                                                                           | `string`                                                                                                                                            | :heavy_check_mark:                                                                                                                                  | The id of an agent. This is returned on agent creation.                                                                                             | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                                                                                                  |
-| `enableVersioningIfNotEnabled`                                                                                                                      | `*bool`                                                                                                                                             | :heavy_minus_sign:                                                                                                                                  | Enable versioning for the agent, if not already enabled                                                                                             |                                                                                                                                                     |
-| `branchID`                                                                                                                                          | `*string`                                                                                                                                           | :heavy_minus_sign:                                                                                                                                  | The ID of the branch to use                                                                                                                         | agtbranch_0901k4aafjxxfxt93gd841r7tv5t                                                                                                              |
-| `body`                                                                                                                                              | [*components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch](../../models/components/bodypatchesanagentsettingsv1convaiagentsagentidpatch.md) | :heavy_minus_sign:                                                                                                                                  | N/A                                                                                                                                                 |                                                                                                                                                     |
-| `opts`                                                                                                                                              | [][operations.Option](../../models/operations/option.md)                                                                                            | :heavy_minus_sign:                                                                                                                                  | The options for this request.                                                                                                                       |                                                                                                                                                     |
+| Parameter                                                                                                                                                                                 | Type                                                                                                                                                                                      | Required                                                                                                                                                                                  | Description                                                                                                                                                                               | Example                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                        | The context to use for the request.                                                                                                                                                       |                                                                                                                                                                                           |
+| `agentID`                                                                                                                                                                                 | `string`                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                        | The id of an agent. This is returned on agent creation.                                                                                                                                   | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                                                                                                                                        |
+| `enableVersioningIfNotEnabled`                                                                                                                                                            | `*bool`                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                        | : warning: ** DEPRECATED **: This will be removed in a future release, please migrate away from it as soon as possible.<br/><br/>Deprecated: all agents are versioned. This parameter is ignored. |                                                                                                                                                                                           |
+| `branchID`                                                                                                                                                                                | `*string`                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                        | The ID of the branch to use                                                                                                                                                               | agtbranch_0901k4aafjxxfxt93gd841r7tv5t                                                                                                                                                    |
+| `body`                                                                                                                                                                                    | [*components.BodyPatchesAnAgentSettingsV1ConvaiAgentsAgentIDPatch](../../models/components/bodypatchesanagentsettingsv1convaiagentsagentidpatch.md)                                       | :heavy_minus_sign:                                                                                                                                                                        | N/A                                                                                                                                                                                       |                                                                                                                                                                                           |
+| `opts`                                                                                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                        | The options for this request.                                                                                                                                                             |                                                                                                                                                                                           |
 
 ### Response
 
@@ -1275,7 +1410,7 @@ func main() {
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                                                                                           | :heavy_check_mark:                                                                                                                                              | The context to use for the request.                                                                                                                             |                                                                                                                                                                 |
 | `agentID`                                                                                                                                                       | `string`                                                                                                                                                        | :heavy_check_mark:                                                                                                                                              | The id of an agent. This is returned on agent creation.                                                                                                         | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                                                                                                              |
-| `conversationSignature`                                                                                                                                         | `*string`                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                              | An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get-signed-url endpoint |                                                                                                                                                                 |
+| `conversationSignature`                                                                                                                                         | `*string`                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                              | An expiring token that enables a websocket conversation to start. These can be generated for an agent using the /v1/convai/conversation/get_signed_url endpoint |                                                                                                                                                                 |
 | `opts`                                                                                                                                                          | [][operations.Option](../../models/operations/option.md)                                                                                                        | :heavy_minus_sign:                                                                                                                                              | The options for this request.                                                                                                                                   |                                                                                                                                                                 |
 
 ### Response
@@ -1623,9 +1758,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## RunConversationSimulation
+## ~~RunConversationSimulation~~
 
-Run a conversation between the agent and a simulated user.
+Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1690,9 +1827,11 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
-## RunConversationSimulationRouteStream
+## ~~RunConversationSimulationRouteStream~~
 
-Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+Deprecated. Use the `/v1/convai/agent-testing/create` and `/v1/convai/agents/:agent_id/run-tests` endpoints to create and run simulations. Run a conversation between the agent and a simulated user and stream back the response. Response is streamed back as partial lists of messages that should be concatenated and once the conversation has complete a single final message with the conversation analysis will be sent.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -2154,6 +2293,7 @@ package main
 import(
 	"context"
 	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/operations"
 	"log"
 )
 
@@ -2164,7 +2304,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetConversationHistory(ctx, "21m00Tcm4TlvDq8ikWAM")
+    res, err := s.AgentsPlatform.GetConversationHistory(ctx, "21m00Tcm4TlvDq8ikWAM", operations.FormatJSON.ToPointer())
     if err != nil {
         log.Fatal(err)
     }
@@ -2176,11 +2316,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `conversationID`                                         | `string`                                                 | :heavy_check_mark:                                       | The id of the conversation you're taking the action on.  | 21m00Tcm4TlvDq8ikWAM                                     |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+| Parameter                                                                                                                                           | Type                                                                                                                                                | Required                                                                                                                                            | Description                                                                                                                                         | Example                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                               | [context.Context](https://pkg.go.dev/context#Context)                                                                                               | :heavy_check_mark:                                                                                                                                  | The context to use for the request.                                                                                                                 |                                                                                                                                                     |
+| `conversationID`                                                                                                                                    | `string`                                                                                                                                            | :heavy_check_mark:                                                                                                                                  | The id of the conversation you're taking the action on.                                                                                             | 21m00Tcm4TlvDq8ikWAM                                                                                                                                |
+| `format`                                                                                                                                            | [*operations.Format](../../models/operations/format.md)                                                                                             | :heavy_minus_sign:                                                                                                                                  | Response format. Defaults to 'json'. Set to 'opentelemetry' for an OTLP-compatible trace payload using the same structure as the post-call webhook. |                                                                                                                                                     |
+| `opts`                                                                                                                                              | [][operations.Option](../../models/operations/option.md)                                                                                            | :heavy_minus_sign:                                                                                                                                  | The options for this request.                                                                                                                       |                                                                                                                                                     |
 
 ### Response
 
@@ -2237,6 +2378,60 @@ func main() {
 ### Response
 
 **[*operations.DeleteConversationRouteResponse](../../models/operations/deleteconversationrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetConversationSipMessages
+
+Get SIP messages associated with a conversation's phone call
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_conversation_sip_messages" method="get" path="/v1/convai/conversations/{conversation_id}/sip-messages" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetConversationSipMessages(ctx, "21m00Tcm4TlvDq8ikWAM", elevenlabsgo.Pointer[int64](20), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetSIPLogMessagesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      | Example                                                          |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |                                                                  |
+| `conversationID`                                                 | `string`                                                         | :heavy_check_mark:                                               | The id of the conversation you're taking the action on.          | 21m00Tcm4TlvDq8ikWAM                                             |
+| `pageSize`                                                       | `*int64`                                                         | :heavy_minus_sign:                                               | N/A                                                              |                                                                  |
+| `cursor`                                                         | `*string`                                                        | :heavy_minus_sign:                                               | Used for fetching next page. Cursor is returned in the response. |                                                                  |
+| `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |                                                                  |
+
+### Response
+
+**[*operations.GetConversationSipMessagesResponse](../../models/operations/getconversationsipmessagesresponse.md), error**
 
 ### Errors
 
@@ -2444,14 +2639,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      | Example                                                          |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |                                                                  |
-| `textQuery`                                                      | `string`                                                         | :heavy_check_mark:                                               | The search query text for semantic similarity matching           |                                                                  |
-| `agentID`                                                        | `*string`                                                        | :heavy_minus_sign:                                               | The id of the agent you're taking the action on.                 | 21m00Tcm4TlvDq8ikWAM                                             |
-| `pageSize`                                                       | `*int64`                                                         | :heavy_minus_sign:                                               | Number of results per page. Max 50.                              |                                                                  |
-| `cursor`                                                         | `*string`                                                        | :heavy_minus_sign:                                               | Used for fetching next page. Cursor is returned in the response. |                                                                  |
-| `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |                                                                  |
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            | Example                                                                                                |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |                                                                                                        |
+| `textQuery`                                                                                            | `string`                                                                                               | :heavy_check_mark:                                                                                     | The search query text for semantic similarity matching                                                 |                                                                                                        |
+| `agentID`                                                                                              | `*string`                                                                                              | :heavy_minus_sign:                                                                                     | Agent id (agent_…) or speech engine external id (seng_), resolved to the same underlying resource.     | **Example 1:** agent_3701k3ttaq12ewp8b7qv5rfyszkz<br/>**Example 2:** seng_3701k3ttaq12ewp8b7qv5rfyszkz |
+| `pageSize`                                                                                             | `*int64`                                                                                               | :heavy_minus_sign:                                                                                     | Number of results per page. Max 50.                                                                    |                                                                                                        |
+| `cursor`                                                                                               | `*string`                                                                                              | :heavy_minus_sign:                                                                                     | Used for fetching next page. Cursor is returned in the response.                                       |                                                                                                        |
+| `opts`                                                                                                 | [][operations.Option](../../models/operations/option.md)                                               | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |                                                                                                        |
 
 ### Response
 
@@ -2464,9 +2659,384 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
+## AssignConversationTagsRoute
+
+Assign one or more conversation tags to a conversation. Tags that are already assigned are ignored. Tags must belong to the same workspace.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="assign_conversation_tags_route" method="post" path="/v1/convai/conversations/{conversation_id}/tags" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.AssignConversationTagsRoute(ctx, "<id>", components.AssignConversationTagsRequestModel{
+        TagIds: []string{},
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
+| `conversationID`                                                                                               | `string`                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `body`                                                                                                         | [components.AssignConversationTagsRequestModel](../../models/components/assignconversationtagsrequestmodel.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
+
+### Response
+
+**[*operations.AssignConversationTagsRouteResponse](../../models/operations/assignconversationtagsrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## UnassignConversationTagRoute
+
+Remove a single conversation tag from a conversation.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="unassign_conversation_tag_route" method="delete" path="/v1/convai/conversations/{conversation_id}/tags/{tag_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.UnassignConversationTagRoute(ctx, "<id>", "<id>")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `conversationID`                                         | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `tagID`                                                  | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.UnassignConversationTagRouteResponse](../../models/operations/unassignconversationtagrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## ListConversationTagsRoute
+
+List conversation tags for the workspace, ordered by most recently created first.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="list_conversation_tags_route" method="get" path="/v1/convai/tags" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.ListConversationTagsRoute(ctx, elevenlabsgo.Pointer[int64](100), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetConversationTagsPageResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
+| `pageSize`                                                       | `*int64`                                                         | :heavy_minus_sign:                                               | How many conversation tags to return. Can not exceed 100.        |
+| `cursor`                                                         | `*string`                                                        | :heavy_minus_sign:                                               | Used for fetching next page. Cursor is returned in the response. |
+| `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |
+
+### Response
+
+**[*operations.ListConversationTagsRouteResponse](../../models/operations/listconversationtagsrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## CreateConversationTagRoute
+
+Create a new conversation tag for the workspace.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="create_conversation_tag_route" method="post" path="/v1/convai/tags" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.CreateConversationTagRoute(ctx, components.CreateConversationTagRequestModel{
+        Title: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConversationTagResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
+| `request`                                                                                                    | [components.CreateConversationTagRequestModel](../../models/components/createconversationtagrequestmodel.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `opts`                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
+
+### Response
+
+**[*operations.CreateConversationTagRouteResponse](../../models/operations/createconversationtagrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetConversationTagRoute
+
+Get a conversation tag by ID.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_conversation_tag_route" method="get" path="/v1/convai/tags/{tag_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetConversationTagRoute(ctx, "<id>")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConversationTagResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `tagID`                                                  | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.GetConversationTagRouteResponse](../../models/operations/getconversationtagrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## DeleteConversationTagRoute
+
+Delete a conversation tag. Restricted to the tag owner or a workspace admin.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="delete_conversation_tag_route" method="delete" path="/v1/convai/tags/{tag_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.DeleteConversationTagRoute(ctx, "<id>")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `tagID`                                                  | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.DeleteConversationTagRouteResponse](../../models/operations/deleteconversationtagrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## UpdateConversationTagRoute
+
+Update a conversation tag's title and/or description. Restricted to the tag owner or a workspace admin.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="update_conversation_tag_route" method="patch" path="/v1/convai/tags/{tag_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.UpdateConversationTagRoute(ctx, "<id>", components.PatchConversationTagRequestModel{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConversationTagResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `tagID`                                                                                                    | `string`                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `body`                                                                                                     | [components.PatchConversationTagRequestModel](../../models/components/patchconversationtagrequestmodel.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `opts`                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.UpdateConversationTagRouteResponse](../../models/operations/updateconversationtagrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
 ## CreatePhoneNumber
 
-Import Phone Number from provider configuration (Twilio or SIP trunk)
+Import Phone Number from provider configuration (Twilio, Exotel, or SIP trunk)
 
 ### Example Usage
 
@@ -2489,12 +3059,15 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.CreatePhoneNumber(ctx, operations.CreatePhoneRequestCreateTwilioPhoneNumberRequest(
-        components.CreateTwilioPhoneNumberRequest{
-            PhoneNumber: "1-844-780-5664",
-            Label: "<value>",
-            Sid: "<id>",
-            Token: "<value>",
+    res, err := s.AgentsPlatform.CreatePhoneNumber(ctx, operations.CreatePhoneRequestCreateExotelPhoneNumberRequest(
+        components.CreateExotelPhoneNumberRequest{
+            PhoneNumber: "+919999999999",
+            Label: "Exotel Outbound",
+            AccountSid: "your-account-sid",
+            APIKey: "your-api-key",
+            APIToken: "********",
+            APISubdomain: components.ExotelAPISubdomainAPIInExotelCom,
+            AppID: "12345",
         },
     ))
     if err != nil {
@@ -2548,7 +3121,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.ListPhoneNumbers(ctx)
+    res, err := s.AgentsPlatform.ListPhoneNumbers(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -2560,10 +3133,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `ctx`                                                                         | [context.Context](https://pkg.go.dev/context#Context)                         | :heavy_check_mark:                                                            | The context to use for the request.                                           |
+| `provider`                                                                    | [*components.TelephonyProvider](../../models/components/telephonyprovider.md) | :heavy_minus_sign:                                                            | Filter by telephony provider                                                  |
+| `agentID`                                                                     | `*string`                                                                     | :heavy_minus_sign:                                                            | Filter by assigned agent ID                                                   |
+| `branchID`                                                                    | `*string`                                                                     | :heavy_minus_sign:                                                            | Filter by assigned branch ID                                                  |
+| `opts`                                                                        | [][operations.Option](../../models/operations/option.md)                      | :heavy_minus_sign:                                                            | The options for this request.                                                 |
 
 ### Response
 
@@ -2608,6 +3184,8 @@ func main() {
         switch res.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet.Type {
             case operations.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeTwilio:
                 // res.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet.GetPhoneNumberTwilioResponseModel is populated
+            case operations.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeExotel:
+                // res.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet.GetPhoneNumberExotelResponseModel is populated
             case operations.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGetTypeSipTrunk:
                 // res.ResponseGetPhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDGet.GetPhoneNumberSIPTrunkResponseModel is populated
         }
@@ -2618,11 +3196,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `phoneNumberID`                                          | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | TeaqRRdTcIfIu2i7BYfT                                     |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |                                                                        |
+| `phoneNumberID`                                                        | `string`                                                               | :heavy_check_mark:                                                     | The phone number ID. This is returned when a phone number is imported. | TeaqRRdTcIfIu2i7BYfT                                                   |
+| `opts`                                                                 | [][operations.Option](../../models/operations/option.md)               | :heavy_minus_sign:                                                     | The options for this request.                                          |                                                                        |
 
 ### Response
 
@@ -2670,11 +3248,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `phoneNumberID`                                          | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | TeaqRRdTcIfIu2i7BYfT                                     |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |                                                                        |
+| `phoneNumberID`                                                        | `string`                                                               | :heavy_check_mark:                                                     | The phone number ID. This is returned when a phone number is imported. | TeaqRRdTcIfIu2i7BYfT                                                   |
+| `opts`                                                                 | [][operations.Option](../../models/operations/option.md)               | :heavy_minus_sign:                                                     | The options for this request.                                          |                                                                        |
 
 ### Response
 
@@ -2720,6 +3298,8 @@ func main() {
         switch res.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.Type {
             case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeTwilio:
                 // res.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberTwilioResponseModel is populated
+            case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeExotel:
+                // res.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberExotelResponseModel is populated
             case operations.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatchTypeSipTrunk:
                 // res.ResponseUpdatePhoneNumberV1ConvaiPhoneNumbersPhoneNumberIDPatch.GetPhoneNumberSIPTrunkResponseModel is populated
         }
@@ -2733,13 +3313,67 @@ func main() {
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
-| `phoneNumberID`                                                                            | `string`                                                                                   | :heavy_check_mark:                                                                         | The id of an agent. This is returned on agent creation.                                    | TeaqRRdTcIfIu2i7BYfT                                                                       |
+| `phoneNumberID`                                                                            | `string`                                                                                   | :heavy_check_mark:                                                                         | The phone number ID. This is returned when a phone number is imported.                     | TeaqRRdTcIfIu2i7BYfT                                                                       |
 | `body`                                                                                     | [components.UpdatePhoneNumberRequest](../../models/components/updatephonenumberrequest.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
 | `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |                                                                                            |
 
 ### Response
 
 **[*operations.UpdatePhoneNumberRouteResponse](../../models/operations/updatephonenumberrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## ListSipMessages
+
+Get SIP messages for a phone number
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="list_sip_messages" method="get" path="/v1/convai/phone-numbers/{phone_number_id}/sip-messages" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.ListSipMessages(ctx, "TeaqRRdTcIfIu2i7BYfT", elevenlabsgo.Pointer[int64](20), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetSIPLogMessagesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |                                                                        |
+| `phoneNumberID`                                                        | `string`                                                               | :heavy_check_mark:                                                     | The phone number ID. This is returned when a phone number is imported. | TeaqRRdTcIfIu2i7BYfT                                                   |
+| `pageSize`                                                             | `*int64`                                                               | :heavy_minus_sign:                                                     | N/A                                                                    |                                                                        |
+| `cursor`                                                               | `*string`                                                              | :heavy_minus_sign:                                                     | Used for fetching next page. Cursor is returned in the response.       |                                                                        |
+| `opts`                                                                 | [][operations.Option](../../models/operations/option.md)               | :heavy_minus_sign:                                                     | The options for this request.                                          |                                                                        |
+
+### Response
+
+**[*operations.ListSipMessagesResponse](../../models/operations/listsipmessagesresponse.md), error**
 
 ### Errors
 
@@ -3365,7 +3999,7 @@ func main() {
 
 ## UpdateDocument
 
-Update the name of a document
+Update the name and/or content of a document.
 
 ### Example Usage
 
@@ -3388,8 +4022,8 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.UpdateDocument(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch{
-        Name: "<value>",
+    res, err := s.AgentsPlatform.UpdateDocument(ctx, "21m00Tcm4TlvDq8ikWAM", &components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch{
+        Name: elevenlabsgo.Pointer("<value>"),
     })
     if err != nil {
         log.Fatal(err)
@@ -3412,12 +4046,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                        | Type                                                                                                                                                             | Required                                                                                                                                                         | Description                                                                                                                                                      | Example                                                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                                                                            | :heavy_check_mark:                                                                                                                                               | The context to use for the request.                                                                                                                              |                                                                                                                                                                  |
-| `documentationID`                                                                                                                                                | `string`                                                                                                                                                         | :heavy_check_mark:                                                                                                                                               | The id of a document from the knowledge base. This is returned on document addition.                                                                             | 21m00Tcm4TlvDq8ikWAM                                                                                                                                             |
-| `body`                                                                                                                                                           | [components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch](../../models/components/bodyupdatedocumentv1convaiknowledgebasedocumentationidpatch.md) | :heavy_check_mark:                                                                                                                                               | N/A                                                                                                                                                              |                                                                                                                                                                  |
-| `opts`                                                                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                                                                         | :heavy_minus_sign:                                                                                                                                               | The options for this request.                                                                                                                                    |                                                                                                                                                                  |
+| Parameter                                                                                                                                                         | Type                                                                                                                                                              | Required                                                                                                                                                          | Description                                                                                                                                                       | Example                                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                             | [context.Context](https://pkg.go.dev/context#Context)                                                                                                             | :heavy_check_mark:                                                                                                                                                | The context to use for the request.                                                                                                                               |                                                                                                                                                                   |
+| `documentationID`                                                                                                                                                 | `string`                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                | The id of a document from the knowledge base. This is returned on document addition.                                                                              | 21m00Tcm4TlvDq8ikWAM                                                                                                                                              |
+| `body`                                                                                                                                                            | [*components.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIDPatch](../../models/components/bodyupdatedocumentv1convaiknowledgebasedocumentationidpatch.md) | :heavy_minus_sign:                                                                                                                                                | N/A                                                                                                                                                               |                                                                                                                                                                   |
+| `opts`                                                                                                                                                            | [][operations.Option](../../models/operations/option.md)                                                                                                          | :heavy_minus_sign:                                                                                                                                                | The options for this request.                                                                                                                                     |                                                                                                                                                                   |
 
 ### Response
 
@@ -3539,6 +4173,82 @@ func main() {
 ### Response
 
 **[*operations.DeleteKnowledgeBaseDocumentResponse](../../models/operations/deleteknowledgebasedocumentresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## UpdateFileDocumentRoute
+
+Update the source file of a file document. The document name, content, and metadata are updated to reflect the new file. Any manual content edits will be overwritten.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="update_file_document_route" method="patch" path="/v1/convai/knowledge-base/{documentation_id}/update-file" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"os"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+	"github.com/bdlilley/elevenlabs-go/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    example, fileErr := os.Open("example.file")
+    if fileErr != nil {
+        panic(fileErr)
+    }
+
+    res, err := s.AgentsPlatform.UpdateFileDocumentRoute(ctx, "21m00Tcm4TlvDq8ikWAM", components.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch{
+        File: components.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchFile{
+            FileName: "example.file",
+            Content: example,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch != nil {
+        switch res.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.Type {
+            case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeURLObj:
+                // res.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseURLResponseModel is populated
+            case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeFile:
+                // res.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseFileResponseModel is populated
+            case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeText:
+                // res.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseTextResponseModel is populated
+            case operations.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatchTypeFolder:
+                // res.ResponseUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch.GetKnowledgeBaseFolderResponseModel is populated
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                    | Type                                                                                                                                                                                         | Required                                                                                                                                                                                     | Description                                                                                                                                                                                  | Example                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                           | The context to use for the request.                                                                                                                                                          |                                                                                                                                                                                              |
+| `documentationID`                                                                                                                                                                            | `string`                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                           | The id of a document from the knowledge base. This is returned on document addition.                                                                                                         | 21m00Tcm4TlvDq8ikWAM                                                                                                                                                                         |
+| `body`                                                                                                                                                                                       | [components.BodyUpdateFileDocumentV1ConvaiKnowledgeBaseDocumentationIDUpdateFilePatch](../../models/components/bodyupdatefiledocumentv1convaiknowledgebasedocumentationidupdatefilepatch.md) | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |                                                                                                                                                                                              |
+| `opts`                                                                                                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                           | The options for this request.                                                                                                                                                                |                                                                                                                                                                                              |
+
+### Response
+
+**[*operations.UpdateFileDocumentRouteResponse](../../models/operations/updatefiledocumentrouteresponse.md), error**
 
 ### Errors
 
@@ -4149,6 +4859,116 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
+## GetDocumentationChunksFromKnowledgeBase
+
+Get all RAG chunks for a specific knowledge base document.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_documentation_chunks_from_knowledge_base" method="get" path="/v1/convai/knowledge-base/{documentation_id}/chunks" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetDocumentationChunksFromKnowledgeBase(ctx, "21m00Tcm4TlvDq8ikWAM", components.EmbeddingModelEnumE5Mistral7bInstruct, elevenlabsgo.Pointer[int64](30), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.KnowledgeBaseDocumentChunksResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |                                                                                      |
+| `documentationID`                                                                    | `string`                                                                             | :heavy_check_mark:                                                                   | The id of a document from the knowledge base. This is returned on document addition. | 21m00Tcm4TlvDq8ikWAM                                                                 |
+| `embeddingModel`                                                                     | [components.EmbeddingModelEnum](../../models/components/embeddingmodelenum.md)       | :heavy_check_mark:                                                                   | The embedding model used to retrieve the chunk.                                      |                                                                                      |
+| `pageSize`                                                                           | `*int64`                                                                             | :heavy_minus_sign:                                                                   | How many documents to return at maximum. Can not exceed 100, defaults to 30.         |                                                                                      |
+| `cursor`                                                                             | `*string`                                                                            | :heavy_minus_sign:                                                                   | Used for fetching next page. Cursor is returned in the response.                     |                                                                                      |
+| `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
+
+### Response
+
+**[*operations.GetDocumentationChunksFromKnowledgeBaseResponse](../../models/operations/getdocumentationchunksfromknowledgebaseresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetAgentTopicsRoute
+
+Returns the latest topic discovery run results for a given agent.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_agent_topics_route" method="get" path="/v1/convai/agents/{agent_id}/topics" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetAgentTopicsRoute(ctx, "<id>", nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetAgentTopicsResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |
+| `agentID`                                                                                                                | `string`                                                                                                                 | :heavy_check_mark:                                                                                                       | ID of the agent                                                                                                          |
+| `fromUnixSecs`                                                                                                           | `*int64`                                                                                                                 | :heavy_minus_sign:                                                                                                       | Start of the window to view topics for. When set with to_unix_secs, per-day topics in the range are aggregated together. |
+| `toUnixSecs`                                                                                                             | `*int64`                                                                                                                 | :heavy_minus_sign:                                                                                                       | End of the window to view topics for.                                                                                    |
+| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |
+
+### Response
+
+**[*operations.GetAgentTopicsRouteResponse](../../models/operations/getagenttopicsrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
 ## AddTool
 
 Add a new tool to the available tools in the workspace.
@@ -4513,6 +5333,61 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
+## GetToolExecutionsRoute
+
+Get paginated list of tool executions for a specific tool.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_tool_executions_route" method="get" path="/v1/convai/tools/{tool_id}/executions" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"github.com/bdlilley/elevenlabs-go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetToolExecutionsRoute(ctx, operations.GetToolExecutionsRouteRequest{
+        ToolID: "<id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetToolExecutionsPageResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `request`                                                                                            | [operations.GetToolExecutionsRouteRequest](../../models/operations/gettoolexecutionsrouterequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| `opts`                                                                                               | [][operations.Option](../../models/operations/option.md)                                             | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.GetToolExecutionsRouteResponse](../../models/operations/gettoolexecutionsrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
 ## GetSettings
 
 Retrieve Convai settings for the workspace
@@ -4809,7 +5684,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetSecrets(ctx, nil, nil, nil)
+    res, err := s.AgentsPlatform.GetSecrets(ctx, nil, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -4826,12 +5701,65 @@ func main() {
 | `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
 | `pageSize`                                                                                                     | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | How many documents to return at maximum. Can not exceed 100. If not provided, returns all secrets.             |
 | `dependencyLimit`                                                                                              | `*int64`                                                                                                       | :heavy_minus_sign:                                                                                             | Maximum number of dependent resources (tools, agents, phone numbers) to return per secret. Can not exceed 100. |
+| `search`                                                                                                       | `*string`                                                                                                      | :heavy_minus_sign:                                                                                             | If specified, returns only secrets whose names start with this string.                                         |
 | `cursor`                                                                                                       | `*string`                                                                                                      | :heavy_minus_sign:                                                                                             | Used for fetching next page. Cursor is returned in the response.                                               |
 | `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
 ### Response
 
 **[*operations.GetSecretsRouteResponse](../../models/operations/getsecretsrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## GetSecretRoute
+
+Get a workspace secret by ID
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_secret_route" method="get" path="/v1/convai/secrets/{secret_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetSecretRoute(ctx, "<id>")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConvAIWorkspaceStoredSecretConfig != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `secretID`                                               | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.GetSecretRouteResponse](../../models/operations/getsecretrouteresponse.md), error**
 
 ### Errors
 
@@ -5093,7 +6021,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.GetWorkspaceBatchCalls(ctx, elevenlabsgo.Pointer[int64](100), nil)
+    res, err := s.AgentsPlatform.GetWorkspaceBatchCalls(ctx, elevenlabsgo.Pointer[int64](100), nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -5110,6 +6038,7 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `limit`                                                  | `*int64`                                                 | :heavy_minus_sign:                                       | N/A                                                      |
 | `lastDoc`                                                | `*string`                                                | :heavy_minus_sign:                                       | N/A                                                      |
+| `agentID`                                                | `*string`                                                | :heavy_minus_sign:                                       | Filter batch calls to a single agent.                    |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -5361,6 +6290,12 @@ func main() {
         ToNumber: "<value>",
         ConversationInitiationClientData: &components.ConversationInitiationClientDataRequestInput{
             ConversationConfigOverride: &components.ConversationConfigClientOverrideInput{
+                Asr: &components.ASRConversationalConfigOverride{
+                    Keywords: []string{
+                        "hello",
+                        "world",
+                    },
+                },
                 Turn: &components.TurnConfigOverride{
                     SoftTimeoutConfig: &components.SoftTimeoutConfigOverride{
                         Message: elevenlabsgo.Pointer("Hhmmmm...yeah."),
@@ -5443,8 +6378,8 @@ func main() {
                 "https://babyish-injunction.info",
             ),
             Name: "<value>",
-            ToolConfigOverrides: []components.MCPToolConfigOverride{
-                components.MCPToolConfigOverride{
+            ToolConfigOverrides: []components.MCPToolConfigOverrideInput{
+                components.MCPToolConfigOverrideInput{
                     ToolName: "<value>",
                     Assignments: []components.DynamicVariableAssignment{
                         components.DynamicVariableAssignment{
@@ -6000,7 +6935,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.MCPToolConfigOverride != nil {
+    if res.MCPToolConfigOverrideOutput != nil {
         // handle response
     }
 }
@@ -6322,7 +7257,7 @@ func main() {
         elevenlabsgo.WithSecurity("YOUR_API_KEY"),
     )
 
-    res, err := s.AgentsPlatform.ListWhatsappAccounts(ctx)
+    res, err := s.AgentsPlatform.ListWhatsappAccounts(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -6337,6 +7272,7 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `agentID`                                                | `*string`                                                | :heavy_minus_sign:                                       | Filter by assigned agent ID                              |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -6392,6 +7328,31 @@ func main() {
                 "start_to_entry": components.WorkflowEdgeModelInput{
                     Source: "start_node",
                     Target: "entry_node",
+                    ForwardCondition: elevenlabsgo.Pointer(components.CreateWorkflowEdgeModelInputForwardConditionExpression(
+                        components.WorkflowExpressionConditionModelInput{
+                            Expression: components.CreateASTNodeInputAddOperator(
+                                components.ASTAdditionOperatorNodeInput1{
+                                    Left: components.CreateASTNodeInputLlm(
+                                        components.CreateASTLLMNodeInputASTLLMNode1(
+                                            components.ASTLLMNode1{
+                                                ValueSchema: components.LLMLiteralJSONSchemaProperty{
+                                                    Type: components.CreateLLMLiteralJSONSchemaPropertyTypeUnionLLMLiteralJSONSchemaPropertyTypeEnum(
+                                                        components.LLMLiteralJSONSchemaPropertyTypeEnumNumber,
+                                                    ),
+                                                    Description: "ashamed golden wide-eyed deduce kiddingly sure-footed",
+                                                },
+                                            },
+                                        ),
+                                    ),
+                                    Right: components.CreateASTNodeInputDynamicVariable(
+                                        components.ASTDynamicVariableNodeInput{
+                                            Name: "<value>",
+                                        },
+                                    ),
+                                },
+                            ),
+                        },
+                    )),
                 },
                 "tool_a_to_failure": components.WorkflowEdgeModelInput{
                     Source: "tool_node_a",
@@ -6487,7 +7448,7 @@ func main() {
                 ),
                 "success_transfer": components.CreateAgentWorkflowRequestModelNodesStandaloneAgent(
                     components.WorkflowStandaloneAgentNodeModelInput{
-                        AgentID: "<id>",
+                        AgentID: elevenlabsgo.Pointer("<id>"),
                     },
                 ),
                 "tool_node_a": components.CreateAgentWorkflowRequestModelNodesStart(
@@ -6689,6 +7650,114 @@ func main() {
 | apierrors.HTTPValidationError | 422                           | application/json              |
 | apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
+## GetVersionMetadataRoute
+
+Get metadata for a specific agent version
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="get_version_metadata_route" method="get" path="/v1/convai/agents/{agent_id}/versions/{version_id}" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.GetVersionMetadataRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtvrsn_0901k4aafjxxfxt93gd841r7tv5t")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.AgentVersionMetadata != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
+| `versionID`                                              | `string`                                                 | :heavy_check_mark:                                       | Unique identifier for the version.                       | agtvrsn_0901k4aafjxxfxt93gd841r7tv5t                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.GetVersionMetadataRouteResponse](../../models/operations/getversionmetadatarouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## MergePreviewRoute
+
+Returns the result of merging the source branch into the target branch without performing the merge. Useful for showing an accurate diff before confirming.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="merge_preview_route" method="get" path="/v1/convai/agents/{agent_id}/branches/{source_branch_id}/merge-preview" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.MergePreviewRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj", elevenlabsgo.Pointer(false))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.MergePreviewResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |                                                                                |
+| `agentID`                                                                      | `string`                                                                       | :heavy_check_mark:                                                             | The id of an agent. This is returned on agent creation.                        | agent_3701k3ttaq12ewp8b7qv5rfyszkz                                             |
+| `sourceBranchID`                                                               | `string`                                                                       | :heavy_check_mark:                                                             | Unique identifier for the source branch to merge from.                         | agtbrch_8901k4t9z5defmb8vh3e9361y7nj                                           |
+| `targetBranchID`                                                               | `string`                                                                       | :heavy_check_mark:                                                             | The ID of the target branch to merge into.                                     | agtbrch_8901k4t9z5defmb8vh3e9361y7nj                                           |
+| `force`                                                                        | `*bool`                                                                        | :heavy_minus_sign:                                                             | When true, source branch changes always win conflicts regardless of timestamps |                                                                                |
+| `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |                                                                                |
+
+### Response
+
+**[*operations.MergePreviewRouteResponse](../../models/operations/mergepreviewrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
 ## MergeBranchIntoTarget
 
 Merge a branch into a target branch
@@ -6736,6 +7805,112 @@ func main() {
 ### Response
 
 **[*operations.MergeBranchIntoTargetResponse](../../models/operations/mergebranchintotargetresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## RebasePreviewRoute
+
+Returns the result of rebasing the branch onto main without performing the rebase. Useful for showing an accurate diff before confirming.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="rebase_preview_route" method="get" path="/v1/convai/agents/{agent_id}/branches/{branch_id}/rebase-preview" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.RebasePreviewRoute(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.MergePreviewResponseModel != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
+| `branchID`                                               | `string`                                                 | :heavy_check_mark:                                       | Unique identifier for the source branch to merge from.   | agtbrch_8901k4t9z5defmb8vh3e9361y7nj                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.RebasePreviewRouteResponse](../../models/operations/rebasepreviewrouteresponse.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## RebaseBranchOntoMain
+
+Rebase a branch onto the latest main branch, incorporating main's changes while preserving the branch's own changes.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="rebase_branch_onto_main" method="post" path="/v1/convai/agents/{agent_id}/branches/{branch_id}/rebase" -->
+```go
+package main
+
+import(
+	"context"
+	elevenlabsgo "github.com/bdlilley/elevenlabs-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := elevenlabsgo.New(
+        elevenlabsgo.WithSecurity("YOUR_API_KEY"),
+    )
+
+    res, err := s.AgentsPlatform.RebaseBranchOntoMain(ctx, "agent_3701k3ttaq12ewp8b7qv5rfyszkz", "agtbrch_8901k4t9z5defmb8vh3e9361y7nj")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Any != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `agentID`                                                | `string`                                                 | :heavy_check_mark:                                       | The id of an agent. This is returned on agent creation.  | agent_3701k3ttaq12ewp8b7qv5rfyszkz                       |
+| `branchID`                                               | `string`                                                 | :heavy_check_mark:                                       | Unique identifier for the source branch to merge from.   | agtbrch_8901k4t9z5defmb8vh3e9361y7nj                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.RebaseBranchOntoMainResponse](../../models/operations/rebasebranchontomainresponse.md), error**
 
 ### Errors
 
@@ -6924,7 +8099,7 @@ func main() {
                 ),
                 "failure_node": components.CreateAgentWorkflowRequestModelNodesStandaloneAgent(
                     components.WorkflowStandaloneAgentNodeModelInput{
-                        AgentID: "<id>",
+                        AgentID: elevenlabsgo.Pointer("<id>"),
                     },
                 ),
                 "start_node": components.CreateAgentWorkflowRequestModelNodesStart(
@@ -6946,12 +8121,12 @@ func main() {
                 ),
                 "success_phone": components.CreateAgentWorkflowRequestModelNodesStandaloneAgent(
                     components.WorkflowStandaloneAgentNodeModelInput{
-                        AgentID: "<id>",
+                        AgentID: elevenlabsgo.Pointer("<id>"),
                     },
                 ),
                 "success_transfer": components.CreateAgentWorkflowRequestModelNodesStandaloneAgent(
                     components.WorkflowStandaloneAgentNodeModelInput{
-                        AgentID: "<id>",
+                        AgentID: elevenlabsgo.Pointer("<id>"),
                     },
                 ),
                 "tool_node_a": components.CreateAgentWorkflowRequestModelNodesEnd(

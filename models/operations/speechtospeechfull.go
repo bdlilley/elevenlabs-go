@@ -10,31 +10,38 @@ import (
 	"io"
 )
 
-// SpeechToSpeechFullOutputFormatOfTheGeneratedAudio - Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
+// SpeechToSpeechFullOutputFormatOfTheGeneratedAudio - Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM and WAV formats with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
 type SpeechToSpeechFullOutputFormatOfTheGeneratedAudio string
 
 const (
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioAlaw8000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "alaw_8000"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp32205032   SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_22050_32"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp32400048   SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_24000_48"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp344100128  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_44100_128"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp344100192  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_44100_192"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp34410032   SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_44100_32"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp34410064   SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_44100_64"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp34410096   SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_44100_96"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp344100128  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_44100_128"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioMp344100192  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "mp3_44100_192"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm8000      SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_8000"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus48000128 SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_128"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus48000192 SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_192"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus4800032  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_32"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus4800064  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_64"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus4800096  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_96"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm16000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_16000"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm22050     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_22050"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm24000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_24000"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm32000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_32000"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm44100     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_44100"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm48000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_48000"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioPcm8000      SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "pcm_8000"
 	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioUlaw8000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "ulaw_8000"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioAlaw8000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "alaw_8000"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus4800032  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_32"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus4800064  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_64"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus4800096  SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_96"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus48000128 SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_128"
-	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioOpus48000192 SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "opus_48000_192"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioWav16000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "wav_16000"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioWav22050     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "wav_22050"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioWav24000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "wav_24000"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioWav32000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "wav_32000"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioWav44100     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "wav_44100"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioWav48000     SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "wav_48000"
+	SpeechToSpeechFullOutputFormatOfTheGeneratedAudioWav8000      SpeechToSpeechFullOutputFormatOfTheGeneratedAudio = "wav_8000"
 )
 
 func (e SpeechToSpeechFullOutputFormatOfTheGeneratedAudio) ToPointer() *SpeechToSpeechFullOutputFormatOfTheGeneratedAudio {
@@ -46,9 +53,15 @@ func (e *SpeechToSpeechFullOutputFormatOfTheGeneratedAudio) UnmarshalJSON(data [
 		return err
 	}
 	switch v {
+	case "alaw_8000":
+		fallthrough
 	case "mp3_22050_32":
 		fallthrough
 	case "mp3_24000_48":
+		fallthrough
+	case "mp3_44100_128":
+		fallthrough
+	case "mp3_44100_192":
 		fallthrough
 	case "mp3_44100_32":
 		fallthrough
@@ -56,11 +69,15 @@ func (e *SpeechToSpeechFullOutputFormatOfTheGeneratedAudio) UnmarshalJSON(data [
 		fallthrough
 	case "mp3_44100_96":
 		fallthrough
-	case "mp3_44100_128":
+	case "opus_48000_128":
 		fallthrough
-	case "mp3_44100_192":
+	case "opus_48000_192":
 		fallthrough
-	case "pcm_8000":
+	case "opus_48000_32":
+		fallthrough
+	case "opus_48000_64":
+		fallthrough
+	case "opus_48000_96":
 		fallthrough
 	case "pcm_16000":
 		fallthrough
@@ -74,19 +91,23 @@ func (e *SpeechToSpeechFullOutputFormatOfTheGeneratedAudio) UnmarshalJSON(data [
 		fallthrough
 	case "pcm_48000":
 		fallthrough
+	case "pcm_8000":
+		fallthrough
 	case "ulaw_8000":
 		fallthrough
-	case "alaw_8000":
+	case "wav_16000":
 		fallthrough
-	case "opus_48000_32":
+	case "wav_22050":
 		fallthrough
-	case "opus_48000_64":
+	case "wav_24000":
 		fallthrough
-	case "opus_48000_96":
+	case "wav_32000":
 		fallthrough
-	case "opus_48000_128":
+	case "wav_44100":
 		fallthrough
-	case "opus_48000_192":
+	case "wav_48000":
+		fallthrough
+	case "wav_8000":
 		*e = SpeechToSpeechFullOutputFormatOfTheGeneratedAudio(v)
 		return nil
 	default:
@@ -111,7 +132,7 @@ type SpeechToSpeechFullRequest struct {
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	OptimizeStreamingLatency *int64 `queryParam:"style=form,explode=true,name=optimize_streaming_latency"`
-	// Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
+	// Output format of the generated audio. Formatted as codec_sample_rate_bitrate. So an mp3 with 22.05kHz sample rate at 32kbs is represented as mp3_22050_32. MP3 with 192kbps bitrate requires you to be subscribed to Creator tier or above. PCM and WAV formats with 44.1kHz sample rate requires you to be subscribed to Pro tier or above. Note that the μ-law format (sometimes written mu-law, often approximated as u-law) is commonly used for Twilio audio inputs.
 	OutputFormat *SpeechToSpeechFullOutputFormatOfTheGeneratedAudio       `default:"mp3_44100_128" queryParam:"style=form,explode=true,name=output_format"`
 	Body         components.BodySpeechToSpeechV1SpeechToSpeechVoiceIDPost `request:"mediaType=multipart/form-data"`
 }

@@ -116,6 +116,33 @@ func (e *BodySpeechToTextV1SpeechToTextPostFileFormat) UnmarshalJSON(data []byte
 	}
 }
 
+// MultichannelOutputStyle - Controls the response shape when use_multi_channel is enabled. 'separate' (default) returns one transcript per channel under 'transcripts'. 'combined' merges all channels into a single transcript whose words are sorted by start time, each carrying a 'channel_index' - matching the single-channel response shape. 'combined' requires timestamps (timestamps_granularity must not be 'none') and does not support entity detection or redaction.
+type MultichannelOutputStyle string
+
+const (
+	MultichannelOutputStyleSeparate MultichannelOutputStyle = "separate"
+	MultichannelOutputStyleCombined MultichannelOutputStyle = "combined"
+)
+
+func (e MultichannelOutputStyle) ToPointer() *MultichannelOutputStyle {
+	return &e
+}
+func (e *MultichannelOutputStyle) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "separate":
+		fallthrough
+	case "combined":
+		*e = MultichannelOutputStyle(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for MultichannelOutputStyle: %v", v)
+	}
+}
+
 type WebhookMetadataType string
 
 const (
@@ -213,7 +240,7 @@ const (
 	EntityDetectionTypeArrayOfStr EntityDetectionType = "arrayOfStr"
 )
 
-// EntityDetection - Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur additional costs.
+// EntityDetection - Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 type EntityDetection struct {
 	Str        *string  `queryParam:"inline" union:"member"`
 	ArrayOfStr []string `queryParam:"inline" union:"member"`
@@ -303,7 +330,7 @@ const (
 	EntityRedactionTypeArrayOfStr EntityRedactionType = "arrayOfStr"
 )
 
-// EntityRedaction - Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned.
+// EntityRedaction - Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 type EntityRedaction struct {
 	Str        *string  `queryParam:"inline" union:"member"`
 	ArrayOfStr []string `queryParam:"inline" union:"member"`
@@ -389,7 +416,7 @@ func (u EntityRedaction) MarshalJSON() ([]byte, error) {
 type BodySpeechToTextV1SpeechToTextPost struct {
 	// The ID of the model to use for transcription.
 	ModelID BodySpeechToTextV1SpeechToTextPostModelID `multipartForm:"name=model_id"`
-	// The file to transcribe (100ms minimum audio length). All major audio and video formats are supported. Exactly one of the file or cloud_storage_url parameters must be provided. The file size must be less than 3.0GB.
+	// The file to transcribe (100ms minimum audio length). All major audio and video formats are supported. Exactly one of the file or cloud_storage_url parameters must be provided. The file size must be less than 5.0GB.
 	File *BodySpeechToTextV1SpeechToTextPostFile `multipartForm:"file,name=file"`
 	// An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically.
 	LanguageCode *string `multipartForm:"name=language_code"`
@@ -406,7 +433,7 @@ type BodySpeechToTextV1SpeechToTextPost struct {
 	AdditionalFormats    []ExportOptions `multipartForm:"name=additional_formats,json"`
 	// The format of input audio. Options are 'pcm_s16le_16' or 'other' For `pcm_s16le_16`, the input audio must be 16-bit PCM at a 16kHz sample rate, single channel (mono), and little-endian byte order. Latency will be lower than with passing an encoded waveform.
 	FileFormat *BodySpeechToTextV1SpeechToTextPostFileFormat `default:"other" multipartForm:"name=file_format"`
-	// The HTTPS URL of the file to transcribe. Exactly one of the file or cloud_storage_url parameters must be provided. The file must be accessible via HTTPS and the file size must be less than 2GB. Any valid HTTPS URL is accepted, including URLs from cloud storage providers (AWS S3, Google Cloud Storage, Cloudflare R2, etc.), CDNs, or any other HTTPS source. URLs can be pre-signed or include authentication tokens in query parameters.
+	// [Deprecated] This parameter is deprecated and will be removed in the future. Use 'source_url' instead.The HTTPS URL of the file to transcribe. Exactly one of the file or cloud_storage_url parameters must be provided. The file must be accessible via HTTPS and the file size must be less than 2GB. Any valid HTTPS URL is accepted, including URLs from cloud storage providers (AWS S3, Google Cloud Storage, Cloudflare R2, etc.), CDNs, or any other HTTPS source. URLs can be pre-signed or include authentication tokens in query parameters.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	CloudStorageURL *string `multipartForm:"name=cloud_storage_url"`
@@ -420,19 +447,25 @@ type BodySpeechToTextV1SpeechToTextPost struct {
 	Temperature *float64 `multipartForm:"name=temperature"`
 	// If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed. Must be an integer between 0 and 2147483647.
 	Seed *int64 `multipartForm:"name=seed"`
-	// Whether the audio file contains multiple channels where each channel contains a single speaker. When enabled, each channel will be transcribed independently and the results will be combined. Each word in the response will include a 'channel_index' field indicating which channel it was spoken on. A maximum of 5 channels is supported.
+	// Whether the audio file contains multiple channels where each channel contains a single speaker. When enabled, each channel is transcribed independently. By default a separate transcript is returned per channel; set multichannel_output_style='combined' to instead receive a single transcript with all channels merged and sorted by time. Each word in the response includes a 'channel_index' field indicating which channel it was spoken on. A maximum of 5 channels is supported. Each channel is billed independently at the full audio duration, so cost scales linearly with the number of channels.
 	UseMultiChannel *bool `default:"false" multipartForm:"name=use_multi_channel"`
+	// Controls the response shape when use_multi_channel is enabled. 'separate' (default) returns one transcript per channel under 'transcripts'. 'combined' merges all channels into a single transcript whose words are sorted by start time, each carrying a 'channel_index' - matching the single-channel response shape. 'combined' requires timestamps (timestamps_granularity must not be 'none') and does not support entity detection or redaction.
+	MultichannelOutputStyle *MultichannelOutputStyle `default:"separate" multipartForm:"name=multichannel_output_style"`
 	// Optional metadata to be included in the webhook response. This should be a JSON string representing an object with a maximum depth of 2 levels and maximum size of 16KB. Useful for tracking internal IDs, job references, or other contextual information.
 	WebhookMetadata *WebhookMetadata `multipartForm:"name=webhook_metadata,json"`
-	// Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur additional costs.
+	// Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 	EntityDetection *EntityDetection `multipartForm:"name=entity_detection"`
 	// If true, the transcription will not have any filler words, false starts and non-speech sounds. Only supported with scribe_v2 model.
 	NoVerbatim *bool `default:"false" multipartForm:"name=no_verbatim"`
-	// Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned.
+	// Whether to use the speaker library for identifying known speakers during diarization. When enabled and diarize is true, detected speakers will be matched against registered speakers in the workspace's speaker library.
+	UseSpeakerLibrary *bool `default:"false" multipartForm:"name=use_speaker_library"`
+	// Whether to detect speaker roles (agent vs customer). Requires diarize=true. Cannot be used with use_multi_channel=true. When enabled, speaker_id values will be 'agent' and 'customer' instead of 'speaker_0', 'speaker_1', etc. Usage incurs an additional 10% surcharge on base transcription cost.
+	DetectSpeakerRoles *bool `default:"false" multipartForm:"name=detect_speaker_roles"`
+	// Redact entities from the transcript text. Accepts the same format as entity_detection: 'all', a category ('pii', 'phi'), or specific entity types. Must be a subset of entity_detection. When redaction is enabled, the entities field will not be returned. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost.
 	EntityRedaction *EntityRedaction `multipartForm:"name=entity_redaction"`
 	// How to format redacted entities. 'redacted' replaces with {REDACTED}, 'entity_type' replaces with {ENTITY_TYPE}, 'enumerated_entity_type' replaces with {ENTITY_TYPE_N} where N enumerates each occurrence. Only used when entity_redaction is set.
 	EntityRedactionMode *string `default:"enumerated_entity_type" multipartForm:"name=entity_redaction_mode"`
-	// A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 1000.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           Usage of this parameter will incur additional costs.           When more than 100 keyterms are provided, a minimum billable duration of 20 seconds applies per request.
+	// A list of keyterms to bias the transcription towards.           The keyterms are words or phrases you want the model to recognise more accurately.           The number of keyterms cannot exceed 1000.           The length of each keyterm must be less than 50 characters.           Keyterms can contain at most 5 words (after normalisation).           For example ["hello", "world", "technical term"].           The following characters are not supported: `<`, `>`, `{`, `}`, `[`, `]`, `\`.           Usage of this parameter will incur an additional 20% surcharge on the base transcription cost.           When more than 100 keyterms are provided, a minimum billable duration of 20 seconds applies per request.
 	Keyterms []string `multipartForm:"name=keyterms"`
 }
 
@@ -566,6 +599,13 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetUseMultiChannel() *bool {
 	return b.UseMultiChannel
 }
 
+func (b *BodySpeechToTextV1SpeechToTextPost) GetMultichannelOutputStyle() *MultichannelOutputStyle {
+	if b == nil {
+		return nil
+	}
+	return b.MultichannelOutputStyle
+}
+
 func (b *BodySpeechToTextV1SpeechToTextPost) GetWebhookMetadata() *WebhookMetadata {
 	if b == nil {
 		return nil
@@ -585,6 +625,20 @@ func (b *BodySpeechToTextV1SpeechToTextPost) GetNoVerbatim() *bool {
 		return nil
 	}
 	return b.NoVerbatim
+}
+
+func (b *BodySpeechToTextV1SpeechToTextPost) GetUseSpeakerLibrary() *bool {
+	if b == nil {
+		return nil
+	}
+	return b.UseSpeakerLibrary
+}
+
+func (b *BodySpeechToTextV1SpeechToTextPost) GetDetectSpeakerRoles() *bool {
+	if b == nil {
+		return nil
+	}
+	return b.DetectSpeakerRoles
 }
 
 func (b *BodySpeechToTextV1SpeechToTextPost) GetEntityRedaction() *EntityRedaction {
